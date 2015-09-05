@@ -10,6 +10,7 @@
 #import "LocalSettings.h"
 #import "DownloadManager.h"
 #import "ReadBookViewController.h"
+//#import "BookEntity+NSDictionary.h"
 
 @interface Leader21SDKOC()
 @property (nonatomic, strong) NSString *mAppId;
@@ -44,11 +45,12 @@
     [DE requestBookInfo:bookIds onComplete:block];
 }
 
-/*
- 
+- (void)startDownloadBookByDict:(NSDictionary *)dict
+{
+    BookEntity *entity = [BookEntity itemWithDictionary:dict];
+    [self startDownloadBook:entity];
+}
 
- 
- */
 - (void)startDownloadBook:(BookEntity *)book
 {
     if (book == nil){

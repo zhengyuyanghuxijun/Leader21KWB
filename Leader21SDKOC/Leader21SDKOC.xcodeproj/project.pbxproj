@@ -11,9 +11,7 @@
 		0D7487771B89DD1B007BE4CD /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487691B89DD1B007BE4CD /* DownloadManager.m */; };
 		0D7487791B89DD1B007BE4CD /* DownloadStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74876B1B89DD1B007BE4CD /* DownloadStoreManager.m */; };
 		0D74877B1B89DD1B007BE4CD /* ErrorCodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74876D1B89DD1B007BE4CD /* ErrorCodeUtils.m */; };
-		0D74877D1B89DD1B007BE4CD /* NSDictionary+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74876F1B89DD1B007BE4CD /* NSDictionary+Safe.m */; };
 		0D74877F1B89DD1B007BE4CD /* ViewCreatorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487711B89DD1B007BE4CD /* ViewCreatorHelper.m */; };
-		0D74878D1B89DDF5007BE4CD /* BookEntity+NSDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487821B89DDF5007BE4CD /* BookEntity+NSDictionary.m */; };
 		0D74878F1B89DDF5007BE4CD /* BookEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487841B89DDF5007BE4CD /* BookEntity.m */; };
 		0D7487911B89DDF5007BE4CD /* CoreDataEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487871B89DDF5007BE4CD /* CoreDataEngine.m */; };
 		0D7487931B89DDF5007BE4CD /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487891B89DDF5007BE4CD /* CoreDataHelper.m */; };
@@ -57,6 +55,7 @@
 		0D74884C1B89E1C7007BE4CD /* DownloadEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74884A1B89E1C7007BE4CD /* DownloadEntity.m */; };
 		0D7488501B89E249007BE4CD /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74884E1B89E249007BE4CD /* LocalSettings.m */; };
 		0DA93E6B1B8B755F0011A87C /* LocalSettings.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0DA93E671B8B6F620011A87C /* LocalSettings.h */; };
+		0DC1D40F1B9BA77E0043C79B /* NSDictionary+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC1D40E1B9BA77E0043C79B /* NSDictionary+Safe.m */; };
 		0DC415891B9AA043004A6D2C /* UIImage+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC415881B9AA043004A6D2C /* UIImage+Extra.m */; };
 		0DCBC2991B99DAE5003DFDD5 /* NSString+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCBC2981B99DAE5003DFDD5 /* NSString+Extra.m */; };
 		68A2C1E71B441DE600A0BB71 /* Leader21SDKOC.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 68A2C1E61B441DE600A0BB71 /* Leader21SDKOC.h */; };
@@ -128,12 +127,8 @@
 		0D74876B1B89DD1B007BE4CD /* DownloadStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadStoreManager.m; sourceTree = "<group>"; };
 		0D74876C1B89DD1B007BE4CD /* ErrorCodeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorCodeUtils.h; sourceTree = "<group>"; };
 		0D74876D1B89DD1B007BE4CD /* ErrorCodeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorCodeUtils.m; sourceTree = "<group>"; };
-		0D74876E1B89DD1B007BE4CD /* NSDictionary+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Safe.h"; sourceTree = "<group>"; };
-		0D74876F1B89DD1B007BE4CD /* NSDictionary+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Safe.m"; sourceTree = "<group>"; };
 		0D7487701B89DD1B007BE4CD /* ViewCreatorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewCreatorHelper.h; sourceTree = "<group>"; };
 		0D7487711B89DD1B007BE4CD /* ViewCreatorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewCreatorHelper.m; sourceTree = "<group>"; };
-		0D7487811B89DDF5007BE4CD /* BookEntity+NSDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BookEntity+NSDictionary.h"; sourceTree = "<group>"; };
-		0D7487821B89DDF5007BE4CD /* BookEntity+NSDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BookEntity+NSDictionary.m"; sourceTree = "<group>"; };
 		0D7487831B89DDF5007BE4CD /* BookEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookEntity.h; sourceTree = "<group>"; };
 		0D7487841B89DDF5007BE4CD /* BookEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookEntity.m; sourceTree = "<group>"; };
 		0D7487861B89DDF5007BE4CD /* CoreDataEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataEngine.h; sourceTree = "<group>"; };
@@ -224,6 +219,8 @@
 		0D74884A1B89E1C7007BE4CD /* DownloadEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadEntity.m; sourceTree = "<group>"; };
 		0D74884E1B89E249007BE4CD /* LocalSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalSettings.m; sourceTree = "<group>"; };
 		0DA93E671B8B6F620011A87C /* LocalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalSettings.h; sourceTree = "<group>"; };
+		0DC1D40D1B9BA77E0043C79B /* NSDictionary+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Safe.h"; sourceTree = "<group>"; };
+		0DC1D40E1B9BA77E0043C79B /* NSDictionary+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Safe.m"; sourceTree = "<group>"; };
 		0DC415871B9AA043004A6D2C /* UIImage+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extra.h"; sourceTree = "<group>"; };
 		0DC415881B9AA043004A6D2C /* UIImage+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extra.m"; sourceTree = "<group>"; };
 		0DCBC2971B99DAE5003DFDD5 /* NSString+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extra.h"; sourceTree = "<group>"; };
@@ -335,8 +332,6 @@
 				0D7487641B89DD1B007BE4CD /* DownloadHelper */,
 				0D74876C1B89DD1B007BE4CD /* ErrorCodeUtils.h */,
 				0D74876D1B89DD1B007BE4CD /* ErrorCodeUtils.m */,
-				0D74876E1B89DD1B007BE4CD /* NSDictionary+Safe.h */,
-				0D74876F1B89DD1B007BE4CD /* NSDictionary+Safe.m */,
 				0D7487701B89DD1B007BE4CD /* ViewCreatorHelper.h */,
 				0D7487711B89DD1B007BE4CD /* ViewCreatorHelper.m */,
 			);
@@ -364,8 +359,6 @@
 			children = (
 				0DA93E671B8B6F620011A87C /* LocalSettings.h */,
 				0D74884E1B89E249007BE4CD /* LocalSettings.m */,
-				0D7487811B89DDF5007BE4CD /* BookEntity+NSDictionary.h */,
-				0D7487821B89DDF5007BE4CD /* BookEntity+NSDictionary.m */,
 				0D7487831B89DDF5007BE4CD /* BookEntity.h */,
 				0D7487841B89DDF5007BE4CD /* BookEntity.m */,
 				0D7487851B89DDF5007BE4CD /* CoreData */,
@@ -389,6 +382,8 @@
 		0D7487961B89DE72007BE4CD /* Additional */ = {
 			isa = PBXGroup;
 			children = (
+				0DC1D40D1B9BA77E0043C79B /* NSDictionary+Safe.h */,
+				0DC1D40E1B9BA77E0043C79B /* NSDictionary+Safe.m */,
 				0DCBC2971B99DAE5003DFDD5 /* NSString+Extra.h */,
 				0DCBC2981B99DAE5003DFDD5 /* NSString+Extra.m */,
 				0D7487991B89DE72007BE4CD /* UIDevice+Addtional.h */,
@@ -817,7 +812,6 @@
 				0D74880A1B89DF42007BE4CD /* ASIDownloadCache.m in Sources */,
 				0D7488121B89DF42007BE4CD /* ASIInputStream.m in Sources */,
 				68A2C22C1B4421A600A0BB71 /* MKHttpRequest.m in Sources */,
-				0D74877D1B89DD1B007BE4CD /* NSDictionary+Safe.m in Sources */,
 				0D7488141B89DF42007BE4CD /* ASINetworkQueue.m in Sources */,
 				68A2C36E1B47DD5B00A0BB71 /* ReadBookLocationConverter.m in Sources */,
 				0DCBC2991B99DAE5003DFDD5 /* NSString+Extra.m in Sources */,
@@ -850,6 +844,7 @@
 				0D74881D1B89DF42007BE4CD /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				0D74881B1B89DF42007BE4CD /* LDProgressHUD.m in Sources */,
 				0D74883A1B89DF42007BE4CD /* mztools.c in Sources */,
+				0DC1D40F1B9BA77E0043C79B /* NSDictionary+Safe.m in Sources */,
 				68A2C36B1B47DD5B00A0BB71 /* ReadBookDataSource.m in Sources */,
 				68A2C3691B47DD5B00A0BB71 /* ReadBookBaseController.m in Sources */,
 				68A2C37D1B47DD5B00A0BB71 /* PRXMLObject.m in Sources */,
@@ -860,7 +855,6 @@
 				0D7487FC1B89DF42007BE4CD /* NSData+Base64.m in Sources */,
 				0D7488061B89DF42007BE4CD /* ASIDataCompressor.m in Sources */,
 				0D7488451B89E022007BE4CD /* db.xcdatamodeld in Sources */,
-				0D74878D1B89DDF5007BE4CD /* BookEntity+NSDictionary.m in Sources */,
 				0D74880C1B89DF42007BE4CD /* ASIFormDataRequest.m in Sources */,
 				0D7487751B89DD1B007BE4CD /* DownloadItem.m in Sources */,
 				0D7488031B89DF42007BE4CD /* ASIAuthenticationDialog.m in Sources */,

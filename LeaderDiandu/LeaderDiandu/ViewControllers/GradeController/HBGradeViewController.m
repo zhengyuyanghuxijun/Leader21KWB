@@ -19,7 +19,6 @@
 #import "HBContentDetailEntity.h"
 #import "FTMenu.h"
 #import "Leader21SDKOC.h"
-#import "BookEntity.h"
 
 #define DataSourceCount 10
 
@@ -224,8 +223,7 @@
     
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
     NSMutableDictionary *dic = [arr objectAtIndex:index];
-//    BookEntity *entity = [[BookEntity alloc] initWithDict:dic];
-//    [[Leader21SDKOC sharedInstance] startDownloadBook:entity];
+    [[Leader21SDKOC sharedInstance] startDownloadBookByDict:dic];
 }
 
 - (BookEntity *)getBookEntityByDic:(NSDictionary *)dict

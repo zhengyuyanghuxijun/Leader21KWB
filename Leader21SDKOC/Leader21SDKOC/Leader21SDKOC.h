@@ -43,6 +43,7 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
             object:nil];
  */
 - (void) startDownloadBook:(BookEntity *)book;
+- (void) startDownloadBookByDict:(NSDictionary *)dict;
 /**
  * 书籍是否正在下载
  * @param book

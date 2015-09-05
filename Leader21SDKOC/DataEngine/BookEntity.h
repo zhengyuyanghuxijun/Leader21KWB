@@ -29,4 +29,7 @@
 @property (nonatomic, retain) NSNumber * hasDown;
 
 @property (nonatomic, retain) DownloadEntity *download;
+
++ (BookEntity*)itemWithDictionary:(NSDictionary*)dic;
+
 @end
