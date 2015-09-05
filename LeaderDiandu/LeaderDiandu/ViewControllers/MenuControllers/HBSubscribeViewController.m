@@ -14,6 +14,7 @@
 #import "ButtonGridItemView.h"
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
+#import "HHAlertSingleView.h"
 
 @interface HBSubscribeViewController ()<HBGridViewDelegate, UIAlertViewDelegate>
 {
@@ -102,7 +103,9 @@
 
 - (void)ruleDescriptionPressed:(id)sender
 {
-    //to do ...
+    NSString *firstStr = @"学生在绑定老师前，或者绑定了老师未指派组时，可以自由订阅等级，在订阅的等级内按照时间推送新书";
+    NSString *secondStr = @"当被老师指定了组后，等级就被老师的组确定，且锁定，学生无法更改，直到退出组（被老师移除，或者解除绑定老师，即没有组的信息时）";
+    [HHAlertSingleView showAlertWithStyle:HHAlertStyleInstructions inView:self.view Title:@"规则说明" detailFirst:firstStr detailSecond:secondStr okButton:@"我知道了"];
 }
 
 #pragma mark - actionSheetDelegate

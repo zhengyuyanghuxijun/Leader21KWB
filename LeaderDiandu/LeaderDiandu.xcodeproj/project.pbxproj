@@ -110,6 +110,7 @@
 		0DD214781B9601DA009E3DB9 /* HBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214771B9601DA009E3DB9 /* HBMessageViewController.m */; };
 		181456DD1B96D9DD003CCD6C /* HBContentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DC1B96D9DD003CCD6C /* HBContentEntity.m */; };
 		181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */; };
+		182306081B9AD93500A8E146 /* HHAlertSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182306071B9AD93500A8E146 /* HHAlertSingleView.m */; };
 		18B5FD2E1B981454002CCD95 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5FD2D1B981454002CCD95 /* UIButton+AFNetworking.m */; };
 		18B5FD311B983930002CCD95 /* FTMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5FD301B983930002CCD95 /* FTMenu.m */; };
 		18EC49431B999B2D000900E4 /* ButtonGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC49421B999B2D000900E4 /* ButtonGridItemView.m */; };
@@ -325,6 +326,8 @@
 		181456DC1B96D9DD003CCD6C /* HBContentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentEntity.m; sourceTree = "<group>"; };
 		181456DE1B96E483003CCD6C /* HBContentDetailEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentDetailEntity.h; sourceTree = "<group>"; };
 		181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentDetailEntity.m; sourceTree = "<group>"; };
+		182306061B9AD93500A8E146 /* HHAlertSingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HHAlertSingleView.h; path = ../../../../HHAlertSingleView.h; sourceTree = "<group>"; };
+		182306071B9AD93500A8E146 /* HHAlertSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HHAlertSingleView.m; path = ../../../../HHAlertSingleView.m; sourceTree = "<group>"; };
 		18B5FD2C1B981454002CCD95 /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
 		18B5FD2D1B981454002CCD95 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
 		18B5FD2F1B983930002CCD95 /* FTMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMenu.h; sourceTree = "<group>"; };
@@ -480,6 +483,8 @@
 		0D7487331B88B262007BE4CD /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				182306061B9AD93500A8E146 /* HHAlertSingleView.h */,
+				182306071B9AD93500A8E146 /* HHAlertSingleView.m */,
 				18B5FD2F1B983930002CCD95 /* FTMenu.h */,
 				18B5FD301B983930002CCD95 /* FTMenu.m */,
 				0DBE35D31B8CD8D500179237 /* HBHyperlinksButton.h */,
@@ -955,6 +960,7 @@
 				0DBE35361B8CB8B500179237 /* DoubleCompare.c in Sources */,
 				0DAAF40E1B8E01EB00078285 /* HBGradeViewController.m in Sources */,
 				0D018FF11B96F67500A92F59 /* HBContentBaseRequest.m in Sources */,
+				182306081B9AD93500A8E146 /* HHAlertSingleView.m in Sources */,
 				18B5FD2E1B981454002CCD95 /* UIButton+AFNetworking.m in Sources */,
 				0DBE35C31B8CD46500179237 /* HBBaseViewController.m in Sources */,
 				0D7487601B88C2C4007BE4CD /* TextGridItemView.m in Sources */,

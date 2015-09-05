@@ -10,31 +10,31 @@
 	<string>LeaderDiandu</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>3DFC4BA3A6606AC52ED145F7D3882B8EC78D98A8</key>
-		<string>https://github.com/summerhxj/LeaderKWB</string>
+		<key>2D4DC0234C47EAA2E360938AC01E7C72C9B7B787</key>
+		<string>https://github.com/summerhxj/Leader21KWB.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>LeaderDiandu.xcodeproj</string>
+	<string>LeaderDiandu/LeaderDiandu.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>3DFC4BA3A6606AC52ED145F7D3882B8EC78D98A8</key>
-		<string>../..</string>
+		<key>2D4DC0234C47EAA2E360938AC01E7C72C9B7B787</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/summerhxj/LeaderKWB</string>
+	<string>https://github.com/summerhxj/Leader21KWB.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>3DFC4BA3A6606AC52ED145F7D3882B8EC78D98A8</string>
+	<string>2D4DC0234C47EAA2E360938AC01E7C72C9B7B787</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3DFC4BA3A6606AC52ED145F7D3882B8EC78D98A8</string>
+			<string>2D4DC0234C47EAA2E360938AC01E7C72C9B7B787</string>
 			<key>IDESourceControlWCCName</key>
-			<string>LeaderDiandu</string>
+			<string>Leader21KWB</string>
 		</dict>
 	</array>
 </dict>
