@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0AE6142C-F1F0-4253-A309-265D9F0E3558</string>
+	<key>IDESourceControlProjectName</key>
+	<string>LeaderDiandu</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3DFC4BA3A6606AC52ED145F7D3882B8EC78D98A8</key>
+		<string>https://github.com/summerhxj/LeaderKWB</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>LeaderDiandu.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3DFC4BA3A6606AC52ED145F7D3882B8EC78D98A8</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/summerhxj/LeaderKWB</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3DFC4BA3A6606AC52ED145F7D3882B8EC78D98A8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3DFC4BA3A6606AC52ED145F7D3882B8EC78D98A8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>LeaderDiandu</string>
+		</dict>
+	</array>
+</dict>
+</plist>

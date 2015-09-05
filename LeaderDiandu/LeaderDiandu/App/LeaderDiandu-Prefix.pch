@@ -1,0 +1,27 @@
+//
+//  LeaderDiandu-Prefix.pch
+//  LeaderDiandu
+//
+//  Created by xijun on 15/8/23.
+//  Copyright (c) 2015年 hxj. All rights reserved.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
+#import <CoreData/CoreData.h>
+#import "Constants.h"
+#import "Navigator.h"
+#import "AppDelegate.h"
+#import "UIImage+Extra.h"
+#import "UIDevice+Addtional.h"
+#import "MBHudUtil.h"
+#endif
+

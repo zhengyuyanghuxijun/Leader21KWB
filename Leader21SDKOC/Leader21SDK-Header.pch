@@ -1,0 +1,59 @@
+//
+//  Leader21SDK-Header.pch
+//  Leader21SDKOC
+//
+//  Created by leader on 15/7/1.
+//  Copyright (c) 2015年 leader. All rights reserved.
+//
+
+#ifndef Leader21SDKOC_Leader21SDK_Header_pch
+#define Leader21SDKOC_Leader21SDK_Header_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
+#import <CoreData/CoreData.h>
+
+#import "JSONKit.h"
+#import "LeaderSDKConstants.h"
+#import "DataEngine.h"
+#import "NSDictionary+Safe.h"
+#import "LDHudUtil.h"
+#import "CoreDataEngine.h"
+#import "CoreDataHelper.h"
+
+
+#import "UIViewAdditions.h"
+#import "NSString+Extra.h"
+#import "UIImage+Extra.h"
+#import "UIDevice+Addtional.h"
+
+#endif
+
+#undef	DEC_SINGLETON
+#define DEC_SINGLETON( __class ) \
++ (__class *)sharedInstance;
+
+#undef	DEF_SINGLETON
+#define DEF_SINGLETON( __class ) \
++ (__class *)sharedInstance \
+{ \
+static dispatch_once_t once; \
+static __class * __singleton__; \
+dispatch_once( &once, ^{ __singleton__ = [[__class alloc] init]; } ); \
+return __singleton__; \
+}
+
+#endif
