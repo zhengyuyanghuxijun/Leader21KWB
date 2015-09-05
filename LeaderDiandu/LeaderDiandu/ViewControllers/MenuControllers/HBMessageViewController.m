@@ -20,7 +20,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"设置" onView:self.view];
+    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"消息中心" onView:self.view];
     [self.view addSubview:labTitle];
     
     [self addBackButton];

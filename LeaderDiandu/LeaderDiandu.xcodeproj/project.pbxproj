@@ -91,7 +91,6 @@
 		0DBE35711B8CB95800179237 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35621B8CB95800179237 /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0DBE35721B8CB95800179237 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35641B8CB95800179237 /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0DBE35821B8CBE4300179237 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35811B8CBE4300179237 /* MBProgressHUD.m */; };
-		0DBE35861B8CC02F00179237 /* RTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35851B8CC02F00179237 /* RTLabel.m */; };
 		0DBE35AF1B8CCEFA00179237 /* TableSecitonDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35A31B8CCEFA00179237 /* TableSecitonDataObject.m */; };
 		0DBE35B21B8CCEFA00179237 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35A91B8CCEFA00179237 /* UIViewAdditions.m */; };
 		0DBE35C31B8CD46500179237 /* HBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35C21B8CD46500179237 /* HBBaseViewController.m */; };
@@ -100,6 +99,10 @@
 		0DBE35CC1B8CD7BE00179237 /* HBRegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35CA1B8CD7BE00179237 /* HBRegistViewController.m */; };
 		0DBE35D21B8CD87900179237 /* HBNTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35D01B8CD87900179237 /* HBNTextField.m */; };
 		0DBE35D51B8CD91500179237 /* HBHyperlinksButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35D41B8CD91500179237 /* HBHyperlinksButton.m */; };
+		0DC1D3F21B9B31180043C79B /* libLeader21SDKOC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCBC2941B99D4EA003DFDD5 /* libLeader21SDKOC.a */; };
+		0DC1D3F41B9B33B40043C79B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC1D3F31B9B33B40043C79B /* MapKit.framework */; };
+		0DC1D3F61B9B33BD0043C79B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC1D3F51B9B33BC0043C79B /* ImageIO.framework */; };
+		0DC1D3F81B9B348F0043C79B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC1D3F71B9B348F0043C79B /* AVFoundation.framework */; };
 		0DCBC29F1B99DE16003DFDD5 /* NSString+Verify.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCBC29E1B99DE16003DFDD5 /* NSString+Verify.m */; };
 		0DD214651B95568E009E3DB9 /* HBDataSaveManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214641B95568E009E3DB9 /* HBDataSaveManager.m */; };
 		0DD214691B95FCDF009E3DB9 /* HBSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214681B95FCDF009E3DB9 /* HBSettingViewController.m */; };
@@ -124,6 +127,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 0D7486ED1B88A884007BE4CD;
 			remoteInfo = LeaderDiandu;
+		};
+		0DC1D4041B9B981B0043C79B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0DCBC28E1B99D4EA003DFDD5 /* Leader21SDKOC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 68A2C1E21B441DE600A0BB71;
+			remoteInfo = Leader21SDKOC;
 		};
 		0DCBC2931B99D4EA003DFDD5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -286,8 +296,6 @@
 		0DBE35641B8CB95800179237 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		0DBE35801B8CBE4300179237 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		0DBE35811B8CBE4300179237 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		0DBE35841B8CC02F00179237 /* RTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel.h; sourceTree = "<group>"; };
-		0DBE35851B8CC02F00179237 /* RTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel.m; sourceTree = "<group>"; };
 		0DBE35A21B8CCEFA00179237 /* TableSecitonDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableSecitonDataObject.h; sourceTree = "<group>"; };
 		0DBE35A31B8CCEFA00179237 /* TableSecitonDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableSecitonDataObject.m; sourceTree = "<group>"; };
 		0DBE35A81B8CCEFA00179237 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
@@ -304,6 +312,9 @@
 		0DBE35D01B8CD87900179237 /* HBNTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBNTextField.m; sourceTree = "<group>"; };
 		0DBE35D31B8CD8D500179237 /* HBHyperlinksButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBHyperlinksButton.h; sourceTree = "<group>"; };
 		0DBE35D41B8CD91500179237 /* HBHyperlinksButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBHyperlinksButton.m; sourceTree = "<group>"; };
+		0DC1D3F31B9B33B40043C79B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0DC1D3F51B9B33BC0043C79B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		0DC1D3F71B9B348F0043C79B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		0DCBC28E1B99D4EA003DFDD5 /* Leader21SDKOC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Leader21SDKOC.xcodeproj; path = ../Leader21SDKOC/Leader21SDKOC.xcodeproj; sourceTree = "<group>"; };
 		0DCBC29D1B99DE16003DFDD5 /* NSString+Verify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Verify.h"; sourceTree = "<group>"; };
 		0DCBC29E1B99DE16003DFDD5 /* NSString+Verify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Verify.m"; sourceTree = "<group>"; };
@@ -344,13 +355,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D74887A1B8A2219007BE4CD /* CoreData.framework in Frameworks */,
+				0DC1D3F81B9B348F0043C79B /* AVFoundation.framework in Frameworks */,
+				0DC1D3F61B9B33BD0043C79B /* ImageIO.framework in Frameworks */,
+				0DC1D3F41B9B33B40043C79B /* MapKit.framework in Frameworks */,
 				0DAAF4141B8E06C200078285 /* libz.dylib in Frameworks */,
 				0D74887C1B8A2229007BE4CD /* QuartzCore.framework in Frameworks */,
-				0D74887A1B8A2219007BE4CD /* CoreData.framework in Frameworks */,
 				0D7488781B8A2213007BE4CD /* CFNetwork.framework in Frameworks */,
 				0D7488761B8A21FA007BE4CD /* SystemConfiguration.framework in Frameworks */,
 				0D7488741B8A21CB007BE4CD /* UIKit.framework in Frameworks */,
 				0D7488721B8A21C4007BE4CD /* Foundation.framework in Frameworks */,
+				0DC1D3F21B9B31180043C79B /* libLeader21SDKOC.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +467,9 @@
 		0D7487171B88A8BC007BE4CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0DC1D3F71B9B348F0043C79B /* AVFoundation.framework */,
+				0DC1D3F51B9B33BC0043C79B /* ImageIO.framework */,
+				0DC1D3F31B9B33B40043C79B /* MapKit.framework */,
 				0DAAF4131B8E06C200078285 /* libz.dylib */,
 				0D74887B1B8A2229007BE4CD /* QuartzCore.framework */,
 				0D7488791B8A2219007BE4CD /* CoreData.framework */,
@@ -497,7 +515,6 @@
 				0DAAF4051B8D651500078285 /* HBTitleView.h */,
 				0DAAF4061B8D651500078285 /* HBTitleView.m */,
 				0D7487511B88C2C4007BE4CD /* HBGrid */,
-				0DBE35831B8CC02F00179237 /* RTLabel */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -754,15 +771,6 @@
 			path = Addtional;
 			sourceTree = "<group>";
 		};
-		0DBE35831B8CC02F00179237 /* RTLabel */ = {
-			isa = PBXGroup;
-			children = (
-				0DBE35841B8CC02F00179237 /* RTLabel.h */,
-				0DBE35851B8CC02F00179237 /* RTLabel.m */,
-			);
-			path = RTLabel;
-			sourceTree = "<group>";
-		};
 		0DBE35871B8CCE2200179237 /* Login&RegisterController */ = {
 			isa = PBXGroup;
 			children = (
@@ -844,6 +852,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0DC1D4051B9B981B0043C79B /* PBXTargetDependency */,
 			);
 			name = LeaderDiandu;
 			productName = LeaderDiandu;
@@ -1003,7 +1012,6 @@
 				0DB537351B8F78AF0023A3F7 /* HBServiceManager.m in Sources */,
 				0D018FEE1B96DB9200A92F59 /* HBLeaderViewController.m in Sources */,
 				0DBE356F1B8CB95800179237 /* SBJSON.m in Sources */,
-				0DBE35861B8CC02F00179237 /* RTLabel.m in Sources */,
 				0D7488901B8A2973007BE4CD /* NetUtil.m in Sources */,
 				0DCBC29F1B99DE16003DFDD5 /* NSString+Verify.m in Sources */,
 				0D74887F1B8A226E007BE4CD /* AppDelegate.m in Sources */,
@@ -1068,6 +1076,11 @@
 			isa = PBXTargetDependency;
 			target = 0D7486ED1B88A884007BE4CD /* LeaderDiandu */;
 			targetProxy = 0D7487081B88A884007BE4CD /* PBXContainerItemProxy */;
+		};
+		0DC1D4051B9B981B0043C79B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Leader21SDKOC;
+			targetProxy = 0DC1D4041B9B981B0043C79B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1189,10 +1202,10 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../Leader21SDKOC/Additional",
-					"$(SRCROOT)/../Leader21SDKOC/DataEngine",
-					"$(SRCROOT)/../Leader21SDKOC/ReadModule",
-					"$(SRCROOT)/../Leader21SDKOC/Utils",
-					"$(SRCROOT)/../Leader21SDKOC/Third",
+					"$(SRCROOT)/../Leader21SDKOC/DataEngine/**",
+					"$(SRCROOT)/../Leader21SDKOC/ReadModule/**",
+					"$(SRCROOT)/../Leader21SDKOC/Utils/**",
+					"$(SRCROOT)/../Leader21SDKOC/Third/**",
 					"$(SRCROOT)/../Leader21SDKOC/Http",
 					"$(SRCROOT)/../Leader21SDKOC/Leader21SDKOC",
 				);
@@ -1214,10 +1227,10 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../Leader21SDKOC/Additional",
-					"$(SRCROOT)/../Leader21SDKOC/DataEngine",
-					"$(SRCROOT)/../Leader21SDKOC/ReadModule",
-					"$(SRCROOT)/../Leader21SDKOC/Utils",
-					"$(SRCROOT)/../Leader21SDKOC/Third",
+					"$(SRCROOT)/../Leader21SDKOC/DataEngine/**",
+					"$(SRCROOT)/../Leader21SDKOC/ReadModule/**",
+					"$(SRCROOT)/../Leader21SDKOC/Utils/**",
+					"$(SRCROOT)/../Leader21SDKOC/Third/**",
 					"$(SRCROOT)/../Leader21SDKOC/Http",
 					"$(SRCROOT)/../Leader21SDKOC/Leader21SDKOC",
 				);

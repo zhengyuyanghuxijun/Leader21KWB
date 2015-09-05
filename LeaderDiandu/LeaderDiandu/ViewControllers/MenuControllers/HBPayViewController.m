@@ -19,16 +19,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
     
     HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"支付中心" onView:self.view];
     [self.view addSubview:labTitle];
     
     [self addBackButton];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 /*

@@ -18,6 +18,8 @@
 #import "HBContentEntity.h"
 #import "HBContentDetailEntity.h"
 #import "FTMenu.h"
+#import "Leader21SDKOC.h"
+#import "BookEntity.h"
 
 #define DataSourceCount 10
 
@@ -49,6 +51,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [[Leader21SDKOC sharedInstance] setAppKey:KAppKeyStudy];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProgress:) name:kNotification_bookDownloadProgress object:nil];
     
     [self initMainView];
     [self initMainGrid];
@@ -216,6 +221,19 @@
 {
     HBGridItemView *itemView = [gridView gridItemViewAtIndex:index];
     itemView.backgroundColor = [UIColor grayColor];
+    
+    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
+    NSMutableDictionary *dic = [arr objectAtIndex:index];
+//    BookEntity *entity = [[BookEntity alloc] initWithDict:dic];
+//    [[Leader21SDKOC sharedInstance] startDownloadBook:entity];
+}
+
+- (BookEntity *)getBookEntityByDic:(NSDictionary *)dict
+{
+    BookEntity *entity = [[BookEntity alloc] init];
+    
+    
+    return entity;
 }
 
 - (void)requestAllBookset
@@ -260,5 +278,9 @@
     }
 }
 
+- (void)updateProgress:(id)progress
+{
+    
+}
 
 @end

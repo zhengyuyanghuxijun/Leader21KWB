@@ -10,6 +10,7 @@
 #import "BookEntity.h"
 
 typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NSString* errorMsg);
+
 @interface Leader21SDKOC : NSObject
 
 + (Leader21SDKOC *)sharedInstance;
@@ -69,4 +70,5 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
 - (BOOL) deleteLocalBooks:(NSMutableArray *)books;
 
 - (void) setManagedObjectContext:(NSManagedObjectContext *) moContext;
+
 @end

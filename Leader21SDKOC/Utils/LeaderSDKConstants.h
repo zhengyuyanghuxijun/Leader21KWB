@@ -16,8 +16,8 @@
 #define HTTP_KEYNAME_FAIL_RETURN_CODE       @"HttpKeyName_FailReturnCode"
 
 #define HOST                                @"http://teach.61dear.cn:9081"
-#define API_GET_BOOK_INFO                   @"api/book"
-#define API_DOWNLOAD_BOOK                   @"api/book/download"
+#define API_GET_BOOK_INFO                   @"/api/book"
+#define API_DOWNLOAD_BOOK                   @"/api/book/download"
 #define kNotification_bookDownloadProgress  @"kNotification_bookDownloadProgress"
 
 #define kNotification_clearPageHightLight    @"kNotification_clearPageHightLight"

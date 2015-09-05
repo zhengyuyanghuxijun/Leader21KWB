@@ -17,7 +17,6 @@
 #import "ErrorCodeUtils.h"
 #import "ZipArchive.h"
 
-
 static DataEngine *dataEngineInstance = nil;
 
 @interface DataEngine()
@@ -50,12 +49,12 @@ static DataEngine *dataEngineInstance = nil;
         
         self.downloadDic = [NSMutableDictionary dictionaryWithCapacity:16];
         
-        if ([UIDevice isiPad]) {
-            _isPad = YES;
-        }
-        else {
-            _isPad = NO;
-        }
+//        if ([UIDevice isiPad]) {
+//            _isPad = YES;
+//        }
+//        else {
+//            _isPad = NO;
+//        }
     }
     
     
@@ -74,7 +73,7 @@ static DataEngine *dataEngineInstance = nil;
         self.deviceScreenSize = CGSizeMake(scale * self.deviceScreenSize.width, scale * self.deviceScreenSize.height);
     }
     
-    self.deviceUniqueId = [[UIDevice currentDevice] deviceIdentifier];
+//    self.deviceUniqueId = [[UIDevice currentDevice] deviceIdentifier];
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
     self.appName = [bundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
     if (self.appName.length == 0) {

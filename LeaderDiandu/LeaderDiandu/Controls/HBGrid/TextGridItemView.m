@@ -64,12 +64,12 @@
 
 -(void)downloadButtonPressed:(id)sender
 {
-    
+    [self didTap];
 }
 
 -(void)bookCoverButtonPressed:(id)sender
 {
-    
+    [self didTap];
 }
 
 -(void)updateFormData:(NSDictionary*)dic

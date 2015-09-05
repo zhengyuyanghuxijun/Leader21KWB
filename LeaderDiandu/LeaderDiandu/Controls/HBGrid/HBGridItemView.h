@@ -15,5 +15,6 @@
 }
 
 - (void)setTarget:(id)target action:(SEL)action;
+- (void)didTap;
 
 @end
