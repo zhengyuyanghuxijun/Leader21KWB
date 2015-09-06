@@ -18,7 +18,7 @@
 + (BOOL)isSameYear:(NSDate*)date1 withDate:(NSDate*)date2;
 + (BOOL)isSameDay:(NSDate*)date1 withDate:(NSDate*)date2;
 
-
++ (NSString*)getStringMDHMSFromTimeInterval:(NSTimeInterval)timeInterval;
 + (NSString*)getStringYearMonthFromTimeinterval:(NSTimeInterval)timeInterval;
 + (NSString*)getStringYearMonthDayFromTimeinterval:(NSTimeInterval)timeInterval;
 + (NSString*)getStringYMDHMFromTimeinterval:(NSTimeInterval)timeInterval;

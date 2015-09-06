@@ -459,6 +459,16 @@ static TimeIntervalUtils *singleton = nil;
     }
 }
 
++ (NSString*)getStringMDHMSFromTimeInterval:(NSTimeInterval)timeInterval
+{
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    TimeIntervalUtils *timeutils = [TimeIntervalUtils sharedInstance];
+    [timeutils.dateFormatter setDateFormat:NSLocalizedString(@"MM-dd HH:mm:ss", @"")];
+    NSString* str = [timeutils.dateFormatter stringFromDate:date];
+    
+    return str;
+}
+
 + (NSString*)getStringYearMonthFromTimeinterval:(NSTimeInterval)timeInterval
 {
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeInterval];

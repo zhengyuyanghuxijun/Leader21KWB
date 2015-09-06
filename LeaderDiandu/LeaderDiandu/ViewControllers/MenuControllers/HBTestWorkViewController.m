@@ -12,6 +12,7 @@
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 #import "HBTaskEntity.h"
+#import "TimeIntervalUtils.h"
 
 static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewControllerCellReuseId";
 
@@ -162,13 +163,15 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     NSString *bookName = [bookDic objectForKey:@"book_title_cn"];
                     taskEntity.bookName = bookName;
                     
-                    NSString *timeStr = [dic objectForKey:@"modified_time"];
-//                    taskEntity.taskTime = timeStr;
-                    taskEntity.taskTime = @"08-31 11:37:26";
+                    NSTimeInterval interval = [[dic objectForKey:@"modified_time"] doubleValue];
+                    taskEntity.taskTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
                     
                     NSString *score = [dic objectForKey:@"score"];
-//                    taskEntity.score = score;
-                    taskEntity.score = @"50";
+                    if ([score isKindOfClass:[NSNull class]] || score == nil) {
+                        taskEntity.score = @"";
+                    } else {
+                        taskEntity.score = score;
+                    }
                     
                     [self.taskEntityArr addObject:taskEntity];
                 }
