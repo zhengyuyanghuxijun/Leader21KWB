@@ -94,6 +94,7 @@
 		0DC1D3F41B9B33B40043C79B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC1D3F31B9B33B40043C79B /* MapKit.framework */; };
 		0DC1D3F61B9B33BD0043C79B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC1D3F51B9B33BC0043C79B /* ImageIO.framework */; };
 		0DC1D3F81B9B348F0043C79B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC1D3F71B9B348F0043C79B /* AVFoundation.framework */; };
+		0DC1D4151B9BDF430043C79B /* MyStaticModels.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0DC1D4141B9BDF430043C79B /* MyStaticModels.bundle */; };
 		0DCBC29F1B99DE16003DFDD5 /* NSString+Verify.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCBC29E1B99DE16003DFDD5 /* NSString+Verify.m */; };
 		0DD214651B95568E009E3DB9 /* HBDataSaveManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214641B95568E009E3DB9 /* HBDataSaveManager.m */; };
 		0DD214691B95FCDF009E3DB9 /* HBSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214681B95FCDF009E3DB9 /* HBSettingViewController.m */; };
@@ -284,6 +285,7 @@
 		0DC1D3F31B9B33B40043C79B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0DC1D3F51B9B33BC0043C79B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0DC1D3F71B9B348F0043C79B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		0DC1D4141B9BDF430043C79B /* MyStaticModels.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MyStaticModels.bundle; path = LeaderDiandu/MyStaticModels.bundle; sourceTree = "<group>"; };
 		0DCBC28E1B99D4EA003DFDD5 /* Leader21SDKOC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Leader21SDKOC.xcodeproj; path = ../Leader21SDKOC/Leader21SDKOC.xcodeproj; sourceTree = "<group>"; };
 		0DCBC29D1B99DE16003DFDD5 /* NSString+Verify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Verify.h"; sourceTree = "<group>"; };
 		0DCBC29E1B99DE16003DFDD5 /* NSString+Verify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Verify.m"; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 		0D7487181B88A8C8007BE4CD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0DC1D4141B9BDF430043C79B /* MyStaticModels.bundle */,
 				0D7486FE1B88A884007BE4CD /* Images.xcassets */,
 			);
 			name = Resources;
@@ -875,6 +878,7 @@
 			files = (
 				0DAAF4171B8E0DE900078285 /* Login.storyboard in Resources */,
 				0D7486FD1B88A884007BE4CD /* Main.storyboard in Resources */,
+				0DC1D4151B9BDF430043C79B /* MyStaticModels.bundle in Resources */,
 				0D7487021B88A884007BE4CD /* LaunchScreen.xib in Resources */,
 				0D7486FF1B88A884007BE4CD /* Images.xcassets in Resources */,
 			);

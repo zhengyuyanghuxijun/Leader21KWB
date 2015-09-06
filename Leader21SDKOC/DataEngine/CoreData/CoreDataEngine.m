@@ -73,10 +73,9 @@
     if (_managedObjectModel != nil) return _managedObjectModel;
     
     NSString *staticLibraryBundlePath = [[NSBundle mainBundle] pathForResource:@"MyStaticModels" ofType:@"bundle"];
-    NSURL *staticLibraryMOMURL = [[NSBundle bundleWithPath:staticLibraryBundlePath] URLForResource:@"MyStaticModels" withExtension:@"mom"];
+    NSURL *staticLibraryMOMURL = [[NSBundle bundleWithPath:staticLibraryBundlePath] URLForResource:@"db" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:staticLibraryMOMURL];
-
-//    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];    
+    
     return _managedObjectModel;
 }
 

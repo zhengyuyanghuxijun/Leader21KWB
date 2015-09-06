@@ -59,7 +59,7 @@
     }
     //TODO generate download url "?book_id=%s&file_id=%s&app_key=%s"
     NSString* bookUrl = [NSString stringWithFormat:
-                         @"%@/%@?book_id=%@&file_id=%@&app_key=%@",
+                         @"%@%@?book_id=%@&file_id=%@&app_key=%@",
                          HOST,API_DOWNLOAD_BOOK,book.bookId,book.fileId,_mAppId];
 
     NSLog(@"book download url %@",bookUrl);
@@ -145,7 +145,9 @@
     }
     return YES;
 }
--(void)setManagedObjectContext:(NSManagedObjectContext *)moContext{
+
+-(void)setManagedObjectContext:(NSManagedObjectContext *)moContext
+{
     [CoreDataEngine sharedInstance].managedObjectContext = moContext;
 }
 @end

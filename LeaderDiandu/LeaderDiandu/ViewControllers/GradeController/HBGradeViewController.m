@@ -20,6 +20,8 @@
 #import "FTMenu.h"
 #import "Leader21SDKOC.h"
 
+#define LEADERSDK [Leader21SDKOC sharedInstance]
+
 #define DataSourceCount 10
 
 @interface HBGradeViewController ()<HBGridViewDelegate>
@@ -30,6 +32,8 @@
 
 @property (nonatomic, strong)NSMutableArray *contentEntityArr;
 @property (nonatomic, strong)NSMutableDictionary *contentDetailEntityDic;
+
+@property (nonatomic, copy) NSString* bookDownloadUrl;
 
 @end
 
@@ -51,7 +55,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [[Leader21SDKOC sharedInstance] setAppKey:KAppKeyStudy];
+    [LEADERSDK setAppKey:KAppKeyStudy];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProgress:) name:kNotification_bookDownloadProgress object:nil];
     
     [self initMainView];
@@ -223,7 +227,7 @@
     
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
     NSMutableDictionary *dic = [arr objectAtIndex:index];
-    [[Leader21SDKOC sharedInstance] startDownloadBookByDict:dic];
+    [LEADERSDK startDownloadBookByDict:dic];
 }
 
 - (BookEntity *)getBookEntityByDic:(NSDictionary *)dict
@@ -276,9 +280,21 @@
     }
 }
 
-- (void)updateProgress:(id)progress
+- (void)updateProgress:(NSNotification*)notification
 {
-    
+    if ([notification.object isKindOfClass:[BookEntity class]]) {
+        BookEntity* book = (BookEntity*)notification.object;
+        if ([book.bookUrl isEqualToString:self.bookDownloadUrl]) {
+            
+            if (book.download == nil) {
+                NSPredicate* pre = [NSPredicate predicateWithFormat:@"downloadUrl == %@", book.bookUrl];
+//                DownloadEntity* download = (DownloadEntity*)[BookListCellView getFirstObjectWithEntryName:@"DownloadEntity" withPredicate:pre];
+//                book.download = download;
+            }
+            
+//            [self resetWithBook:book];
+        }
+    }
 }
 
 @end
