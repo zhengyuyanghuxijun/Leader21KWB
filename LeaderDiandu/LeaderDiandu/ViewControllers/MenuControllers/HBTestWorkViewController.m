@@ -161,6 +161,8 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     
                     NSDictionary *bookDic = [dic objectForKey:@"book"];
                     NSString *bookName = [bookDic objectForKey:@"book_title_cn"];
+                    NSString *bookIdStr = [bookDic objectForKey:@"id"];
+                    taskEntity.bookId = [bookIdStr integerValue];
                     taskEntity.bookName = bookName;
                     
                     NSTimeInterval interval = [[dic objectForKey:@"modified_time"] doubleValue];
@@ -168,7 +170,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     
                     NSString *score = [dic objectForKey:@"score"];
                     if ([score isKindOfClass:[NSNull class]] || score == nil) {
-                        taskEntity.score = @"";
+                        taskEntity.score = nil;
                     } else {
                         taskEntity.score = score;
                     }
@@ -224,6 +226,15 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+    if (dict) {
+        NSString *user = [dict objectForKey:@"name"];
+        HBTaskEntity *taskEntity = [self.taskEntityArr objectAtIndex:indexPath.row];
+        [[HBServiceManager defaultManager] requestBookInfo:user book_id:[NSString stringWithFormat:@"%ld", taskEntity.bookId] completion:^(id responseObject, NSError *error) {
+            // to do ...
+        }];
+    }
 }
 
 @end

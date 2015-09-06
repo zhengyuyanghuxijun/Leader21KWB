@@ -15,4 +15,6 @@
 @property (nonatomic, strong)NSString *taskTime;
 @property (nonatomic, strong)NSString *score;
 
+@property (nonatomic, assign)NSInteger bookId;
+
 @end
