@@ -270,7 +270,7 @@
                 if (responseObject){
                     //获取书本列表成功
                     NSArray *arr = [responseObject objectForKey:@"books"];
-                    [self.contentDetailEntityDic setObject:arr forKey:[NSString stringWithFormat:@"%ld", currentID]];
+                    [self.contentDetailEntityDic setObject:arr forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
                     [_gridView reloadData];
                 }
             }];

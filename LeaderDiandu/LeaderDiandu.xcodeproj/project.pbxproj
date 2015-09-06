@@ -1122,6 +1122,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: wei chanyuan (A2Z38B538T)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1148,6 +1149,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: wei chanyuan (X2Y6A4GX9Q)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
