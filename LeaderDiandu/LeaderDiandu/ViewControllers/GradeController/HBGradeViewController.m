@@ -230,14 +230,6 @@
     [LEADERSDK startDownloadBookByDict:dic];
 }
 
-- (BookEntity *)getBookEntityByDic:(NSDictionary *)dict
-{
-    BookEntity *entity = [[BookEntity alloc] init];
-    
-    
-    return entity;
-}
-
 - (void)requestAllBookset
 {
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];

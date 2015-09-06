@@ -8,8 +8,6 @@
 
 #import "Navigator.h"
 #import "AppDelegate.h"
-
-#import "HBLoginViewController.h"
 #import "HBGradeViewController.h"
 
 @implementation Navigator
@@ -88,8 +86,7 @@
 
 + (void)pushLoginController
 {
-    HBLoginViewController* vc = [[HBLoginViewController alloc] init];
-    [[AppDelegate delegate].globalNavi pushViewController:vc animated:YES];
+    [[AppDelegate delegate] showLoginVC];
 }
 
 @end

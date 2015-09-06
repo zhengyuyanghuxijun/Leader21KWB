@@ -44,17 +44,8 @@
 
 -(void)handleRequestResponseWithData:(id)responseObject
 {
-    if ([responseObject[@"status"] integerValue] == 1) {    //success
-        
-        self.completionBlock(responseObject,nil);
-    } else {
-        NSInteger error_code = [responseObject[@"status"] integerValue];
-        NSError *error = [NSError errorWithDomain:@"HBHTTPRequestError"
-                                             code:error_code
-                                         userInfo: (NSDictionary *)responseObject //@{NSLocalizedDescriptionKey:responseObject[@"info"]}
-                          ];
-        
-        self.completionBlock(responseObject, error);
+    if (responseObject) {    //success
+        self.completionBlock(responseObject, nil);
     }
 }
 

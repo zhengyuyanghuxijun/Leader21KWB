@@ -32,11 +32,19 @@
 {
     [dict setObject:KAppKeyStudy forKey:KWBAppKey];
     [[HBHTTPBaseRequest requestWithSubUrl:api] startWithMethod:HBHTTPRequestMethodPOST parameters:dict completion:^(id responseObject, NSError *error) {
-        if (receivedBlock) {
+        if (error) {
+            NSDictionary *userDic = error.userInfo;
+            NSString *descValue = userDic[@"NSLocalizedDescription"];
+            if ([descValue containsString:@"401"]) {
+                //token过期，需要重新登录
+                [Navigator pushLoginController];
+            }
+        }
+        else if (receivedBlock) {
             NSLog(@"responseObject=\r\n%@", responseObject);
             receivedBlock(responseObject,error);
-            self.receivedBlock = nil;
         }
+        self.receivedBlock = nil;
     }];
 }
 

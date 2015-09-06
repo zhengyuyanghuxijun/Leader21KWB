@@ -77,5 +77,69 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LeaderDiandu/ViewControllers/GradeController/HBGradeViewController.m"
+            timestampString = "463242699.058482"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "-gridView:didSelectGridItemAtIndex:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LeaderDiandu/ViewControllers/Login&amp;RegisterController/HBRegistViewController.m"
+            timestampString = "463246310.072021"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "-fetchVerifyCode:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[HBRegistViewController fetchVerifyCode:]"
+                  moduleName = "LeaderDiandu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/komarejun/Desktop/Lead_zhang/Leader21KWB/LeaderDiandu/LeaderDiandu/ViewControllers/Login&amp;RegisterController/HBRegistViewController.m"
+                  timestampString = "463246553.952553"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "332">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__42-[HBRegistViewController fetchVerifyCode:]_block_invoke"
+                  moduleName = "LeaderDiandu"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/komarejun/Desktop/Lead_zhang/Leader21KWB/LeaderDiandu/LeaderDiandu/ViewControllers/Login&amp;RegisterController/HBRegistViewController.m"
+                  timestampString = "463246553.952796"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "113"
+                  endingLineNumber = "113"
+                  offsetFromSymbolStart = "67">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

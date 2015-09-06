@@ -18,7 +18,6 @@
 
 @interface AppDelegate ()
 {
-    HBLoginViewController *loginVC;
     DHSlideMenuController *menuVC;
 }
 
@@ -59,9 +58,9 @@
     }
 
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-    loginVC = [sb instantiateViewControllerWithIdentifier:@"HBLoginViewController"];
+    self.loginVC = [sb instantiateViewControllerWithIdentifier:@"HBLoginViewController"];
     if (!islogined) {
-        [self.globalNavi pushViewController:loginVC animated:NO];
+        [self.globalNavi pushViewController:_loginVC animated:NO];
     }
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -72,6 +71,14 @@
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)showLoginVC
+{
+    if (_loginVC) {
+        [self.globalNavi popToRootViewControllerAnimated:NO];
+        [self.globalNavi pushViewController:_loginVC animated:YES];
+    }
 }
 
 //登录成功后调用

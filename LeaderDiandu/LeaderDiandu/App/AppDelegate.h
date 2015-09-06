@@ -8,14 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class HBLoginViewController;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UINavigationController* globalNavi;
+@property (nonatomic, strong) HBLoginViewController *loginVC;
 
 + (AppDelegate *)delegate;
 
 - (void)initDHSlideMenu;
+
+- (void)showLoginVC;
 
 @end
 
