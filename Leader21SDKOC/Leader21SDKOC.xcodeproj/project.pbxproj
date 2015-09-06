@@ -56,7 +56,7 @@
 		0D7488501B89E249007BE4CD /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74884E1B89E249007BE4CD /* LocalSettings.m */; };
 		0DA93E6B1B8B755F0011A87C /* LocalSettings.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0DA93E671B8B6F620011A87C /* LocalSettings.h */; };
 		0DC1D40F1B9BA77E0043C79B /* NSDictionary+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC1D40E1B9BA77E0043C79B /* NSDictionary+Safe.m */; };
-		0DC415891B9AA043004A6D2C /* UIImage+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC415881B9AA043004A6D2C /* UIImage+Extra.m */; };
+		0DC1D4211B9CA0290043C79B /* UIImage+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC1D4201B9CA0290043C79B /* UIImage+Extra.m */; };
 		0DCBC2991B99DAE5003DFDD5 /* NSString+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCBC2981B99DAE5003DFDD5 /* NSString+Extra.m */; };
 		68A2C1E71B441DE600A0BB71 /* Leader21SDKOC.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 68A2C1E61B441DE600A0BB71 /* Leader21SDKOC.h */; };
 		68A2C1E91B441DE600A0BB71 /* Leader21SDKOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A2C1E81B441DE600A0BB71 /* Leader21SDKOC.m */; };
@@ -221,8 +221,8 @@
 		0DA93E671B8B6F620011A87C /* LocalSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalSettings.h; sourceTree = "<group>"; };
 		0DC1D40D1B9BA77E0043C79B /* NSDictionary+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Safe.h"; sourceTree = "<group>"; };
 		0DC1D40E1B9BA77E0043C79B /* NSDictionary+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Safe.m"; sourceTree = "<group>"; };
-		0DC415871B9AA043004A6D2C /* UIImage+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extra.h"; sourceTree = "<group>"; };
-		0DC415881B9AA043004A6D2C /* UIImage+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extra.m"; sourceTree = "<group>"; };
+		0DC1D41F1B9CA0290043C79B /* UIImage+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extra.h"; sourceTree = "<group>"; };
+		0DC1D4201B9CA0290043C79B /* UIImage+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extra.m"; sourceTree = "<group>"; };
 		0DCBC2971B99DAE5003DFDD5 /* NSString+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extra.h"; sourceTree = "<group>"; };
 		0DCBC2981B99DAE5003DFDD5 /* NSString+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extra.m"; sourceTree = "<group>"; };
 		68A2C1E31B441DE600A0BB71 /* libLeader21SDKOC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLeader21SDKOC.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -382,14 +382,14 @@
 		0D7487961B89DE72007BE4CD /* Additional */ = {
 			isa = PBXGroup;
 			children = (
+				0DC1D41F1B9CA0290043C79B /* UIImage+Extra.h */,
+				0DC1D4201B9CA0290043C79B /* UIImage+Extra.m */,
 				0DC1D40D1B9BA77E0043C79B /* NSDictionary+Safe.h */,
 				0DC1D40E1B9BA77E0043C79B /* NSDictionary+Safe.m */,
 				0DCBC2971B99DAE5003DFDD5 /* NSString+Extra.h */,
 				0DCBC2981B99DAE5003DFDD5 /* NSString+Extra.m */,
 				0D7487991B89DE72007BE4CD /* UIDevice+Addtional.h */,
 				0D74879A1B89DE72007BE4CD /* UIDevice+Addtional.m */,
-				0DC415871B9AA043004A6D2C /* UIImage+Extra.h */,
-				0DC415881B9AA043004A6D2C /* UIImage+Extra.m */,
 			);
 			path = Additional;
 			sourceTree = "<group>";
@@ -807,7 +807,6 @@
 				68A2C37F1B47DD5B00A0BB71 /* ScreenReaderObject.m in Sources */,
 				68A2C3701B47DD5B00A0BB71 /* ReadBookOCController.m in Sources */,
 				0D7488011B89DF42007BE4CD /* README.md in Sources */,
-				0DC415891B9AA043004A6D2C /* UIImage+Extra.m in Sources */,
 				0D7488301B89DF42007BE4CD /* Reachability.m in Sources */,
 				0D74880A1B89DF42007BE4CD /* ASIDownloadCache.m in Sources */,
 				0D7488121B89DF42007BE4CD /* ASIInputStream.m in Sources */,
@@ -833,6 +832,7 @@
 				68A2C3761B47DD5B00A0BB71 /* ReadBookResourceModel.m in Sources */,
 				0D74882B1B89DF42007BE4CD /* MKNetworkEngine.m in Sources */,
 				0D74883C1B89DF42007BE4CD /* unzip.c in Sources */,
+				0DC1D4211B9CA0290043C79B /* UIImage+Extra.m in Sources */,
 				68A2C3881B47DECD00A0BB71 /* BasePageViewController.m in Sources */,
 				68A2C3721B47DD5B00A0BB71 /* ReadBookPlayer.m in Sources */,
 				0D7488231B89DF42007BE4CD /* NSDictionary+RequestEncoding.m in Sources */,

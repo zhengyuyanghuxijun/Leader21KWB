@@ -8,6 +8,8 @@
 
 #import "TextGridItemView.h"
 #import "UIButton+AFNetworking.h"
+#import "MBProgressHUD.h"
+#import "UIViewAdditions.h"
 
 #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 
@@ -60,6 +62,23 @@
     self.bookCoverButton.frame = CGRectMake(10, self.bookNameLabel.frame.origin.y + self.bookNameLabel.frame.size.height, self.frame.size.width - 20, 100);
     [self.bookCoverButton addTarget:self action:@selector(bookCoverButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.bookCoverButton];
+    
+    self.progressView = [[MBProgressHUD alloc] initWithView:self];
+    self.progressView.mode = MBProgressHUDModeDeterminate;
+    self.progressView.backgroundBg = [self imageWithColor:[UIColor clearColor] size:CGSizeMake(1.0f, 1.0f)];
+    self.progressView.userInteractionEnabled = NO;
+    [self addSubview:self.progressView];
+    
+    UIImage* pause = [UIImage imageNamed:@"continue_download.png"];
+    self.pauseView = [[UIImageView alloc] initWithImage:pause];
+    self.pauseView.size = CGSizeMake(36.0f, 36.0f);
+    self.pauseView.contentMode = UIViewContentModeCenter;
+    self.pauseView.clipsToBounds = YES;
+    self.pauseView.layer.cornerRadius = self.pauseView.width / 2.0f;
+    self.pauseView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f];
+    [self addSubview:self.pauseView];
+    self.progressView.hidden = YES;
+    [self.progressView show:YES];
 }
 
 -(void)downloadButtonPressed:(id)sender
@@ -97,6 +116,36 @@
 
     //刷新cell
     [self setNeedsLayout];
+}
+
+- (UIImage*)imageWithColor:(UIColor*)color size:(CGSize)size
+{
+    CGRect frame = CGRectZero;
+    
+    BOOL resizeable = NO;
+    if (CGSizeEqualToSize(size, CGSizeZero)) {
+        size = CGSizeMake(5.0f, 5.0f);
+        resizeable = YES;
+    }
+    
+    frame.size = size;
+    UIView* view = [[UIView alloc] initWithFrame:frame];
+    view.backgroundColor = color;
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    if (resizeable) {
+        UIEdgeInsets inset = UIEdgeInsetsMake(size.height/2.0f-1, size.width/2.0f-1, size.height/2.0+1, size.width/2.0+1);
+        UIImage* result = [image resizableImageWithCapInsets:inset];
+        return result;
+    }
+    else {
+        return image;
+    }
 }
 
 @end

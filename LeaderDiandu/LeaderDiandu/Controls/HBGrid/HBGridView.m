@@ -172,8 +172,9 @@ delegate = _delegate;
     if ([_delegate respondsToSelector:@selector(gridView:didSelectGridItemAtIndex:)]) 
     {
         HBGridItemView *view = (HBGridItemView *)sender;
-        NSLog(@"tap index:%ld", [self indexOfGridItemView:view]);
-        [_delegate gridView:self didSelectGridItemAtIndex:[self indexOfGridItemView:view]];
+        self.selIndex = [self indexOfGridItemView:view];
+        NSLog(@"tap index:%ld", self.selIndex);
+        [_delegate gridView:self didSelectGridItemAtIndex:self.selIndex];
     }
 }
 

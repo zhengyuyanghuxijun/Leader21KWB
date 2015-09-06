@@ -51,6 +51,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -283,7 +288,7 @@
 //                DownloadEntity* download = (DownloadEntity*)[BookListCellView getFirstObjectWithEntryName:@"DownloadEntity" withPredicate:pre];
 //                book.download = download;
             }
-            
+            HBGridItemView *itemView = [_gridView gridItemViewAtIndex:_gridView.selIndex];
 //            [self resetWithBook:book];
         }
     }

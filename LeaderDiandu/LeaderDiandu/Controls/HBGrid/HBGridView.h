@@ -34,6 +34,7 @@
 
 @property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, assign) id<HBGridViewDelegate> delegate;
+@property (nonatomic, assign) NSUInteger selIndex;
 
 // 一个cell中的grid在内部是可以反复使用
 - (HBGridItemView *)dequeueReusableGridItemAtGridIndex:(GridIndex *)gridIndex ofGridCellView:(HBGridCellView *)gridCellView;
