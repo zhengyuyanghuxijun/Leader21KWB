@@ -110,6 +110,8 @@
 		1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */; };
 		18B5FD2E1B981454002CCD95 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5FD2D1B981454002CCD95 /* UIButton+AFNetworking.m */; };
 		18B5FD311B983930002CCD95 /* FTMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5FD301B983930002CCD95 /* FTMenu.m */; };
+		18C64FFF1B9DE74B0040E349 /* HBScoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C64FFE1B9DE74B0040E349 /* HBScoreListViewController.m */; };
+		18C650021B9DF1CA0040E349 /* HBScoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C650011B9DF1CA0040E349 /* HBScoreEntity.m */; };
 		18EC49431B999B2D000900E4 /* ButtonGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC49421B999B2D000900E4 /* ButtonGridItemView.m */; };
 /* End PBXBuildFile section */
 
@@ -320,6 +322,10 @@
 		18B5FD2D1B981454002CCD95 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
 		18B5FD2F1B983930002CCD95 /* FTMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMenu.h; sourceTree = "<group>"; };
 		18B5FD301B983930002CCD95 /* FTMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMenu.m; sourceTree = "<group>"; };
+		18C64FFD1B9DE74B0040E349 /* HBScoreListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBScoreListViewController.h; sourceTree = "<group>"; };
+		18C64FFE1B9DE74B0040E349 /* HBScoreListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreListViewController.m; sourceTree = "<group>"; };
+		18C650001B9DF1CA0040E349 /* HBScoreEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBScoreEntity.h; sourceTree = "<group>"; };
+		18C650011B9DF1CA0040E349 /* HBScoreEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreEntity.m; sourceTree = "<group>"; };
 		18EC49411B999B2D000900E4 /* ButtonGridItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonGridItemView.h; sourceTree = "<group>"; };
 		18EC49421B999B2D000900E4 /* ButtonGridItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonGridItemView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -654,6 +660,8 @@
 				1823061F1B9B300300A8E146 /* HBTaskEntity.m */,
 				1898BCEA1B9DA7ED00FD9A11 /* HBManageTaskEntity.h */,
 				1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */,
+				18C650001B9DF1CA0040E349 /* HBScoreEntity.h */,
+				18C650011B9DF1CA0040E349 /* HBScoreEntity.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -749,6 +757,7 @@
 		0DD214661B95FC8B009E3DB9 /* MenuControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18C64FFB1B9DE4D20040E349 /* HBWorkManViewControllers */,
 				0D018FF21B97513400A92F59 /* HBUserInfoViewController.h */,
 				0D018FF31B97513400A92F59 /* HBUserInfoViewController.m */,
 				0D01900F1B98B19200A92F59 /* HBEditNameViewController.h */,
@@ -759,8 +768,6 @@
 				0DD2146B1B95FF3B009E3DB9 /* HBMyTeacherViewController.m */,
 				0D018FE61B96DB3500A92F59 /* HBStuManViewController.h */,
 				0D018FE71B96DB3500A92F59 /* HBStuManViewController.m */,
-				0D018FE91B96DB5C00A92F59 /* HBWorkManViewController.h */,
-				0D018FEA1B96DB5C00A92F59 /* HBWorkManViewController.m */,
 				0D018FEC1B96DB9200A92F59 /* HBLeaderViewController.h */,
 				0D018FED1B96DB9200A92F59 /* HBLeaderViewController.m */,
 				0DD2146D1B95FFAC009E3DB9 /* HBSubscribeViewController.h */,
@@ -775,6 +782,17 @@
 				0DD214681B95FCDF009E3DB9 /* HBSettingViewController.m */,
 			);
 			path = MenuControllers;
+			sourceTree = "<group>";
+		};
+		18C64FFB1B9DE4D20040E349 /* HBWorkManViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0D018FE91B96DB5C00A92F59 /* HBWorkManViewController.h */,
+				0D018FEA1B96DB5C00A92F59 /* HBWorkManViewController.m */,
+				18C64FFD1B9DE74B0040E349 /* HBScoreListViewController.h */,
+				18C64FFE1B9DE74B0040E349 /* HBScoreListViewController.m */,
+			);
+			name = HBWorkManViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -906,8 +924,10 @@
 				0DD214781B9601DA009E3DB9 /* HBMessageViewController.m in Sources */,
 				18B5FD311B983930002CCD95 /* FTMenu.m in Sources */,
 				0DBE35721B8CB95800179237 /* SBJsonWriter.m in Sources */,
+				18C650021B9DF1CA0040E349 /* HBScoreEntity.m in Sources */,
 				0D7488541B8A2071007BE4CD /* ViewController.m in Sources */,
 				0DBE35D51B8CD91500179237 /* HBHyperlinksButton.m in Sources */,
+				18C64FFF1B9DE74B0040E349 /* HBScoreListViewController.m in Sources */,
 				0DBE356D1B8CB95800179237 /* NSObject+SBJSON.m in Sources */,
 				0DD214691B95FCDF009E3DB9 /* HBSettingViewController.m in Sources */,
 				0DB5372B1B8F5DEE0023A3F7 /* AFNetworkReachabilityManager.m in Sources */,

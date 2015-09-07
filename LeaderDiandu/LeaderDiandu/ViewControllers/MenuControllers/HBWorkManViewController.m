@@ -14,6 +14,7 @@
 #import "HBManageTaskEntity.h"
 #import "TimeIntervalUtils.h"
 #import "UIImageView+AFNetworking.h"
+#import "HBScoreListViewController.h"
 
 #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewControllerCellReuseId";
@@ -181,8 +182,8 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
                     NSString *total = [statDic objectForKey:@"total"];
                     manageTaskEntity.total = [total integerValue];
                     
-//                    NSString *fileId = [dic objectForKey:@"file_id"];
-//                    manageTaskEntity.fileId = fileId;
+                    NSString *examId = [dic objectForKey:@"exam_id"];
+                    manageTaskEntity.examId = [examId integerValue];
                     
                     NSTimeInterval interval = [[dic objectForKey:@"created_time"] doubleValue];
                     manageTaskEntity.taskTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
@@ -238,6 +239,11 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    HBScoreListViewController *vc = [[HBScoreListViewController alloc] init];
+    HBManageTaskEntity *manageTaskEntity = [self.manageTaskEntityArr objectAtIndex:indexPath.row];
+    [vc setTitleStr:manageTaskEntity.bookName];
+    [vc setExamId:manageTaskEntity.examId];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

@@ -16,5 +16,6 @@
 @property (nonatomic, strong)NSString *fileId;
 @property (nonatomic, assign)NSInteger submitted;
 @property (nonatomic, assign)NSInteger total;
+@property (nonatomic, assign)NSInteger examId;
 
 @end
