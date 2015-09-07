@@ -23,4 +23,6 @@
 - (void)saveUserByDict:(NSDictionary *)dict;
 - (NSDictionary *)loadUser;
 
+- (void)clearUserData;
+
 @end

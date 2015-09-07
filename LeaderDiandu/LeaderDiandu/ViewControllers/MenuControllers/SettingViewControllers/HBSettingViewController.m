@@ -10,6 +10,8 @@
 #import "HBTitleView.h"
 #import "UIViewController+AddBackBtn.h"
 
+#import "HBServiceManager.h"
+
 static NSString * const KSettingViewControllerCellSwitchReuseId = @"KSettingViewControllerCellSwitchReuseId";
 static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingViewControllerCellAccessoryReuseId";
 
@@ -72,7 +74,18 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
     if (buttonIndex == 0){
         //to do ...
     }else{
-        //to do ...
+        //to do 注销...
+        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+        [[HBServiceManager defaultManager] requestLogout:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+            if (responseObject) {
+                NSDictionary *dic = responseObject;
+                if ([dic[@"result"] isEqualToString:@"OK"]) {
+                    //注销成功
+                    [[HBDataSaveManager defaultManager] clearUserData];
+                    [Navigator pushLoginController];
+                }
+            }
+        }];
     }
 }
 

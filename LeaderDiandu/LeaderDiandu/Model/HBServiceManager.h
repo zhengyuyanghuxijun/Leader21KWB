@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "HBModelConst.h"
+#import "HBDataSaveManager.h"
+#import "HBUserEntity.h"
 
 typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
 

@@ -57,4 +57,11 @@
     return dict;
 }
 
+- (void)clearUserData
+{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault removeObjectForKey:KWBDefaultUser];
+    [userDefault synchronize];
+}
+
 @end
