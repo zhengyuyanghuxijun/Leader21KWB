@@ -292,6 +292,13 @@
 //            [self resetWithBook:book];
         }
     }
+
+//    NSInteger per =  [[notification.userInfo objectForKey:@"progress"] integerValue];
+//    
+//    if (per == 1) {
+//        [LEADERSDK readBook:(BookEntity*)notification.object useNavigation:self.navigationController];
+//
+//    }
 }
 
 @end

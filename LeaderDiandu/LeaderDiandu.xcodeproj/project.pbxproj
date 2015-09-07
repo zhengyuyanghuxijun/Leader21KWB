@@ -107,6 +107,7 @@
 		181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */; };
 		182306131B9B0DEE00A8E146 /* HHAlertSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182306121B9B0DEE00A8E146 /* HHAlertSingleView.m */; };
 		182306201B9B300300A8E146 /* HBTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823061F1B9B300300A8E146 /* HBTaskEntity.m */; };
+		1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */; };
 		18B5FD2E1B981454002CCD95 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5FD2D1B981454002CCD95 /* UIButton+AFNetworking.m */; };
 		18B5FD311B983930002CCD95 /* FTMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5FD301B983930002CCD95 /* FTMenu.m */; };
 		18EC49431B999B2D000900E4 /* ButtonGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC49421B999B2D000900E4 /* ButtonGridItemView.m */; };
@@ -313,6 +314,8 @@
 		182306121B9B0DEE00A8E146 /* HHAlertSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHAlertSingleView.m; sourceTree = "<group>"; };
 		1823061E1B9B300300A8E146 /* HBTaskEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTaskEntity.h; sourceTree = "<group>"; };
 		1823061F1B9B300300A8E146 /* HBTaskEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTaskEntity.m; sourceTree = "<group>"; };
+		1898BCEA1B9DA7ED00FD9A11 /* HBManageTaskEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBManageTaskEntity.h; sourceTree = "<group>"; };
+		1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBManageTaskEntity.m; sourceTree = "<group>"; };
 		18B5FD2C1B981454002CCD95 /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
 		18B5FD2D1B981454002CCD95 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
 		18B5FD2F1B983930002CCD95 /* FTMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMenu.h; sourceTree = "<group>"; };
@@ -649,6 +652,8 @@
 				181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */,
 				1823061E1B9B300300A8E146 /* HBTaskEntity.h */,
 				1823061F1B9B300300A8E146 /* HBTaskEntity.m */,
+				1898BCEA1B9DA7ED00FD9A11 /* HBManageTaskEntity.h */,
+				1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -952,6 +957,7 @@
 				0DBE35C61B8CD60F00179237 /* HBLoginViewController.m in Sources */,
 				0D7486F41B88A884007BE4CD /* main.m in Sources */,
 				0DB537291B8F5DEE0023A3F7 /* AFHTTPSessionManager.m in Sources */,
+				1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */,
 				0DBE353B1B8CB8B500179237 /* MBHudUtil.m in Sources */,
 				0D01900B1B980E8200A92F59 /* UIImageView+AFNetworking.m in Sources */,
 				0DB537321B8F70E80023A3F7 /* HBHTTPBaseRequest.m in Sources */,
