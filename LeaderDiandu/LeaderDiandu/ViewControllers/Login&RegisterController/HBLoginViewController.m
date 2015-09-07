@@ -15,7 +15,6 @@
 
 #import "HBTitleView.h"
 #import "NSString+Verify.h"
-#import "HBHyperlinksButton.h"
 #import "HBNTextField.h"
 
 #import "HBServiceManager.h"
@@ -26,8 +25,8 @@
 @property (weak, nonatomic) IBOutlet HBNTextField *inputPhoneNumber;
 @property (weak, nonatomic) IBOutlet HBNTextField *inputPassword;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (weak, nonatomic) IBOutlet HBHyperlinksButton *forgetPassword;
-@property (weak, nonatomic) IBOutlet HBHyperlinksButton *userRegister;
+@property (weak, nonatomic) IBOutlet UIButton *userRegister;
+@property (weak, nonatomic) IBOutlet UIButton *forgetPassword;
 
 @end
 
@@ -38,7 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initMainView];
-    [self addThirdLoginObserve];
+//    [self addThirdLoginObserve];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,8 +72,7 @@
 //    self.fd_interactivePopDisabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToHideKeyboard:)];
     [self.view addGestureRecognizer:tap];
-    [self.forgetPassword setColor:[UIColor whiteColor]];
-    [self.userRegister setColor:[UIColor whiteColor]];
+    [self.view bringSubviewToFront:self.userRegister];
     [self.inputPhoneNumber setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
     [self.inputPassword setupTextFieldWithType:HBNTextFieldTypePassword withIconName:@"lock"];
 }

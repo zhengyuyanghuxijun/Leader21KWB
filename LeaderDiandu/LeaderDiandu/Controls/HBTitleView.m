@@ -15,10 +15,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.font = [UIFont boldSystemFontOfSize:18];
+        self.font = [UIFont boldSystemFontOfSize:20];
         self.textAlignment = NSTextAlignmentCenter;
         self.backgroundColor = [UIColor clearColor];
-        self.textColor = [UIColor blackColor];
+        self.textColor = [UIColor whiteColor];
         self.shadowColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
         self.shadowOffset = CGSizeMake(0, 1);
     }

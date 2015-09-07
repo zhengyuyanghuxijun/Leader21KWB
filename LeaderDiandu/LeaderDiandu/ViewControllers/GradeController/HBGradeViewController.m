@@ -73,6 +73,7 @@
 - (void)initMainView
 {
     HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"课外宝" onView:self.view];
+    labTitle.textColor = [UIColor blackColor];
     [self.view addSubview:labTitle];
 }
 

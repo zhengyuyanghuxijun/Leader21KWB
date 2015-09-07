@@ -55,6 +55,7 @@
 		0D74884C1B89E1C7007BE4CD /* DownloadEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74884A1B89E1C7007BE4CD /* DownloadEntity.m */; };
 		0D7488501B89E249007BE4CD /* LocalSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74884E1B89E249007BE4CD /* LocalSettings.m */; };
 		0DA93E6B1B8B755F0011A87C /* LocalSettings.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0DA93E671B8B6F620011A87C /* LocalSettings.h */; };
+		0DBAEB571B9D3E02007CB65E /* BookEntity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0D7487831B89DDF5007BE4CD /* BookEntity.h */; };
 		0DC1D40F1B9BA77E0043C79B /* NSDictionary+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC1D40E1B9BA77E0043C79B /* NSDictionary+Safe.m */; };
 		0DC1D4211B9CA0290043C79B /* UIImage+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC1D4201B9CA0290043C79B /* UIImage+Extra.m */; };
 		0DCBC2991B99DAE5003DFDD5 /* NSString+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCBC2981B99DAE5003DFDD5 /* NSString+Extra.m */; };
@@ -109,6 +110,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				0DBAEB571B9D3E02007CB65E /* BookEntity.h in CopyFiles */,
 				0DA93E6B1B8B755F0011A87C /* LocalSettings.h in CopyFiles */,
 				68A2C1E71B441DE600A0BB71 /* Leader21SDKOC.h in CopyFiles */,
 			);

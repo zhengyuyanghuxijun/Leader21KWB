@@ -13,6 +13,7 @@
 
 #import "HBGridItemView.h"
 
+
 @class MBProgressHUD;
 
 @interface TextGridItemView : HBGridItemView

@@ -81,6 +81,15 @@
     [self.progressView show:YES];
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    CGFloat progressY = -18;
+    self.progressView.frame = CGRectMake(0, progressY, self.bounds.size.width, self.bounds.size.height);
+    self.pauseView.center = self.progressView.center;
+}
+
 -(void)downloadButtonPressed:(id)sender
 {
     [self didTap];
