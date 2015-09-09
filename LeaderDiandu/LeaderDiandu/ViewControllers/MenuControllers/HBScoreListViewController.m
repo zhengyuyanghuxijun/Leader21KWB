@@ -60,7 +60,12 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
     if (scoreEntity) {
         self.cellName.text = scoreEntity.displayName;
         self.cellTime.text = scoreEntity.taskTime;
-        self.cellScore.text = scoreEntity.score;
+        if (scoreEntity.score) {
+            self.cellScore.text = scoreEntity.score;
+        }else{
+            self.cellScore.text = @"未完成测试";
+        }
+        
     }
 }
 
@@ -118,7 +123,7 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight);
+    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, self.scoreEntityArr.count * 70);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;

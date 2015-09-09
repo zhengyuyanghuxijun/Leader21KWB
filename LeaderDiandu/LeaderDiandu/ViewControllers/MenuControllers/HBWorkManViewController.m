@@ -15,6 +15,7 @@
 #import "TimeIntervalUtils.h"
 #import "UIImageView+AFNetworking.h"
 #import "HBScoreListViewController.h"
+#import "HBPublishWorkViewController.h"
 
 #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewControllerCellReuseId";
@@ -102,7 +103,8 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     UITableView *_tableView;
 }
 
-@property (nonatomic, strong)NSMutableArray *manageTaskEntityArr;
+@property (nonatomic, strong) NSMutableArray *manageTaskEntityArr;
+@property (nonatomic, strong) UIButton* assignWorkButton;
 
 @end
 
@@ -128,6 +130,13 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     [self addBackButton];
 
     [self requestTaskListOfTeacher];
+    
+    CGRect rc = CGRectMake(0.0f, ScreenHeight - 50.0f, ScreenWidth, 50.0f);
+    self.assignWorkButton = [[UIButton alloc] initWithFrame:rc];
+    [self.assignWorkButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+    [self.assignWorkButton setTitle:@"布置作业" forState:UIControlStateNormal];
+    [self.assignWorkButton addTarget:self action:@selector(assignWorkButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.assignWorkButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -145,10 +154,16 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
 }
 */
 
+- (void)assignWorkButtonPressed:(id)sender
+{
+    HBPublishWorkViewController *vc = [[HBPublishWorkViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight);
+    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight - 50);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
