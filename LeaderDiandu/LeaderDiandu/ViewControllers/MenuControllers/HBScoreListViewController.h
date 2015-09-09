@@ -9,6 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "HBBaseViewController.h"
 
+@interface HBScoreListViewCell : UITableViewCell
+
+@property (strong, nonatomic) UIImageView * cellHeadImage;
+@property (strong, nonatomic) UILabel *     cellName;
+@property (strong, nonatomic) UILabel *     cellTime;
+@property (strong, nonatomic) UILabel *     cellScore;
+
+/**
+ *	@brief	更新表格内容
+ *	@param 	NSDictionary 内容字典
+ *  @retuan nil
+ */
+-(void)updateFormData:(id)sender;
+
+@end
+
 @interface HBScoreListViewController : HBBaseViewController
 
 @property (nonatomic, copy)NSString *titleStr;

@@ -16,6 +16,56 @@
 
 static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewControllerCellReuseId";
 
+@implementation HBScoreListViewCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self)
+    {
+        [self initUI];
+    }
+    return self;
+}
+
+- (void) initUI
+{
+    //头像
+    self.cellHeadImage = [[UIImageView alloc] init];
+    self.cellHeadImage.image = [UIImage imageNamed:@"menu_head"];
+    self.cellHeadImage.frame = CGRectMake(10, 10, 50, 70 - 10 - 10);
+    [self addSubview:self.cellHeadImage];
+    
+    //姓名
+    self.cellName = [[UILabel alloc] init];
+    self.cellName.frame = CGRectMake(10 + 50 + 10, 10, 150, 70/2 - 10);
+    [self addSubview:self.cellName];
+    
+    //时间
+    self.cellTime = [[UILabel alloc] init];
+    self.cellTime.frame = CGRectMake(10 + 50 + 10, 70/2, 150, 70/2 - 10);
+    [self addSubview:self.cellTime];
+    
+    //分数
+    self.cellScore = [[UILabel alloc] init];
+    self.cellScore.frame = CGRectMake(ScreenWidth - 100, 0, 90, 70);
+    self.cellScore.textAlignment = NSTextAlignmentRight;
+    [self addSubview:self.cellScore];
+}
+
+-(void)updateFormData:(id)sender
+{
+    HBScoreEntity *scoreEntity = (HBScoreEntity*)sender;
+    
+    if (scoreEntity) {
+        self.cellName.text = scoreEntity.displayName;
+        self.cellTime.text = scoreEntity.taskTime;
+        self.cellScore.text = scoreEntity.score;
+    }
+}
+
+@end
+
 @interface HBScoreListViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     UITableView *_tableView;
@@ -125,24 +175,23 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 70.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSParameterAssert(self.scoreEntityArr);
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KScoreListViewControllerCellReuseId];
+    HBScoreListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KScoreListViewControllerCellReuseId];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KScoreListViewControllerCellReuseId];
+        cell = [[HBScoreListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KScoreListViewControllerCellReuseId];
     }
     
     HBScoreEntity *scoreEntity = [self.scoreEntityArr objectAtIndex:indexPath.row];
-    cell.textLabel.text = scoreEntity.displayName;
+    [cell updateFormData:scoreEntity];
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textColor = [UIColor blackColor];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
     
     return cell;
 }
