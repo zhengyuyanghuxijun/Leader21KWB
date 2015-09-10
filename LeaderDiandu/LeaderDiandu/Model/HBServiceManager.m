@@ -40,7 +40,7 @@
                 [Navigator pushLoginController];
             }
         }
-        else if (receivedBlock) {
+        if (receivedBlock) {
             NSLog(@"responseObject=\r\n%@", responseObject);
             receivedBlock(responseObject,error);
         }
@@ -445,12 +445,12 @@
     [self Post:@"/api/task/assign" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestTaskList:(NSString *)user class_id:(NSString *)class_id bookset_id:(NSString *)bookset_id completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestTaskList:(NSString *)user class_id:(NSInteger)class_id bookset_id:(NSInteger)bookset_id completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:class_id     forKey:@"class_id"];
-    [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
+    [dicInfo setObject:@(class_id)     forKey:@"class_id"];
+    [dicInfo setObject:@(bookset_id)     forKey:@"bookset_id"];
     
     if (_receivedBlock) {
         return;
@@ -472,19 +472,19 @@
     [self Post:@"/api/exam" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestTaskListOfClass:(NSString *)user class_id:(NSString *)class_id bookset_id:(NSString *)bookset_id completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestTaskListOfClass:(NSString *)user class_id:(NSInteger)class_id bookset_id:(NSInteger)bookset_id completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:class_id     forKey:@"class_id"];
-    [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
+    [dicInfo setObject:@(class_id)     forKey:@"class_id"];
+    [dicInfo setObject:@(bookset_id)     forKey:@"bookset_id"];
     
     if (_receivedBlock) {
         return;
     }
     self.receivedBlock = receivedBlock;
     ///api/exam/class/list
-    [self Post:@"/api/task/class/list" dict:dicInfo block:receivedBlock];
+    [self Post:@"/api/exam/class/list" dict:dicInfo block:receivedBlock];
 }
 
 - (void)requestTaskListOfStudent:(NSString *)user from:(NSInteger)from count:(NSInteger)count completion:(HBServiceReceivedBlock)receivedBlock

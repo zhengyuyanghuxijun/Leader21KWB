@@ -138,9 +138,7 @@
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
-        NSString *classIdStr = [NSString stringWithFormat:@"%ld", self.classEntity.classId];
-        NSString *booksetIdStr = [NSString stringWithFormat:@"%ld", self.classEntity.booksetId];
-        [[HBServiceManager defaultManager] requestTaskListOfClass:user class_id:classIdStr bookset_id:booksetIdStr completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestTaskList:user class_id:_classEntity.classId bookset_id:_classEntity.booksetId completion:^(id responseObject, NSError *error) {
             int i = 0;
         }];
     }

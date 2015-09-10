@@ -91,7 +91,7 @@
     NSArray *ctlArray = nil;
     if (userEntity.type == 1) {
         imgArray = @[@"menu_teacher", @"menu_star", @"menu_test", @"menu_pay", @"menu_setting", @"menu_service", @"menu_setting"];
-        titleArr = @[@"我的老师", @"订阅等级", @"测试作业", @"支付中心", @"消息中心", @"联系客服", @"设置"];
+        titleArr = @[@"我的老师", @"订阅等级", @"我的作业", @"支付中心", @"消息中心", @"联系客服", @"设置"];
         ctlArray = @[@"HBMyTeacherViewController", @"HBSubscribeViewController", @"HBTestWorkViewController", @"HBPayViewController", @"HBMessageViewController", @"", @"HBSettingViewController"];
     } else if (userEntity.type == 10) {//老师
         imgArray = @[@"menu_teacher", @"menu_test", @"menu_pay", @"menu_setting", @"menu_service", @"menu_setting"];

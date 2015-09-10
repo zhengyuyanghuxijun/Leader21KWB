@@ -13,7 +13,6 @@
 
 #import "HBGridItemView.h"
 
-
 @class MBProgressHUD;
 
 @interface TextGridItemView : HBGridItemView
@@ -22,6 +21,7 @@
 @property (nonatomic, strong) MBProgressHUD* progressView;
 
 //更新数据
--(void)updateFormData:(NSDictionary*)dic;
+- (void)updateFormData:(NSDictionary*)dic;
+- (void)resetWithBook;
 
 @end

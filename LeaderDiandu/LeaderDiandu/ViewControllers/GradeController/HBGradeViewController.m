@@ -18,7 +18,10 @@
 #import "HBContentEntity.h"
 #import "HBContentDetailEntity.h"
 #import "FTMenu.h"
+
 #import "Leader21SDKOC.h"
+#import "DownloadEntity.h"
+#import "DataEngine.h"
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
 
@@ -289,8 +292,7 @@
 //                DownloadEntity* download = (DownloadEntity*)[BookListCellView getFirstObjectWithEntryName:@"DownloadEntity" withPredicate:pre];
 //                book.download = download;
             }
-            HBGridItemView *itemView = [_gridView gridItemViewAtIndex:_gridView.selIndex];
-//            [self resetWithBook:book];
+            [self resetWithBook:book];
         }
     }
 
@@ -300,6 +302,57 @@
 //        [LEADERSDK readBook:(BookEntity*)notification.object useNavigation:self.navigationController];
 //
 //    }
+}
+
+- (void)resetWithBook:(BookEntity *)book
+{
+    TextGridItemView *itemView = (TextGridItemView *)[_gridView gridItemViewAtIndex:_gridView.selIndex];
+    [itemView resetWithBook];
+    
+    CGFloat progress = book.download.progress.floatValue;
+    
+    // 是否正在下载
+    NSInteger s = book.download.status.integerValue;
+    NSLog(@"download status:%ld, progress:%f", (long)s, progress);
+    if (book.download != nil) {
+        if (book.download.status.integerValue != downloadStatusFinished) {
+            if (progress > 0.97f) {
+                progress = 0.97f;
+            }
+        }
+    }
+    if (book.download != nil && (progress < 1.0f || book.download.status.integerValue == downloadStatusUnZipping)) {
+        if (s == downloadStatusPause) {
+//            self.progressView.hidden = YES;
+//            self.pauseView.hidden = NO;
+            NSLog(@"download status:pause");
+        }
+        else {
+            if (progress < 0.005) {
+                progress = 0.005;
+            }
+            if (downloadStatusUnZipping == book.download.status.integerValue) {
+                progress = 0.97f;
+            }
+            else if (progress == 1.0f) {
+                book.download.status = @(downloadStatusFinished);
+            }
+//            self.progressView.hidden = NO;
+//            self.pauseView.hidden = YES;
+//            self.progressView.alpha = 1.0f;
+//            self.progressView.progress = progress;
+            NSLog(@"download status:downing");
+        }
+//        if (book.hasBook.boolValue) {
+//            self.priceButton.hidden = YES;
+//            self.readProgressLabel.text = [NSString stringWithFormat:@"Read %d%%", book.readProgress.integerValue];
+//            self.readProgressLabel.hidden = NO;
+//        }
+//        else {
+//            self.priceButton.hidden = NO;
+//            self.readProgressLabel.hidden = YES;
+//        }
+    }
 }
 
 @end

@@ -127,6 +127,14 @@
     [self setNeedsLayout];
 }
 
+- (void)resetWithBook
+{
+    self.downloadButton.hidden = YES;
+    self.progressView.hidden = YES;
+    self.pauseView.hidden = YES;
+
+}
+
 - (UIImage*)imageWithColor:(UIColor*)color size:(CGSize)size
 {
     CGRect frame = CGRectZero;

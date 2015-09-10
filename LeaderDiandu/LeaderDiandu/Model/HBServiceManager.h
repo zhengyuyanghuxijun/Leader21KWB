@@ -298,7 +298,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param bookset_id       套餐ID
  *  @param receivedBlock 回调Block
  */
-- (void)requestTaskList:(NSString *)user class_id:(NSString *)class_id bookset_id:(NSString *)bookset_id completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestTaskList:(NSString *)user class_id:(NSInteger)class_id bookset_id:(NSInteger)bookset_id completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  获取一个测试或作业的信息
@@ -317,7 +317,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param bookset_id 为班级对应的套餐ID，冗余参数，仅作为参数校验用
  *  @param receivedBlock 回调Block
  */
-- (void)requestTaskListOfClass:(NSString *)user class_id:(NSString *)class_id bookset_id:(NSString *)bookset_id completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestTaskListOfClass:(NSString *)user class_id:(NSInteger)class_id bookset_id:(NSInteger)bookset_id completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  学生获取作业列表
