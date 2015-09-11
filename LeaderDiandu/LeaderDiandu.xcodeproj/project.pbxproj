@@ -105,6 +105,15 @@
 		0DD214781B9601DA009E3DB9 /* HBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214771B9601DA009E3DB9 /* HBMessageViewController.m */; };
 		181456DD1B96D9DD003CCD6C /* HBContentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DC1B96D9DD003CCD6C /* HBContentEntity.m */; };
 		181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */; };
+		181E30741BA2B14100BBA92F /* UtilFMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E306B1BA2B14100BBA92F /* UtilFMDatabase.m */; };
+		181E30751BA2B14100BBA92F /* UtilFMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E306D1BA2B14100BBA92F /* UtilFMDatabaseAdditions.m */; };
+		181E30761BA2B14100BBA92F /* UtilFMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E306F1BA2B14100BBA92F /* UtilFMDatabasePool.m */; };
+		181E30771BA2B14100BBA92F /* UtilFMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E30711BA2B14100BBA92F /* UtilFMDatabaseQueue.m */; };
+		181E30781BA2B14100BBA92F /* UtilFMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E30731BA2B14100BBA92F /* UtilFMResultSet.m */; };
+		181E307A1BA2B30A00BBA92F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 181E30791BA2B30A00BBA92F /* libsqlite3.dylib */; };
+		181E307D1BA2B7AD00BBA92F /* FileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E307C1BA2B7AD00BBA92F /* FileUtil.m */; };
+		181E30801BA2C28600BBA92F /* HBContentDetailDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */; };
+		181E30821BA2D0CF00BBA92F /* hbcontentdetail.db in Resources */ = {isa = PBXBuildFile; fileRef = 181E30811BA2D0CF00BBA92F /* hbcontentdetail.db */; };
 		182306131B9B0DEE00A8E146 /* HHAlertSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182306121B9B0DEE00A8E146 /* HHAlertSingleView.m */; };
 		182306201B9B300300A8E146 /* HBTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823061F1B9B300300A8E146 /* HBTaskEntity.m */; };
 		189719DC1B9F3405006F42A2 /* HBStudentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 189719DB1B9F3405006F42A2 /* HBStudentEntity.m */; };
@@ -316,6 +325,22 @@
 		181456DC1B96D9DD003CCD6C /* HBContentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentEntity.m; sourceTree = "<group>"; };
 		181456DE1B96E483003CCD6C /* HBContentDetailEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentDetailEntity.h; sourceTree = "<group>"; };
 		181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentDetailEntity.m; sourceTree = "<group>"; };
+		181E306A1BA2B14100BBA92F /* UtilFMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilFMDatabase.h; sourceTree = "<group>"; };
+		181E306B1BA2B14100BBA92F /* UtilFMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilFMDatabase.m; sourceTree = "<group>"; };
+		181E306C1BA2B14100BBA92F /* UtilFMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilFMDatabaseAdditions.h; sourceTree = "<group>"; };
+		181E306D1BA2B14100BBA92F /* UtilFMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilFMDatabaseAdditions.m; sourceTree = "<group>"; };
+		181E306E1BA2B14100BBA92F /* UtilFMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilFMDatabasePool.h; sourceTree = "<group>"; };
+		181E306F1BA2B14100BBA92F /* UtilFMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilFMDatabasePool.m; sourceTree = "<group>"; };
+		181E30701BA2B14100BBA92F /* UtilFMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilFMDatabaseQueue.h; sourceTree = "<group>"; };
+		181E30711BA2B14100BBA92F /* UtilFMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilFMDatabaseQueue.m; sourceTree = "<group>"; };
+		181E30721BA2B14100BBA92F /* UtilFMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilFMResultSet.h; sourceTree = "<group>"; };
+		181E30731BA2B14100BBA92F /* UtilFMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilFMResultSet.m; sourceTree = "<group>"; };
+		181E30791BA2B30A00BBA92F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		181E307B1BA2B7AD00BBA92F /* FileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtil.h; sourceTree = "<group>"; };
+		181E307C1BA2B7AD00BBA92F /* FileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUtil.m; sourceTree = "<group>"; };
+		181E307E1BA2C28600BBA92F /* HBContentDetailDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentDetailDB.h; sourceTree = "<group>"; };
+		181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentDetailDB.m; sourceTree = "<group>"; };
+		181E30811BA2D0CF00BBA92F /* hbcontentdetail.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbcontentdetail.db; sourceTree = "<group>"; };
 		182306111B9B0DEE00A8E146 /* HHAlertSingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHAlertSingleView.h; sourceTree = "<group>"; };
 		182306121B9B0DEE00A8E146 /* HHAlertSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHAlertSingleView.m; sourceTree = "<group>"; };
 		1823061E1B9B300300A8E146 /* HBTaskEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTaskEntity.h; sourceTree = "<group>"; };
@@ -347,6 +372,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181E307A1BA2B30A00BBA92F /* libsqlite3.dylib in Frameworks */,
 				0D74887A1B8A2219007BE4CD /* CoreData.framework in Frameworks */,
 				0DC1D3F81B9B348F0043C79B /* AVFoundation.framework in Frameworks */,
 				0DC1D3F61B9B33BD0043C79B /* ImageIO.framework in Frameworks */,
@@ -468,6 +494,7 @@
 		0D7487171B88A8BC007BE4CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				181E30791BA2B30A00BBA92F /* libsqlite3.dylib */,
 				0DC1D3F71B9B348F0043C79B /* AVFoundation.framework */,
 				0DC1D3F51B9B33BC0043C79B /* ImageIO.framework */,
 				0DC1D3F31B9B33B40043C79B /* MapKit.framework */,
@@ -485,6 +512,7 @@
 		0D7487181B88A8C8007BE4CD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				181E30811BA2D0CF00BBA92F /* hbcontentdetail.db */,
 				0DC1D4141B9BDF430043C79B /* MyStaticModels.bundle */,
 				0D7486FE1B88A884007BE4CD /* Images.xcassets */,
 			);
@@ -687,6 +715,8 @@
 				189719DB1B9F3405006F42A2 /* HBStudentEntity.m */,
 				18C3168E1BA092B1004F716E /* HBClassEntity.h */,
 				18C3168F1BA092B1004F716E /* HBClassEntity.m */,
+				181E307E1BA2C28600BBA92F /* HBContentDetailDB.h */,
+				181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -694,6 +724,7 @@
 		0DBE35171B8CB8B500179237 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				181E30691BA2B14100BBA92F /* UtilFMDB */,
 				0DBE35181B8CB8B500179237 /* DataCheckUtil.h */,
 				0DBE35191B8CB8B500179237 /* DataCheckUtil.m */,
 				0DBE351A1B8CB8B500179237 /* DoubleCompare.c */,
@@ -806,6 +837,25 @@
 				0DD214771B9601DA009E3DB9 /* HBMessageViewController.m */,
 			);
 			path = MenuControllers;
+			sourceTree = "<group>";
+		};
+		181E30691BA2B14100BBA92F /* UtilFMDB */ = {
+			isa = PBXGroup;
+			children = (
+				181E307B1BA2B7AD00BBA92F /* FileUtil.h */,
+				181E307C1BA2B7AD00BBA92F /* FileUtil.m */,
+				181E306A1BA2B14100BBA92F /* UtilFMDatabase.h */,
+				181E306B1BA2B14100BBA92F /* UtilFMDatabase.m */,
+				181E306C1BA2B14100BBA92F /* UtilFMDatabaseAdditions.h */,
+				181E306D1BA2B14100BBA92F /* UtilFMDatabaseAdditions.m */,
+				181E306E1BA2B14100BBA92F /* UtilFMDatabasePool.h */,
+				181E306F1BA2B14100BBA92F /* UtilFMDatabasePool.m */,
+				181E30701BA2B14100BBA92F /* UtilFMDatabaseQueue.h */,
+				181E30711BA2B14100BBA92F /* UtilFMDatabaseQueue.m */,
+				181E30721BA2B14100BBA92F /* UtilFMResultSet.h */,
+				181E30731BA2B14100BBA92F /* UtilFMResultSet.m */,
+			);
+			path = UtilFMDB;
 			sourceTree = "<group>";
 		};
 		18C64FFB1B9DE4D20040E349 /* HBWorkManViewControllers */ = {
@@ -927,6 +977,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				181E30821BA2D0CF00BBA92F /* hbcontentdetail.db in Resources */,
 				0DAAF4171B8E0DE900078285 /* Login.storyboard in Resources */,
 				0D7486FD1B88A884007BE4CD /* Main.storyboard in Resources */,
 				0DC1D4151B9BDF430043C79B /* MyStaticModels.bundle in Resources */,
@@ -980,6 +1031,8 @@
 				0D0190111B98B19200A92F59 /* HBEditNameViewController.m in Sources */,
 				182306201B9B300300A8E146 /* HBTaskEntity.m in Sources */,
 				189719DC1B9F3405006F42A2 /* HBStudentEntity.m in Sources */,
+				181E307D1BA2B7AD00BBA92F /* FileUtil.m in Sources */,
+				181E30761BA2B14100BBA92F /* UtilFMDatabasePool.m in Sources */,
 				0D018FEB1B96DB5C00A92F59 /* HBWorkManViewController.m in Sources */,
 				0DB537261B8F5DEE0023A3F7 /* AFHTTPRequestOperation.m in Sources */,
 				0DBE353E1B8CB8B500179237 /* NSDateUtilities.m in Sources */,
@@ -988,6 +1041,7 @@
 				18EC49431B999B2D000900E4 /* ButtonGridItemView.m in Sources */,
 				0DAAF4041B8D5F8900078285 /* UIViewController+AddBackBtn.m in Sources */,
 				0DD2146F1B95FFAC009E3DB9 /* HBSubscribeViewController.m in Sources */,
+				181E30801BA2C28600BBA92F /* HBContentDetailDB.m in Sources */,
 				0D74875C1B88C2C4007BE4CD /* HBGridItemView.m in Sources */,
 				0D7488941B8A2973007BE4CD /* NSString+MD5.mm in Sources */,
 				0DB5372E1B8F5DEE0023A3F7 /* AFURLResponseSerialization.m in Sources */,
@@ -999,6 +1053,7 @@
 				0D018FEE1B96DB9200A92F59 /* HBLeaderViewController.m in Sources */,
 				0DBE356F1B8CB95800179237 /* SBJSON.m in Sources */,
 				0D7488901B8A2973007BE4CD /* NetUtil.m in Sources */,
+				181E30741BA2B14100BBA92F /* UtilFMDatabase.m in Sources */,
 				0DCBC29F1B99DE16003DFDD5 /* NSString+Verify.m in Sources */,
 				0D74887F1B8A226E007BE4CD /* AppDelegate.m in Sources */,
 				0DB537281B8F5DEE0023A3F7 /* AFURLConnectionOperation.m in Sources */,
@@ -1008,10 +1063,12 @@
 				0D7486F41B88A884007BE4CD /* main.m in Sources */,
 				0DB537291B8F5DEE0023A3F7 /* AFHTTPSessionManager.m in Sources */,
 				1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */,
+				181E30771BA2B14100BBA92F /* UtilFMDatabaseQueue.m in Sources */,
 				0DBE353B1B8CB8B500179237 /* MBHudUtil.m in Sources */,
 				0D01900B1B980E8200A92F59 /* UIImageView+AFNetworking.m in Sources */,
 				0DB537321B8F70E80023A3F7 /* HBHTTPBaseRequest.m in Sources */,
 				0DB5372C1B8F5DEE0023A3F7 /* AFSecurityPolicy.m in Sources */,
+				181E30781BA2B14100BBA92F /* UtilFMResultSet.m in Sources */,
 				0D7488961B8A2973007BE4CD /* RC4.m in Sources */,
 				0D74888E1B8A2973007BE4CD /* md5.cpp in Sources */,
 				0DBE35B21B8CCEFA00179237 /* UIViewAdditions.m in Sources */,
@@ -1029,6 +1086,7 @@
 				18C316841BA07A9D004F716E /* HBPublishWorkViewController.m in Sources */,
 				0DBE35CB1B8CD7BE00179237 /* HBForgetPwdViewController.m in Sources */,
 				0DBE353D1B8CB8B500179237 /* Navigator.m in Sources */,
+				181E30751BA2B14100BBA92F /* UtilFMDatabaseAdditions.m in Sources */,
 				0D018FE81B96DB3500A92F59 /* HBStuManViewController.m in Sources */,
 				0DBE35401B8CB8B500179237 /* TimeIntervalUtils.m in Sources */,
 			);

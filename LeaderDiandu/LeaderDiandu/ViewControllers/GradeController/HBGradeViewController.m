@@ -16,7 +16,7 @@
 #import "HBServiceManager.h"
 #import "HBContentManager.h"
 #import "HBContentEntity.h"
-#import "HBContentDetailEntity.h"
+#import "HBContentDetailDB.h"
 #import "FTMenu.h"
 
 #import "Leader21SDKOC.h"
@@ -267,11 +267,12 @@
     //获取书本列表
     for (HBContentEntity *contentEntity in self.contentEntityArr) {
         if (contentEntity.bookId == currentID) {
-            [[HBContentManager defaultManager] requestBookList:contentEntity.free_books completion:^(id responseObject, NSError *error) {
+            [[HBContentManager defaultManager] requestBookList:contentEntity.books completion:^(id responseObject, NSError *error) {
                 if (responseObject){
                     //获取书本列表成功
                     NSArray *arr = [responseObject objectForKey:@"books"];
                     [self.contentDetailEntityDic setObject:arr forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+                    [[HBContentDetailDB sharedInstance] updateHBContentDetail:arr];
                     [_gridView reloadData];
                 }
             }];
