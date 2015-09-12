@@ -7,13 +7,9 @@
 //
 
 #import "ViewCreatorHelper.h"
-
-#import "RTLabel1.h"
-
+//#import "RTLabel1.h"
 
 @implementation ViewCreatorHelper
-
-
 
 + (UIButton*)createButtonWithTitle:(NSString*)title
                              frame:(CGRect)frame
@@ -295,19 +291,19 @@
     return img;
 }
 
-+ (RTLabel1*)createRTLabelWithFrame:(CGRect)frame
-                              font:(UIFont*)font
-                         textColor:(UIColor*)textColor
-                   backgroundColor:(UIColor*)backgroundColor
-{
-    RTLabel1* label = [[RTLabel1 alloc] initWithFrame:frame];
-    [label setParagraphReplacement:@""];
-    [label setTextColor:textColor];
-    [label setFont:font];
-    [label setBackgroundColor:backgroundColor];
-    
-    return label;
-}
+//+ (RTLabel1*)createRTLabelWithFrame:(CGRect)frame
+//                              font:(UIFont*)font
+//                         textColor:(UIColor*)textColor
+//                   backgroundColor:(UIColor*)backgroundColor
+//{
+//    RTLabel1* label = [[RTLabel1 alloc] initWithFrame:frame];
+//    [label setParagraphReplacement:@""];
+//    [label setTextColor:textColor];
+//    [label setFont:font];
+//    [label setBackgroundColor:backgroundColor];
+//    
+//    return label;
+//}
 
 + (UIView*)lineWithWidth:(CGFloat)width
 {

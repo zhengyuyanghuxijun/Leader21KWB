@@ -11,10 +11,7 @@
 #import "ViewCreatorHelper.h"
 //#import "Navigator.h"
 
-
 @class CustomNavView;
-
-@protocol RTLabelDelegate;
 
 @interface BaseViewController : UIViewController
 

@@ -113,7 +113,7 @@ static DataEngine *dataEngineInstance = nil;
                 completOpeartion:(MKNKResponseBlock)complete
                   errorOperation:(MKNKResponseErrorBlock)error
 {
-    NSAssert(![apiName hasPrefix:@"/"], @"apiname error /");
+    NSAssert([apiName hasPrefix:@"/"], @"apiname error /");
     
     if (method.length == 0) {
         method = @"POST";
@@ -125,7 +125,7 @@ static DataEngine *dataEngineInstance = nil;
     }
     
     if (apiName.length > 0) {
-        fullUrl = [NSString stringWithFormat:@"%@/%@", fullUrl, apiName];
+        fullUrl = [NSString stringWithFormat:@"%@%@", fullUrl, apiName];
     }
     
     //

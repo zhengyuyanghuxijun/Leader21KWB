@@ -43,7 +43,6 @@
 		0D74882B1B89DF42007BE4CD /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487DD1B89DF42007BE4CD /* MKNetworkEngine.m */; };
 		0D74882E1B89DF42007BE4CD /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487E01B89DF42007BE4CD /* MKNetworkOperation.m */; };
 		0D7488301B89DF42007BE4CD /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487E31B89DF42007BE4CD /* Reachability.m */; };
-		0D7488321B89DF42007BE4CD /* RTLabel1.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487E61B89DF42007BE4CD /* RTLabel1.m */; };
 		0D7488341B89DF42007BE4CD /* Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487E91B89DF42007BE4CD /* Stack.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0D7488361B89DF42007BE4CD /* XMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487EB1B89DF42007BE4CD /* XMLParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0D7488381B89DF42007BE4CD /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487EF1B89DF42007BE4CD /* ioapi.c */; };
@@ -198,8 +197,6 @@
 		0D7487E01B89DF42007BE4CD /* MKNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNetworkOperation.m; sourceTree = "<group>"; };
 		0D7487E21B89DF42007BE4CD /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		0D7487E31B89DF42007BE4CD /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		0D7487E51B89DF42007BE4CD /* RTLabel1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLabel1.h; sourceTree = "<group>"; };
-		0D7487E61B89DF42007BE4CD /* RTLabel1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLabel1.m; sourceTree = "<group>"; };
 		0D7487E81B89DF42007BE4CD /* Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
 		0D7487E91B89DF42007BE4CD /* Stack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stack.m; sourceTree = "<group>"; };
 		0D7487EA1B89DF42007BE4CD /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLParser.h; sourceTree = "<group>"; };
@@ -406,7 +403,6 @@
 				0D7487C81B89DF42007BE4CD /* LDHudUtil.m */,
 				0D7487C91B89DF42007BE4CD /* LDProgressHUD */,
 				0D7487CC1B89DF42007BE4CD /* MKNetworkKit */,
-				0D7487E41B89DF42007BE4CD /* RTLabel */,
 				0D7487E71B89DF42007BE4CD /* XMLParser */,
 				0D7487EC1B89DF42007BE4CD /* ZipArchive */,
 			);
@@ -517,15 +513,6 @@
 				0D7487E31B89DF42007BE4CD /* Reachability.m */,
 			);
 			path = Reachability;
-			sourceTree = "<group>";
-		};
-		0D7487E41B89DF42007BE4CD /* RTLabel */ = {
-			isa = PBXGroup;
-			children = (
-				0D7487E51B89DF42007BE4CD /* RTLabel1.h */,
-				0D7487E61B89DF42007BE4CD /* RTLabel1.m */,
-			);
-			path = RTLabel;
 			sourceTree = "<group>";
 		};
 		0D7487E71B89DF42007BE4CD /* XMLParser */ = {
@@ -838,7 +825,6 @@
 				68A2C3881B47DECD00A0BB71 /* BasePageViewController.m in Sources */,
 				68A2C3721B47DD5B00A0BB71 /* ReadBookPlayer.m in Sources */,
 				0D7488231B89DF42007BE4CD /* NSDictionary+RequestEncoding.m in Sources */,
-				0D7488321B89DF42007BE4CD /* RTLabel1.m in Sources */,
 				68A2C3791B47DD5B00A0BB71 /* ReadBookViewController.m in Sources */,
 				0D74877F1B89DD1B007BE4CD /* ViewCreatorHelper.m in Sources */,
 				0D7488001B89DF42007BE4CD /* NSString+Base64.m in Sources */,

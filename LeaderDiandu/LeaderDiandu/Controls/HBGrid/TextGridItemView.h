@@ -12,13 +12,13 @@
 
 
 #import "HBGridItemView.h"
-
-@class MBProgressHUD;
+#import "MBProgressHUD.h"
 
 @interface TextGridItemView : HBGridItemView
 
-@property (nonatomic, strong) UIImageView* pauseView;
-@property (nonatomic, strong) MBProgressHUD* progressView;
+@property (nonatomic, strong) UIImageView *pauseView;
+@property (nonatomic, strong) MBProgressHUD *progressView;
+@property (nonatomic, strong) UILabel *readProgressLabel;
 
 //更新数据
 - (void)updateFormData:(NSDictionary*)dic;

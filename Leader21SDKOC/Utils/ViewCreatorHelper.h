@@ -77,10 +77,10 @@
 + (UIImageView*)lineBgViewForFrame:(CGRect)frame;
 + (UIImageView*)lineBgViewForFrameHl:(CGRect)frame;
 
-+ (RTLabel1*)createRTLabelWithFrame:(CGRect)frame
-                              font:(UIFont*)font
-                         textColor:(UIColor*)textColor
-                   backgroundColor:(UIColor*)backgroundColor;
+//+ (RTLabel1*)createRTLabelWithFrame:(CGRect)frame
+//                              font:(UIFont*)font
+//                         textColor:(UIColor*)textColor
+//                   backgroundColor:(UIColor*)backgroundColor;
 
 
 + (UIView*)lineWithWidth:(CGFloat)width;

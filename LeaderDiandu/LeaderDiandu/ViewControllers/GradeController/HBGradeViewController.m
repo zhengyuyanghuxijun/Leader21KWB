@@ -324,8 +324,8 @@
     }
     if (book.download != nil && (progress < 1.0f || book.download.status.integerValue == downloadStatusUnZipping)) {
         if (s == downloadStatusPause) {
-//            self.progressView.hidden = YES;
-//            self.pauseView.hidden = NO;
+            itemView.progressView.hidden = YES;
+            itemView.pauseView.hidden = NO;
             NSLog(@"download status:pause");
         }
         else {
@@ -338,20 +338,18 @@
             else if (progress == 1.0f) {
                 book.download.status = @(downloadStatusFinished);
             }
-//            self.progressView.hidden = NO;
-//            self.pauseView.hidden = YES;
-//            self.progressView.alpha = 1.0f;
-//            self.progressView.progress = progress;
+            itemView.progressView.hidden = NO;
+            itemView.pauseView.hidden = YES;
+            itemView.progressView.alpha = 1.0f;
+            itemView.progressView.progress = progress;
             NSLog(@"download status:downing");
         }
 //        if (book.hasBook.boolValue) {
-//            self.priceButton.hidden = YES;
-//            self.readProgressLabel.text = [NSString stringWithFormat:@"Read %d%%", book.readProgress.integerValue];
-//            self.readProgressLabel.hidden = NO;
+//            itemView.readProgressLabel.text = [NSString stringWithFormat:@"Read %d%%", book.readProgress.integerValue];
+//            itemView.readProgressLabel.hidden = NO;
 //        }
 //        else {
-//            self.priceButton.hidden = NO;
-//            self.readProgressLabel.hidden = YES;
+//            itemView.readProgressLabel.hidden = YES;
 //        }
     }
 }
