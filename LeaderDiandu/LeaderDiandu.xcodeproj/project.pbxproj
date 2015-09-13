@@ -125,6 +125,9 @@
 		18C316901BA092B1004F716E /* HBClassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3168F1BA092B1004F716E /* HBClassEntity.m */; };
 		18C64FFF1B9DE74B0040E349 /* HBScoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C64FFE1B9DE74B0040E349 /* HBScoreListViewController.m */; };
 		18C650021B9DF1CA0040E349 /* HBScoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C650011B9DF1CA0040E349 /* HBScoreEntity.m */; };
+		18E57D5F1BA52AA600198BE9 /* hbcontentlist.db in Resources */ = {isa = PBXBuildFile; fileRef = 18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */; };
+		18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D621BA52AC400198BE9 /* HBContentListDB.m */; };
+		18E57D661BA5520900198BE9 /* HBTestSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D651BA5520900198BE9 /* HBTestSelectViewController.m */; };
 		18EC49431B999B2D000900E4 /* ButtonGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC49421B999B2D000900E4 /* ButtonGridItemView.m */; };
 /* End PBXBuildFile section */
 
@@ -363,6 +366,11 @@
 		18C64FFE1B9DE74B0040E349 /* HBScoreListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreListViewController.m; sourceTree = "<group>"; };
 		18C650001B9DF1CA0040E349 /* HBScoreEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBScoreEntity.h; sourceTree = "<group>"; };
 		18C650011B9DF1CA0040E349 /* HBScoreEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreEntity.m; sourceTree = "<group>"; };
+		18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbcontentlist.db; sourceTree = "<group>"; };
+		18E57D611BA52AC400198BE9 /* HBContentListDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentListDB.h; sourceTree = "<group>"; };
+		18E57D621BA52AC400198BE9 /* HBContentListDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentListDB.m; sourceTree = "<group>"; };
+		18E57D641BA5520900198BE9 /* HBTestSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestSelectViewController.h; sourceTree = "<group>"; };
+		18E57D651BA5520900198BE9 /* HBTestSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestSelectViewController.m; sourceTree = "<group>"; };
 		18EC49411B999B2D000900E4 /* ButtonGridItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonGridItemView.h; sourceTree = "<group>"; };
 		18EC49421B999B2D000900E4 /* ButtonGridItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonGridItemView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -512,6 +520,7 @@
 		0D7487181B88A8C8007BE4CD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */,
 				181E30811BA2D0CF00BBA92F /* hbcontentdetail.db */,
 				0DC1D4141B9BDF430043C79B /* MyStaticModels.bundle */,
 				0D7486FE1B88A884007BE4CD /* Images.xcassets */,
@@ -717,6 +726,8 @@
 				18C3168F1BA092B1004F716E /* HBClassEntity.m */,
 				181E307E1BA2C28600BBA92F /* HBContentDetailDB.h */,
 				181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */,
+				18E57D611BA52AC400198BE9 /* HBContentListDB.h */,
+				18E57D621BA52AC400198BE9 /* HBContentListDB.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -869,6 +880,8 @@
 				18C316831BA07A9D004F716E /* HBPublishWorkViewController.m */,
 				18C316861BA07F11004F716E /* HBGroupSelectViewController.h */,
 				18C316871BA07F11004F716E /* HBGroupSelectViewController.m */,
+				18E57D641BA5520900198BE9 /* HBTestSelectViewController.h */,
+				18E57D651BA5520900198BE9 /* HBTestSelectViewController.m */,
 			);
 			name = HBWorkManViewControllers;
 			sourceTree = "<group>";
@@ -977,6 +990,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E57D5F1BA52AA600198BE9 /* hbcontentlist.db in Resources */,
 				181E30821BA2D0CF00BBA92F /* hbcontentdetail.db in Resources */,
 				0DAAF4171B8E0DE900078285 /* Login.storyboard in Resources */,
 				0D7486FD1B88A884007BE4CD /* Main.storyboard in Resources */,
@@ -1025,6 +1039,7 @@
 				0DD2146C1B95FF3B009E3DB9 /* HBMyTeacherViewController.m in Sources */,
 				0D7488921B8A2973007BE4CD /* NSData+MD5.m in Sources */,
 				181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */,
+				18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */,
 				0DBE35351B8CB8B500179237 /* DataCheckUtil.m in Sources */,
 				0DB537271B8F5DEE0023A3F7 /* AFHTTPRequestOperationManager.m in Sources */,
 				0DBE35D21B8CD87900179237 /* HBNTextField.m in Sources */,
@@ -1067,6 +1082,7 @@
 				0DBE353B1B8CB8B500179237 /* MBHudUtil.m in Sources */,
 				0D01900B1B980E8200A92F59 /* UIImageView+AFNetworking.m in Sources */,
 				0DB537321B8F70E80023A3F7 /* HBHTTPBaseRequest.m in Sources */,
+				18E57D661BA5520900198BE9 /* HBTestSelectViewController.m in Sources */,
 				0DB5372C1B8F5DEE0023A3F7 /* AFSecurityPolicy.m in Sources */,
 				181E30781BA2B14100BBA92F /* UtilFMResultSet.m in Sources */,
 				0D7488961B8A2973007BE4CD /* RC4.m in Sources */,

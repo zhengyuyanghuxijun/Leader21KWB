@@ -10,12 +10,12 @@
 #import "UIViewController+AddBackBtn.h"
 #import "HBTitleView.h"
 #import "HBGroupSelectViewController.h"
+#import "HBTestSelectViewController.h"
 #import "HBClassEntity.h"
-
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 
-@interface HBPublishWorkViewController ()<UITableViewDataSource, UITableViewDelegate, HBGroupSelectViewDelegate>
+@interface HBPublishWorkViewController ()<UITableViewDataSource, UITableViewDelegate, HBGroupSelectViewDelegate, HBTestSelectViewDelegate>
 {
     UITableView *_tableView;
 }
@@ -25,6 +25,7 @@
 @property (nonatomic, copy) NSString* testStr;
 
 @property (nonatomic, strong) HBClassEntity* classEntity;
+@property (nonatomic, strong) HBContentDetailEntity* contentDetailEntity;
 
 @end
 
@@ -118,28 +119,25 @@
         vc.delegate = self;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
-//        //测试一下哈
-//        NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-//        if (dict) {
-//            NSString *user = [dict objectForKey:@"name"];
-//            NSString *classIdStr = [NSString stringWithFormat:@"%ld", self.classEntity.classId];
-//            NSString *booksetIdStr = [NSString stringWithFormat:@"%ld", self.classEntity.booksetId];
-//            [[HBServiceManager defaultManager] requestTaskListOfClass:user class_id:classIdStr bookset_id:booksetIdStr completion:^(id responseObject, NSError *error) {
-//                int i = 0;
-//            }];
-//        }
+        HBTestSelectViewController *vc = [[HBTestSelectViewController alloc] init];
+        vc.bookset_id = self.classEntity.booksetId;
+        vc.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
 - (void)publishWorkButtonPressed:(id)sender
 {
-    //to do ...
-    //测试一下哈
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
-        [[HBServiceManager defaultManager] requestTaskList:user class_id:_classEntity.classId bookset_id:_classEntity.booksetId completion:^(id responseObject, NSError *error) {
-            int i = 0;
+        
+        NSString *bookID = [NSString stringWithFormat:@"%ld", self.contentDetailEntity.ID];
+        NSString *classID = [NSString stringWithFormat:@"%ld", self.classEntity.classId];
+        NSString *booksetID = [NSString stringWithFormat:@"%ld", self.classEntity.booksetId];
+        [[HBServiceManager defaultManager] requestTaskAssign:user book_id:bookID class_id:classID bookset_id:booksetID completion:^(id responseObject, NSError *error) {
+            
+            //布置作业成功了吗？？？
         }];
     }
 }
@@ -150,6 +148,15 @@
 {
     self.classEntity = classEntity;
     self.groupStr = classEntity.name;
+    [_tableView reloadData];
+}
+
+#pragma mark - HBTestSelectViewDelegate
+
+- (void)selectedTest:(HBContentDetailEntity *)contentDetailEntity
+{
+    self.contentDetailEntity = contentDetailEntity;
+    self.testStr = contentDetailEntity.BOOK_TITLE_CN;
     [_tableView reloadData];
 }
 

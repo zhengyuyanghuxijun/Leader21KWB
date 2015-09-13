@@ -51,7 +51,7 @@
 /**
  *  更新课本信息
  *
- *  @param contentDetailEntity   课本信息
+ *  @param contentDetailArr   课本信息
  *
  *  @return 操作结果
  */
@@ -100,11 +100,11 @@
 /**
  *  读取课本信息
  *
- *  @param user 老师账号
+ *  @param booksIDArr 课本ID号数组
  *
  *  @return 课本数组
  */
-- (NSMutableArray*)booksWithUser:(NSString*)user
+- (NSMutableArray*)booksWithBooksIDArr:(NSArray*)booksIDArr
 {
     __block BOOL isOK = NO;
     NSMutableArray *booksArr = [[NSMutableArray alloc] initWithCapacity:1];
@@ -113,44 +113,46 @@
     [queue inDatabase:^(UtilFMDatabase *db)
      {
          BOOL isRollBack = NO;
+         for (NSString *bookIDStr in booksIDArr) {
+             @try
+             {
+                 NSString *strSql = [NSString stringWithFormat:@"SELECT * FROM contentDetail WHERE %@ = ?", @"bookID"];
+                 
+                 UtilFMResultSet *result = [db executeQuery:strSql,bookIDStr];
+                 
+                 while ([result next])
+                 {
+                     HBContentDetailEntity *contentDetailEntity = [[HBContentDetailEntity alloc] init];
+                     
+                     contentDetailEntity.ID = [result intForColumn:@"bookID"];
+                     contentDetailEntity.UNIT = [result intForColumn:@"unit"];
+                     
+                     contentDetailEntity.BOOK_LEVEL = [result stringForColumn:@"bookLevel"];
+                     contentDetailEntity.BOOK_SRNO = [result stringForColumn:@"bookSrno"];
+                     contentDetailEntity.BOOK_TITLE = [result stringForColumn:@"bookTitle"];
+                     contentDetailEntity.BOOK_TITLE_CN = [result stringForColumn:@"bookTitleCN"];
+                     contentDetailEntity.BOOK_TYPE = [result stringForColumn:@"bookType"];
+                     contentDetailEntity.FILE_ID = [result stringForColumn:@"fileID"];
+                     contentDetailEntity.GRADE = [result stringForColumn:@"grade"];
+                     
+                     [booksArr addObject:contentDetailEntity];
+                 }
+             }
+             @catch (NSException *exception)
+             {
+                 isRollBack = YES;
+                 [db rollback];
+             }
+             @finally
+             {
+                 if (!isRollBack)
+                 {
+                     isOK = YES;
+                     [db commit];
+                 }
+             }
+         }
          
-         @try
-         {
-             NSString *strSql = [NSString stringWithFormat:@"SELECT * FROM contentDetail"];
-             
-             UtilFMResultSet *result = [db executeQuery:strSql];
-             
-             while ([result next])
-             {
-                 HBContentDetailEntity *contentDetailEntity = [[HBContentDetailEntity alloc] init];
-                 
-                 contentDetailEntity.ID = [result intForColumn:@"bookID"];
-                 contentDetailEntity.UNIT = [result intForColumn:@"unit"];
-                 
-                 contentDetailEntity.BOOK_LEVEL = [result stringForColumn:@"bookLevel"];
-                 contentDetailEntity.BOOK_SRNO = [result stringForColumn:@"bookSrno"];
-                 contentDetailEntity.BOOK_TITLE = [result stringForColumn:@"bookTitle"];
-                 contentDetailEntity.BOOK_TITLE_CN = [result stringForColumn:@"bookTitleCN"];
-                 contentDetailEntity.BOOK_TYPE = [result stringForColumn:@"bookType"];
-                 contentDetailEntity.FILE_ID = [result stringForColumn:@"fileID"];
-                 contentDetailEntity.GRADE = [result stringForColumn:@"grade"];
-                 
-                 [booksArr addObject:contentDetailEntity];
-             }
-         }
-         @catch (NSException *exception)
-         {
-             isRollBack = YES;
-             [db rollback];
-         }
-         @finally
-         {
-             if (!isRollBack)
-             {
-                 isOK = YES;
-                 [db commit];
-             }
-         }
          [db close];
      }];
     

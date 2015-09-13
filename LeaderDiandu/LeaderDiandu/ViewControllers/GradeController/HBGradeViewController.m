@@ -17,6 +17,7 @@
 #import "HBContentManager.h"
 #import "HBContentEntity.h"
 #import "HBContentDetailDB.h"
+#import "HBContentListDB.h"
 #import "FTMenu.h"
 
 #import "Leader21SDKOC.h"
@@ -255,6 +256,7 @@
                     HBContentEntity *contentEntity = [[HBContentEntity alloc] initWithDictionary:dict];
                     [self.contentEntityArr addObject:contentEntity];
                 }
+                [[HBContentListDB sharedInstance] updateHBContentList:arr];
                 //获取书本列表
                 [self requestContentDetailEntity];
             }

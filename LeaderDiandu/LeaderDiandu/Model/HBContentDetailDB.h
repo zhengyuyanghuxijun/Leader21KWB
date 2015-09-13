@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HBContentDetailEntity.h"
 
 @interface HBContentDetailDB : NSObject
 
@@ -16,7 +15,7 @@
 /**
  *  更新课本信息
  *
- *  @param contentDetailEntity   课本信息
+ *  @param contentDetailArr   课本信息
  *
  *  @return 操作结果
  */
@@ -25,11 +24,11 @@
 /**
  *  读取课本信息
  *
- *  @param user 老师账号
+ *  @param booksIDArr 课本ID号数组
  *
  *  @return 课本数组
  */
-- (NSMutableArray*)booksWithUser:(NSString*)user;
+- (NSMutableArray*)booksWithBooksIDArr:(NSArray*)booksIDArr;
 
 
 @end
