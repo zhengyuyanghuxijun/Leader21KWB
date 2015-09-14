@@ -16,6 +16,7 @@
 #import "TimeIntervalUtils.h"
 #import "HBStudentCell.h"
 #import "HBGroupCell.h"
+#import "HBCreatGroupController.h"
 
 static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryReuseId";
 static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseId";
@@ -27,6 +28,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 
 @property (nonatomic, strong) UIButton* studentButton;
 @property (nonatomic, strong) UIButton* groupButton;
+@property (nonatomic, strong) UIButton* addGroupButton;
 @property (nonatomic, strong) NSMutableArray *studentArr;
 @property (nonatomic, strong) NSMutableArray *groupArr;
 
@@ -72,6 +74,14 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     [self.groupButton setTitle:@"群组" forState:UIControlStateNormal];
     [self.groupButton addTarget:self action:@selector(groupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.groupButton];
+    
+    rc = CGRectMake(0.0f, ScreenHeight - 50.0f, ScreenWidth, 50.0f);
+    self.addGroupButton = [[UIButton alloc] initWithFrame:rc];
+    [self.addGroupButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+    [self.addGroupButton setTitle:@"添加群组" forState:UIControlStateNormal];
+    [self.addGroupButton addTarget:self action:@selector(assignWorkButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.addGroupButton];
+    [self.addGroupButton setHidden:YES];
 }
 
 -(void)addTableView:(CGRect) rc
@@ -144,7 +154,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
         if (dict) {
             NSString *user = [dict objectForKey:@"name"];
             
-            [[HBServiceManager defaultManager] requestClassMember:user class_id:[NSString stringWithFormat:@"%ld", classEntity.classId] completion:^(id responseObject, NSError *error) {
+            [[HBServiceManager defaultManager] requestClassMember:user class_id: classEntity.classId completion:^(id responseObject, NSError *error) {
                 NSArray *arr = [responseObject objectForKey:@"members"];
                 [cell updateCellCount:arr.count];
             }];
@@ -178,6 +188,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 
 - (void)studentButtonPressed:(id)sender
 {
+    [self.addGroupButton setHidden:YES];
     self.isShowStuView = YES;
     if (0 == self.studentArr.count) {
         [self requestStudentList];
@@ -191,6 +202,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 
 -(void)groupButtonPressed:(id)sender
 {
+    [self.addGroupButton setHidden:NO];
     self.isShowStuView = NO;
     if (0 == self.groupArr.count) {
         [self requestClassList];
@@ -200,6 +212,12 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     _tableView.frame = rc;
     
     [_tableView reloadData];
+}
+
+-(void)assignWorkButtonPressed:(id)sender
+{
+    HBCreatGroupController *vc = [[HBCreatGroupController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)requestStudentList
