@@ -338,11 +338,11 @@
     [self Post:@"/api/class" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestClassMember:(NSString *)user class_id:(NSString *)class_id completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestClassMember:(NSString *)user class_id:(NSInteger)class_id completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:class_id    forKey:@"class_id"];
+    [dicInfo setObject:@(class_id)    forKey:@"class_id"];
     
     if (_receivedBlock) {
         return;
@@ -430,13 +430,13 @@
     [self Post:@"/api/class/quit" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestTaskAssign:(NSString *)user book_id:(NSString *)book_id class_id:(NSString *)class_id bookset_id:(NSString *)bookset_id completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestTaskAssign:(NSString *)user book_id:(NSInteger)book_id class_id:(NSInteger)class_id bookset_id:(NSInteger)bookset_id completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:book_id     forKey:@"book_id"];
-    [dicInfo setObject:class_id     forKey:@"class_id"];
-    [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
+    [dicInfo setObject:@(book_id)     forKey:@"book_id"];
+    [dicInfo setObject:@(class_id)     forKey:@"class_id"];
+    [dicInfo setObject:@(bookset_id)     forKey:@"bookset_id"];
     
     if (_receivedBlock) {
         return;

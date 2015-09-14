@@ -44,8 +44,14 @@
 {
     self.userEntity = [[HBUserEntity alloc] initWithDictionary:dict];
     
+    NSMutableDictionary *newDic = [NSMutableDictionary dictionaryWithDictionary:dict];
+    id phone = newDic[@"phone"];
+    if ([phone isKindOfClass:[NSNull class]]) {
+        [newDic setValue:@"" forKey:@"phone"];
+    }
+    
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    [userDefault setObject:dict forKey:KWBDefaultUser];
+    [userDefault setObject:newDic forKey:KWBDefaultUser];
     [userDefault synchronize];
 }
 

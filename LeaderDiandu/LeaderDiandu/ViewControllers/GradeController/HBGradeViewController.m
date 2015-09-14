@@ -23,6 +23,9 @@
 #import "Leader21SDKOC.h"
 #import "DownloadEntity.h"
 #import "DataEngine.h"
+#import "CoreDataHelper.h"
+
+#define KUseLeaserSDK  1
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
 
@@ -72,6 +75,17 @@
     [self initButton];
     //获取所有可选套餐
     [self requestAllBookset];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    //token失效后再进来需要重新获取数据
+    if ([self.contentEntityArr count] == 0) {
+        //获取所有可选套餐
+        [self requestAllBookset];
+    }
 }
 
 - (void)initMainView
@@ -220,12 +234,15 @@
     }
     
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
-    
-    NSMutableDictionary *dic = [arr objectAtIndex:listIndex];
-    
+#if KUseLeaserSDK
+    BookEntity *entity = arr[listIndex];
     NSDictionary * targetData = [[NSDictionary alloc]initWithObjectsAndKeys:
-                                 [dic objectForKey:@"BOOK_TITLE_CN"], TextGridItemView_BookName,[dic objectForKey:@"FILE_ID"], TextGridItemView_BookCover,@"mainGrid_download", TextGridItemView_downloadState,
-                                 nil];
+                                 entity.bookTitleCN, TextGridItemView_BookName,entity.fileId, TextGridItemView_BookCover, @"mainGrid_download", TextGridItemView_downloadState, nil];
+#else
+    NSMutableDictionary *dic = [arr objectAtIndex:listIndex];
+    NSDictionary * targetData = [[NSDictionary alloc]initWithObjectsAndKeys:
+                                 [dic objectForKey:@"BOOK_TITLE_CN"], TextGridItemView_BookName,[dic objectForKey:@"FILE_ID"], TextGridItemView_BookCover,@"mainGrid_download", TextGridItemView_downloadState, nil];
+#endif
     [itemView updateFormData:targetData];
     return itemView;
 }
@@ -236,8 +253,13 @@
     itemView.backgroundColor = [UIColor grayColor];
     
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
+#if KUseLeaserSDK
+    BookEntity *entity = arr[index];
+    [LEADERSDK startDownloadBook:entity];
+#else
     NSMutableDictionary *dic = [arr objectAtIndex:index];
     [LEADERSDK startDownloadBookByDict:dic];
+#endif
 }
 
 - (void)requestAllBookset
@@ -269,6 +291,13 @@
     //获取书本列表
     for (HBContentEntity *contentEntity in self.contentEntityArr) {
         if (contentEntity.bookId == currentID) {
+#if KUseLeaserSDK
+            [LEADERSDK requestBookInfo:contentEntity.books onComplete:^(NSArray *booklist, NSInteger errorCode, NSString *errorMsg) {
+                [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+//                [[HBContentDetailDB sharedInstance] updateHBContentDetail:booklist];
+                [_gridView reloadData];
+            }];
+#else
             [[HBContentManager defaultManager] requestBookList:contentEntity.books completion:^(id responseObject, NSError *error) {
                 if (responseObject){
                     //获取书本列表成功
@@ -278,6 +307,7 @@
                     [_gridView reloadData];
                 }
             }];
+#endif
             
             break;
         }
@@ -286,14 +316,16 @@
 
 - (void)updateProgress:(NSNotification*)notification
 {
-    if ([notification.object isKindOfClass:[BookEntity class]]) {
+//    if ([notification.object isKindOfClass:[BookEntity class]])
+    {
         BookEntity* book = (BookEntity*)notification.object;
-        if ([book.bookUrl isEqualToString:self.bookDownloadUrl]) {
+//        if ([book.bookUrl isEqualToString:self.bookDownloadUrl])
+        {
             
             if (book.download == nil) {
                 NSPredicate* pre = [NSPredicate predicateWithFormat:@"downloadUrl == %@", book.bookUrl];
-//                DownloadEntity* download = (DownloadEntity*)[BookListCellView getFirstObjectWithEntryName:@"DownloadEntity" withPredicate:pre];
-//                book.download = download;
+                DownloadEntity* download = (DownloadEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"DownloadEntity" withPredicate:pre];
+                book.download = download;
             }
             [self resetWithBook:book];
         }

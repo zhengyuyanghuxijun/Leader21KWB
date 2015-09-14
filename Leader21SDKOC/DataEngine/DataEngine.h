@@ -78,7 +78,7 @@ typedef enum {
  * @param bookIds   书本ID列表
  * @param block  返回数据的回调
  */
-- (MKHttpRequest*)requestBookInfo:(NSArray*)bookIds
+- (MKHttpRequest*)requestBookInfo:(NSString*)bookIds
                        onComplete:(ResponseBookListBlock)block;
 
 

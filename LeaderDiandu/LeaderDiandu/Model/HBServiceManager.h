@@ -221,7 +221,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param class_id         班级ID
  *  @param receivedBlock 回调Block
  */
-- (void)requestClassMember:(NSString *)user class_id:(NSString *)class_id completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestClassMember:(NSString *)user class_id:(NSInteger)class_id completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  获取绑定老师的学生信息，只有老师有权限调用该接口
@@ -288,7 +288,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param bookset_id       套餐ID
  *  @param receivedBlock 回调Block
  */
-- (void)requestTaskAssign:(NSString *)user book_id:(NSString *)book_id class_id:(NSString *)class_id bookset_id:(NSString *)bookset_id completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestTaskAssign:(NSString *)user book_id:(NSInteger)book_id class_id:(NSInteger)class_id bookset_id:(NSInteger)bookset_id completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  根据班级获取作业列表

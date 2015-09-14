@@ -40,7 +40,7 @@
     return self.mAppId;
 }
 
--(void)requestBookInfo:(NSArray *)bookIds onComplete:(ResponseBookListBlock)block
+-(void)requestBookInfo:(NSString *)bookIds onComplete:(ResponseBookListBlock)block
 {
     [DE requestBookInfo:bookIds onComplete:block];
 }

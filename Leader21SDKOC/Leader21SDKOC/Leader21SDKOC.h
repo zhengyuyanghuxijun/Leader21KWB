@@ -32,7 +32,7 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
  @param bookIds bookId列表
         block： 回调，返回书本详细信息
  */
-- (void) requestBookInfo:(NSArray *)bookIds
+- (void) requestBookInfo:(NSString *)bookIds
               onComplete:(ResponseBookListBlock)block;
 
 /**根据bookId下载一本book

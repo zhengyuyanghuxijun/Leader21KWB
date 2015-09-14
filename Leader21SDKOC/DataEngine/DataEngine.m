@@ -223,21 +223,11 @@ static DataEngine *dataEngineInstance = nil;
  参数名称:ids | 参数类型:string | 默认值: | 是否为空:N | 字段描述:多个书ID以英文逗号分隔
  参数名称:app_key | 参数类型:string | 默认值: | 是否为空:N | 字段描述:app唯一id
  */
-- (MKHttpRequest *)requestBookInfo:(NSArray *)bookIds onComplete:(ResponseBookListBlock)block{
-    NSString * ids = @"";
+- (MKHttpRequest *)requestBookInfo:(NSString *)bookIds onComplete:(ResponseBookListBlock)block{
     
-    for (NSString* id in bookIds) {
-        
-        if ([ids length]==0) {
-            ids = [NSString stringWithFormat:@"%@",id];
-        }
-        else {
-            ids = [NSString stringWithFormat:@"%@,%@",ids,id];
-        }
-    }
-    NSLog(@"REQUEST:%@", ids);
+    NSLog(@"REQUEST:%@", bookIds);
     NSMutableDictionary* param = [NSMutableDictionary dictionaryWithCapacity:4];
-    [param setObject:ids forKey:@"ids"];
+    [param setObject:bookIds forKey:@"ids"];
     [param setObject:mAppId forKey:@"app_key"];
     
     MKHttpRequest *r = [self requestPOSTWithApi:API_GET_BOOK_INFO
