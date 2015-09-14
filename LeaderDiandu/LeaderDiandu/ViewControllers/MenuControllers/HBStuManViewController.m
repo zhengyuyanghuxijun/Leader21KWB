@@ -21,7 +21,7 @@
 static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryReuseId";
 static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseId";
 
-@interface HBStuManViewController ()<UITableViewDataSource, UITableViewDelegate, UnbundlingDelegate>
+@interface HBStuManViewController ()<UITableViewDataSource, UITableViewDelegate, UnbundlingDelegate, DissolveDelegate, CreatGroupDelegate>
 {
     UITableView *_tableView;
 }
@@ -65,14 +65,14 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     self.studentButton = [[UIButton alloc] initWithFrame:rc];
     [self.studentButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
     [self.studentButton setTitle:@"学生" forState:UIControlStateNormal];
-    [self.studentButton addTarget:self action:@selector(studentButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.studentButton addTarget:self action:@selector(studentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.studentButton];
     
     rc = CGRectMake(self.view.frame.size.width/2, KHBNaviBarHeight, self.view.frame.size.width/2, 50.0f);
     self.groupButton = [[UIButton alloc] initWithFrame:rc];
     [self.groupButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
     [self.groupButton setTitle:@"群组" forState:UIControlStateNormal];
-    [self.groupButton addTarget:self action:@selector(groupButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.groupButton addTarget:self action:@selector(groupButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.groupButton];
     
     rc = CGRectMake(0.0f, ScreenHeight - 50.0f, ScreenWidth, 50.0f);
@@ -146,6 +146,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
             cell = [[HBGroupCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KGroupCellAccessoryReuseId];
         }
         
+        cell.delegate = self;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         HBClassEntity *classEntity = [self.groupArr objectAtIndex:indexPath.row];
@@ -186,7 +187,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 }
 */
 
-- (void)studentButtonPressed:(id)sender
+- (void)studentButtonPressed
 {
     [self.addGroupButton setHidden:YES];
     self.isShowStuView = YES;
@@ -200,7 +201,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     [_tableView reloadData];
 }
 
--(void)groupButtonPressed:(id)sender
+-(void)groupButtonPressed
 {
     [self.addGroupButton setHidden:NO];
     self.isShowStuView = NO;
@@ -217,6 +218,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 -(void)assignWorkButtonPressed:(id)sender
 {
     HBCreatGroupController *vc = [[HBCreatGroupController alloc] init];
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -257,6 +259,9 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 
 -(void)requestClassList
 {
+    if (self.groupArr) {
+        [self.groupArr removeAllObjects];
+    }
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
@@ -299,6 +304,35 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
             //解除绑定成功！！！
         }];
     }
+}
+
+#pragma mark - DissolveDelegate
+- (void)dissolveBtnPressed:(NSInteger)classId
+{
+    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+    if (dict) {
+        NSString *user = [dict objectForKey:@"name"];
+        
+        [[HBServiceManager defaultManager] requestClassDelete:user class_id:[NSString stringWithFormat:@"%ld", classId] completion:^(id responseObject, NSError *error) {
+            int index = 0;
+            for (HBClassEntity *classEntity in self.groupArr) {
+                if (classEntity.classId == classId) {
+                    break;
+                }
+                index++;
+            }
+            
+            [self.groupArr removeObjectAtIndex:index];
+            [self groupButtonPressed];
+        }];
+
+    }
+}
+
+#pragma mark - CreatGroupDelegate
+- (void)creatGroupComplete
+{
+    [self requestClassList];
 }
 
 @end

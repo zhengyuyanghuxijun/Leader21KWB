@@ -8,6 +8,14 @@
 
 #import "HBBaseViewController.h"
 
+@protocol CreatGroupDelegate <NSObject>
+
+- (void)creatGroupComplete;
+
+@end
+
 @interface HBCreatGroupController : HBBaseViewController
+
+@property (weak, nonatomic) id <CreatGroupDelegate> delegate;
 
 @end

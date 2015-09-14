@@ -368,9 +368,9 @@
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
     
-    if (_receivedBlock) {
-        return;
-    }
+//    if (_receivedBlock) {
+//        return;
+//    }
     self.receivedBlock = receivedBlock;
     [self Post:@"/api/teacher/class" dict:dicInfo block:receivedBlock];
 }
@@ -382,9 +382,9 @@
     [dicInfo setObject:name     forKey:@"name"];
     [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
     
-    if (_receivedBlock) {
-        return;
-    }
+//    if (_receivedBlock) {
+//        return;
+//    }
     self.receivedBlock = receivedBlock;
     [self Post:@"/api/class/create" dict:dicInfo block:receivedBlock];
 }
@@ -395,9 +395,9 @@
     [dicInfo setObject:user     forKey:@"user"];
     [dicInfo setObject:class_id     forKey:@"class_id"];
     
-    if (_receivedBlock) {
-        return;
-    }
+//    if (_receivedBlock) {
+//        return;
+//    }
     self.receivedBlock = receivedBlock;
     [self Post:@"/api/class/delete" dict:dicInfo block:receivedBlock];
 }

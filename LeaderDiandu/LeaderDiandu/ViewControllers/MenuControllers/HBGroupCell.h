@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol DissolveDelegate <NSObject>
+
+- (void)dissolveBtnPressed:(NSInteger)classId;
+
+@end
+
 @interface HBGroupCell : UITableViewCell
 
 @property (strong, nonatomic) UILabel *     cellGroupName;
@@ -15,6 +21,10 @@
 @property (strong, nonatomic) UILabel *     cellCount;
 @property (strong, nonatomic) UILabel *     cellTime;
 @property (strong, nonatomic) UIButton *    cellDissolveBtn;
+
+@property (nonatomic, assign)NSInteger classId;
+
+@property (weak, nonatomic) id <DissolveDelegate> delegate;
 
 -(void)updateFormData:(id)sender;
 

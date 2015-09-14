@@ -75,6 +75,7 @@
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
         [[HBServiceManager defaultManager] requestClassCreate:user name:self.nameTextField.text bookset_id:self.levelTextField.text completion:^(id responseObject, NSError *error) {
+            [self.delegate creatGroupComplete];
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }

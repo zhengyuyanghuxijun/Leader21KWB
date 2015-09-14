@@ -60,6 +60,7 @@
         self.cellLevel.text = [NSString stringWithFormat:@"%@"@"%ld", @"等级", classEntity.booksetId];
         self.cellCount.text = [NSString stringWithFormat:@"%@"@"%d", @"人数", 0];
         self.cellTime.text = classEntity.createdTime;
+        self.classId = classEntity.classId;
     }
 }
 
@@ -70,7 +71,7 @@
 
 - (void)dissolveBtnPressed
 {
-    //to do ...
+    [self.delegate dissolveBtnPressed:self.classId];
 }
 
 @end
