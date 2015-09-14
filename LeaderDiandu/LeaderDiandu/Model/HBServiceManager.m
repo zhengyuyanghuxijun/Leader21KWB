@@ -344,9 +344,9 @@
     [dicInfo setObject:user     forKey:@"user"];
     [dicInfo setObject:@(class_id)    forKey:@"class_id"];
     
-    if (_receivedBlock) {
-        return;
-    }
+//    if (_receivedBlock) {
+//        return;
+//    }
     self.receivedBlock = receivedBlock;
     [self Post:@"/api/class/member" dict:dicInfo block:receivedBlock];
 }

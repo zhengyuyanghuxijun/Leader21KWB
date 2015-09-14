@@ -59,7 +59,11 @@
     if (studentEntity) {
         self.cellName.text = studentEntity.displayName;
         self.cellStuType.text = @"普通用户";
-        self.cellGroup.text = studentEntity.className;
+        if ([studentEntity.className isEqualToString:@""]) {
+            self.cellGroup.text = @"无";
+        }else{
+            self.cellGroup.text = studentEntity.className;
+        }
         self.studentID = studentEntity.studentId;
     }
 }

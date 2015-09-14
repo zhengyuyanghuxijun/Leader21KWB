@@ -11,7 +11,9 @@
 @interface HBClassEntity : NSObject
 
 @property (nonatomic, strong)NSString *name;
+@property (nonatomic, strong)NSString *createdTime;
 @property (nonatomic, assign)NSInteger booksetId;
 @property (nonatomic, assign)NSInteger classId;
+@property (nonatomic, assign)NSInteger stuCount;
 
 @end

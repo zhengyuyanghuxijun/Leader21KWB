@@ -12,10 +12,13 @@
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 #import "HBStudentEntity.h"
+#import "HBClassEntity.h"
 #import "TimeIntervalUtils.h"
 #import "HBStudentCell.h"
+#import "HBGroupCell.h"
 
 static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryReuseId";
+static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseId";
 
 @interface HBStuManViewController ()<UITableViewDataSource, UITableViewDelegate, UnbundlingDelegate>
 {
@@ -26,6 +29,8 @@ static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryRe
 @property (nonatomic, strong) UIButton* groupButton;
 @property (nonatomic, strong) NSMutableArray *studentArr;
 @property (nonatomic, strong) NSMutableArray *groupArr;
+
+@property (nonatomic, assign) BOOL isShowStuView;
 
 @end
 
@@ -38,6 +43,7 @@ static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryRe
         // Custom initialization
         self.studentArr = [[NSMutableArray alloc] initWithCapacity:1];
         self.groupArr = [[NSMutableArray alloc] initWithCapacity:1];
+        self.isShowStuView = YES;
     }
     return self;
 }
@@ -68,13 +74,17 @@ static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryRe
     [self.view addSubview:self.groupButton];
 }
 
--(void)addTableView
+-(void)addTableView:(CGRect) rc
 {
-    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.studentArr.count * 70.0f);
-    _tableView = [[UITableView alloc] initWithFrame:rc];
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
-    [self.view addSubview:_tableView];
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        [self.view addSubview:_tableView];
+    }
+    
+    _tableView.frame = rc;
+    [_tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -87,8 +97,13 @@ static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryRe
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSParameterAssert(self.studentArr);
-    return self.studentArr.count;
+    if (self.isShowStuView) {
+        NSParameterAssert(self.studentArr);
+        return self.studentArr.count;
+    }else{
+        NSParameterAssert(self.groupArr);
+        return self.groupArr.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -98,20 +113,47 @@ static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryRe
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSParameterAssert(self.studentArr);
-    
-    HBStudentCell *cell = [tableView dequeueReusableCellWithIdentifier:KStudentCellAccessoryReuseId];
-    if (!cell) {
-        cell = [[HBStudentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KStudentCellAccessoryReuseId];
+    if (self.isShowStuView) {
+        NSParameterAssert(self.studentArr);
+        
+        HBStudentCell *cell = [tableView dequeueReusableCellWithIdentifier:KStudentCellAccessoryReuseId];
+        if (!cell) {
+            cell = [[HBStudentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KStudentCellAccessoryReuseId];
+        }
+        
+        cell.delegate = self;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        HBStudentEntity *studentEntity = [self.studentArr objectAtIndex:indexPath.row];
+        [cell updateFormData:studentEntity];
+        
+        return cell;
+    }else{
+        NSParameterAssert(self.groupArr);
+        
+        HBGroupCell *cell = [tableView dequeueReusableCellWithIdentifier:KGroupCellAccessoryReuseId];
+        if (!cell) {
+            cell = [[HBGroupCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KGroupCellAccessoryReuseId];
+        }
+        
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        HBClassEntity *classEntity = [self.groupArr objectAtIndex:indexPath.row];
+        
+        NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+        if (dict) {
+            NSString *user = [dict objectForKey:@"name"];
+            
+            [[HBServiceManager defaultManager] requestClassMember:user class_id:[NSString stringWithFormat:@"%ld", classEntity.classId] completion:^(id responseObject, NSError *error) {
+                NSArray *arr = [responseObject objectForKey:@"members"];
+                [cell updateCellCount:arr.count];
+            }];
+        }
+
+        [cell updateFormData:classEntity];
+        
+        return cell;
     }
-    
-    cell.delegate = self;
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    HBStudentEntity *studentEntity = [self.studentArr objectAtIndex:indexPath.row];
-    [cell updateFormData:studentEntity];
-    
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -136,12 +178,28 @@ static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryRe
 
 - (void)studentButtonPressed:(id)sender
 {
-    //to do ...
+    self.isShowStuView = YES;
+    if (0 == self.studentArr.count) {
+        [self requestStudentList];
+    }
+    
+    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.studentArr.count * 70.0f);
+    _tableView.frame = rc;
+    
+    [_tableView reloadData];
 }
 
 -(void)groupButtonPressed:(id)sender
 {
-    //to do ...
+    self.isShowStuView = NO;
+    if (0 == self.groupArr.count) {
+        [self requestClassList];
+    }
+    
+    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.groupArr.count * 70.0f);
+    _tableView.frame = rc;
+    
+    [_tableView reloadData];
 }
 
 - (void)requestStudentList
@@ -169,9 +227,45 @@ static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryRe
                     
                     [self.studentArr addObject:studentEntity];
                 }
-                [self addTableView];
+                
+                if (self.studentArr.count > 0) {
+                    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.studentArr.count * 70.0f);
+                    [self addTableView:rc];
+                }
             }
         }];
+    }
+}
+
+-(void)requestClassList
+{
+    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+    if (dict) {
+        NSString *user = [dict objectForKey:@"name"];
+        [[HBServiceManager defaultManager] requestClassList:user completion:^(id responseObject, NSError *error) {
+            NSArray *arr = [responseObject objectForKey:@"classes"];
+            for (NSDictionary *dic in arr)
+            {
+                HBClassEntity *classEntity = [[HBClassEntity alloc] init];
+                classEntity.name = [dic objectForKey:@"name"];
+                classEntity.booksetId = [[dic objectForKey:@"bookset_id"] integerValue];
+                classEntity.classId = [[dic objectForKey:@"id"] integerValue];
+                NSTimeInterval interval = [[dic objectForKey:@"created_time"] doubleValue];
+                classEntity.createdTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
+                
+                [self.groupArr addObject:classEntity];
+            }
+            
+            if (self.groupArr.count > 0) {
+                CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.groupArr.count * 70.0f);
+                [self addTableView:rc];
+            }
+        }];
+        
+//        [[HBServiceManager defaultManager] requestClassMember:user class_id:@"1" completion:^(id responseObject, NSError *error) {
+//            NSArray *arr = [responseObject objectForKey:@"members"];
+//            
+//        }];
     }
 }
 
