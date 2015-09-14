@@ -13,10 +13,11 @@
 #import "HBServiceManager.h"
 #import "HBStudentEntity.h"
 #import "TimeIntervalUtils.h"
+#import "HBStudentCell.h"
 
-static NSString * const KStuManViewControllerCellAccessoryReuseId = @"KStuManViewControllerCellAccessoryReuseId";
+static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryReuseId";
 
-@interface HBStuManViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface HBStuManViewController ()<UITableViewDataSource, UITableViewDelegate, UnbundlingDelegate>
 {
     UITableView *_tableView;
 }
@@ -69,7 +70,7 @@ static NSString * const KStuManViewControllerCellAccessoryReuseId = @"KStuManVie
 
 -(void)addTableView
 {
-    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.studentArr.count * 60);
+    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.studentArr.count * 70.0f);
     _tableView = [[UITableView alloc] initWithFrame:rc];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -92,25 +93,23 @@ static NSString * const KStuManViewControllerCellAccessoryReuseId = @"KStuManVie
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return 70.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSParameterAssert(self.studentArr);
     
-    UITableViewCell *cell;
-    cell = [tableView dequeueReusableCellWithIdentifier:KStuManViewControllerCellAccessoryReuseId];
+    HBStudentCell *cell = [tableView dequeueReusableCellWithIdentifier:KStudentCellAccessoryReuseId];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KStuManViewControllerCellAccessoryReuseId];
+        cell = [[HBStudentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KStudentCellAccessoryReuseId];
     }
     
+    cell.delegate = self;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     HBStudentEntity *studentEntity = [self.studentArr objectAtIndex:indexPath.row];
-    cell.textLabel.text = studentEntity.displayName;
-    cell.textLabel.textColor = [UIColor blackColor];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
+    [cell updateFormData:studentEntity];
     
     return cell;
 }
@@ -162,6 +161,7 @@ static NSString * const KStuManViewControllerCellAccessoryReuseId = @"KStuManVie
                     studentEntity.phone = [dic objectForKey:@"phone"];
                     NSTimeInterval interval = [[dic objectForKey:@"vip_time"] doubleValue];
                     studentEntity.vipTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
+                    studentEntity.className = [dic objectForKey:@"class_name"];
                     studentEntity.classId = [[dic objectForKey:@"class_id"] integerValue];
                     studentEntity.studentId = [[dic objectForKey:@"id"] integerValue];
                     studentEntity.gender = [[dic objectForKey:@"gender"] integerValue];
@@ -171,6 +171,20 @@ static NSString * const KStuManViewControllerCellAccessoryReuseId = @"KStuManVie
                 }
                 [self addTableView];
             }
+        }];
+    }
+}
+
+#pragma mark - UnbundlingDelegate
+- (void)unbundlingBtnPressed:(NSInteger)studentId
+{
+    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+    if (dict) {
+        NSString *user = [dict objectForKey:@"name"];
+        
+        [[HBServiceManager defaultManager] requestTeacherUnAssignStu:user student_id:[NSString stringWithFormat:@"%ld", studentId] completion:^(id responseObject, NSError *error) {
+            
+            //解除绑定成功！！！
         }];
     }
 }

@@ -17,7 +17,7 @@
     UITableView *_tableView;
 }
 
-@property (nonatomic, strong) NSMutableArray* groupNameArray;
+@property (nonatomic, strong) NSMutableArray* groupArray;
 
 @end
 
@@ -28,7 +28,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.groupNameArray = [[NSMutableArray alloc] initWithCapacity:1];
+        self.groupArray = [[NSMutableArray alloc] initWithCapacity:1];
     }
     return self;
 }
@@ -58,9 +58,9 @@
                 classEntity.name = [dic objectForKey:@"name"];
                 classEntity.booksetId = [[dic objectForKey:@"bookset_id"] integerValue];
                 classEntity.classId = [[dic objectForKey:@"id"] integerValue];
-                [self.groupNameArray addObject:classEntity];
+                [self.groupArray addObject:classEntity];
             }
-            if (self.groupNameArray.count > 0) {
+            if (self.groupArray.count > 0) {
                 [self addTableView];
             }
         }];
@@ -70,7 +70,7 @@
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, self.groupNameArray.count*50);
+    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, self.groupArray.count*50);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -87,7 +87,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return self.groupNameArray.count;
+    return self.groupArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -103,7 +103,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"KHBGroupSelectViewControllerCellReuseId"];
     }
     
-    HBClassEntity *classEntity = [self.groupNameArray objectAtIndex:indexPath.row];
+    HBClassEntity *classEntity = [self.groupArray objectAtIndex:indexPath.row];
     cell.textLabel.text = classEntity.name;
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.backgroundColor = [UIColor clearColor];
@@ -116,7 +116,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self.delegate selectedGroup:[self.groupNameArray objectAtIndex:indexPath.row]];
+    [self.delegate selectedGroup:[self.groupArray objectAtIndex:indexPath.row]];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

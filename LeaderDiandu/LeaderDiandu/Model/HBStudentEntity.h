@@ -14,6 +14,7 @@
 @property (nonatomic, strong)NSString *name;
 @property (nonatomic, strong)NSString *phone;
 @property (nonatomic, strong)NSString *vipTime;
+@property (nonatomic, strong)NSString *className;
 @property (nonatomic, assign)NSInteger classId;
 @property (nonatomic, assign)NSInteger studentId;
 @property (nonatomic, assign)NSInteger gender;

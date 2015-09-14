@@ -128,6 +128,7 @@
 		18E57D5F1BA52AA600198BE9 /* hbcontentlist.db in Resources */ = {isa = PBXBuildFile; fileRef = 18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */; };
 		18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D621BA52AC400198BE9 /* HBContentListDB.m */; };
 		18E57D661BA5520900198BE9 /* HBTestSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D651BA5520900198BE9 /* HBTestSelectViewController.m */; };
+		18E57D6C1BA5B25C00198BE9 /* HBStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D6B1BA5B25C00198BE9 /* HBStudentCell.m */; };
 		18EC49431B999B2D000900E4 /* ButtonGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC49421B999B2D000900E4 /* ButtonGridItemView.m */; };
 /* End PBXBuildFile section */
 
@@ -371,6 +372,8 @@
 		18E57D621BA52AC400198BE9 /* HBContentListDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentListDB.m; sourceTree = "<group>"; };
 		18E57D641BA5520900198BE9 /* HBTestSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestSelectViewController.h; sourceTree = "<group>"; };
 		18E57D651BA5520900198BE9 /* HBTestSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestSelectViewController.m; sourceTree = "<group>"; };
+		18E57D6A1BA5B25C00198BE9 /* HBStudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBStudentCell.h; sourceTree = "<group>"; };
+		18E57D6B1BA5B25C00198BE9 /* HBStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBStudentCell.m; sourceTree = "<group>"; };
 		18EC49411B999B2D000900E4 /* ButtonGridItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonGridItemView.h; sourceTree = "<group>"; };
 		18EC49421B999B2D000900E4 /* ButtonGridItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonGridItemView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -824,6 +827,7 @@
 		0DD214661B95FC8B009E3DB9 /* MenuControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18E57D681BA5B1CC00198BE9 /* HBStuManViewControllers */,
 				18C64FFB1B9DE4D20040E349 /* HBWorkManViewControllers */,
 				0D7292C21B9E0650006FA7EA /* SettingViewControllers */,
 				0D018FF21B97513400A92F59 /* HBUserInfoViewController.h */,
@@ -834,8 +838,6 @@
 				0D0190131B98B1B500A92F59 /* HBBindPhoneViewController.m */,
 				0DD2146A1B95FF3B009E3DB9 /* HBMyTeacherViewController.h */,
 				0DD2146B1B95FF3B009E3DB9 /* HBMyTeacherViewController.m */,
-				0D018FE61B96DB3500A92F59 /* HBStuManViewController.h */,
-				0D018FE71B96DB3500A92F59 /* HBStuManViewController.m */,
 				0D018FEC1B96DB9200A92F59 /* HBLeaderViewController.h */,
 				0D018FED1B96DB9200A92F59 /* HBLeaderViewController.m */,
 				0DD2146D1B95FFAC009E3DB9 /* HBSubscribeViewController.h */,
@@ -884,6 +886,17 @@
 				18E57D651BA5520900198BE9 /* HBTestSelectViewController.m */,
 			);
 			name = HBWorkManViewControllers;
+			sourceTree = "<group>";
+		};
+		18E57D681BA5B1CC00198BE9 /* HBStuManViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0D018FE61B96DB3500A92F59 /* HBStuManViewController.h */,
+				0D018FE71B96DB3500A92F59 /* HBStuManViewController.m */,
+				18E57D6A1BA5B25C00198BE9 /* HBStudentCell.h */,
+				18E57D6B1BA5B25C00198BE9 /* HBStudentCell.m */,
+			);
+			name = HBStuManViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1105,6 +1118,7 @@
 				181E30751BA2B14100BBA92F /* UtilFMDatabaseAdditions.m in Sources */,
 				0D018FE81B96DB3500A92F59 /* HBStuManViewController.m in Sources */,
 				0DBE35401B8CB8B500179237 /* TimeIntervalUtils.m in Sources */,
+				18E57D6C1BA5B25C00198BE9 /* HBStudentCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -135,10 +135,19 @@
         NSString *bookID = [NSString stringWithFormat:@"%ld", self.contentDetailEntity.ID];
         NSString *classID = [NSString stringWithFormat:@"%ld", self.classEntity.classId];
         NSString *booksetID = [NSString stringWithFormat:@"%ld", self.classEntity.booksetId];
-        [[HBServiceManager defaultManager] requestTaskAssign:user book_id:bookID class_id:classID bookset_id:booksetID completion:^(id responseObject, NSError *error) {
-            
-            //布置作业成功了吗？？？
+        
+        [[HBServiceManager defaultManager] requestClassMember:user class_id:classID completion:^(id responseObject, NSError *error) {
+            NSArray *arr = [responseObject objectForKey:@"members"];
+            if (arr.count > 0) {
+                [[HBServiceManager defaultManager] requestTaskAssign:user book_id:bookID class_id:classID bookset_id:booksetID completion:^(id responseObject, NSError *error) {
+                    //布置作业成功!!!
+                }];
+            }else{
+                //组内人数为0，无法布置作业！！！
+            }
         }];
+        
+
     }
 }
 

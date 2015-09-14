@@ -18,8 +18,7 @@
 
 /**
  *	@brief	更新表格内容
- *	@param 	NSDictionary 内容字典
- *  @retuan nil
+ *  @return nil
  */
 -(void)updateFormData:(id)sender;
 
