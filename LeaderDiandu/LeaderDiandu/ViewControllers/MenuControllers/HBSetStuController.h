@@ -17,6 +17,7 @@
 }
 
 @property (copy, nonatomic) NSString *titleStr;
+@property (assign, nonatomic) NSInteger classId;
 @property (strong, nonatomic) NSMutableArray *groupStuArr;
 @property (strong, nonatomic) NSMutableArray *otherStuArr;
 

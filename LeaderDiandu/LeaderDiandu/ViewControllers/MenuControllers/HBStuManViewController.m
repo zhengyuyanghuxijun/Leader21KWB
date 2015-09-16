@@ -351,6 +351,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     
     HBSetStuController *vc = [[HBSetStuController alloc] init];
     vc.titleStr = classEntity.name;
+    vc.classId = classEntity.classId;
     vc.groupStuArr = groupStuArr;
     vc.otherStuArr = otherStuArr;
     [self.navigationController pushViewController:vc animated:YES];

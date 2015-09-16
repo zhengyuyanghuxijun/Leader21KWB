@@ -60,8 +60,7 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
 -(void)rightButtonPressed
 {
     if (self.joinGroupArr.count > 0) {
-       HBStudentEntity *stuEntity = [self.joinGroupArr objectAtIndex:0];
-        NSString *classIdStr = [NSString stringWithFormat:@"%ld", stuEntity.classId];
+        NSString *classIdStr = [NSString stringWithFormat:@"%ld", self.classId];
         NSMutableArray *studentIdArr = [[NSMutableArray alloc] initWithCapacity:1];
         for (HBStudentEntity *studentEntity in self.joinGroupArr) {
             [studentIdArr addObject:[NSString stringWithFormat:@"%ld", studentEntity.studentId]];
