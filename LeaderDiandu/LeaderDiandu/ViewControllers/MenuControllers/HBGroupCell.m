@@ -7,7 +7,6 @@
 //
 
 #import "HBGroupCell.h"
-#import "HBClassEntity.h"
 
 @implementation HBGroupCell
 
@@ -43,6 +42,13 @@
     self.cellTime.frame = CGRectMake(10 + 75 + 10, 70/2, 150, 70/2 - 10);
     [self addSubview:self.cellTime];
     
+    //编辑按钮
+    self.cellEditBtn = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 100, (70 - 30)/2, 30, 30)];
+    [self.cellEditBtn setBackgroundImage:[UIImage imageNamed:@"flower"] forState:UIControlStateNormal];
+//    [self.cellEditBtn setTitle:@"编辑" forState:UIControlStateNormal];
+    [self.cellEditBtn addTarget:self action:@selector(editBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.cellEditBtn];
+    
     //解散按钮
     self.cellDissolveBtn = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 60, (70 - 30)/2, 45, 30)];
     [self.cellDissolveBtn setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
@@ -53,14 +59,14 @@
 
 -(void)updateFormData:(id)sender
 {
-    HBClassEntity *classEntity = (HBClassEntity *)sender;
+    self.classEntity = (HBClassEntity *)sender;
     
-    if (classEntity) {
-        self.cellGroupName.text = classEntity.name;
-        self.cellLevel.text = [NSString stringWithFormat:@"%@"@"%ld", @"等级", classEntity.booksetId];
+    if (self.classEntity) {
+        self.cellGroupName.text = self.classEntity.name;
+        self.cellLevel.text = [NSString stringWithFormat:@"%@"@"%ld", @"等级", self.classEntity.booksetId];
         self.cellCount.text = [NSString stringWithFormat:@"%@"@"%d", @"人数", 0];
-        self.cellTime.text = classEntity.createdTime;
-        self.classId = classEntity.classId;
+        self.cellTime.text = self.classEntity.createdTime;
+        self.classId = self.classEntity.classId;
     }
 }
 
@@ -72,6 +78,11 @@
 - (void)dissolveBtnPressed
 {
     [self.delegate dissolveBtnPressed:self.classId];
+}
+
+- (void)editBtnPressed
+{
+    [self.delegate editBtnPressed:self.classEntity];
 }
 
 @end

@@ -17,6 +17,7 @@
 #import "HBStudentCell.h"
 #import "HBGroupCell.h"
 #import "HBCreatGroupController.h"
+#import "HBSetStuController.h"
 
 static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryReuseId";
 static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseId";
@@ -325,8 +326,27 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
             [self.groupArr removeObjectAtIndex:index];
             [self groupButtonPressed];
         }];
-
     }
+}
+
+- (void)editBtnPressed:(HBClassEntity *)classEntity
+{
+    NSMutableArray *groupStuArr = [[NSMutableArray alloc] initWithCapacity:1];
+    NSMutableArray *otherStuArr = [[NSMutableArray alloc] initWithCapacity:1];
+    
+    for (HBStudentEntity *studentEntity in self.studentArr) {
+        if (studentEntity.classId == classEntity.classId) {
+            [groupStuArr addObject:studentEntity];
+        }else{
+            [otherStuArr addObject:studentEntity];
+        }
+    }
+    
+    HBSetStuController *vc = [[HBSetStuController alloc] init];
+    vc.titleStr = classEntity.name;
+    vc.groupStuArr = groupStuArr;
+    vc.otherStuArr = otherStuArr;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - CreatGroupDelegate

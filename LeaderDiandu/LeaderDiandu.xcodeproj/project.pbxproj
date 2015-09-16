@@ -132,6 +132,9 @@
 		18E57D661BA5520900198BE9 /* HBTestSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D651BA5520900198BE9 /* HBTestSelectViewController.m */; };
 		18E57D6C1BA5B25C00198BE9 /* HBStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D6B1BA5B25C00198BE9 /* HBStudentCell.m */; };
 		18EC49431B999B2D000900E4 /* ButtonGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC49421B999B2D000900E4 /* ButtonGridItemView.m */; };
+		18F367E71BA90C7800EBFEC4 /* HBSetStuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367E61BA90C7800EBFEC4 /* HBSetStuController.m */; };
+		18F367F21BA9541100EBFEC4 /* HBSetStuGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */; };
+		18F367F51BA9542D00EBFEC4 /* HBSetStuOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -382,6 +385,12 @@
 		18E57D6B1BA5B25C00198BE9 /* HBStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBStudentCell.m; sourceTree = "<group>"; };
 		18EC49411B999B2D000900E4 /* ButtonGridItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonGridItemView.h; sourceTree = "<group>"; };
 		18EC49421B999B2D000900E4 /* ButtonGridItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonGridItemView.m; sourceTree = "<group>"; };
+		18F367E51BA90C7800EBFEC4 /* HBSetStuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuController.h; sourceTree = "<group>"; };
+		18F367E61BA90C7800EBFEC4 /* HBSetStuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuController.m; sourceTree = "<group>"; };
+		18F367F01BA9541100EBFEC4 /* HBSetStuGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuGroupCell.h; sourceTree = "<group>"; };
+		18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuGroupCell.m; sourceTree = "<group>"; };
+		18F367F31BA9542D00EBFEC4 /* HBSetStuOtherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuOtherCell.h; sourceTree = "<group>"; };
+		18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuOtherCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -905,6 +914,12 @@
 				18A13BAF1BA6F5FD004A288F /* HBGroupCell.m */,
 				18A244751BA7295A00E1E703 /* HBCreatGroupController.h */,
 				18A244761BA7295A00E1E703 /* HBCreatGroupController.m */,
+				18F367E51BA90C7800EBFEC4 /* HBSetStuController.h */,
+				18F367E61BA90C7800EBFEC4 /* HBSetStuController.m */,
+				18F367F01BA9541100EBFEC4 /* HBSetStuGroupCell.h */,
+				18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */,
+				18F367F31BA9542D00EBFEC4 /* HBSetStuOtherCell.h */,
+				18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */,
 			);
 			name = HBStuManViewControllers;
 			sourceTree = "<group>";
@@ -1051,6 +1066,7 @@
 				0DAAF40E1B8E01EB00078285 /* HBGradeViewController.m in Sources */,
 				0D018FF11B96F67500A92F59 /* HBContentBaseRequest.m in Sources */,
 				18B5FD2E1B981454002CCD95 /* UIButton+AFNetworking.m in Sources */,
+				18F367E71BA90C7800EBFEC4 /* HBSetStuController.m in Sources */,
 				0DBE35C31B8CD46500179237 /* HBBaseViewController.m in Sources */,
 				0D7487601B88C2C4007BE4CD /* TextGridItemView.m in Sources */,
 				0D086EDD1B949B110061BB1F /* DHSlideMenuViewController.m in Sources */,
@@ -1072,6 +1088,7 @@
 				181E307D1BA2B7AD00BBA92F /* FileUtil.m in Sources */,
 				181E30761BA2B14100BBA92F /* UtilFMDatabasePool.m in Sources */,
 				0D018FEB1B96DB5C00A92F59 /* HBWorkManViewController.m in Sources */,
+				18F367F51BA9542D00EBFEC4 /* HBSetStuOtherCell.m in Sources */,
 				0DB537261B8F5DEE0023A3F7 /* AFHTTPRequestOperation.m in Sources */,
 				0DBE353E1B8CB8B500179237 /* NSDateUtilities.m in Sources */,
 				0D74875E1B88C2C4007BE4CD /* HBGridView.m in Sources */,
@@ -1113,6 +1130,7 @@
 				0D7488961B8A2973007BE4CD /* RC4.m in Sources */,
 				0D74888E1B8A2973007BE4CD /* md5.cpp in Sources */,
 				0DBE35B21B8CCEFA00179237 /* UIViewAdditions.m in Sources */,
+				18F367F21BA9541100EBFEC4 /* HBSetStuGroupCell.m in Sources */,
 				0D0190141B98B1B500A92F59 /* HBBindPhoneViewController.m in Sources */,
 				0DD214721B960148009E3DB9 /* HBTestWorkViewController.m in Sources */,
 				0D018FF41B97513400A92F59 /* HBUserInfoViewController.m in Sources */,
@@ -1280,7 +1298,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: wei chanyuan (X2Y6A4GX9Q)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHEN YUE (S7A22NS2N6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1300,7 +1318,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "51b1bc31-da78-42c4-a83a-53ba0907c94e";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -1309,7 +1327,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: wei chanyuan (X2Y6A4GX9Q)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHEN YUE (S7A22NS2N6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1329,7 +1347,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "51b1bc31-da78-42c4-a83a-53ba0907c94e";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

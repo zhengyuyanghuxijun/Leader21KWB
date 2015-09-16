@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HBClassEntity.h"
 
 @protocol DissolveDelegate <NSObject>
 
 - (void)dissolveBtnPressed:(NSInteger)classId;
+- (void)editBtnPressed:(HBClassEntity *)classEntity;
 
 @end
 
@@ -20,9 +22,11 @@
 @property (strong, nonatomic) UILabel *     cellLevel;
 @property (strong, nonatomic) UILabel *     cellCount;
 @property (strong, nonatomic) UILabel *     cellTime;
+@property (strong, nonatomic) UIButton *    cellEditBtn;
 @property (strong, nonatomic) UIButton *    cellDissolveBtn;
 
 @property (nonatomic, assign)NSInteger classId;
+@property (nonatomic, strong)HBClassEntity *classEntity;
 
 @property (weak, nonatomic) id <DissolveDelegate> delegate;
 
