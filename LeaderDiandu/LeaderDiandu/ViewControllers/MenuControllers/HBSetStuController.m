@@ -54,6 +54,7 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
 }
 
@@ -74,6 +75,8 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
                 [self.navigationController popViewControllerAnimated:YES];
             }];
         }
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
