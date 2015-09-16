@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "HBBaseViewController.h"
+#import "HBSetStuGroupCell.h"
+#import "HBSetStuOtherCell.h"
 
-@interface HBSetStuController : HBBaseViewController<UITableViewDataSource, UITableViewDelegate>
+@interface HBSetStuController : HBBaseViewController<UITableViewDataSource, UITableViewDelegate, QuitGroupDelegate, JoinGroupDelegate>
 {
     UITableView *_tableView;
 }
@@ -17,5 +19,7 @@
 @property (copy, nonatomic) NSString *titleStr;
 @property (strong, nonatomic) NSMutableArray *groupStuArr;
 @property (strong, nonatomic) NSMutableArray *otherStuArr;
+
+@property (strong, nonatomic) NSMutableArray *joinGroupArr;
 
 @end

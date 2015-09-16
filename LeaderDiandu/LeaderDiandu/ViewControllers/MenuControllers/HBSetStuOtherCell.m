@@ -40,9 +40,10 @@
     [self addSubview:self.cellselectedBtn];
 }
 
--(void)updateFormData:(id)stuName
+-(void)updateFormData:(HBStudentEntity *)aStudentEntity;
 {
-    self.cellName.text = stuName;
+    self.studentEntity = aStudentEntity;
+    self.cellName.text = self.studentEntity.displayName;
 }
 
 -(void)selectedBtnPressed
@@ -54,6 +55,8 @@
         self.checked = YES;
         [self.cellselectedBtn setBackgroundImage:[UIImage imageNamed:@"selected_on"] forState:UIControlStateNormal];
     }
+    
+    [self.delegate joinGroupBtnPressed:self.studentEntity checked:self.checked];
 }
 
 @end

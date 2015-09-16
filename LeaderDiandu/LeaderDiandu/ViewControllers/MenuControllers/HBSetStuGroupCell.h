@@ -7,6 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HBStudentEntity.h"
+
+@protocol QuitGroupDelegate <NSObject>
+
+- (void)quitGroupBtnPressed:(HBStudentEntity *)aStudentEntity;
+
+@end
 
 @interface HBSetStuGroupCell : UITableViewCell
 
@@ -14,6 +21,10 @@
 @property (strong, nonatomic) UILabel *     cellName;
 @property (strong, nonatomic) UIButton *    cellQuitGroupBtn;
 
--(void)updateFormData:(NSString *)stuName;
+@property (strong, nonatomic) HBStudentEntity * studentEntity;
+
+-(void)updateFormData:(HBStudentEntity *)aStudentEntity;
+
+@property (weak, nonatomic) id <QuitGroupDelegate> delegate;
 
 @end

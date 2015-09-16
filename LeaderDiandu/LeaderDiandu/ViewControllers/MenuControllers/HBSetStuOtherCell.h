@@ -7,6 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HBStudentEntity.h"
+
+
+@protocol JoinGroupDelegate <NSObject>
+
+- (void)joinGroupBtnPressed:(HBStudentEntity *)aStudentEntity
+                    checked:(BOOL)aChecked;
+
+@end
 
 @interface HBSetStuOtherCell : UITableViewCell
 
@@ -16,6 +25,10 @@
 
 @property (assign, nonatomic) BOOL checked;
 
--(void)updateFormData:(NSString *)stuName;
+@property (strong, nonatomic) HBStudentEntity * studentEntity;
+
+-(void)updateFormData:(HBStudentEntity *)aStudentEntity;
+
+@property (weak, nonatomic) id <JoinGroupDelegate> delegate;
 
 @end

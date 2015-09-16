@@ -40,14 +40,15 @@
     [self addSubview:self.cellQuitGroupBtn];
 }
 
--(void)updateFormData:(id)stuName
+-(void)updateFormData:(HBStudentEntity *)aStudentEntity
 {
-    self.cellName.text = stuName;
+    self.studentEntity = aStudentEntity;
+    self.cellName.text = self.studentEntity.displayName;
 }
 
 -(void)quitGroupBtnPressed
 {
-    
+    [self.delegate quitGroupBtnPressed:self.studentEntity];
 }
 
 @end

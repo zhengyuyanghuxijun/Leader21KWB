@@ -10,8 +10,8 @@
 #import "UIViewController+AddBackBtn.h"
 #import "HBTitleView.h"
 #import "HBStudentEntity.h"
-#import "HBSetStuGroupCell.h"
-#import "HBSetStuOtherCell.h"
+#import "HBDataSaveManager.h"
+#import "HBServiceManager.h"
 
 static NSString * const KGroupStuCellReuseId = @"KGroupStuCellReuseId";
 static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
@@ -25,6 +25,7 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
         // Custom initialization
         self.groupStuArr = [[NSMutableArray alloc] initWithCapacity:1];
         self.otherStuArr = [[NSMutableArray alloc] initWithCapacity:1];
+        self.joinGroupArr = [[NSMutableArray alloc] initWithCapacity:1];
     }
     return self;
 }
@@ -39,6 +40,11 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
     [self addBackButton];
     
     [self addTableView];
+    
+    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 8 - 44, 20, 44, 44)];
+    [rightButton setTitle:@"完成" forState:UIControlStateNormal];
+    [rightButton addTarget:self action:@selector(rightButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:rightButton];
 }
 
 -(void)addTableView
@@ -49,6 +55,27 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [self.view addSubview:_tableView];
+}
+
+-(void)rightButtonPressed
+{
+    if (self.joinGroupArr.count > 0) {
+       HBStudentEntity *stuEntity = [self.joinGroupArr objectAtIndex:0];
+        NSString *classIdStr = [NSString stringWithFormat:@"%ld", stuEntity.classId];
+        NSMutableArray *studentIdArr = [[NSMutableArray alloc] initWithCapacity:1];
+        for (HBStudentEntity *studentEntity in self.joinGroupArr) {
+            [studentIdArr addObject:[NSString stringWithFormat:@"%ld", studentEntity.studentId]];
+        }
+        NSString * studentIdStr=[studentIdArr componentsJoinedByString:@","];
+        
+        NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+        if (dict) {
+            NSString *user = [dict objectForKey:@"name"];
+            [[HBServiceManager defaultManager] requestClassJoin:user class_id:classIdStr user_ids:studentIdStr completion:^(id responseObject, NSError *error) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+        }
+    }
 }
 
 #pragma mark - Table view data source
@@ -125,7 +152,8 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
             }
             
             HBStudentEntity *studentEntity = [self.groupStuArr objectAtIndex:indexPath.row];
-            [cell updateFormData:studentEntity.displayName];
+            [cell updateFormData:studentEntity];
+            cell.delegate = self;
             cell.backgroundColor = [UIColor clearColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.textColor = [UIColor blackColor];
@@ -138,7 +166,8 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
             }
             
             HBStudentEntity *studentEntity = [self.otherStuArr objectAtIndex:indexPath.row];
-            [cell updateFormData:studentEntity.displayName];
+            [cell updateFormData:studentEntity];
+            cell.delegate = self;
             cell.backgroundColor = [UIColor clearColor];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.textLabel.textColor = [UIColor blackColor];
@@ -152,7 +181,8 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
         }
         
         HBStudentEntity *studentEntity = [self.otherStuArr objectAtIndex:indexPath.row];
-        [cell updateFormData:studentEntity.displayName];
+        [cell updateFormData:studentEntity];
+        cell.delegate = self;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.textColor = [UIColor blackColor];
@@ -166,6 +196,36 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - QuitGroupDelegate
+
+- (void)quitGroupBtnPressed:(HBStudentEntity *)aStudentEntity
+{
+    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+    if (dict) {
+        NSString *user = [dict objectForKey:@"name"];
+        NSString *classIdStr = [NSString stringWithFormat:@"%ld", aStudentEntity.classId];
+        NSString *studentIdStr = [NSString stringWithFormat:@"%ld", aStudentEntity.studentId];
+        
+        [[HBServiceManager defaultManager] requestClassQuit:user class_id:classIdStr user_ids:studentIdStr completion:^(id responseObject, NSError *error) {
+            [self.groupStuArr removeObject:aStudentEntity];
+            [self.otherStuArr addObject:aStudentEntity];
+            [_tableView reloadData];
+        }];
+    }
+}
+
+#pragma mark - JoinGroupDelegate
+
+- (void)joinGroupBtnPressed:(HBStudentEntity *)aStudentEntity checked:(BOOL)aChecked
+{
+    if (aChecked) {
+        [self.joinGroupArr addObject:aStudentEntity];
+    }else{
+        [self.joinGroupArr removeObject:aStudentEntity];
+    }
+    
 }
 
 @end

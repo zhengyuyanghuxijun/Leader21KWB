@@ -67,6 +67,7 @@
         self.cellCount.text = [NSString stringWithFormat:@"%@"@"%d", @"人数", 0];
         self.cellTime.text = self.classEntity.createdTime;
         self.classId = self.classEntity.classId;
+        self.cellCount.text = [NSString stringWithFormat:@"%@"@"%ld", @"人数", self.classEntity.stuCount];
     }
 }
 

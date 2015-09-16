@@ -85,7 +85,16 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     [self.addGroupButton setHidden:YES];
 }
 
--(void)addTableView:(CGRect) rc
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (!self.isShowStuView) {
+        [self requestStudentList];
+        [self requestClassList];
+    }
+}
+
+-(void)addTableView
 {
     if (_tableView == nil) {
         _tableView = [[UITableView alloc] init];
@@ -94,7 +103,14 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
         [self.view addSubview:_tableView];
     }
     
-    _tableView.frame = rc;
+    if (self.isShowStuView) {
+        CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.studentArr.count * 70.0f);
+        _tableView.frame = rc;
+    }else{
+        CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.groupArr.count * 70.0f);
+        _tableView.frame = rc;
+    }
+    
     [_tableView reloadData];
 }
 
@@ -151,17 +167,6 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         HBClassEntity *classEntity = [self.groupArr objectAtIndex:indexPath.row];
-        
-        NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-        if (dict) {
-            NSString *user = [dict objectForKey:@"name"];
-            
-            [[HBServiceManager defaultManager] requestClassMember:user class_id: classEntity.classId completion:^(id responseObject, NSError *error) {
-                NSArray *arr = [responseObject objectForKey:@"members"];
-                [cell updateCellCount:arr.count];
-            }];
-        }
-
         [cell updateFormData:classEntity];
         
         return cell;
@@ -232,6 +237,9 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
             if (responseObject) {
                 //获取绑定老师的学生信息成功
                 NSArray *arr = [responseObject objectForKey:@"students"];
+                if (arr.count > 0) {
+                    [self.studentArr removeAllObjects];
+                }
                 for (NSDictionary *dic in arr)
                 {
                     HBStudentEntity *studentEntity = [[HBStudentEntity alloc] init];
@@ -250,8 +258,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
                 }
                 
                 if (self.studentArr.count > 0) {
-                    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.studentArr.count * 70.0f);
-                    [self addTableView:rc];
+                    [self addTableView];
                 }
             }
         }];
@@ -260,14 +267,14 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 
 -(void)requestClassList
 {
-    if (self.groupArr) {
-        [self.groupArr removeAllObjects];
-    }
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
         [[HBServiceManager defaultManager] requestClassList:user completion:^(id responseObject, NSError *error) {
             NSArray *arr = [responseObject objectForKey:@"classes"];
+            if (arr.count > 0) {
+                [self.groupArr removeAllObjects];
+            }
             for (NSDictionary *dic in arr)
             {
                 HBClassEntity *classEntity = [[HBClassEntity alloc] init];
@@ -277,19 +284,19 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
                 NSTimeInterval interval = [[dic objectForKey:@"created_time"] doubleValue];
                 classEntity.createdTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
                 
+                [[HBServiceManager defaultManager] requestClassMember:user class_id: classEntity.classId completion:^(id responseObject, NSError *error) {
+                    NSArray *arr = [responseObject objectForKey:@"members"];
+                    classEntity.stuCount = arr.count;
+                    [_tableView reloadData];
+                }];
+                
                 [self.groupArr addObject:classEntity];
             }
             
             if (self.groupArr.count > 0) {
-                CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.groupArr.count * 70.0f);
-                [self addTableView:rc];
+                [self addTableView];
             }
         }];
-        
-//        [[HBServiceManager defaultManager] requestClassMember:user class_id:@"1" completion:^(id responseObject, NSError *error) {
-//            NSArray *arr = [responseObject objectForKey:@"members"];
-//            
-//        }];
     }
 }
 
@@ -352,7 +359,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 #pragma mark - CreatGroupDelegate
 - (void)creatGroupComplete
 {
-    [self requestClassList];
+//    [self requestClassList];
 }
 
 @end
