@@ -29,8 +29,6 @@
 		0D74875D1B88C2C4007BE4CD /* HBGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487551B88C2C4007BE4CD /* HBGridItemView.m */; };
 		0D74875E1B88C2C4007BE4CD /* HBGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487571B88C2C4007BE4CD /* HBGridView.m */; };
 		0D74875F1B88C2C4007BE4CD /* HBGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487571B88C2C4007BE4CD /* HBGridView.m */; };
-		0D7487601B88C2C4007BE4CD /* TextGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487591B88C2C4007BE4CD /* TextGridItemView.m */; };
-		0D7487611B88C2C4007BE4CD /* TextGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487591B88C2C4007BE4CD /* TextGridItemView.m */; };
 		0D7488541B8A2071007BE4CD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7488531B8A2071007BE4CD /* ViewController.m */; };
 		0D7488551B8A2071007BE4CD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7488531B8A2071007BE4CD /* ViewController.m */; };
 		0D7488721B8A21C4007BE4CD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D7488711B8A21C4007BE4CD /* Foundation.framework */; };
@@ -103,6 +101,7 @@
 		0DD214721B960148009E3DB9 /* HBTestWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214711B960148009E3DB9 /* HBTestWorkViewController.m */; };
 		0DD214751B96018A009E3DB9 /* HBPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214741B96018A009E3DB9 /* HBPayViewController.m */; };
 		0DD214781B9601DA009E3DB9 /* HBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214771B9601DA009E3DB9 /* HBMessageViewController.m */; };
+		0DFBD3E51BA86839003DB2D1 /* TextGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFBD3E41BA86839003DB2D1 /* TextGridItemView.m */; };
 		181456DD1B96D9DD003CCD6C /* HBContentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DC1B96D9DD003CCD6C /* HBContentEntity.m */; };
 		181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */; };
 		181E30741BA2B14100BBA92F /* UtilFMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E306B1BA2B14100BBA92F /* UtilFMDatabase.m */; };
@@ -207,7 +206,6 @@
 		0D7487561B88C2C4007BE4CD /* HBGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGridView.h; sourceTree = "<group>"; };
 		0D7487571B88C2C4007BE4CD /* HBGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGridView.m; sourceTree = "<group>"; };
 		0D7487581B88C2C4007BE4CD /* TextGridItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextGridItemView.h; sourceTree = "<group>"; };
-		0D7487591B88C2C4007BE4CD /* TextGridItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextGridItemView.m; sourceTree = "<group>"; };
 		0D7488521B8A2071007BE4CD /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		0D7488531B8A2071007BE4CD /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0D7488711B8A21C4007BE4CD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -330,6 +328,7 @@
 		0DD214761B9601DA009E3DB9 /* HBMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMessageViewController.h; sourceTree = "<group>"; };
 		0DD214771B9601DA009E3DB9 /* HBMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMessageViewController.m; sourceTree = "<group>"; };
 		0DE611411B9332DA0001C763 /* HBModelConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBModelConst.h; sourceTree = "<group>"; };
+		0DFBD3E41BA86839003DB2D1 /* TextGridItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextGridItemView.m; sourceTree = "<group>"; };
 		181456DB1B96D9DD003CCD6C /* HBContentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentEntity.h; sourceTree = "<group>"; };
 		181456DC1B96D9DD003CCD6C /* HBContentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentEntity.m; sourceTree = "<group>"; };
 		181456DE1B96E483003CCD6C /* HBContentDetailEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentDetailEntity.h; sourceTree = "<group>"; };
@@ -586,7 +585,7 @@
 				0D7487561B88C2C4007BE4CD /* HBGridView.h */,
 				0D7487571B88C2C4007BE4CD /* HBGridView.m */,
 				0D7487581B88C2C4007BE4CD /* TextGridItemView.h */,
-				0D7487591B88C2C4007BE4CD /* TextGridItemView.m */,
+				0DFBD3E41BA86839003DB2D1 /* TextGridItemView.m */,
 				18EC49411B999B2D000900E4 /* ButtonGridItemView.h */,
 				18EC49421B999B2D000900E4 /* ButtonGridItemView.m */,
 			);
@@ -1068,7 +1067,6 @@
 				18B5FD2E1B981454002CCD95 /* UIButton+AFNetworking.m in Sources */,
 				18F367E71BA90C7800EBFEC4 /* HBSetStuController.m in Sources */,
 				0DBE35C31B8CD46500179237 /* HBBaseViewController.m in Sources */,
-				0D7487601B88C2C4007BE4CD /* TextGridItemView.m in Sources */,
 				0D086EDD1B949B110061BB1F /* DHSlideMenuViewController.m in Sources */,
 				0DD214651B95568E009E3DB9 /* HBDataSaveManager.m in Sources */,
 				0DBE35CC1B8CD7BE00179237 /* HBRegistViewController.m in Sources */,
@@ -1078,6 +1076,7 @@
 				0DD2146C1B95FF3B009E3DB9 /* HBMyTeacherViewController.m in Sources */,
 				0D7488921B8A2973007BE4CD /* NSData+MD5.m in Sources */,
 				181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */,
+				0DFBD3E51BA86839003DB2D1 /* TextGridItemView.m in Sources */,
 				18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */,
 				0DBE35351B8CB8B500179237 /* DataCheckUtil.m in Sources */,
 				0DB537271B8F5DEE0023A3F7 /* AFHTTPRequestOperationManager.m in Sources */,
@@ -1165,7 +1164,6 @@
 				0D7488911B8A2973007BE4CD /* NetUtil.m in Sources */,
 				0D7488801B8A226E007BE4CD /* AppDelegate.m in Sources */,
 				0D74875D1B88C2C4007BE4CD /* HBGridItemView.m in Sources */,
-				0D7487611B88C2C4007BE4CD /* TextGridItemView.m in Sources */,
 				0D7488971B8A2973007BE4CD /* RC4.m in Sources */,
 				0D74888F1B8A2973007BE4CD /* md5.cpp in Sources */,
 			);

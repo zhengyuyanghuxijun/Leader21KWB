@@ -171,6 +171,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     cell.backgroundColor = self.backgroundColor;
     cell.textLabel.text = [self.titles objectAtIndex:indexPath.row];
     cell.textLabel.textColor = [UIColor whiteColor];
+//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(170, 20, 20, 20)];
     arrowImg.image = [UIImage imageNamed:@"menu_right"];

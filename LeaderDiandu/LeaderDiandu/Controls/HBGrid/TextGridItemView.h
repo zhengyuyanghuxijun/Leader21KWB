@@ -20,8 +20,9 @@
 @property (nonatomic, strong) MBProgressHUD *progressView;
 @property (nonatomic, strong) UILabel *readProgressLabel;
 
+@property (nonatomic, copy) NSString* bookDownloadUrl;
+
 //更新数据
 - (void)updateFormData:(NSDictionary*)dic;
-- (void)resetWithBook;
 
 @end

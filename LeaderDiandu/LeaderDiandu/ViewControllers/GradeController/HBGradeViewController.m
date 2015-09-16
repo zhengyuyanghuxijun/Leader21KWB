@@ -68,7 +68,6 @@
     // Do any additional setup after loading the view.
     
     [LEADERSDK setAppKey:KAppKeyStudy];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProgress:) name:kNotification_bookDownloadProgress object:nil];
     
     [self initMainView];
     [self initMainGrid];
@@ -249,13 +248,14 @@
 
 - (void)gridView:(HBGridView *)gridView didSelectGridItemAtIndex:(NSInteger)index
 {
-    HBGridItemView *itemView = [gridView gridItemViewAtIndex:index];
-    itemView.backgroundColor = [UIColor grayColor];
+    TextGridItemView *itemView = (TextGridItemView *)[gridView gridItemViewAtIndex:index];
+//    itemView.backgroundColor = [UIColor grayColor];
     
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
 #if KUseLeaserSDK
     BookEntity *entity = arr[index];
     [LEADERSDK startDownloadBook:entity];
+    itemView.bookDownloadUrl = entity.bookUrl;
 #else
     NSMutableDictionary *dic = [arr objectAtIndex:index];
     [LEADERSDK startDownloadBookByDict:dic];
@@ -311,80 +311,6 @@
             
             break;
         }
-    }
-}
-
-- (void)updateProgress:(NSNotification*)notification
-{
-//    if ([notification.object isKindOfClass:[BookEntity class]])
-    {
-        BookEntity* book = (BookEntity*)notification.object;
-//        if ([book.bookUrl isEqualToString:self.bookDownloadUrl])
-        {
-            
-            if (book.download == nil) {
-                NSPredicate* pre = [NSPredicate predicateWithFormat:@"downloadUrl == %@", book.bookUrl];
-                DownloadEntity* download = (DownloadEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"DownloadEntity" withPredicate:pre];
-                book.download = download;
-            }
-            [self resetWithBook:book];
-        }
-    }
-
-//    NSInteger per =  [[notification.userInfo objectForKey:@"progress"] integerValue];
-//    
-//    if (per == 1) {
-//        [LEADERSDK readBook:(BookEntity*)notification.object useNavigation:self.navigationController];
-//
-//    }
-}
-
-- (void)resetWithBook:(BookEntity *)book
-{
-    TextGridItemView *itemView = (TextGridItemView *)[_gridView gridItemViewAtIndex:_gridView.selIndex];
-    [itemView resetWithBook];
-    
-    CGFloat progress = book.download.progress.floatValue;
-    
-    // 是否正在下载
-    NSInteger s = book.download.status.integerValue;
-    NSLog(@"download status:%ld, progress:%f", (long)s, progress);
-    if (book.download != nil) {
-        if (book.download.status.integerValue != downloadStatusFinished) {
-            if (progress > 0.97f) {
-                progress = 0.97f;
-            }
-        }
-    }
-    if (book.download != nil && (progress < 1.0f || book.download.status.integerValue == downloadStatusUnZipping)) {
-        if (s == downloadStatusPause) {
-            itemView.progressView.hidden = YES;
-            itemView.pauseView.hidden = NO;
-            NSLog(@"download status:pause");
-        }
-        else {
-            if (progress < 0.005) {
-                progress = 0.005;
-            }
-            if (downloadStatusUnZipping == book.download.status.integerValue) {
-                progress = 0.97f;
-            }
-            else if (progress == 1.0f) {
-                book.download.status = @(downloadStatusFinished);
-            }
-            itemView.progressView.hidden = NO;
-            itemView.pauseView.hidden = YES;
-            itemView.progressView.alpha = 1.0f;
-            itemView.progressView.progress = progress;
-            NSLog(@"download status:downing");
-        }
-//        if (book.hasBook.boolValue) {
-//            itemView.readProgressLabel.text = [NSString stringWithFormat:@"Read %d%%", book.readProgress.integerValue];
-//            itemView.readProgressLabel.hidden = NO;
-//        }
-//        else {
-//            itemView.readProgressLabel.hidden = YES;
-//        }
     }
 }
 

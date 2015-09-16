@@ -10,8 +10,10 @@
 #import "UIButton+AFNetworking.h"
 #import "UIViewAdditions.h"
 
-//#import "BookEntity.h"
-//#import "CoreDataHelper.h"
+#import "BookEntity.h"
+#import "DownloadEntity.h"
+#import "CoreDataHelper.h"
+#import "DataEngine.h"
 
 #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 
@@ -37,8 +39,15 @@
     {
         // Initialization code
         [self initUI];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProgress:) name:kNotification_bookDownloadProgress object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setText:(NSString *)text
@@ -129,12 +138,79 @@
     [self setNeedsLayout];
 }
 
-- (void)resetWithBook
+- (void)updateProgress:(NSNotification*)notification
+{
+//    if ([notification.object isKindOfClass:[BookEntity class]])
+    {
+        BookEntity* book = (BookEntity*)notification.object;
+        if ([book.bookUrl isEqualToString:self.bookDownloadUrl])
+        {
+            
+            if (book.download == nil) {
+                NSPredicate* pre = [NSPredicate predicateWithFormat:@"downloadUrl == %@", book.bookUrl];
+                DownloadEntity* download = (DownloadEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"DownloadEntity" withPredicate:pre];
+                book.download = download;
+            }
+            [self resetWithBook:book];
+        }
+    }
+    
+    //    NSInteger per =  [[notification.userInfo objectForKey:@"progress"] integerValue];
+    //
+    //    if (per == 1) {
+    //        [LEADERSDK readBook:(BookEntity*)notification.object useNavigation:self.navigationController];
+    //
+    //    }
+}
+
+- (void)resetWithBook:(BookEntity *)book
 {
     self.downloadButton.hidden = YES;
     self.progressView.hidden = YES;
     self.pauseView.hidden = YES;
-
+    
+    CGFloat progress = book.download.progress.floatValue;
+    
+    // 是否正在下载
+    NSInteger s = book.download.status.integerValue;
+    NSLog(@"download status:%ld, progress:%f", (long)s, progress);
+    if (book.download != nil) {
+        if (book.download.status.integerValue != downloadStatusFinished) {
+            if (progress > 0.97f) {
+                progress = 0.97f;
+            }
+        }
+    }
+    if (book.download != nil && (progress < 1.0f || book.download.status.integerValue == downloadStatusUnZipping)) {
+        if (s == downloadStatusPause) {
+            self.progressView.hidden = YES;
+            self.pauseView.hidden = NO;
+            NSLog(@"download status:pause");
+        }
+        else {
+            if (progress < 0.005) {
+                progress = 0.005;
+            }
+            if (downloadStatusUnZipping == book.download.status.integerValue) {
+                progress = 0.97f;
+            }
+            else if (progress == 1.0f) {
+                book.download.status = @(downloadStatusFinished);
+            }
+            self.progressView.hidden = NO;
+            self.pauseView.hidden = YES;
+            self.progressView.alpha = 1.0f;
+            self.progressView.progress = progress;
+            NSLog(@"download status:downing");
+        }
+        //        if (book.hasBook.boolValue) {
+        //            itemView.readProgressLabel.text = [NSString stringWithFormat:@"Read %d%%", book.readProgress.integerValue];
+        //            itemView.readProgressLabel.hidden = NO;
+        //        }
+        //        else {
+        //            itemView.readProgressLabel.hidden = YES;
+        //        }
+    }
 }
 
 - (UIImage*)imageWithColor:(UIColor*)color size:(CGSize)size
