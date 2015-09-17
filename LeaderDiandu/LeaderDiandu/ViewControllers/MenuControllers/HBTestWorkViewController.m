@@ -160,7 +160,12 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     taskEntity.teacherName = teacherName;
                     
                     NSDictionary *bookDic = [dic objectForKey:@"book"];
-                    NSString *bookName = [bookDic objectForKey:@"book_title_cn"];
+                    NSString *bookName;
+                    if ([[HBDataSaveManager defaultManager] showEnBookName]) {
+                        bookName = [bookDic objectForKey:@"book_title"];
+                    }else{
+                        bookName = [bookDic objectForKey:@"book_title_cn"];
+                    }
                     NSString *bookIdStr = [bookDic objectForKey:@"id"];
                     taskEntity.bookId = [bookIdStr integerValue];
                     taskEntity.bookName = bookName;

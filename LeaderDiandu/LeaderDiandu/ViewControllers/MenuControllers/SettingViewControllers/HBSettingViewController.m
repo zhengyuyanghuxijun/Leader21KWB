@@ -91,17 +91,40 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
 
 - (void)wifiDownload:(id)sender
 {
-    //to do ...
+    BOOL aWifiDownload = YES;
+    UISwitch *aSwitch = (UISwitch *)sender;
+    if (aSwitch.isOn) {
+        aWifiDownload = YES;
+    }else{
+        aWifiDownload = NO;
+    }
+    
+    BOOL aShowEnBookName = [[HBDataSaveManager defaultManager] showEnBookName];
+    NSString *wifiDownloadStr = [NSString stringWithFormat:@"%d", aWifiDownload];
+    NSString *showEnBookNameStr = [NSString stringWithFormat:@"%d", aShowEnBookName];
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:wifiDownloadStr, @"wifidownload", showEnBookNameStr, @"showenbookname", nil];
+    
+    [[HBDataSaveManager defaultManager] saveSettingsByDict:dict];
 }
 
 - (void)showEnglishName:(id)sender
 {
+    BOOL aShowEnBookName = YES;
     UISwitch *aSwitch = (UISwitch *)sender;
     if (aSwitch.isOn) {
-        //显示英文书名
+        aShowEnBookName = YES;
     }else{
-        //显示中文书名
+        aShowEnBookName = NO;
     }
+    
+    BOOL aWifiDownload = [[HBDataSaveManager defaultManager] wifiDownload];
+    NSString *wifiDownloadStr = [NSString stringWithFormat:@"%d", aWifiDownload];
+    NSString *showEnBookNameStr = [NSString stringWithFormat:@"%d", aShowEnBookName];
+    
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:wifiDownloadStr, @"wifidownload", showEnBookNameStr, @"showenbookname", nil];
+    
+    [[HBDataSaveManager defaultManager] saveSettingsByDict:dict];
 }
 
 #pragma mark - Table view data source
@@ -145,9 +168,19 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
         
         if (indexPath.row == 0) {
             [switchView addTarget:self action:@selector(wifiDownload:) forControlEvents:UIControlEventValueChanged];
+            if ([[HBDataSaveManager defaultManager] wifiDownload]) {
+                [switchView setOn:YES];
+            }else{
+                [switchView setOn:NO];
+            }
         }
         else{
             [switchView addTarget:self action:@selector(showEnglishName:) forControlEvents:UIControlEventValueChanged];
+            if ([[HBDataSaveManager defaultManager] showEnBookName]) {
+                [switchView setOn:YES];
+            }else{
+                [switchView setOn:NO];
+            }
         }
         cell.accessoryView = switchView;
     }

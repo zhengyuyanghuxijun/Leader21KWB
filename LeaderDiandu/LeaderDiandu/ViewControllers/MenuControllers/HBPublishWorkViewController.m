@@ -151,8 +151,14 @@
 
 - (void)selectedGroup:(HBClassEntity *)classEntity
 {
+    if (self.classEntity.classId != classEntity.classId) {
+        self.contentDetailEntity = nil;
+        self.testStr = @"测试选择";
+    }
+    
     self.classEntity = classEntity;
     self.groupStr = classEntity.name;
+
     [_tableView reloadData];
 }
 
@@ -161,7 +167,12 @@
 - (void)selectedTest:(HBContentDetailEntity *)contentDetailEntity
 {
     self.contentDetailEntity = contentDetailEntity;
-    self.testStr = contentDetailEntity.BOOK_TITLE_CN;
+    if ([[HBDataSaveManager defaultManager] showEnBookName]) {
+        self.testStr = contentDetailEntity.BOOK_TITLE;
+    }else{
+        self.testStr = contentDetailEntity.BOOK_TITLE_CN;
+    }
+    
     [_tableView reloadData];
 }
 

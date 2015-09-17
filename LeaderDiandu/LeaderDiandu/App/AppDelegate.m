@@ -56,6 +56,8 @@
         islogined = YES;
         [self initDHSlideMenu];
     }
+    
+    [[HBDataSaveManager defaultManager] loadSettings];
 
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     self.loginVC = [sb instantiateViewControllerWithIdentifier:@"HBLoginViewController"];

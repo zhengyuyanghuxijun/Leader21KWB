@@ -186,7 +186,12 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
                     manageTaskEntity.className = className;
                     
                     NSDictionary *bookDic = [dic objectForKey:@"book"];
-                    NSString *bookName = [bookDic objectForKey:@"book_title_cn"];
+                    NSString *bookName;
+                    if ([[HBDataSaveManager defaultManager] showEnBookName]) {
+                        bookName = [bookDic objectForKey:@"book_title"];
+                    }else{
+                        bookName = [bookDic objectForKey:@"book_title_cn"];
+                    }
                     manageTaskEntity.bookName = bookName;
                     NSString *fileId = [bookDic objectForKey:@"file_id"];
                     manageTaskEntity.fileId = fileId;

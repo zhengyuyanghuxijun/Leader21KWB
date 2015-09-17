@@ -105,7 +105,12 @@
     }
     
     HBContentDetailEntity *contentDetailEntity = [self.testArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = contentDetailEntity.BOOK_TITLE_CN;
+    if ([[HBDataSaveManager defaultManager] showEnBookName]) {
+        cell.textLabel.text = contentDetailEntity.BOOK_TITLE;
+    }else{
+        cell.textLabel.text = contentDetailEntity.BOOK_TITLE_CN;
+    }
+    
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

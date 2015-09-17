@@ -85,6 +85,8 @@
         //获取所有可选套餐
         [self requestAllBookset];
     }
+    
+    [_gridView reloadData];
 }
 
 - (void)initMainView
@@ -235,8 +237,12 @@
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
 #if KUseLeaserSDK
     BookEntity *entity = arr[listIndex];
+    NSString *bookTitle = entity.bookTitleCN;
+    if ([[HBDataSaveManager defaultManager] showEnBookName]) {
+        bookTitle = entity.bookTitle;
+    }
     NSDictionary * targetData = [[NSDictionary alloc]initWithObjectsAndKeys:
-                                 entity.bookTitleCN, TextGridItemView_BookName,entity.fileId, TextGridItemView_BookCover, @"mainGrid_download", TextGridItemView_downloadState, nil];
+                                 bookTitle, TextGridItemView_BookName,entity.fileId, TextGridItemView_BookCover, @"mainGrid_download", TextGridItemView_downloadState, nil];
 #else
     NSMutableDictionary *dic = [arr objectAtIndex:listIndex];
     NSDictionary * targetData = [[NSDictionary alloc]initWithObjectsAndKeys:

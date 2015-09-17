@@ -70,4 +70,32 @@
     [userDefault synchronize];
 }
 
+- (void)saveSettingsByDict:(NSDictionary *)dict
+{
+    NSString *wifiDownloadStr = [dict objectForKey:@"wifidownload"];
+    NSString *showEnBookNameStr = [dict objectForKey:@"showenbookname"];
+    
+    self.wifiDownload = [wifiDownloadStr boolValue];
+    self.showEnBookName = [showEnBookNameStr boolValue];
+    
+    NSString *settingDataKey = [NSString stringWithFormat:@"%@"@"_"@"%ld", KHBSettingData,self.userEntity.userid];
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:dict forKey:settingDataKey];
+    [userDefault synchronize];
+}
+
+- (void)loadSettings
+{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *settingDataKey = [NSString stringWithFormat:@"%@"@"_"@"%ld", KHBSettingData,self.userEntity.userid];
+    NSDictionary *dict = [userDefault objectForKey:settingDataKey];
+    
+    NSString *wifiDownloadStr = [dict objectForKey:@"wifidownload"];
+    NSString *showEnBookNameStr = [dict objectForKey:@"showenbookname"];
+    
+    self.wifiDownload = [wifiDownloadStr boolValue];
+    self.showEnBookName = [showEnBookNameStr boolValue];
+}
+
 @end
