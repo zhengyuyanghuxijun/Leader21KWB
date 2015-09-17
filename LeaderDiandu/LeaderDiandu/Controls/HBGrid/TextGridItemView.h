@@ -14,6 +14,8 @@
 #import "HBGridItemView.h"
 #import "MBProgressHUD.h"
 
+@class BookEntity;
+
 @interface TextGridItemView : HBGridItemView
 
 @property (nonatomic, strong) UIImageView *pauseView;
@@ -24,5 +26,6 @@
 
 //更新数据
 - (void)updateFormData:(NSDictionary*)dic;
+- (void)resetWithBook:(BookEntity *)book;
 
 @end

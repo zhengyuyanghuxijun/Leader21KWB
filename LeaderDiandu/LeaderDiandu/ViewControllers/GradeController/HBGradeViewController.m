@@ -243,6 +243,10 @@
                                  [dic objectForKey:@"BOOK_TITLE_CN"], TextGridItemView_BookName,[dic objectForKey:@"FILE_ID"], TextGridItemView_BookCover,@"mainGrid_download", TextGridItemView_downloadState, nil];
 #endif
     [itemView updateFormData:targetData];
+    if ([LEADERSDK isBookDownloaded:entity]) {
+        //书籍已下载
+        [itemView resetWithBook:entity];
+    }
     return itemView;
 }
 
@@ -254,7 +258,7 @@
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
 #if KUseLeaserSDK
     BookEntity *entity = arr[index];
-    [LEADERSDK startDownloadBook:entity];
+    [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
     itemView.bookDownloadUrl = entity.bookUrl;
 #else
     NSMutableDictionary *dic = [arr objectAtIndex:index];

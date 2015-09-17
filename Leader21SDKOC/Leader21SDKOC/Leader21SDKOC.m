@@ -10,6 +10,8 @@
 #import "LocalSettings.h"
 #import "DownloadManager.h"
 #import "ReadBookViewController.h"
+#import "DownloadEntity.h"
+#import "ReadBookDecrypt.h"
 //#import "BookEntity+NSDictionary.h"
 
 @interface Leader21SDKOC()
@@ -67,6 +69,10 @@
     NSLog(@"book download path %@",path);
     book.bookUrl = bookUrl;
     BOOL start = [[DownloadManager sharedInstance] startDownload:bookUrl withLocalPath:path isFree:YES];
+    if (!start) {
+        NSLog(@"Download need restart");
+        start = [[DownloadManager sharedInstance] startDownload:book.bookUrl withLocalPath:path reStartFinished:YES isFree:YES];
+    }
 
     NSLog(@"download book start?  %@", start?@"YES":@"NO");
     [CoreDataHelper save];
@@ -150,4 +156,112 @@
 {
     [CoreDataEngine sharedInstance].managedObjectContext = moContext;
 }
+
+- (void)bookPressed:(BookEntity*)book useNavigation:(UINavigationController *)navigation
+{
+    // 如果正在下载中，不做任何处理
+    if (book.download != nil) {
+        if([[DownloadManager sharedInstance] isExistInDowningQueue:book.bookUrl])
+        {
+            [[DownloadManager sharedInstance] pauseDownload:book.bookUrl];
+            book.download.status = @(downloadStatusPause);
+            [CoreDataHelper save];
+            
+            // 暂停
+            NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
+            [info setObject:@(-1.0) forKey:@"progress"];
+            [info setObject:book.bookUrl forKey:@"url"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_bookDownloadProgress object:book userInfo:info];
+            
+            return;
+        }
+    }
+    
+    [self bookPressedCheckDownload:book useNavigation:navigation];
+}
+
+- (void)bookPressedCheckDownload:(BookEntity*)book useNavigation:(UINavigationController *)navigation
+{
+    BOOL findBook = [LocalSettings findBookLoginOrNot:book.fileId];
+    if (findBook) {
+        BOOL canOpen = YES;
+        if (book.download != nil) {
+            if (book.download.status.integerValue == downloadStatusUnZipping) {
+                canOpen = NO;
+            }
+            else if (book.download.status.integerValue == downloadStatusDownloadSuccess) {
+                canOpen = NO;
+                NSString* path = [LocalSettings bookPathForDefaultUser:book.fileId];
+                
+                // 解压
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0UL), ^{
+                    // 解压
+                    book.download.status = @(downloadStatusUnZipping);
+                    NSString* dir = [LocalSettings bookDirectoryForUser:@"0"];
+                    
+                    BOOL unziped = [DE unZipFile:path toPath:dir];
+                    if (unziped) {
+                        NSError* error = nil;
+                        [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+                        
+                        BOOL isBookFree = YES;
+                        [[ReadBookDecrypt sharedInstance] decryptAllFile:[book.fileId lowercaseString] isBookFree:isBookFree];
+                    }
+                    else {
+                        // 文件解压出错，重下
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [[DownloadManager sharedInstance] startDownload:book.bookUrl withLocalPath:path reStartFinished:YES isFree:YES];
+                        });
+                        return;
+                    }
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        NSString* bookName = [NSString stringWithFormat:@"下载《%@》成功", book.bookTitle];
+                        [LDHudUtil showTextView:bookName inView:nil];
+                        
+                        book.hasDown = [NSNumber numberWithBool:YES];
+                        book.download.progress = @(1.0f);
+                        book.download.status = @(downloadStatusFinished);
+                        
+                        // 解压完成，可以用了
+                        NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
+                        [info setObject:@(1.0) forKey:@"progress"];
+                        [info setObject:book.bookUrl forKey:@"url"];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_bookDownloadProgress object:book  userInfo:info];
+                        [CoreDataHelper save];
+                    });
+                });
+            }
+        }
+        if (!canOpen) {
+            return;
+        }
+        book.download.status = @(downloadStatusFinished);
+        // 进入书阅读页面
+        NSString* folder = [LocalSettings bookPathForDefaultUser:[book.fileId lowercaseString]];
+        if (folder.length > 0) {
+            ReadBookViewController* vc = [[ReadBookViewController alloc] init];
+            vc.folderName = folder;
+            vc.navBarTitle = book.bookTitle;
+            vc.bookID = book.bookId.longLongValue;
+            [navigation pushViewController:vc animated:YES];
+            
+            //            if (!book.hasDown.boolValue) {
+            //                book.hasDown = [NSNumber numberWithBool:YES];
+            //                [CoreDataHelper save];
+            //                [self bookDidDownload:book.fileId];
+            //            }
+            
+            //            if (!book.hasBook.boolValue) {
+            //                // 告诉服务端，这本书算下载过了
+            //                [self bookDidDownload:book.fileId];
+            //            }
+        }
+    }
+    else {
+        // 下载
+        [self startDownloadBook:book];
+    }
+}
+
 @end

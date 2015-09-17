@@ -692,6 +692,7 @@
 				68A2C1DF1B441DE600A0BB71 /* Sources */,
 				68A2C1E01B441DE600A0BB71 /* Frameworks */,
 				68A2C1E11B441DE600A0BB71 /* CopyFiles */,
+				0DCA25581BA9EB5C00D6C752 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -756,6 +757,13 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0DCA25581BA9EB5C00D6C752 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		68A2C1EC1B441DE600A0BB71 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;

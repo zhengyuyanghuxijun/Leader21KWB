@@ -66,6 +66,9 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
  */
 - (void) readBook:(BookEntity *)book useNavigation:(UINavigationController*)navigationController;
 
+- (void)bookPressed:(BookEntity*)book useNavigation:(UINavigationController *)navigation;
+- (void)bookPressedCheckDownload:(BookEntity*)book useNavigation:(UINavigationController *)navigation;
+
 - (NSMutableArray *) getLocalBooks;
 
 - (BOOL) deleteLocalBooks:(NSMutableArray *)books;
