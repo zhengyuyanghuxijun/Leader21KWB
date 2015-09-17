@@ -96,7 +96,12 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
 
 - (void)showEnglishName:(id)sender
 {
-    //to do ...
+    UISwitch *aSwitch = (UISwitch *)sender;
+    if (aSwitch.isOn) {
+        //显示英文书名
+    }else{
+        //显示中文书名
+    }
 }
 
 #pragma mark - Table view data source

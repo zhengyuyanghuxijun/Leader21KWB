@@ -51,6 +51,7 @@
     [self.view addSubview:editBg];
     
     self.nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 5, width-40, 40)];
+    self.nameTextField.placeholder = @"群组名称";
     [editBg addSubview:self.nameTextField];
     
     UIImageView *editBgSec = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY + 60, width, 50)];
@@ -59,6 +60,8 @@
     [self.view addSubview:editBgSec];
     
     self.levelTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 5, width-40, 40)];
+    self.levelTextField.placeholder = @"群组等级";
+    self.levelTextField.keyboardType = UIKeyboardTypeNumberPad;
     [editBgSec addSubview:self.levelTextField];
     
     CGRect rc = CGRectMake(20.0f, controlY + 140, ScreenWidth - 20 - 20, 50.0f);
