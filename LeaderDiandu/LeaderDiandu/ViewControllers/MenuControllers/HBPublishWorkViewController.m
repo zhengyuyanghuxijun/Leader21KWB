@@ -137,13 +137,17 @@
             if (arr.count > 0) {
                 [[HBServiceManager defaultManager] requestTaskAssign:user book_id:self.contentDetailEntity.ID class_id:self.classEntity.classId bookset_id:self.classEntity.booksetId completion:^(id responseObject, NSError *error) {
                     //布置作业成功!!!
+                    if (responseObject) {
+                        NSDictionary *dict = responseObject;
+                        if (dict[@"exam_id"]) {
+                            [MBHudUtil showTextView:@"布置作业成功" inView:nil];
+                        }
+                    }
                 }];
             }else{
                 //组内人数为0，无法布置作业！！！
             }
         }];
-        
-
     }
 }
 

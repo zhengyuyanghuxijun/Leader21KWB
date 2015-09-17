@@ -111,6 +111,12 @@
             self.loginButton.enabled = YES;
             [Navigator popToRootController];
             [[AppDelegate delegate] initDHSlideMenu];
+            
+            NSString *message = [NSString stringWithFormat:@"用户%@登录成功", phone];
+            [MBHudUtil showTextView:message inView:nil];
+        } else {
+            NSString *message = [NSString stringWithFormat:@"用户%@登录失败", phone];
+            [MBHudUtil showTextView:message inView:nil];
         }
     }];
 }

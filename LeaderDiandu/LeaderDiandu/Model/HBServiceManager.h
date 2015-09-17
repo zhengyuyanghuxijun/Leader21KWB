@@ -17,6 +17,8 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
 
 + (HBServiceManager *)defaultManager;
 
+- (void)requestExamContent:(NSString *)url;
+
 /**
  *  注册
  *
@@ -307,7 +309,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param book_id          作业ID
  *  @param receivedBlock 回调Block
  */
-- (void)requestBookInfo:(NSString *)user book_id:(NSString *)book_id completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestBookInfo:(NSString *)user book_id:(NSInteger)book_id completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  获取一个班的作业列表

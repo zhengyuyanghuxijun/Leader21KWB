@@ -106,13 +106,28 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
 
 - (void)bindButtonAction:(id)sender
 {
-    
+    NSString *text = _textField.text;
+    if (text == nil) {
+        //TODO提示
+        return;
+    }
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    [[HBServiceManager defaultManager] requestTeacherAssign:userEntity.name teacher:text completion:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            NSDictionary *dict = responseObject;
+            if ([dict[@"result"] isEqualToString:@"OK"]) {
+                //绑定成功
+                [MBHudUtil showTextView:@"绑定成功" inView:self.view];
+            }
+        }
+    }];
 }
 
 - (void)getMyTeacher
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestTeacher:userEntity.name teacher:nil completion:^(id responseObject, NSError *error) {
+    NSString *teacher = userEntity.teacher[@"name"];
+    [[HBServiceManager defaultManager] requestTeacher:userEntity.name teacher:teacher completion:^(id responseObject, NSError *error) {
         
     }];
 }

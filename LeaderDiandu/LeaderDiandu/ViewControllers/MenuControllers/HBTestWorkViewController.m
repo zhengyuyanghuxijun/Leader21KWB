@@ -236,7 +236,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
         HBTaskEntity *taskEntity = [self.taskEntityArr objectAtIndex:indexPath.row];
-        [[HBServiceManager defaultManager] requestBookInfo:user book_id:[NSString stringWithFormat:@"%ld", taskEntity.bookId] completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestBookInfo:user book_id:taskEntity.bookId completion:^(id responseObject, NSError *error) {
             // to do ...
         }];
     }

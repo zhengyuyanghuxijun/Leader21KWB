@@ -28,6 +28,11 @@
     return manager;
 }
 
+- (void)requestExamContent:(NSString *)url
+{
+    
+}
+
 - (void)Post:(NSString *)api dict:(NSMutableDictionary *)dict block:(HBServiceReceivedBlock)receivedBlock
 {
     [dict setObject:KAppKeyStudy forKey:KWBAppKey];
@@ -438,9 +443,9 @@
     [dicInfo setObject:@(class_id)     forKey:@"class_id"];
     [dicInfo setObject:@(bookset_id)     forKey:@"bookset_id"];
     
-    if (_receivedBlock) {
-        return;
-    }
+//    if (_receivedBlock) {
+//        return;
+//    }
     self.receivedBlock = receivedBlock;
     [self Post:@"/api/task/assign" dict:dicInfo block:receivedBlock];
 }
@@ -459,11 +464,11 @@
     [self Post:@"/api/task/list" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestBookInfo:(NSString *)user book_id:(NSString *)book_id completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestBookInfo:(NSString *)user book_id:(NSInteger)book_id completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:book_id     forKey:@"book_id"];
+    [dicInfo setObject:@(book_id)     forKey:@"book_id"];
     
     if (_receivedBlock) {
         return;
