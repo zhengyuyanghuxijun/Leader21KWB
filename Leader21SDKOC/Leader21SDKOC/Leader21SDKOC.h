@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BookEntity.h"
+#import "DownloadEntity.h"
 
 typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NSString* errorMsg);
 
