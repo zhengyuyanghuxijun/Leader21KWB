@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D3F6D0B1BAD56DB005B4358 /* LeaderSDKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D0A1BAD56DB005B4358 /* LeaderSDKUtil.m */; };
 		0D7487751B89DD1B007BE4CD /* DownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487671B89DD1B007BE4CD /* DownloadItem.m */; };
 		0D7487771B89DD1B007BE4CD /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487691B89DD1B007BE4CD /* DownloadManager.m */; };
 		0D7487791B89DD1B007BE4CD /* DownloadStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74876B1B89DD1B007BE4CD /* DownloadStoreManager.m */; };
@@ -118,6 +119,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D3F6D091BAD56DB005B4358 /* LeaderSDKUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderSDKUtil.h; sourceTree = "<group>"; };
+		0D3F6D0A1BAD56DB005B4358 /* LeaderSDKUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderSDKUtil.m; sourceTree = "<group>"; };
 		0D7487631B89DD1B007BE4CD /* LeaderSDKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderSDKConstants.h; sourceTree = "<group>"; };
 		0D7487651B89DD1B007BE4CD /* DownloadConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadConstants.h; sourceTree = "<group>"; };
 		0D7487661B89DD1B007BE4CD /* DownloadItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadItem.h; sourceTree = "<group>"; };
@@ -584,6 +587,8 @@
 				68A2C1E61B441DE600A0BB71 /* Leader21SDKOC.h */,
 				68A2C1E81B441DE600A0BB71 /* Leader21SDKOC.m */,
 				0D7488421B89E022007BE4CD /* db.xcdatamodeld */,
+				0D3F6D091BAD56DB005B4358 /* LeaderSDKUtil.h */,
+				0D3F6D0A1BAD56DB005B4358 /* LeaderSDKUtil.m */,
 			);
 			path = Leader21SDKOC;
 			sourceTree = "<group>";
@@ -782,6 +787,7 @@
 				0D7488171B89DF42007BE4CD /* JSONKit.m in Sources */,
 				0D7487911B89DDF5007BE4CD /* CoreDataEngine.m in Sources */,
 				0D7488211B89DF42007BE4CD /* NSDate+RFC1123.m in Sources */,
+				0D3F6D0B1BAD56DB005B4358 /* LeaderSDKUtil.m in Sources */,
 				0D7488411B89DF42007BE4CD /* ZipArchive.mm in Sources */,
 				68A2C38B1B47DF4200A0BB71 /* CustomNavView.m in Sources */,
 				0D7488501B89E249007BE4CD /* LocalSettings.m in Sources */,
