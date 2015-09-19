@@ -17,8 +17,6 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
 
 + (HBServiceManager *)defaultManager;
 
-- (void)requestExamContent:(NSString *)url;
-
 /**
  *  注册
  *

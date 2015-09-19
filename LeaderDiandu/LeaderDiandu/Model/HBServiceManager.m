@@ -28,11 +28,6 @@
     return manager;
 }
 
-- (void)requestExamContent:(NSString *)url
-{
-    
-}
-
 - (void)Post:(NSString *)api dict:(NSMutableDictionary *)dict block:(HBServiceReceivedBlock)receivedBlock
 {
     [dict setObject:KAppKeyStudy forKey:KWBAppKey];

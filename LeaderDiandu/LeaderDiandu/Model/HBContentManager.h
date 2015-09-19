@@ -10,6 +10,8 @@
 
 typedef void(^HBContentReceivedBlock) (id responseObject, NSError *error);
 
+typedef void(^HBDownloadReceiveBlock)(id responseObject, NSError *error);
+
 @interface HBContentManager : NSObject
 
 + (HBContentManager *)defaultManager;
@@ -60,5 +62,15 @@ typedef void(^HBContentReceivedBlock) (id responseObject, NSError *error);
  *  @param receivedBlock 回调Block
  */
 - (void)requestBookProgress:(NSString *)user bookset_id:(NSInteger)bookset_id completion:(HBContentReceivedBlock)receivedBlock;
+
+/**
+ * 下载文件
+ *
+ * @param string aUrl 请求文件地址
+ * @param string aSavePath 保存地址
+ * @param string aFileName 文件名
+ * @param int aTag tag标识
+ */
+- (void)downloadFileURL:(NSString *)aUrl savePath:(NSString *)aSavePath fileName:(NSString *)aFileName completion:(HBDownloadReceiveBlock)block;
 
 @end

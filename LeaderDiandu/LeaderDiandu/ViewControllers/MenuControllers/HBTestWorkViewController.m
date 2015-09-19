@@ -11,8 +11,12 @@
 #import "HBTitleView.h"
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
+#import "HBContentManager.h"
 #import "HBTaskEntity.h"
 #import "TimeIntervalUtils.h"
+#import "LocalSettings.h"
+
+#define KHBTestWorkPath   @"HBTestWork"
 
 static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewControllerCellReuseId";
 
@@ -238,8 +242,24 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
         HBTaskEntity *taskEntity = [self.taskEntityArr objectAtIndex:indexPath.row];
         [[HBServiceManager defaultManager] requestBookInfo:user book_id:taskEntity.bookId completion:^(id responseObject, NSError *error) {
             // to do ...
+            if (responseObject) {
+                NSDictionary *dict = responseObject;
+                NSString *url = dict[@"url"];
+                [self downloaTestWork:url];
+            }
         }];
     }
+}
+
+- (void)downloaTestWork:(NSString *)url
+{
+    NSString *path = [LocalSettings bookCachePath];
+    path = [NSString stringWithFormat:@"%@/%@", path, KHBTestWorkPath];
+    [[HBContentManager defaultManager] downloadFileURL:url savePath:path fileName:@"test.zip" completion:^(id responseObject, NSError *error) {
+        if (responseObject && [responseObject isKindOfClass:[NSString class]]) {
+            NSString *path = responseObject;
+        }
+    }];
 }
 
 @end
