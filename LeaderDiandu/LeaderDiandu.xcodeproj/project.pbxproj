@@ -160,6 +160,7 @@
 		18A244771BA7295A00E1E703 /* HBCreatGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A244761BA7295A00E1E703 /* HBCreatGroupController.m */; };
 		18B5FD2E1B981454002CCD95 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5FD2D1B981454002CCD95 /* UIButton+AFNetworking.m */; };
 		18B5FD311B983930002CCD95 /* FTMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5FD301B983930002CCD95 /* FTMenu.m */; };
+		18B712E91BAC5C9F0002AB43 /* HBBookManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B712E81BAC5C9F0002AB43 /* HBBookManViewController.m */; };
 		18C316841BA07A9D004F716E /* HBPublishWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C316831BA07A9D004F716E /* HBPublishWorkViewController.m */; };
 		18C316881BA07F11004F716E /* HBGroupSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C316871BA07F11004F716E /* HBGroupSelectViewController.m */; };
 		18C316901BA092B1004F716E /* HBClassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3168F1BA092B1004F716E /* HBClassEntity.m */; };
@@ -436,6 +437,8 @@
 		18B5FD2D1B981454002CCD95 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
 		18B5FD2F1B983930002CCD95 /* FTMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMenu.h; sourceTree = "<group>"; };
 		18B5FD301B983930002CCD95 /* FTMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMenu.m; sourceTree = "<group>"; };
+		18B712E71BAC5C9F0002AB43 /* HBBookManViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBBookManViewController.h; sourceTree = "<group>"; };
+		18B712E81BAC5C9F0002AB43 /* HBBookManViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBookManViewController.m; sourceTree = "<group>"; };
 		18C316821BA07A9D004F716E /* HBPublishWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBPublishWorkViewController.h; sourceTree = "<group>"; };
 		18C316831BA07A9D004F716E /* HBPublishWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBPublishWorkViewController.m; sourceTree = "<group>"; };
 		18C316861BA07F11004F716E /* HBGroupSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGroupSelectViewController.h; sourceTree = "<group>"; };
@@ -520,6 +523,8 @@
 			children = (
 				0D7292C31B9E0650006FA7EA /* HBSettingViewController.h */,
 				0D7292C41B9E0650006FA7EA /* HBSettingViewController.m */,
+				18B712E71BAC5C9F0002AB43 /* HBBookManViewController.h */,
+				18B712E81BAC5C9F0002AB43 /* HBBookManViewController.m */,
 			);
 			path = SettingViewControllers;
 			sourceTree = "<group>";
@@ -1280,6 +1285,7 @@
 				0DBE35821B8CBE4300179237 /* MBProgressHUD.m in Sources */,
 				0DBE35AF1B8CCEFA00179237 /* TableSecitonDataObject.m in Sources */,
 				0DB5372D1B8F5DEE0023A3F7 /* AFURLRequestSerialization.m in Sources */,
+				18B712E91BAC5C9F0002AB43 /* HBBookManViewController.m in Sources */,
 				0D086EDC1B949B110061BB1F /* DHSlideMenuController.m in Sources */,
 				18C316901BA092B1004F716E /* HBClassEntity.m in Sources */,
 				0D7A76921B92064100BC50A0 /* HBBaseEntity.m in Sources */,
@@ -1438,7 +1444,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: wei chanyuan (A2Z38B538T)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHEN YUE (S7A22NS2N6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1467,7 +1473,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: wei chanyuan (X2Y6A4GX9Q)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: CHEN YUE (S7A22NS2N6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

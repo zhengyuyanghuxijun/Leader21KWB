@@ -9,6 +9,7 @@
 #import "HBSettingViewController.h"
 #import "HBTitleView.h"
 #import "UIViewController+AddBackBtn.h"
+#import "HBBookManViewController.h"
 
 #import "HBServiceManager.h"
 
@@ -206,7 +207,8 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if (indexPath.row == 2){
-        
+        HBBookManViewController *vc = [[HBBookManViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 3){
         
     }else if (indexPath.row == 4){

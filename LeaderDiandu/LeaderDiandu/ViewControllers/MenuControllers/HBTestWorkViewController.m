@@ -73,7 +73,22 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     if (taskEntity) {
         self.cellTime.text = taskEntity.taskTime;
         self.cellTeacherName.text = taskEntity.teacherName;
-        self.cellScore.text = taskEntity.score;
+        
+        if (taskEntity.score == nil) {
+            self.cellScore.text = nil;
+        }else{
+            NSInteger score = [taskEntity.score integerValue];
+            if (100 == score) {
+                self.cellScore.text = @"A+";
+            }else if (score >=80 && score < 100){
+                self.cellScore.text = @"A";
+            }else if (score >= 60 && score < 80){
+                self.cellScore.text = @"B";
+            }else{
+                self.cellScore.text = @"C";
+            }
+        }
+        
         self.cellBookName.text = taskEntity.bookName;
         if (taskEntity.score) {
             self.cellSubmitState.text = @"已提交";
