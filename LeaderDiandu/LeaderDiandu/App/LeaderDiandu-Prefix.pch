@@ -25,7 +25,8 @@
 #import "Navigator.h"
 #import "AppDelegate.h"
 #import "UIImage+Extra.h"
-#import "UIDevice+Addtional.h"
 #import "MBHudUtil.h"
+#import "UIDevice+Addtional.h"
+#import "UIColor+TKCategory.h"
 #endif
 

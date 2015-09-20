@@ -12,7 +12,7 @@
 #define KLeaderJudge        @"judge"    //判断题
 #define KLeaderPair         @"pair"     //连线题
 
-#define KLeaderQuestion     @"question"
+#define KLeaderQuestion     @"questions"
 
 @implementation HBTestWorkManager
 
@@ -56,6 +56,15 @@
         }
     }
     
+    self.workArray = workArray;
+}
+
+- (NSDictionary *)getQuestion:(NSInteger)index
+{
+    if (index>0 && index<[self.workArray count]) {
+        return self.workArray[index];
+    }
+    return nil;
 }
 
 //计算文件夹下文件的总大小

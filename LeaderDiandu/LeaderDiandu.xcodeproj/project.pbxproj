@@ -18,6 +18,9 @@
 		0D086EDC1B949B110061BB1F /* DHSlideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D086ED91B949B110061BB1F /* DHSlideMenuController.m */; };
 		0D086EDD1B949B110061BB1F /* DHSlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D086EDB1B949B110061BB1F /* DHSlideMenuViewController.m */; };
 		0D3F6D0E1BADA391005B4358 /* HBTestWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */; };
+		0D3F6D161BAE8F64005B4358 /* HBMyWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */; };
+		0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */; };
+		0D3F6D1C1BAEA41A005B4358 /* HBMyWorkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D1B1BAEA41A005B4358 /* HBMyWorkView.m */; };
 		0D7292C51B9E0650006FA7EA /* HBSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7292C41B9E0650006FA7EA /* HBSettingViewController.m */; };
 		0D7486F41B88A884007BE4CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7486F31B88A884007BE4CD /* main.m */; };
 		0D7486FD1B88A884007BE4CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D7486FB1B88A884007BE4CD /* Main.storyboard */; };
@@ -231,6 +234,12 @@
 		0D086EDB1B949B110061BB1F /* DHSlideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHSlideMenuViewController.m; sourceTree = "<group>"; };
 		0D3F6D0C1BADA391005B4358 /* HBTestWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestWorkManager.h; sourceTree = "<group>"; };
 		0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestWorkManager.m; sourceTree = "<group>"; };
+		0D3F6D141BAE8F64005B4358 /* HBMyWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkViewController.h; sourceTree = "<group>"; };
+		0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMyWorkViewController.m; sourceTree = "<group>"; };
+		0D3F6D171BAE9E68005B4358 /* UIColor+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+TKCategory.h"; sourceTree = "<group>"; };
+		0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+TKCategory.m"; sourceTree = "<group>"; };
+		0D3F6D1A1BAEA41A005B4358 /* HBMyWorkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkView.h; sourceTree = "<group>"; };
+		0D3F6D1B1BAEA41A005B4358 /* HBMyWorkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMyWorkView.m; sourceTree = "<group>"; };
 		0D7292C31B9E0650006FA7EA /* HBSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSettingViewController.h; sourceTree = "<group>"; };
 		0D7292C41B9E0650006FA7EA /* HBSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSettingViewController.m; sourceTree = "<group>"; };
 		0D7486EE1B88A884007BE4CD /* LeaderDiandu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeaderDiandu.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -519,6 +528,19 @@
 				0D086EDB1B949B110061BB1F /* DHSlideMenuViewController.m */,
 			);
 			path = DHSlideMenuController;
+			sourceTree = "<group>";
+		};
+		0D3F6D121BAE8E67005B4358 /* HBMyWorkViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0DD214701B960148009E3DB9 /* HBTestWorkViewController.h */,
+				0DD214711B960148009E3DB9 /* HBTestWorkViewController.m */,
+				0D3F6D141BAE8F64005B4358 /* HBMyWorkViewController.h */,
+				0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */,
+				0D3F6D1A1BAEA41A005B4358 /* HBMyWorkView.h */,
+				0D3F6D1B1BAEA41A005B4358 /* HBMyWorkView.m */,
+			);
+			name = HBMyWorkViewControllers;
 			sourceTree = "<group>";
 		};
 		0D7292C21B9E0650006FA7EA /* SettingViewControllers */ = {
@@ -855,6 +877,8 @@
 		0DBE35731B8CBD0000179237 /* Addtional */ = {
 			isa = PBXGroup;
 			children = (
+				0D3F6D171BAE9E68005B4358 /* UIColor+TKCategory.h */,
+				0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */,
 				0DCBC29D1B99DE16003DFDD5 /* NSString+Verify.h */,
 				0DCBC29E1B99DE16003DFDD5 /* NSString+Verify.m */,
 				0DAAF4021B8D5F8900078285 /* UIViewController+AddBackBtn.h */,
@@ -954,6 +978,7 @@
 		0DD214661B95FC8B009E3DB9 /* MenuControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0D3F6D121BAE8E67005B4358 /* HBMyWorkViewControllers */,
 				18E57D681BA5B1CC00198BE9 /* HBStuManViewControllers */,
 				18C64FFB1B9DE4D20040E349 /* HBWorkManViewControllers */,
 				0D7292C21B9E0650006FA7EA /* SettingViewControllers */,
@@ -969,8 +994,6 @@
 				0D018FED1B96DB9200A92F59 /* HBLeaderViewController.m */,
 				0DD2146D1B95FFAC009E3DB9 /* HBSubscribeViewController.h */,
 				0DD2146E1B95FFAC009E3DB9 /* HBSubscribeViewController.m */,
-				0DD214701B960148009E3DB9 /* HBTestWorkViewController.h */,
-				0DD214711B960148009E3DB9 /* HBTestWorkViewController.m */,
 				0DD214731B96018A009E3DB9 /* HBPayViewController.h */,
 				0DD214741B96018A009E3DB9 /* HBPayViewController.m */,
 				0DD214761B9601DA009E3DB9 /* HBMessageViewController.h */,
@@ -1254,6 +1277,7 @@
 				0D74875C1B88C2C4007BE4CD /* HBGridItemView.m in Sources */,
 				0D7488941B8A2973007BE4CD /* NSString+MD5.mm in Sources */,
 				18A244771BA7295A00E1E703 /* HBCreatGroupController.m in Sources */,
+				0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */,
 				0DB5372E1B8F5DEE0023A3F7 /* AFURLResponseSerialization.m in Sources */,
 				181456DD1B96D9DD003CCD6C /* HBContentEntity.m in Sources */,
 				0D7A76951B92176C00BC50A0 /* HBUserEntity.m in Sources */,
@@ -1295,11 +1319,13 @@
 				0D086EDC1B949B110061BB1F /* DHSlideMenuController.m in Sources */,
 				18C316901BA092B1004F716E /* HBClassEntity.m in Sources */,
 				0D7A76921B92064100BC50A0 /* HBBaseEntity.m in Sources */,
+				0D3F6D1C1BAEA41A005B4358 /* HBMyWorkView.m in Sources */,
 				18C316841BA07A9D004F716E /* HBPublishWorkViewController.m in Sources */,
 				0DBE35CB1B8CD7BE00179237 /* HBForgetPwdViewController.m in Sources */,
 				0DBE353D1B8CB8B500179237 /* Navigator.m in Sources */,
 				181E30751BA2B14100BBA92F /* UtilFMDatabaseAdditions.m in Sources */,
 				0D018FE81B96DB3500A92F59 /* HBStuManViewController.m in Sources */,
+				0D3F6D161BAE8F64005B4358 /* HBMyWorkViewController.m in Sources */,
 				0DBE35401B8CB8B500179237 /* TimeIntervalUtils.m in Sources */,
 				18E57D6C1BA5B25C00198BE9 /* HBStudentCell.m in Sources */,
 			);

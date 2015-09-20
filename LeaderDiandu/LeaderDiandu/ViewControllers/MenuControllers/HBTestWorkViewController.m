@@ -9,6 +9,8 @@
 #import "HBTestWorkViewController.h"
 #import "UIViewController+AddBackBtn.h"
 #import "HBTitleView.h"
+#import "HBMyWorkViewController.h"
+
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 #import "HBContentManager.h"
@@ -271,13 +273,13 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
             if (responseObject) {
                 NSDictionary *dict = responseObject;
                 NSString *url = dict[@"url"];
-                [self downloaTestWork:url];
+                [self downloaTestWork:url onSelect:taskEntity];
             }
         }];
     }
 }
 
-- (void)downloaTestWork:(NSString *)url
+- (void)downloaTestWork:(NSString *)url onSelect:(HBTaskEntity *)taskEntity
 {
     NSString *path = [LocalSettings bookCachePath];
     path = [NSString stringWithFormat:@"%@/%@", path, KHBTestWorkPath];
@@ -285,6 +287,10 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
         if (responseObject && [responseObject isKindOfClass:[NSString class]]) {
             NSString *path = responseObject;
             [_workManager parseTestWork:path];
+            HBMyWorkViewController *controller = [[HBMyWorkViewController alloc] init];
+            controller.workManager = _workManager;
+            controller.taskEntity = taskEntity;
+            [self.navigationController pushViewController:controller animated:YES];
         }
     }];
 }

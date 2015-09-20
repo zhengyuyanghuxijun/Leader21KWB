@@ -33,7 +33,7 @@
     CGRect rect = self.view.frame;
     UIImageView *navView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rect), KHBNaviBarHeight)];
 //    navView.image = [UIImage imageNamed:@"resource_title_bg"];
-    navView.backgroundColor = RGBCOLOR(249, 154, 11);
+    navView.backgroundColor = [UIColor colorWithHex:0xff8903];
     [self.view addSubview:navView];
 }
 

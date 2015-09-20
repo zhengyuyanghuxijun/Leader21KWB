@@ -115,11 +115,10 @@
     if ([fileManager fileExistsAtPath:fileName]) {
         NSError *error;
         [fileManager removeItemAtPath:aSavePath error:&error];
-    } else {
-        //创建附件存储目录
-        if (![fileManager fileExistsAtPath:aSavePath]) {
-            [fileManager createDirectoryAtPath:aSavePath withIntermediateDirectories:YES attributes:nil error:nil];
-        }
+    }
+    //创建文件存储目录
+    if (![fileManager fileExistsAtPath:aSavePath]) {
+        [fileManager createDirectoryAtPath:aSavePath withIntermediateDirectories:YES attributes:nil error:nil];
     }
     
     //下载附件

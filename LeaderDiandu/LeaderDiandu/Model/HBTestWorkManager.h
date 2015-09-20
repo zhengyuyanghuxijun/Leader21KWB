@@ -10,9 +10,14 @@
 
 @interface HBTestWorkManager : NSObject
 
-//计算文件夹下文件的总大小
-+ (long)fileSizeForDir:(NSString*)path;
+@property (nonatomic, strong)NSArray *workArray;
 
 - (void)parseTestWork:(NSString *)path;
+
+- (NSDictionary *)getQuestion:(NSInteger)index;
+
+
+//计算文件夹下文件的总大小
++ (long)fileSizeForDir:(NSString*)path;
 
 @end
