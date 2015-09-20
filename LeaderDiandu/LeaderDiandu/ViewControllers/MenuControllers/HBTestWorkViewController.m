@@ -16,6 +16,7 @@
 #import "TimeIntervalUtils.h"
 #import "LocalSettings.h"
 #import "UIImageView+AFNetworking.h"
+#import "HBTestWorkManager.h"
 
 #define KHBTestWorkPath   @"HBTestWork"
 #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
@@ -111,6 +112,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
 @interface HBTestWorkViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     UITableView *_tableView;
+    HBTestWorkManager *_workManager;
 }
 
 @property (nonatomic, strong)NSMutableArray *taskEntityArr;
@@ -133,6 +135,8 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    _workManager = [[HBTestWorkManager alloc] init];
+
     HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"我的作业" onView:self.view];
     [self.view addSubview:labTitle];
     
@@ -280,6 +284,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     [[HBContentManager defaultManager] downloadFileURL:url savePath:path fileName:@"test.zip" completion:^(id responseObject, NSError *error) {
         if (responseObject && [responseObject isKindOfClass:[NSString class]]) {
             NSString *path = responseObject;
+            [_workManager parseTestWork:path];
         }
     }];
 }

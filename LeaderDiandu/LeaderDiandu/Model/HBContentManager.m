@@ -115,52 +115,50 @@
     if ([fileManager fileExistsAtPath:fileName]) {
         NSError *error;
         [fileManager removeItemAtPath:aSavePath error:&error];
-//        NSData *audioData = [NSData dataWithContentsOfFile:fileName];
-//        [self requestFinished:[NSDictionary dictionaryWithObject:audioData forKey:@"res"] tag:aTag];
-    }else{
+    } else {
         //创建附件存储目录
         if (![fileManager fileExistsAtPath:aSavePath]) {
             [fileManager createDirectoryAtPath:aSavePath withIntermediateDirectories:YES attributes:nil error:nil];
         }
-        
-        //下载附件
-        NSURL *url = [[NSURL alloc] initWithString:aUrl];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        
-        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        operation.inputStream   = [NSInputStream inputStreamWithURL:url];
-        operation.outputStream  = [NSOutputStream outputStreamToFileAtPath:fileName append:NO];
-        
-        //下载进度控制
-        /*
-         [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-         NSLog(@"is download：%f", (float)totalBytesRead/totalBytesExpectedToRead);
-         }];
-         */
-        
-        //已完成下载
-        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            //解压文件
-            ZipArchive* zip = [[ZipArchive alloc] init];
-            
-            if ([zip UnzipOpenFile:fileName]) {
-                BOOL ret = [zip UnzipFileTo:aSavePath overWrite:YES];
-                [zip UnzipCloseFile];
-            }
-            if (block) {
-                block(aSavePath, nil);
-            }
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            
-            //下载失败
-            if (block) {
-                block(nil, error);
-            }
-        }];
-        
-        [operation start];
     }
+    
+    //下载附件
+    NSURL *url = [[NSURL alloc] initWithString:aUrl];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.inputStream   = [NSInputStream inputStreamWithURL:url];
+    operation.outputStream  = [NSOutputStream outputStreamToFileAtPath:fileName append:NO];
+    
+    //下载进度控制
+    /*
+     [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+     NSLog(@"is download：%f", (float)totalBytesRead/totalBytesExpectedToRead);
+     }];
+     */
+    
+    //已完成下载
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //解压文件
+        ZipArchive* zip = [[ZipArchive alloc] init];
+        
+        if ([zip UnzipOpenFile:fileName]) {
+            BOOL ret = [zip UnzipFileTo:aSavePath overWrite:YES];
+            [zip UnzipCloseFile];
+        }
+        if (block) {
+            block(aSavePath, nil);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        //下载失败
+        if (block) {
+            block(nil, error);
+        }
+    }];
+    
+    [operation start];
 }
 
 @end
