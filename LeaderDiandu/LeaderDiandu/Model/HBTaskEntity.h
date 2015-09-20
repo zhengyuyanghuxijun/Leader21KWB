@@ -14,6 +14,7 @@
 @property (nonatomic, strong)NSString *teacherName;
 @property (nonatomic, strong)NSString *taskTime;
 @property (nonatomic, strong)NSString *score;
+@property (nonatomic, strong)NSString *fileId;
 
 @property (nonatomic, assign)NSInteger bookId;
 

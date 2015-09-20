@@ -15,8 +15,10 @@
 #import "HBTaskEntity.h"
 #import "TimeIntervalUtils.h"
 #import "LocalSettings.h"
+#import "UIImageView+AFNetworking.h"
 
 #define KHBTestWorkPath   @"HBTestWork"
+#define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 
 static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewControllerCellReuseId";
 
@@ -51,7 +53,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     
     //书皮
     self.cellImageBookCover = [[UIImageView alloc] init];
-    self.cellImageBookCover.image = [UIImage imageNamed:@"mainGrid_defaultBookCover"];
+//    self.cellImageBookCover.image = [UIImage imageNamed:@"mainGrid_defaultBookCover"];
     self.cellImageBookCover.frame = CGRectMake(10, 35, 50, 60);
     [self addSubview:self.cellImageBookCover];
     
@@ -95,6 +97,10 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
         }else{
             self.cellSubmitState.text = @"未提交";
         }
+        
+        NSString *fileIdStr = [taskEntity.fileId lowercaseString];
+        NSString *urlStr = [NSString stringWithFormat:KHBBookImgFormatUrl, fileIdStr, fileIdStr];
+        [self.cellImageBookCover setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"mainGrid_defaultBookCover"]];
     }
     //刷新cell
 //    [self setNeedsLayout];
@@ -127,7 +133,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"测试作业" onView:self.view];
+    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"我的作业" onView:self.view];
     [self.view addSubview:labTitle];
     
     [self addBackButton];
@@ -188,6 +194,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     NSString *bookIdStr = [bookDic objectForKey:@"id"];
                     taskEntity.bookId = [bookIdStr integerValue];
                     taskEntity.bookName = bookName;
+                    taskEntity.fileId = [bookDic objectForKey:@"file_id"];
                     
                     NSTimeInterval interval = [[dic objectForKey:@"modified_time"] doubleValue];
                     taskEntity.taskTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
@@ -198,7 +205,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     } else {
                         taskEntity.score = score;
                     }
-                    
+          
                     [self.taskEntityArr addObject:taskEntity];
                 }
                 if (self.taskEntityArr.count > 0) {
