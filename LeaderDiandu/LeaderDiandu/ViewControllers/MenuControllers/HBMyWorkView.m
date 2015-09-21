@@ -126,7 +126,9 @@ typedef enum : NSUInteger {
         [_descButton setBackgroundImage:[UIImage imageNamed:@"test-btn-sound-normal"] forState:UIControlStateNormal];
         [_descButton setBackgroundImage:[UIImage imageNamed:@"test-btn-sound-press"] forState:UIControlStateNormal];
     } else if (_questionType == HBQuestionTypeTAP) {
-        
+        CGSize size = [_descLabel.text sizeWithAttributes:@{NSFontAttributeName: _descLabel.font }];
+        rect.size.height = size.height;
+        _descLabel.frame = rect;
     }
 }
 

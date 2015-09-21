@@ -52,7 +52,7 @@
     
     controlY = CGRectGetMaxY(_progressView.frame) + 15;
     float controlH = rect.size.height - controlY;
-    _myWorkView = [[HBMyWorkView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH) Type:1];
+    _myWorkView = [[HBMyWorkView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     NSDictionary *dict = [_workManager getQuestion:0];
     [_myWorkView updateData:dict];
     [self.view addSubview:_myWorkView];
