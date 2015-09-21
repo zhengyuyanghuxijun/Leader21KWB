@@ -246,6 +246,9 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
                     studentEntity.displayName = [dic objectForKey:@"display_name"];
                     studentEntity.name = [dic objectForKey:@"name"];
                     studentEntity.phone = [dic objectForKey:@"phone"];
+                    if ([studentEntity.displayName isEqualToString:@""]) {
+                        studentEntity.displayName = studentEntity.phone;
+                    }
                     NSTimeInterval interval = [[dic objectForKey:@"vip_time"] doubleValue];
                     studentEntity.vipTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
                     studentEntity.className = [dic objectForKey:@"class_name"];
@@ -253,6 +256,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
                     studentEntity.studentId = [[dic objectForKey:@"id"] integerValue];
                     studentEntity.gender = [[dic objectForKey:@"gender"] integerValue];
                     studentEntity.type = [[dic objectForKey:@"type"] integerValue];
+                    studentEntity.accountStatus = [[dic objectForKey:@"account_status"] integerValue];
                     
                     [self.studentArr addObject:studentEntity];
                 }

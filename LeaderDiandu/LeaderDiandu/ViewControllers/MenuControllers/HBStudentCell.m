@@ -36,7 +36,7 @@
     
     //用户类型
     self.cellStuType = [[UILabel alloc] init];
-    self.cellStuType.frame = CGRectMake(10 + 50 + 10 + 70 + 10, 10, 70, 70/2 - 10);
+    self.cellStuType.frame = CGRectMake(10 + 50 + 10 + 70 + 10, 10, 110, 70/2 - 10);
     [self addSubview:self.cellStuType];
     
     //用户所属分组
@@ -58,7 +58,16 @@
 
     if (studentEntity) {
         self.cellName.text = studentEntity.displayName;
-        self.cellStuType.text = @"普通用户";
+        
+        //1：普通用户 2：VIP用户 3：VIP过期用户
+        if(1 == studentEntity.accountStatus){
+            self.cellStuType.text = @"普通用户";
+        }else if (2 == studentEntity.accountStatus){
+            self.cellStuType.text = @"VIP用户";
+        }else{
+            self.cellStuType.text = @"VIP过期用户";
+        }
+        
         if ([studentEntity.className isEqualToString:@""]) {
             self.cellGroup.text = @"无";
         }else{

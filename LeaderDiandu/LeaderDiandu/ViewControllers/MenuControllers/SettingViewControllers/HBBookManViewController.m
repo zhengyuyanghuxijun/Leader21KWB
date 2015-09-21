@@ -9,10 +9,70 @@
 #import "HBBookManViewController.h"
 #import "HBTitleView.h"
 #import "UIViewController+AddBackBtn.h"
-#import "Leader21SDKOC.h"
-#import "LeaderSDKUtil.h"
+#import "UIImageView+AFNetworking.h"
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
+#define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
+
+@implementation HBBookInfoCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self)
+    {
+        self.checked = NO;
+        [self initUI];
+    }
+    return self;
+}
+
+- (void) initUI
+{
+    //选择按钮
+    self.cellSelectedBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, (120 - 20)/2, 20, 20)];
+    [self.cellSelectedBtn setBackgroundImage:[UIImage imageNamed:@"selected_off"] forState:UIControlStateNormal];
+    [self.cellSelectedBtn addTarget:self action:@selector(selectedBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.cellSelectedBtn];
+    
+    //书籍封皮
+    self.cellBookCoverImg = [[UIImageView alloc] initWithFrame:CGRectMake(10 + 20 + 10, (120 - 100)/2, 80, 100)];
+    [self addSubview:self.cellBookCoverImg];
+    
+    //书籍名称
+    self.cellBookName = [[UILabel alloc] init];
+    self.cellBookName.frame = CGRectMake(self.cellBookCoverImg.frame.origin.x + self.cellBookCoverImg.frame.size.width + 10, (120 - 30)/2, 100, 30);
+    [self addSubview:self.cellBookName];
+    
+    //书籍大小
+    self.cellBookSize = [[UILabel alloc] init];
+    self.cellBookSize.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 50, (120 - 30)/2, 30, 30);
+    [self addSubview:self.cellBookSize];
+}
+
+-(void)updateFormData:(BookEntity *)aBookEntity;
+{
+    self.bookEntity = aBookEntity;
+    self.cellBookName.text = self.bookEntity.bookTitle;
+    self.cellBookSize.text = @"1M";
+    
+    NSString *fileIdStr = [self.bookEntity.fileId lowercaseString];
+    NSString *urlStr = [NSString stringWithFormat:KHBBookImgFormatUrl, fileIdStr, fileIdStr];
+    [self.cellBookCoverImg setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"mainGrid_defaultBookCover"]];
+}
+
+-(void)selectedBtnPressed
+{
+    if (self.checked) {
+        self.checked = NO;
+        [self.cellSelectedBtn setBackgroundImage:[UIImage imageNamed:@"selected_off"] forState:UIControlStateNormal];
+    }else{
+        self.checked = YES;
+        [self.cellSelectedBtn setBackgroundImage:[UIImage imageNamed:@"selected_on"] forState:UIControlStateNormal];
+    }
+}
+
+@end
 
 @interface HBBookManViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -21,6 +81,8 @@
 
 @property (nonatomic, strong) UILabel   *describeLabel;
 @property (nonatomic, assign) NSInteger localBookSize;
+
+@property (nonatomic, strong) NSMutableArray *bookEntityarr;
 
 @end
 
@@ -32,6 +94,7 @@
     if (self) {
         // Custom initialization
         self.localBookSize = 1;
+        self.bookEntityarr = [[NSMutableArray alloc] initWithCapacity:1];
     }
     return self;
 }
@@ -49,7 +112,7 @@
     [self addTableView];
     
     ////////////////////////////////////////////////////////////
-//    NSMutableArray *arr = [LEADERSDK getLocalBooks];
+    self.bookEntityarr = [LEADERSDK getLocalBooks];
 //    for (BookEntity *bookEntity in arr) {
 //        NSString *bookStr = bookEntity.bookTitle;
 //        
@@ -104,7 +167,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 2;
+    return self.bookEntityarr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -115,12 +178,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KHBBookManViewControllerCellReuseId"];
+    HBBookInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KHBBookManViewControllerCellReuseId"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"KHBBookManViewControllerCellReuseId"];
+        cell = [[HBBookInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"KHBBookManViewControllerCellReuseId"];
     }
     
-    cell.textLabel.text = @"我是一个程序猿！！！";
+    BookEntity *bookEntity = [self.bookEntityarr objectAtIndex:indexPath.row];
+    [cell updateFormData:bookEntity];
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textColor = [UIColor blackColor];

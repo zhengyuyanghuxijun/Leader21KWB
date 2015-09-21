@@ -142,7 +142,12 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
                 {
                     HBScoreEntity *scoreEntity = [[HBScoreEntity alloc] init];
                     NSString *displayName = [dic objectForKey:@"display_name"];
-                    scoreEntity.displayName = displayName;
+                    if ([displayName isEqualToString:@""]) {
+                        NSString *name = [dic objectForKey:@"name"];
+                        scoreEntity.displayName = name;
+                    }else{
+                        scoreEntity.displayName = displayName;
+                    }
                     
                     NSTimeInterval interval = [[dic objectForKey:@"created_time"] doubleValue];
                     scoreEntity.taskTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];

@@ -19,5 +19,6 @@
 @property (nonatomic, assign)NSInteger studentId;
 @property (nonatomic, assign)NSInteger gender;
 @property (nonatomic, assign)NSInteger type;
+@property (nonatomic, assign)NSInteger accountStatus; //1：普通用户 2：VIP用户 3：VIP过期用户
 
 @end
