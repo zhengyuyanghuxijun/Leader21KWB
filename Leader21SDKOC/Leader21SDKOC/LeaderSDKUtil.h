@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DownloadEntity.h"
+#import "LocalSettings.h"
 
 @interface LeaderSDKUtil : NSObject
 

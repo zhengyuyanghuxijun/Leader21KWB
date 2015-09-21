@@ -22,6 +22,11 @@
 @property (strong, nonatomic) BookEntity * bookEntity;
 
 -(void)updateFormData:(BookEntity *)aBookEntity;
+-(void)updateBookSize:(NSInteger)aBookSize;
+
+-(void)selectedBtnPressed;
+
+-(void)setSelectedBtnStatus:(BOOL)selected;
 
 @end
 
