@@ -175,6 +175,7 @@
 		18E57D661BA5520900198BE9 /* HBTestSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D651BA5520900198BE9 /* HBTestSelectViewController.m */; };
 		18E57D6C1BA5B25C00198BE9 /* HBStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D6B1BA5B25C00198BE9 /* HBStudentCell.m */; };
 		18EC49431B999B2D000900E4 /* ButtonGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC49421B999B2D000900E4 /* ButtonGridItemView.m */; };
+		18EED16A1BB12802004E5071 /* GuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EED1681BB12802004E5071 /* GuideView.m */; };
 		18F367E71BA90C7800EBFEC4 /* HBSetStuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367E61BA90C7800EBFEC4 /* HBSetStuController.m */; };
 		18F367F21BA9541100EBFEC4 /* HBSetStuGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */; };
 		18F367F51BA9542D00EBFEC4 /* HBSetStuOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */; };
@@ -470,6 +471,8 @@
 		18E57D6B1BA5B25C00198BE9 /* HBStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBStudentCell.m; sourceTree = "<group>"; };
 		18EC49411B999B2D000900E4 /* ButtonGridItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonGridItemView.h; sourceTree = "<group>"; };
 		18EC49421B999B2D000900E4 /* ButtonGridItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonGridItemView.m; sourceTree = "<group>"; };
+		18EED1681BB12802004E5071 /* GuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideView.m; sourceTree = "<group>"; };
+		18EED1691BB12802004E5071 /* GuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideView.h; sourceTree = "<group>"; };
 		18F367E51BA90C7800EBFEC4 /* HBSetStuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuController.h; sourceTree = "<group>"; };
 		18F367E61BA90C7800EBFEC4 /* HBSetStuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuController.m; sourceTree = "<group>"; };
 		18F367F01BA9541100EBFEC4 /* HBSetStuGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuGroupCell.h; sourceTree = "<group>"; };
@@ -546,6 +549,8 @@
 		0D7292C21B9E0650006FA7EA /* SettingViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18EED1691BB12802004E5071 /* GuideView.h */,
+				18EED1681BB12802004E5071 /* GuideView.m */,
 				0D7292C31B9E0650006FA7EA /* HBSettingViewController.h */,
 				0D7292C41B9E0650006FA7EA /* HBSettingViewController.m */,
 				18B712E71BAC5C9F0002AB43 /* HBBookManViewController.h */,
@@ -1274,6 +1279,7 @@
 				0DAAF4041B8D5F8900078285 /* UIViewController+AddBackBtn.m in Sources */,
 				0DD2146F1B95FFAC009E3DB9 /* HBSubscribeViewController.m in Sources */,
 				181E30801BA2C28600BBA92F /* HBContentDetailDB.m in Sources */,
+				18EED16A1BB12802004E5071 /* GuideView.m in Sources */,
 				0D74875C1B88C2C4007BE4CD /* HBGridItemView.m in Sources */,
 				0D7488941B8A2973007BE4CD /* NSString+MD5.mm in Sources */,
 				18A244771BA7295A00E1E703 /* HBCreatGroupController.m in Sources */,

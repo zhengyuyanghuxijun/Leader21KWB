@@ -12,6 +12,7 @@
 #import "HBBookManViewController.h"
 
 #import "HBServiceManager.h"
+#import "GuideView.h"
 
 static NSString * const KSettingViewControllerCellSwitchReuseId = @"KSettingViewControllerCellSwitchReuseId";
 static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingViewControllerCellAccessoryReuseId";
@@ -212,7 +213,7 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
     }else if (indexPath.row == 3){
         
     }else if (indexPath.row == 4){
-        
+        [GuideView showGuideViewAnimated:YES];
     }else if (indexPath.row == 5){
         
     }
