@@ -10,6 +10,7 @@
 #import "HBTitleView.h"
 #import "UIViewController+AddBackBtn.h"
 #import "HBBookManViewController.h"
+#import "HBAboutViewController.h"
 
 #import "HBServiceManager.h"
 #import "GuideView.h"
@@ -215,7 +216,9 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
     }else if (indexPath.row == 4){
         [GuideView showGuideViewAnimated:YES];
     }else if (indexPath.row == 5){
-        
+        HBAboutViewController *vc = [[HBAboutViewController alloc] init];
+        [vc setVersionStr:@"1.0.0 beta"];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
