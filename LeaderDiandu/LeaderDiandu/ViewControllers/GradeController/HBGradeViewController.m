@@ -87,7 +87,7 @@
         //获取所有可选套餐
         [self requestAllBookset];
     }
-    
+
     [_gridView reloadData];
 }
 
@@ -289,6 +289,7 @@
         [[HBServiceManager defaultManager] requestAllBookset:user token:token completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 //获取所有可选套餐成功
+                [self.contentEntityArr removeAllObjects];
                 NSArray *arr = [responseObject objectForKey:@"booksets"];
                 for (NSDictionary *dict in arr)
                 {
@@ -310,6 +311,7 @@
         if (contentEntity.bookId == currentID) {
 #if KUseLeaserSDK
             [LEADERSDK requestBookInfo:contentEntity.books onComplete:^(NSArray *booklist, NSInteger errorCode, NSString *errorMsg) {
+                [self.contentDetailEntityDic removeAllObjects];
                 [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
 //                [[HBContentDetailDB sharedInstance] updateHBContentDetail:booklist];
                 [_gridView reloadData];

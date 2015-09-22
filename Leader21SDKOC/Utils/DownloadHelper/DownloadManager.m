@@ -286,7 +286,7 @@ static DownloadManager *_instance;
 {
     [_finishedQueue.allValues enumerateObjectsUsingBlock:^(id obj,NSUInteger index,BOOL *stop){
         DownloadItem *item=obj;
-        NSString *url=[item.url description];
+        NSString *url=[item.originalURL description];
         
 
         if([_waittingQueue objectForKey:url])
