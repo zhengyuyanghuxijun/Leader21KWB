@@ -225,6 +225,14 @@
     }
 }
 
+- (void)bookDownloaded
+{
+    self.progressView.hidden = YES;
+    self.pauseView.hidden = YES;
+    
+    [self.downloadButton setTitle:@"已下载" forState:UIControlStateNormal];
+}
+
 - (UIImage*)imageWithColor:(UIColor*)color size:(CGSize)size
 {
     CGRect frame = CGRectZero;

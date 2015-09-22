@@ -27,5 +27,6 @@
 //更新数据
 - (void)updateFormData:(NSDictionary*)dic;
 - (void)resetWithBook:(BookEntity *)book;
+- (void)bookDownloaded;
 
 @end

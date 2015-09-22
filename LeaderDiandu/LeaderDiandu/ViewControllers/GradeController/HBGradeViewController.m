@@ -255,10 +255,12 @@
     NSString *url = [self.bookSelectedDic objectForKey:entity.fileId];
     itemView.bookDownloadUrl = url;
     
-//    if ([LEADERSDK isBookDownloaded:entity]) {
-//        //书籍已下载
+    if ([LEADERSDK isBookDownloaded:entity]) {
+        //书籍已下载
+        [itemView bookDownloaded];
+    }else{
         [itemView resetWithBook:entity];
-//    }
+    }
     return itemView;
 }
 
@@ -272,7 +274,8 @@
     BookEntity *entity = arr[index];
     [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
     itemView.bookDownloadUrl = entity.bookUrl;
-    [self.bookSelectedDic setObject:entity.bookUrl forKey:entity.fileId];
+    if (entity.bookUrl)
+        [self.bookSelectedDic setObject:entity.bookUrl forKey:entity.fileId];
 #else
     NSMutableDictionary *dic = [arr objectAtIndex:index];
     [LEADERSDK startDownloadBookByDict:dic];
