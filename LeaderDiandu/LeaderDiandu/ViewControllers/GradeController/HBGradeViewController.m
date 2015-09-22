@@ -39,6 +39,7 @@
 
 @property (nonatomic, strong)NSMutableArray *contentEntityArr;
 @property (nonatomic, strong)NSMutableDictionary *contentDetailEntityDic;
+@property (nonatomic, strong) NSMutableDictionary *bookSelectedDic; //key为fileId value是否已选择
 
 @property (nonatomic, copy) NSString* bookDownloadUrl;
 
@@ -53,6 +54,7 @@
         // Custom initialization
         self.contentEntityArr = [[NSMutableArray alloc] initWithCapacity:1];
         self.contentDetailEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
+        self.bookSelectedDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         currentID = 1;
     }
     return self;
@@ -249,10 +251,14 @@
                                  [dic objectForKey:@"BOOK_TITLE_CN"], TextGridItemView_BookName,[dic objectForKey:@"FILE_ID"], TextGridItemView_BookCover,@"mainGrid_download", TextGridItemView_downloadState, nil];
 #endif
     [itemView updateFormData:targetData];
-    if ([LEADERSDK isBookDownloaded:entity]) {
-        //书籍已下载
+    
+    NSString *url = [self.bookSelectedDic objectForKey:entity.fileId];
+    itemView.bookDownloadUrl = url;
+    
+//    if ([LEADERSDK isBookDownloaded:entity]) {
+//        //书籍已下载
         [itemView resetWithBook:entity];
-    }
+//    }
     return itemView;
 }
 
@@ -266,6 +272,7 @@
     BookEntity *entity = arr[index];
     [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
     itemView.bookDownloadUrl = entity.bookUrl;
+    [self.bookSelectedDic setObject:entity.bookUrl forKey:entity.fileId];
 #else
     NSMutableDictionary *dic = [arr objectAtIndex:index];
     [LEADERSDK startDownloadBookByDict:dic];

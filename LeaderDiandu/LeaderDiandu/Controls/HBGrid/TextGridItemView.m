@@ -116,7 +116,7 @@
     //下载按钮
     if ([dic objectForKey:TextGridItemView_downloadState])
     {
-        [self.downloadButton setBackgroundImage:[UIImage imageNamed:[dic objectForKey:TextGridItemView_downloadState]] forState:UIControlStateNormal];
+        [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
     }
     
     //书籍名称
@@ -165,7 +165,7 @@
 
 - (void)resetWithBook:(BookEntity *)book
 {
-    self.downloadButton.hidden = YES;
+//    self.downloadButton.hidden = YES;
     self.progressView.hidden = YES;
     self.pauseView.hidden = YES;
     
@@ -180,11 +180,23 @@
                 progress = 0.97f;
             }
         }
+        
+        if (progress == 1.0f) {
+            [self.downloadButton setTitle:@"已下载" forState:UIControlStateNormal];
+        }else{
+            [self.downloadButton setTitle:@"下载中" forState:UIControlStateNormal];
+        }
+        
+    }else{
+        [self.downloadButton setTitle:@"下载" forState:UIControlStateNormal];
+        self.pauseView.hidden = NO;
     }
+    
     if (book.download != nil && (progress < 1.0f || book.download.status.integerValue == downloadStatusUnZipping)) {
         if (s == downloadStatusPause) {
             self.progressView.hidden = YES;
             self.pauseView.hidden = NO;
+            [self.downloadButton setTitle:@"下载" forState:UIControlStateNormal];
             NSLog(@"download status:pause");
         }
         else {
