@@ -113,8 +113,9 @@
 @property (nonatomic, assign) BOOL  checkedAll; //是否全选
 @property (nonatomic, assign) NSInteger localBookSize; //本地图书总大小
 @property (nonatomic, strong) NSMutableArray *bookEntityarr; //本地图书数组
+@property (nonatomic, strong) NSMutableDictionary *bookEntityDic; //本地图书字典 key为fileId value为书籍对象
 @property (nonatomic, strong) NSMutableDictionary *bookSizeDic; //key为fileId value为书籍大小
-@property (nonatomic, strong) NSMutableDictionary *bookSelectedDic; //key为fileId value已选择书籍
+@property (nonatomic, strong) NSMutableDictionary *bookSelectedDic; //key为fileId value是否已选择
 
 @end
 
@@ -130,6 +131,7 @@
         self.bookEntityarr = [[NSMutableArray alloc] initWithCapacity:1];
         self.bookSizeDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         self.bookSelectedDic = [[NSMutableDictionary alloc] initWithCapacity:1];
+        self.bookEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
     }
     return self;
 }
@@ -221,12 +223,14 @@
     for (NSString *selectedStrKey in self.bookSelectedDic) {
         NSString *selectedStr = [self.bookSelectedDic objectForKey:selectedStrKey];
         if ([selectedStr isEqualToString:@"1"]) {
-            [selectedArr addObject:selectedStr];
+            [selectedArr addObject:[self.bookEntityDic objectForKey:selectedStrKey]];
         }
     }
 
     if (selectedArr.count > 0) {
         //删除本地书籍
+        [LEADERSDK deleteLocalBooks:selectedArr];
+        
         [self updateViewDate];
     }
 }
@@ -241,23 +245,32 @@
     self.selectedSizeLabel.text = @"0M";
     self.checkedAll = NO;
     
-    [_tableView reloadData];
+    if (self.bookEntityarr.count > 0) {
+        _tableView.hidden = NO;
+        [_tableView reloadData];
+    }else{
+        _tableView.hidden = YES;
+    }
 }
 
 -(void)loadBookDate
 {
     self.localBookSize = 0;
+    [self.bookSelectedDic removeAllObjects];
+    [self.bookEntityDic removeAllObjects];
+    [self.bookSizeDic removeAllObjects];
+    
     self.bookEntityarr = [LEADERSDK getLocalBooks];
     for (BookEntity *bookEntity in self.bookEntityarr) {
         NSString* fileName = [bookEntity.fileId lowercaseString];
         NSString* path = [LocalSettings bookPathForDefaultUser:fileName];
         long bookSize = [HBTestWorkManager fileSizeForDir:path];
         
+        [self.bookSelectedDic setObject:@"0" forKey:bookEntity.fileId];
+        [self.bookEntityDic setObject:bookEntity forKey:bookEntity.fileId];
         [self.bookSizeDic setObject:[NSString stringWithFormat:@"%ld", bookSize / 1024] forKey:bookEntity.fileId];
         
         self.localBookSize += bookSize / 1024;
-        
-        [self.bookSelectedDic setObject:@"0" forKey:bookEntity.fileId];
     }
 }
 
