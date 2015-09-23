@@ -93,7 +93,7 @@
 {
     [super layoutSubviews];
     
-    CGFloat progressY = -18;
+    CGFloat progressY = -10;
     self.progressView.frame = CGRectMake(0, progressY, self.bounds.size.width, self.bounds.size.height);
     self.pauseView.center = self.progressView.center;
 }

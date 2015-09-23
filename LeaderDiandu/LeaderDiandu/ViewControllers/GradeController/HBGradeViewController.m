@@ -97,7 +97,7 @@
 
 - (void)initMainGrid
 {
-    _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, 80, ScreenWidth, ScreenHeight)];
+    _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, ScreenWidth, ScreenHeight - KHBNaviBarHeight)];
     _gridView.delegate = self;
     _gridView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_gridView];
@@ -220,7 +220,7 @@
 
 - (CGFloat)gridView:(HBGridView *)gridView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return ScreenHeight / 3.0f;
+    return (ScreenHeight - KHBNaviBarHeight) / 3.0f;
 }
 
 // 获取特定位置的单元格视图
@@ -230,7 +230,7 @@
     TextGridItemView *itemView = (TextGridItemView *)[gridView dequeueReusableGridItemAtGridIndex:gridIndex ofGridCellView:gridCell];
     if (!itemView)
     {
-        itemView = [[TextGridItemView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, ScreenHeight/3)];
+        itemView = [[TextGridItemView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, (ScreenHeight - KHBNaviBarHeight)/3)];
     }
     
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
