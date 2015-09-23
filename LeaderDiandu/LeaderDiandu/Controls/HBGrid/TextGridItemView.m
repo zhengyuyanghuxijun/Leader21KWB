@@ -10,6 +10,8 @@
 #import "UIButton+AFNetworking.h"
 #import "UIViewAdditions.h"
 
+#import "Leader21SDKOC.h"
+
 #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 
 @interface TextGridItemView()

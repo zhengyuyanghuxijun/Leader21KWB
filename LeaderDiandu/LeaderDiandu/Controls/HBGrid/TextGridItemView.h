@@ -10,10 +10,10 @@
 #define TextGridItemView_BookName               @"bookName"
 #define TextGridItemView_BookCover              @"bookCover"
 
-
 #import "HBGridItemView.h"
 #import "MBProgressHUD.h"
-#import "Leader21SDKOC.h"
+
+@class BookEntity;
 
 @interface TextGridItemView : HBGridItemView
 
