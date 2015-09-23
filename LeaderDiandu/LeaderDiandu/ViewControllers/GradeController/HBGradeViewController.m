@@ -249,8 +249,7 @@
 #endif
     [itemView updateFormData:targetData];
     
-    NSString *url = [self.bookSelectedDic objectForKey:entity.fileId];
-    itemView.bookDownloadUrl = url;
+    itemView.bookDownloadUrl = [self.bookSelectedDic objectForKey:entity.fileId];
     
     if ([LEADERSDK isBookDownloaded:entity]) {
         //书籍已下载
@@ -269,10 +268,18 @@
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
 #if KUseLeaserSDK
     BookEntity *entity = arr[index];
-    [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
-    itemView.bookDownloadUrl = entity.bookUrl;
-    if (entity.bookUrl)
-        [self.bookSelectedDic setObject:entity.bookUrl forKey:entity.fileId];
+    
+    if (![self.bookSelectedDic objectForKey:entity.fileId] || [LEADERSDK isBookDownloaded:entity]) {
+        
+        [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
+        
+        itemView.bookDownloadUrl = entity.bookUrl;
+        if (entity.bookUrl){
+            [self.bookSelectedDic setObject:entity.bookUrl forKey:entity.fileId];
+        }
+    }
+    
+
 #else
     NSMutableDictionary *dic = [arr objectAtIndex:index];
     [LEADERSDK startDownloadBookByDict:dic];
