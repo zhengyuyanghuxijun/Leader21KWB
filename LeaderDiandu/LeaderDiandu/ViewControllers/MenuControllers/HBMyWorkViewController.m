@@ -39,7 +39,7 @@
 - (void)initUI
 {
     CGRect rect = self.view.frame;
-    float controlX = 12;
+    float controlX = 20;
     float controlY = KHBNaviBarHeight + 15;
     float controlW = rect.size.width - controlX*2;
     CGRect viewFrame = CGRectMake(controlX, controlY, controlW, 10);
@@ -50,9 +50,12 @@
     _progressView.transform = transform;
     [self.view addSubview:_progressView];
     
+    controlX = 0;
     controlY = CGRectGetMaxY(_progressView.frame) + 15;
+    controlW = rect.size.width;
     float controlH = rect.size.height - controlY;
     _myWorkView = [[HBMyWorkView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    _myWorkView.workManager = self.workManager;
     NSDictionary *dict = [_workManager getQuestion:0];
     [_myWorkView updateData:dict];
     [self.view addSubview:_myWorkView];

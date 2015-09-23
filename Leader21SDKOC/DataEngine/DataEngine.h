@@ -42,16 +42,6 @@ typedef void (^RequestBlock)(NSDictionary *sourceDic, NSInteger errorCode, NSStr
 @property (nonatomic, strong) MKNetworkEngine* networkEngine;
 @property (nonatomic, strong) NSString *mAppId;
 
-typedef enum {
-    downloadStatusNone = 0,
-    downloadStatusDownloading = Downloading,
-    downloadStatusDownloadFailed = DownloadFailed,
-    downloadStatusDownloadSuccess = DownloadFinished,
-    downloadStatusPause = DownloadPaused,
-    downloadStatusUnZipping = 8,
-    downloadStatusFinished = 10,
-}downloadStatus;
-
 + (DataEngine *)sharedInstance;
 
 - (BOOL)unZipFile:(NSString*)zipFile toPath:(NSString*)path;

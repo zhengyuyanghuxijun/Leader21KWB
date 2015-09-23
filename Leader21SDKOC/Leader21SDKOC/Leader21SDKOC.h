@@ -8,6 +8,26 @@
 
 #import <Foundation/Foundation.h>
 #import "BookEntity.h"
+#import "DownloadEntity.h"
+
+typedef enum  {
+    DownloadNotStart=0,
+    DownloadWait=1,
+    Downloading,
+    DownloadPaused,
+    DownloadFailed,
+    DownloadFinished,
+}DownloadItemState;
+
+typedef enum {
+    downloadStatusNone = 0,
+    downloadStatusDownloading = Downloading,
+    downloadStatusDownloadFailed = DownloadFailed,
+    downloadStatusDownloadSuccess = DownloadFinished,
+    downloadStatusPause = DownloadPaused,
+    downloadStatusUnZipping = 8,
+    downloadStatusFinished = 10,
+}downloadStatus;
 
 typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NSString* errorMsg);
 
@@ -69,7 +89,9 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
 - (void)bookPressed:(BookEntity*)book useNavigation:(UINavigationController *)navigation;
 - (void)bookPressedCheckDownload:(BookEntity*)book useNavigation:(UINavigationController *)navigation;
 
-- (NSMutableArray *) getLocalBooks;
+- (DownloadEntity *)getCoreDataDownload:(NSString *)url;
+
+- (NSMutableArray *)getLocalBooks;
 
 - (BOOL) deleteLocalBooks:(NSMutableArray *)books;
 

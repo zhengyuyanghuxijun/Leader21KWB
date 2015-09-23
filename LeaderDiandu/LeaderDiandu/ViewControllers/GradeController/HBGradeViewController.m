@@ -21,9 +21,6 @@
 #import "FTMenu.h"
 
 #import "Leader21SDKOC.h"
-#import "DownloadEntity.h"
-#import "DataEngine.h"
-#import "CoreDataHelper.h"
 
 #define KUseLeaserSDK  1
 

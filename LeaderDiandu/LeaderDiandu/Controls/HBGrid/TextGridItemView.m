@@ -10,11 +10,6 @@
 #import "UIButton+AFNetworking.h"
 #import "UIViewAdditions.h"
 
-#import "BookEntity.h"
-#import "DownloadEntity.h"
-#import "CoreDataHelper.h"
-#import "DataEngine.h"
-
 #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 
 @interface TextGridItemView()
@@ -147,9 +142,7 @@
         {
             
             if (book.download == nil) {
-                NSPredicate* pre = [NSPredicate predicateWithFormat:@"downloadUrl == %@", book.bookUrl];
-                DownloadEntity* download = (DownloadEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"DownloadEntity" withPredicate:pre];
-                book.download = download;
+                book.download = [[Leader21SDKOC sharedInstance] getCoreDataDownload:book.bookUrl];
             }
             [self resetWithBook:book];
         }

@@ -14,10 +14,18 @@
 
 #define KLeaderQuestion     @"questions"
 
+@interface HBTestWorkManager ()
+
+@property (nonatomic, strong)NSString *workPath;
+
+@end
+
 @implementation HBTestWorkManager
 
 - (void)parseTestWork:(NSString *)path
 {
+    self.workPath = path;
+    
     NSError *error = nil;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     //获取path下全部文件及文件夹
@@ -59,9 +67,38 @@
     self.workArray = workArray;
 }
 
+- (UIImage *)getPicture:(NSString *)fileName
+{
+    UIImage *image = nil;
+    if (fileName) {
+        NSString *imgFileName = [NSString stringWithFormat:@"%@/pics/%@", _workPath, fileName];
+        image = [UIImage imageWithContentsOfFile:imgFileName];
+    }
+    
+    return image;
+}
+
+- (NSArray *)getOptionArray:(NSDictionary *)dict
+{
+    NSMutableArray *optionArr = [[NSMutableArray alloc] init];
+    NSArray *array = dict[@"Options"];
+    for (NSString *option in array) {
+        if ([[option pathExtension] isEqualToString:@"jpg"]) {
+            NSString *imgFileName = [NSString stringWithFormat:@"%@/pics/%@", _workPath, option];
+            UIImage *image = [UIImage imageWithContentsOfFile:imgFileName];
+            [optionArr addObject:image];
+        } else {
+            [optionArr addObject:option];
+        }
+    }
+    
+    return optionArr;
+}
+
 - (NSDictionary *)getQuestion:(NSInteger)index
 {
-    if (index>0 && index<[self.workArray count]) {
+    if (index>=0 && index<[self.workArray count]) {
+        self.selIndex = index;
         return self.workArray[index];
     }
     return nil;

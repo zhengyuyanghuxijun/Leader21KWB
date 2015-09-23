@@ -13,8 +13,7 @@
 
 #import "HBGridItemView.h"
 #import "MBProgressHUD.h"
-
-@class BookEntity;
+#import "Leader21SDKOC.h"
 
 @interface TextGridItemView : HBGridItemView
 

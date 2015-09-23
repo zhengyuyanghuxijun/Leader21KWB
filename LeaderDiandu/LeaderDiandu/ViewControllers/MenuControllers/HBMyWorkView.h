@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class HBTestWorkManager;
+
 @interface HBMyWorkView : UIView
+
+@property (nonatomic, strong)HBTestWorkManager *workManager;
 
 - (id)initWithFrame:(CGRect)frame;
 

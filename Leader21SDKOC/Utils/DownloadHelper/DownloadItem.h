@@ -7,14 +7,7 @@
 //
 
 #import "ASIHTTPRequest.h"
-typedef enum  {
-    DownloadNotStart=0,
-    DownloadWait=1,
-    Downloading,
-    DownloadPaused,
-    DownloadFailed,
-    DownloadFinished,
-}DownloadItemState;
+#import "Leader21SDKOC.h"
 
 #define kDownloadItemStateChanaged @"DownloadItemStateChanged"
 #define kDownloadItemProgressChanged @"DownloadItemProgressChanged"

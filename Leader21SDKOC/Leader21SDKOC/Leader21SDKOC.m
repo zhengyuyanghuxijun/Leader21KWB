@@ -108,8 +108,18 @@
     vc.navBarTitle = book.bookTitle;
     vc.bookID = book.bookId.longLongValue;
     [navigationController pushViewController:vc animated:YES];
-
 }
+
+- (DownloadEntity *)getCoreDataDownload:(NSString *)url
+{
+    DownloadEntity* download = nil;
+    if (url) {
+        NSPredicate* pre = [NSPredicate predicateWithFormat:@"downloadUrl == %@", url];
+        download = (DownloadEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"DownloadEntity" withPredicate:pre];
+    }
+    return download;
+}
+
 - (NSMutableArray *)getLocalBooks
 {
     NSMutableArray* bookArray = [NSMutableArray arrayWithCapacity:64];

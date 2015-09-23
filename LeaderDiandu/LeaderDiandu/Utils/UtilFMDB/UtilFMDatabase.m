@@ -1,12 +1,8 @@
+
 #import "UtilFMDatabase.h"
 #import "unistd.h"
 #import <objc/runtime.h>
 //#import <Log.h>
-
-#ifdef NSLog
-#undef NSLog
-#define NSLog DB_LOG
-#endif
 
 @interface UtilFMDatabase ()
 
