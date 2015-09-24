@@ -88,20 +88,8 @@
                 
                 //根据套餐id返回该套餐对应的books字符串,转换为数组格式,便于操作
                 NSArray *booksIDsArr=[booksIDsStr componentsSeparatedByString:@","];
-                NSMutableArray *booklist = [[NSMutableArray alloc] initWithCapacity:1];
-                for (NSString *bookId in booksIDsArr) {
-                    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"bookId == %@", bookId];
-                    BookEntity *bookEntity = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
-                    if (bookEntity != nil) {
-                        [booklist addObject:bookEntity];
-                    }else{
-                        //获取书本列表
-                        [self requestContentDetailEntity];
-                        return ;
-                    }
-                }
-                [self.contentDetailEntityDic removeAllObjects];
-                [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+                [self getContentDetailEntitys:booksIDsArr];
+                
             }else{
                 //从服务器拉取套餐信息
                 [self requestAllBookset];
@@ -120,6 +108,25 @@
         [self requestAllBookset];
     }
 
+    [_gridView reloadData];
+}
+
+-(void)getContentDetailEntitys:(NSArray *)booksIDsArr
+{
+    NSMutableArray *booklist = [[NSMutableArray alloc] initWithCapacity:1];
+    for (NSString *bookId in booksIDsArr) {
+        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"bookId == %@", bookId];
+        BookEntity *bookEntity = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
+        if (bookEntity != nil) {
+            [booklist addObject:bookEntity];
+        }else{
+            //获取书本列表
+            [self requestContentDetailEntity];
+            return ;
+        }
+    }
+    [self.contentDetailEntityDic removeAllObjects];
+    [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
     [_gridView reloadData];
 }
 
@@ -159,29 +166,18 @@
 
 - (void) pushMenuItem:(KxMenuItem *)sender
 {
-//    if ([sender.title isEqualToString:@"1"]) {
-//        
-//    }else if([sender.title isEqualToString:@"2"]){
-//        
-//    }else if([sender.title isEqualToString:@"3"]){
-//        
-//    }else if([sender.title isEqualToString:@"4"]){
-//        
-//    }else if([sender.title isEqualToString:@"5"]){
-//        
-//    }else if([sender.title isEqualToString:@"6"]){
-//        
-//    }else if([sender.title isEqualToString:@"7"]){
-//        
-//    }else if([sender.title isEqualToString:@"8"]){
-//        
-//    }else if([sender.title isEqualToString:@"9"]){
-//        
-//    }
-
     currentID = [sender.title integerValue];
     //获取书本列表
-    [self requestContentDetailEntity];
+//    [self requestContentDetailEntity];
+    
+    //获取书本列表
+    for (HBContentEntity *contentEntity in self.contentEntityArr) {
+        if (contentEntity.bookId == currentID) {
+            //根据套餐id返回该套餐对应的books字符串,转换为数组格式,便于操作
+            NSArray *booksIDsArr=[contentEntity.books componentsSeparatedByString:@","];
+            [self getContentDetailEntitys:booksIDsArr];
+        }
+    }
 }
 
 - (void)initButton
@@ -341,21 +337,7 @@
                         if (contentEntity.bookId == currentID) {
                             //根据套餐id返回该套餐对应的books字符串,转换为数组格式,便于操作
                             NSArray *booksIDsArr=[contentEntity.books componentsSeparatedByString:@","];
-                            NSMutableArray *booklist = [[NSMutableArray alloc] initWithCapacity:1];
-                            for (NSString *bookId in booksIDsArr) {
-                                NSPredicate* predicate = [NSPredicate predicateWithFormat:@"bookId == %@", bookId];
-                                BookEntity *bookEntity = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
-                                if (bookEntity != nil) {
-                                    [booklist addObject:bookEntity];
-                                }else{
-                                    //获取书本列表
-                                    [self requestContentDetailEntity];
-                                    return ;
-                                }
-                            }
-                            [self.contentDetailEntityDic removeAllObjects];
-                            [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
-                            [_gridView reloadData];
+                            [self getContentDetailEntitys:booksIDsArr];
                         }
                     }
                 }else{
