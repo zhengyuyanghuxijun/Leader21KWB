@@ -53,6 +53,9 @@
         self.contentEntityArr = [[NSMutableArray alloc] initWithCapacity:1];
         self.contentDetailEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         currentID = 1;
+        
+        //用户登录成功通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:kNotification_LoginSuccess object:nil];
     }
     return self;
 }
@@ -62,16 +65,11 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    [LEADERSDK setAppKey:KAppKeyStudy];
-    
-    [self initMainView];
-    [self initMainGrid];
-    [self initButton];
-    
+-(void)LoginSuccess
+{
+    currentID = 1;
+    [self.contentEntityArr removeAllObjects];
+    [self.contentDetailEntityDic removeAllObjects];
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         /** type: 1 - 学生； 10 - 老师*/
@@ -96,6 +94,17 @@
             }
         }
     }
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    [LEADERSDK setAppKey:KAppKeyStudy];
+    
+    [self initMainView];
+    [self initMainGrid];
+    [self initButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated

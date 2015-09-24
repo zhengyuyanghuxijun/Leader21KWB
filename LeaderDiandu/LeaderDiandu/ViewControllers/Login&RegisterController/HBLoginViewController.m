@@ -114,6 +114,10 @@
             
             NSString *message = [NSString stringWithFormat:@"用户%@登录成功", phone];
             [MBHudUtil showTextView:message inView:nil];
+            
+            //用户登录成功后发送通知
+            [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_LoginSuccess object:nil];
+            
         } else {
             NSString *message = [NSString stringWithFormat:@"用户%@登录失败", phone];
             [MBHudUtil showTextView:message inView:nil];
