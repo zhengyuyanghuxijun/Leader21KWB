@@ -22,6 +22,8 @@
 
 #import "Leader21SDKOC.h"
 
+#import "CoreDataHelper.h"
+
 #define KUseLeaserSDK  1
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
@@ -36,7 +38,6 @@
 
 @property (nonatomic, strong)NSMutableArray *contentEntityArr;
 @property (nonatomic, strong)NSMutableDictionary *contentDetailEntityDic;
-@property (nonatomic, strong) NSMutableDictionary *bookSelectedDic; //key为fileId value是否已选择
 
 @property (nonatomic, copy) NSString* bookDownloadUrl;
 
@@ -51,7 +52,6 @@
         // Custom initialization
         self.contentEntityArr = [[NSMutableArray alloc] initWithCapacity:1];
         self.contentDetailEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
-        self.bookSelectedDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         currentID = 1;
     }
     return self;
@@ -71,8 +71,43 @@
     [self initMainView];
     [self initMainGrid];
     [self initButton];
-    //获取所有可选套餐
-    [self requestAllBookset];
+    
+    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+    if (dict) {
+        /** type: 1 - 学生； 10 - 老师*/
+        NSInteger type = [[dict objectForKey:@"type"] integerValue];
+        if (type == 1) {
+            //从服务器拉取套餐信息
+            [self requestAllBookset];
+        }else{
+            //登录成功先load套餐信息，如果套餐信息为空则去服务器拉取数据
+            NSString *booksIDsStr = [[HBContentListDB sharedInstance] booksidWithID:currentID];
+            if (booksIDsStr) {
+                [self.contentEntityArr removeAllObjects];
+                self.contentEntityArr = [[HBContentListDB sharedInstance] getAllContentEntitys];
+                
+                //根据套餐id返回该套餐对应的books字符串,转换为数组格式,便于操作
+                NSArray *booksIDsArr=[booksIDsStr componentsSeparatedByString:@","];
+                NSMutableArray *booklist = [[NSMutableArray alloc] initWithCapacity:1];
+                for (NSString *bookId in booksIDsArr) {
+                    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"bookId == %@", bookId];
+                    BookEntity *bookEntity = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
+                    if (bookEntity != nil) {
+                        [booklist addObject:bookEntity];
+                    }else{
+                        //获取书本列表
+                        [self requestContentDetailEntity];
+                        return ;
+                    }
+                }
+                [self.contentDetailEntityDic removeAllObjects];
+                [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+            }else{
+                //从服务器拉取套餐信息
+                [self requestAllBookset];
+            }
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -243,20 +278,22 @@
     NSDictionary * targetData = [[NSDictionary alloc]initWithObjectsAndKeys:
                                  bookTitle, TextGridItemView_BookName,entity.fileId, TextGridItemView_BookCover, @"mainGrid_download", TextGridItemView_downloadState, nil];
 #else
+    BookEntity *entity = [arr objectAtIndex:listIndex];
     NSMutableDictionary *dic = [arr objectAtIndex:listIndex];
     NSDictionary * targetData = [[NSDictionary alloc]initWithObjectsAndKeys:
                                  [dic objectForKey:@"BOOK_TITLE_CN"], TextGridItemView_BookName,[dic objectForKey:@"FILE_ID"], TextGridItemView_BookCover,@"mainGrid_download", TextGridItemView_downloadState, nil];
 #endif
+
     [itemView updateFormData:targetData];
     
-    itemView.bookDownloadUrl = [self.bookSelectedDic objectForKey:entity.fileId];
+    itemView.bookDownloadUrl = entity.bookUrl;
     
     if ([LEADERSDK isBookDownloaded:entity]) {
-        //书籍已下载
-        [itemView bookDownloaded];
+        [itemView bookDownloaded]; //书籍已下载
     }else{
         [itemView resetWithBook:entity];
     }
+    
     return itemView;
 }
 
@@ -266,24 +303,16 @@
 //    itemView.backgroundColor = [UIColor grayColor];
     
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
+    
 #if KUseLeaserSDK
     BookEntity *entity = arr[index];
-    
-    if (![self.bookSelectedDic objectForKey:entity.fileId] || [LEADERSDK isBookDownloaded:entity]) {
-        
-        [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
-        
-        itemView.bookDownloadUrl = entity.bookUrl;
-        if (entity.bookUrl){
-            [self.bookSelectedDic setObject:entity.bookUrl forKey:entity.fileId];
-        }
-    }
-    
-
+    [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
+    itemView.bookDownloadUrl = entity.bookUrl;
 #else
     NSMutableDictionary *dic = [arr objectAtIndex:index];
     [LEADERSDK startDownloadBookByDict:dic];
 #endif
+    
 }
 
 - (void)requestAllBookset
@@ -303,9 +332,38 @@
                     HBContentEntity *contentEntity = [[HBContentEntity alloc] initWithDictionary:dict];
                     [self.contentEntityArr addObject:contentEntity];
                 }
-                [[HBContentListDB sharedInstance] updateHBContentList:arr];
-                //获取书本列表
-                [self requestContentDetailEntity];
+ 
+                /** type: 1 - 学生； 10 - 老师*/
+                NSInteger type = [[dict objectForKey:@"type"] integerValue];
+                if (type == 1) {
+                    //获取书本列表
+                    for (HBContentEntity *contentEntity in self.contentEntityArr) {
+                        if (contentEntity.bookId == currentID) {
+                            //根据套餐id返回该套餐对应的books字符串,转换为数组格式,便于操作
+                            NSArray *booksIDsArr=[contentEntity.books componentsSeparatedByString:@","];
+                            NSMutableArray *booklist = [[NSMutableArray alloc] initWithCapacity:1];
+                            for (NSString *bookId in booksIDsArr) {
+                                NSPredicate* predicate = [NSPredicate predicateWithFormat:@"bookId == %@", bookId];
+                                BookEntity *bookEntity = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
+                                if (bookEntity != nil) {
+                                    [booklist addObject:bookEntity];
+                                }else{
+                                    //获取书本列表
+                                    [self requestContentDetailEntity];
+                                    return ;
+                                }
+                            }
+                            [self.contentDetailEntityDic removeAllObjects];
+                            [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+                            [_gridView reloadData];
+                        }
+                    }
+                }else{
+                    //老师获取所有可选套餐成功保存数据库
+                    [[HBContentListDB sharedInstance] updateHBContentList:arr];
+                    //获取书本列表
+                    [self requestContentDetailEntity];
+                }
             }
         }];
     }
@@ -320,7 +378,6 @@
             [LEADERSDK requestBookInfo:contentEntity.books onComplete:^(NSArray *booklist, NSInteger errorCode, NSString *errorMsg) {
                 [self.contentDetailEntityDic removeAllObjects];
                 [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
-//                [[HBContentDetailDB sharedInstance] updateHBContentDetail:booklist];
                 [_gridView reloadData];
             }];
 #else
@@ -334,7 +391,6 @@
                 }
             }];
 #endif
-            
             break;
         }
     }

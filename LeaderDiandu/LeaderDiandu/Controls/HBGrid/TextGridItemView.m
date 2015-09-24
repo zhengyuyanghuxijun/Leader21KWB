@@ -140,11 +140,13 @@
 //    if ([notification.object isKindOfClass:[BookEntity class]])
     {
         BookEntity* book = (BookEntity*)notification.object;
+
         if ([book.bookUrl isEqualToString:self.bookDownloadUrl])
         {
-            
             if (book.download == nil) {
                 book.download = [[Leader21SDKOC sharedInstance] getCoreDataDownload:book.bookUrl];
+                
+                DownloadEntity *bookEntity = book.download;
             }
             [self resetWithBook:book];
         }
@@ -160,11 +162,12 @@
 
 - (void)resetWithBook:(BookEntity *)book
 {
-//    self.downloadButton.hidden = YES;
     self.progressView.hidden = YES;
     self.pauseView.hidden = YES;
     
     CGFloat progress = book.download.progress.floatValue;
+    
+    DownloadEntity *bookEntity = book.download;
     
     // 是否正在下载
     NSInteger s = book.download.status.integerValue;
@@ -174,14 +177,8 @@
             if (progress > 0.97f) {
                 progress = 0.97f;
             }
-        }
-        
-        if (progress == 1.0f) {
-            [self.downloadButton setTitle:@"已下载" forState:UIControlStateNormal];
-        }else{
             [self.downloadButton setTitle:@"下载中" forState:UIControlStateNormal];
         }
-        
     }else{
         [self.downloadButton setTitle:@"下载" forState:UIControlStateNormal];
         self.pauseView.hidden = NO;

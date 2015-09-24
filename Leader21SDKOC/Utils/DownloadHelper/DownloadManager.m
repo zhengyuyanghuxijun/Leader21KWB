@@ -219,8 +219,7 @@ static DownloadManager *_instance;
         }
         book.download.progress = [NSNumber numberWithDouble:progress];
         book.download.status = [NSNumber numberWithInteger:downloadStatusDownloading];
-
-
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             // 下载中
             NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];

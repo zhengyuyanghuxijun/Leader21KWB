@@ -26,4 +26,11 @@
  */
 - (NSString*)booksidWithID:(NSInteger)ID;
 
+/**
+ *  获取所有套餐
+ *
+ *  @return 套餐数组
+ */
+- (NSMutableArray *)getAllContentEntitys;
+
 @end

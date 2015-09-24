@@ -142,6 +142,8 @@
             NSPredicate* predicate = [NSPredicate predicateWithFormat:@"fileId == %@", fileId];
             BookEntity* book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
             [bookArray addObject:book];
+            
+            NSInteger integerTmp = [CoreDataHelper getCountByEntryName:@"BookEntity"];
         }
     }
     return bookArray;
@@ -158,6 +160,14 @@
         if ([[NSFileManager defaultManager] fileExistsAtPath:path1]) {
             [[NSFileManager defaultManager] removeItemAtPath:path1 error:&error];
         }
+        
+//        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"fileId == %@", fileId];
+//        BookEntity* book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
+//        
+//        book.download.status = @(downloadStatusNone);
+//        book.download.progress = @(0.0);
+//        
+//        [CoreDataHelper save];
     }
     return YES;
 }

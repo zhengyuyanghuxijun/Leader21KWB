@@ -11,6 +11,7 @@
 #import "UtilFMDatabaseQueue.h"
 #import "FileUtil.h"
 #import "HBDataSaveManager.h"
+#import "HBContentEntity.h"
 
 //课本信息数据库保存路径
 #define HBContentList_DB_FILENAME  @"hbcontentlist.db"
@@ -146,6 +147,56 @@
      }];
     
     return booksIDStr;
+}
+
+/**
+ *  获取所有套餐
+ *
+ *  @return 套餐数组
+ */
+- (NSMutableArray *)getAllContentEntitys
+{
+    NSMutableArray *contentEntitys = [[NSMutableArray alloc]init];
+    
+    UtilFMDatabaseQueue * queue = [UtilFMDatabaseQueue databaseQueueWithPath:[self getHBContentListDBPath]];
+    [queue inDatabase:^(UtilFMDatabase *db)
+     {
+         NSString *strSql = @"SELECT * FROM contentList";
+         
+         UtilFMResultSet *result = [db executeQuery:strSql];
+         
+         while ([result next])
+         {
+             HBContentEntity *contentEntity = [[HBContentEntity alloc] init];
+             
+             contentEntity.bookId = [result intForColumn:@"bookID"];
+             contentEntity.total = [result intForColumn:@"total"];
+             contentEntity.name = [result stringForColumn:@"name"];
+             contentEntity.descriptionStr = [result stringForColumn:@"description"];
+             contentEntity.books = [result stringForColumn:@"books"];;
+             contentEntity.free_books = [result stringForColumn:@"freeBooks"];
+             
+             NSString *subscribedStr = [result stringForColumn:@"subscribed"];
+             NSString *substatusStr = [result stringForColumn:@"substatus"];
+             
+             if ([subscribedStr isEqualToString:@"1"]) {
+                 contentEntity.subscribed = YES;
+             }else{
+                 contentEntity.subscribed = NO;
+             }
+             
+             if ([substatusStr isEqualToString:@"1"]) {
+                 contentEntity.sub_status = YES;
+             }else{
+                 contentEntity.sub_status = NO;
+             }
+             
+             [contentEntitys addObject:contentEntity];
+         }
+         [db close];
+     }];
+    
+    return contentEntitys;
 }
 
 - (NSString *)getHBContentListDBPath
