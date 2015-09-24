@@ -161,13 +161,21 @@
             [[NSFileManager defaultManager] removeItemAtPath:path1 error:&error];
         }
         
-//        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"fileId == %@", fileId];
-//        BookEntity* book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
-//        
+        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"fileId == %@", fileId];
+        BookEntity* book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
+        
+        book.download.status = @(downloadStatusNone);
+        book.download.progress = @(0.0);
+        
+        book.bookUrl = nil;
+        book.download = nil;
+        book.hasDown = nil;
+        
+//        book.hasDown = [NSNumber numberWithBool:NO];
+//        book.download.progress = @(0.0f);
 //        book.download.status = @(downloadStatusNone);
-//        book.download.progress = @(0.0);
-//        
-//        [CoreDataHelper save];
+
+        [CoreDataHelper save];
     }
     return YES;
 }

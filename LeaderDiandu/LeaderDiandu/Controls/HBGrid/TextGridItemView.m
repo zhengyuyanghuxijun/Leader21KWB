@@ -137,92 +137,52 @@
 
 - (void)updateProgress:(NSNotification*)notification
 {
-//    if ([notification.object isKindOfClass:[BookEntity class]])
-    {
-        BookEntity* book = (BookEntity*)notification.object;
-
-        if ([book.bookUrl isEqualToString:self.bookDownloadUrl])
-        {
-            if (book.download == nil) {
-                book.download = [[Leader21SDKOC sharedInstance] getCoreDataDownload:book.bookUrl];
-                
-                DownloadEntity *bookEntity = book.download;
-            }
-            [self resetWithBook:book];
+    BookEntity* book = (BookEntity*)notification.object;
+    NSInteger status = book.download.status.integerValue;
+    
+    if ([book.bookUrl isEqualToString:self.bookDownloadUrl]){
+        if (status == downloadStatusFinished) {
+            [self bookDownloaded:book];
+        }else if(status == downloadStatusDownloading){
+            [self bookDownloading:book];
+        }else if (status == downloadStatusNone){
+            [self bookUnDownload:book];
         }
-    }
-    
-    //    NSInteger per =  [[notification.userInfo objectForKey:@"progress"] integerValue];
-    //
-    //    if (per == 1) {
-    //        [LEADERSDK readBook:(BookEntity*)notification.object useNavigation:self.navigationController];
-    //
-    //    }
-}
-
-- (void)resetWithBook:(BookEntity *)book
-{
-    self.progressView.hidden = YES;
-    self.pauseView.hidden = YES;
-    
-    CGFloat progress = book.download.progress.floatValue;
-    
-    DownloadEntity *bookEntity = book.download;
-    
-    // 是否正在下载
-    NSInteger s = book.download.status.integerValue;
-    NSLog(@"download status:%ld, progress:%f", (long)s, progress);
-    if (book.download != nil) {
-        if (book.download.status.integerValue != downloadStatusFinished) {
-            if (progress > 0.97f) {
-                progress = 0.97f;
-            }
-            [self.downloadButton setTitle:@"下载中" forState:UIControlStateNormal];
-        }
-    }else{
-        [self.downloadButton setTitle:@"下载" forState:UIControlStateNormal];
-        self.pauseView.hidden = NO;
-    }
-    
-    if (book.download != nil && (progress < 1.0f || book.download.status.integerValue == downloadStatusUnZipping)) {
-        if (s == downloadStatusPause) {
-            self.progressView.hidden = YES;
-            self.pauseView.hidden = NO;
-            [self.downloadButton setTitle:@"下载" forState:UIControlStateNormal];
-            NSLog(@"download status:pause");
-        }
-        else {
-            if (progress < 0.005) {
-                progress = 0.005;
-            }
-            if (downloadStatusUnZipping == book.download.status.integerValue) {
-                progress = 0.97f;
-            }
-            else if (progress == 1.0f) {
-                book.download.status = @(downloadStatusFinished);
-            }
-            self.progressView.hidden = NO;
-            self.pauseView.hidden = YES;
-            self.progressView.alpha = 1.0f;
-            self.progressView.progress = progress;
-            NSLog(@"download status:downing");
-        }
-        //        if (book.hasBook.boolValue) {
-        //            itemView.readProgressLabel.text = [NSString stringWithFormat:@"Read %d%%", book.readProgress.integerValue];
-        //            itemView.readProgressLabel.hidden = NO;
-        //        }
-        //        else {
-        //            itemView.readProgressLabel.hidden = YES;
-        //        }
     }
 }
 
-- (void)bookDownloaded
+- (void)bookDownloaded:(BookEntity *)book
 {
+    //已下载
     self.progressView.hidden = YES;
     self.pauseView.hidden = YES;
     
     [self.downloadButton setTitle:@"已下载" forState:UIControlStateNormal];
+}
+
+- (void)bookDownloading:(BookEntity *)book
+{
+    //正在下载
+    CGFloat progress = book.download.progress.floatValue;
+    if (progress <= 0.005f || progress >= 1.0f) {
+        progress = 0.005f;
+    }
+    NSLog(@"download progress:%f", progress);
+
+    [self.downloadButton setTitle:@"下载中" forState:UIControlStateNormal];
+
+    self.pauseView.hidden = YES;
+    self.progressView.hidden = NO;
+    self.progressView.alpha = 1.0f;
+    self.progressView.progress = progress;
+}
+
+- (void)bookUnDownload:(BookEntity *)book
+{
+    //未下载
+    self.progressView.hidden = YES;
+    self.pauseView.hidden = NO;
+    [self.downloadButton setTitle:@"下载" forState:UIControlStateNormal];
 }
 
 - (UIImage*)imageWithColor:(UIColor*)color size:(CGSize)size

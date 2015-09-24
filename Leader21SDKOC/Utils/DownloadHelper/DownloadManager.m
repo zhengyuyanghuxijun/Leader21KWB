@@ -287,7 +287,6 @@ static DownloadManager *_instance;
         DownloadItem *item=obj;
         NSString *url=[item.originalURL description];
         
-
         if([_waittingQueue objectForKey:url])
         {
             [_waittingQueue removeObjectForKey:url];

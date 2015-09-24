@@ -19,12 +19,8 @@
 #import "HBContentDetailDB.h"
 #import "HBContentListDB.h"
 #import "FTMenu.h"
-
 #import "Leader21SDKOC.h"
-
 #import "CoreDataHelper.h"
-
-#define KUseLeaserSDK  1
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
 
@@ -38,8 +34,6 @@
 
 @property (nonatomic, strong)NSMutableArray *contentEntityArr;
 @property (nonatomic, strong)NSMutableDictionary *contentDetailEntityDic;
-
-@property (nonatomic, copy) NSString* bookDownloadUrl;
 
 @end
 
@@ -176,8 +170,6 @@
 - (void) pushMenuItem:(KxMenuItem *)sender
 {
     currentID = [sender.title integerValue];
-    //获取书本列表
-//    [self requestContentDetailEntity];
     
     //获取书本列表
     for (HBContentEntity *contentEntity in self.contentEntityArr) {
@@ -274,7 +266,7 @@
     }
     
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
-#if KUseLeaserSDK
+
     BookEntity *entity = arr[listIndex];
     NSString *bookTitle = entity.bookTitleCN;
     if ([[HBDataSaveManager defaultManager] showEnBookName]) {
@@ -282,21 +274,17 @@
     }
     NSDictionary * targetData = [[NSDictionary alloc]initWithObjectsAndKeys:
                                  bookTitle, TextGridItemView_BookName,entity.fileId, TextGridItemView_BookCover, @"mainGrid_download", TextGridItemView_downloadState, nil];
-#else
-    BookEntity *entity = [arr objectAtIndex:listIndex];
-    NSMutableDictionary *dic = [arr objectAtIndex:listIndex];
-    NSDictionary * targetData = [[NSDictionary alloc]initWithObjectsAndKeys:
-                                 [dic objectForKey:@"BOOK_TITLE_CN"], TextGridItemView_BookName,[dic objectForKey:@"FILE_ID"], TextGridItemView_BookCover,@"mainGrid_download", TextGridItemView_downloadState, nil];
-#endif
 
     [itemView updateFormData:targetData];
     
     itemView.bookDownloadUrl = entity.bookUrl;
     
     if ([LEADERSDK isBookDownloaded:entity]) {
-        [itemView bookDownloaded]; //书籍已下载
+        [itemView bookDownloaded:entity];   //已下载
+    }else if([LEADERSDK isBookDownloading:entity]){
+        [itemView bookDownloading:entity];  //正在下载
     }else{
-        [itemView resetWithBook:entity];
+        [itemView bookUnDownload:entity];   //未下载
     }
     
     return itemView;
@@ -308,16 +296,10 @@
 //    itemView.backgroundColor = [UIColor grayColor];
     
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
-    
-#if KUseLeaserSDK
+
     BookEntity *entity = arr[index];
     [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
     itemView.bookDownloadUrl = entity.bookUrl;
-#else
-    NSMutableDictionary *dic = [arr objectAtIndex:index];
-    [LEADERSDK startDownloadBookByDict:dic];
-#endif
-    
 }
 
 - (void)requestAllBookset
@@ -365,23 +347,13 @@
     //获取书本列表
     for (HBContentEntity *contentEntity in self.contentEntityArr) {
         if (contentEntity.bookId == currentID) {
-#if KUseLeaserSDK
+
             [LEADERSDK requestBookInfo:contentEntity.books onComplete:^(NSArray *booklist, NSInteger errorCode, NSString *errorMsg) {
                 [self.contentDetailEntityDic removeAllObjects];
                 [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
                 [_gridView reloadData];
             }];
-#else
-            [[HBContentManager defaultManager] requestBookList:contentEntity.books completion:^(id responseObject, NSError *error) {
-                if (responseObject){
-                    //获取书本列表成功
-                    NSArray *arr = [responseObject objectForKey:@"books"];
-                    [self.contentDetailEntityDic setObject:arr forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
-                    [[HBContentDetailDB sharedInstance] updateHBContentDetail:arr];
-                    [_gridView reloadData];
-                }
-            }];
-#endif
+            
             break;
         }
     }
