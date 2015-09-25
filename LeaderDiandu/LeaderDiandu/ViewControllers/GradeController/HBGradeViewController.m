@@ -62,8 +62,6 @@
 -(void)LoginSuccess
 {
     currentID = 1;
-    [self.contentEntityArr removeAllObjects];
-    [self.contentDetailEntityDic removeAllObjects];
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         /** type: 1 - 学生； 10 - 老师*/
@@ -105,11 +103,11 @@
 {
     [super viewWillAppear:animated];
     
-    //token失效后再进来需要重新获取数据
-    if ([self.contentEntityArr count] == 0) {
-        //获取所有可选套餐
-        [self requestAllBookset];
-    }
+//    //token失效后再进来需要重新获取数据
+//    if ([self.contentEntityArr count] == 0) {
+//        //获取所有可选套餐
+//        [self requestAllBookset];
+//    }
 
     [_gridView reloadData];
 }
@@ -142,10 +140,16 @@
 
 - (void)initMainGrid
 {
-    _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, ScreenWidth, ScreenHeight - KHBNaviBarHeight)];
-    _gridView.delegate = self;
-    _gridView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_gridView];
+    if (_gridView == nil) {
+        _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, ScreenWidth, ScreenHeight - KHBNaviBarHeight)];
+        _gridView.delegate = self;
+        _gridView.backgroundColor = [UIColor clearColor];
+        [self.view addSubview:_gridView];
+    }
+//    _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, ScreenWidth, ScreenHeight - KHBNaviBarHeight)];
+//    _gridView.delegate = self;
+//    _gridView.backgroundColor = [UIColor clearColor];
+//    [self.view addSubview:_gridView];
 }
 
 -(void)showPullView
@@ -298,8 +302,13 @@
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
 
     BookEntity *entity = arr[index];
-    [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
-    itemView.bookDownloadUrl = entity.bookUrl;
+    
+    if([LEADERSDK isBookDownloading:entity]){
+        //正在下载，不处理
+    }else{
+        [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
+        itemView.bookDownloadUrl = entity.bookUrl;
+    }
 }
 
 - (void)requestAllBookset
@@ -349,8 +358,29 @@
         if (contentEntity.bookId == currentID) {
 
             [LEADERSDK requestBookInfo:contentEntity.books onComplete:^(NSArray *booklist, NSInteger errorCode, NSString *errorMsg) {
+                
+                NSMutableArray *booklistTmp = [[NSMutableArray alloc] initWithCapacity:1];
+                for (BookEntity *entityTmp in booklist) {
+                    [booklistTmp addObject:entityTmp];
+                }
+                
+                //如果缓存中有数据，先不要清空，可能这个时候缓存中的数据保存着正在下载书籍的URL等信息
+                if (self.contentDetailEntityDic.count > 0) {
+                    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
+                    
+                    for (BookEntity *entity in arr) {
+                        for (NSInteger index = 0; index < booklistTmp.count; index++) {
+                            BookEntity *newEntity = [booklistTmp objectAtIndex:index];
+                            if ([entity.fileId isEqualToString:newEntity.fileId]) {
+                                [booklistTmp replaceObjectAtIndex:index withObject:entity];
+                                break;
+                            }
+                        }
+                    }
+                }
+                
                 [self.contentDetailEntityDic removeAllObjects];
-                [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+                [self.contentDetailEntityDic setObject:booklistTmp forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
                 [_gridView reloadData];
             }];
             
