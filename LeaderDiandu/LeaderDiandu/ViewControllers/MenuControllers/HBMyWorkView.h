@@ -10,9 +10,16 @@
 
 @class HBTestWorkManager;
 
+@protocol HBMyWorkViewDelegate <NSObject>
+
+- (void)onTouchFinishedButton;
+
+@end
+
 @interface HBMyWorkView : UIView
 
 @property (nonatomic, strong)HBTestWorkManager *workManager;
+@property (nonatomic) id<HBMyWorkViewDelegate> delegate;
 
 - (id)initWithFrame:(CGRect)frame;
 

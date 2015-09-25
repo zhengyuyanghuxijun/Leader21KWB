@@ -56,6 +56,7 @@
 		0D7A768F1B91E33900BC50A0 /* HBContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A768E1B91E33900BC50A0 /* HBContentManager.m */; };
 		0D7A76921B92064100BC50A0 /* HBBaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A76911B92064100BC50A0 /* HBBaseEntity.m */; };
 		0D7A76951B92176C00BC50A0 /* HBUserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A76941B92176C00BC50A0 /* HBUserEntity.m */; };
+		0D9E04FD1BB52B1500055203 /* HBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9E04FC1BB52B1500055203 /* HBOptionView.m */; };
 		0DAAF4041B8D5F8900078285 /* UIViewController+AddBackBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAF4031B8D5F8900078285 /* UIViewController+AddBackBtn.m */; };
 		0DAAF4071B8D651500078285 /* HBTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAF4061B8D651500078285 /* HBTitleView.m */; };
 		0DAAF40E1B8E01EB00078285 /* HBGradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAF40D1B8E01EB00078285 /* HBGradeViewController.m */; };
@@ -287,6 +288,8 @@
 		0D7A76911B92064100BC50A0 /* HBBaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBaseEntity.m; sourceTree = "<group>"; };
 		0D7A76931B92176C00BC50A0 /* HBUserEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBUserEntity.h; sourceTree = "<group>"; };
 		0D7A76941B92176C00BC50A0 /* HBUserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBUserEntity.m; sourceTree = "<group>"; };
+		0D9E04FB1BB52B1500055203 /* HBOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBOptionView.h; sourceTree = "<group>"; };
+		0D9E04FC1BB52B1500055203 /* HBOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBOptionView.m; sourceTree = "<group>"; };
 		0DAAF4021B8D5F8900078285 /* UIViewController+AddBackBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AddBackBtn.h"; sourceTree = "<group>"; };
 		0DAAF4031B8D5F8900078285 /* UIViewController+AddBackBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AddBackBtn.m"; sourceTree = "<group>"; };
 		0DAAF4051B8D651500078285 /* HBTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTitleView.h; sourceTree = "<group>"; };
@@ -545,6 +548,8 @@
 				0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */,
 				0D3F6D1A1BAEA41A005B4358 /* HBMyWorkView.h */,
 				0D3F6D1B1BAEA41A005B4358 /* HBMyWorkView.m */,
+				0D9E04FB1BB52B1500055203 /* HBOptionView.h */,
+				0D9E04FC1BB52B1500055203 /* HBOptionView.m */,
 			);
 			name = HBMyWorkViewControllers;
 			sourceTree = "<group>";
@@ -1264,6 +1269,7 @@
 				0D7488921B8A2973007BE4CD /* NSData+MD5.m in Sources */,
 				181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */,
 				0DFBD3E51BA86839003DB2D1 /* TextGridItemView.m in Sources */,
+				0D9E04FD1BB52B1500055203 /* HBOptionView.m in Sources */,
 				18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */,
 				0DBE35351B8CB8B500179237 /* DataCheckUtil.m in Sources */,
 				0DB537271B8F5DEE0023A3F7 /* AFHTTPRequestOperationManager.m in Sources */,

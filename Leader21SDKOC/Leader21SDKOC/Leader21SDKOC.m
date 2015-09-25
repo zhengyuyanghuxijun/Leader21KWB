@@ -35,6 +35,9 @@
 {
     self.mAppId = appKey;
     DE.mAppId = appKey;
+    
+    NSManagedObjectContext *managedObjectContext = [[CoreDataEngine sharedInstance] managedObjectContext];
+    [self setManagedObjectContext:managedObjectContext];
 }
 
 - (NSString *)appKey

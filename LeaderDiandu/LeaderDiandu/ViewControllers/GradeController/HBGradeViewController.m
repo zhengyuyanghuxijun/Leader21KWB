@@ -262,15 +262,14 @@
 // 获取特定位置的单元格视图
 - (HBGridItemView *)gridView:(HBGridView *)gridView inGridCell:(HBGridCellView *)gridCell gridItemViewAtGridIndex:(GridIndex *)gridIndex listIndex:(NSInteger)listIndex
 {
-    NSLog(@"list index:%ld", listIndex);
+    NSLog(@"list index:%ld", (long)listIndex);
     TextGridItemView *itemView = (TextGridItemView *)[gridView dequeueReusableGridItemAtGridIndex:gridIndex ofGridCellView:gridCell];
     if (!itemView)
     {
         itemView = [[TextGridItemView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, (ScreenHeight - KHBNaviBarHeight)/3)];
     }
     
-    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
-
+    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
     BookEntity *entity = arr[listIndex];
     NSString *bookTitle = entity.bookTitleCN;
     if ([[HBDataSaveManager defaultManager] showEnBookName]) {
@@ -299,7 +298,7 @@
     TextGridItemView *itemView = (TextGridItemView *)[gridView gridItemViewAtIndex:index];
 //    itemView.backgroundColor = [UIColor grayColor];
     
-    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
+    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
 
     BookEntity *entity = arr[index];
     

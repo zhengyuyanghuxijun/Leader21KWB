@@ -8,6 +8,7 @@
 
 #import "HBMyWorkView.h"
 #import "HBTestWorkManager.h"
+#import "HBOptionView.h"
 
 #define KTagSelectionBegin  1527
 
@@ -23,7 +24,7 @@ typedef enum : NSUInteger {
     HBSelectionTypeText4,
 } HBSelectionType;
 
-@interface HBMyWorkView ()
+@interface HBMyWorkView () <HBOptionViewDelegate>
 {
     UILabel *_titleLabel;
     UILabel *_descLabel;
@@ -38,11 +39,12 @@ typedef enum : NSUInteger {
     UIButton *_rightButton;
     
     UIView *_questionView;
-    UIView *_selectionView;
     
     HBQuestionType _questionType;
     HBSelectionType _selectionType;
 }
+
+@property (nonatomic, strong)UIView *selectionView;
 
 @end
 
@@ -70,15 +72,15 @@ typedef enum : NSUInteger {
     controlH = 40;
     controlY = frame.size.height-16-controlH;
     _finishButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-    [_finishButton.layer setMasksToBounds:YES];
-    [_finishButton.layer setCornerRadius:5.0];
-    _finishButton.backgroundColor = [UIColor greenColor];
+//    [_finishButton.layer setMasksToBounds:YES];
+//    [_finishButton.layer setCornerRadius:5.0];
+//    _finishButton.backgroundColor = [UIColor greenColor];
+    [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-finish-normal"] forState:UIControlStateNormal];
+    [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-finish-press"] forState:UIControlStateHighlighted];
     _finishButton.titleLabel.font = font;
+    [_finishButton setTitle:@"下一题" forState:UIControlStateNormal];
+    [_finishButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_finishButton];
-    
-    float selY = CGRectGetMaxY(_questionView.frame) + 28;
-    controlH = controlY - selY - 28;
-    [self initSelectionView:CGRectMake(controlX, controlY, controlW, controlH)];
 }
 
 - (void)initQuestionView:(CGRect)frame
@@ -115,37 +117,50 @@ typedef enum : NSUInteger {
     [_questionView addSubview:_descButton];
 }
 
-- (void)initSelectionView:(CGRect)frame
+- (void)initSelectionView:(NSArray *)optionArray
 {
-    _selectionView = [[UIView alloc] initWithFrame:frame];
-    [self addSubview:_selectionView];
+    if (_selectionView) {
+        NSArray *subViews = [_selectionView subviews];
+        for (UIView *view in subViews) {
+            [view removeFromSuperview];
+        }
+    } else {
+        CGRect rect = _questionView.frame;
+        float selY = CGRectGetMaxY(rect) + 28;
+        float controlH = CGRectGetMinY(_finishButton.frame) - selY - 28;
+        _selectionView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(rect), selY, CGRectGetWidth(rect), controlH)];
+        [self addSubview:_selectionView];
+    }
     
     float controlW = 110;
     float controlH = 80;
     float controlX = 0;
+    CGRect frame = _selectionView.frame;
     float controlY = (frame.size.height-controlH) / 2;
-    if (_selectionType == HBSelectionTypePic) {
-        UIImageView *img1 = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-        img1.tag = KTagSelectionBegin;
-        [_selectionView addSubview:img1];
-        controlX = frame.size.width - controlW;
-        UIImageView *img2 = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-        img2.tag = KTagSelectionBegin+1;
-        [_selectionView addSubview:img2];
-    } else if (_selectionType == HBSelectionTypeText) {
-        controlW = 140;
-        controlH = 60;
-        [self createSelectionButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin];
-        controlX = frame.size.width - controlW;
-        [self createSelectionButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin+1];
-        
+    NSInteger count = [optionArray count];
+    for (NSInteger i=0; i<count; i++) {
+        id obj = optionArray[i];
+        if (i%2 == 1) {
+            controlX = frame.size.width - controlW;;
+        }
+        if ([obj isKindOfClass:[UIImage class]]) {
+            HBOptionView *view = [[HBOptionView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH) image:obj];
+            view.tag = KTagSelectionBegin+i;
+            view.delegate = self;
+            [_selectionView addSubview:view];
+        } else {
+            controlW = 140;
+            controlH = 60;
+            [self createSelectionButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin+i title:obj];
+        }
     }
 }
 
-- (void)createSelectionButton:(CGRect)frame tag:(NSInteger)tag
+- (void)createSelectionButton:(CGRect)frame tag:(NSInteger)tag title:(NSString *)title
 {
     UIButton *button = [[UIButton alloc] initWithFrame:frame];
     button.tag = tag;
+    [button setTitle:title forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-normal"] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-press"] forState:UIControlStateHighlighted];
     [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-selected"] forState:UIControlStateSelected];
@@ -175,6 +190,7 @@ typedef enum : NSUInteger {
     }
     
     NSArray *optionsArr = [_workManager getOptionArray:dict];
+    [self initSelectionView:optionsArr];
 }
 
 - (void)updateTitle:(NSString *)type
@@ -218,6 +234,27 @@ typedef enum : NSUInteger {
         _selectionType = HBSelectionTypePic;
     }
     _titleLabel.text = [NSString stringWithFormat:@"%ld.%@", _workManager.selIndex, title];
+}
+
+- (void)buttonAction:(id)sender
+{
+    
+}
+
+#pragma ---HBOptionViewDelegate---
+
+- (void)setOptionViewSelected:(HBOptionView *)optionView
+{
+    NSArray *subViews = [_selectionView subviews];
+    for (UIView *view in subViews) {
+        if ([view isKindOfClass:[HBOptionView class]]) {
+            if (view == optionView) {
+                [optionView setSelected:YES];
+            } else {
+                [(HBOptionView *)view setSelected:NO];
+            }
+        }
+    }
 }
 
 /*

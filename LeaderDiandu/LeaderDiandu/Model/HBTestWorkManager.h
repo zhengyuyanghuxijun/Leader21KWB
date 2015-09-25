@@ -11,7 +11,7 @@
 @interface HBTestWorkManager : NSObject
 
 @property (nonatomic, strong)NSArray *workArray;
-@property (nonatomic, assign)NSInteger selIndex;
+@property (nonatomic, assign)long selIndex;
 
 - (void)parseTestWork:(NSString *)path;
 
