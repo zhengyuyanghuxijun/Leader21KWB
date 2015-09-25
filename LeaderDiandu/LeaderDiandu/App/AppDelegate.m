@@ -16,6 +16,8 @@
 #import "HBLoginViewController.h"
 #import "HBGradeViewController.h"
 
+#import "Constants.h"
+
 @interface AppDelegate ()
 {
     DHSlideMenuController *menuVC;
@@ -63,6 +65,9 @@
     self.loginVC = [sb instantiateViewControllerWithIdentifier:@"HBLoginViewController"];
     if (!islogined) {
         [self.globalNavi pushViewController:_loginVC animated:NO];
+    }else{
+        //用户登录成功后发送通知
+        [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_LoginSuccess object:nil];
     }
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
