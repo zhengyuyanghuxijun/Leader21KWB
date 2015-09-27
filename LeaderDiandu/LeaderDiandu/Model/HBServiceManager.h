@@ -338,7 +338,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param question_stat 为一个JSON数组格式的题目统计信息，包括每道题的知识点、难度、能力点、结果...等原始数据： [{knowledge:2, ability: 1, difficulty: 3, score: 0/1}]， 其中 score 表示该题是否得分
  *  @param receivedBlock 回调Block
  */
-- (void)requestSubmitScore:(NSString *)user book_id:(NSInteger)book_id exam_id:(NSInteger)exam_id question_stat:(NSString *)jsonStr completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestSubmitScore:(NSString *)user book_id:(NSInteger)book_id bookset_id:(NSInteger)bookset_id exam_id:(NSInteger)exam_id question_stat:(NSString *)jsonStr completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  老师获取自己布置的作业列表

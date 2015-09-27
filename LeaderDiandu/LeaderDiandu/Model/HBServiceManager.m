@@ -502,11 +502,12 @@
     [self Post:@"/api/task/student/list" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestSubmitScore:(NSString *)user book_id:(NSInteger)book_id exam_id:(NSInteger)exam_id question_stat:(NSString *)jsonStr completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestSubmitScore:(NSString *)user book_id:(NSInteger)book_id bookset_id:(NSInteger)bookset_id exam_id:(NSInteger)exam_id question_stat:(NSString *)jsonStr completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
     [dicInfo setObject:@(book_id)     forKey:@"book_id"];
+    [dicInfo setObject:@(bookset_id)  forKey:@"bookset_id"];
     [dicInfo setObject:@(exam_id)     forKey:@"exam_id"];
     [dicInfo setObject:jsonStr     forKey:@"question_stat"];
     

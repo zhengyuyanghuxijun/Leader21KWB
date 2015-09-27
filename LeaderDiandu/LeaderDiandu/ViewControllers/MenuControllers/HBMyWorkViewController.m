@@ -11,6 +11,7 @@
 #import "HBTitleView.h"
 #import "HBMyWorkView.h"
 
+#import "HBServiceManager.h"
 #import "HBTaskEntity.h"
 #import "HBTestWorkManager.h"
 
@@ -92,7 +93,22 @@
     
     //下一题或者完成
     NSDictionary *dict = [_workManager nextQuestion];
-    [self updateWorkData:dict];
+    if (dict) {
+        [self updateWorkData:dict];
+    } else {
+        //提交成绩，算分数
+        if (_taskEntity.score) {
+            
+        } else {
+            
+        }
+    }
+}
+
+- (void)submitScore
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+//    [[HBServiceManager defaultManager] requestSubmitScore:userEntity.name book_id:<#(NSInteger)#> bookset_id:<#(NSInteger)#> exam_id:<#(NSInteger)#> question_stat:<#(NSString *)#> completion:<#^(id responseObject, NSError *error)receivedBlock#>]
 }
 
 - (void)handleScore
