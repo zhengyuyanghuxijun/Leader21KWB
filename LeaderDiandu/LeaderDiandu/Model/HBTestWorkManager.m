@@ -97,11 +97,30 @@
 
 - (NSDictionary *)getQuestion:(NSInteger)index
 {
-    if (index>=0 && index<[self.workArray count]) {
+    if (index>=0 && index<[_workArray count]) {
         self.selIndex = index;
-        return self.workArray[index];
+        return _workArray[index];
     }
     return nil;
+}
+
+- (NSDictionary *)currentQuestion
+{
+    return _workArray[_selIndex];
+}
+
+- (NSDictionary *)nextQuestion
+{
+    return [self getQuestion:_selIndex+1];
+}
+
+- (BOOL)isLastObject
+{
+    BOOL isLast = NO;
+    if (_selIndex == [_workArray count]-1) {
+        isLast = YES;
+    }
+    return isLast;
 }
 
 //计算文件夹下文件的总大小

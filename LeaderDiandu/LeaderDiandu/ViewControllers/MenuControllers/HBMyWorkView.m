@@ -9,6 +9,7 @@
 #import "HBMyWorkView.h"
 #import "HBTestWorkManager.h"
 #import "HBOptionView.h"
+#import "MBHudUtil.h"
 
 #define KTagSelectionBegin  1527
 
@@ -42,6 +43,9 @@ typedef enum : NSUInteger {
     
     HBQuestionType _questionType;
     HBSelectionType _selectionType;
+    
+    BOOL isOptionSelected;  //是否选中一个选项
+    NSInteger selAnswerIndex;//选中的是哪一项
 }
 
 @property (nonatomic, strong)UIView *selectionView;
@@ -66,19 +70,18 @@ typedef enum : NSUInteger {
     float controlX = 20;
     float controlY = 0;
     float controlW = frame.size.width - controlX*2;
-    float controlH = 300;
+    float controlH = 270;
     [self initQuestionView:CGRectMake(controlX, controlY, controlW, controlH)];
     
     controlH = 40;
-    controlY = frame.size.height-16-controlH;
+    controlY = frame.size.height-40-controlH;
     _finishButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
 //    [_finishButton.layer setMasksToBounds:YES];
 //    [_finishButton.layer setCornerRadius:5.0];
 //    _finishButton.backgroundColor = [UIColor greenColor];
-    [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-finish-normal"] forState:UIControlStateNormal];
-    [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-finish-press"] forState:UIControlStateHighlighted];
+    [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-normal"] forState:UIControlStateNormal];
+    [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-press"] forState:UIControlStateHighlighted];
     _finishButton.titleLabel.font = font;
-    [_finishButton setTitle:@"下一题" forState:UIControlStateNormal];
     [_finishButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_finishButton];
 }
@@ -101,6 +104,7 @@ typedef enum : NSUInteger {
     _titleLabel.backgroundColor = [UIColor clearColor];
     _titleLabel.textColor = [UIColor colorWithHex:0xff8903];
     _titleLabel.font = [UIFont boldSystemFontOfSize:22];
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
     [_questionView addSubview:_titleLabel];
     
     controlY += controlH + 20;
@@ -108,6 +112,7 @@ typedef enum : NSUInteger {
     _descLabel.backgroundColor = [UIColor clearColor];
     _descLabel.textColor = [UIColor colorWithHex:0x817b72];
     _descLabel.font = [UIFont systemFontOfSize:22];
+    _descLabel.textAlignment = NSTextAlignmentCenter;
     [_questionView addSubview:_descLabel];
 
     controlY += controlH + 20;
@@ -161,36 +166,56 @@ typedef enum : NSUInteger {
     UIButton *button = [[UIButton alloc] initWithFrame:frame];
     button.tag = tag;
     [button setTitle:title forState:UIControlStateNormal];
+    button.titleLabel.numberOfLines = 0;
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
     [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-normal"] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-press"] forState:UIControlStateHighlighted];
     [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-selected"] forState:UIControlStateSelected];
     [button setTitleColor:[UIColor colorWithHex:0xff8903] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(selectionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [_selectionView addSubview:button];
 }
 
-- (void)updateData:(NSDictionary *)dict
+- (void)updateData:(NSDictionary *)dict byScore:(NSString *)score
 {
+    isOptionSelected = NO;
+    
     NSString *typeStr = dict[@"Type"];
     [self updateTitle:typeStr];
     
     _descLabel.text = dict[@"Text"];
     CGRect rect = _descLabel.frame;
     if (_questionType == HBQuestionTypeText) {
-        rect.size.height = _questionView.frame.size.height - rect.size.height;
+        rect = _questionView.bounds;
+        rect.origin.x = 10;
         _descLabel.frame = rect;
+        _descButton.hidden = YES;
     } else if (_questionType == HBQuestionTypeTAA) {
+        _descButton.hidden = NO;
         [_descButton setBackgroundImage:[UIImage imageNamed:@"test-btn-sound-normal"] forState:UIControlStateNormal];
         [_descButton setBackgroundImage:[UIImage imageNamed:@"test-btn-sound-press"] forState:UIControlStateHighlighted];
     } else if (_questionType == HBQuestionTypeTAP) {
         CGSize size = [_descLabel.text sizeWithAttributes:@{NSFontAttributeName: _descLabel.font }];
         rect.size.height = size.height;
         _descLabel.frame = rect;
-        
-        
     }
     
     NSArray *optionsArr = [_workManager getOptionArray:dict];
     [self initSelectionView:optionsArr];
+    
+    //若不是最后一题，显示“下一题”，若是最后一题，则未提交过的显示“交作业”。已提交过的显示“完成”
+    BOOL isLast = [_workManager isLastObject];
+    if (isLast) {
+        if (score) {
+            [_finishButton setTitle:@"完成" forState:UIControlStateNormal];
+        } else {
+            [_finishButton setTitle:@"交作业" forState:UIControlStateNormal];
+        }
+        [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-finish-normal"] forState:UIControlStateNormal];
+        [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-finish-press"] forState:UIControlStateHighlighted];
+    } else {
+        [_finishButton setTitle:@"下一题" forState:UIControlStateNormal];
+    }
 }
 
 - (void)updateTitle:(NSString *)type
@@ -221,7 +246,7 @@ typedef enum : NSUInteger {
         _questionType = HBQuestionTypeText;
         _selectionType = HBSelectionTypeText;
     } else if ([type isEqualToString:@"p2t"]) {
-        title = @"连接匹配的图片的文字";
+        title = @"连接匹配的图片和文字";
         _questionType = HBQuestionTypeTAP;
         _selectionType = HBSelectionTypeText;
     } else if ([type isEqualToString:@"t2p"]) {
@@ -233,26 +258,67 @@ typedef enum : NSUInteger {
         _questionType = HBQuestionTypeTAP;
         _selectionType = HBSelectionTypePic;
     }
-    _titleLabel.text = [NSString stringWithFormat:@"%ld.%@", _workManager.selIndex, title];
+    _titleLabel.text = [NSString stringWithFormat:@"%ld.%@", _workManager.selIndex+1, title];
+}
+
+- (BOOL)isQuestionRight:(NSInteger)answer
+{
+    BOOL isRight = NO;
+    if (selAnswerIndex == answer) {
+        isRight = YES;
+    }
+    
+    return isRight;
 }
 
 - (void)buttonAction:(id)sender
 {
-    
+    if (isOptionSelected == NO) {
+        [MBHudUtil showTextView:@"您还没有完成这道题哦" inView:nil];
+        return;
+    }
+    if (self.delegate) {
+        [self.delegate onTouchFinishedButton];
+    }
+}
+
+- (void)selectionBtnAction:(id)sender
+{
+    isOptionSelected = NO;
+    NSInteger i = 0;
+    NSArray *subViews = [_selectionView subviews];
+    for (UIView *view in subViews) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton *button = (UIButton *)view;
+            if (button == sender) {
+                isOptionSelected = YES;
+                button.selected = YES;
+                selAnswerIndex = i;
+            } else {
+                button.selected = NO;
+            }
+            i++;
+        }
+    }
 }
 
 #pragma ---HBOptionViewDelegate---
 
 - (void)setOptionViewSelected:(HBOptionView *)optionView
 {
+    isOptionSelected = NO;
+    NSInteger i = 0;
     NSArray *subViews = [_selectionView subviews];
     for (UIView *view in subViews) {
         if ([view isKindOfClass:[HBOptionView class]]) {
             if (view == optionView) {
+                isOptionSelected = YES;
                 [optionView setSelected:YES];
+                selAnswerIndex = i;
             } else {
                 [(HBOptionView *)view setSelected:NO];
             }
+            i++;
         }
     }
 }

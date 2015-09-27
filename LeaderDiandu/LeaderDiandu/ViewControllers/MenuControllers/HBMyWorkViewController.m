@@ -14,11 +14,13 @@
 #import "HBTaskEntity.h"
 #import "HBTestWorkManager.h"
 
-@interface HBMyWorkViewController ()
+@interface HBMyWorkViewController () <HBMyWorkViewDelegate>
 {
     UIProgressView *_progressView;
     HBMyWorkView *_myWorkView;
 }
+
+@property (nonatomic, strong)NSMutableArray *scoreArray;
 
 @end
 
@@ -40,7 +42,7 @@
 {
     CGRect rect = self.view.frame;
     float controlX = 20;
-    float controlY = KHBNaviBarHeight + 15;
+    float controlY = KHBNaviBarHeight + 30;
     float controlW = rect.size.width - controlX*2;
     CGRect viewFrame = CGRectMake(controlX, controlY, controlW, 10);
     _progressView = [[UIProgressView alloc] initWithFrame:viewFrame];
@@ -51,19 +53,60 @@
     [self.view addSubview:_progressView];
     
     controlX = 0;
-    controlY = CGRectGetMaxY(_progressView.frame) + 15;
+    controlY = CGRectGetMaxY(_progressView.frame) + 30;
     controlW = rect.size.width;
     float controlH = rect.size.height - controlY;
     _myWorkView = [[HBMyWorkView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    _myWorkView.delegate = self;
     _myWorkView.workManager = self.workManager;
     NSDictionary *dict = [_workManager getQuestion:0];
-    [_myWorkView updateData:dict];
+    [self updateWorkData:dict];
     [self.view addSubview:_myWorkView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)updateWorkData:(NSDictionary *)dict
+{
+    if (_scoreArray) {
+        [_scoreArray removeAllObjects];
+    } else {
+        self.scoreArray = [[NSMutableArray alloc] init];
+    }
+    if (dict) {
+        [_myWorkView updateData:dict byScore:_taskEntity.score];
+    }
+}
+
+- (void)onTouchFinishedButton
+{
+    //更新进度条
+    NSInteger index = _workManager.selIndex;
+    NSInteger total = [_workManager.workArray count]-1;
+    _progressView.progress = ((double)index+1) / total;
+    //统计成绩
+    [self handleScore];
+    
+    //下一题或者完成
+    NSDictionary *dict = [_workManager nextQuestion];
+    [self updateWorkData:dict];
+}
+
+- (void)handleScore
+{
+    NSDictionary *dict = [_workManager currentQuestion];
+    NSMutableDictionary *scoreDict = [[NSMutableDictionary alloc] init];
+    [scoreDict setObject:dict[@"type"] forKey:@"type"];
+    [scoreDict setObject:dict[@"knowledge"] forKey:@"knowledge"];
+    [scoreDict setObject:dict[@"ability"] forKey:@"ability"];
+    [scoreDict setObject:dict[@"difficulty"] forKey:@"difficulty"];
+    BOOL isRight = [_myWorkView isQuestionRight:[dict[@"Answer"] integerValue]];
+    [scoreDict setObject:@(isRight) forKey:@"score"];
+    
+    [_scoreArray addObject:scoreDict];
 }
 
 /*

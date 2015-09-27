@@ -16,6 +16,9 @@
 - (void)parseTestWork:(NSString *)path;
 
 - (NSDictionary *)getQuestion:(NSInteger)index;
+- (NSDictionary *)currentQuestion;
+- (NSDictionary *)nextQuestion;
+- (BOOL)isLastObject;
 
 - (UIImage *)getPicture:(NSString *)fileName;
 

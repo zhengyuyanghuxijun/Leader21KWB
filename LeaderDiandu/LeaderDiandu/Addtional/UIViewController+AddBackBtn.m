@@ -14,7 +14,7 @@
 - (void)addBackButton
 {
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(8, 20, 44, 44)];
-    [button setBackgroundImage:[UIImage imageNamed:@"back_normal"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
 //    [button setBackgroundImage:[UIImage imageNamed:@"back_press"] forState:UIControlStateHighlighted];
     [button addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];

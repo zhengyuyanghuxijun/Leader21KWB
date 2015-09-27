@@ -19,10 +19,12 @@
 @interface HBMyWorkView : UIView
 
 @property (nonatomic, strong)HBTestWorkManager *workManager;
-@property (nonatomic) id<HBMyWorkViewDelegate> delegate;
+@property (nonatomic, assign)id<HBMyWorkViewDelegate> delegate;
 
 - (id)initWithFrame:(CGRect)frame;
 
-- (void)updateData:(NSDictionary *)dict;
+- (void)updateData:(NSDictionary *)dict byScore:(NSString *)score;
+
+- (BOOL)isQuestionRight:(NSInteger)answer;
 
 @end
