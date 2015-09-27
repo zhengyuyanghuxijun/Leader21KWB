@@ -10,7 +10,6 @@
 #import "UtilFMDatabase.h"
 #import "UtilFMDatabaseQueue.h"
 #import "FileUtil.h"
-#import "HBDataSaveManager.h"
 #import "HBContentEntity.h"
 
 //课本信息数据库保存路径
@@ -201,13 +200,7 @@
 
 - (NSString *)getHBContentListDBPath
 {
-    NSString *user;
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        user = [dict objectForKey:@"name"];
-    }
-    
-    NSString *path = [[[kFileUtil getAppDataPath] stringByAppendingPathComponent:user]  stringByAppendingPathComponent:HBContentList_DB_FILENAME];
+    NSString *path = [[kFileUtil getAppDataPath] stringByAppendingPathComponent:HBContentList_DB_FILENAME];
     if (![kFileUtil isFileExist:path])
     {
         //如果不存在需要创建数据库,也就是文件拷贝的过程
