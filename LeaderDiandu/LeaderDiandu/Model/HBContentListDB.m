@@ -82,7 +82,7 @@
                  BOOL result = [db executeUpdate:@"REPLACE INTO contentList(bookID, total, name, description, books, freeBooks, subscribed, substatus) VALUES(?, ?, ?, ?, ?, ?, ?, ?)",bookIdNum, totalNum, [dic objectForKey:@"name"], [dic objectForKey:@"description"], [dic objectForKey:@"books"], [dic objectForKey:@"free_books"], subscribedStr, substatusStr];
                  
                  if (result == NO) {
-                     //orgStructure version save erro!
+                     //save erro!
                  }
              }
          }

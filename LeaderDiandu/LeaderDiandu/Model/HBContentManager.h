@@ -34,34 +34,34 @@ typedef void(^HBDownloadReceiveBlock)(id responseObject, NSError *error);
  */
 - (void)requestBookDownload:(NSString *)book_id file_id:(NSString *)file_id completion:(HBContentReceivedBlock)receivedBlock;
 
-/**
- *  学生上报一本书的阅读进度
- *  当进度为100时，并且该学生没有绑定老师，系统会自动为其布置作业（参考返回应答中的 exam_assigned 参数）
- *
- *  @param user             用户ID
- *  @param book_id          书本ID
- *  @param progress为0-100 之间的数字。如果上报的进度小于当前服务器端进度，则保持后者
- *  @param receivedBlock 回调Block
- */
-- (void)requestUpdateBookProgress:(NSString *)user book_id:(NSInteger)book_id progress:(NSInteger)progress completion:(HBContentReceivedBlock)receivedBlock;
+///**
+// *  学生上报一本书的阅读进度
+// *  当进度为100时，并且该学生没有绑定老师，系统会自动为其布置作业（参考返回应答中的 exam_assigned 参数）
+// *
+// *  @param user             用户ID
+// *  @param book_id          书本ID
+// *  @param progress为0-100 之间的数字。如果上报的进度小于当前服务器端进度，则保持后者
+// *  @param receivedBlock 回调Block
+// */
+//- (void)requestUpdateBookProgress:(NSString *)user token:(NSString *)token book_id:(NSInteger)book_id progress:(NSInteger)progress completion:(HBContentReceivedBlock)receivedBlock;
 
-/**
- *  获取用户书本阅读进度
- *
- *  @param user             用户ID
- *  @param book_id          书本ID
- *  @param receivedBlock 回调Block
- */
-- (void)requestBookProgress:(NSString *)user book_id:(NSInteger)book_id completion:(HBContentReceivedBlock)receivedBlock;
+///**
+// *  获取用户书本阅读进度
+// *
+// *  @param user             用户ID
+// *  @param book_id          书本ID
+// *  @param receivedBlock 回调Block
+// */
+//- (void)requestBookProgress:(NSString *)user book_id:(NSInteger)book_id completion:(HBContentReceivedBlock)receivedBlock;
 
-/**
- *  获取用户某个套餐的书本阅读进度
- *
- *  @param user             用户ID
- *  @param bookset_id       套餐ID
- *  @param receivedBlock 回调Block
- */
-- (void)requestBookProgress:(NSString *)user bookset_id:(NSInteger)bookset_id completion:(HBContentReceivedBlock)receivedBlock;
+///**
+// *  获取用户某个套餐的书本阅读进度
+// *
+// *  @param user             用户ID
+// *  @param bookset_id       套餐ID
+// *  @param receivedBlock 回调Block
+// */
+//- (void)requestBookProgress:(NSString *)user bookset_id:(NSInteger)bookset_id completion:(HBContentReceivedBlock)receivedBlock;
 
 /**
  * 下载文件

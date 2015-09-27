@@ -64,45 +64,46 @@
     [self Post:@"/api/book/download" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestUpdateBookProgress:(NSString *)user book_id:(NSInteger)book_id progress:(NSInteger)progress completion:(HBContentReceivedBlock)receivedBlock
-{
-    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
-    [dicInfo setObject:user     forKey:@"boouserk_id"];
-    [dicInfo setObject:@(book_id)     forKey:@"book_id"];
-    [dicInfo setObject:@(progress)     forKey:@"progress"];
-    
-    if (_receivedBlock) {
-        return;
-    }
-    self.receivedBlock = receivedBlock;
-    [self Post:@"/api/stat/book/progress/update" dict:dicInfo block:receivedBlock];
-}
+//- (void)requestUpdateBookProgress:(NSString *)user token:(NSString *)token book_id:(NSInteger)book_id progress:(NSInteger)progress completion:(HBContentReceivedBlock)receivedBlock
+//{
+//    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+//    [dicInfo setObject:user     forKey:@"user"];
+//    [dicInfo setObject:token    forKey:@"token"];
+//    [dicInfo setObject:@(book_id)     forKey:@"book_id"];
+//    [dicInfo setObject:@(progress)     forKey:@"progress"];
+//    
+////    if (_receivedBlock) {
+////        return;
+////    }
+//    self.receivedBlock = receivedBlock;
+//    [self Post:@"/api/stat/book/progress/update" dict:dicInfo block:receivedBlock];
+//}
 
-- (void)requestBookProgress:(NSString *)user book_id:(NSInteger)book_id completion:(HBContentReceivedBlock)receivedBlock
-{
-    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
-    [dicInfo setObject:user     forKey:@"boouserk_id"];
-    [dicInfo setObject:@(book_id)     forKey:@"book_id"];
-    
-    if (_receivedBlock) {
-        return;
-    }
-    self.receivedBlock = receivedBlock;
-    [self Post:@"/api/stat/book/progress" dict:dicInfo block:receivedBlock];
-}
+//- (void)requestBookProgress:(NSString *)user book_id:(NSInteger)book_id completion:(HBContentReceivedBlock)receivedBlock
+//{
+//    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+//    [dicInfo setObject:user     forKey:@"boouserk_id"];
+//    [dicInfo setObject:@(book_id)     forKey:@"book_id"];
+//    
+////    if (_receivedBlock) {
+////        return;
+////    }
+//    self.receivedBlock = receivedBlock;
+//    [self Post:@"/api/stat/book/progress" dict:dicInfo block:receivedBlock];
+//}
 
-- (void)requestBookProgress:(NSString *)user bookset_id:(NSInteger)bookset_id completion:(HBContentReceivedBlock)receivedBlock
-{
-    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
-    [dicInfo setObject:user     forKey:@"boouserk_id"];
-    [dicInfo setObject:@(bookset_id)     forKey:@"bookset_id"];
-    
-    if (_receivedBlock) {
-        return;
-    }
-    self.receivedBlock = receivedBlock;
-    [self Post:@"/api/stat/bookset/progress" dict:dicInfo block:receivedBlock];
-}
+//- (void)requestBookProgress:(NSString *)user bookset_id:(NSInteger)bookset_id completion:(HBContentReceivedBlock)receivedBlock
+//{
+//    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+//    [dicInfo setObject:user     forKey:@"boouserk_id"];
+//    [dicInfo setObject:@(bookset_id)     forKey:@"bookset_id"];
+//    
+////    if (_receivedBlock) {
+////        return;
+////    }
+//    self.receivedBlock = receivedBlock;
+//    [self Post:@"/api/stat/bookset/progress" dict:dicInfo block:receivedBlock];
+//}
 
 - (void)downloadFileURL:(NSString *)aUrl savePath:(NSString *)aSavePath fileName:(NSString *)aFileName completion:(HBDownloadReceiveBlock)block
 {

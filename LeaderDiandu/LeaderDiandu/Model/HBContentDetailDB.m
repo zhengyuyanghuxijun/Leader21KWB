@@ -74,7 +74,7 @@
                  BOOL result = [db executeUpdate:@"REPLACE INTO contentDetail(bookID, unit, bookLevel, bookSrno, bookTitle, bookTitleCN, bookType, fileID, grade) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",bookIdNum, unitNum, [dic objectForKey:@"BOOK_LEVEL"], [dic objectForKey:@"BOOK_SRNO"], [dic objectForKey:@"BOOK_TITLE"], [dic objectForKey:@"BOOK_TITLE_CN"], [dic objectForKey:@"BOOK_TYPE"], [dic objectForKey:@"FILE_ID"], [dic objectForKey:@"GRADE"]];
                  
                  if (result == NO) {
-                     //orgStructure version save erro!
+                     //save erro!
                  }
              }
          }

@@ -16,8 +16,9 @@
 #import "HBServiceManager.h"
 #import "HBContentManager.h"
 #import "HBContentEntity.h"
-#import "HBContentDetailDB.h"
+#import "HBReadprogressEntity.h"
 #import "HBContentListDB.h"
+#import "HBReadProgressDB.h"
 #import "FTMenu.h"
 #import "Leader21SDKOC.h"
 #import "CoreDataHelper.h"
@@ -34,6 +35,7 @@
 
 @property (nonatomic, strong)NSMutableArray *contentEntityArr;
 @property (nonatomic, strong)NSMutableDictionary *contentDetailEntityDic;
+@property (nonatomic, strong)NSMutableDictionary *readProgressEntityDic;
 
 @end
 
@@ -46,6 +48,7 @@
         // Custom initialization
         self.contentEntityArr = [[NSMutableArray alloc] initWithCapacity:1];
         self.contentDetailEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
+        self.readProgressEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         currentID = 1;
         
         //用户登录成功通知
@@ -69,6 +72,15 @@
         if (type == 1) {
             //从服务器拉取套餐信息
             [self requestAllBookset];
+            
+            //----------------------测试代码（begin）-----------------------
+            NSString *user = [dict objectForKey:@"name"];
+            NSString *token = [dict objectForKey:@"token"];
+            [[HBServiceManager defaultManager] requestUpdateBookProgress:user token:token book_id:5 progress:16 completion:^(id responseObject, NSError *error) {
+                
+            }];
+            //----------------------（end）--------------------------------
+            
         }else{
             //登录成功先load套餐信息，如果套餐信息为空则去服务器拉取数据
             NSString *booksIDsStr = [[HBContentListDB sharedInstance] booksidWithID:currentID];

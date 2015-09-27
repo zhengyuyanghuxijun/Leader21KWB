@@ -575,4 +575,76 @@
     [self Post:@"/api/exam/score/class/list" dict:dicInfo block:receivedBlock];
 }
 
+- (void)requestUpdateBookProgress:(NSString *)user token:(NSString *)token book_id:(NSInteger)book_id progress:(NSInteger)progress completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:user     forKey:@"user"];
+    [dicInfo setObject:token    forKey:@"token"];
+    [dicInfo setObject:@(book_id)     forKey:@"book_id"];
+    [dicInfo setObject:@(progress)     forKey:@"progress"];
+    
+    //    if (_receivedBlock) {
+    //        return;
+    //    }
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/stat/book/progress/update" dict:dicInfo block:receivedBlock];
+}
+
+- (void)requestBookProgress:(NSString *)user token:(NSString *)token book_id:(NSInteger)book_id completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:user     forKey:@"user"];
+    [dicInfo setObject:token    forKey:@"token"];
+    [dicInfo setObject:@(book_id)     forKey:@"book_id"];
+    
+    //    if (_receivedBlock) {
+    //        return;
+    //    }
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/stat/book/progress" dict:dicInfo block:receivedBlock];
+}
+
+- (void)requestBookProgress:(NSString *)user token:(NSString *)token bookset_id:(NSInteger)bookset_id completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:user     forKey:@"user"];
+    [dicInfo setObject:token    forKey:@"token"];
+    [dicInfo setObject:@(bookset_id)     forKey:@"bookset_id"];
+    
+    //    if (_receivedBlock) {
+    //        return;
+    //    }
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/stat/bookset/progress" dict:dicInfo block:receivedBlock];
+}
+
+- (void)requestReportBookProgress:(NSString *)user
+                            token:(NSString *)token
+                          book_id:(NSInteger)book_id
+                       bookset_id:(NSInteger)bookset_id
+                        from_time:(NSString *)from_time
+                          to_time:(NSString *)to_time
+                        from_page:(NSString *)from_page
+                          to_page:(NSString *)to_page
+                       total_page:(NSString *)total_page
+                       completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:user     forKey:@"user"];
+    [dicInfo setObject:token    forKey:@"token"];
+    [dicInfo setObject:@(book_id)     forKey:@"book_id"];
+    [dicInfo setObject:@(bookset_id)     forKey:@"bookset_id"];
+    [dicInfo setObject:from_time     forKey:@"from_time"];
+    [dicInfo setObject:to_time     forKey:@"to_time"];
+    [dicInfo setObject:from_page     forKey:@"from_page"];
+    [dicInfo setObject:to_page     forKey:@"to_page"];
+    [dicInfo setObject:total_page     forKey:@"total_page"];
+    
+    //    if (_receivedBlock) {
+    //        return;
+    //    }
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/stat/book/reading/report" dict:dicInfo block:receivedBlock];
+}
+
 @end

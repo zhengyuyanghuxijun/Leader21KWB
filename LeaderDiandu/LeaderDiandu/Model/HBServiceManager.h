@@ -378,4 +378,62 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  */
 - (void)requestUserScore:(NSString *)user class_id:(NSInteger)class_id completion:(HBServiceReceivedBlock)receivedBlock;
 
+/**
+ *  学生上报一本书的阅读进度
+ *  当进度为100时，并且该学生没有绑定老师，系统会自动为其布置作业（参考返回应答中的 exam_assigned 参数）
+ *
+ *  @param user             用户ID
+ *  @param token            登录返回的凭证
+ *  @param book_id          书本ID
+ *  @param progress为0-100 之间的数字。如果上报的进度小于当前服务器端进度，则保持后者
+ *  @param receivedBlock 回调Block
+ */
+- (void)requestUpdateBookProgress:(NSString *)user token:(NSString *)token book_id:(NSInteger)book_id progress:(NSInteger)progress completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
+ *  获取用户书本阅读进度
+ *
+ *  @param user             用户ID
+ *  @param token            登录返回的凭证
+ *  @param book_id          书本ID
+ *  @param receivedBlock 回调Block
+ */
+- (void)requestBookProgress:(NSString *)user token:(NSString *)token book_id:(NSInteger)book_id completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
+ *  获取用户某个套餐的书本阅读进度
+ *
+ *  @param user             用户ID
+ *  @param token            登录返回的凭证
+ *  @param bookset_id       套餐ID
+ *  @param receivedBlock 回调Block
+ */
+- (void)requestBookProgress:(NSString *)user token:(NSString *)token bookset_id:(NSInteger)bookset_id completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
+ *  上报用户读书行为
+ *
+ *  @param user             用户ID
+ *  @param token            登录返回的凭证
+ *  @param book_id          书本ID
+ *  @param bookset_id       套餐ID
+ *  @param from_time        阅读开始时间
+ *  @param to_time          阅读结束时间
+ *  @param from_page        阅读开始页码
+ *  @param to_page          阅读结束页码
+ *  @param total_page       书籍共多少页
+ *  @param receivedBlock    回调Block
+ */
+- (void)requestReportBookProgress:(NSString *)user
+                            token:(NSString *)token
+                          book_id:(NSInteger)book_id
+                       bookset_id:(NSInteger)bookset_id
+                        from_time:(NSString *)from_time
+                          to_time:(NSString *)to_time
+                        from_page:(NSString *)from_page
+                          to_page:(NSString *)to_page
+                       total_page:(NSString *)total_page
+                       completion:(HBServiceReceivedBlock)receivedBlock;
+
+
 @end

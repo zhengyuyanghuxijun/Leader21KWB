@@ -161,6 +161,7 @@
 		182306201B9B300300A8E146 /* HBTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823061F1B9B300300A8E146 /* HBTaskEntity.m */; };
 		189719DC1B9F3405006F42A2 /* HBStudentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 189719DB1B9F3405006F42A2 /* HBStudentEntity.m */; };
 		1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */; };
+		189C0F5E1BB5776300DD39C0 /* HBReadprogressEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C0F5D1BB5776300DD39C0 /* HBReadprogressEntity.m */; };
 		18A13BB01BA6F5FD004A288F /* HBGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A13BAF1BA6F5FD004A288F /* HBGroupCell.m */; };
 		18A244771BA7295A00E1E703 /* HBCreatGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A244761BA7295A00E1E703 /* HBCreatGroupController.m */; };
 		18B5FD2E1B981454002CCD95 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5FD2D1B981454002CCD95 /* UIButton+AFNetworking.m */; };
@@ -171,6 +172,8 @@
 		18C316901BA092B1004F716E /* HBClassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3168F1BA092B1004F716E /* HBClassEntity.m */; };
 		18C64FFF1B9DE74B0040E349 /* HBScoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C64FFE1B9DE74B0040E349 /* HBScoreListViewController.m */; };
 		18C650021B9DF1CA0040E349 /* HBScoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C650011B9DF1CA0040E349 /* HBScoreEntity.m */; };
+		18D325171BB820EA00904FA6 /* HBReadProgressDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D325161BB820EA00904FA6 /* HBReadProgressDB.m */; };
+		18D3251A1BB8275100904FA6 /* hbreadprogress.db in Resources */ = {isa = PBXBuildFile; fileRef = 18D325191BB8275100904FA6 /* hbreadprogress.db */; };
 		18E57D5F1BA52AA600198BE9 /* hbcontentlist.db in Resources */ = {isa = PBXBuildFile; fileRef = 18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */; };
 		18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D621BA52AC400198BE9 /* HBContentListDB.m */; };
 		18E57D661BA5520900198BE9 /* HBTestSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D651BA5520900198BE9 /* HBTestSelectViewController.m */; };
@@ -446,6 +449,8 @@
 		189719DB1B9F3405006F42A2 /* HBStudentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBStudentEntity.m; sourceTree = "<group>"; };
 		1898BCEA1B9DA7ED00FD9A11 /* HBManageTaskEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBManageTaskEntity.h; sourceTree = "<group>"; };
 		1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBManageTaskEntity.m; sourceTree = "<group>"; };
+		189C0F5C1BB5776300DD39C0 /* HBReadprogressEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBReadprogressEntity.h; sourceTree = "<group>"; };
+		189C0F5D1BB5776300DD39C0 /* HBReadprogressEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBReadprogressEntity.m; sourceTree = "<group>"; };
 		18A13BAE1BA6F5FD004A288F /* HBGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGroupCell.h; sourceTree = "<group>"; };
 		18A13BAF1BA6F5FD004A288F /* HBGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGroupCell.m; sourceTree = "<group>"; };
 		18A244751BA7295A00E1E703 /* HBCreatGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBCreatGroupController.h; sourceTree = "<group>"; };
@@ -466,6 +471,9 @@
 		18C64FFE1B9DE74B0040E349 /* HBScoreListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreListViewController.m; sourceTree = "<group>"; };
 		18C650001B9DF1CA0040E349 /* HBScoreEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBScoreEntity.h; sourceTree = "<group>"; };
 		18C650011B9DF1CA0040E349 /* HBScoreEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreEntity.m; sourceTree = "<group>"; };
+		18D325151BB820EA00904FA6 /* HBReadProgressDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBReadProgressDB.h; sourceTree = "<group>"; };
+		18D325161BB820EA00904FA6 /* HBReadProgressDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBReadProgressDB.m; sourceTree = "<group>"; };
+		18D325191BB8275100904FA6 /* hbreadprogress.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbreadprogress.db; sourceTree = "<group>"; };
 		18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbcontentlist.db; sourceTree = "<group>"; };
 		18E57D611BA52AC400198BE9 /* HBContentListDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentListDB.h; sourceTree = "<group>"; };
 		18E57D621BA52AC400198BE9 /* HBContentListDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentListDB.m; sourceTree = "<group>"; };
@@ -656,6 +664,7 @@
 				0DCAE0CA1BAAAA3F00AB7557 /* LeaderSDKResources */,
 				18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */,
 				181E30811BA2D0CF00BBA92F /* hbcontentdetail.db */,
+				18D325191BB8275100904FA6 /* hbreadprogress.db */,
 				0DC1D4141B9BDF430043C79B /* MyStaticModels.bundle */,
 				0D7486FE1B88A884007BE4CD /* Images.xcassets */,
 			);
@@ -849,6 +858,8 @@
 				181456DC1B96D9DD003CCD6C /* HBContentEntity.m */,
 				181456DE1B96E483003CCD6C /* HBContentDetailEntity.h */,
 				181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */,
+				189C0F5C1BB5776300DD39C0 /* HBReadprogressEntity.h */,
+				189C0F5D1BB5776300DD39C0 /* HBReadprogressEntity.m */,
 				1823061E1B9B300300A8E146 /* HBTaskEntity.h */,
 				1823061F1B9B300300A8E146 /* HBTaskEntity.m */,
 				1898BCEA1B9DA7ED00FD9A11 /* HBManageTaskEntity.h */,
@@ -863,6 +874,8 @@
 				181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */,
 				18E57D611BA52AC400198BE9 /* HBContentListDB.h */,
 				18E57D621BA52AC400198BE9 /* HBContentListDB.m */,
+				18D325151BB820EA00904FA6 /* HBReadProgressDB.h */,
+				18D325161BB820EA00904FA6 /* HBReadProgressDB.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1185,6 +1198,7 @@
 				0DCAE1191BAAAA3F00AB7557 /* orientation_port.png in Resources */,
 				0DCAE10D1BAAAA3F00AB7557 /* menu_bar_button.png in Resources */,
 				18E57D5F1BA52AA600198BE9 /* hbcontentlist.db in Resources */,
+				18D3251A1BB8275100904FA6 /* hbreadprogress.db in Resources */,
 				0DCAE1061BAAAA3F00AB7557 /* btn_reader_w_disable@2x.png in Resources */,
 				0DCAE1231BAAAA3F00AB7557 /* titlebar.png in Resources */,
 				0DCAE0FB1BAAAA3F00AB7557 /* back_button@2x.png in Resources */,
@@ -1300,6 +1314,7 @@
 				0D7A76951B92176C00BC50A0 /* HBUserEntity.m in Sources */,
 				0D7292C51B9E0650006FA7EA /* HBSettingViewController.m in Sources */,
 				0D7A768F1B91E33900BC50A0 /* HBContentManager.m in Sources */,
+				18D325171BB820EA00904FA6 /* HBReadProgressDB.m in Sources */,
 				0DB537351B8F78AF0023A3F7 /* HBServiceManager.m in Sources */,
 				0D018FEE1B96DB9200A92F59 /* HBLeaderViewController.m in Sources */,
 				0D7488901B8A2973007BE4CD /* NetUtil.m in Sources */,
@@ -1314,6 +1329,7 @@
 				0D7486F41B88A884007BE4CD /* main.m in Sources */,
 				0DB537291B8F5DEE0023A3F7 /* AFHTTPSessionManager.m in Sources */,
 				1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */,
+				189C0F5E1BB5776300DD39C0 /* HBReadprogressEntity.m in Sources */,
 				181E30771BA2B14100BBA92F /* UtilFMDatabaseQueue.m in Sources */,
 				0DBE353B1B8CB8B500179237 /* MBHudUtil.m in Sources */,
 				0D01900B1B980E8200A92F59 /* UIImageView+AFNetworking.m in Sources */,

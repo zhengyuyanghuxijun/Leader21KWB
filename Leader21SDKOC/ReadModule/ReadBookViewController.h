@@ -26,4 +26,6 @@ typedef NS_ENUM(NSInteger, ReadType){
 @property (nonatomic, strong) ReadBookToolBar *readBookToolBar;
 @property (nonatomic, strong) ReadBookOrientationButton *rotateButton;
 
+- (void)goBack:(id)sender;
+
 @end

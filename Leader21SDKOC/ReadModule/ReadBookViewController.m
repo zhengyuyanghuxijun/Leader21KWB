@@ -692,4 +692,35 @@
     [self.readBookToolBar setCurrentIndex:[self currentIndex]];
 }
 
+- (void)goBack:(id)sender
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"阅读尚未完成，是否中断阅读？" message:nil delegate:self cancelButtonTitle:@"退出" otherButtonTitles:@"继续阅读", nil];
+    alertView.tag = 0;
+    
+    [alertView show];
+}
+
+#pragma mark - actionSheetDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0){
+        //退出
+        NSInteger index = [self currentIndex];
+        NSInteger count = [self.readBookDataSource totalCount];
+        if (index > 0 && count > 0) {
+            NSInteger progress = 100*index/count;
+            if (index + 1 >= count) {
+                progress = 100;
+            }
+            if (progress < 0 || progress > 100) {
+                progress = 0;
+            }
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        //继续阅读
+    }
+}
+
 @end
