@@ -224,7 +224,7 @@
     contentView.autoresizingMask = UIViewAutoresizingNone;
     contentView.opaque = NO;
     
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 60, 440)];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(-3, -10, 60, 440)];
     imgView.image = [UIImage imageNamed:@"bookshelf-bg-class"];
     [contentView addSubview:imgView];
     
@@ -233,7 +233,7 @@
     for (KxMenuItem *menuItem in _menuItems) {
         
         //itemView
-        const CGRect itemFrame = (CGRect){0, itemY, maxItemWidth, maxItemHeight};
+        const CGRect itemFrame = (CGRect){-3, itemY-10, maxItemWidth, maxItemHeight};
         UIView *itemView = [[UIView alloc] initWithFrame:itemFrame];
         itemView.autoresizingMask = UIViewAutoresizingNone;
 //        itemView.backgroundColor = [UIColor yellowColor];
@@ -303,7 +303,7 @@
         }
         
         if (itemNum < _menuItems.count - 1) {
-            CGRect lineFrame = (CGRect){0, itemY + maxItemHeight -0.5, maxItemWidth, 0.5};
+            CGRect lineFrame = (CGRect){-3, itemY + maxItemHeight -0.5 - 10, maxItemWidth, 0.5};
             UIView *gradientView = [[UIView alloc] init];
             gradientView.backgroundColor = RGB(198, 198, 198);
             gradientView.frame = lineFrame;
