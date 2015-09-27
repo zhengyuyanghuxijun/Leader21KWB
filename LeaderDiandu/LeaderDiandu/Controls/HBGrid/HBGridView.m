@@ -40,6 +40,10 @@ delegate = _delegate;
     _tableView = [[UITableView alloc] initWithFrame:rect];
     _tableView.delegate = self, _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    UIImageView *imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bookshelf-bg-body"]];
+    [_tableView setBackgroundView:imageView];
+    
     [self addSubview:_tableView];
 }
 
@@ -159,6 +163,7 @@ delegate = _delegate;
             [gridItemView setTarget:self action:@selector(didTap:)];
         }
     }
+    cellView.backgroundColor = [UIColor clearColor];
     return cellView;
 }
 

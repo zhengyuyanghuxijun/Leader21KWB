@@ -86,6 +86,11 @@
     [self.bookCoverButton addTarget:self action:@selector(bookCoverButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.bookCoverButton];
     
+    CGRect rect = CGRectMake(0, self.bookNameLabel.frame.origin.y + self.bookNameLabel.frame.size.height + self.bookCoverButton.height, self.frame.size.width, 50);
+    UIImageView *navView = [[UIImageView alloc] initWithFrame:rect];
+    navView.image = [UIImage imageNamed:@"bookshelf-bg-shelf"];
+    [self addSubview:navView];
+    
     self.progressView = [[MBProgressHUD alloc] initWithView:self];
     self.progressView.mode = MBProgressHUDModeDeterminate;
     self.progressView.backgroundBg = [self imageWithColor:[UIColor clearColor] size:CGSizeMake(1.0f, 1.0f)];
@@ -128,7 +133,7 @@
     //下载按钮
     if ([dic objectForKey:TextGridItemView_downloadState])
     {
-        [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+        [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-download"] forState:UIControlStateNormal];
     }
     
     //书籍名称
@@ -178,6 +183,7 @@
         self.downloadButton.hidden = NO;
         _progressControl.hidden = YES;
         [self.downloadButton setTitle:@"作业" forState:UIControlStateNormal];
+        [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-test"] forState:UIControlStateNormal];
     }else{
         self.readProgressLabel.hidden = NO;
         self.downloadButton.hidden = YES;
@@ -206,6 +212,7 @@
     NSLog(@"download progress:%f", progress);
 
     [self.downloadButton setTitle:@"下载中" forState:UIControlStateNormal];
+    [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-downloading"] forState:UIControlStateNormal];
 
     self.pauseView.hidden = YES;
     self.progressView.hidden = NO;
@@ -223,6 +230,7 @@
     self.progressView.hidden = YES;
     self.pauseView.hidden = NO;
     [self.downloadButton setTitle:@"下载" forState:UIControlStateNormal];
+    [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-download"] forState:UIControlStateNormal];
 }
 
 - (UIImage*)imageWithColor:(UIColor*)color size:(CGSize)size

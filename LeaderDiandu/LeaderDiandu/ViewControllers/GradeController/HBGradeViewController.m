@@ -218,6 +218,11 @@
     
     [LEADERSDK setAppKey:KAppKeyStudy];
     
+    CGRect rect = self.view.frame;
+    UIImageView *navView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rect), KHBNaviBarHeight)];
+    navView.image = [UIImage imageNamed:@"bookshelf-bg-navi"];
+    [self.view addSubview:navView];
+    
     [self initMainView];
     [self initMainGrid];
     [self initButton];
@@ -268,12 +273,9 @@
         _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, ScreenWidth, ScreenHeight - KHBNaviBarHeight)];
         _gridView.delegate = self;
         _gridView.backgroundColor = [UIColor clearColor];
+
         [self.view addSubview:_gridView];
     }
-//    _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, ScreenWidth, ScreenHeight - KHBNaviBarHeight)];
-//    _gridView.delegate = self;
-//    _gridView.backgroundColor = [UIColor clearColor];
-//    [self.view addSubview:_gridView];
 }
 
 -(void)showPullView
@@ -312,12 +314,12 @@
 - (void)initButton
 {
     UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(8, 20, 44, 44)];
-    [leftButton setBackgroundImage:[UIImage imageNamed:@"ToggleMenu"] forState:UIControlStateNormal];
+    [leftButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-menu"] forState:UIControlStateNormal];
     [leftButton addTarget:self action:@selector(ToggleMenuPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:leftButton];
     
     UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 8 - 44, 20, 44, 44)];
-    [rightButton setBackgroundImage:[UIImage imageNamed:@"ToggleMenu"] forState:UIControlStateNormal];
+    [rightButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-class"] forState:UIControlStateNormal];
     [rightButton addTarget:self action:@selector(rightButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:rightButton];
 }

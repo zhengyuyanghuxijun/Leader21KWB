@@ -224,6 +224,10 @@
     contentView.autoresizingMask = UIViewAutoresizingNone;
     contentView.opaque = NO;
     
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 60, 440)];
+    imgView.image = [UIImage imageNamed:@"bookshelf-bg-class"];
+    [contentView addSubview:imgView];
+    
     CGFloat itemY = 10;
     NSUInteger itemNum = 0;
     for (KxMenuItem *menuItem in _menuItems) {
@@ -232,7 +236,7 @@
         const CGRect itemFrame = (CGRect){0, itemY, maxItemWidth, maxItemHeight};
         UIView *itemView = [[UIView alloc] initWithFrame:itemFrame];
         itemView.autoresizingMask = UIViewAutoresizingNone;
-        itemView.backgroundColor = [UIColor yellowColor];
+//        itemView.backgroundColor = [UIColor yellowColor];
         itemView.opaque = NO;
         [contentView addSubview:itemView];
         
