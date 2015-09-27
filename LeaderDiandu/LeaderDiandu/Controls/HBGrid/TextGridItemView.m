@@ -16,7 +16,8 @@
 
 @interface TextGridItemView()
 {
-    UILabel *readProgressLabel;
+    UILabel *_readProgressLabel;
+    UIProgressView *_progressControl;
     UILabel *_bookNameLabel;
     UIButton *_downloadButton;
     UIButton *_bookCoverButton;
@@ -61,6 +62,12 @@
     self.readProgressLabel.textAlignment = NSTextAlignmentCenter;
     self.readProgressLabel.hidden = YES;
     [self addSubview:self.readProgressLabel];
+    
+    //阅读进度条
+    _progressControl = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    _progressControl.frame = CGRectMake(10, 35, self.frame.size.width - 10 - 10, 10);
+    _progressControl.hidden = YES;
+    [self addSubview:_progressControl];
     
     //下载按钮
     self.downloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -169,16 +176,18 @@
     if ([progress isEqualToString:@"100"]) {
         self.readProgressLabel.hidden = YES;
         self.downloadButton.hidden = NO;
+        _progressControl.hidden = YES;
         [self.downloadButton setTitle:@"作业" forState:UIControlStateNormal];
     }else{
-        //to do ...
         self.readProgressLabel.hidden = NO;
         self.downloadButton.hidden = YES;
+        _progressControl.hidden = NO;
         
         if (progress == nil) {
             progress = @"0";
         }
         
+        _progressControl.progress = [progress integerValue]/100.0f;
         self.readProgressLabel.text = [NSString stringWithFormat:@"Read %@%@", progress, @"%"];
     }
 }
@@ -187,6 +196,7 @@
 {
     self.readProgressLabel.hidden = YES;
     self.downloadButton.hidden = NO;
+    _progressControl.hidden = YES;
     
     //正在下载
     CGFloat progress = book.download.progress.floatValue;
@@ -207,6 +217,7 @@
 {
     self.readProgressLabel.hidden = YES;
     self.downloadButton.hidden = NO;
+    _progressControl.hidden = YES;
     
     //未下载
     self.progressView.hidden = YES;
