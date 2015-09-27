@@ -38,6 +38,9 @@
 @property (nonatomic, strong)NSMutableDictionary *contentDetailEntityDic;
 @property (nonatomic, strong)NSMutableDictionary *readProgressEntityDic;
 
+@property (nonatomic, strong)UIButton *rightButton;
+
+
 @end
 
 @implementation HBGradeViewController
@@ -301,6 +304,9 @@
 {
     currentID = [sender.title integerValue];
     
+    [self.rightButton setTitle:sender.title forState:UIControlStateNormal];
+    [self.rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
     //获取书本列表
     for (HBContentEntity *contentEntity in self.contentEntityArr) {
         if (contentEntity.bookId == currentID) {
@@ -318,10 +324,12 @@
     [leftButton addTarget:self action:@selector(ToggleMenuPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:leftButton];
     
-    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 8 - 44, 20, 44, 44)];
-    [rightButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-class"] forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(rightButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:rightButton];
+    self.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 8 - 44, 20, 44, 44)];
+    [self.rightButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-class"] forState:UIControlStateNormal];
+    [self.rightButton addTarget:self action:@selector(rightButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rightButton setTitle:@"1" forState:UIControlStateNormal];
+    [self.rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.view addSubview:self.rightButton];
 }
 
 - (void)ToggleMenuPressed:(id)sender
