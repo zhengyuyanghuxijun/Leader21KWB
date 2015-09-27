@@ -303,7 +303,7 @@
         }
         
         if (itemNum < _menuItems.count - 1) {
-            CGRect lineFrame = (CGRect){-3, itemY + maxItemHeight -0.5 - 10, maxItemWidth, 0.5};
+            CGRect lineFrame = (CGRect){10, itemY + maxItemHeight -0.5 - 10, maxItemWidth - 26, 0.5};
             UIView *gradientView = [[UIView alloc] init];
             gradientView.backgroundColor = RGB(198, 198, 198);
             gradientView.frame = lineFrame;
