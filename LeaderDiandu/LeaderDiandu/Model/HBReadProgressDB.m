@@ -53,7 +53,7 @@
  *
  *  @return 操作结果
  */
-- (BOOL)updateHBReadprogress:(HBReadprogressEntity *)readprogressEntity
+- (BOOL)updateHBReadprogress:(NSArray *)readprogressEntityArr
 {
     __block BOOL isOK = NO;
     UtilFMDatabaseQueue * queue = [UtilFMDatabaseQueue databaseQueueWithPath:[self getHBReadprogressDBPath]];
@@ -64,14 +64,16 @@
          
          @try
          {
-             NSString *book_id = readprogressEntity.book_id;
-             NSString *progress = readprogressEntity.progress;
-             NSString *exam_assigned = [NSString stringWithFormat:@"%d", readprogressEntity.exam_assigned];
-             
-             BOOL result = [db executeUpdate:@"REPLACE INTO readProgress(book_id, progress, exam_assigned) VALUES(?, ?, ?)",book_id, progress, exam_assigned];
-             
-             if (result == NO) {
-                 //save erro!
+             for (HBReadprogressEntity *readprogressEntity in readprogressEntityArr) {
+                 NSString *book_id = readprogressEntity.book_id;
+                 NSString *progress = readprogressEntity.progress;
+                 NSString *exam_assigned = [NSString stringWithFormat:@"%d", readprogressEntity.exam_assigned];
+                 
+                 BOOL result = [db executeUpdate:@"REPLACE INTO readProgress(book_id, progress, exam_assigned) VALUES(?, ?, ?)",book_id, progress, exam_assigned];
+                 
+                 if (result == NO) {
+                     //save erro!
+                 }
              }
          }
          @catch (NSException *exception)

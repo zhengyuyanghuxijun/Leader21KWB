@@ -20,7 +20,7 @@
  *
  *  @return 操作结果
  */
-- (BOOL)updateHBReadprogress:(HBReadprogressEntity *)readprogressEntity;
+- (BOOL)updateHBReadprogress:(NSArray *)readprogressEntityArr;
 
 /**
  *  获取所有阅读进度信息

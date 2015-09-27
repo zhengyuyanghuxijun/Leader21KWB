@@ -22,12 +22,13 @@
 #import "FTMenu.h"
 #import "Leader21SDKOC.h"
 #import "CoreDataHelper.h"
+#import "ReadBookViewController.h"
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
 
 #define DataSourceCount 10
 
-@interface HBGradeViewController ()<HBGridViewDelegate>
+@interface HBGradeViewController ()<HBGridViewDelegate, reloadGridDelegate>
 {
     HBGridView *_gridView;
     NSInteger currentID;
@@ -53,6 +54,9 @@
         
         //用户登录成功通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:kNotification_LoginSuccess object:nil];
+        
+        //用户阅读书籍返回通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReadBookBack:) name:kNotification_ReadBookBack object:nil];
     }
     return self;
 }
@@ -64,6 +68,10 @@
 
 -(void)LoginSuccess
 {
+    //登录成功，先从本地读取一下当前用户数据库中保存的全部阅读进度
+    [self.readProgressEntityDic removeAllObjects];
+    self.readProgressEntityDic = [[HBReadProgressDB sharedInstance] getAllReadprogressDic];
+    
     currentID = 1;
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
@@ -73,14 +81,15 @@
             //从服务器拉取套餐信息
             [self requestAllBookset];
             
-            //----------------------测试代码（begin）-----------------------
+            //学生用户从服务器拉取最新的书籍阅读进度（老师用户直接从本地读取）
             NSString *user = [dict objectForKey:@"name"];
             NSString *token = [dict objectForKey:@"token"];
-            [[HBServiceManager defaultManager] requestUpdateBookProgress:user token:token book_id:5 progress:16 completion:^(id responseObject, NSError *error) {
-                
+            [[HBServiceManager defaultManager] requestBookProgress:user token:token bookset_id:1 completion:^(id responseObject, NSError *error) {
+                if (responseObject) {
+                    //获取阅读进度成功
+                    [self requestBookProgressSuccess:responseObject];
+                }
             }];
-            //----------------------（end）--------------------------------
-            
         }else{
             //登录成功先load套餐信息，如果套餐信息为空则去服务器拉取数据
             NSString *booksIDsStr = [[HBContentListDB sharedInstance] booksidWithID:currentID];
@@ -98,6 +107,109 @@
             }
         }
     }
+}
+
+-(void)ReadBookBack:(NSNotification*)note
+{
+    NSMutableDictionary *dic = (NSMutableDictionary *)[note userInfo];
+    NSString *bookId = [dic objectForKey:@"book_id"];
+    NSString *progress = [dic objectForKey:@"progress"];
+    
+    HBReadprogressEntity *oldReadprogressEntity = [self.readProgressEntityDic objectForKey:bookId];
+    NSString *oldProgress = oldReadprogressEntity.progress;
+    
+    //只有当新的阅读进度大于之前的阅读进度，才更新
+    if ([progress integerValue] > [oldProgress integerValue]) {
+        NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+        if (dict) {
+            NSString *user = [dict objectForKey:@"name"];
+            NSString *token = [dict objectForKey:@"token"];
+            
+            /** type: 1 - 学生； 10 - 老师*/
+            NSInteger type = [[dict objectForKey:@"type"] integerValue];
+            if (type == 1) {
+                [[HBServiceManager defaultManager] requestUpdateBookProgress:user token:token book_id:[bookId integerValue] progress:[progress integerValue] completion:^(id responseObject, NSError *error) {
+                    
+                    NSString *book_id = [NSString stringWithFormat:@"%ld", [[responseObject objectForKey:@"book_id"] integerValue]];
+                    NSString *progress = [NSString stringWithFormat:@"%ld", [[responseObject objectForKey:@"progress"] integerValue]];
+                    NSString *exam_assigned = [responseObject objectForKey:@"exam_assigned"];
+                    
+                    HBReadprogressEntity *readprogressEntity = [self.readProgressEntityDic objectForKey:book_id];
+                    
+                    if (readprogressEntity) {
+                        readprogressEntity.progress = progress;
+                        readprogressEntity.exam_assigned = exam_assigned;
+                    }else{
+                        readprogressEntity = [[HBReadprogressEntity alloc] init];
+                        readprogressEntity.book_id = book_id;
+                        readprogressEntity.progress = progress;
+                        readprogressEntity.exam_assigned = NO; //先临时设置为NO
+                        [self.readProgressEntityDic setObject:readprogressEntity forKey:book_id];
+                    }
+                    
+                    NSMutableArray *progressArr = [[NSMutableArray alloc] initWithCapacity:1];
+                    [progressArr addObject:readprogressEntity];
+                    
+                    [[HBReadProgressDB sharedInstance] updateHBReadprogress:progressArr];
+                    
+                    [self reloadGrid];
+                }];
+            }else{
+                
+                HBReadprogressEntity *readprogressEntity = [self.readProgressEntityDic objectForKey:bookId];
+                
+                if (readprogressEntity) {
+                    readprogressEntity.progress = progress;
+                    readprogressEntity.exam_assigned = NO; //先临时设置为NO
+                }else{
+                    readprogressEntity = [[HBReadprogressEntity alloc] init];
+                    readprogressEntity.book_id = bookId;
+                    readprogressEntity.progress = progress;
+                    readprogressEntity.exam_assigned = NO; //先临时设置为NO
+                    [self.readProgressEntityDic setObject:readprogressEntity forKey:bookId];
+                }
+                
+                NSMutableArray *progressArr = [[NSMutableArray alloc] initWithCapacity:1];
+                [progressArr addObject:readprogressEntity];
+                
+                [[HBReadProgressDB sharedInstance] updateHBReadprogress:progressArr];
+                
+                [self reloadGrid];
+            }
+        }
+    }
+}
+
+-(void)requestBookProgressSuccess:(id)responseObject
+{
+    NSArray *arr = [responseObject objectForKey:@"progress"];
+    for (NSDictionary *dict in arr)
+    {
+        NSString *book_id = [NSString stringWithFormat:@"%ld", [[dict objectForKey:@"id"] integerValue]];
+        NSString *progress = [NSString stringWithFormat:@"%ld", [[dict objectForKey:@"progress"] integerValue]];
+        
+        HBReadprogressEntity *readprogressEntity = [self.readProgressEntityDic objectForKey:book_id];
+        
+        if (readprogressEntity) {
+            readprogressEntity.progress = progress;
+        }else{
+            readprogressEntity = [[HBReadprogressEntity alloc] init];
+            readprogressEntity.book_id = book_id;
+            readprogressEntity.progress = progress;
+            readprogressEntity.exam_assigned = NO; //先临时设置为NO
+            [self.readProgressEntityDic setObject:readprogressEntity forKey:book_id];
+        }
+    }
+    
+    NSArray* keys = [self.readProgressEntityDic allKeys];
+    NSMutableArray *progressArr = [[NSMutableArray alloc] initWithCapacity:1];
+    for(NSString* str in keys)
+    {
+        [progressArr addObject:[self.readProgressEntityDic objectForKey:str]];
+    }
+    [[HBReadProgressDB sharedInstance] updateHBReadprogress:progressArr];
+    
+    [self reloadGrid];
 }
 
 - (void)viewDidLoad {
@@ -121,7 +233,7 @@
 //        [self requestAllBookset];
 //    }
 
-    [_gridView reloadData];
+    [self reloadGrid];
 }
 
 -(void)getContentDetailEntitys:(NSArray *)booksIDsArr
@@ -140,7 +252,7 @@
     }
     [self.contentDetailEntityDic removeAllObjects];
     [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
-    [_gridView reloadData];
+    [self reloadGrid];
 }
 
 - (void)initMainView
@@ -281,6 +393,8 @@
         itemView = [[TextGridItemView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, (ScreenHeight - KHBNaviBarHeight)/3)];
     }
     
+    itemView.delegate = self;
+    
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
     BookEntity *entity = arr[listIndex];
     NSString *bookTitle = entity.bookTitleCN;
@@ -294,8 +408,12 @@
     
     itemView.bookDownloadUrl = entity.bookUrl;
     
+    NSString *book_id = [NSString stringWithFormat:@"%@", entity.bookId];
+    HBReadprogressEntity *readprogressEntity = [self.readProgressEntityDic objectForKey:book_id];
+    NSString *progress = readprogressEntity.progress;
+    
     if ([LEADERSDK isBookDownloaded:entity]) {
-        [itemView bookDownloaded:entity];   //已下载
+        [itemView bookDownloaded:entity progress:progress];   //已下载（阅读完成显示“作业”，未完成显示进度条）
     }else if([LEADERSDK isBookDownloading:entity]){
         [itemView bookDownloading:entity];  //正在下载
     }else{
@@ -392,12 +510,18 @@
                 
                 [self.contentDetailEntityDic removeAllObjects];
                 [self.contentDetailEntityDic setObject:booklistTmp forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
-                [_gridView reloadData];
+                
+                [self reloadGrid];
             }];
             
             break;
         }
     }
+}
+
+-(void)reloadGrid
+{
+    [_gridView reloadData];
 }
 
 @end

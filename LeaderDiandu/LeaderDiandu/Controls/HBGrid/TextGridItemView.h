@@ -15,18 +15,24 @@
 
 @class BookEntity;
 
+@protocol reloadGridDelegate <NSObject>
+
+- (void)reloadGrid;
+
+@end
+
 @interface TextGridItemView : HBGridItemView
 
 @property (nonatomic, strong) UIImageView *pauseView;
 @property (nonatomic, strong) MBProgressHUD *progressView;
-@property (nonatomic, strong) UILabel *readProgressLabel;
-
 @property (nonatomic, copy) NSString* bookDownloadUrl;
+
+@property (nonatomic, weak) id<reloadGridDelegate> delegate;
 
 //更新数据
 - (void)updateFormData:(NSDictionary*)dic;
 
-- (void)bookDownloaded:(BookEntity *)book;
+- (void)bookDownloaded:(BookEntity *)book progress:(NSString *)progress;
 - (void)bookDownloading:(BookEntity *)book;
 - (void)bookUnDownload:(BookEntity *)book;
 

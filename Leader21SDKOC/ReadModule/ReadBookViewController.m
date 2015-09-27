@@ -21,6 +21,8 @@
 
 #define READ_BOOK_TOOLBAR_HEIGHT  ([DE isPad]?64:44)
 
+#define kNotification_ReadBookBack       @"kNotification_ReadBookBack"
+
 @interface ReadBookViewController ()<UIGestureRecognizerDelegate, BasePageViewControllerDelegate>
 
 @property (nonatomic, strong, readwrite) BasePageViewController *pageViewController;
@@ -707,14 +709,24 @@
         //退出
         NSInteger index = [self currentIndex];
         NSInteger count = [self.readBookDataSource totalCount];
-        if (index > 0 && count > 0) {
+        if (index >= 0 && count > 0) {
             NSInteger progress = 100*index/count;
             if (index + 1 >= count) {
                 progress = 100;
             }
+            if (progress == 0) {
+                progress = 8;
+            }
             if (progress < 0 || progress > 100) {
                 progress = 0;
             }
+            
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:1];
+            [dic setObject:[NSString stringWithFormat:@"%ld", progress] forKey:@"progress"];
+            [dic setObject:[NSString stringWithFormat:@"%lld", self.bookID] forKey:@"book_id"];
+            
+            //用户阅读书籍返回发送通知
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_ReadBookBack object:nil userInfo:dic];
         }
         
         [self.navigationController popViewControllerAnimated:YES];

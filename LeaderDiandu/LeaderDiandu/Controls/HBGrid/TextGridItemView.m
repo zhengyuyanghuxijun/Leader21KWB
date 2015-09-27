@@ -16,11 +16,13 @@
 
 @interface TextGridItemView()
 {
+    UILabel *readProgressLabel;
     UILabel *_bookNameLabel;
     UIButton *_downloadButton;
     UIButton *_bookCoverButton;
 }
 
+@property (strong, nonatomic) UILabel *readProgressLabel;
 @property (strong, nonatomic) UILabel * bookNameLabel;
 @property (strong, nonatomic) UIButton * downloadButton;
 @property (strong, nonatomic) UIButton * bookCoverButton;
@@ -54,6 +56,12 @@
 
 - (void) initUI
 {
+    //阅读进度Label
+    self.readProgressLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, self.frame.size.width, 25)];
+    self.readProgressLabel.textAlignment = NSTextAlignmentCenter;
+    self.readProgressLabel.hidden = YES;
+    [self addSubview:self.readProgressLabel];
+    
     //下载按钮
     self.downloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.downloadButton.frame = CGRectMake((self.frame.size.width - 60)/2, 10, 60, 25);
@@ -142,7 +150,8 @@
     
     if ([book.bookUrl isEqualToString:self.bookDownloadUrl]){
         if (status == downloadStatusFinished) {
-            [self bookDownloaded:book];
+            [self bookDownloaded:book progress:@"0"];
+            [self.delegate reloadGrid];
         }else if(status == downloadStatusDownloading){
             [self bookDownloading:book];
         }else if (status == downloadStatusNone){
@@ -151,17 +160,34 @@
     }
 }
 
-- (void)bookDownloaded:(BookEntity *)book
+- (void)bookDownloaded:(BookEntity *)book progress:(NSString *)progress
 {
-    //已下载
+    //已下载（阅读完成显示“作业”，未完成显示进度条）
     self.progressView.hidden = YES;
     self.pauseView.hidden = YES;
     
-    [self.downloadButton setTitle:@"已下载" forState:UIControlStateNormal];
+    if ([progress isEqualToString:@"100"]) {
+        self.readProgressLabel.hidden = YES;
+        self.downloadButton.hidden = NO;
+        [self.downloadButton setTitle:@"作业" forState:UIControlStateNormal];
+    }else{
+        //to do ...
+        self.readProgressLabel.hidden = NO;
+        self.downloadButton.hidden = YES;
+        
+        if (progress == nil) {
+            progress = @"0";
+        }
+        
+        self.readProgressLabel.text = [NSString stringWithFormat:@"Read %@%@", progress, @"%"];
+    }
 }
 
 - (void)bookDownloading:(BookEntity *)book
 {
+    self.readProgressLabel.hidden = YES;
+    self.downloadButton.hidden = NO;
+    
     //正在下载
     CGFloat progress = book.download.progress.floatValue;
     if (progress <= 0.005f || progress >= 1.0f) {
@@ -179,6 +205,9 @@
 
 - (void)bookUnDownload:(BookEntity *)book
 {
+    self.readProgressLabel.hidden = YES;
+    self.downloadButton.hidden = NO;
+    
     //未下载
     self.progressView.hidden = YES;
     self.pauseView.hidden = NO;
