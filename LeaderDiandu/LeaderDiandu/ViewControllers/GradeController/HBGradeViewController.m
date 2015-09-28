@@ -41,7 +41,6 @@
 
 @property (nonatomic, strong)UIButton *rightButton;
 
-
 @end
 
 @implementation HBGradeViewController
@@ -77,12 +76,12 @@
     [self.readProgressEntityDic removeAllObjects];
     self.readProgressEntityDic = [[HBReadProgressDB sharedInstance] getAllReadprogressDic];
     
-    currentID = 1;
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         /** type: 1 - 学生； 10 - 老师*/
         NSInteger type = [[dict objectForKey:@"type"] integerValue];
         if (type == 1) {
+            [_gridView setHeaderViewHidden:NO];
             //学生获取作业列表
             [self requestTaskListOfStudent];
             //从服务器拉取套餐信息
@@ -97,6 +96,7 @@
                 }
             }];
         }else{
+            [_gridView setHeaderViewHidden:YES];
             //老师登录，将学生作业Id数组清空
             [self.taskBookIdArr removeAllObjects];
             //登录成功先load套餐信息，如果套餐信息为空则去服务器拉取数据
@@ -276,6 +276,7 @@
     }
     [self.contentDetailEntityDic removeAllObjects];
     [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+    [_gridView hideRefreshView];
     [self reloadGrid];
 }
 
@@ -292,6 +293,17 @@
         _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, ScreenWidth, ScreenHeight - KHBNaviBarHeight)];
         _gridView.delegate = self;
         _gridView.backgroundColor = [UIColor clearColor];
+        
+        NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+        if (dict) {
+            /** type: 1 - 学生； 10 - 老师*/
+            NSInteger type = [[dict objectForKey:@"type"] integerValue];
+            if (type == 1) {
+                [_gridView setHeaderViewHidden:NO];
+            }else{
+                [_gridView setHeaderViewHidden:YES];
+            }
+        }
 
         [self.view addSubview:_gridView];
     }
@@ -478,6 +490,14 @@
     }
 }
 
+-(void)refreshTableHeaderDidTriggerRefresh
+{
+    //下拉加载 加载数据 (从服务器拉取套餐信息）
+//    [self requestAllBookset];
+    
+    [self LoginSuccess];
+}
+
 - (void)requestAllBookset
 {
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
@@ -549,6 +569,7 @@
                 [self.contentDetailEntityDic removeAllObjects];
                 [self.contentDetailEntityDic setObject:booklistTmp forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
                 
+                [_gridView hideRefreshView];
                 [self reloadGrid];
             }];
             

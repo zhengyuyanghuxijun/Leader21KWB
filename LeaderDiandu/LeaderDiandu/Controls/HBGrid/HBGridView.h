@@ -46,6 +46,8 @@
 - (NSInteger)indexOfGridItemView:(HBGridItemView *)gridItem;
 - (NSInteger)indexOfGridIndex:(GridIndex *)gridIndex;
 - (void)reloadData;
+-(void)hideRefreshView;
+-(void)setHeaderViewHidden:(BOOL)hidden;
 
 @end
 
@@ -66,5 +68,7 @@
 - (void)gridViewDidScroll:(HBGridView *)gridView;
 - (void)gridViewDidEndDragging:(HBGridView *)gridView willDecelerate:(BOOL)decelerate;
 - (void)gridViewDidEndDecelerating:(HBGridView *)gridView;
+
+-(void)refreshTableHeaderDidTriggerRefresh;
 
 @end

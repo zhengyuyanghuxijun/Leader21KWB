@@ -9,8 +9,16 @@
 #import "HBGridView.h"
 #import "HBGridCellView.h"
 
-@interface HBGridView ()
+#import "RefreshTableHeaderView.h"
 
+@interface HBGridView ()<RefreshTableHeaderDelegate>
+{
+    RefreshTableHeaderView *_headerView;
+    BOOL _isRefresh;
+}
+
+@property (nonatomic, strong)RefreshTableHeaderView * headerView;//下拉加载
+@property (nonatomic, assign)BOOL isRefresh;
 
 @end
 
@@ -45,6 +53,16 @@ delegate = _delegate;
     [_tableView setBackgroundView:imageView];
     
     [self addSubview:_tableView];
+    
+    _headerView = [[RefreshTableHeaderView alloc]initWithFrame:CGRectMake(0, -_tableView.frame.size.height, _tableView.frame.size.width, _tableView.frame.size.height)];
+    _headerView.delegate = self;
+    _headerView.hidden = YES;
+    [_tableView addSubview:_headerView];
+}
+
+-(void)setHeaderViewHidden:(BOOL)hidden
+{
+    _headerView.hidden = hidden;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -183,6 +201,29 @@ delegate = _delegate;
     }
 }
 
+#pragma mark - refreshTableHeaderViewDelegate
+
+- (void)refreshTableHeaderDidTriggerRefresh:(RefreshTableHeaderView *)view{
+    if(_isRefresh)return;
+    _isRefresh = true;
+    if ([_delegate respondsToSelector:@selector(refreshTableHeaderDidTriggerRefresh)])
+    {
+        [_delegate refreshTableHeaderDidTriggerRefresh];
+    }
+}
+- (BOOL)refreshTableHeaderDataSourceIsLoading:(RefreshTableHeaderView*)view{
+    
+    return _isRefresh;
+}
+
+-(void)hideRefreshView
+{
+    if (_isRefresh) {
+        _isRefresh = NO;
+        [_headerView refreshScrollViewDataSourceDidFinishedLoading:_tableView];
+    }
+}
+
 #pragma mark -
 #pragma mark UIScrollViewDelegate
 
@@ -192,6 +233,11 @@ delegate = _delegate;
     {
         [_delegate gridViewDidScroll:self];
     }
+    
+    if(scrollView == _tableView && ![_headerView isHidden]){
+        //        isScroll = NO;
+        [_headerView refreshScrollViewDidScroll:_tableView];
+    }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
@@ -199,6 +245,10 @@ delegate = _delegate;
     if ([_delegate respondsToSelector:@selector(gridViewDidEndDragging:willDecelerate:)]) 
     {
         [_delegate gridViewDidEndDragging:self willDecelerate:decelerate];
+    }
+    
+    if(scrollView == _tableView && ![_headerView isHidden]){
+        [_headerView refreshScrollViewDidEndDragging:_tableView];
     }
 }
 
