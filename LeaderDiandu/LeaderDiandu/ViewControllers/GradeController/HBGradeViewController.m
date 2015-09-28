@@ -294,10 +294,10 @@
                             action:@selector(pushMenuItem:)];
         [menuItems addObject:item];
     }
- 
+
     CGRect menuFrame = CGRectMake(ScreenWidth - 70, 70, 60, 50 * self.contentEntityArr.count);
 
-    [FTMenu showMenuWithFrame:menuFrame inView:self.navigationController.view menuItems:menuItems];
+    [FTMenu showMenuWithFrame:menuFrame inView:self.navigationController.view menuItems:menuItems currentID:currentID];
 }
 
 - (void) pushMenuItem:(KxMenuItem *)sender

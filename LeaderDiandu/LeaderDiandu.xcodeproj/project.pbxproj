@@ -1530,7 +1530,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "51b1bc31-da78-42c4-a83a-53ba0907c94e";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -1560,7 +1560,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "51b1bc31-da78-42c4-a83a-53ba0907c94e";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

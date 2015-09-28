@@ -46,7 +46,7 @@
  *
  *	@return	nil
  */
-+ (void) showMenuWithFrame:(CGRect)frame inView:(UIView *)view menuItems:(NSArray *)menuItems;
++ (void) showMenuWithFrame:(CGRect)frame inView:(UIView *)view menuItems:(NSArray *)menuItems currentID:(NSInteger)currentID;
 
 /**
  *	@brief	下拉列表删除
