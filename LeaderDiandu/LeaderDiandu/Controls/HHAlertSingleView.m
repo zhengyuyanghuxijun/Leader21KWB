@@ -196,9 +196,9 @@ static selectButton STAblock;
     if (hHAlertStyle == HHAlertStyleDefault) {
     }else{
         if (hHAlertStyle == HHAlertStyleOk) {
-            _tagView.image = [UIImage imageNamed:@"menu_head"];
+            _tagView.image = [UIImage imageNamed:@"menu_user_pohoto"];
         }else
-            _tagView.image = [UIImage imageNamed:@"menu_head"];
+            _tagView.image = [UIImage imageNamed:@"menu_user_pohoto"];
         [self addSubview:_tagView];
     }
     

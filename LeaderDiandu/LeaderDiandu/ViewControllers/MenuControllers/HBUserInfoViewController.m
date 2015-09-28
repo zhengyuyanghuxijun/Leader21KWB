@@ -89,7 +89,7 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     NSInteger screenWidth = [UIScreen mainScreen].bounds.size.width;
     UIView *view = [[UIView alloc] init];
     UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-imgWidth)/2, (200-imgWidth)/2, imgWidth, imgWidth)];
-    headView.image = [UIImage imageNamed:@"menu_head"];
+    headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
     [view addSubview:headView];
     
     return view;
@@ -116,7 +116,7 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         } else if (index > 0) {
             UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(viewWidth-40, 20, 20, 20)];
-            arrowImg.image = [UIImage imageNamed:@"menu_right"];
+            arrowImg.image = [UIImage imageNamed:@"menu_icon_user_open"];
             [cell.contentView addSubview:arrowImg];
         }
     }

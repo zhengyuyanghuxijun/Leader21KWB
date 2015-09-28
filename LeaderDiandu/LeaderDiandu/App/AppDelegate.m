@@ -97,11 +97,11 @@
     NSArray *titleArr = nil;
     NSArray *ctlArray = nil;
     if (userEntity.type == 1) {
-        imgArray = @[@"menu_teacher", @"menu_star", @"menu_test", @"menu_pay", @"menu_setting", @"menu_service", @"menu_setting"];
+        imgArray = @[@"menu-icn-myteacher", @"menu-icn-subs", @"menu-icn-test", @"menu-icn-pay", @"menu-icn-message", @"menu-icn-service", @"menu-icn-setting"];
         titleArr = @[@"我的老师", @"订阅等级", @"我的作业", @"支付中心", @"消息中心", @"联系客服", @"设置"];
         ctlArray = @[@"HBMyTeacherViewController", @"HBSubscribeViewController", @"HBTestWorkViewController", @"HBPayViewController", @"HBMessageViewController", @"", @"HBSettingViewController"];
     } else if (userEntity.type == 10) {//老师
-        imgArray = @[@"menu_teacher", @"menu_test", @"menu_pay", @"menu_setting", @"menu_service", @"menu_setting"];
+        imgArray = @[@"menu-icn-student", @"menu-icn-homework", @"menu-icn-instructor", @"menu-icn-message", @"menu-icn-service", @"menu-icn-setting"];
         titleArr = @[@"学生管理", @"作业管理", @"我的教研员", @"消息中心", @"联系客服", @"设置"];
         ctlArray = @[@"HBStuManViewController", @"HBWorkManViewController", @"HBLeaderViewController", @"HBMessageViewController", @"", @"HBSettingViewController"];
     }

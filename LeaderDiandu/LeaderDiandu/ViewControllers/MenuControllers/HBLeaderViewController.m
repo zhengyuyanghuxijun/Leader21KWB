@@ -72,7 +72,7 @@ static NSString * const KLeaderViewControllerCellReuseId = @"KUserInfoViewContro
     NSInteger screenWidth = [UIScreen mainScreen].bounds.size.width;
     UIView *view = [[UIView alloc] init];
     UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-imgWidth)/2, (200-imgWidth)/2, imgWidth, imgWidth)];
-    headView.image = [UIImage imageNamed:@"menu_head"];
+    headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
     [view addSubview:headView];
     
     return view;

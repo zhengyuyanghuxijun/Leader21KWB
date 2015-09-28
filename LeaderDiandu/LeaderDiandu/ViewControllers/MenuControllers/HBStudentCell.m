@@ -25,7 +25,7 @@
 {
     //头像
     self.cellHeadImage = [[UIImageView alloc] init];
-    self.cellHeadImage.image = [UIImage imageNamed:@"menu_head"];
+    self.cellHeadImage.image = [UIImage imageNamed:@"menu_user_pohoto"];
     self.cellHeadImage.frame = CGRectMake(10, 10, 50, 70 - 10 - 10);
     [self addSubview:self.cellHeadImage];
     

@@ -122,7 +122,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     float controlY = 80;
     float controlH = 50;
     UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlH, controlH)];
-    headView.image = [UIImage imageNamed:@"menu_head"];
+    headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
     [view addSubview:headView];
     
     controlX += controlH;
@@ -154,7 +154,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     controlX += controlW;
     controlY = 15;
     UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlH, controlH)];
-    arrowImg.image = [UIImage imageNamed:@"menu_right"];
+    arrowImg.image = [UIImage imageNamed:@"menu_icon_user_open"];
     [buttonInfo addSubview:arrowImg];
     
     return view;
@@ -174,7 +174,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 //    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(170, 20, 20, 20)];
-    arrowImg.image = [UIImage imageNamed:@"menu_right"];
+    arrowImg.image = [UIImage imageNamed:@"menu_icon_user_open"];
     [cell addSubview:arrowImg];
     
     return cell;

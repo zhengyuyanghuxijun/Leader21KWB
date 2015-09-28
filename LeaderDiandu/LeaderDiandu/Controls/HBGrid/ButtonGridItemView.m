@@ -65,7 +65,7 @@
         [self.levelButton setImage:[UIImage imageNamed:@"flower"] forState:UIControlStateDisabled];
     }else{
         self.subscribedImgView.hidden = YES;
-        [self.levelButton setImage:[UIImage imageNamed:@"menu_head"] forState:UIControlStateDisabled];
+        [self.levelButton setImage:[UIImage imageNamed:@"menu_user_pohoto"] forState:UIControlStateDisabled];
     }
 }
 
