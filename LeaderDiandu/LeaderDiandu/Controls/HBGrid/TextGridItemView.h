@@ -21,6 +21,12 @@
 
 @end
 
+@interface MyProgressView : UIView
+
+-(void)setProgress:(float)fProgress;
+
+@end
+
 @interface TextGridItemView : HBGridItemView
 
 @property (nonatomic, strong) MBProgressHUD *progressView;

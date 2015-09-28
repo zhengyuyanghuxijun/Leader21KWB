@@ -15,10 +15,63 @@
 #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 #define LABELFONTSIZE 14.0f
 
+@interface MyProgressView()
+{
+    UIImageView *_trackView;
+    UIImageView *_progressView;
+}
+
+@end
+
+@implementation MyProgressView
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        // Initialization code
+        [self initUI];
+    }
+    return self;
+}
+
+- (void) initUI
+{
+    CGSize size = self.frame.size;
+    
+    //进度未填充部分显示的图像
+    _trackView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *trackImage = [UIImage imageNamed:@"bookshelf-bg-progress-bg"];
+    _trackView.image = trackImage;
+    [self addSubview:_trackView];
+    
+    //背景VIEW
+    UIView *progressViewBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    progressViewBg.clipsToBounds = YES;//当前view的主要作用是将出界了的_progressView剪切掉，所以需将clipsToBounds设置为YES
+    [self addSubview:progressViewBg];
+    
+    //进度填充部分显示的图像
+    _progressView = [[UIImageView alloc] init];
+    UIImage *progressImage = [UIImage imageNamed:@"bookshelf-bg-progress"];
+    _progressView.image = progressImage;
+    [self setProgress:0.0f];//设置进度
+    [progressViewBg addSubview:_progressView];
+}
+
+-(void)setProgress:(float)fProgress
+{
+    float progress = fProgress;
+    CGSize size = self.frame.size;
+    _progressView.frame = CGRectMake(0, 0, size.width * progress, size.height);
+}
+
+@end
+
 @interface TextGridItemView()
 {
     UILabel *_readProgressLabel;
-    UIProgressView *_progressControl;
+    MyProgressView *_progressControl;
     UILabel *_bookNameLabel;
     UIButton *_downloadButton;
     UIButton *_bookCoverButton;
@@ -66,29 +119,8 @@
     [self addSubview:self.readProgressLabel];
     
     //阅读进度条
-    _progressControl = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-    _progressControl.frame = CGRectMake(10, 30, self.frame.size.width - 10 - 10, 10);
+    _progressControl = [[MyProgressView alloc] initWithFrame:CGRectMake(15, 30, self.frame.size.width - 30, 6)];
     _progressControl.hidden = YES;
-    
-    UIImage *progressImage = [UIImage imageNamed:@"bookshelf-bg-progress"];
-    UIImage *trackImage = [UIImage imageNamed:@"bookshelf-bg-progress-bg"];
-    
-//    //不让图片拉伸变形
-//    CGFloat top = 10; // 顶端盖高度
-//    CGFloat bottom = 10 ; // 底端盖高度
-//    CGFloat left = 20; // 左端盖宽度
-//    CGFloat right = 20; // 右端盖宽度
-//    UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
-//    // 指定为拉伸模式，伸缩后重新赋值
-//    progressImage = [progressImage resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
-//    trackImage = [trackImage resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
-    
-    _progressControl.trackImage = trackImage;
-    _progressControl.progressImage = progressImage;
-    
-    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 3.0f);
-    _progressControl.transform = transform;
-    
     [self addSubview:_progressControl];
     
     //下载按钮
@@ -208,7 +240,7 @@
             progress = @"0";
         }
         
-        _progressControl.progress = [progress integerValue]/100.0f;
+        [_progressControl setProgress:[progress integerValue]/100.0f];
         self.readProgressLabel.text = [NSString stringWithFormat:@"Read %@%@", progress, @"%"];
     }
 }
