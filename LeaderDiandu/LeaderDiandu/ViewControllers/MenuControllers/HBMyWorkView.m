@@ -264,7 +264,7 @@ typedef enum : NSUInteger {
 - (BOOL)isQuestionRight:(NSInteger)answer
 {
     BOOL isRight = NO;
-    if (selAnswerIndex == answer) {
+    if (selAnswerIndex+1 == answer) {
         isRight = YES;
     }
     

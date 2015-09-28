@@ -10,6 +10,9 @@
 
 @interface HBScoreView : UIView
 
+- (id)initWithFrame:(CGRect)frame score:(NSInteger)score;
+
 @property (nonatomic, assign)NSInteger score;
+@property (nonatomic, strong)UIButton *finishBtn;
 
 @end

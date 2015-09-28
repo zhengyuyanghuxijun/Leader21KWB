@@ -109,7 +109,9 @@
 
 - (void)showScoreView
 {
+    _progressView.hidden = YES;
     _myWorkView.hidden = YES;
+    _labTitle.text = @"成绩展示";
     
     NSInteger scoreNum = 0;
     for (NSDictionary *dict in _scoreArray) {
@@ -121,9 +123,14 @@
     }
     
     CGRect frame = _myWorkView.frame;
-    HBScoreView *scoreView = [[HBScoreView alloc] initWithFrame:frame];
-    scoreView.score = scoreNum;
+    HBScoreView *scoreView = [[HBScoreView alloc] initWithFrame:frame score:scoreNum];
+    [scoreView.finishBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:scoreView];
+}
+
+- (void)buttonAction:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)submitScore

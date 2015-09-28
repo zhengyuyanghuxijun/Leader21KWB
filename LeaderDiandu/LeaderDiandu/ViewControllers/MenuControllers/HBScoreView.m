@@ -10,10 +10,11 @@
 
 @implementation HBScoreView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame score:(NSInteger)score
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.score = score;
         [self initUI:frame];
     }
     return self;
@@ -21,21 +22,22 @@
 
 - (void)initUI:(CGRect)frame
 {
-    float controlX = 50;
-    float controlY = 50;
+    float controlX = 80;
+    float controlY = 0;
     float controlW = frame.size.width - controlX*2;
-    float controlH = controlW * 2;
+    UIImage *image = [self getScoreImage];
+    float controlH = image.size.height/image.size.width * controlW;
     UIImageView *scoreImg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-    scoreImg.image = [self getScoreImage];
+    scoreImg.image = image;
     [self addSubview:scoreImg];
     
     controlY = CGRectGetMaxY(scoreImg.frame) + 20;
-    controlH = 20;
+    controlH = 30;
     UILabel *scoreLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     scoreLbl.backgroundColor = [UIColor clearColor];
     scoreLbl.textColor = [UIColor redColor];
     scoreLbl.textAlignment = NSTextAlignmentCenter;
-    scoreLbl.font = [UIFont systemFontOfSize:22];
+    scoreLbl.font = [UIFont systemFontOfSize:30];
     scoreLbl.text = [self getScoreTip];
     [self addSubview:scoreLbl];
     
@@ -43,11 +45,11 @@
     controlW = frame.size.width - controlX*2;
     controlH = 45;
     controlY = frame.size.height - controlH - 20;
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-    [button setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
-    [button setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
-    [button setTitle:@"我知道了" forState:UIControlStateNormal];
-    [self addSubview:button];
+    self.finishBtn = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    [_finishBtn setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [_finishBtn setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
+    [_finishBtn setTitle:@"我知道了" forState:UIControlStateNormal];
+    [self addSubview:_finishBtn];
 }
 
 - (UIImage *)getScoreImage
