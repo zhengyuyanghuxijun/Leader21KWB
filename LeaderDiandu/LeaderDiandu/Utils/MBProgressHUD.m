@@ -815,7 +815,8 @@
     CGFloat radius = (allRect.size.width - 4) / 2;
     CGFloat startAngle = - ((float)M_PI / 2); // 90 degrees
     CGFloat endAngle = (self.progress * 2 * (float)M_PI) + startAngle;
-    CGContextSetRGBFillColor(context, 1.0f, 1.0f, 1.0f, .9f); // white
+    UIColor *aColor = [UIColor colorWithHex:0xFFC600];
+    CGContextSetFillColorWithColor(context, aColor.CGColor);
     CGContextMoveToPoint(context, center.x, center.y);
     CGContextAddArc(context, center.x, center.y, radius, startAngle, endAngle, 0);
     CGContextClosePath(context);
