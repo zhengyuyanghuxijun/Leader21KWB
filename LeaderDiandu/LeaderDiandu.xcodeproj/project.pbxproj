@@ -56,6 +56,7 @@
 		0D7A768F1B91E33900BC50A0 /* HBContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A768E1B91E33900BC50A0 /* HBContentManager.m */; };
 		0D7A76921B92064100BC50A0 /* HBBaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A76911B92064100BC50A0 /* HBBaseEntity.m */; };
 		0D7A76951B92176C00BC50A0 /* HBUserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A76941B92176C00BC50A0 /* HBUserEntity.m */; };
+		0D8F03421BB9857F00D64D48 /* HBScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8F03411BB9857F00D64D48 /* HBScoreView.m */; };
 		0D9E04FD1BB52B1500055203 /* HBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9E04FC1BB52B1500055203 /* HBOptionView.m */; };
 		0DAAF4041B8D5F8900078285 /* UIViewController+AddBackBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAF4031B8D5F8900078285 /* UIViewController+AddBackBtn.m */; };
 		0DAAF4071B8D651500078285 /* HBTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAF4061B8D651500078285 /* HBTitleView.m */; };
@@ -293,6 +294,8 @@
 		0D7A76911B92064100BC50A0 /* HBBaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBaseEntity.m; sourceTree = "<group>"; };
 		0D7A76931B92176C00BC50A0 /* HBUserEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBUserEntity.h; sourceTree = "<group>"; };
 		0D7A76941B92176C00BC50A0 /* HBUserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBUserEntity.m; sourceTree = "<group>"; };
+		0D8F03401BB9857F00D64D48 /* HBScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBScoreView.h; sourceTree = "<group>"; };
+		0D8F03411BB9857F00D64D48 /* HBScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreView.m; sourceTree = "<group>"; };
 		0D9E04FB1BB52B1500055203 /* HBOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBOptionView.h; sourceTree = "<group>"; };
 		0D9E04FC1BB52B1500055203 /* HBOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBOptionView.m; sourceTree = "<group>"; };
 		0DAAF4021B8D5F8900078285 /* UIViewController+AddBackBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AddBackBtn.h"; sourceTree = "<group>"; };
@@ -560,6 +563,8 @@
 				0DD214711B960148009E3DB9 /* HBTestWorkViewController.m */,
 				0D3F6D141BAE8F64005B4358 /* HBMyWorkViewController.h */,
 				0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */,
+				0D8F03401BB9857F00D64D48 /* HBScoreView.h */,
+				0D8F03411BB9857F00D64D48 /* HBScoreView.m */,
 				0D3F6D1A1BAEA41A005B4358 /* HBMyWorkView.h */,
 				0D3F6D1B1BAEA41A005B4358 /* HBMyWorkView.m */,
 				0D9E04FB1BB52B1500055203 /* HBOptionView.h */,
@@ -1315,6 +1320,7 @@
 				0DAAF4041B8D5F8900078285 /* UIViewController+AddBackBtn.m in Sources */,
 				0DD2146F1B95FFAC009E3DB9 /* HBSubscribeViewController.m in Sources */,
 				181E30801BA2C28600BBA92F /* HBContentDetailDB.m in Sources */,
+				0D8F03421BB9857F00D64D48 /* HBScoreView.m in Sources */,
 				18EED16A1BB12802004E5071 /* GuideView.m in Sources */,
 				0D74875C1B88C2C4007BE4CD /* HBGridItemView.m in Sources */,
 				0D7488941B8A2973007BE4CD /* NSString+MD5.mm in Sources */,
@@ -1542,7 +1548,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51b1bc31-da78-42c4-a83a-53ba0907c94e";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -1572,7 +1578,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51b1bc31-da78-42c4-a83a-53ba0907c94e";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

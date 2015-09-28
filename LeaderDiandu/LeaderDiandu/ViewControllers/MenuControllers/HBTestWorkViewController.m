@@ -272,8 +272,12 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
             // to do ...
             if (responseObject) {
                 NSDictionary *dict = responseObject;
-                NSString *url = dict[@"url"];
-                [self downloaTestWork:url onSelect:taskEntity];
+                if (dict) {
+                    NSString *url = dict[@"url"];
+                    [self downloaTestWork:url onSelect:taskEntity];
+                } else {
+                    [MBHudUtil showTextView:@"服务器资源缺失，敬请期待" inView:nil];
+                }
             }
         }];
     }

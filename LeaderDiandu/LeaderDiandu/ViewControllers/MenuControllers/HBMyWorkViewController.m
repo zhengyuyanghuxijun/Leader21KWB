@@ -10,6 +10,7 @@
 #import "UIViewController+AddBackBtn.h"
 #import "HBTitleView.h"
 #import "HBMyWorkView.h"
+#import "HBScoreView.h"
 
 #import "HBServiceManager.h"
 #import "HBTaskEntity.h"
@@ -19,6 +20,7 @@
 {
     UIProgressView *_progressView;
     HBMyWorkView *_myWorkView;
+    HBTitleView *_labTitle;
 }
 
 @property (nonatomic, strong)NSMutableArray *scoreArray;
@@ -31,8 +33,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:_taskEntity.bookName onView:self.view];
-    [self.view addSubview:labTitle];
+    _labTitle = [HBTitleView titleViewWithTitle:_taskEntity.bookName onView:self.view];
+    [self.view addSubview:_labTitle];
     
     [self addBackButton];
     
@@ -73,7 +75,7 @@
 - (void)updateWorkData:(NSDictionary *)dict
 {
     if (_scoreArray) {
-        [_scoreArray removeAllObjects];
+//        [_scoreArray removeAllObjects];
     } else {
         self.scoreArray = [[NSMutableArray alloc] init];
     }
@@ -98,11 +100,30 @@
     } else {
         //提交成绩，算分数
         if (_taskEntity.score) {
-            
+            [self showScoreView];
         } else {
             
         }
     }
+}
+
+- (void)showScoreView
+{
+    _myWorkView.hidden = YES;
+    
+    NSInteger scoreNum = 0;
+    for (NSDictionary *dict in _scoreArray) {
+        BOOL isRight = [dict[@"score"] boolValue];
+        if (isRight) {
+            NSInteger num = [dict[@"scoreNum"] integerValue];
+            scoreNum += num;
+        }
+    }
+    
+    CGRect frame = _myWorkView.frame;
+    HBScoreView *scoreView = [[HBScoreView alloc] initWithFrame:frame];
+    scoreView.score = scoreNum;
+    [self.view addSubview:scoreView];
 }
 
 - (void)submitScore
@@ -115,10 +136,11 @@
 {
     NSDictionary *dict = [_workManager currentQuestion];
     NSMutableDictionary *scoreDict = [[NSMutableDictionary alloc] init];
-    [scoreDict setObject:dict[@"type"] forKey:@"type"];
-    [scoreDict setObject:dict[@"knowledge"] forKey:@"knowledge"];
-    [scoreDict setObject:dict[@"ability"] forKey:@"ability"];
-    [scoreDict setObject:dict[@"difficulty"] forKey:@"difficulty"];
+    [scoreDict setObject:dict[@"Type"] forKey:@"type"];
+    [scoreDict setObject:dict[@"Knowledge"] forKey:@"knowledge"];
+    [scoreDict setObject:dict[@"Ability"] forKey:@"ability"];
+    [scoreDict setObject:dict[@"Difficulty"] forKey:@"difficulty"];
+    [scoreDict setObject:dict[@"Score"] forKey:@"scoreNum"];
     BOOL isRight = [_myWorkView isQuestionRight:[dict[@"Answer"] integerValue]];
     [scoreDict setObject:@(isRight) forKey:@"score"];
     

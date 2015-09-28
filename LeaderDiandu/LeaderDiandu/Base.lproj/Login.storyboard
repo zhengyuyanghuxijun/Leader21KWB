@@ -147,7 +147,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="967D5B5F-03EE-4034-8EB7-22657B332335" translatesAutoresizingMaskIntoConstraints="NO" id="Q2K-hg-8x1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DFC3168-85DE-4954-A443-9D28B2DAE9DD" translatesAutoresizingMaskIntoConstraints="NO" id="Q2K-hg-8x1">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号/ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Huy-Kb-5AL" customClass="HBNTextField">
@@ -291,7 +291,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="751C4935-D771-416D-A9FB-E80D4B3B33D8" translatesAutoresizingMaskIntoConstraints="NO" id="mKY-Hd-NsR">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A479E1D9-57F5-41E1-A1FE-3D9AF0FE230D" translatesAutoresizingMaskIntoConstraints="NO" id="mKY-Hd-NsR">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSo-HN-CUX">
@@ -418,7 +418,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="751C4935-D771-416D-A9FB-E80D4B3B33D8" width="375" height="666">
+        <image name="2DFC3168-85DE-4954-A443-9D28B2DAE9DD" width="375" height="666">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -17122,7 +17122,7 @@ D0hxAA9IeQAPSIYAD0iLAA9IjQAPSI8AD0iUAA9InAAPSJ8AD0ikAA9IrAAPSK8AD0jBAA9IxAAPSMkA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAA9Iyw
 </mutableData>
         </image>
-        <image name="967D5B5F-03EE-4034-8EB7-22657B332335" width="375" height="666">
+        <image name="A479E1D9-57F5-41E1-A1FE-3D9AF0FE230D" width="375" height="666">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -33826,7 +33826,7 @@ D0hxAA9IeQAPSIYAD0iLAA9IjQAPSI8AD0iUAA9InAAPSJ8AD0ikAA9IrAAPSK8AD0jBAA9IxAAPSMkA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAA9Iyw
 </mutableData>
         </image>
-        <image name="back" width="22" height="22"/>
+        <image name="back" width="32" height="32"/>
         <image name="free_btn" width="161" height="44"/>
         <image name="user_button" width="551" height="99"/>
     </resources>
