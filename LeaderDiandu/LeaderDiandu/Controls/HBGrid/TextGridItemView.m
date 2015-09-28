@@ -69,6 +69,23 @@
     _progressControl = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     _progressControl.frame = CGRectMake(10, 30, self.frame.size.width - 10 - 10, 10);
     _progressControl.hidden = YES;
+    
+    UIImage *progressImage = [UIImage imageNamed:@"bookshelf-bg-progress"];
+    UIImage *trackImage = [UIImage imageNamed:@"bookshelf-bg-progress-bg"];
+    
+//    //不让图片拉伸变形
+//    CGFloat top = 10; // 顶端盖高度
+//    CGFloat bottom = 10 ; // 底端盖高度
+//    CGFloat left = 20; // 左端盖宽度
+//    CGFloat right = 20; // 右端盖宽度
+//    UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
+//    // 指定为拉伸模式，伸缩后重新赋值
+//    progressImage = [progressImage resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
+//    trackImage = [trackImage resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
+    
+    _progressControl.trackImage = trackImage;
+    _progressControl.progressImage = progressImage;
+    
     [self addSubview:_progressControl];
     
     //下载按钮
