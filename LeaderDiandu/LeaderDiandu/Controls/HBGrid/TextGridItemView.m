@@ -86,6 +86,9 @@
     _progressControl.trackImage = trackImage;
     _progressControl.progressImage = progressImage;
     
+    CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 3.0f);
+    _progressControl.transform = transform;
+    
     [self addSubview:_progressControl];
     
     //下载按钮
@@ -97,18 +100,18 @@
     [self addSubview:self.downloadButton];
     
     //书籍名称
-    self.bookNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, self.downloadButton.frame.origin.y + self.downloadButton.frame.size.height, self.frame.size.width - 30, 20)];
+    self.bookNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, self.downloadButton.frame.origin.y + self.downloadButton.frame.size.height + 5, self.frame.size.width - 30, 20)];
     self.bookNameLabel.textAlignment = NSTextAlignmentCenter;
     self.bookNameLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];;
     [self addSubview:self.bookNameLabel];
     
     //书籍封皮
     self.bookCoverButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.bookCoverButton.frame = CGRectMake(10, self.bookNameLabel.frame.origin.y + self.bookNameLabel.frame.size.height, self.frame.size.width - 20, 100);
+    self.bookCoverButton.frame = CGRectMake(10, self.bookNameLabel.frame.origin.y + self.bookNameLabel.frame.size.height, self.frame.size.width - 20, 120);
     [self.bookCoverButton addTarget:self action:@selector(bookCoverButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.bookCoverButton];
     
-    CGRect rect = CGRectMake(0, self.bookNameLabel.frame.origin.y + self.bookNameLabel.frame.size.height + self.bookCoverButton.height, self.frame.size.width, 50);
+    CGRect rect = CGRectMake(0, self.bookCoverButton.frame.origin.y + self.bookCoverButton.height - 4, self.frame.size.width, 50);
     UIImageView *navView = [[UIImageView alloc] initWithFrame:rect];
     navView.image = [UIImage imageNamed:@"bookshelf-bg-shelf"];
     [self addSubview:navView];
@@ -119,15 +122,6 @@
     self.progressView.userInteractionEnabled = NO;
     [self addSubview:self.progressView];
     
-//    UIImage* pause = [UIImage imageNamed:@"continue_download.png"];
-//    self.pauseView = [[UIImageView alloc] initWithImage:pause];
-//    self.pauseView.size = CGSizeMake(36.0f, 36.0f);
-//    self.pauseView.contentMode = UIViewContentModeCenter;
-//    self.pauseView.clipsToBounds = YES;
-//    self.pauseView.layer.cornerRadius = self.pauseView.width / 2.0f;
-//    self.pauseView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5f];
-//    [self addSubview:self.pauseView];
-    
     self.progressView.hidden = YES;
     [self.progressView show:YES];
 }
@@ -136,9 +130,8 @@
 {
     [super layoutSubviews];
     
-    CGFloat progressY = 0;
+    CGFloat progressY = 15;
     self.progressView.frame = CGRectMake(0, progressY, self.bounds.size.width, self.bounds.size.height);
-//    self.pauseView.center = self.progressView.center;
 }
 
 -(void)downloadButtonPressed:(id)sender
@@ -199,7 +192,6 @@
 {
     //已下载（阅读完成显示“作业”，未完成显示进度条）
     self.progressView.hidden = YES;
-//    self.pauseView.hidden = YES;
     
     if ([progress isEqualToString:@"100"]) {
         self.readProgressLabel.hidden = YES;
@@ -237,7 +229,6 @@
     [self.downloadButton setTitle:@"下载中" forState:UIControlStateNormal];
     [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-downloading"] forState:UIControlStateNormal];
 
-//    self.pauseView.hidden = YES;
     self.progressView.hidden = NO;
     self.progressView.alpha = 1.0f;
     self.progressView.progress = progress;
@@ -251,7 +242,6 @@
     
     //未下载
     self.progressView.hidden = YES;
-//    self.pauseView.hidden = NO;
     [self.downloadButton setTitle:@"下载" forState:UIControlStateNormal];
     [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-download"] forState:UIControlStateNormal];
 }

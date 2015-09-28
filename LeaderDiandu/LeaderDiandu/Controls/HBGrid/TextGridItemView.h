@@ -23,7 +23,6 @@
 
 @interface TextGridItemView : HBGridItemView
 
-@property (nonatomic, strong) UIImageView *pauseView;
 @property (nonatomic, strong) MBProgressHUD *progressView;
 @property (nonatomic, copy) NSString* bookDownloadUrl;
 
