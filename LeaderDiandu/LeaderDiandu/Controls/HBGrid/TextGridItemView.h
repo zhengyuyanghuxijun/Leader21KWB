@@ -17,7 +17,7 @@
 
 @protocol reloadGridDelegate <NSObject>
 
-- (void)reloadGrid;
+- (void)reloadGridView;
 
 @end
 
@@ -37,7 +37,7 @@
 //更新数据
 - (void)updateFormData:(NSDictionary*)dic;
 
-- (void)bookDownloaded:(BookEntity *)book progress:(NSString *)progress;
+- (void)bookDownloaded:(BookEntity *)book progress:(NSString *)progress isTask:(BOOL)isTask;
 - (void)bookDownloading:(BookEntity *)book;
 - (void)bookUnDownload:(BookEntity *)book;
 

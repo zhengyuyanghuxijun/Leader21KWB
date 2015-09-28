@@ -37,6 +37,7 @@
 @property (nonatomic, strong)NSMutableArray *contentEntityArr;
 @property (nonatomic, strong)NSMutableDictionary *contentDetailEntityDic;
 @property (nonatomic, strong)NSMutableDictionary *readProgressEntityDic;
+@property (nonatomic, strong)NSMutableArray *taskBookIdArr;
 
 @property (nonatomic, strong)UIButton *rightButton;
 
@@ -53,6 +54,7 @@
         self.contentEntityArr = [[NSMutableArray alloc] initWithCapacity:1];
         self.contentDetailEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         self.readProgressEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
+        self.taskBookIdArr = [[NSMutableArray alloc] initWithCapacity:1];
         currentID = 1;
         
         //用户登录成功通知
@@ -81,9 +83,10 @@
         /** type: 1 - 学生； 10 - 老师*/
         NSInteger type = [[dict objectForKey:@"type"] integerValue];
         if (type == 1) {
+            //学生获取作业列表
+            [self requestTaskListOfStudent];
             //从服务器拉取套餐信息
             [self requestAllBookset];
-            
             //学生用户从服务器拉取最新的书籍阅读进度（老师用户直接从本地读取）
             NSString *user = [dict objectForKey:@"name"];
             NSString *token = [dict objectForKey:@"token"];
@@ -94,6 +97,8 @@
                 }
             }];
         }else{
+            //老师登录，将学生作业Id数组清空
+            [self.taskBookIdArr removeAllObjects];
             //登录成功先load套餐信息，如果套餐信息为空则去服务器拉取数据
             NSString *booksIDsStr = [[HBContentListDB sharedInstance] booksidWithID:currentID];
             if (booksIDsStr) {
@@ -117,6 +122,17 @@
     NSMutableDictionary *dic = (NSMutableDictionary *)[note userInfo];
     NSString *bookId = [dic objectForKey:@"book_id"];
     NSString *progress = [dic objectForKey:@"progress"];
+    
+    if ([progress integerValue] == 100) {
+        NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+        if (dict) {
+            /** type: 1 - 学生； 10 - 老师*/
+            NSInteger type = [[dict objectForKey:@"type"] integerValue];
+            if (type == 1) {
+                [self requestTaskListOfStudent];
+            }
+        }
+    }
     
     HBReadprogressEntity *oldReadprogressEntity = [self.readProgressEntityDic objectForKey:bookId];
     NSString *oldProgress = oldReadprogressEntity.progress;
@@ -423,7 +439,19 @@
     NSString *progress = readprogressEntity.progress;
     
     if ([LEADERSDK isBookDownloaded:entity]) {
-        [itemView bookDownloaded:entity progress:progress];   //已下载（阅读完成显示“作业”，未完成显示进度条）
+        //已下载（阅读完成,并且在作业列表里面，显示“作业”；阅读完成,不在作业列表里面显示“100%”；阅读未完成显示进度条）
+        BOOL flag = YES;
+        for (NSString *taskBookStr in self.taskBookIdArr) {
+            NSString *entityBookIdStr = [NSString stringWithFormat:@"%@", entity.bookId];
+            if ([taskBookStr isEqualToString:entityBookIdStr]) {
+                [itemView bookDownloaded:entity progress:progress isTask:YES];
+                flag = NO;
+                break;
+            }
+        }
+        if (flag) {
+            [itemView bookDownloaded:entity progress:progress isTask:NO];
+        }
     }else if([LEADERSDK isBookDownloading:entity]){
         [itemView bookDownloading:entity];  //正在下载
     }else{
@@ -529,9 +557,46 @@
     }
 }
 
+-(void)reloadGridView
+{
+    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+    if (dict) {
+        /** type: 1 - 学生； 10 - 老师*/
+        NSInteger type = [[dict objectForKey:@"type"] integerValue];
+        if (type == 1) {
+            [self requestTaskListOfStudent];
+        }
+    }
+    [self reloadGrid];
+}
+
 -(void)reloadGrid
 {
     [_gridView reloadData];
+}
+
+-(void)requestTaskListOfStudent
+{
+    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+    if (dict) {
+        NSString *user = [dict objectForKey:@"name"];
+        [[HBServiceManager defaultManager] requestTaskListOfStudent:user from:0 count:100 completion:^(id responseObject, NSError *error) {
+            if (responseObject) {
+                //学生获取作业列表成功
+                [self.taskBookIdArr removeAllObjects];
+                NSArray *arr = [responseObject objectForKey:@"exams"];
+                for (NSDictionary *dic in arr)
+                {
+                    NSDictionary *bookDic = [dic objectForKey:@"book"];
+                    NSString *bookIdStr = [bookDic objectForKey:@"id"];
+                    NSInteger bookId = [bookIdStr integerValue];
+                    [self.taskBookIdArr addObject:[NSString stringWithFormat:@"%ld", bookId]];
+                }
+                
+                [self reloadGrid];
+            }
+        }];
+    }
 }
 
 @end

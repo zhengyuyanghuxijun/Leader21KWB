@@ -175,7 +175,7 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
-        [[HBServiceManager defaultManager] requestTaskListOfTeacher:user from:0 count:10 completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestTaskListOfTeacher:user from:0 count:100 completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 NSArray *arr = [responseObject objectForKey:@"exams"];
                 for (NSDictionary *dic in arr)

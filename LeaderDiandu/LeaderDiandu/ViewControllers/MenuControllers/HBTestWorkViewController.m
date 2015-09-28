@@ -177,7 +177,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
 //        NSString *timeStr = [NSString stringWithFormat:@"%f", [NSDate date].timeIntervalSince1970];
-        [[HBServiceManager defaultManager] requestTaskListOfStudent:user from:0 count:10 completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestTaskListOfStudent:user from:0 count:100 completion:^(id responseObject, NSError *error) {
             
             if (responseObject) {
                 //学生获取作业列表成功

@@ -494,9 +494,9 @@
     [dicInfo setObject:@(from)     forKey:@"from"];
     [dicInfo setObject:@(count)     forKey:@"count"];
     
-    if (_receivedBlock) {
-        return;
-    }
+//    if (_receivedBlock) {
+//        return;
+//    }
     self.receivedBlock = receivedBlock;
     ////api/exam/student/list
     [self Post:@"/api/task/student/list" dict:dicInfo block:receivedBlock];

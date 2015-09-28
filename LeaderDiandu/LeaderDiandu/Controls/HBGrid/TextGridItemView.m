@@ -210,8 +210,8 @@
     
     if ([book.bookUrl isEqualToString:self.bookDownloadUrl]){
         if (status == downloadStatusFinished) {
-            [self bookDownloaded:book progress:@"0"];
-            [self.delegate reloadGrid];
+            [self bookDownloaded:book progress:@"0" isTask:NO];
+            [self.delegate reloadGridView];
         }else if(status == downloadStatusDownloading){
             [self bookDownloading:book];
         }else if (status == downloadStatusNone){
@@ -220,12 +220,12 @@
     }
 }
 
-- (void)bookDownloaded:(BookEntity *)book progress:(NSString *)progress
+- (void)bookDownloaded:(BookEntity *)book progress:(NSString *)progress isTask:(BOOL)isTask
 {
     //已下载（阅读完成显示“作业”，未完成显示进度条）
     self.progressView.hidden = YES;
     
-    if ([progress isEqualToString:@"100"]) {
+    if ([progress isEqualToString:@"100"] && isTask == YES) {
         self.readProgressLabel.hidden = YES;
         self.downloadButton.hidden = NO;
         _progressControl.hidden = YES;
