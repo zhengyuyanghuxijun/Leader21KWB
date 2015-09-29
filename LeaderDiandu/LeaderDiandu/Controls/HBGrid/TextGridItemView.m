@@ -128,7 +128,7 @@
     self.downloadButton.frame = CGRectMake((self.frame.size.width - 60)/2, 10, 60, 25);
     [self.downloadButton addTarget:self action:@selector(downloadButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.downloadButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.downloadButton.titleLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];;
+    self.downloadButton.titleLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     [self addSubview:self.downloadButton];
     
     //书籍名称

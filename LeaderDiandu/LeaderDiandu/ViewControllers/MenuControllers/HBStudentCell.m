@@ -9,6 +9,9 @@
 #import "HBStudentCell.h"
 #import "HBStudentEntity.h"
 
+#define LABELFONTSIZE 14.0f
+#define BUTTONFONTSIZE 15.0f
+
 @implementation HBStudentCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -32,23 +35,37 @@
     //姓名
     self.cellName = [[UILabel alloc] init];
     self.cellName.frame = CGRectMake(10 + 50 + 10, 10, 70, 70/2 - 10);
+    self.cellName.textAlignment = NSTextAlignmentLeft;
+    self.cellName.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     [self addSubview:self.cellName];
     
     //用户类型
-    self.cellStuType = [[UILabel alloc] init];
-    self.cellStuType.frame = CGRectMake(10 + 50 + 10 + 70 + 10, 10, 110, 70/2 - 10);
-    [self addSubview:self.cellStuType];
+    self.cellStuTypeBtn = [[UIButton alloc] initWithFrame:CGRectMake(10 + 50 + 10, 70/2, 60, 70/2 - 15)];
+    self.cellStuTypeBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.cellStuTypeBtn.titleLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
+    [self addSubview:self.cellStuTypeBtn];
+    
+    //群组图标
+    self.cellGroupImage = [[UIImageView alloc] init];
+    self.cellGroupImage.image = [UIImage imageNamed:@"icn-group"];
+    self.cellGroupImage.frame = CGRectMake(self.cellStuTypeBtn.frame.origin.x + 60 + 7, 70/2 + 3, 17, 14);
+    [self addSubview:self.cellGroupImage];
     
     //用户所属分组
     self.cellGroup = [[UILabel alloc] init];
-    self.cellGroup.frame = CGRectMake(10 + 50 + 10, 70/2, 150, 70/2 - 10);
+    self.cellGroup.frame = CGRectMake(self.cellGroupImage.frame.origin.x + self.cellGroupImage.frame.size.width + 7, 70/2 - 3, 150, 70/2 - 10);
+    self.cellGroup.textAlignment = NSTextAlignmentLeft;
+    self.cellGroup.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     [self addSubview:self.cellGroup];
     
     //解绑按钮
-    self.cellUnbundlingBtn = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 100, (70 - 30)/2, 90, 30)];
-    [self.cellUnbundlingBtn setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+    self.cellUnbundlingBtn = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 80, (70 - 25)/2, 70, 25)];
+    [self.cellUnbundlingBtn setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-normal"] forState:UIControlStateNormal];
     [self.cellUnbundlingBtn setTitle:@"解除绑定" forState:UIControlStateNormal];
+    [self.cellUnbundlingBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.cellUnbundlingBtn addTarget:self action:@selector(unbundlingBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+    self.cellUnbundlingBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.cellUnbundlingBtn.titleLabel.font = [UIFont boldSystemFontOfSize:BUTTONFONTSIZE];
     [self addSubview:self.cellUnbundlingBtn];
 }
 
@@ -61,11 +78,14 @@
         
         //1：普通用户 2：VIP用户 3：VIP过期用户
         if(1 == studentEntity.accountStatus){
-            self.cellStuType.text = @"普通用户";
+            [self.cellStuTypeBtn setTitle:@"普通用户" forState:UIControlStateNormal];
+            [self.cellStuTypeBtn setBackgroundImage:[UIImage imageNamed:@"studentmanage-bg-normal-user"] forState:UIControlStateNormal];
         }else if (2 == studentEntity.accountStatus){
-            self.cellStuType.text = @"VIP用户";
+            [self.cellStuTypeBtn setTitle:@"VIP会员" forState:UIControlStateNormal];
+            [self.cellStuTypeBtn setBackgroundImage:[UIImage imageNamed:@"studentmanage-bg-vip-user"] forState:UIControlStateNormal];
         }else{
-            self.cellStuType.text = @"VIP过期用户";
+            [self.cellStuTypeBtn setTitle:@"VIP过期" forState:UIControlStateNormal];
+            [self.cellStuTypeBtn setBackgroundImage:[UIImage imageNamed:@"studentmanage-bg-vipover-user"] forState:UIControlStateNormal];
         }
         
         if ([studentEntity.className isEqualToString:@""]) {

@@ -435,5 +435,15 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
                        total_page:(NSString *)total_page
                        completion:(HBServiceReceivedBlock)receivedBlock;
 
+/**
+ *  获取用户头像
+ *
+ *  @param user             用户ID
+ *  @param token            登录返回的凭证
+ *  @param userId           用户ID
+ *  @param receivedBlock 回调Block
+ */
+- (void)requestGetAvatar:(NSString *)user token:(NSString *)token userId:(NSString*)userId completion:(HBServiceReceivedBlock)receivedBlock;
+
 
 @end

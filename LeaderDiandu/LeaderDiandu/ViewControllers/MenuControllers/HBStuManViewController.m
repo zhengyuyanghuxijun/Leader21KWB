@@ -28,7 +28,9 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 }
 
 @property (nonatomic, strong) UIButton* studentButton;
+@property (nonatomic, strong) UILabel * studentSeperator;
 @property (nonatomic, strong) UIButton* groupButton;
+@property (nonatomic, strong) UILabel * groupSeperator;
 @property (nonatomic, strong) UIButton* addGroupButton;
 @property (nonatomic, strong) NSMutableArray *studentArr;
 @property (nonatomic, strong) NSMutableArray *groupArr;
@@ -61,20 +63,40 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     [self addBackButton];
     
     [self requestStudentList];
-    
-    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight, self.view.frame.size.width/2, 50.0f);
+    //学生按钮
+    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight, self.view.frame.size.width/2 - 3, 50.0f);
     self.studentButton = [[UIButton alloc] initWithFrame:rc];
-    [self.studentButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
     [self.studentButton setTitle:@"学生" forState:UIControlStateNormal];
+    [self.studentButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.studentButton addTarget:self action:@selector(studentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    self.studentButton.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.studentButton];
     
-    rc = CGRectMake(self.view.frame.size.width/2, KHBNaviBarHeight, self.view.frame.size.width/2, 50.0f);
+    self.studentSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.studentButton.frame.size.height - 2, self.studentButton.frame.size.width, 2)];
+    self.studentSeperator.backgroundColor = [UIColor colorWithHex:0xff8903];
+    [self.studentButton addSubview:self.studentSeperator];
+    
+    //分割线
+    UILabel *verticalLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.studentButton.frame.origin.x + self.studentButton.frame.size.width, KHBNaviBarHeight, 6, 50)];
+    verticalLineLabel.text = @"|";
+    verticalLineLabel.font = [UIFont boldSystemFontOfSize:20.0f];
+    verticalLineLabel.textAlignment = NSTextAlignmentCenter;
+    verticalLineLabel.textColor = [UIColor lightGrayColor];
+    verticalLineLabel.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:verticalLineLabel];
+    
+    //群组按钮
+    rc = CGRectMake(self.view.frame.size.width/2 + 3, KHBNaviBarHeight, self.view.frame.size.width/2, 50.0f);
     self.groupButton = [[UIButton alloc] initWithFrame:rc];
-    [self.groupButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
     [self.groupButton setTitle:@"群组" forState:UIControlStateNormal];
+    [self.groupButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.groupButton addTarget:self action:@selector(groupButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    self.groupButton.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.groupButton];
+    
+    self.groupSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.groupButton.frame.size.height - 2, self.groupButton.frame.size.width, 2)];
+    self.groupSeperator.backgroundColor = [UIColor colorWithHex:0xff8903];
+    [self.groupButton addSubview:self.groupSeperator];
     
     rc = CGRectMake(0.0f, ScreenHeight - 50.0f, ScreenWidth, 50.0f);
     self.addGroupButton = [[UIButton alloc] initWithFrame:rc];
@@ -83,6 +105,23 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     [self.addGroupButton addTarget:self action:@selector(assignWorkButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.addGroupButton];
     [self.addGroupButton setHidden:YES];
+    
+    [self showStudentView:YES];
+}
+
+-(void)showStudentView:(BOOL)showStudentView
+{
+    if (showStudentView) {
+        [self.studentButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.groupButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        self.studentSeperator.hidden = NO;
+        self.groupSeperator.hidden = YES;
+    }else{
+        [self.studentButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [self.groupButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.studentSeperator.hidden = YES;
+        self.groupSeperator.hidden = NO;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -205,6 +244,8 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     _tableView.frame = rc;
     
     [_tableView reloadData];
+    
+    [self showStudentView:YES];
 }
 
 -(void)groupButtonPressed
@@ -219,6 +260,8 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     _tableView.frame = rc;
     
     [_tableView reloadData];
+    
+    [self showStudentView:NO];
 }
 
 -(void)assignWorkButtonPressed:(id)sender
@@ -233,6 +276,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
+        NSString *token = [dict objectForKey:@"token"];
         [[HBServiceManager defaultManager] requestStudentList:user completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 //获取绑定老师的学生信息成功
@@ -259,6 +303,11 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
                     studentEntity.accountStatus = [[dic objectForKey:@"account_status"] integerValue];
                     
                     [self.studentArr addObject:studentEntity];
+                    
+//                    //获取用户头像
+//                    [[HBServiceManager defaultManager] requestGetAvatar:user token:token userId:studentEntity.name completion:^(id responseObject, NSError *error) {
+//                        
+//                    }];
                 }
                 
                 if (self.studentArr.count > 0) {

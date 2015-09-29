@@ -18,7 +18,8 @@
 
 @property (strong, nonatomic) UIImageView * cellHeadImage;
 @property (strong, nonatomic) UILabel *     cellName;
-@property (strong, nonatomic) UILabel *     cellStuType;
+@property (strong, nonatomic) UIButton *    cellStuTypeBtn;
+@property (strong, nonatomic) UIImageView * cellGroupImage;
 @property (strong, nonatomic) UILabel *     cellGroup;
 @property (strong, nonatomic) UIButton *    cellUnbundlingBtn;
 
