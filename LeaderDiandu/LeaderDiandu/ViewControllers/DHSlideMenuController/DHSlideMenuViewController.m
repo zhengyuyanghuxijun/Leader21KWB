@@ -190,6 +190,14 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
         [svc resetCurrentViewToMainViewController];
         
         NSString *viewCtlName = self.controllers[index];
+        
+        if ([viewCtlName isEqualToString:@""]) { //联系客服
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"您确定要拨打客服电话？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            alertView.tag = 0;
+            
+            [alertView show];
+        }
+        
         Class viewCtlClass = NSClassFromString(viewCtlName);
         if (viewCtlClass && [viewCtlClass isSubclassOfClass:[UIViewController class]]) {
             UIViewController *viewController = [[viewCtlClass alloc] init];
@@ -198,6 +206,17 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     }
     
     [svc hideSlideMenuViewController:YES];
+}
+
+#pragma mark - actionSheetDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0){
+        
+    }else{
+        NSString *allString = [NSString stringWithFormat:@"tel:4008126161"];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
+    }
 }
 
 #if 0
