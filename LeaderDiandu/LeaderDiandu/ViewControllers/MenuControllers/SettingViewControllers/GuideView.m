@@ -69,11 +69,12 @@ static NSInteger pageCount = 3;
         _pageControl.numberOfPages = pageCount;
         [_pageControl setCurrentPage:0];
         _pageControl.enabled = NO;
+        _pageControl.hidden = YES;
         [self addSubview:_pageControl];
         
         _enterButton = [[UIButton alloc] init];
-        [_enterButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
-        [_enterButton setTitle:@"立即体验" forState:UIControlStateNormal];
+//        [_enterButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+//        [_enterButton setTitle:@"立即体验" forState:UIControlStateNormal];
         [_enterButton addTarget:self action:@selector(enterButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         self.enterButton.hidden = YES;
         [self addSubview:_enterButton];
@@ -105,8 +106,8 @@ static NSInteger pageCount = 3;
     self.pageControl.center = CGPointMake(w * 0.5, h - 20);
     self.pageControl.bounds = CGRectMake(0, 0, 150, 50);
     
-    self.enterButton.center = CGPointMake(w * 0.5, h - 60);
-    self.enterButton.bounds = CGRectMake(0, 0, 200, 50);
+    self.enterButton.center = CGPointMake(w * 0.5, h - 90);
+    self.enterButton.bounds = CGRectMake(0, 0, 220, 50);
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -115,12 +116,12 @@ static NSInteger pageCount = 3;
     if (scrollView.contentOffset.x < 0.0f) {
         scrollView.contentOffset = CGPointZero;
     }
-    else if (scrollView.contentOffset.x > scrollView.frame.size.width * (pageCount-1)) {
-        self.pageControl.hidden = YES;
-    }
-    else {
-        self.pageControl.hidden = NO;
-    }
+//    else if (scrollView.contentOffset.x > scrollView.frame.size.width * (pageCount-1)) {
+//        self.pageControl.hidden = YES;
+//    }
+//    else {
+//        self.pageControl.hidden = NO;
+//    }
     
     self.enterButton.hidden = YES;
 }
