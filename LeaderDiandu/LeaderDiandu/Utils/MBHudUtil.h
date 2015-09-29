@@ -46,6 +46,6 @@
 + (void)showTextView:(NSString *)text
               inView:(UIView *)view;
 
-+ (void)showTextAlert:(NSString*)msg;
++ (void)showTextAlert:(NSString*)msg delegate:(id)delegate;
 
 @end

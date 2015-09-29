@@ -10,6 +10,7 @@
 #import "HBTestWorkManager.h"
 #import "HBOptionView.h"
 #import "MBHudUtil.h"
+#import <AVFoundation/AVAudioPlayer.h>
 
 #define KTagSelectionBegin  1527
 
@@ -25,7 +26,7 @@ typedef enum : NSUInteger {
     HBSelectionTypeText4,
 } HBSelectionType;
 
-@interface HBMyWorkView () <HBOptionViewDelegate>
+@interface HBMyWorkView () <HBOptionViewDelegate, AVAudioPlayerDelegate>
 {
     UILabel *_titleLabel;
     UILabel *_descLabel;
@@ -48,6 +49,7 @@ typedef enum : NSUInteger {
     NSInteger selAnswerIndex;//选中的是哪一项
 }
 
+@property (nonatomic, strong)AVAudioPlayer *audioPlayer;
 @property (nonatomic, strong)UIView *selectionView;
 
 @end
@@ -70,7 +72,7 @@ typedef enum : NSUInteger {
     float controlX = 20;
     float controlY = 0;
     float controlW = frame.size.width - controlX*2;
-    float controlH = 270;
+    float controlH = 250;
     [self initQuestionView:CGRectMake(controlX, controlY, controlW, controlH)];
     
     controlH = 40;
@@ -107,19 +109,26 @@ typedef enum : NSUInteger {
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     [_questionView addSubview:_titleLabel];
     
-    controlY += controlH + 20;
+    controlY += controlH + 10;
+    controlH = 60;
     _descLabel = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _descLabel.backgroundColor = [UIColor clearColor];
     _descLabel.textColor = [UIColor colorWithHex:0x817b72];
     _descLabel.font = [UIFont systemFontOfSize:22];
     _descLabel.textAlignment = NSTextAlignmentCenter;
+    _descLabel.numberOfLines = 0;
     [_questionView addSubview:_descLabel];
 
-    controlY += controlH + 20;
+    controlY += controlH + 10;
     controlX += (controlW - 100) / 2;
     controlW = controlH = 100;
     _descButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    [_descButton addTarget:self action:@selector(voiceBtnTouched:) forControlEvents:UIControlEventTouchUpInside];
     [_questionView addSubview:_descButton];
+    
+    _descImg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    _descImg.hidden = YES;
+    [_questionView addSubview:_descImg];
 }
 
 - (void)initSelectionView:(NSArray *)optionArray
@@ -143,10 +152,16 @@ typedef enum : NSUInteger {
     CGRect frame = _selectionView.frame;
     float controlY = (frame.size.height-controlH) / 2;
     NSInteger count = [optionArray count];
+    if (count == 4) {
+        controlY = (frame.size.height-controlH*2-5) / 2;
+    }
     for (NSInteger i=0; i<count; i++) {
         id obj = optionArray[i];
         if (i%2 == 1) {
-            controlX = frame.size.width - controlW;;
+            controlX = frame.size.width - controlW;
+        } else {
+            controlX = 0;
+            controlY += controlH*(i/2) + 10;
         }
         if ([obj isKindOfClass:[UIImage class]]) {
             HBOptionView *view = [[HBOptionView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH) image:obj];
@@ -159,6 +174,24 @@ typedef enum : NSUInteger {
             [self createSelectionButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin+i title:obj];
         }
     }
+    if (count == 0) {
+        //判断题
+        controlW = controlH;
+        controlX = (frame.size.width - controlW*2)/4;
+        [self createJudgeButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin normal:@"test-btn-right-normal" selected:@"test-btn-right-selected"];
+        controlX += controlX*2 + controlW;
+        [self createJudgeButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin normal:@"test-btn-wrong-normal" selected:@"test-btn-wrong-selected"];
+    }
+}
+
+- (void)createJudgeButton:(CGRect)frame tag:(NSInteger)tag normal:(NSString *)normaol selected:(NSString *)sel
+{
+    UIButton *button = [[UIButton alloc] initWithFrame:frame];
+    button.tag = tag;
+    [button setBackgroundImage:[UIImage imageNamed:normaol] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:sel] forState:UIControlStateSelected];
+    [button addTarget:self action:@selector(selectionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_selectionView addSubview:button];
 }
 
 - (void)createSelectionButton:(CGRect)frame tag:(NSInteger)tag title:(NSString *)title
@@ -188,16 +221,34 @@ typedef enum : NSUInteger {
     if (_questionType == HBQuestionTypeText) {
         rect = _questionView.bounds;
         rect.origin.x = 10;
+        rect.size.width -= 20;
         _descLabel.frame = rect;
         _descButton.hidden = YES;
+        _descImg.hidden = YES;
     } else if (_questionType == HBQuestionTypeTAA) {
         _descButton.hidden = NO;
+        _descImg.hidden = YES;
+        CGSize size = [_descLabel.text boundingRectWithSize:rect.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_descLabel.font} context:nil].size;
+        rect.size.height = size.height;
+        _descLabel.frame = rect;
         [_descButton setBackgroundImage:[UIImage imageNamed:@"test-btn-sound-normal"] forState:UIControlStateNormal];
         [_descButton setBackgroundImage:[UIImage imageNamed:@"test-btn-sound-press"] forState:UIControlStateHighlighted];
     } else if (_questionType == HBQuestionTypeTAP) {
-        CGSize size = [_descLabel.text sizeWithAttributes:@{NSFontAttributeName: _descLabel.font }];
+        CGSize size = [_descLabel.text boundingRectWithSize:rect.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_descLabel.font} context:nil].size;
+        rect.origin.y = CGRectGetMaxY(_titleLabel.frame) + 10;
         rect.size.height = size.height;
         _descLabel.frame = rect;
+        
+        _descButton.hidden = YES;
+        _descImg.hidden = NO;
+        UIImage *image = [_workManager getPictureByDict:dict];
+        _descImg.image = image;
+        CGSize imgSize = image.size;
+        imgSize = CGSizeMake(imgSize.width/3, imgSize.height/3);
+        rect = _questionView.bounds;
+        float controlX = (rect.size.width-imgSize.width) / 2;
+        float controlY = rect.size.height-imgSize.height-10;
+        _descImg.frame = CGRectMake(controlX, controlY, imgSize.width, imgSize.height);
     }
     
     NSArray *optionsArr = [_workManager getOptionArray:dict];
@@ -271,11 +322,49 @@ typedef enum : NSUInteger {
     return isRight;
 }
 
+- (void)playAudio:(NSString *)audioFile
+{
+    if (_audioPlayer) {
+        [_audioPlayer play];
+        return;
+    }
+    NSString *ext = [audioFile pathExtension];
+    if ([ext length] == 0) {
+        NSString *audioPath = [NSString stringWithFormat:@"%@.mp3", audioFile];
+        NSError *error;
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:audioPath] error:&error];
+//        self.audioPlayer.delegate = self;
+        if (!error) {
+            [_audioPlayer play];
+        } else {
+            [MBHudUtil showTextView:@"没有找到资源" inView:nil];
+        }
+    }
+}
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    if (flag && _audioPlayer) {
+//        BOOL isPlaying = _audioPlayer.isPlaying;
+//        [_audioPlayer stop];
+    }
+}
+
+- (void)voiceBtnTouched:(id)sender
+{
+    NSString *audioFile = [_workManager getAudioFile];
+    [self playAudio:audioFile];
+}
+
 - (void)buttonAction:(id)sender
 {
     if (isOptionSelected == NO) {
         [MBHudUtil showTextView:@"您还没有完成这道题哦" inView:nil];
         return;
+    }
+    if (_audioPlayer) {
+        [_audioPlayer stop];
+        self.audioPlayer = nil;
     }
     if (self.delegate) {
         [self.delegate onTouchFinishedButton];

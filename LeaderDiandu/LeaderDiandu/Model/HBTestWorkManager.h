@@ -20,7 +20,9 @@
 - (NSDictionary *)nextQuestion;
 - (BOOL)isLastObject;
 
+- (NSString *)getAudioFile;
 - (UIImage *)getPicture:(NSString *)fileName;
+- (UIImage *)getPictureByDict:(NSDictionary *)dict;
 
 - (NSArray *)getOptionArray:(NSDictionary *)dict;
 

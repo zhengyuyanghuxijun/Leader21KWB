@@ -180,13 +180,13 @@
 }
 
 
-+ (void)showTextAlert:(NSString*)msg
++ (void)showTextAlert:(NSString*)msg delegate:(id)delegate
 {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                     message:msg
-                                                   delegate:nil
-                                          cancelButtonTitle:@"确定"
-                                          otherButtonTitles:nil, nil];
+                                                   delegate:delegate
+                                          cancelButtonTitle:@"取消"
+                                          otherButtonTitles:@"确定", nil];
     [alert show];
 }
 

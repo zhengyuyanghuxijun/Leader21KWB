@@ -63,6 +63,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     //书名
     self.cellBookName = [[UILabel alloc] init];
     self.cellBookName.frame = CGRectMake(self.cellImageBookCover.frame.origin.x + self.cellImageBookCover.frame.size.width + 10, 35, 200, 60);
+    self.cellBookName.numberOfLines = 0;
     [self addSubview:self.cellBookName];
     
     //状态

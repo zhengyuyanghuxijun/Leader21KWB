@@ -83,6 +83,10 @@
 - (void)showLoginVC
 {
     if (_loginVC) {
+        UIViewController *curVC = self.globalNavi.visibleViewController;
+        if (curVC == _loginVC) {
+            return;
+        }
         [self.globalNavi popToRootViewControllerAnimated:NO];
         [self.globalNavi pushViewController:_loginVC animated:YES];
     }

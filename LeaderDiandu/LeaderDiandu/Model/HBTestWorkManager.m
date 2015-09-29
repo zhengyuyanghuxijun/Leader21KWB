@@ -67,6 +67,17 @@
     self.workArray = workArray;
 }
 
+- (NSString *)getAudioFile
+{
+    NSString *audioFile = nil;
+    NSDictionary *dict = [self getQuestion:_selIndex];
+    if (dict) {
+        NSString *audioName = dict[@"Audio"];
+        audioFile = [NSString stringWithFormat:@"%@/audio/%@", _workPath, audioName];
+    }
+    return audioFile;
+}
+
 - (UIImage *)getPicture:(NSString *)fileName
 {
     UIImage *image = nil;
@@ -76,6 +87,15 @@
     }
     
     return image;
+}
+
+- (UIImage *)getPictureByDict:(NSDictionary *)dict
+{
+    if (dict == nil) {
+        return nil;
+    }
+    NSString *imgName = dict[@"Picture"];
+    return [self getPicture:imgName];
 }
 
 - (NSArray *)getOptionArray:(NSDictionary *)dict

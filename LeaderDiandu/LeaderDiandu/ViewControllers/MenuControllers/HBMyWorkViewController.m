@@ -11,6 +11,7 @@
 #import "HBTitleView.h"
 #import "HBMyWorkView.h"
 #import "HBScoreView.h"
+#import "HHAlertSingleView.h"
 
 #import "HBServiceManager.h"
 #import "HBTaskEntity.h"
@@ -131,6 +132,18 @@
 - (void)buttonAction:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)backButtonPressed:(id)sender
+{
+    [MBHudUtil showTextAlert:@"作业没有完成，确定要现在退出吗？" delegate:self];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)submitScore
