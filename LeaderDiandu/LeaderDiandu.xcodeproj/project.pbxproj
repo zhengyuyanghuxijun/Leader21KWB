@@ -166,6 +166,8 @@
 		1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */; };
 		189C0F5E1BB5776300DD39C0 /* HBReadprogressEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C0F5D1BB5776300DD39C0 /* HBReadprogressEntity.m */; };
 		18A13BB01BA6F5FD004A288F /* HBGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A13BAF1BA6F5FD004A288F /* HBGroupCell.m */; };
+		18A21E6E1BBAE63A00EA05C6 /* HBPayViewControllerMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A21E6D1BBAE63A00EA05C6 /* HBPayViewControllerMoneyCell.m */; };
+		18A21E711BBAFDFF00EA05C6 /* HBPayViewControllerModeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A21E701BBAFDFF00EA05C6 /* HBPayViewControllerModeCell.m */; };
 		18A244771BA7295A00E1E703 /* HBCreatGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A244761BA7295A00E1E703 /* HBCreatGroupController.m */; };
 		18AB8F4F1BB9911300409103 /* RefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AB8F4E1BB9911300409103 /* RefreshTableHeaderView.m */; };
 		18AB8F531BB9918D00409103 /* FTRotatingCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AB8F521BB9918D00409103 /* FTRotatingCircle.m */; };
@@ -462,6 +464,10 @@
 		189C0F5D1BB5776300DD39C0 /* HBReadprogressEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBReadprogressEntity.m; sourceTree = "<group>"; };
 		18A13BAE1BA6F5FD004A288F /* HBGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGroupCell.h; sourceTree = "<group>"; };
 		18A13BAF1BA6F5FD004A288F /* HBGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGroupCell.m; sourceTree = "<group>"; };
+		18A21E6C1BBAE63A00EA05C6 /* HBPayViewControllerMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBPayViewControllerMoneyCell.h; sourceTree = "<group>"; };
+		18A21E6D1BBAE63A00EA05C6 /* HBPayViewControllerMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBPayViewControllerMoneyCell.m; sourceTree = "<group>"; };
+		18A21E6F1BBAFDFF00EA05C6 /* HBPayViewControllerModeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBPayViewControllerModeCell.h; sourceTree = "<group>"; };
+		18A21E701BBAFDFF00EA05C6 /* HBPayViewControllerModeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBPayViewControllerModeCell.m; sourceTree = "<group>"; };
 		18A244751BA7295A00E1E703 /* HBCreatGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBCreatGroupController.h; sourceTree = "<group>"; };
 		18A244761BA7295A00E1E703 /* HBCreatGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBCreatGroupController.m; sourceTree = "<group>"; };
 		18AB8F4D1BB9911300409103 /* RefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshTableHeaderView.h; sourceTree = "<group>"; };
@@ -1027,6 +1033,7 @@
 		0DD214661B95FC8B009E3DB9 /* MenuControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18A21E6A1BBAE5EF00EA05C6 /* HBPayViewControllers */,
 				0D3F6D121BAE8E67005B4358 /* HBMyWorkViewControllers */,
 				18E57D681BA5B1CC00198BE9 /* HBStuManViewControllers */,
 				18C64FFB1B9DE4D20040E349 /* HBWorkManViewControllers */,
@@ -1043,8 +1050,6 @@
 				0D018FED1B96DB9200A92F59 /* HBLeaderViewController.m */,
 				0DD2146D1B95FFAC009E3DB9 /* HBSubscribeViewController.h */,
 				0DD2146E1B95FFAC009E3DB9 /* HBSubscribeViewController.m */,
-				0DD214731B96018A009E3DB9 /* HBPayViewController.h */,
-				0DD214741B96018A009E3DB9 /* HBPayViewController.m */,
 				0DD214761B9601DA009E3DB9 /* HBMessageViewController.h */,
 				0DD214771B9601DA009E3DB9 /* HBMessageViewController.m */,
 			);
@@ -1068,6 +1073,19 @@
 				181E30731BA2B14100BBA92F /* UtilFMResultSet.m */,
 			);
 			path = UtilFMDB;
+			sourceTree = "<group>";
+		};
+		18A21E6A1BBAE5EF00EA05C6 /* HBPayViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0DD214731B96018A009E3DB9 /* HBPayViewController.h */,
+				0DD214741B96018A009E3DB9 /* HBPayViewController.m */,
+				18A21E6C1BBAE63A00EA05C6 /* HBPayViewControllerMoneyCell.h */,
+				18A21E6D1BBAE63A00EA05C6 /* HBPayViewControllerMoneyCell.m */,
+				18A21E6F1BBAFDFF00EA05C6 /* HBPayViewControllerModeCell.h */,
+				18A21E701BBAFDFF00EA05C6 /* HBPayViewControllerModeCell.m */,
+			);
+			name = HBPayViewControllers;
 			sourceTree = "<group>";
 		};
 		18C64FFB1B9DE4D20040E349 /* HBWorkManViewControllers */ = {
@@ -1302,12 +1320,14 @@
 				0DD214651B95568E009E3DB9 /* HBDataSaveManager.m in Sources */,
 				0DBE35CC1B8CD7BE00179237 /* HBRegistViewController.m in Sources */,
 				0DD214751B96018A009E3DB9 /* HBPayViewController.m in Sources */,
+				18A21E711BBAFDFF00EA05C6 /* HBPayViewControllerModeCell.m in Sources */,
 				0DD2146C1B95FF3B009E3DB9 /* HBMyTeacherViewController.m in Sources */,
 				18AB8F531BB9918D00409103 /* FTRotatingCircle.m in Sources */,
 				0D7488921B8A2973007BE4CD /* NSData+MD5.m in Sources */,
 				181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */,
 				0DFBD3E51BA86839003DB2D1 /* TextGridItemView.m in Sources */,
 				0D9E04FD1BB52B1500055203 /* HBOptionView.m in Sources */,
+				18A21E6E1BBAE63A00EA05C6 /* HBPayViewControllerMoneyCell.m in Sources */,
 				18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */,
 				0DBE35351B8CB8B500179237 /* DataCheckUtil.m in Sources */,
 				0DB537271B8F5DEE0023A3F7 /* AFHTTPRequestOperationManager.m in Sources */,
