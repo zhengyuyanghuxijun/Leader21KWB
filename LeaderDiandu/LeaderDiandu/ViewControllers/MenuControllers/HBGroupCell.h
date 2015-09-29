@@ -18,9 +18,12 @@
 
 @interface HBGroupCell : UITableViewCell
 
+@property (strong, nonatomic) UIImageView * cellGroupImage;
 @property (strong, nonatomic) UILabel *     cellGroupName;
 @property (strong, nonatomic) UILabel *     cellLevel;
+@property (strong, nonatomic) UILabel *     cellLevelNum;
 @property (strong, nonatomic) UILabel *     cellCount;
+@property (strong, nonatomic) UILabel *     cellCountNum;
 @property (strong, nonatomic) UILabel *     cellTime;
 @property (strong, nonatomic) UIButton *    cellEditBtn;
 @property (strong, nonatomic) UIButton *    cellDissolveBtn;

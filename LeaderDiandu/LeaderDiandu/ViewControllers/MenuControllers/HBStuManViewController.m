@@ -98,7 +98,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     self.groupSeperator.backgroundColor = [UIColor colorWithHex:0xff8903];
     [self.groupButton addSubview:self.groupSeperator];
     
-    rc = CGRectMake(0.0f, ScreenHeight - 50.0f, ScreenWidth, 50.0f);
+    rc = CGRectMake(10.0f, ScreenHeight - 60.0f, ScreenWidth - 10 - 10, 50.0f);
     self.addGroupButton = [[UIButton alloc] initWithFrame:rc];
     [self.addGroupButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
     [self.addGroupButton setTitle:@"添加群组" forState:UIControlStateNormal];
