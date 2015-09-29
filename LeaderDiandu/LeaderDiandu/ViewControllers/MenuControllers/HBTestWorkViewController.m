@@ -181,36 +181,29 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
             
             if (responseObject) {
                 //学生获取作业列表成功
-                NSArray *arr = [responseObject objectForKey:@"exams"];
+                NSArray *arr = [responseObject arrayForKey:@"exams"];
                 for (NSDictionary *dic in arr)
                 {
                     HBTaskEntity *taskEntity = [[HBTaskEntity alloc] init];
                     
-                    NSDictionary *teacherDic = [dic objectForKey:@"teacher"];
-                    NSString *teacherName = [teacherDic objectForKey:@"display_name"];
+                    NSDictionary *teacherDic = [dic dicForKey:@"teacher"];
+                    NSString *teacherName = [teacherDic stringForKey:@"display_name"];
                     taskEntity.teacherName = teacherName;
                     
-                    NSDictionary *bookDic = [dic objectForKey:@"book"];
+                    NSDictionary *bookDic = [dic dicForKey:@"book"];
                     NSString *bookName;
                     if ([[HBDataSaveManager defaultManager] showEnBookName]) {
-                        bookName = [bookDic objectForKey:@"book_title"];
+                        bookName = [bookDic stringForKey:@"book_title"];
                     }else{
-                        bookName = [bookDic objectForKey:@"book_title_cn"];
+                        bookName = [bookDic stringForKey:@"book_title_cn"];
                     }
-                    NSString *bookIdStr = [bookDic objectForKey:@"id"];
-                    taskEntity.bookId = [bookIdStr integerValue];
+                    taskEntity.bookId = [[bookDic numberForKey:@"id"] integerValue];
                     taskEntity.bookName = bookName;
-                    taskEntity.fileId = [bookDic objectForKey:@"file_id"];
+                    taskEntity.fileId = [bookDic stringForKey:@"file_id"];
                     
-                    NSTimeInterval interval = [[dic objectForKey:@"modified_time"] doubleValue];
+                    NSTimeInterval interval = [[dic numberForKey:@"modified_time"] doubleValue];
                     taskEntity.taskTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
-                    
-                    NSString *score = [dic objectForKey:@"score"];
-                    if ([score isKindOfClass:[NSNull class]] || score == nil) {
-                        taskEntity.score = nil;
-                    } else {
-                        taskEntity.score = score;
-                    }
+                    taskEntity.score = [dic stringForKey:@"score"];
           
                     [self.taskEntityArr addObject:taskEntity];
                 }

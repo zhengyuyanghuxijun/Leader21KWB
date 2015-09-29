@@ -34,5 +34,6 @@
 #import "MBHudUtil.h"
 #import "UIDevice+Addtional.h"
 #import "UIColor+TKCategory.h"
+#import "NSDictionary+Safe.h"
 #endif
 
