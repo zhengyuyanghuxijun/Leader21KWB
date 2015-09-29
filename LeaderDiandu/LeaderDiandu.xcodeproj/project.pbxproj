@@ -21,6 +21,8 @@
 		0D3F6D161BAE8F64005B4358 /* HBMyWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */; };
 		0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */; };
 		0D3F6D1C1BAEA41A005B4358 /* HBMyWorkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D1B1BAEA41A005B4358 /* HBMyWorkView.m */; };
+		0D6BEEF51BBA38090080F342 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 0D6BEEF31BBA38090080F342 /* iTunesArtwork */; };
+		0D6BEEF61BBA38090080F342 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 0D6BEEF41BBA38090080F342 /* iTunesArtwork@2x */; };
 		0D7292C51B9E0650006FA7EA /* HBSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7292C41B9E0650006FA7EA /* HBSettingViewController.m */; };
 		0D7486F41B88A884007BE4CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7486F31B88A884007BE4CD /* main.m */; };
 		0D7486FD1B88A884007BE4CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D7486FB1B88A884007BE4CD /* Main.storyboard */; };
@@ -249,6 +251,8 @@
 		0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+TKCategory.m"; sourceTree = "<group>"; };
 		0D3F6D1A1BAEA41A005B4358 /* HBMyWorkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkView.h; sourceTree = "<group>"; };
 		0D3F6D1B1BAEA41A005B4358 /* HBMyWorkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMyWorkView.m; sourceTree = "<group>"; };
+		0D6BEEF31BBA38090080F342 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = LeaderDiandu/iTunesArtwork; sourceTree = "<group>"; };
+		0D6BEEF41BBA38090080F342 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; name = "iTunesArtwork@2x"; path = "LeaderDiandu/iTunesArtwork@2x"; sourceTree = "<group>"; };
 		0D7292C31B9E0650006FA7EA /* HBSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSettingViewController.h; sourceTree = "<group>"; };
 		0D7292C41B9E0650006FA7EA /* HBSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSettingViewController.m; sourceTree = "<group>"; };
 		0D7486EE1B88A884007BE4CD /* LeaderDiandu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeaderDiandu.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -672,6 +676,8 @@
 		0D7487181B88A8C8007BE4CD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0D6BEEF31BBA38090080F342 /* iTunesArtwork */,
+				0D6BEEF41BBA38090080F342 /* iTunesArtwork@2x */,
 				0DCAE0CA1BAAAA3F00AB7557 /* LeaderSDKResources */,
 				18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */,
 				181E30811BA2D0CF00BBA92F /* hbcontentdetail.db */,
@@ -1219,6 +1225,7 @@
 				0DCAE0FB1BAAAA3F00AB7557 /* back_button@2x.png in Resources */,
 				0DCAE11E1BAAAA3F00AB7557 /* preview_icon.png in Resources */,
 				0DCAE1141BAAAA3F00AB7557 /* next_pressed@2x.png in Resources */,
+				0D6BEEF51BBA38090080F342 /* iTunesArtwork in Resources */,
 				0DCAE1221BAAAA3F00AB7557 /* star.png in Resources */,
 				0DCAE1081BAAAA3F00AB7557 /* drawn_rectangle.png in Resources */,
 				0DCAE1051BAAAA3F00AB7557 /* btn_reader_w_disable.png in Resources */,
@@ -1235,6 +1242,7 @@
 				181E30821BA2D0CF00BBA92F /* hbcontentdetail.db in Resources */,
 				0DCAE11B1BAAAA3F00AB7557 /* prev.png in Resources */,
 				0DCAE1011BAAAA3F00AB7557 /* big_button3_pressed.png in Resources */,
+				0D6BEEF61BBA38090080F342 /* iTunesArtwork@2x in Resources */,
 				0DAAF4171B8E0DE900078285 /* Login.storyboard in Resources */,
 				0DCAE0F81BAAAA3F00AB7557 /* autoplay_icon.png in Resources */,
 				0DCAE11D1BAAAA3F00AB7557 /* prev_pressed.png in Resources */,
@@ -1528,6 +1536,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: wei chanyuan (A2Z38B538T)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
@@ -1557,6 +1566,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: wei chanyuan (X2Y6A4GX9Q)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: wei chanyuan (X2Y6A4GX9Q)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

@@ -33,29 +33,31 @@ static NSInteger pageCount = 3;
         _scrollView.showsHorizontalScrollIndicator = NO;
         [self addSubview:_scrollView];
         
-        
         UIImage* image1 = nil;
         UIImage* image2 = nil;
         UIImage* image3 = nil;
 
-        if (frame.size.height > 480.0f) {
-            // 4寸手机
-            image1 = [UIImage imageNamed:@"splash_1h.png"];
-            image2 = [UIImage imageNamed:@"splash_2h.png"];
-            image3 = [UIImage imageNamed:@"splash_3h.png"];
-        }
-        else {
-            image1 = [UIImage imageNamed:@"splash_1.png"];
-            image2 = [UIImage imageNamed:@"splash_2.png"];
-            image3 = [UIImage imageNamed:@"splash_3.png"];
-        }
+//        if (frame.size.height > 480.0f) {
+//            // 4寸手机
+//            image1 = [UIImage imageNamed:@"splash_1h.png"];
+//            image2 = [UIImage imageNamed:@"splash_2h.png"];
+//            image3 = [UIImage imageNamed:@"splash_3h.png"];
+//        }
+//        else {
+//            image1 = [UIImage imageNamed:@"splash_1.png"];
+//            image2 = [UIImage imageNamed:@"splash_2.png"];
+//            image3 = [UIImage imageNamed:@"splash_3.png"];
+//        }
+        image1 = [UIImage imageNamed:@"study_guide_1"];
+        image2 = [UIImage imageNamed:@"study_guide_2"];
+        image3 = [UIImage imageNamed:@"study_guide_3"];
 
         _imageView1 = [[UIImageView alloc] initWithImage:image1];
         _imageView2 = [[UIImageView alloc] initWithImage:image2];
         _imageView3 = [[UIImageView alloc] initWithImage:image3];
-        _imageView1.contentMode = UIViewContentModeCenter;
-        _imageView2.contentMode = UIViewContentModeCenter;
-        _imageView3.contentMode = UIViewContentModeCenter;
+//        _imageView1.contentMode = UIViewContentModeCenter;
+//        _imageView2.contentMode = UIViewContentModeCenter;
+//        _imageView3.contentMode = UIViewContentModeCenter;
         _imageView1.backgroundColor = RGBCOLOR(28, 158, 201);
         _imageView2.backgroundColor = RGBCOLOR(28, 158, 201);
         _imageView3.backgroundColor = RGBCOLOR(28, 158, 201);
