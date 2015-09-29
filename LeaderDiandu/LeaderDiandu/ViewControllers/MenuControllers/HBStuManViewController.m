@@ -57,6 +57,9 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //设置页面背景颜色
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"学生管理" onView:self.view];
     [self.view addSubview:labTitle];
     
@@ -69,7 +72,6 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     [self.studentButton setTitle:@"学生" forState:UIControlStateNormal];
     [self.studentButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.studentButton addTarget:self action:@selector(studentButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    self.studentButton.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.studentButton];
     
     self.studentSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.studentButton.frame.size.height - 2, self.studentButton.frame.size.width, 2)];
@@ -82,7 +84,6 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     verticalLineLabel.font = [UIFont boldSystemFontOfSize:20.0f];
     verticalLineLabel.textAlignment = NSTextAlignmentCenter;
     verticalLineLabel.textColor = [UIColor lightGrayColor];
-    verticalLineLabel.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:verticalLineLabel];
     
     //群组按钮
@@ -91,13 +92,13 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     [self.groupButton setTitle:@"群组" forState:UIControlStateNormal];
     [self.groupButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.groupButton addTarget:self action:@selector(groupButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    self.groupButton.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.groupButton];
     
     self.groupSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.groupButton.frame.size.height - 2, self.groupButton.frame.size.width, 2)];
     self.groupSeperator.backgroundColor = [UIColor colorWithHex:0xff8903];
     [self.groupButton addSubview:self.groupSeperator];
     
+    //底部按钮
     rc = CGRectMake(10.0f, ScreenHeight - 60.0f, ScreenWidth - 10 - 10, 50.0f);
     self.addGroupButton = [[UIButton alloc] initWithFrame:rc];
     [self.addGroupButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
@@ -139,14 +140,15 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
         _tableView = [[UITableView alloc] init];
         _tableView.dataSource = self;
         _tableView.delegate = self;
+        _tableView.separatorStyle = NO;
         [self.view addSubview:_tableView];
     }
     
     if (self.isShowStuView) {
-        CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.studentArr.count * 70.0f);
+        CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50.0f);
         _tableView.frame = rc;
     }else{
-        CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.groupArr.count * 70.0f);
+        CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50.0f - 60.0f);
         _tableView.frame = rc;
     }
     
@@ -240,7 +242,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
         [self requestStudentList];
     }
     
-    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.studentArr.count * 70.0f);
+    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50.0f);
     _tableView.frame = rc;
     
     [_tableView reloadData];
@@ -256,7 +258,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
         [self requestClassList];
     }
     
-    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, self.view.frame.size.width, self.groupArr.count * 70.0f);
+    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50.0f - 60.0f);
     _tableView.frame = rc;
     
     [_tableView reloadData];

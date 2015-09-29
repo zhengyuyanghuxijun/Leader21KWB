@@ -85,6 +85,10 @@
     [self.cellDissolveBtn addTarget:self action:@selector(dissolveBtnPressed) forControlEvents:UIControlEventTouchUpInside];
     self.cellDissolveBtn.titleLabel.font = [UIFont boldSystemFontOfSize:BUTTONFONTSIZE];
     [self addSubview:self.cellDissolveBtn];
+    
+    UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 70 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
+    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    [self addSubview:seperatorLine];
 }
 
 -(void)updateFormData:(id)sender
