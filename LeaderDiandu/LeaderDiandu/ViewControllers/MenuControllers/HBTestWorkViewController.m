@@ -39,37 +39,53 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
 
 - (void) initUI
 {
+    UIFont *fontTime = [UIFont systemFontOfSize:14];
     //时间
     self.cellTime = [[UILabel alloc] init];
-    self.cellTime.frame = CGRectMake(10, 5, 120, 25);
+    _cellTime.font = fontTime;
+    self.cellTime.textColor = [UIColor lightGrayColor];
+    self.cellTime.frame = CGRectMake(10, 5, 100, 25);
     [self addSubview:self.cellTime];
     
     //老师
     self.cellTeacherName = [[UILabel alloc] init];
-    self.cellTeacherName.frame = CGRectMake(self.cellTime.frame.origin.x + self.cellTime.frame.size.width + 10, 5, 80, 25);
+    self.cellTeacherName.textColor = KLeaderRGB;
+    self.cellTeacherName.frame = CGRectMake(CGRectGetMaxX(self.cellTime.frame), 5, 80, 25);
     [self addSubview:self.cellTeacherName];
-    
-    //分数
-    self.cellScore = [[UILabel alloc] init];
-    self.cellScore.frame = CGRectMake(ScreenWidth - 100, 5, 100, 25);
-    [self addSubview:self.cellScore];
     
     //书皮
     self.cellImageBookCover = [[UIImageView alloc] init];
-//    self.cellImageBookCover.image = [UIImage imageNamed:@"mainGrid_defaultBookCover"];
     self.cellImageBookCover.frame = CGRectMake(10, 35, 50, 60);
     [self addSubview:self.cellImageBookCover];
     
-    //书名
-    self.cellBookName = [[UILabel alloc] init];
-    self.cellBookName.frame = CGRectMake(self.cellImageBookCover.frame.origin.x + self.cellImageBookCover.frame.size.width + 10, 35, 200, 60);
-    self.cellBookName.numberOfLines = 0;
-    [self addSubview:self.cellBookName];
+    float controlW = 80;
+    float controlX = ScreenWidth-controlW-25;
+    //分数
+    self.cellScore = [[UILabel alloc] init];
+    self.cellScore.textColor = KLeaderRGB;
+    _cellScore.textAlignment = NSTextAlignmentRight;
+    self.cellScore.frame = CGRectMake(controlX, 5, controlW, 20);
+    [self addSubview:self.cellScore];
+    
+    self.cellModifiedTime = [[UILabel alloc] initWithFrame:CGRectMake(controlX, 25, controlW, 20)];
+    _cellModifiedTime.font = fontTime;
+    _cellModifiedTime.textColor = [UIColor lightGrayColor];
+    _cellModifiedTime.textAlignment = NSTextAlignmentRight;
+    [self addSubview:_cellModifiedTime];
     
     //状态
     self.cellSubmitState = [[UILabel alloc] init];
-    self.cellSubmitState.frame = CGRectMake(ScreenWidth - 100, 35, 100, 60);
+    _cellSubmitState.textAlignment = NSTextAlignmentRight;
+    self.cellSubmitState.frame = CGRectMake(controlX, 35, controlW, 60);
     [self addSubview:self.cellSubmitState];
+    
+    //书名
+    controlX = CGRectGetMaxX(self.cellImageBookCover.frame) + 10;
+    controlW = CGRectGetMinX(self.cellSubmitState.frame) - controlX - 10;
+    self.cellBookName = [[UILabel alloc] init];
+    self.cellBookName.frame = CGRectMake(controlX, 35, controlW, 60);
+    self.cellBookName.numberOfLines = 0;
+    [self addSubview:self.cellBookName];
 }
 
 -(void)updateFormData:(id)sender
@@ -77,7 +93,8 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     HBTaskEntity *taskEntity = (HBTaskEntity*)sender;
     
     if (taskEntity) {
-        self.cellTime.text = taskEntity.taskTime;
+        self.cellTime.text = taskEntity.createdTime;
+        self.cellModifiedTime.text = taskEntity.modifiedTime;
         self.cellTeacherName.text = taskEntity.teacherName;
         
         if ([taskEntity.score length] == 0) {
@@ -97,7 +114,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
         
         self.cellBookName.text = taskEntity.bookName;
         if (self.cellScore.text) {
-            self.cellSubmitState.text = @"已提交";
+            self.cellSubmitState.text = @"";
         }else{
             self.cellSubmitState.text = @"未提交";
         }
@@ -191,6 +208,9 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     
                     NSDictionary *teacherDic = [dic dicForKey:@"teacher"];
                     NSString *teacherName = [teacherDic stringForKey:@"display_name"];
+                    if ([teacherName length] == 0) {
+                        teacherName = [teacherDic stringForKey:@"name"];
+                    }
                     taskEntity.teacherName = teacherName;
                     
                     NSDictionary *bookDic = [dic dicForKey:@"book"];
@@ -204,8 +224,10 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     taskEntity.bookName = bookName;
                     taskEntity.fileId = [bookDic stringForKey:@"file_id"];
                     
-                    NSTimeInterval interval = [[dic numberForKey:@"modified_time"] doubleValue];
-                    taskEntity.taskTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
+                    NSTimeInterval interval = [[dic numberForKey:@"created_time"] doubleValue];
+                    taskEntity.createdTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
+                    interval = [[dic numberForKey:@"modified_time"] doubleValue];
+                    taskEntity.modifiedTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
                     taskEntity.score = [dic stringForKey:@"score"];
           
                     [self.taskEntityArr addObject:taskEntity];

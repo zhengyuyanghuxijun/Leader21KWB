@@ -16,6 +16,7 @@
 @property (strong, nonatomic) UIImageView * cellImageBookCover;
 @property (strong, nonatomic) UILabel *     cellBookName;
 @property (strong, nonatomic) UILabel *     cellSubmitState;
+@property (strong, nonatomic) UILabel *     cellModifiedTime;
 
 /**
  *	@brief	更新表格内容

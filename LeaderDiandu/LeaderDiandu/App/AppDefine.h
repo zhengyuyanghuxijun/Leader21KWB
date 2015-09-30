@@ -26,14 +26,7 @@
 #define FETION_APP_DELEGATE ((FetionAppDelegate *)[UIApplication sharedApplication].delegate)
 
 
-
-
-#define FTGetNavPDAO [[[FtLogicManager getSingleton]getFileModel]getFtNavPDAO]
-
-
-#define CommonTestCode 0
-#define MsgTestCode 0
-
+#define KLeaderRGB [UIColor colorWithHex:0xff8903]
 
 #define RGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0f]
 
