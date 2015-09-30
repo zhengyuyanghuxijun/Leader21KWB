@@ -25,6 +25,6 @@
 
 - (void)updateData:(NSDictionary *)dict byScore:(NSString *)score;
 
-- (BOOL)isQuestionRight:(NSInteger)answer;
+- (BOOL)isQuestionRightByDict:(NSDictionary *)dict;
 
 @end

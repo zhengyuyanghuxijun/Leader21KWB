@@ -22,9 +22,14 @@
     UIProgressView *_progressView;
     HBMyWorkView *_myWorkView;
     HBTitleView *_labTitle;
+    
+    NSInteger _scoreNum;
 }
 
 @property (nonatomic, strong)NSMutableArray *scoreArray;
+
+@property (nonatomic, assign)NSInteger fromTime;
+@property (nonatomic, assign)NSInteger toTime;
 
 @end
 
@@ -34,12 +39,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    _scoreNum = 0;
+    
     _labTitle = [HBTitleView titleViewWithTitle:_taskEntity.bookName onView:self.view];
     [self.view addSubview:_labTitle];
     
     [self addBackButton];
     
     [self initUI];
+    
+    NSDate *date = [NSDate date];
+    self.fromTime = [date timeIntervalSince1970];
 }
 
 - (void)initUI
@@ -100,10 +110,10 @@
         [self updateWorkData:dict];
     } else {
         //提交成绩，算分数
-        if (_taskEntity.score) {
+        if ([_taskEntity.score length] > 0) {
             [self showScoreView];
         } else {
-            
+            [self submitScore];
         }
     }
 }
@@ -114,17 +124,8 @@
     _myWorkView.hidden = YES;
     _labTitle.text = @"成绩展示";
     
-    NSInteger scoreNum = 0;
-    for (NSDictionary *dict in _scoreArray) {
-        BOOL isRight = [dict[@"score"] boolValue];
-        if (isRight) {
-            NSInteger num = [dict[@"scoreNum"] integerValue];
-            scoreNum += num;
-        }
-    }
-    
     CGRect frame = _myWorkView.frame;
-    HBScoreView *scoreView = [[HBScoreView alloc] initWithFrame:frame score:scoreNum];
+    HBScoreView *scoreView = [[HBScoreView alloc] initWithFrame:frame score:_scoreNum];
     [scoreView.finishBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:scoreView];
 }
@@ -136,7 +137,11 @@
 
 - (void)backButtonPressed:(id)sender
 {
-    [MBHudUtil showTextAlert:@"作业没有完成，确定要现在退出吗？" delegate:self];
+    if ([_scoreArray count] < [_workManager.workArray count]) {
+        [MBHudUtil showTextAlert:@"作业没有完成，确定要现在退出吗？" delegate:self];
+    } else {
+        [super backButtonPressed:sender];
+    }
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -148,8 +153,24 @@
 
 - (void)submitScore
 {
+    NSDate *date = [NSDate date];
+    self.toTime = [date timeIntervalSince1970];
+    
+    NSString *jsonStr = nil;
+    if ([_scoreArray count] > 0) {
+        NSError *error = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:_scoreArray options:NSJSONWritingPrettyPrinted error:&error];
+        jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-//    [[HBServiceManager defaultManager] requestSubmitScore:userEntity.name book_id:<#(NSInteger)#> bookset_id:<#(NSInteger)#> exam_id:<#(NSInteger)#> question_stat:<#(NSString *)#> completion:<#^(id responseObject, NSError *error)receivedBlock#>]
+    [[HBServiceManager defaultManager] requestSubmitScore:userEntity.name book_id:_taskEntity.bookId exam_id:_taskEntity.exam_id score:_scoreNum fromTime:_fromTime toTime:_toTime question_stat:jsonStr completion:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            NSString *result = [responseObject stringForKey:@"result"];
+            if ([result isEqualToString:@"OK"]) {
+                [self showScoreView];
+            }
+        }
+    }];
 }
 
 - (void)handleScore
@@ -160,9 +181,12 @@
     [scoreDict setObject:dict[@"Knowledge"] forKey:@"knowledge"];
     [scoreDict setObject:dict[@"Ability"] forKey:@"ability"];
     [scoreDict setObject:dict[@"Difficulty"] forKey:@"difficulty"];
-    [scoreDict setObject:dict[@"Score"] forKey:@"scoreNum"];
-    BOOL isRight = [_myWorkView isQuestionRight:[dict[@"Answer"] integerValue]];
+    BOOL isRight = [_myWorkView isQuestionRightByDict:dict];
     [scoreDict setObject:@(isRight) forKey:@"score"];
+    if (isRight) {
+        NSInteger num = [dict[@"Score"] integerValue];
+        _scoreNum += num;
+    }
     
     [_scoreArray addObject:scoreDict];
 }

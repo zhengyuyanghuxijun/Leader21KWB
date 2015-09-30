@@ -80,7 +80,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
         self.cellTime.text = taskEntity.taskTime;
         self.cellTeacherName.text = taskEntity.teacherName;
         
-        if (taskEntity.score == nil) {
+        if ([taskEntity.score length] == 0) {
             self.cellScore.text = nil;
         }else{
             NSInteger score = [taskEntity.score integerValue];
@@ -96,7 +96,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
         }
         
         self.cellBookName.text = taskEntity.bookName;
-        if (taskEntity.score) {
+        if (self.cellScore.text) {
             self.cellSubmitState.text = @"已提交";
         }else{
             self.cellSubmitState.text = @"未提交";
@@ -178,14 +178,16 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
 //        NSString *timeStr = [NSString stringWithFormat:@"%f", [NSDate date].timeIntervalSince1970];
+        [MBHudUtil showActivityView:nil inView:nil];
         [[HBServiceManager defaultManager] requestTaskListOfStudent:user from:0 count:100 completion:^(id responseObject, NSError *error) {
-            
+            [MBHudUtil hideActivityView:nil];
             if (responseObject) {
                 //学生获取作业列表成功
                 NSArray *arr = [responseObject arrayForKey:@"exams"];
                 for (NSDictionary *dic in arr)
                 {
                     HBTaskEntity *taskEntity = [[HBTaskEntity alloc] init];
+                    taskEntity.exam_id = [[dic numberForKey:@"exam_id"] integerValue];
                     
                     NSDictionary *teacherDic = [dic dicForKey:@"teacher"];
                     NSString *teacherName = [teacherDic stringForKey:@"display_name"];
@@ -262,12 +264,14 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
         HBTaskEntity *taskEntity = [self.taskEntityArr objectAtIndex:indexPath.row];
+        [MBHudUtil showActivityView:nil inView:nil];
         [[HBServiceManager defaultManager] requestBookInfo:user book_id:taskEntity.bookId completion:^(id responseObject, NSError *error) {
             // to do ...
             if (responseObject) {
                 NSDictionary *dict = responseObject;
                 if (dict == nil) {
-                    [MBHudUtil showTextView:@"服务器资源缺失，敬请期待" inView:nil];
+                    [MBHudUtil hideActivityView:nil];
+                    [MBHudUtil showTextViewAfter:@"服务器资源缺失，敬请期待"];
                 } else {
                     NSString *url = dict[@"url"];
                     [self downloaTestWork:url onSelect:taskEntity];
@@ -282,6 +286,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     NSString *path = [LocalSettings bookCachePath];
     path = [NSString stringWithFormat:@"%@/%@", path, KHBTestWorkPath];
     [[HBContentManager defaultManager] downloadFileURL:url savePath:path fileName:@"test.zip" completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
         if (responseObject && [responseObject isKindOfClass:[NSString class]]) {
             NSString *path = responseObject;
             [_workManager parseTestWork:path];
@@ -290,7 +295,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
             controller.taskEntity = taskEntity;
             [self.navigationController pushViewController:controller animated:YES];
         } else {
-            [MBHudUtil showTextView:@"服务器资源缺失，敬请期待" inView:nil];
+            [MBHudUtil showTextViewAfter:@"服务器资源缺失，敬请期待"];
         }
     }];
 }

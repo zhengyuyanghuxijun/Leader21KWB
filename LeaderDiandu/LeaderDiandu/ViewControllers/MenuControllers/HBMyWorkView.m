@@ -178,17 +178,18 @@ typedef enum : NSUInteger {
         //判断题
         controlW = controlH;
         controlX = (frame.size.width - controlW*2)/4;
-        [self createJudgeButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin normal:@"test-btn-right-normal" selected:@"test-btn-right-selected"];
+        [self createJudgeButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin normal:@"test-btn-right-normal" press:@"test-btn-right-press" selected:@"test-btn-right-selected"];
         controlX += controlX*2 + controlW;
-        [self createJudgeButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin normal:@"test-btn-wrong-normal" selected:@"test-btn-wrong-selected"];
+        [self createJudgeButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin normal:@"test-btn-wrong-normal" press:@"test-btn-wrong-press" selected:@"test-btn-wrong-selected"];
     }
 }
 
-- (void)createJudgeButton:(CGRect)frame tag:(NSInteger)tag normal:(NSString *)normaol selected:(NSString *)sel
+- (void)createJudgeButton:(CGRect)frame tag:(NSInteger)tag normal:(NSString *)normaol press:(NSString *)press selected:(NSString *)sel
 {
     UIButton *button = [[UIButton alloc] initWithFrame:frame];
     button.tag = tag;
     [button setBackgroundImage:[UIImage imageNamed:normaol] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:press] forState:UIControlStateHighlighted];
     [button setBackgroundImage:[UIImage imageNamed:sel] forState:UIControlStateSelected];
     [button addTarget:self action:@selector(selectionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [_selectionView addSubview:button];
@@ -312,11 +313,19 @@ typedef enum : NSUInteger {
     _titleLabel.text = [NSString stringWithFormat:@"%ld.%@", _workManager.selIndex+1, title];
 }
 
-- (BOOL)isQuestionRight:(NSInteger)answer
+- (BOOL)isQuestionRightByDict:(NSDictionary *)dict
 {
     BOOL isRight = NO;
-    if (selAnswerIndex+1 == answer) {
-        isRight = YES;
+    NSInteger answer = [dict[@"Answer"] integerValue];
+    if ([dict[@"Type"] isEqualToString:@"judge"]) {
+        //判断题，answer为1或0，选择index=0为对，index=1为错
+        if (selAnswerIndex == !answer) {
+            isRight = YES;
+        }
+    } else {
+        if (selAnswerIndex+1 == answer) {
+            isRight = YES;
+        }
     }
     
     return isRight;
@@ -330,15 +339,15 @@ typedef enum : NSUInteger {
     }
     NSString *ext = [audioFile pathExtension];
     if ([ext length] == 0) {
-        NSString *audioPath = [NSString stringWithFormat:@"%@.mp3", audioFile];
-        NSError *error;
-        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:audioPath] error:&error];
-//        self.audioPlayer.delegate = self;
-        if (!error) {
-            [_audioPlayer play];
-        } else {
-            [MBHudUtil showTextView:@"没有找到资源" inView:nil];
-        }
+        audioFile = [NSString stringWithFormat:@"%@.mp3", audioFile];
+    }
+    NSError *error;
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:audioFile] error:&error];
+//    self.audioPlayer.delegate = self;
+    if (!error) {
+        [_audioPlayer play];
+    } else {
+        [MBHudUtil showTextView:@"没有找到资源" inView:nil];
     }
 }
 

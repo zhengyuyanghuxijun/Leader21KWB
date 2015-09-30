@@ -76,6 +76,7 @@
 		0DB5372E1B8F5DEE0023A3F7 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537251B8F5DEE0023A3F7 /* AFURLResponseSerialization.m */; };
 		0DB537321B8F70E80023A3F7 /* HBHTTPBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537311B8F70E80023A3F7 /* HBHTTPBaseRequest.m */; };
 		0DB537351B8F78AF0023A3F7 /* HBServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537341B8F78AF0023A3F7 /* HBServiceManager.m */; };
+		0DBD1AB01BBBAB5E00A3BD72 /* MJProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBD1AAF1BBBAB5E00A3BD72 /* MJProgressHUD.m */; };
 		0DBE35351B8CB8B500179237 /* DataCheckUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35191B8CB8B500179237 /* DataCheckUtil.m */; };
 		0DBE35361B8CB8B500179237 /* DoubleCompare.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE351A1B8CB8B500179237 /* DoubleCompare.c */; };
 		0DBE353B1B8CB8B500179237 /* MBHudUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35271B8CB8B500179237 /* MBHudUtil.m */; };
@@ -335,6 +336,8 @@
 		0DB537311B8F70E80023A3F7 /* HBHTTPBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBHTTPBaseRequest.m; sourceTree = "<group>"; };
 		0DB537331B8F78AF0023A3F7 /* HBServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBServiceManager.h; sourceTree = "<group>"; };
 		0DB537341B8F78AF0023A3F7 /* HBServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBServiceManager.m; sourceTree = "<group>"; };
+		0DBD1AAE1BBBAB5E00A3BD72 /* MJProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProgressHUD.h; sourceTree = "<group>"; };
+		0DBD1AAF1BBBAB5E00A3BD72 /* MJProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProgressHUD.m; sourceTree = "<group>"; };
 		0DBE35181B8CB8B500179237 /* DataCheckUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCheckUtil.h; sourceTree = "<group>"; };
 		0DBE35191B8CB8B500179237 /* DataCheckUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCheckUtil.m; sourceTree = "<group>"; };
 		0DBE351A1B8CB8B500179237 /* DoubleCompare.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DoubleCompare.c; sourceTree = "<group>"; };
@@ -709,6 +712,8 @@
 		0D7487331B88B262007BE4CD /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				0DBD1AAE1BBBAB5E00A3BD72 /* MJProgressHUD.h */,
+				0DBD1AAF1BBBAB5E00A3BD72 /* MJProgressHUD.m */,
 				18AB8F511BB9918D00409103 /* FTRotatingCircle.h */,
 				18AB8F521BB9918D00409103 /* FTRotatingCircle.m */,
 				18AB8F4D1BB9911300409103 /* RefreshTableHeaderView.h */,
@@ -1386,6 +1391,7 @@
 				0D74888E1B8A2973007BE4CD /* md5.cpp in Sources */,
 				18AB8F4F1BB9911300409103 /* RefreshTableHeaderView.m in Sources */,
 				0DBE35B21B8CCEFA00179237 /* UIViewAdditions.m in Sources */,
+				0DBD1AB01BBBAB5E00A3BD72 /* MJProgressHUD.m in Sources */,
 				18F367F21BA9541100EBFEC4 /* HBSetStuGroupCell.m in Sources */,
 				0D0190141B98B1B500A92F59 /* HBBindPhoneViewController.m in Sources */,
 				0DD214721B960148009E3DB9 /* HBTestWorkViewController.m in Sources */,

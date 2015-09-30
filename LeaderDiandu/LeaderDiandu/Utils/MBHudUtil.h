@@ -43,6 +43,8 @@
                       interval:(NSTimeInterval)time
                         inView:(UIView *)view;
 
++ (void)showTextViewAfter:(NSString *)text;
+
 + (void)showTextView:(NSString *)text
               inView:(UIView *)view;
 

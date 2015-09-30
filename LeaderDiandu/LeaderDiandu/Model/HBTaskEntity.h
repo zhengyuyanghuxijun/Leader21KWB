@@ -17,5 +17,6 @@
 @property (nonatomic, strong)NSString *fileId;
 
 @property (nonatomic, assign)NSInteger bookId;
+@property (nonatomic, assign)NSInteger exam_id;
 
 @end
