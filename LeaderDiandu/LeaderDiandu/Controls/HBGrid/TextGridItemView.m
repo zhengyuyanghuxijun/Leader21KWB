@@ -132,18 +132,22 @@
     [self addSubview:self.downloadButton];
     
     //书籍名称
-    self.bookNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, self.downloadButton.frame.origin.y + self.downloadButton.frame.size.height + 5, self.frame.size.width - 30, 20)];
+    self.bookNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(self.downloadButton.frame) + 5, self.frame.size.width - 30, 20)];
     self.bookNameLabel.textAlignment = NSTextAlignmentCenter;
     self.bookNameLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];;
     [self addSubview:self.bookNameLabel];
     
     //书籍封皮
     self.bookCoverButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.bookCoverButton.frame = CGRectMake(10, self.bookNameLabel.frame.origin.y + self.bookNameLabel.frame.size.height, self.frame.size.width - 20, 120);
+    NSInteger height = 120;
+    if ([[UIDevice currentDevice] isIphone5]) {
+        height = 100;
+    }
+    self.bookCoverButton.frame = CGRectMake(10, CGRectGetMaxY(self.bookNameLabel.frame), self.frame.size.width - 20, height);
     [self.bookCoverButton addTarget:self action:@selector(bookCoverButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.bookCoverButton];
     
-    CGRect rect = CGRectMake(0, self.bookCoverButton.frame.origin.y + self.bookCoverButton.height - 4, self.frame.size.width, 50);
+    CGRect rect = CGRectMake(0, CGRectGetMaxY(self.bookCoverButton.frame) - 4, self.frame.size.width, 50);
     UIImageView *navView = [[UIImageView alloc] initWithFrame:rect];
     navView.image = [UIImage imageNamed:@"bookshelf-bg-shelf"];
     [self addSubview:navView];

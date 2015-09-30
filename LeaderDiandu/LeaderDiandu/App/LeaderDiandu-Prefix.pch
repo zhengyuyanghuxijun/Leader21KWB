@@ -27,6 +27,8 @@
 #import <Foundation/Foundation.h>
 #import <QuartzCore/QuartzCore.h>
 #import <CoreData/CoreData.h>
+
+#import "AppDefine.h"
 #import "Constants.h"
 #import "Navigator.h"
 #import "AppDelegate.h"

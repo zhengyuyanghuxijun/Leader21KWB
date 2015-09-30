@@ -47,8 +47,8 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.view.backgroundColor = [UIColor darkGrayColor];
-    self.tableView.backgroundColor = [UIColor darkGrayColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.tableFooterView = nil;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kSlideMenuViewControllerCellReuseId];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -138,7 +138,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     controlH = 20;
     UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     nameLbl.backgroundColor = [UIColor clearColor];
-    nameLbl.textColor = [UIColor whiteColor];
+    nameLbl.textColor = [UIColor lightGrayColor];
     nameLbl.font = [UIFont systemFontOfSize:14];
     nameLbl.text = _headerName;
     [buttonInfo addSubview:nameLbl];
@@ -146,7 +146,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     controlY += controlH;
     UILabel *phoneLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     phoneLbl.backgroundColor = [UIColor clearColor];
-    phoneLbl.textColor = [UIColor whiteColor];
+    phoneLbl.textColor = [UIColor lightGrayColor];
     phoneLbl.font = [UIFont systemFontOfSize:14];
     phoneLbl.text = _headerPhone;
     [buttonInfo addSubview:phoneLbl];
@@ -170,7 +170,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     }
     cell.backgroundColor = self.backgroundColor;
     cell.textLabel.text = [self.titles objectAtIndex:indexPath.row];
-    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.textColor = [UIColor blackColor];
 //    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(170, 20, 20, 20)];

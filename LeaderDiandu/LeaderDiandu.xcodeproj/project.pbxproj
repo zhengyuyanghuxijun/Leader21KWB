@@ -338,6 +338,7 @@
 		0DB537341B8F78AF0023A3F7 /* HBServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBServiceManager.m; sourceTree = "<group>"; };
 		0DBD1AAE1BBBAB5E00A3BD72 /* MJProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProgressHUD.h; sourceTree = "<group>"; };
 		0DBD1AAF1BBBAB5E00A3BD72 /* MJProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProgressHUD.m; sourceTree = "<group>"; };
+		0DBD1ABA1BBC501000A3BD72 /* AppDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDefine.h; path = App/AppDefine.h; sourceTree = "<group>"; };
 		0DBE35181B8CB8B500179237 /* DataCheckUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCheckUtil.h; sourceTree = "<group>"; };
 		0DBE35191B8CB8B500179237 /* DataCheckUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCheckUtil.m; sourceTree = "<group>"; };
 		0DBE351A1B8CB8B500179237 /* DoubleCompare.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DoubleCompare.c; sourceTree = "<group>"; };
@@ -700,6 +701,7 @@
 		0D7487191B88A90C007BE4CD /* App */ = {
 			isa = PBXGroup;
 			children = (
+				0DBD1ABA1BBC501000A3BD72 /* AppDefine.h */,
 				0DCBC2A01B99E380003DFDD5 /* Constants.h */,
 				0D74887D1B8A226E007BE4CD /* AppDelegate.h */,
 				0D74887E1B8A226E007BE4CD /* AppDelegate.m */,
@@ -1583,7 +1585,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51b1bc31-da78-42c4-a83a-53ba0907c94e";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -1614,7 +1616,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51b1bc31-da78-42c4-a83a-53ba0907c94e";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

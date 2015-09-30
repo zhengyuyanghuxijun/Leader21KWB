@@ -9,8 +9,6 @@
 #import <QuartzCore/QuartzCore.h>
 //#import "UIImage+Extend.h"
 
-#define RGB(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0f]
-
 @interface KxMenuView : UIImageView
 - (void)dismissMenu:(BOOL) animated;
 - (void)showMenuWithFrame:(CGRect)frame inView:(UIView *)view menuItems:(NSArray *)menuItems;
