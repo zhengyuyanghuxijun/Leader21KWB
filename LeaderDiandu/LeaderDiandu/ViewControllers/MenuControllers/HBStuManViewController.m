@@ -399,7 +399,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     for (HBStudentEntity *studentEntity in self.studentArr) {
         if (studentEntity.classId == classEntity.classId) {
             [groupStuArr addObject:studentEntity];
-        }else{
+        }else if(0 == studentEntity.classId){
             [otherStuArr addObject:studentEntity];
         }
     }
