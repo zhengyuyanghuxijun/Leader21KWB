@@ -464,12 +464,12 @@ static TimeIntervalUtils *singleton = nil;
 #if 1
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     TimeIntervalUtils *timeutils = [TimeIntervalUtils sharedInstance];
-    [timeutils.dateFormatter setDateFormat:NSLocalizedString(@"MM-dd HH:mm:ss", @"")];
+    [timeutils.dateFormatter setDateFormat:NSLocalizedString(@"MM-dd HH:mm", @"")];
     NSString* str = [timeutils.dateFormatter stringFromDate:date];
 #else
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"]];//location设置为中国
-    [dateFormatter setDateFormat:@"MM-dd HH:mm:ss"];
+    [dateFormatter setDateFormat:@"MM-dd HH:mm"];
     NSString* str = [dateFormatter stringFromDate:date];
 #endif
     
