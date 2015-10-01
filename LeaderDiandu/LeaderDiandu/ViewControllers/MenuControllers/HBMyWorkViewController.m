@@ -56,7 +56,11 @@
 {
     CGRect rect = self.view.frame;
     float controlX = 20;
-    float controlY = KHBNaviBarHeight + 30;
+    NSInteger margin = 30;
+    if ([[UIDevice currentDevice] isIphone5]) {
+        margin = 10;
+    }
+    float controlY = KHBNaviBarHeight + margin;
     float controlW = rect.size.width - controlX*2;
     CGRect viewFrame = CGRectMake(controlX, controlY, controlW, 10);
     _progressView = [[UIProgressView alloc] initWithFrame:viewFrame];
@@ -67,7 +71,7 @@
     [self.view addSubview:_progressView];
     
     controlX = 0;
-    controlY = CGRectGetMaxY(_progressView.frame) + 30;
+    controlY = CGRectGetMaxY(_progressView.frame) + margin;
     controlW = rect.size.width;
     float controlH = rect.size.height - controlY;
     _myWorkView = [[HBMyWorkView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];

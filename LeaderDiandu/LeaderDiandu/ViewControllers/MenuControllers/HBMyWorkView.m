@@ -76,7 +76,11 @@ typedef enum : NSUInteger {
     [self initQuestionView:CGRectMake(controlX, controlY, controlW, controlH)];
     
     controlH = 40;
-    controlY = frame.size.height-40-controlH;
+    NSInteger margin = 20;
+    if ([[UIDevice currentDevice] isIphone5]) {
+        margin = 20;
+    }
+    controlY = frame.size.height-margin-controlH;
     _finishButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
 //    [_finishButton.layer setMasksToBounds:YES];
 //    [_finishButton.layer setCornerRadius:5.0];
@@ -170,6 +174,9 @@ typedef enum : NSUInteger {
             [_selectionView addSubview:view];
         } else {
             controlW = 140;
+            if ([[UIDevice currentDevice] isIphone5]) {
+                controlW = 120;
+            }
             controlH = 60;
             [self createSelectionButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin+i title:obj];
         }
