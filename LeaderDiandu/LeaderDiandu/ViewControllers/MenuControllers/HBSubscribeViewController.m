@@ -7,8 +7,6 @@
 //
 
 #import "HBSubscribeViewController.h"
-#import "HBTitleView.h"
-#import "UIViewController+AddBackBtn.h"
 #import "HBGridView.h"
 #import "HBGridItemView.h"
 #import "ButtonGridItemView.h"
@@ -44,10 +42,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"订阅等级" onView:self.view];
-    [self.view addSubview:labTitle];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"订阅等级";
     
-    [self addBackButton];
     [self initMainGrid];
     [self initConfirmButton];
     [self initRuleDescriptionButton];
@@ -57,7 +54,7 @@
 
 - (void)initMainGrid
 {
-    _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, 60, ScreenWidth, ScreenWidth)];
+    _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth)];
     _gridView.delegate = self;
     _gridView.backgroundColor = [UIColor redColor];
     [self.view addSubview:_gridView];

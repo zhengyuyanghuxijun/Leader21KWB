@@ -147,7 +147,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2DFC3168-85DE-4954-A443-9D28B2DAE9DD" translatesAutoresizingMaskIntoConstraints="NO" id="Q2K-hg-8x1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="9F10A79B-2CB9-4B42-AD0F-2FCA0C2F61F8" translatesAutoresizingMaskIntoConstraints="NO" id="Q2K-hg-8x1">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号/ID" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Huy-Kb-5AL" customClass="HBNTextField">
@@ -203,7 +203,7 @@
                                     <constraint firstAttribute="height" constant="44" id="VjZ-Ar-EBp"/>
                                     <constraint firstAttribute="width" constant="44" id="jkC-hJ-wL6"/>
                                 </constraints>
-                                <state key="normal" image="back">
+                                <state key="normal" backgroundImage="back">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" image="back"/>
@@ -291,7 +291,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A479E1D9-57F5-41E1-A1FE-3D9AF0FE230D" translatesAutoresizingMaskIntoConstraints="NO" id="mKY-Hd-NsR">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="8935848E-B328-4E12-A620-8FA59C2CC467" translatesAutoresizingMaskIntoConstraints="NO" id="mKY-Hd-NsR">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSo-HN-CUX">
@@ -361,7 +361,7 @@
                                     <constraint firstAttribute="width" constant="44" id="Eca-Q0-Dt3"/>
                                     <constraint firstAttribute="height" constant="44" id="n0k-gb-2Tm"/>
                                 </constraints>
-                                <state key="normal" image="back">
+                                <state key="normal" backgroundImage="back">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" image="back"/>
@@ -418,7 +418,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="2DFC3168-85DE-4954-A443-9D28B2DAE9DD" width="375" height="666">
+        <image name="8935848E-B328-4E12-A620-8FA59C2CC467" width="375" height="666">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -17122,7 +17122,7 @@ D0hxAA9IeQAPSIYAD0iLAA9IjQAPSI8AD0iUAA9InAAPSJ8AD0ikAA9IrAAPSK8AD0jBAA9IxAAPSMkA
 AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAA9Iyw
 </mutableData>
         </image>
-        <image name="A479E1D9-57F5-41E1-A1FE-3D9AF0FE230D" width="375" height="666">
+        <image name="9F10A79B-2CB9-4B42-AD0F-2FCA0C2F61F8" width="375" height="666">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

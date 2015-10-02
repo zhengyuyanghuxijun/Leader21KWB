@@ -7,8 +7,6 @@
 //
 
 #import "HBBindPhoneViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 
 @interface HBBindPhoneViewController ()
 {
@@ -24,10 +22,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"绑定手机号" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"绑定手机号";
     
     CGRect frame = self.view.frame;
     float controlX = 20;

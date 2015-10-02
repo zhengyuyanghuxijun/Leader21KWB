@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class HBLoginViewController;
+@class HBNLoginViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UINavigationController* globalNavi;
-@property (nonatomic, strong) HBLoginViewController *loginVC;
+@property (nonatomic, strong) HBNLoginViewController *loginVC;
 
 + (AppDelegate *)delegate;
 

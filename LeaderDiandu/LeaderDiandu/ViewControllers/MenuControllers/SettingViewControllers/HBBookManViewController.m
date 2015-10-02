@@ -7,8 +7,6 @@
 //
 
 #import "HBBookManViewController.h"
-#import "HBTitleView.h"
-#import "UIViewController+AddBackBtn.h"
 #import "UIImageView+AFNetworking.h"
 #import "HBTestWorkManager.h"
 #import "HBDataSaveManager.h"
@@ -140,10 +138,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"本地图书管理" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"本地图书管理";
     
     [self loadBookDate];
     [self creatDescribeLabel];

@@ -7,8 +7,6 @@
 //
 
 #import "HBStuManViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 #import "HBStudentEntity.h"
@@ -60,10 +58,8 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     //设置页面背景颜色
     self.view.backgroundColor = [UIColor whiteColor];
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"学生管理" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"学生管理";
     
     [self requestStudentList];
     //学生按钮

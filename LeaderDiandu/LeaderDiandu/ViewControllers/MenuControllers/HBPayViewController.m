@@ -7,8 +7,6 @@
 //
 
 #import "HBPayViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 #import "HBPayViewControllerMoneyCell.h"
 #import "HBPayViewControllerModeCell.h"
 
@@ -30,13 +28,11 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"支付中心" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"支付中心";
     
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight);
+    CGRect viewFrame = CGRectMake(0, 0, rect.size.width, rect.size.height);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;

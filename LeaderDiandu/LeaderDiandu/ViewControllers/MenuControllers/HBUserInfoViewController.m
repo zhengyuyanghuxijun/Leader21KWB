@@ -7,8 +7,6 @@
 //
 
 #import "HBUserInfoViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 #import "HBServiceManager.h"
 #import "HBEditNameViewController.h"
 #import "HBBindPhoneViewController.h"
@@ -32,13 +30,11 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     
     _titleArr = @[@"账号", @"姓名", @"手机"];
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"个人中心" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"个人中心";
     
     CGRect rect = self.view.frame;
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight)];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.scrollEnabled = NO;

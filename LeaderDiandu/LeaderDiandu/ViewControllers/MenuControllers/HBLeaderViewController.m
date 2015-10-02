@@ -7,8 +7,6 @@
 //
 
 #import "HBLeaderViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 
 static NSString * const KLeaderViewControllerCellReuseId = @"KUserInfoViewControllerCellReuseId";
 
@@ -28,13 +26,11 @@ static NSString * const KLeaderViewControllerCellReuseId = @"KUserInfoViewContro
     
     _titleArr = @[@"账号", @"姓名"];
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"我的教研员" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"我的教研员";
     
     CGRect rect = self.view.frame;
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight)];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, rect.size.height)];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.tableFooterView = [[UIView alloc] init];

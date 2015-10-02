@@ -7,8 +7,6 @@
 //
 
 #import "HBSetStuController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 #import "HBStudentEntity.h"
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
@@ -34,10 +32,8 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:self.titleStr onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = self.titleStr;
     
     [self addTableView];
     

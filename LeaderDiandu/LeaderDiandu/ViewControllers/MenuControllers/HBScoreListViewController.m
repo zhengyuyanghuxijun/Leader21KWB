@@ -7,8 +7,6 @@
 //
 
 #import "HBScoreListViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 #import "HBScoreEntity.h"
@@ -96,13 +94,10 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:self.titleStr onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = self.titleStr;
     
     [self requestUserScore];
-
 }
 
 - (void)didReceiveMemoryWarning {

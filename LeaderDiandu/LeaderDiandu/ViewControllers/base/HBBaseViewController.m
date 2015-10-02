@@ -25,16 +25,25 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    UINavigationBar *naviBar = self.navigationController.navigationBar;
+    //设置navigationBar背景颜色
+    [naviBar setBarTintColor:KLeaderRGB];
+    //设置navigationBar Title颜色和字体
+    [naviBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor], NSFontAttributeName:[UIFont boldSystemFontOfSize:20]}];
+    //设置返回按钮
+    UIImage *backButtonImage = [[UIImage imageNamed:@"back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 30, 0, 0)];
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    //将返回按钮的文字position设置不在屏幕上显示
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin) forBarMetrics:UIBarMetricsDefault];
+    
+//    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+//    self.navigationItem.backBarButtonItem = backItem;
+//    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
 //    UIImageView *backgroundImg = [[UIImageView alloc] initWithFrame:self.view.bounds];
 //    backgroundImg.image = [UIImage imageNamed:@"star_bg"];
 //    [self.view addSubview:backgroundImg];
     self.view.backgroundColor = RGBCOLOR(239, 239, 239);
-    
-    CGRect rect = self.view.frame;
-    UIImageView *navView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rect), KHBNaviBarHeight)];
-//    navView.image = [UIImage imageNamed:@"resource_title_bg"];
-    navView.backgroundColor = [UIColor colorWithHex:0xff8903];
-    [self.view addSubview:navView];
 }
 
 -(void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion{

@@ -13,7 +13,7 @@
 
 #import "DHSlideMenuController.h"
 #import "DHSlideMenuViewController.h"
-#import "HBLoginViewController.h"
+#import "HBNLoginViewController.h"
 #import "HBGradeViewController.h"
 
 #import "Constants.h"
@@ -50,7 +50,7 @@
     menuVC.needPanFromViewBounds = YES;
     
     self.globalNavi = [[UINavigationController alloc] initWithRootViewController:menuVC];
-    self.globalNavi.navigationBarHidden = YES;
+//    self.globalNavi.navigationBarHidden = YES;
     
     BOOL islogined = NO;
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
@@ -61,8 +61,9 @@
     
     [[HBDataSaveManager defaultManager] loadSettings];
 
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-    self.loginVC = [sb instantiateViewControllerWithIdentifier:@"HBLoginViewController"];
+//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+//    self.loginVC = [sb instantiateViewControllerWithIdentifier:@"HBLoginViewController"];
+    self.loginVC = [[HBNLoginViewController alloc] init];
     if (!islogined) {
         [self.globalNavi pushViewController:_loginVC animated:NO];
     }else{

@@ -7,8 +7,6 @@
 //
 
 #import "HBMessageViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 
 @interface HBMessageViewController ()
 
@@ -20,10 +18,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"消息中心" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"消息中心";
 }
 
 - (void)didReceiveMemoryWarning {

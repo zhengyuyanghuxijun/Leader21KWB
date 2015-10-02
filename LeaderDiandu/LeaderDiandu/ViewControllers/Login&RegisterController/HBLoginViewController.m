@@ -50,18 +50,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"defaultLoginID"]) {
-//        UITextField *textID = (UITextField *)[[self.view viewWithTag:1005] viewWithTag:1006];
-        self.inputPhoneNumber.text = [NSString stringWithFormat:@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"defaultLoginID"] ];
-    }
-//    UITextField *textPW = (UITextField *)[[self.view viewWithTag:1005] viewWithTag:1007];
-    self.inputPassword.text = @"";
-}
-
 #pragma mark - init Method
 
 - (void)initMainView

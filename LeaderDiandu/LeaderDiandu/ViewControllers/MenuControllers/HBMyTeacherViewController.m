@@ -7,8 +7,6 @@
 //
 
 #import "HBMyTeacherViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 #import "HBServiceManager.h"
 #import "HBDataSaveManager.h"
 
@@ -35,10 +33,8 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     
     _titleArr = @[@"账号", @"姓名"];
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"我的老师" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"我的老师";
     
     CGRect rect = self.view.frame;
     CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight);

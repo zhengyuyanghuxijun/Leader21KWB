@@ -251,6 +251,8 @@
 {
     [super viewWillAppear:animated];
     
+    self.navigationController.navigationBarHidden = YES;
+    
 //    //token失效后再进来需要重新获取数据
 //    if ([self.contentEntityArr count] == 0) {
 //        //获取所有可选套餐

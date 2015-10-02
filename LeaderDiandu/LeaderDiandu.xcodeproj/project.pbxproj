@@ -77,6 +77,7 @@
 		0DB537321B8F70E80023A3F7 /* HBHTTPBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537311B8F70E80023A3F7 /* HBHTTPBaseRequest.m */; };
 		0DB537351B8F78AF0023A3F7 /* HBServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537341B8F78AF0023A3F7 /* HBServiceManager.m */; };
 		0DBD1AB01BBBAB5E00A3BD72 /* MJProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBD1AAF1BBBAB5E00A3BD72 /* MJProgressHUD.m */; };
+		0DBD1AC31BBD940900A3BD72 /* HBNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBD1AC21BBD940900A3BD72 /* HBNLoginViewController.m */; };
 		0DBE35351B8CB8B500179237 /* DataCheckUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35191B8CB8B500179237 /* DataCheckUtil.m */; };
 		0DBE35361B8CB8B500179237 /* DoubleCompare.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE351A1B8CB8B500179237 /* DoubleCompare.c */; };
 		0DBE353B1B8CB8B500179237 /* MBHudUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35271B8CB8B500179237 /* MBHudUtil.m */; };
@@ -339,6 +340,8 @@
 		0DBD1AAE1BBBAB5E00A3BD72 /* MJProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProgressHUD.h; sourceTree = "<group>"; };
 		0DBD1AAF1BBBAB5E00A3BD72 /* MJProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProgressHUD.m; sourceTree = "<group>"; };
 		0DBD1ABA1BBC501000A3BD72 /* AppDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDefine.h; path = App/AppDefine.h; sourceTree = "<group>"; };
+		0DBD1AC11BBD940900A3BD72 /* HBNLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBNLoginViewController.h; sourceTree = "<group>"; };
+		0DBD1AC21BBD940900A3BD72 /* HBNLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBNLoginViewController.m; sourceTree = "<group>"; };
 		0DBE35181B8CB8B500179237 /* DataCheckUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCheckUtil.h; sourceTree = "<group>"; };
 		0DBE35191B8CB8B500179237 /* DataCheckUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCheckUtil.m; sourceTree = "<group>"; };
 		0DBE351A1B8CB8B500179237 /* DoubleCompare.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = DoubleCompare.c; sourceTree = "<group>"; };
@@ -914,6 +917,19 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		0DBD1AC51BBED77C00A3BD72 /* HBUserInfoViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0D018FF21B97513400A92F59 /* HBUserInfoViewController.h */,
+				0D018FF31B97513400A92F59 /* HBUserInfoViewController.m */,
+				0D01900F1B98B19200A92F59 /* HBEditNameViewController.h */,
+				0D0190101B98B19200A92F59 /* HBEditNameViewController.m */,
+				0D0190121B98B1B500A92F59 /* HBBindPhoneViewController.h */,
+				0D0190131B98B1B500A92F59 /* HBBindPhoneViewController.m */,
+			);
+			name = HBUserInfoViewControllers;
+			sourceTree = "<group>";
+		};
 		0DBE35171B8CB8B500179237 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -959,6 +975,8 @@
 				0DBE35C81B8CD7BE00179237 /* HBForgetPwdViewController.m */,
 				0DBE35C91B8CD7BE00179237 /* HBRegistViewController.h */,
 				0DBE35CA1B8CD7BE00179237 /* HBRegistViewController.m */,
+				0DBD1AC11BBD940900A3BD72 /* HBNLoginViewController.h */,
+				0DBD1AC21BBD940900A3BD72 /* HBNLoginViewController.m */,
 			);
 			path = "Login&RegisterController";
 			sourceTree = "<group>";
@@ -1045,12 +1063,7 @@
 				18E57D681BA5B1CC00198BE9 /* HBStuManViewControllers */,
 				18C64FFB1B9DE4D20040E349 /* HBWorkManViewControllers */,
 				0D7292C21B9E0650006FA7EA /* SettingViewControllers */,
-				0D018FF21B97513400A92F59 /* HBUserInfoViewController.h */,
-				0D018FF31B97513400A92F59 /* HBUserInfoViewController.m */,
-				0D01900F1B98B19200A92F59 /* HBEditNameViewController.h */,
-				0D0190101B98B19200A92F59 /* HBEditNameViewController.m */,
-				0D0190121B98B1B500A92F59 /* HBBindPhoneViewController.h */,
-				0D0190131B98B1B500A92F59 /* HBBindPhoneViewController.m */,
+				0DBD1AC51BBED77C00A3BD72 /* HBUserInfoViewControllers */,
 				0DD2146A1B95FF3B009E3DB9 /* HBMyTeacherViewController.h */,
 				0DD2146B1B95FF3B009E3DB9 /* HBMyTeacherViewController.m */,
 				0D018FEC1B96DB9200A92F59 /* HBLeaderViewController.h */,
@@ -1360,6 +1373,7 @@
 				0D74875C1B88C2C4007BE4CD /* HBGridItemView.m in Sources */,
 				0D7488941B8A2973007BE4CD /* NSString+MD5.mm in Sources */,
 				18A244771BA7295A00E1E703 /* HBCreatGroupController.m in Sources */,
+				0DBD1AC31BBD940900A3BD72 /* HBNLoginViewController.m in Sources */,
 				0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */,
 				0DB5372E1B8F5DEE0023A3F7 /* AFURLResponseSerialization.m in Sources */,
 				181456DD1B96D9DD003CCD6C /* HBContentEntity.m in Sources */,

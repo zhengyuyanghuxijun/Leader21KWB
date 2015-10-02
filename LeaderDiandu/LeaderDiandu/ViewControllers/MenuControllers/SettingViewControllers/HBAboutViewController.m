@@ -7,8 +7,6 @@
 //
 
 #import "HBAboutViewController.h"
-#import "HBTitleView.h"
-#import "UIViewController+AddBackBtn.h"
 
 @implementation HBAboutViewController
 
@@ -16,10 +14,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"关于课外宝" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"关于课外宝";
     
     UIImageView *logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"flower"]];
     logoImgView.frame = CGRectMake((ScreenWidth - 120)/2, (ScreenHeight - 120)/2 - 20, 120, 120);

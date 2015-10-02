@@ -7,8 +7,6 @@
 //
 
 #import "HBPublishWorkViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 #import "HBGroupSelectViewController.h"
 #import "HBTestSelectViewController.h"
 #import "HBClassEntity.h"
@@ -46,10 +44,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"发布作业" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"发布作业";
     
     [self addTableView];
     
@@ -64,7 +60,7 @@
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight + 50, rect.size.width, 70*2);
+    CGRect viewFrame = CGRectMake(0, 50, rect.size.width, 70*2);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;

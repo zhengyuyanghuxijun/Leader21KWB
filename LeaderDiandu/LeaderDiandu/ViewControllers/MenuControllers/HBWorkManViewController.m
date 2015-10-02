@@ -7,8 +7,6 @@
 //
 
 #import "HBWorkManViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 #import "HBManageTaskEntity.h"
@@ -124,10 +122,8 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"作业管理" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"作业管理";
 
     [self requestTaskListOfTeacher];
     

@@ -13,11 +13,9 @@
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
 
 @interface HBBaseViewController : UIViewController
-{
-    
-}
 
--(void)willPop;
+- (void)willPop;
+
 @end
 
 @interface HBBaseViewController(CallBack)

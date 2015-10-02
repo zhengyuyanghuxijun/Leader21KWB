@@ -7,8 +7,6 @@
 //
 
 #import "HBEditNameViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 #import "HBServiceManager.h"
 #import "HBDataSaveManager.h"
 
@@ -25,10 +23,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"修改名字" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"修改名字";
     
     CGRect frame = self.view.frame;
     float controlX = 20;

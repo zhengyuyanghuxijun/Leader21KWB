@@ -7,8 +7,6 @@
 //
 
 #import "HBTestWorkViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 #import "HBMyWorkViewController.h"
 
 #import "HBDataSaveManager.h"
@@ -157,10 +155,10 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     
     _workManager = [[HBTestWorkManager alloc] init];
 
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"我的作业" onView:self.view];
-    [self.view addSubview:labTitle];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"我的作业";
     
-    [self addBackButton];
+    [self addTableView];
     [self requestTaskListOfStudent];
 }
 
@@ -182,7 +180,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight);
+    CGRect viewFrame = CGRectMake(0, 0, rect.size.width, rect.size.height);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -233,7 +231,8 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     [self.taskEntityArr addObject:taskEntity];
                 }
                 if (self.taskEntityArr.count > 0) {
-                    [self addTableView];
+                    [_tableView reloadData];
+//                    [self addTableView];
                 }
             }
         }];

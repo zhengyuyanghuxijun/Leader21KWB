@@ -7,8 +7,6 @@
 //
 
 #import "HBMyWorkViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 #import "HBMyWorkView.h"
 #import "HBScoreView.h"
 #import "HHAlertSingleView.h"
@@ -21,7 +19,6 @@
 {
     UIProgressView *_progressView;
     HBMyWorkView *_myWorkView;
-    HBTitleView *_labTitle;
     
     NSInteger _scoreNum;
 }
@@ -41,10 +38,13 @@
     
     _scoreNum = 0;
     
-    _labTitle = [HBTitleView titleViewWithTitle:_taskEntity.bookName onView:self.view];
-    [self.view addSubview:_labTitle];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = _taskEntity.bookName;
     
-    [self addBackButton];
+    self.navigationItem.hidesBackButton = YES;
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStyleDone target:self action:@selector(backButtonPressed:)];
+    [leftItem setTintColor:[UIColor whiteColor]];
+    self.navigationItem.leftBarButtonItem = leftItem;
     
     [self initUI];
     
@@ -126,7 +126,7 @@
 {
     _progressView.hidden = YES;
     _myWorkView.hidden = YES;
-    _labTitle.text = @"成绩展示";
+    self.title = @"成绩展示";
     
     CGRect frame = _myWorkView.frame;
     HBScoreView *scoreView = [[HBScoreView alloc] initWithFrame:frame score:_scoreNum];
@@ -144,7 +144,7 @@
     if ([_scoreArray count] < [_workManager.workArray count]) {
         [MBHudUtil showTextAlert:@"作业没有完成，确定要现在退出吗？" delegate:self];
     } else {
-        [super backButtonPressed:sender];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

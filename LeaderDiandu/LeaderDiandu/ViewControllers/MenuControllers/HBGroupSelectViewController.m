@@ -7,8 +7,6 @@
 //
 
 #import "HBGroupSelectViewController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 
@@ -37,10 +35,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"发布作业" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"发布作业";
     
     [self requestClassList];
 }

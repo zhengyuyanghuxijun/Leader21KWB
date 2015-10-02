@@ -7,8 +7,6 @@
 //
 
 #import "HBSettingViewController.h"
-#import "HBTitleView.h"
-#import "UIViewController+AddBackBtn.h"
 #import "HBBookManViewController.h"
 #import "HBAboutViewController.h"
 
@@ -36,13 +34,11 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
     
     _titleArr = @[@"仅用WiFi下载图书", @"显示英文书名", @"本地图书管理", @"检查更新", @"欢迎页", @"关于课外宝"];
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"设置" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"设置";
     
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight);
+    CGRect viewFrame = CGRectMake(0, 0, rect.size.width, rect.size.height);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;

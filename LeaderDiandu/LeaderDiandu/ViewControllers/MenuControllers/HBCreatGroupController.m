@@ -7,8 +7,6 @@
 //
 
 #import "HBCreatGroupController.h"
-#import "UIViewController+AddBackBtn.h"
-#import "HBTitleView.h"
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 
@@ -35,10 +33,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"创建群组" onView:self.view];
-    [self.view addSubview:labTitle];
-    
-    [self addBackButton];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"创建群组";
     
     CGRect frame = self.view.frame;
     float controlX = 20;

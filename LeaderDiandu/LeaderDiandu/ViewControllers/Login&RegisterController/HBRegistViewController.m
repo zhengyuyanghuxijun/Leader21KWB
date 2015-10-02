@@ -7,18 +7,16 @@
 //
 
 #import "HBRegistViewController.h"
-#import "HBNTextField.h"
 #import "NSString+Verify.h"
 #import "HBServiceManager.h"
-#import "HBTitleView.h" 
 
 @interface HBRegistViewController ()
 
-@property (weak, nonatomic) IBOutlet HBNTextField *inputPhoneNumber;
-@property (weak, nonatomic) IBOutlet HBNTextField *inputPassword;
-@property (weak, nonatomic) IBOutlet HBNTextField *inputVerifyCode;
-@property (weak, nonatomic) IBOutlet UIButton *getCodeButton;
-@property (weak, nonatomic) IBOutlet UIButton *registerButton;
+@property (nonatomic, strong) UITextField *inputPhoneNumber;
+@property (nonatomic, strong) UITextField *inputPassword;
+@property (nonatomic, strong) UITextField *inputVerifyCode;
+@property (nonatomic, strong) UIButton *getCodeButton;
+@property (nonatomic, strong) UIButton *registerButton;
 
 @property (nonatomic, assign) int countDownNum;
 @property (nonatomic, strong) NSTimer *mtimer;
@@ -29,24 +27,18 @@
 
 @implementation HBRegistViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
     [self initMainView];
-    // Do any additional setup after loading the view.
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToHideKeyboard:)];
+    [self.view addGestureRecognizer:tap];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)didReceiveMemoryWarning
 {
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -54,15 +46,59 @@
 #pragma mark - init Method
 - (void)initMainView
 {
-    HBTitleView *labTitle = [HBTitleView titleViewWithTitle:@"注册" onView:self.view];
-    [self.view addSubview:labTitle];
+    self.title = @"注册";
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToHideKeyboard:)];
-    [self.view addGestureRecognizer:tap];
+    float controlY = KHBNaviBarHeight + 50;
+    float controlH = 45;
+    float screenW = self.view.frame.size.width;
+    UIView *accountView = [[UIView alloc] initWithFrame:CGRectMake(0, controlY, screenW, controlH*3+2)];
+    accountView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:accountView];
     
-    [self.inputPhoneNumber setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
-    [self.inputPassword setupTextFieldWithType:HBNTextFieldTypePassword withIconName:@"lock"];
-    [self.inputVerifyCode setupTextFieldWithType:HBNTextFieldTypeVerifyCode withIconName:@""];
+    float controlX = 30;
+    controlY = 0;
+    float controlW = screenW - controlX;
+    self.inputPhoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    _inputPhoneNumber.placeholder = @"请输入手机号";
+    [accountView addSubview:_inputPhoneNumber];
+    
+    controlY += controlH;
+    UILabel *lineLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, 1)];
+    lineLbl.backgroundColor = RGBEQ(239);
+    [accountView addSubview:lineLbl];
+    
+    controlY += 1;
+    self.inputPassword = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    _inputPassword.placeholder = @"请输入密码";
+    [accountView addSubview:_inputPassword];
+    
+    controlY += controlH;
+    lineLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, 1)];
+    lineLbl.backgroundColor = RGBEQ(239);
+    [accountView addSubview:lineLbl];
+    
+    float buttonW = 100;
+    controlY += 1;
+    controlW -= buttonW;
+    self.inputVerifyCode = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    _inputVerifyCode.placeholder = @"验证码";
+    [accountView addSubview:_inputVerifyCode];
+    
+    controlX = screenW - buttonW;
+    controlH = 25;
+    controlY += 10;
+    lineLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, 1, controlH)];
+    lineLbl.backgroundColor = RGBEQ(239);
+    [accountView addSubview:lineLbl];
+    
+    controlX += 5;
+    buttonW -= 10;
+    self.getCodeButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, buttonW, controlH)];
+    _getCodeButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    [_getCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+    [_getCodeButton setTitleColor:KLeaderRGB forState:UIControlStateNormal];
+    [_getCodeButton addTarget:self action:@selector(fetchVerifyCode:) forControlEvents:UIControlEventTouchUpInside];
+    [accountView addSubview:_getCodeButton];
 }
 
 - (void)tapToHideKeyboard:(id)sender
@@ -73,10 +109,9 @@
 }
 
 #pragma mark - Target Action
-- (IBAction)backToPreView:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-- (IBAction)registerUser:(id)sender {
+
+- (void)registerUser:(id)sender
+{
     [self tapToHideKeyboard:nil];
     
     if ([self checkIfNeedReturn]) {
@@ -99,14 +134,15 @@
     }];
 }
 
-- (IBAction)fetchVerifyCode:(id)sender {
+- (void)fetchVerifyCode:(id)sender
+{
     [self tapToHideKeyboard:nil];
 
     [self.inputPhoneNumber resignFirstResponder];
     
     NSString *phoneNum = self.inputPhoneNumber.text;
     if (![phoneNum isPhoneNumInput]){
-        [self.inputPhoneNumber showErrorMessage:@"请输入正确的手机号"];
+        [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
         return;
     }
     
@@ -147,15 +183,15 @@
 {
     BOOL needReturn = NO;
     if (![self.inputPhoneNumber.text isPhoneNumInput]){
-        [self.inputPhoneNumber showErrorMessage:@"请输入正确的手机号"];
+        [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
         needReturn = YES;
     }
     if (![self.inputPassword.text isPasswordInput]){
-        [self.inputPassword showErrorMessage:@"密码长度只能在6-32位字符之间"];
+        [MBHudUtil showTextView:@"密码长度只能在6-32位字符之间" inView:nil];
         needReturn = YES;
     }
     if ([NSString checkTextNULL:self.inputVerifyCode.text]){
-        [self.inputVerifyCode showErrorMessage:@"验证码错误"];
+        [MBHudUtil showTextView:@"验证码错误" inView:nil];
         needReturn = YES;
     }
     return needReturn;
