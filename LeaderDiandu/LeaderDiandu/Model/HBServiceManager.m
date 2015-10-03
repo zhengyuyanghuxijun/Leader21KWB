@@ -184,19 +184,22 @@
     [self Post:@"/api/user/phone/update" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestUpdatePwd:(NSString *)user token:(NSString *)token password:(NSString *)password sms_code:(NSString *)sms_code completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestUpdatePwd:(NSString *)phone token:(NSString *)token password:(NSString *)password sms_code:(NSString *)sms_code code_id:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
-    [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
+    [dicInfo setObject:phone     forKey:@"phone"];
+    if (token) {
+        [dicInfo setObject:token    forKey:@"token"];
+    }
     [dicInfo setObject:password    forKey:@"password"];
     [dicInfo setObject:sms_code    forKey:@"sms_code"];
+    [dicInfo setObject:code_id     forKey:@"code_id"];
     
     if (_receivedBlock) {
         return;
     }
     self.receivedBlock = receivedBlock;
-    [self Post:@"/api/user/password/update" dict:dicInfo block:receivedBlock];
+    [self Post:@"/api/user/password/forget" dict:dicInfo block:receivedBlock];
 }
 
 - (void)requestVerifyCode:(NSString *)icode completion:(HBServiceReceivedBlock)receivedBlock

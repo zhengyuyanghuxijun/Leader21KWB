@@ -6,8 +6,16 @@
 //
 //
 
+typedef enum : NSUInteger {
+    KLeaderViewTypeNull,
+    KLeaderViewTypeRegister,
+    KLeaderViewTypeForgetPwd,
+} KLeaderViewType;
+
 #import "HBBaseViewController.h"
 
 @interface HBForgetPwdViewController : HBBaseViewController
+
+@property (nonatomic, assign)KLeaderViewType viewType;
 
 @end

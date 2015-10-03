@@ -75,6 +75,7 @@
     controlY += 1;
     self.inputPassword = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _inputPassword.placeholder = @"输入密码";
+    _inputPassword.secureTextEntry = YES;
     [accountView addSubview:_inputPassword];
     
     controlW = 100;
@@ -116,17 +117,12 @@
     NSString *phone = self.inputPhoneNumber.text;
     NSString *pwd = self.inputPassword.text;
     if ([NSString checkTextNULL:phone]  || [NSString checkTextNULL:pwd] ) {
-        if ([NSString checkTextNULL:phone]) {
-            [MBHudUtil showTextView:@"请输入手机号" inView:nil];
-        }
-        if ([NSString checkTextNULL:pwd]) {
-            [MBHudUtil showTextView:@"请输入密码" inView:nil];
-        }
-        if (![pwd isValidPassword]) {
-            [MBHudUtil showTextView:@"请输入正确格式的密码" inView:nil];
-        }
+        [MBHudUtil showTextView:@"请填写完整的用户名和密码" inView:nil];
         return;
     }
+//    else if (![pwd isValidPassword]) {
+//        [MBHudUtil showTextView:@"请输入正确格式的密码" inView:nil];
+//    }
     
 //    self.loginButton.enabled = NO;
     //登录
@@ -164,12 +160,14 @@
 - (void)forgetPassword:(id)sender
 {
     HBForgetPwdViewController *vc = [[HBForgetPwdViewController alloc] init];
+    vc.viewType = KLeaderViewTypeForgetPwd;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)userRegister:(id)sender
 {
-    HBRegistViewController *vc = [[HBRegistViewController alloc] init];
+    HBForgetPwdViewController *vc = [[HBForgetPwdViewController alloc] init];
+    vc.viewType = KLeaderViewTypeRegister;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

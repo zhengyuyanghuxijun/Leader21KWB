@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, HBHTTPRequestType){
 typedef enum : NSUInteger {
     HBRequestSmsByRegister = 1,
     HBRequestSmsByModifyPwd,
-    HBRequestSmsByForgetPwd,
+    HBRequestSmsByForgetPwd,//废弃
     HBRequestSmsByBindPhone,
 } HBRequestSmsType;
 

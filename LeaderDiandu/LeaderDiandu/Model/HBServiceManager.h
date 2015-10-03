@@ -99,7 +99,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param sms_code         短信验证码
  *  @param receivedBlock 回调Block
  */
-- (void)requestUpdatePwd:(NSString *)user token:(NSString *)token password:(NSString *)password sms_code:(NSString *)sms_code completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestUpdatePwd:(NSString *)phone token:(NSString *)token password:(NSString *)password sms_code:(NSString *)sms_code code_id:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  验证邀请码
