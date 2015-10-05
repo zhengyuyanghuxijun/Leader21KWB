@@ -2,7 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "dropmenu_refresh_down@2x-1.png"
     },
     {
       "idiom" : "universal",

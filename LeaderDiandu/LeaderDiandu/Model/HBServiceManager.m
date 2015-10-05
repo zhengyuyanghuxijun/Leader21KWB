@@ -100,7 +100,7 @@
 
     [[HBHTTPBaseRequest requestWithSubUrl:@"/api/auth/login"] startWithMethod:HBHTTPRequestMethodPOST parameters:dicInfo completion:^(id responseObject, NSError *error) {
         if (receivedBlock) {
-            if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            if (error.code == 0) {
                 [[HBDataSaveManager defaultManager] saveUserByDict:responseObject];
             }
             receivedBlock(responseObject,error);

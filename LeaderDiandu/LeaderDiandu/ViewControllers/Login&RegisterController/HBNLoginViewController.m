@@ -129,7 +129,7 @@
     [MBHudUtil showActivityView:nil inView:nil];
     [[HBServiceManager defaultManager] requestLogin:phone pwd:pwd completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
-        if (responseObject) {
+        if (error.code == 0) {
             //登录成功
             [[HBDataSaveManager defaultManager] loadSettings];
             self.loginButton.enabled = YES;

@@ -101,7 +101,7 @@
     NSArray *imgArray = nil;
     NSArray *titleArr = nil;
     NSArray *ctlArray = nil;
-    if (userEntity.type == 1) {
+    if (userEntity.type <= 1) {
         imgArray = @[@"menu-icn-myteacher", @"menu-icn-subs", @"menu-icn-test", @"menu-icn-pay", @"menu-icn-message", @"menu-icn-service", @"menu-icn-setting"];
         titleArr = @[@"我的老师", @"订阅等级", @"我的作业", @"支付中心", @"消息中心", @"联系客服", @"设置"];
         ctlArray = @[@"HBMyTeacherViewController", @"HBSubscribeViewController", @"HBTestWorkViewController", @"HBPayViewController", @"HBMessageViewController", @"", @"HBSettingViewController"];
