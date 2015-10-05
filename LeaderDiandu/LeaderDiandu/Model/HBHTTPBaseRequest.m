@@ -62,9 +62,9 @@
                        success:^(NSURLSessionDataTask *task, id responseObject) {
                            [self handleRequestResponseWithData:responseObject];
                            
-                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                       } failure:^(id responseObject, NSError *error) {
                            if (completionBlock) {
-                               self.completionBlock(nil,error);
+                               self.completionBlock(responseObject,error);
                            }
                        }];
         

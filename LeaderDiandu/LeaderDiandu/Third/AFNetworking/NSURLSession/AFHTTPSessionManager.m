@@ -222,7 +222,7 @@
                                        URLString:(NSString *)URLString
                                       parameters:(id)parameters
                                          success:(void (^)(NSURLSessionDataTask *, id))success
-                                         failure:(void (^)(NSURLSessionDataTask *, NSError *))failure
+                                         failure:(void (^)(id, NSError *))failure
 {
     NSError *serializationError = nil;
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&serializationError];
@@ -243,7 +243,7 @@
     dataTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
         if (error) {
             if (failure) {
-                failure(dataTask, error);
+                failure(responseObject, error);
             }
         } else {
             if (success) {

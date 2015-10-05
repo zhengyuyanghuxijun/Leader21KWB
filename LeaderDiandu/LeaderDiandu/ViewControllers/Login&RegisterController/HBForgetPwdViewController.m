@@ -70,6 +70,7 @@
     float controlW = screenW - controlX;
     self.inputPhoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _inputPhoneNumber.placeholder = @"请输入手机号";
+    _inputPhoneNumber.keyboardType = UIKeyboardTypePhonePad;
     [accountView addSubview:_inputPhoneNumber];
     
     controlY += controlH;
@@ -128,11 +129,17 @@
         smsCode = [self.smsDict objectForKey:@"sms_code"];
     }
     //注册
+    [MBHudUtil showActivityView:nil inView:nil];
     [[HBServiceManager defaultManager] requestRegister:phone pwd:password type:@"1" smsCode:smsCode codeId:[self.smsDict objectForKey:@"code_id"] completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
         NSDictionary *dict = responseObject;
         if ([[dict objectForKey:@"result"] isEqualToString:@"OK"]) {
             //注册成功
-            [MBHudUtil showTextView:@"注册成功" inView:nil];
+            [MBHudUtil showTextViewAfter:@"注册成功，请登录"];
+            //返回登录界面
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [MBHudUtil showTextViewAfter:@"注册失败，请重试"];
         }
     }];
 }
@@ -145,9 +152,15 @@
         smsCode = [self.smsDict objectForKey:@"sms_code"];
     }
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    [MBHudUtil showActivityView:nil inView:nil];
     [[HBServiceManager defaultManager] requestUpdatePwd:phone token:userEntity.token password:password sms_code:smsCode code_id:self.smsDict[@"code_id"] completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
         if ([[responseObject objectForKey:@"result"] isEqualToString:@"OK"]) {
-            [MBHudUtil showTextView:@"密码修改成功" inView:nil];
+            [MBHudUtil showTextViewAfter:@"修改密码成功，请登录"];
+            //返回登录界面
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [MBHudUtil showTextViewAfter:@"修改密码失败，请重试"];
         }
     }];
 }
@@ -201,10 +214,12 @@
     }
     HBRequestSmsType smsType = HBRequestSmsByRegister;
     if (self.viewType == KLeaderViewTypeForgetPwd) {
-        smsType = HBRequestSmsByModifyPwd;
+        smsType = HBRequestSmsByForgetPwd;
     }
     //手机找回密码 的短信下发
+    [MBHudUtil showActivityView:nil inView:nil];
     [[HBServiceManager defaultManager] requestSmsCode:nil token:nil phone:phoneNum service_type:smsType completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
         if (error.code == 0) {
             self.smsDict = responseObject;
             //发送了 验证码 进入倒计时
@@ -215,6 +230,8 @@
                 return ;
             }
             self.mtimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(beginCountDow) userInfo:nil repeats:YES];
+        } else {
+            [MBHudUtil showTextViewAfter:@"获取验证码失败"];
         }
     }];
 }
