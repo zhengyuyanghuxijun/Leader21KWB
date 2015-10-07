@@ -9,5 +9,8 @@
 #import "HBBaseViewController.h"
 
 @interface HBMessageViewController : HBBaseViewController
+{
+    UITableView *_tableView;
+}
 
 @end

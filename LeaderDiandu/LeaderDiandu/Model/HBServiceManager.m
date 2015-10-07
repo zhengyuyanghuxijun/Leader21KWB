@@ -692,4 +692,27 @@
     [self Get:apiStr dict:dicInfo block:receivedBlock];
 }
 
+/**
+ *  获取系统消息
+ *
+ *  @param user             用户名
+ *  @param token            登录返回的凭证
+ *  @param from_time        为起始时间，单位为秒。
+ *  @param receivedBlock    回调Block
+ */
+- (void)requestSystemMsg:(NSString *)user token:(NSString *)token from_time:(NSString *)from_time completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:user     forKey:@"user"];
+    [dicInfo setObject:token    forKey:@"token"];
+    [dicInfo setObject:from_time     forKey:@"from_time"];
+    
+    //    if (_receivedBlock) {
+    //        return;
+    //    }
+    
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/msg/list" dict:dicInfo block:receivedBlock];
+}
+
 @end
