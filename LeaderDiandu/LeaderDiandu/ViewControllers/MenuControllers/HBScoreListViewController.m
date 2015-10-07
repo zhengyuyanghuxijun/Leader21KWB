@@ -14,6 +14,9 @@
 
 static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewControllerCellReuseId";
 
+#define LABELFONTSIZE 14.0f
+#define SCORELABELFONTSIZE 20.0f
+
 @implementation HBScoreListViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -37,18 +40,26 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
     //姓名
     self.cellName = [[UILabel alloc] init];
     self.cellName.frame = CGRectMake(10 + 50 + 10, 10, 150, 70/2 - 10);
+    self.cellName.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     [self addSubview:self.cellName];
     
     //时间
     self.cellTime = [[UILabel alloc] init];
     self.cellTime.frame = CGRectMake(10 + 50 + 10, 70/2, 150, 70/2 - 10);
+    self.cellTime.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     [self addSubview:self.cellTime];
     
     //分数
     self.cellScore = [[UILabel alloc] init];
     self.cellScore.frame = CGRectMake(ScreenWidth - 100, 0, 90, 70);
     self.cellScore.textAlignment = NSTextAlignmentRight;
+    self.cellScore.font = [UIFont boldSystemFontOfSize:SCORELABELFONTSIZE];
+    self.cellScore.textColor = [UIColor colorWithHex:0xff8903];
     [self addSubview:self.cellScore];
+    
+    UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0,70 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
+    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    [self addSubview:seperatorLine];
 }
 
 -(void)updateFormData:(id)sender
@@ -59,11 +70,14 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
         self.cellName.text = scoreEntity.displayName;
         self.cellTime.text = scoreEntity.taskTime;
         if (scoreEntity.score) {
+            self.cellScore.font = [UIFont boldSystemFontOfSize:SCORELABELFONTSIZE];
+            self.cellScore.textColor = [UIColor colorWithHex:0xff8903];
             self.cellScore.text = scoreEntity.score;
         }else{
+            self.cellScore.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
+            self.cellScore.textColor = [UIColor blackColor];
             self.cellScore.text = @"未完成测试";
         }
-        
     }
 }
 
@@ -118,10 +132,11 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, self.scoreEntityArr.count * 70);
+    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, ScreenHeight);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.separatorStyle = NO;
     [self.view addSubview:_tableView];
 }
 

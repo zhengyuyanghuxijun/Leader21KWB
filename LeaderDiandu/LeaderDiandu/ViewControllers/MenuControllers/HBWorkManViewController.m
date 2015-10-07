@@ -16,6 +16,8 @@
 #import "HBPublishWorkViewController.h"
 
 #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
+#define LABELFONTSIZE 14.0f
+
 static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewControllerCellReuseId";
 
 @implementation HBWorkManViewCell
@@ -34,12 +36,21 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
 {
     //时间
     self.cellTime = [[UILabel alloc] init];
-    self.cellTime.frame = CGRectMake(10, 5, 120, 25);
+    self.cellTime.frame = CGRectMake(10, 5, 80, 25);
+    self.cellTime.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     [self addSubview:self.cellTime];
+    
+    //群组图标
+    self.cellGroupImage = [[UIImageView alloc] init];
+    self.cellGroupImage.image = [UIImage imageNamed:@"icn-group"];
+    self.cellGroupImage.frame = CGRectMake(self.cellTime.frame.origin.x + self.cellTime.frame.size.width + 10, 11, 17, 14);
+    [self addSubview:self.cellGroupImage];
     
     //班级
     self.cellClassName = [[UILabel alloc] init];
-    self.cellClassName.frame = CGRectMake(self.cellTime.frame.origin.x + self.cellTime.frame.size.width + 10, 5, 80, 25);
+    self.cellClassName.frame = CGRectMake(self.cellGroupImage.frame.origin.x + self.cellGroupImage.frame.size.width + 5, 5, 80, 25);
+    self.cellClassName.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
+    self.cellClassName.textColor = [UIColor colorWithHex:0xff8903];
     [self addSubview:self.cellClassName];
     
     //完成
@@ -47,10 +58,13 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     submittedTitle.text = @"完成";
     submittedTitle.frame = CGRectMake(ScreenWidth - 110, 5, 50, 25);
     [submittedTitle setTextAlignment:NSTextAlignmentCenter];
+    submittedTitle.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     [self addSubview:submittedTitle];
     self.cellSubmitted = [[UILabel alloc] init];
     self.cellSubmitted.frame = CGRectMake(ScreenWidth - 110, 25, 50, 25);
     [self.cellSubmitted setTextAlignment:NSTextAlignmentCenter];
+    self.cellSubmitted.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
+    self.cellSubmitted.textColor = [UIColor colorWithHex:0xff8903];
     [self addSubview:self.cellSubmitted];
     
     //总数
@@ -58,22 +72,29 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     totleTitle.text = @"总数";
     totleTitle.frame = CGRectMake(ScreenWidth - 70, 5, 50, 25);
     [totleTitle setTextAlignment:NSTextAlignmentCenter];
+    totleTitle.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     [self addSubview:totleTitle];
     self.cellTotal = [[UILabel alloc] init];
     self.cellTotal.frame = CGRectMake(ScreenWidth - 70, 25, 50, 25);
     [self.cellTotal setTextAlignment:NSTextAlignmentCenter];
+    self.cellTotal.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
+    self.cellTotal.textColor = [UIColor colorWithHex:0xff8903];
     [self addSubview:self.cellTotal];
     
     //书皮
     self.cellImageBookCover = [[UIImageView alloc] init];
     self.cellImageBookCover.image = [UIImage imageNamed:@"mainGrid_defaultBookCover"];
-    self.cellImageBookCover.frame = CGRectMake(10, 35, 50, 60);
+    self.cellImageBookCover.frame = CGRectMake(30, 35, 50, 60);
     [self addSubview:self.cellImageBookCover];
     
     //书名
     self.cellBookName = [[UILabel alloc] init];
-    self.cellBookName.frame = CGRectMake(self.cellImageBookCover.frame.origin.x + self.cellImageBookCover.frame.size.width + 10, 35, 200, 60);
+    self.cellBookName.frame = CGRectMake(self.cellImageBookCover.frame.origin.x + self.cellImageBookCover.frame.size.width + 20, 35, 200, 60);
     [self addSubview:self.cellBookName];
+    
+    UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 100 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
+    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    [self addSubview:seperatorLine];
 }
 
 -(void)updateFormData:(id)sender
@@ -122,12 +143,15 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //设置页面背景颜色
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     self.navigationController.navigationBarHidden = NO;
     self.title = @"作业管理";
 
     [self requestTaskListOfTeacher];
     
-    CGRect rc = CGRectMake(0.0f, ScreenHeight - 50.0f, ScreenWidth, 50.0f);
+    CGRect rc = CGRectMake(10.0f, ScreenHeight - 50.0f, ScreenWidth - 10 - 10, 50.0f);
     self.assignWorkButton = [[UIButton alloc] initWithFrame:rc];
     [self.assignWorkButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
     [self.assignWorkButton setTitle:@"布置作业" forState:UIControlStateNormal];
@@ -163,6 +187,7 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.separatorStyle = NO;
     [self.view addSubview:_tableView];
 }
 

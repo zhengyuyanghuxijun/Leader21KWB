@@ -12,6 +12,9 @@
 #import "HBContentManager.h"
 #import "HBContentListDB.h"
 #import "HBContentDetailDB.h"
+#import "UIImageView+AFNetworking.h"
+
+#define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 
 @interface HBTestSelectViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -68,10 +71,11 @@
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, ScreenHeight - KHBNaviBarHeight);
+    CGRect viewFrame = CGRectMake(0, 0, rect.size.width, ScreenHeight);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.separatorStyle = NO;
     [self.view addSubview:_tableView];
 }
 
@@ -90,7 +94,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    return 120;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -101,16 +105,25 @@
     }
     
     HBContentDetailEntity *contentDetailEntity = [self.testArray objectAtIndex:indexPath.row];
+    
+    NSString *fileIdStr = contentDetailEntity.FILE_ID;
+    fileIdStr = [fileIdStr lowercaseString];
+    NSString *urlStr = [NSString stringWithFormat:KHBBookImgFormatUrl, fileIdStr, fileIdStr];
+    [cell.imageView setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"mainGrid_defaultBookCover"]];
+    
     if ([[HBDataSaveManager defaultManager] showEnBookName]) {
         cell.textLabel.text = contentDetailEntity.BOOK_TITLE;
     }else{
         cell.textLabel.text = contentDetailEntity.BOOK_TITLE_CN;
     }
     
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textColor = [UIColor blackColor];
+    
+    UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 120 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
+    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    [cell addSubview:seperatorLine];
     
     return cell;
 }

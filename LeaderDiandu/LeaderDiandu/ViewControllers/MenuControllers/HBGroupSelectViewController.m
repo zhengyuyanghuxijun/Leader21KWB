@@ -66,10 +66,11 @@
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, self.groupArray.count*50);
+    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, ScreenHeight);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.separatorStyle = NO;
     [self.view addSubview:_tableView];
 }
 
@@ -100,11 +101,17 @@
     }
     
     HBClassEntity *classEntity = [self.groupArray objectAtIndex:indexPath.row];
+    
+    cell.imageView.image = [UIImage imageNamed:@"icn-group"];
+    
     cell.textLabel.text = classEntity.name;
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textColor = [UIColor blackColor];
+    
+    UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 50 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
+    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    [cell addSubview:seperatorLine];
     
     return cell;
 }

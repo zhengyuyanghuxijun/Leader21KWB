@@ -49,7 +49,7 @@
     
     [self addTableView];
     
-    CGRect rc = CGRectMake(0.0f, ScreenHeight - 80.0f, ScreenWidth, 50.0f);
+    CGRect rc = CGRectMake(10.0f, ScreenHeight - 80.0f, ScreenWidth - 10 - 10, 50.0f);
     self.publishWorkButton = [[UIButton alloc] initWithFrame:rc];
     [self.publishWorkButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
     [self.publishWorkButton setTitle:@"发布作业" forState:UIControlStateNormal];
@@ -60,10 +60,11 @@
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, 50, rect.size.width, 70*2);
+    CGRect viewFrame = CGRectMake(0, 0, rect.size.width, ScreenHeight);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.separatorStyle = NO;
     [self.view addSubview:_tableView];
 }
 
@@ -104,6 +105,10 @@
     cell.textLabel.textColor = [UIColor blackColor];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
     
+    UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0,70 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
+    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    [cell addSubview:seperatorLine];
+    
     return cell;
 }
 
@@ -118,7 +123,11 @@
         HBTestSelectViewController *vc = [[HBTestSelectViewController alloc] init];
         vc.bookset_id = self.classEntity.booksetId;
         vc.delegate = self;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (0 == vc.bookset_id) {
+            //请先选择群组
+        }else{
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 

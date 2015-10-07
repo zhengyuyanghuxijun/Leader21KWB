@@ -11,6 +11,7 @@
 @interface HBWorkManViewCell : UITableViewCell
 
 @property (strong, nonatomic) UILabel *     cellTime;
+@property (strong, nonatomic) UIImageView * cellGroupImage;
 @property (strong, nonatomic) UILabel *     cellClassName;
 @property (strong, nonatomic) UILabel *     cellSubmitted;
 @property (strong, nonatomic) UILabel *     cellTotal;
