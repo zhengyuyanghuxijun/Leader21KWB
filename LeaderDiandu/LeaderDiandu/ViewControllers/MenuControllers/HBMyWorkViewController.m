@@ -142,7 +142,7 @@
 - (void)backButtonPressed:(id)sender
 {
     if ([_scoreArray count] < [_workManager.workArray count]) {
-        [MBHudUtil showTextAlert:@"作业没有完成，确定要现在退出吗？" delegate:self];
+        [MBHudUtil showTextAlert:@"提示" msg:@"作业没有完成，确定要现在退出吗？" delegate:self];
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }

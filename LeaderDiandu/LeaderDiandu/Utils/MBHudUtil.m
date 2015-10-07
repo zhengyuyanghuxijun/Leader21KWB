@@ -187,9 +187,9 @@
 }
 
 
-+ (void)showTextAlert:(NSString*)msg delegate:(id)delegate
++ (void)showTextAlert:(NSString *)title msg:(NSString*)msg delegate:(id)delegate
 {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示"
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:title
                                                     message:msg
                                                    delegate:delegate
                                           cancelButtonTitle:@"取消"

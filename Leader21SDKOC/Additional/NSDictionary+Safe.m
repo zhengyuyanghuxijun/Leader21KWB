@@ -10,6 +10,13 @@
 
 @implementation NSDictionary (Safe)
 
+- (BOOL)isValidDictionary
+{
+    if ([[self allKeys] count] > 0) {
+        return YES;
+    }
+    return NO;
+}
 
 - (NSString*)stringForKey:(NSString*)key
 {

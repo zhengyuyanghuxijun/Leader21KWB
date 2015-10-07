@@ -84,13 +84,14 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     [self createBindView:viewFrame];
     [self createTableView:viewFrame];
     
-    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    if ([[userEntity.teacher allKeys] count] > 0) {
-        _teacherView.hidden = NO;
-        [self handleDescArray];
-    } else {
+    //有可能从其他客户端解除绑定老师
+//    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+//    if ([[userEntity.teacher allKeys] count] > 0) {
+//        [self showBindView:NO];
+//        [self handleDescArray];
+//    } else {
         [self getUserInfo];
-    }
+//    }
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
@@ -102,6 +103,12 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
 - (void)keyboardHide:(UITapGestureRecognizer *)tap
 {
     [self.view endEditing:YES];
+}
+
+- (void)showBindView:(BOOL)isBind
+{
+    _bindView.hidden = !isBind;
+    _teacherView.hidden = isBind;
 }
 
 - (void)handleDescArray
@@ -150,31 +157,32 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     _bindView.tag = KTagBindView;
     [self.view addSubview:_bindView];
     
-    float controlX = 20;
+    float controlX = 0;
     float controlY = 20;
-    float width = frame.size.width - controlX*2;
-    UIImageView *editBg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, width, 50)];
-    editBg.userInteractionEnabled = YES;
-    UIImage *image = [UIImage imageNamed:@"user_editbg"];
-    editBg.image = image;//[image resizableImageWithCapInsets:UIEdgeInsetsMake(2, 20, 2, 20) resizingMode:UIImageResizingModeStretch];
-    [_bindView addSubview:editBg];
-    _textField = [[UITextField alloc] initWithFrame:CGRectMake(20, 5, width-40, 40)];
-    _textField.placeholder = @"请输入老师ID";
-    [editBg addSubview:_textField];
+    float width = frame.size.width;
+    UIView *editView = [[UIView alloc] initWithFrame:CGRectMake(controlX, controlY, width, 50)];
+    editView.backgroundColor = [UIColor whiteColor];
+    [_bindView addSubview:editView];
     
-    controlY = CGRectGetMaxY(editBg.frame)+20;
+    controlX = 20;
+    width -= 20*2;
+    _textField = [[UITextField alloc] initWithFrame:CGRectMake(controlX, 5, width, 40)];
+    _textField.placeholder = @"请输入老师的课外宝ID";
+    [editView addSubview:_textField];
+    
+    controlY = CGRectGetMaxY(editView.frame)+20;
     UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, width, 50)];
     tipLabel.backgroundColor = [UIColor clearColor];
     tipLabel.textColor = [UIColor lightGrayColor];
-    tipLabel.text = @"如果您不知道老师的ID，请从您的老师处寻求帮助哦";
+    tipLabel.text = @"如果你不知道老师的课外宝ID，请向你的英语老师或者同学寻求帮助哦";
     tipLabel.numberOfLines = 2;
     [_bindView addSubview:tipLabel];
     
     float buttonHeight = 45;
     controlY = frame.size.height - buttonHeight - 30;
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, width, buttonHeight)];
-    [button setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
-    [button setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
+    [button setBackgroundImage:[UIImage imageNamed:@"green-normal"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"green-press"] forState:UIControlStateHighlighted];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitle:@"绑定老师" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(bindButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -194,7 +202,8 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
             NSDictionary *dict = responseObject;
             if ([dict[@"result"] isEqualToString:@"OK"]) {
                 //绑定成功
-                [MBHudUtil showTextView:@"绑定成功" inView:self.view];
+                [MBHudUtil showTextView:@"绑定成功" inView:nil];
+                [self showBindView:NO];
             }
         }
     }];
@@ -202,7 +211,23 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
 
 - (void)unbindButtonAction:(id)sender
 {
-    
+    [MBHudUtil showTextAlert:@"确定要和老师解除绑定吗？解除绑定之后您将会自动退出该老师的群组，并且无法收到老师布置的作业。" msg:@"解除绑定" delegate:self];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+        [MBHudUtil showActivityView:nil inView:nil];
+        [[HBServiceManager defaultManager] requestTeacherUnAssign:userEntity.name completion:^(id responseObject, NSError *error) {
+            [MBHudUtil hideActivityView:nil];
+            if ([responseObject isKindOfClass:[NSDictionary class]] && [responseObject[@"result"] isEqualToString:@"OK"]) {
+                //解除绑定成功
+                [MBHudUtil showTextView:@"解除绑定成功" inView:nil];
+                [self showBindView:YES];
+            }
+        }];
+    }
 }
 
 - (void)getMyTeacher
@@ -223,12 +248,12 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
         [MBHudUtil hideActivityView:nil];
         if (error.code == 0) {
             [[HBDataSaveManager defaultManager] setUserEntityByDict:responseObject];
-            if (responseObject[@"teacher"]) {
-                _teacherView.hidden = NO;
+            if ([responseObject[@"teacher"] isValidDictionary]) {
+                [self showBindView:NO];
                 [self handleDescArray];
                 [_tableView reloadData];
             } else {
-                _bindView.hidden = NO;
+                [self showBindView:YES];
             }
         }
     }];

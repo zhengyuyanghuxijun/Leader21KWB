@@ -10,6 +10,7 @@
 
 @interface NSDictionary (Safe)
 
+- (BOOL)isValidDictionary;
 
 - (NSString*)stringForKey:(NSString*)key;
 - (NSNumber*)numberForKey:(NSString*)key;
