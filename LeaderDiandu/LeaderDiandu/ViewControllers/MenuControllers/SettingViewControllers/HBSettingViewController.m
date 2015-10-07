@@ -12,6 +12,7 @@
 
 #import "HBServiceManager.h"
 #import "GuideView.h"
+#import "HBSettingViewCell.h"
 
 static NSString * const KSettingViewControllerCellSwitchReuseId = @"KSettingViewControllerCellSwitchReuseId";
 static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingViewControllerCellAccessoryReuseId";
@@ -149,43 +150,57 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
 {
     NSParameterAssert(_titleArr);
     
-    UITableViewCell *cell;
-    
-    if(indexPath.row == 0 || indexPath.row == 1)
+    if(indexPath.row == 0)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:KSettingViewControllerCellSwitchReuseId];
+        HBSettingViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KSettingViewControllerCellSwitchReuseId];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KSettingViewControllerCellSwitchReuseId];
+            cell = [[HBSettingViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KSettingViewControllerCellSwitchReuseId];
         }
         
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.text = [_titleArr objectAtIndex:indexPath.row];
+        cell.mainLabel.text = [_titleArr objectAtIndex:indexPath.row];
+        cell.describeLabel.text = @"仅用WiFi下载，避免使用2G/3G流量";
         cell.textLabel.textColor = [UIColor blackColor];
         
         UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
-        
-        if (indexPath.row == 0) {
-            [switchView addTarget:self action:@selector(wifiDownload:) forControlEvents:UIControlEventValueChanged];
-            if ([[HBDataSaveManager defaultManager] wifiDownload]) {
-                [switchView setOn:YES];
-            }else{
-                [switchView setOn:NO];
-            }
+        [switchView addTarget:self action:@selector(wifiDownload:) forControlEvents:UIControlEventValueChanged];
+        if ([[HBDataSaveManager defaultManager] wifiDownload]) {
+            [switchView setOn:YES];
+        }else{
+            [switchView setOn:NO];
         }
-        else{
-            [switchView addTarget:self action:@selector(showEnglishName:) forControlEvents:UIControlEventValueChanged];
-            if ([[HBDataSaveManager defaultManager] showEnBookName]) {
-                [switchView setOn:YES];
-            }else{
-                [switchView setOn:NO];
-            }
-        }
+
         cell.accessoryView = switchView;
+        return cell;
+    }
+    else if(indexPath.row == 1)
+    {
+        HBSettingViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KSettingViewControllerCellSwitchReuseId];
+        if (!cell) {
+            cell = [[HBSettingViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KSettingViewControllerCellSwitchReuseId];
+        }
+        
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.mainLabel.text = [_titleArr objectAtIndex:indexPath.row];
+        cell.describeLabel.text = @"默认显示中文书名";
+        cell.textLabel.textColor = [UIColor blackColor];
+        
+        UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
+        [switchView addTarget:self action:@selector(showEnglishName:) forControlEvents:UIControlEventValueChanged];
+        if ([[HBDataSaveManager defaultManager] showEnBookName]) {
+            [switchView setOn:YES];
+        }else{
+            [switchView setOn:NO];
+        }
+
+        cell.accessoryView = switchView;
+        return cell;
     }
     else
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:KSettingViewControllerCellAccessoryReuseId];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KSettingViewControllerCellAccessoryReuseId];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KSettingViewControllerCellAccessoryReuseId];
         }
@@ -195,9 +210,9 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
         cell.textLabel.text = [_titleArr objectAtIndex:indexPath.row];
         cell.textLabel.textColor = [UIColor blackColor];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
+        
+        return cell;
     }
-    
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

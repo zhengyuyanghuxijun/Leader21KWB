@@ -166,6 +166,7 @@
 		182306201B9B300300A8E146 /* HBTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823061F1B9B300300A8E146 /* HBTaskEntity.m */; };
 		1864359C1BC546440068E73E /* HBSystemMsgEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864359B1BC546440068E73E /* HBSystemMsgEntity.m */; };
 		186435A11BC54A2F0068E73E /* HBMessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186435A01BC54A2F0068E73E /* HBMessageViewCell.m */; };
+		186435AA1BC559DE0068E73E /* HBSettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186435A91BC559DE0068E73E /* HBSettingViewCell.m */; };
 		189719DC1B9F3405006F42A2 /* HBStudentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 189719DB1B9F3405006F42A2 /* HBStudentEntity.m */; };
 		1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */; };
 		189C0F5E1BB5776300DD39C0 /* HBReadprogressEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C0F5D1BB5776300DD39C0 /* HBReadprogressEntity.m */; };
@@ -469,6 +470,8 @@
 		1864359B1BC546440068E73E /* HBSystemMsgEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSystemMsgEntity.m; sourceTree = "<group>"; };
 		1864359F1BC54A2F0068E73E /* HBMessageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMessageViewCell.h; sourceTree = "<group>"; };
 		186435A01BC54A2F0068E73E /* HBMessageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMessageViewCell.m; sourceTree = "<group>"; };
+		186435A81BC559DE0068E73E /* HBSettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSettingViewCell.h; sourceTree = "<group>"; };
+		186435A91BC559DE0068E73E /* HBSettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSettingViewCell.m; sourceTree = "<group>"; };
 		189719DA1B9F3405006F42A2 /* HBStudentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBStudentEntity.h; sourceTree = "<group>"; };
 		189719DB1B9F3405006F42A2 /* HBStudentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBStudentEntity.m; sourceTree = "<group>"; };
 		1898BCEA1B9DA7ED00FD9A11 /* HBManageTaskEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBManageTaskEntity.h; sourceTree = "<group>"; };
@@ -607,6 +610,8 @@
 				18B712E81BAC5C9F0002AB43 /* HBBookManViewController.m */,
 				18EED16D1BB147DA004E5071 /* HBAboutViewController.h */,
 				18EED16E1BB147DA004E5071 /* HBAboutViewController.m */,
+				186435A81BC559DE0068E73E /* HBSettingViewCell.h */,
+				186435A91BC559DE0068E73E /* HBSettingViewCell.m */,
 			);
 			path = SettingViewControllers;
 			sourceTree = "<group>";
@@ -1437,6 +1442,7 @@
 				0DBE35AF1B8CCEFA00179237 /* TableSecitonDataObject.m in Sources */,
 				0DB5372D1B8F5DEE0023A3F7 /* AFURLRequestSerialization.m in Sources */,
 				18EED16F1BB147DA004E5071 /* HBAboutViewController.m in Sources */,
+				186435AA1BC559DE0068E73E /* HBSettingViewCell.m in Sources */,
 				18B712E91BAC5C9F0002AB43 /* HBBookManViewController.m in Sources */,
 				0D086EDC1B949B110061BB1F /* DHSlideMenuController.m in Sources */,
 				18C316901BA092B1004F716E /* HBClassEntity.m in Sources */,
