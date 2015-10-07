@@ -10,7 +10,7 @@
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 
-@interface HBCreatGroupController ()
+@interface HBCreatGroupController ()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UIButton* okButton;
 @property (nonatomic, strong) UITextField* nameTextField;
@@ -36,31 +36,33 @@
     self.navigationController.navigationBarHidden = NO;
     self.title = @"创建群组";
     
-    CGRect frame = self.view.frame;
-    float controlX = 20;
-    float controlY = 200 + KHBNaviBarHeight;
-    float width = frame.size.width - controlX*2;
-    UIImageView *editBg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, width, 50)];
-    editBg.userInteractionEnabled = YES;
-    UIImage *image = [UIImage imageNamed:@"user_editbg"];
-    editBg.image = image;
-    [self.view addSubview:editBg];
+    float controlY = KHBNaviBarHeight + 50;
+    float screenW = self.view.frame.size.width;
+    UIView *accountView = [[UIView alloc] initWithFrame:CGRectMake(0, controlY, screenW, 91)];
+    accountView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:accountView];
     
-    self.nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 5, width-40, 40)];
+    float controlX = 30;
+    controlY = 0;
+    float controlW = screenW - controlX;
+    float controlH = 45;
+    self.nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     self.nameTextField.placeholder = @"群组名称";
-    [editBg addSubview:self.nameTextField];
+    [accountView addSubview:self.nameTextField];
     
-    UIImageView *editBgSec = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY + 60, width, 50)];
-    editBgSec.image = image;
-    editBgSec.userInteractionEnabled = YES;
-    [self.view addSubview:editBgSec];
+    controlY += controlH;
+    UILabel *lineLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, 1)];
+    lineLbl.backgroundColor = RGBEQ(239);
+    [accountView addSubview:lineLbl];
     
-    self.levelTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 5, width-40, 40)];
-    self.levelTextField.placeholder = @"群组等级";
+    controlY += 1;
+    self.levelTextField = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    self.levelTextField.placeholder = @"群组等级(1-9)";
     self.levelTextField.keyboardType = UIKeyboardTypeNumberPad;
-    [editBgSec addSubview:self.levelTextField];
+    self.levelTextField.delegate = self;
+    [accountView addSubview:self.levelTextField];
     
-    CGRect rc = CGRectMake(20.0f, controlY + 140, ScreenWidth - 20 - 20, 50.0f);
+    CGRect rc = CGRectMake(20.0f, controlY + 180, ScreenWidth - 20 - 20, 50.0f);
     self.okButton = [[UIButton alloc] initWithFrame:rc];
     [self.okButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
     [self.okButton setTitle:@"确定" forState:UIControlStateNormal];
@@ -78,6 +80,15 @@
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if (range.location>= 1)
+        
+        return NO;
+    
+    return YES;
 }
 
 @end

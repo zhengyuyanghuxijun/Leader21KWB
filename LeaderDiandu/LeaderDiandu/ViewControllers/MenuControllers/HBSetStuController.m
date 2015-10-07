@@ -37,16 +37,16 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
     
     [self addTableView];
     
-    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 8 - 44, 20, 44, 44)];
-    [rightButton setTitle:@"完成" forState:UIControlStateNormal];
-    [rightButton addTarget:self action:@selector(rightButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:rightButton];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(rightButtonPressed)];
+    [rightButton setTintColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = rightButton;
 }
 
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight);
+    //    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight);
+    CGRect viewFrame = CGRectMake(0, 0, rect.size.width, rect.size.height);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -111,7 +111,8 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40.0f;
+    //    return 40.0f;
+    return 0.0f;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -136,7 +137,7 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
     }else{
         titleLabel.text = @"以下学生可以添加到群组";
     }
-
+    
     return placeholderSectionHeaderView;
 }
 

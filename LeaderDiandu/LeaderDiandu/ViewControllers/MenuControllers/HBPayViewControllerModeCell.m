@@ -47,7 +47,7 @@
         [self.VIPTextField setEnabled:NO];
         [editBg addSubview:self.VIPTextField];
     }
-
+    
     //选择按钮
     self.selectedBtn = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 40, (50 - 30)/2, 30, 30)];
     if (self.checked) {
@@ -55,7 +55,7 @@
     }else{
         [self.selectedBtn setBackgroundImage:[UIImage imageNamed:@"duoxuan-normal"] forState:UIControlStateNormal];
     }
-
+    
     [self.selectedBtn addTarget:self action:@selector(selectedBtnPress) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.selectedBtn];
 }
@@ -67,18 +67,31 @@
     }
     
     if ([dic objectForKey:@"modeLabel"]) {
-        self.modeLabel.text = [dic objectForKey:@"modeLabel"];
+        if (self.showModeText) {
+            self.modeLabel.text = [dic objectForKey:@"modeLabel"];
+        }else{
+            self.VIPTextField.text = [dic objectForKey:@"checked"];
+        }
+    }
+    
+    if ([dic objectForKey:@"checked"] && [dic objectForKey:@"modeLabel"]) {
+        
+        if ([[dic objectForKey:@"modeLabel"] isEqualToString:[dic objectForKey:@"checked"]]) {
+            self.checked = YES;
+            [self.selectedBtn setBackgroundImage:[UIImage imageNamed:@"duoxuan-slected"] forState:UIControlStateNormal];
+        }else{
+            self.checked = NO;
+            [self.selectedBtn setBackgroundImage:[UIImage imageNamed:@"duoxuan-normal"] forState:UIControlStateNormal];
+        }
     }
 }
 
 -(void)selectedBtnPress
 {
-    if (self.checked) {
-        self.checked = NO;
-        [self.selectedBtn setBackgroundImage:[UIImage imageNamed:@"duoxuan-normal"] forState:UIControlStateNormal];
+    if (self.showModeText){
+        [self.delegate payCellChecked:self.modeLabel.text];
     }else{
-        self.checked = YES;
-        [self.selectedBtn setBackgroundImage:[UIImage imageNamed:@"duoxuan-slected"] forState:UIControlStateNormal];
+        [self.delegate payCellChecked:self.VIPTextField.text];
     }
 }
 

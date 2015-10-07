@@ -13,12 +13,13 @@
 static NSString * const KHBPayViewControllerMoneyCellReuseId = @"KHBPayViewControllerMoneyCellReuseId";
 static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewControllerCellModeReuseId";
 
-@interface HBPayViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface HBPayViewController ()<UITableViewDataSource, UITableViewDelegate, HBPayCellCheckedDelegate>
 {
     UITableView *_tableView;
 }
 
 @property (nonatomic, strong) UIButton* payButton;
+@property (nonatomic, strong) NSMutableDictionary *payModeDic;
 
 @end
 
@@ -30,6 +31,9 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     
     self.navigationController.navigationBarHidden = NO;
     self.title = @"支付中心";
+    
+    self.payModeDic = [[NSMutableDictionary alloc] initWithCapacity:1];
+    [self.payModeDic setObject:@"支付宝支付" forKey:@"checked"];
     
     CGRect rect = self.view.frame;
     CGRect viewFrame = CGRectMake(0, 0, rect.size.width, rect.size.height);
@@ -60,14 +64,14 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 -(void)payButtonPressed
 {
@@ -124,34 +128,33 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     {
         HBPayViewControllerModeCell *cell = [tableView dequeueReusableCellWithIdentifier:KHBPayViewControllerCellModeReuseId];
         
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:1];
         if (0 == indexPath.row) {
             if (!cell) {
                 cell = [[HBPayViewControllerModeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBPayViewControllerCellModeReuseId showModeText:YES];
             }
-            [cell setChecked:YES];
-            [dic setObject:@"pay-icn-alipay" forKey:@"iconImg"];
-            [dic setObject:@"支付宝支付" forKey:@"modeLabel"];
+            [self.payModeDic setObject:@"pay-icn-alipay" forKey:@"iconImg"];
+            [self.payModeDic setObject:@"支付宝支付" forKey:@"modeLabel"];
         }else if (1 == indexPath.row){
             if (!cell) {
                 cell = [[HBPayViewControllerModeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBPayViewControllerCellModeReuseId showModeText:YES];
             }
             
-            [dic setObject:@"pay-icn-wechat" forKey:@"iconImg"];
-            [dic setObject:@"微信支付" forKey:@"modeLabel"];
+            [self.payModeDic setObject:@"pay-icn-wechat" forKey:@"iconImg"];
+            [self.payModeDic setObject:@"微信支付" forKey:@"modeLabel"];
         }else{
             if (!cell) {
                 cell = [[HBPayViewControllerModeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBPayViewControllerCellModeReuseId showModeText:NO];
             }
             
-            [dic setObject:@"pay-icn-voucher" forKey:@"iconImg"];
-            [dic setObject:@"VIP码" forKey:@"modeLabel"];
+            [self.payModeDic setObject:@"pay-icn-voucher" forKey:@"iconImg"];
+            [self.payModeDic setObject:@"VIP码" forKey:@"modeLabel"];
         }
         
+        cell.delegate = self;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.textColor = [UIColor blackColor];
-        [cell updateFormData:dic];
+        [cell updateFormData:self.payModeDic];
         
         return cell;
     }
@@ -160,6 +163,12 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+-(void)payCellChecked:(NSString *)cellText
+{
+    [self.payModeDic setObject:cellText forKey:@"checked"];
+    [_tableView reloadData];
 }
 
 @end

@@ -20,6 +20,8 @@
 @interface HBSetStuOtherCell : UITableViewCell
 
 @property (strong, nonatomic) UIImageView * cellBgImage;
+@property (strong, nonatomic) UIImageView * cellGroupImage;
+@property (strong, nonatomic) UIImageView * cellHeadImage;
 @property (strong, nonatomic) UILabel *     cellName;
 @property (strong, nonatomic) UIButton *    cellselectedBtn;
 

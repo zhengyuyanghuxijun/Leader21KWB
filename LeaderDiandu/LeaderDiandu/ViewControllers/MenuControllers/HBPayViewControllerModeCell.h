@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol HBPayCellCheckedDelegate <NSObject>
+
+- (void)payCellChecked:(NSString *)cellText;
+
+@end
+
 @interface HBPayViewControllerModeCell : UITableViewCell
 
 @property (strong, nonatomic) UIImageView *iconImg;
@@ -17,6 +23,8 @@
 
 @property (assign, nonatomic) BOOL checked;
 @property (assign, nonatomic) BOOL showModeText;
+
+@property (weak, nonatomic) id<HBPayCellCheckedDelegate> delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier showModeText:(BOOL)showModeText;
 
