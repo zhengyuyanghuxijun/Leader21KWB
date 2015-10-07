@@ -22,11 +22,11 @@
 
 - (void)setUserEntityByDict:(NSDictionary *)dict
 {
-    HBUserEntity *entity = [[HBUserEntity alloc] initWithDictionary:dict];
-    if (entity.token == nil) {
-        entity.token = self.userEntity.token;
+    NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+    if (newDict[@"token"] == nil) {
+        newDict[@"token"] = _userEntity.token;
     }
-    self.userEntity = entity;
+    [self saveUserByDict:newDict];
 }
 
 - (void)updateDisplayName:(NSDictionary *)dict

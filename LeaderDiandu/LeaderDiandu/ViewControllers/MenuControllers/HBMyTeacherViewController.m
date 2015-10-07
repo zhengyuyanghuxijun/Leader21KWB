@@ -12,16 +12,59 @@
 
 #define KTagBindView        10001
 
+#define KTeacherCellHeight  60
+
 static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewControllerCellReuseId";
+
+@implementation HBMyTeacherCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self)
+    {
+        [self initUI];
+    }
+    return self;
+}
+
+- (void) initUI
+{
+    self.backgroundColor = [UIColor clearColor];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    float controlX = 20;
+    float controlH = 25;
+    float controlY = (KTeacherCellHeight-controlH*2-5)/2;
+    float controlW = ScreenWidth - controlX*2;
+    
+    //时间
+    self.cellTitle = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    _cellTitle.font = [UIFont systemFontOfSize:20];
+    _cellTitle.textColor = KLeaderRGB;
+    [self.contentView addSubview:_cellTitle];
+    
+    controlY += controlH + 5;
+    self.cellDesc = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    _cellDesc.font = [UIFont systemFontOfSize:16];
+    _cellDesc.textColor = [UIColor lightGrayColor];
+    [self.contentView addSubview:_cellDesc];
+    
+}
+
+@end
 
 @interface HBMyTeacherViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     NSArray     *_titleArr;
     
     UIView      *_bindView;
+    UIView      *_teacherView;
     UITableView *_tableView;
     UITextField *_textField;
 }
+
+@property (nonatomic, strong)NSArray *desArray;
 
 @end
 
@@ -31,7 +74,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _titleArr = @[@"账号", @"姓名"];
+    _titleArr = @[@"账号", @"名字", @"群组名称", @"等级"];
     
     self.navigationController.navigationBarHidden = NO;
     self.title = @"我的老师";
@@ -43,12 +86,11 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if ([[userEntity.teacher allKeys] count] > 0) {
-        _tableView.hidden = NO;
+        _teacherView.hidden = NO;
+        [self handleDescArray];
     } else {
-        _bindView.hidden = NO;
+        [self getUserInfo];
     }
-
-    [self getMyTeacher];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
@@ -62,14 +104,43 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     [self.view endEditing:YES];
 }
 
+- (void)handleDescArray
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    NSDictionary *teacherDic = userEntity.teacher;
+    NSDictionary *classDic = userEntity.myClass;
+    [array addObject:teacherDic[@"name"]];
+    [array addObject:teacherDic[@"display_name"]];
+    [array addObject:classDic[@"name"]];
+    [array addObject:[classDic[@"bookset_id"] stringValue]];
+    self.desArray = array;
+}
+
 - (void)createTableView:(CGRect)frame
 {
-    _tableView = [[UITableView alloc] initWithFrame:frame];
-    _tableView.hidden = YES;
+    _teacherView = [[UIView alloc] initWithFrame:frame];
+    _teacherView.hidden = YES;
+    [self.view addSubview:_teacherView];
+    
+    float controlX = 20;
+    float width = frame.size.width - controlX*2;
+    float controlH = 45;
+    float controlY = frame.size.height - controlH - 30;
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, width, controlH)];
+    [button setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setTitle:@"解除绑定" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(unbindButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_teacherView addSubview:button];
+    
+    controlH = controlY - 10;
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, controlH)];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.tableFooterView = [[UIView alloc] init];
-    [self.view addSubview:_tableView];
+    [_teacherView addSubview:_tableView];
 }
 
 - (void)createBindView:(CGRect)frame
@@ -99,11 +170,11 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     tipLabel.numberOfLines = 2;
     [_bindView addSubview:tipLabel];
     
-    float buttonHeight = 50;
+    float buttonHeight = 45;
     controlY = frame.size.height - buttonHeight - 30;
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, width, buttonHeight)];
-    image = [UIImage imageNamed:@"user_button"];// resizableImageWithCapInsets:UIEdgeInsetsMake(0, 100, 0, 100) resizingMode:UIImageResizingModeStretch];
-    [button setBackgroundImage:image forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitle:@"绑定老师" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(bindButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -129,12 +200,37 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     }];
 }
 
+- (void)unbindButtonAction:(id)sender
+{
+    
+}
+
 - (void)getMyTeacher
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     NSString *teacher = userEntity.teacher[@"name"];
+    [MBHudUtil showActivityView:nil inView:nil];
     [[HBServiceManager defaultManager] requestTeacher:userEntity.name teacher:teacher completion:^(id responseObject, NSError *error) {
-        
+        [MBHudUtil hideActivityView:nil];
+    }];
+}
+
+- (void)getUserInfo
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    [MBHudUtil showActivityView:nil inView:nil];
+    [[HBServiceManager defaultManager] requestUserInfo:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
+        if (error.code == 0) {
+            [[HBDataSaveManager defaultManager] setUserEntityByDict:responseObject];
+            if (responseObject[@"teacher"]) {
+                _teacherView.hidden = NO;
+                [self handleDescArray];
+                [_tableView reloadData];
+            } else {
+                _bindView.hidden = NO;
+            }
+        }
     }];
 }
 
@@ -155,12 +251,12 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return KTeacherCellHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 200;
+    return 150;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -168,7 +264,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     NSInteger imgWidth = 100;
     NSInteger screenWidth = [UIScreen mainScreen].bounds.size.width;
     UIView *view = [[UIView alloc] init];
-    UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-imgWidth)/2, (200-imgWidth)/2, imgWidth, imgWidth)];
+    UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-imgWidth)/2, (150-imgWidth)/2, imgWidth, imgWidth)];
     headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
     [view addSubview:headView];
     
@@ -179,15 +275,14 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
 {
     NSParameterAssert(_titleArr);
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KMyTeacherViewControllerCellReuseId];
+    HBMyTeacherCell *cell = [tableView dequeueReusableCellWithIdentifier:KMyTeacherViewControllerCellReuseId];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KMyTeacherViewControllerCellReuseId];
+        cell = [[HBMyTeacherCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KMyTeacherViewControllerCellReuseId];
     }
     
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.text = [_titleArr objectAtIndex:indexPath.row];
-    cell.textLabel.textColor = [UIColor blackColor];
+    NSInteger index = indexPath.row;
+    cell.cellTitle.text = [_titleArr objectAtIndex:index];
+    cell.cellDesc.text = _desArray[index];
     
     return cell;
 }

@@ -8,6 +8,13 @@
 
 #import "HBBaseViewController.h"
 
+@interface HBMyTeacherCell : UITableViewCell
+
+@property (strong, nonatomic) UILabel *     cellTitle;
+@property (strong, nonatomic) UILabel *     cellDesc;
+
+@end
+
 @interface HBMyTeacherViewController : HBBaseViewController
 
 @end
