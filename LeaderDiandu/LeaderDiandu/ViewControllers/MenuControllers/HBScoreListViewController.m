@@ -76,7 +76,7 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
         }else{
             self.cellScore.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
             self.cellScore.textColor = [UIColor blackColor];
-            self.cellScore.text = @"未完成测试";
+            self.cellScore.text = @"未完成";
         }
     }
 }

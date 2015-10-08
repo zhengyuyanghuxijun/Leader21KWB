@@ -35,7 +35,7 @@
     if (self) {
         // Custom initialization
         self.groupStr = @"群组选择";
-        self.testStr = @"测试选择";
+        self.testStr = @"作业选择";
     }
     return self;
 }
@@ -124,7 +124,7 @@
         vc.bookset_id = self.classEntity.booksetId;
         vc.delegate = self;
         if (0 == vc.bookset_id) {
-            //请先选择群组
+            [MBHudUtil showTextView:@"请先选择群组" inView:nil];
         }else{
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -162,7 +162,7 @@
 {
     if (self.classEntity.classId != classEntity.classId) {
         self.contentDetailEntity = nil;
-        self.testStr = @"测试选择";
+        self.testStr = @"作业选择";
     }
     
     self.classEntity = classEntity;
