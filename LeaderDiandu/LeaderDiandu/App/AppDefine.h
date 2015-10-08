@@ -37,5 +37,6 @@
 
 #define RGBEQA(rgb,a) [UIColor colorWithRed:rgb/255.0 green:rgb/255.0 blue:rgb/255.0 alpha:a]
 
+#define KHBTestWorkPath   @"HBTestWork"
 
 #endif

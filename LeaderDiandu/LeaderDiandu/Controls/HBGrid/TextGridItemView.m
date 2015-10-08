@@ -92,6 +92,7 @@
     if (self) 
     {
         // Initialization code
+        self.isTest = NO;
         [self initUI];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProgress:) name:kNotification_bookDownloadProgress object:nil];
@@ -233,6 +234,7 @@
         self.readProgressLabel.hidden = YES;
         self.downloadButton.hidden = NO;
         _progressControl.hidden = YES;
+        self.isTest = YES;
         [self.downloadButton setTitle:@"作业" forState:UIControlStateNormal];
         [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-test"] forState:UIControlStateNormal];
     }else{

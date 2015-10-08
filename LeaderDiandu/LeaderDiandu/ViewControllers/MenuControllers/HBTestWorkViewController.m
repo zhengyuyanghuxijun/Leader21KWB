@@ -18,7 +18,6 @@
 #import "UIImageView+AFNetworking.h"
 #import "HBTestWorkManager.h"
 
-#define KHBTestWorkPath   @"HBTestWork"
 #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 
 static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewControllerCellReuseId";
@@ -189,9 +188,9 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
 
 -(void)requestTaskListOfStudent
 {
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        NSString *user = [dict objectForKey:@"name"];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        NSString *user = userEntity.name;
 //        NSString *timeStr = [NSString stringWithFormat:@"%f", [NSDate date].timeIntervalSince1970];
         [MBHudUtil showActivityView:nil inView:nil];
         [[HBServiceManager defaultManager] requestTaskListOfStudent:user from:0 count:100 completion:^(id responseObject, NSError *error) {
@@ -281,9 +280,9 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        NSString *user = [dict objectForKey:@"name"];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        NSString *user = userEntity.name;
         HBTaskEntity *taskEntity = [self.taskEntityArr objectAtIndex:indexPath.row];
         [MBHudUtil showActivityView:nil inView:nil];
         [[HBServiceManager defaultManager] requestBookInfo:user book_id:taskEntity.bookId completion:^(id responseObject, NSError *error) {
@@ -295,14 +294,14 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     [MBHudUtil showTextViewAfter:@"服务器资源缺失，敬请期待"];
                 } else {
                     NSString *url = dict[@"url"];
-                    [self downloaTestWork:url onSelect:taskEntity];
+                    [self downloadTestWork:url onSelect:taskEntity];
                 }
             }
         }];
     }
 }
 
-- (void)downloaTestWork:(NSString *)url onSelect:(HBTaskEntity *)taskEntity
+- (void)downloadTestWork:(NSString *)url onSelect:(HBTaskEntity *)taskEntity
 {
     NSString *path = [LocalSettings bookCachePath];
     path = [NSString stringWithFormat:@"%@/%@", path, KHBTestWorkPath];

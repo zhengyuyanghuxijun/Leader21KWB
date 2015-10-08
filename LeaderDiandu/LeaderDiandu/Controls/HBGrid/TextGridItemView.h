@@ -32,6 +32,8 @@
 @property (nonatomic, strong) MBProgressHUD *progressView;
 @property (nonatomic, copy) NSString* bookDownloadUrl;
 
+@property (nonatomic, assign) BOOL isTest;
+
 @property (nonatomic, weak) id<reloadGridDelegate> delegate;
 
 //更新数据

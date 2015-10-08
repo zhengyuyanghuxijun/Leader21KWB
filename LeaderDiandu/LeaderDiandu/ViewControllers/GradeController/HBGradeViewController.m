@@ -23,6 +23,11 @@
 #import "Leader21SDKOC.h"
 #import "CoreDataHelper.h"
 #import "ReadBookViewController.h"
+#import "HBTaskEntity.h"
+#import "HBMyWorkViewController.h"
+#import "LocalSettings.h"
+#import "TimeIntervalUtils.h"
+#import "HBTestWorkManager.h"
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
 
@@ -37,7 +42,7 @@
 @property (nonatomic, strong)NSMutableArray *contentEntityArr;
 @property (nonatomic, strong)NSMutableDictionary *contentDetailEntityDic;
 @property (nonatomic, strong)NSMutableDictionary *readProgressEntityDic;
-@property (nonatomic, strong)NSMutableArray *taskBookIdArr;
+@property (nonatomic, strong)NSMutableArray *taskEntityArr;
 
 @property (nonatomic, strong)UIButton *rightButton;
 
@@ -53,7 +58,7 @@
         self.contentEntityArr = [[NSMutableArray alloc] initWithCapacity:1];
         self.contentDetailEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         self.readProgressEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
-        self.taskBookIdArr = [[NSMutableArray alloc] initWithCapacity:1];
+        self.taskEntityArr = [[NSMutableArray alloc] initWithCapacity:1];
         currentID = 1;
         
         //用户登录成功通知
@@ -98,7 +103,7 @@
         }else{
             [_gridView setHeaderViewHidden:YES];
             //老师登录，将学生作业Id数组清空
-            [self.taskBookIdArr removeAllObjects];
+            [self.taskEntityArr removeAllObjects];
             //登录成功先load套餐信息，如果套餐信息为空则去服务器拉取数据
             NSString *booksIDsStr = [[HBContentListDB sharedInstance] booksidWithID:currentID];
             if (booksIDsStr) {
@@ -455,9 +460,8 @@
     if ([LEADERSDK isBookDownloaded:entity]) {
         //已下载（阅读完成,并且在作业列表里面，显示“作业”；阅读完成,不在作业列表里面显示“100%”；阅读未完成显示进度条）
         BOOL flag = YES;
-        for (NSString *taskBookStr in self.taskBookIdArr) {
-            NSString *entityBookIdStr = [NSString stringWithFormat:@"%@", entity.bookId];
-            if ([taskBookStr isEqualToString:entityBookIdStr]) {
+        for (HBTaskEntity *taskentity in self.taskEntityArr) {
+            if (taskentity.bookId == [entity.bookId integerValue]) {
                 [itemView bookDownloaded:entity progress:progress isTask:YES];
                 flag = NO;
                 break;
@@ -487,9 +491,64 @@
     if([LEADERSDK isBookDownloading:entity]){
         //正在下载，不处理
     }else{
-        [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
-        itemView.bookDownloadUrl = entity.bookUrl;
+        if (itemView.isTest) {
+            //跳转作业逻辑
+            [self jumpToTestWork:[entity.bookId integerValue]];
+        } else {
+            [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
+            itemView.bookDownloadUrl = entity.bookUrl;
+        }
     }
+}
+
+#pragma mark --跳转作业逻辑--
+
+- (void)jumpToTestWork:(NSInteger)bookId
+{
+    HBTaskEntity *taskEntity = nil;
+    for (taskEntity in _taskEntityArr) {
+        if (taskEntity.bookId == bookId) {
+            break;
+        }
+    }
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        NSString *user = userEntity.name;
+        [MBHudUtil showActivityView:nil inView:nil];
+        [[HBServiceManager defaultManager] requestBookInfo:user book_id:taskEntity.bookId completion:^(id responseObject, NSError *error) {
+            // to do ...
+            if (responseObject) {
+                NSDictionary *dict = responseObject;
+                if (dict == nil) {
+                    [MBHudUtil hideActivityView:nil];
+                    [MBHudUtil showTextViewAfter:@"服务器资源缺失，敬请期待"];
+                } else {
+                    NSString *url = dict[@"url"];
+                    [self downloadTestWork:url onSelect:taskEntity];
+                }
+            }
+        }];
+    }
+}
+
+- (void)downloadTestWork:(NSString *)url onSelect:(HBTaskEntity *)taskEntity
+{
+    NSString *path = [LocalSettings bookCachePath];
+    path = [NSString stringWithFormat:@"%@/%@", path, KHBTestWorkPath];
+    [[HBContentManager defaultManager] downloadFileURL:url savePath:path fileName:@"test.zip" completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
+        if (responseObject && [responseObject isKindOfClass:[NSString class]]) {
+            NSString *path = responseObject;
+            HBTestWorkManager *workManager = [[HBTestWorkManager alloc] init];
+            [workManager parseTestWork:path];
+            HBMyWorkViewController *controller = [[HBMyWorkViewController alloc] init];
+            controller.workManager = workManager;
+            controller.taskEntity = taskEntity;
+            [self.navigationController pushViewController:controller animated:YES];
+        } else {
+            [MBHudUtil showTextViewAfter:@"服务器资源缺失，敬请期待"];
+        }
+    }];
 }
 
 -(void)refreshTableHeaderDidTriggerRefresh
@@ -600,20 +659,44 @@
 
 -(void)requestTaskListOfStudent
 {
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        NSString *user = [dict objectForKey:@"name"];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        NSString *user = userEntity.name;
         [[HBServiceManager defaultManager] requestTaskListOfStudent:user from:0 count:100 completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 //学生获取作业列表成功
-                [self.taskBookIdArr removeAllObjects];
+                [self.taskEntityArr removeAllObjects];
                 NSArray *arr = [responseObject objectForKey:@"exams"];
                 for (NSDictionary *dic in arr)
                 {
-                    NSDictionary *bookDic = [dic objectForKey:@"book"];
-                    NSString *bookIdStr = [bookDic objectForKey:@"id"];
-                    NSInteger bookId = [bookIdStr integerValue];
-                    [self.taskBookIdArr addObject:[NSString stringWithFormat:@"%ld", bookId]];
+                    HBTaskEntity *taskEntity = [[HBTaskEntity alloc] init];
+                    taskEntity.exam_id = [[dic numberForKey:@"exam_id"] integerValue];
+                    
+                    NSDictionary *teacherDic = [dic dicForKey:@"teacher"];
+                    NSString *teacherName = [teacherDic stringForKey:@"display_name"];
+                    if ([teacherName length] == 0) {
+                        teacherName = [teacherDic stringForKey:@"name"];
+                    }
+                    taskEntity.teacherName = teacherName;
+                    
+                    NSDictionary *bookDic = [dic dicForKey:@"book"];
+                    NSString *bookName;
+                    if ([[HBDataSaveManager defaultManager] showEnBookName]) {
+                        bookName = [bookDic stringForKey:@"book_title"];
+                    }else{
+                        bookName = [bookDic stringForKey:@"book_title_cn"];
+                    }
+                    taskEntity.bookId = [[bookDic numberForKey:@"id"] integerValue];
+                    taskEntity.bookName = bookName;
+                    taskEntity.fileId = [bookDic stringForKey:@"file_id"];
+                    
+                    NSTimeInterval interval = [[dic numberForKey:@"created_time"] doubleValue];
+                    taskEntity.createdTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
+                    interval = [[dic numberForKey:@"modified_time"] doubleValue];
+                    taskEntity.modifiedTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
+                    taskEntity.score = [dic stringForKey:@"score"];
+                    
+                    [self.taskEntityArr addObject:taskEntity];
                 }
                 
                 [self reloadGrid];
