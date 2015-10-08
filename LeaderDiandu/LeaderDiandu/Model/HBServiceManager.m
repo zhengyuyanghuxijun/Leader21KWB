@@ -325,6 +325,19 @@
     [self Post:@"/api/teacher/s/unassociate" dict:dicInfo block:receivedBlock];
 }
 
+- (void)requestDirectorList:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:user     forKey:@"user"];
+    [dicInfo setObject:token    forKey:@"token"];
+    
+    if (_receivedBlock) {
+        return;
+    }
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/director/list" dict:dicInfo block:receivedBlock];
+}
+
 - (void)requestDirectorAss:(NSString *)user director:(NSString *)director completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
