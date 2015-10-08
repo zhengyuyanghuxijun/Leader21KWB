@@ -30,25 +30,29 @@
 - (void) initUI
 {
     //选择按钮
-    self.cellSelectedBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, (120 - 20)/2, 20, 20)];
+    self.cellSelectedBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, (70 - 20)/2, 20, 20)];
     [self.cellSelectedBtn setBackgroundImage:[UIImage imageNamed:@"selected_off"] forState:UIControlStateDisabled];
     [self.cellSelectedBtn setEnabled:NO];
     [self addSubview:self.cellSelectedBtn];
     
     //书籍封皮
-    self.cellBookCoverImg = [[UIImageView alloc] initWithFrame:CGRectMake(10 + 20 + 10, (120 - 100)/2, 80, 100)];
+    self.cellBookCoverImg = [[UIImageView alloc] initWithFrame:CGRectMake(10 + 20 + 10, (70 - 50)/2, 40, 50)];
     [self addSubview:self.cellBookCoverImg];
     
     //书籍名称
     self.cellBookName = [[UILabel alloc] init];
-    self.cellBookName.frame = CGRectMake(self.cellBookCoverImg.frame.origin.x + self.cellBookCoverImg.frame.size.width + 10, (120 - 30)/2, 200, 30);
+    self.cellBookName.frame = CGRectMake(self.cellBookCoverImg.frame.origin.x + self.cellBookCoverImg.frame.size.width + 10, (70 - 30)/2, 200, 30);
     [self addSubview:self.cellBookName];
     
     //书籍大小
     self.cellBookSize = [[UILabel alloc] init];
-    self.cellBookSize.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 70, (120 - 30)/2, 60, 30);
+    self.cellBookSize.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 70, (70 - 30)/2, 60, 30);
     self.cellBookSize.textAlignment = NSTextAlignmentRight;
     [self addSubview:self.cellBookSize];
+    
+    UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 70 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
+    seperatorLine.backgroundColor = [UIColor lightGrayColor];
+    [self addSubview:seperatorLine];
 }
 
 -(void)updateFormData:(BookEntity *)aBookEntity;
@@ -169,6 +173,7 @@
     _tableView = [[UITableView alloc] initWithFrame:rect];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.separatorStyle = NO;
     [self.view addSubview:_tableView];
 }
 
@@ -320,7 +325,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120;
+    return 70;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
