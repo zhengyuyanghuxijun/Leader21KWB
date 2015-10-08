@@ -331,9 +331,9 @@
     [dicInfo setObject:user     forKey:@"user"];
     [dicInfo setObject:token    forKey:@"token"];
     
-    if (_receivedBlock) {
-        return;
-    }
+//    if (_receivedBlock) {
+//        return;
+//    }
     self.receivedBlock = receivedBlock;
     [self Post:@"/api/director/list" dict:dicInfo block:receivedBlock];
 }

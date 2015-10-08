@@ -10,6 +10,7 @@
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 #import "HBLeaderBindingCell.h"
+#import "HBLeaderUnbindingCell.h"
 
 static NSString * const KLeaderBindingCellReuseId = @"KLeaderBindingCellReuseId";
 static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReuseId";
@@ -26,6 +27,8 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
 @property (nonatomic, assign) BOOL isBinding;
 @property (nonatomic, strong) NSMutableArray *leadersArr;
 
+@property (nonatomic, strong) NSMutableDictionary *leaderSelectedDic; //key为name value是否已选择
+
 @end
 
 @implementation HBLeaderViewController
@@ -39,6 +42,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
         self.nameStr = nil;
         self.isBinding = NO;
         self.leadersArr = [[NSMutableArray alloc] initWithCapacity:1];
+        self.leaderSelectedDic = [[NSMutableDictionary alloc] initWithCapacity:1];
     }
     return self;
 }
@@ -62,7 +66,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
     [[HBServiceManager defaultManager] requestUserInfo:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
         if (responseObject) {
             NSDictionary *dic = [responseObject objectForKey:@"director"];
-            if (dic) {
+            if (dic.count > 0) {
                 //不为空，表示绑定了教研员
                 self.isBinding = YES;
                 self.accountStr = [dic objectForKey:@"name"];
@@ -70,8 +74,19 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
                 [self addTableView];
                 [self addBottomBtn];
             }else{
-                //为空，表示没有绑定教研员，需要获取教研员列表（等待提供接口）
+                //为空，表示没有绑定教研员，需要获取教研员列表
                 self.isBinding = NO;
+                [[HBServiceManager defaultManager] requestDirectorList:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+                    NSArray *directorsArr = [responseObject objectForKey:@"directors"];
+                    for (NSDictionary *director in directorsArr) {
+                        [self.leadersArr addObject:director];
+                        [self.leaderSelectedDic setObject:@"0" forKey:[director objectForKey:@"name"]];
+                    }
+                    if (self.leadersArr.count > 0) {
+                        [self addTableView];
+                        [self addBottomBtn];
+                    }
+                }];
             }
         }
     }];
@@ -79,35 +94,55 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
 
 -(void)addTableView
 {
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 60)];
-    _tableView.dataSource = self;
-    _tableView.delegate = self;
-    _tableView.separatorStyle = NO;
-    [self.view addSubview:_tableView];
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 60)];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.separatorStyle = NO;
+        [self.view addSubview:_tableView];
+    }
 }
 
 -(void)addBottomBtn
 {
     //底部按钮
-    CGRect rc = CGRectMake(10.0f, ScreenHeight - 60.0f, ScreenWidth - 10 - 10, 50.0f);
-    _bottomBtn = [[UIButton alloc] initWithFrame:rc];
-    [_bottomBtn setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+    if (!_bottomBtn) {
+        CGRect rc = CGRectMake(10.0f, ScreenHeight - 60.0f, ScreenWidth - 10 - 10, 50.0f);
+        _bottomBtn = [[UIButton alloc] initWithFrame:rc];
+        [_bottomBtn setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+        [_bottomBtn addTarget:self action:@selector(bottomBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_bottomBtn];
+    }
+    
     if (self.isBinding) {
         [_bottomBtn setTitle:@"解除绑定" forState:UIControlStateNormal];
     }else{
         [_bottomBtn setTitle:@"绑定教研员" forState:UIControlStateNormal];
     }
-
-    [_bottomBtn addTarget:self action:@selector(bottomBtnPressed) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_bottomBtn];
 }
 
 -(void)bottomBtnPressed
 {
     if (self.isBinding) {
-        
+        //解除绑定。。。（等待提供接口）
+         
     }else{
+        NSString *leaderName = nil;
+        for (NSString *keyStr in [self.leaderSelectedDic allKeys]) {
+            NSString *valueStr = [self.leaderSelectedDic objectForKey:keyStr];
+            if ([valueStr isEqualToString:@"1"]) {
+                leaderName = keyStr;
+                break;
+            }
+        }
         
+        if (leaderName) {
+            HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+            [[HBServiceManager defaultManager] requestDirectorAss:userEntity.name director:leaderName completion:^(id responseObject, NSError *error) {
+                [self getUserInfo];
+                [_tableView reloadData];
+            }];
+        }
     }
 }
 
@@ -183,24 +218,38 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
 
     }else{
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KLeaderUnBindingCellReuseId];
+        HBLeaderUnbindingCell *cell = [tableView dequeueReusableCellWithIdentifier:KLeaderUnBindingCellReuseId];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KLeaderUnBindingCellReuseId];
+            cell = [[HBLeaderUnbindingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KLeaderUnBindingCellReuseId];
         }
         
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.text = @"姓名";
         
-        if (0 == indexPath.row) {
-            cell.textLabel.text = self.accountStr;
-        }else{
-            cell.textLabel.text = self.nameStr;
-        }
-        
-        cell.textLabel.textColor = [UIColor blackColor];
+        [cell updateFormData:[self.leadersArr objectAtIndex:indexPath.row]];
+        [cell selectedBtnPressed:[self.leaderSelectedDic objectForKey:cell.nameLabel.text]];
         
         return cell;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (!self.isBinding){
+        HBLeaderUnbindingCell *cell = (HBLeaderUnbindingCell*)[tableView cellForRowAtIndexPath:indexPath];
+        NSString *isSelected = [self.leaderSelectedDic objectForKey:cell.nameLabel.text];
+        if ([isSelected isEqualToString:@"1"]) {
+            [self.leaderSelectedDic setObject:@"0" forKey:cell.nameLabel.text];
+        }else{
+            for (NSString *keyStr in [self.leaderSelectedDic allKeys]) {
+                [self.leaderSelectedDic setObject:@"0" forKey:keyStr];
+            }
+            [self.leaderSelectedDic setObject:@"1" forKey:cell.nameLabel.text];
+        }
+        
+        [_tableView reloadData];
     }
 }
 
