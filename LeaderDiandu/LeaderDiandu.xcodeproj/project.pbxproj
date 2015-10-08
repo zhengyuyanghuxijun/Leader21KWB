@@ -167,6 +167,8 @@
 		1864359C1BC546440068E73E /* HBSystemMsgEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864359B1BC546440068E73E /* HBSystemMsgEntity.m */; };
 		186435A11BC54A2F0068E73E /* HBMessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186435A01BC54A2F0068E73E /* HBMessageViewCell.m */; };
 		186435AA1BC559DE0068E73E /* HBSettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186435A91BC559DE0068E73E /* HBSettingViewCell.m */; };
+		187AD6441BC6831B00E592F4 /* HBLeaderBindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187AD6431BC6831B00E592F4 /* HBLeaderBindingCell.m */; };
+		187AD6471BC6834C00E592F4 /* HBLeaderUnbindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187AD6461BC6834C00E592F4 /* HBLeaderUnbindingCell.m */; };
 		189719DC1B9F3405006F42A2 /* HBStudentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 189719DB1B9F3405006F42A2 /* HBStudentEntity.m */; };
 		1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */; };
 		189C0F5E1BB5776300DD39C0 /* HBReadprogressEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C0F5D1BB5776300DD39C0 /* HBReadprogressEntity.m */; };
@@ -472,6 +474,10 @@
 		186435A01BC54A2F0068E73E /* HBMessageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMessageViewCell.m; sourceTree = "<group>"; };
 		186435A81BC559DE0068E73E /* HBSettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSettingViewCell.h; sourceTree = "<group>"; };
 		186435A91BC559DE0068E73E /* HBSettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSettingViewCell.m; sourceTree = "<group>"; };
+		187AD6421BC6831B00E592F4 /* HBLeaderBindingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBLeaderBindingCell.h; sourceTree = "<group>"; };
+		187AD6431BC6831B00E592F4 /* HBLeaderBindingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBLeaderBindingCell.m; sourceTree = "<group>"; };
+		187AD6451BC6834C00E592F4 /* HBLeaderUnbindingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBLeaderUnbindingCell.h; sourceTree = "<group>"; };
+		187AD6461BC6834C00E592F4 /* HBLeaderUnbindingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBLeaderUnbindingCell.m; sourceTree = "<group>"; };
 		189719DA1B9F3405006F42A2 /* HBStudentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBStudentEntity.h; sourceTree = "<group>"; };
 		189719DB1B9F3405006F42A2 /* HBStudentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBStudentEntity.m; sourceTree = "<group>"; };
 		1898BCEA1B9DA7ED00FD9A11 /* HBManageTaskEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBManageTaskEntity.h; sourceTree = "<group>"; };
@@ -1071,6 +1077,7 @@
 		0DD214661B95FC8B009E3DB9 /* MenuControllers */ = {
 			isa = PBXGroup;
 			children = (
+				187AD6401BC6829E00E592F4 /* HBLeaderViewControllers */,
 				1864359E1BC549EC0068E73E /* HBMessageViewControllers */,
 				18A21E6A1BBAE5EF00EA05C6 /* HBPayViewControllers */,
 				0D3F6D121BAE8E67005B4358 /* HBMyWorkViewControllers */,
@@ -1080,8 +1087,6 @@
 				0DBD1AC51BBED77C00A3BD72 /* HBUserInfoViewControllers */,
 				0DD2146A1B95FF3B009E3DB9 /* HBMyTeacherViewController.h */,
 				0DD2146B1B95FF3B009E3DB9 /* HBMyTeacherViewController.m */,
-				0D018FEC1B96DB9200A92F59 /* HBLeaderViewController.h */,
-				0D018FED1B96DB9200A92F59 /* HBLeaderViewController.m */,
 				0DD2146D1B95FFAC009E3DB9 /* HBSubscribeViewController.h */,
 				0DD2146E1B95FFAC009E3DB9 /* HBSubscribeViewController.m */,
 			);
@@ -1116,6 +1121,19 @@
 				186435A01BC54A2F0068E73E /* HBMessageViewCell.m */,
 			);
 			name = HBMessageViewControllers;
+			sourceTree = "<group>";
+		};
+		187AD6401BC6829E00E592F4 /* HBLeaderViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0D018FEC1B96DB9200A92F59 /* HBLeaderViewController.h */,
+				0D018FED1B96DB9200A92F59 /* HBLeaderViewController.m */,
+				187AD6421BC6831B00E592F4 /* HBLeaderBindingCell.h */,
+				187AD6431BC6831B00E592F4 /* HBLeaderBindingCell.m */,
+				187AD6451BC6834C00E592F4 /* HBLeaderUnbindingCell.h */,
+				187AD6461BC6834C00E592F4 /* HBLeaderUnbindingCell.m */,
+			);
+			name = HBLeaderViewControllers;
 			sourceTree = "<group>";
 		};
 		18A21E6A1BBAE5EF00EA05C6 /* HBPayViewControllers */ = {
@@ -1347,6 +1365,7 @@
 			files = (
 				0DD214781B9601DA009E3DB9 /* HBMessageViewController.m in Sources */,
 				18C316881BA07F11004F716E /* HBGroupSelectViewController.m in Sources */,
+				187AD6471BC6834C00E592F4 /* HBLeaderUnbindingCell.m in Sources */,
 				18B5FD311B983930002CCD95 /* FTMenu.m in Sources */,
 				18C650021B9DF1CA0040E349 /* HBScoreEntity.m in Sources */,
 				0D7488541B8A2071007BE4CD /* ViewController.m in Sources */,
@@ -1443,6 +1462,7 @@
 				0DB5372D1B8F5DEE0023A3F7 /* AFURLRequestSerialization.m in Sources */,
 				18EED16F1BB147DA004E5071 /* HBAboutViewController.m in Sources */,
 				186435AA1BC559DE0068E73E /* HBSettingViewCell.m in Sources */,
+				187AD6441BC6831B00E592F4 /* HBLeaderBindingCell.m in Sources */,
 				18B712E91BAC5C9F0002AB43 /* HBBookManViewController.m in Sources */,
 				0D086EDC1B949B110061BB1F /* DHSlideMenuController.m in Sources */,
 				18C316901BA092B1004F716E /* HBClassEntity.m in Sources */,
