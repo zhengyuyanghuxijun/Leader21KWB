@@ -36,15 +36,13 @@
         self.modeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + 30 + 10, 0, 150, 50)];
         [self addSubview:self.modeLabel];
     }else{
-        CGRect frame = CGRectMake(10 + 30 + 10, 0, 250, 50);
-        UIImageView *editBg = [[UIImageView alloc] initWithFrame:frame];
+        UIImageView *editBg = [[UIImageView alloc] initWithFrame:CGRectMake(10 + 30 + 10, 0, 250, 50)];
         editBg.userInteractionEnabled = YES;
         editBg.image = [UIImage imageNamed:@"user_editbg"];
         [self addSubview:editBg];
         
         self.VIPTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, 250, 30)];
         self.VIPTextField.placeholder = @"VIP码";
-        [self.VIPTextField setEnabled:NO];
         [editBg addSubview:self.VIPTextField];
     }
     
@@ -60,23 +58,22 @@
     [self addSubview:self.selectedBtn];
 }
 
--(void)updateFormData:(NSMutableDictionary *)dic
+-(void)updateFormData:(NSMutableDictionary *)dic checkedName:(NSString *)checkedName
 {
     if ([dic objectForKey:@"iconImg"]) {
         self.iconImg.image = [UIImage imageNamed:[dic objectForKey:@"iconImg"]];
+        self.checkedName = [dic objectForKey:@"iconImg"];
     }
     
     if ([dic objectForKey:@"modeLabel"]) {
         if (self.showModeText) {
             self.modeLabel.text = [dic objectForKey:@"modeLabel"];
-        }else{
-            self.VIPTextField.text = [dic objectForKey:@"checked"];
         }
     }
     
-    if ([dic objectForKey:@"checked"] && [dic objectForKey:@"modeLabel"]) {
+    if ([dic objectForKey:@"iconImg"] && checkedName) {
         
-        if ([[dic objectForKey:@"modeLabel"] isEqualToString:[dic objectForKey:@"checked"]]) {
+        if ([[dic objectForKey:@"iconImg"] isEqualToString:checkedName]) {
             self.checked = YES;
             [self.selectedBtn setBackgroundImage:[UIImage imageNamed:@"duoxuan-slected"] forState:UIControlStateNormal];
         }else{
@@ -84,15 +81,17 @@
             [self.selectedBtn setBackgroundImage:[UIImage imageNamed:@"duoxuan-normal"] forState:UIControlStateNormal];
         }
     }
+    
+    if ([checkedName isEqualToString:@"pay-icn-voucher"]) {
+        [self.VIPTextField setEnabled:YES];
+    }else{
+        [self.VIPTextField setEnabled:NO];
+    }
 }
 
 -(void)selectedBtnPress
 {
-    if (self.showModeText){
-        [self.delegate payCellChecked:self.modeLabel.text];
-    }else{
-        [self.delegate payCellChecked:self.VIPTextField.text];
-    }
+    [self.delegate payCellChecked:self.checkedName];
 }
 
 @end

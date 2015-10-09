@@ -21,6 +21,8 @@
 @property (strong, nonatomic) UIButton *selectedBtn;
 @property (nonatomic, strong) UITextField* VIPTextField;
 
+@property (nonatomic, strong) NSString* checkedName;
+
 @property (assign, nonatomic) BOOL checked;
 @property (assign, nonatomic) BOOL showModeText;
 
@@ -28,6 +30,6 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier showModeText:(BOOL)showModeText;
 
--(void)updateFormData:(NSMutableDictionary *)dic;
+-(void)updateFormData:(NSMutableDictionary *)dic checkedName:(NSString *)checkedName;
 
 @end

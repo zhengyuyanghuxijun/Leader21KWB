@@ -33,7 +33,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     self.title = @"支付中心";
     
     self.payModeDic = [[NSMutableDictionary alloc] initWithCapacity:1];
-    [self.payModeDic setObject:@"支付宝支付" forKey:@"checked"];
+    [self.payModeDic setObject:@"pay-icn-alipay" forKey:@"checked"];
     
     CGRect rect = self.view.frame;
     CGRect viewFrame = CGRectMake(0, 0, rect.size.width, rect.size.height);
@@ -154,7 +154,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.textColor = [UIColor blackColor];
-        [cell updateFormData:self.payModeDic];
+        [cell updateFormData:self.payModeDic checkedName:[self.payModeDic objectForKey:@"checked"]];
         
         return cell;
     }
