@@ -29,7 +29,7 @@
 {
     //图标
     self.msgIconImg = [[UIImageView alloc] init];
-    self.msgIconImg.image = [UIImage imageNamed:@"menu_user_pohoto"];
+    self.msgIconImg.image = [UIImage imageNamed:@"self-msg-icon"];
     self.msgIconImg.frame = CGRectMake(10, 20, 30, 30);
     [self addSubview:self.msgIconImg];
     
