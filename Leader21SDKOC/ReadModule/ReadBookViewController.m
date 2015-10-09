@@ -696,6 +696,15 @@
 
 - (void)goBack:(id)sender
 {
+    NSInteger index = [self currentIndex];
+    NSInteger count = [self.readBookDataSource totalCount];
+    if (index >= 0 && count > 0) {
+        if (index + 1 >= count) {
+            [self.navigationController popViewControllerAnimated:YES];
+            return;
+        }
+    }
+    
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"阅读尚未完成，是否中断阅读？" delegate:self cancelButtonTitle:@"退出" otherButtonTitles:@"继续阅读", nil];
     alertView.tag = 0;
     
