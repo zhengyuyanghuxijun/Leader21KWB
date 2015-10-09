@@ -73,7 +73,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
                 {
                     HBSystemMsgEntity *msgEntity = [[HBSystemMsgEntity alloc] init];
                     msgEntity.body = [dic stringForKey:@"body"];
-                    
+                    msgEntity.user_id = [NSString stringWithFormat:@"%ld", [dic integerForKey:@"user_id"]];
                     NSTimeInterval interval = [[dic numberForKey:@"created_time"] doubleValue];
                     msgEntity.created_time = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
                     

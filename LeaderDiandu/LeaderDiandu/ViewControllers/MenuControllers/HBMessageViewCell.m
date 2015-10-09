@@ -59,6 +59,11 @@
     if (msgEntity) {
         self.bodyLabel.text = msgEntity.body;
         self.timeLabel.text = msgEntity.created_time;
+        if ([msgEntity.user_id isEqualToString:@"0"]) {
+            self.msgIconImg.image = [UIImage imageNamed:@"system-msg-icon"];
+        }else{
+            self.msgIconImg.image = [UIImage imageNamed:@"self-msg-icon"];
+        }
     }
 }
 
