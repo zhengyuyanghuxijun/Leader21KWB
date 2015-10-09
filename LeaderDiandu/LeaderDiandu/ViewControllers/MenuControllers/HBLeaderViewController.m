@@ -78,6 +78,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
                 self.isBinding = NO;
                 [[HBServiceManager defaultManager] requestDirectorList:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
                     NSArray *directorsArr = [responseObject objectForKey:@"directors"];
+                    [self.leadersArr removeAllObjects];
                     for (NSDictionary *director in directorsArr) {
                         [self.leadersArr addObject:director];
                         [self.leaderSelectedDic setObject:@"0" forKey:[director objectForKey:@"name"]];
@@ -101,6 +102,8 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
         _tableView.separatorStyle = NO;
         [self.view addSubview:_tableView];
     }
+    
+    [_tableView reloadData];
 }
 
 -(void)addBottomBtn
@@ -124,7 +127,11 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
 -(void)bottomBtnPressed
 {
     if (self.isBinding) {
-        //解除绑定。。。（等待提供接口）
+        //解除绑定
+        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+        [[HBServiceManager defaultManager] requestDirectorUnAss:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+            [self getUserInfo];
+        }];
          
     }else{
         NSString *leaderName = nil;
@@ -140,7 +147,6 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
             HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
             [[HBServiceManager defaultManager] requestDirectorAss:userEntity.name director:leaderName completion:^(id responseObject, NSError *error) {
                 [self getUserInfo];
-                [_tableView reloadData];
             }];
         }
     }

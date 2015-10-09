@@ -361,7 +361,7 @@
 //        return;
 //    }
     self.receivedBlock = receivedBlock;
-    [self Post:@"/api/director/list" dict:dicInfo block:receivedBlock];
+    [self Post:@"/api/director/unassociate" dict:dicInfo block:receivedBlock];
 }
 
 - (void)requestTeacherList:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock
