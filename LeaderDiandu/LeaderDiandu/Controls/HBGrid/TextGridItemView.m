@@ -92,7 +92,6 @@
     if (self) 
     {
         // Initialization code
-        self.isTest = NO;
         [self initUI];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProgress:) name:kNotification_bookDownloadProgress object:nil];
@@ -173,7 +172,12 @@
 
 -(void)downloadButtonPressed:(id)sender
 {
+    UIButton *button = sender;
+    if ([button.titleLabel.text isEqualToString:@"作业"]) {
+        self.isTest = YES;
+    }
     [self didTap];
+    self.isTest = NO;
 }
 
 -(void)bookCoverButtonPressed:(id)sender
@@ -232,7 +236,6 @@
     self.readProgressLabel.hidden = YES;
     self.downloadButton.hidden = NO;
     _progressControl.hidden = YES;
-    self.isTest = YES;
     [self.downloadButton setTitle:@"作业" forState:UIControlStateNormal];
     [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-test"] forState:UIControlStateNormal];
 }
@@ -246,7 +249,6 @@
         self.readProgressLabel.hidden = YES;
         self.downloadButton.hidden = NO;
         _progressControl.hidden = YES;
-        self.isTest = YES;
         [self.downloadButton setTitle:@"作业" forState:UIControlStateNormal];
         [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-test"] forState:UIControlStateNormal];
     }else{

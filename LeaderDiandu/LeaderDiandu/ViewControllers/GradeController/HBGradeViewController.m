@@ -81,19 +81,18 @@
     [self.readProgressEntityDic removeAllObjects];
     self.readProgressEntityDic = [[HBReadProgressDB sharedInstance] getAllReadprogressDic];
     
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
         /** type: 1 - 学生； 10 - 老师*/
-        NSInteger type = [[dict objectForKey:@"type"] integerValue];
-        if (type == 1) {
+        if (userEntity.type == 1) {
             [_gridView setHeaderViewHidden:NO];
             //学生获取作业列表
             [self requestTaskListOfStudent];
             //从服务器拉取套餐信息
             [self requestAllBookset];
             //学生用户从服务器拉取最新的书籍阅读进度（老师用户直接从本地读取）
-            NSString *user = [dict objectForKey:@"name"];
-            NSString *token = [dict objectForKey:@"token"];
+            NSString *user = userEntity.name;
+            NSString *token = userEntity.token;
             [[HBServiceManager defaultManager] requestBookProgress:user token:token bookset_id:1 completion:^(id responseObject, NSError *error) {
                 if (responseObject) {
                     //获取阅读进度成功
@@ -129,11 +128,10 @@
     NSString *progress = [dic objectForKey:@"progress"];
     
     if ([progress integerValue] == 100) {
-        NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-        if (dict) {
+        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+        if (userEntity) {
             /** type: 1 - 学生； 10 - 老师*/
-            NSInteger type = [[dict objectForKey:@"type"] integerValue];
-            if (type == 1) {
+            if (userEntity.type == 1) {
                 [self requestTaskListOfStudent];
             }
         }
@@ -144,14 +142,13 @@
     
     //只有当新的阅读进度大于之前的阅读进度，才更新
     if ([progress integerValue] > [oldProgress integerValue]) {
-        NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-        if (dict) {
-            NSString *user = [dict objectForKey:@"name"];
-            NSString *token = [dict objectForKey:@"token"];
+        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+        if (userEntity) {
+            NSString *user = userEntity.name;
+            NSString *token = userEntity.token;
             
             /** type: 1 - 学生； 10 - 老师*/
-            NSInteger type = [[dict objectForKey:@"type"] integerValue];
-            if (type == 1) {
+            if (userEntity.type == 1) {
                 [[HBServiceManager defaultManager] requestUpdateBookProgress:user token:token book_id:[bookId integerValue] progress:[progress integerValue] completion:^(id responseObject, NSError *error) {
                     
                     NSString *book_id = [NSString stringWithFormat:@"%ld", [[responseObject objectForKey:@"book_id"] integerValue]];
@@ -301,11 +298,10 @@
         _gridView.delegate = self;
         _gridView.backgroundColor = [UIColor clearColor];
         
-        NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-        if (dict) {
+        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+        if (userEntity) {
             /** type: 1 - 学生； 10 - 老师*/
-            NSInteger type = [[dict objectForKey:@"type"] integerValue];
-            if (type == 1) {
+            if (userEntity.type == 1) {
                 [_gridView setHeaderViewHidden:NO];
             }else{
                 [_gridView setHeaderViewHidden:YES];
@@ -458,11 +454,10 @@
     NSString *progress = readprogressEntity.progress;
     
     if ([LEADERSDK isBookDownloaded:entity]) {
-        NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-        if (dict) {
+        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+        if (userEntity) {
             /** type: 1 - 学生； 10 - 老师*/
-            NSInteger type = [[dict objectForKey:@"type"] integerValue];
-            if (type == 1) {
+            if (userEntity.type == 1) {
                 //已下载（阅读完成,并且在作业列表里面，显示“作业”；阅读完成,不在作业列表里面显示“100%”；阅读未完成显示进度条）
                 BOOL flag = YES;
                 for (HBTaskEntity *taskentity in self.taskEntityArr) {
@@ -524,7 +519,7 @@
     if (userEntity) {
         NSString *user = userEntity.name;
         [MBHudUtil showActivityView:nil inView:nil];
-        [[HBServiceManager defaultManager] requestBookInfo:user book_id:taskEntity.bookId completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestBookInfo:user book_id:bookId completion:^(id responseObject, NSError *error) {
             // to do ...
             if (responseObject) {
                 NSDictionary *dict = responseObject;
@@ -570,10 +565,10 @@
 
 - (void)requestAllBookset
 {
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        NSString *user = [dict objectForKey:@"name"];
-        NSString *token = [dict objectForKey:@"token"];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        NSString *user = userEntity.name;
+        NSString *token = userEntity.token;
         //获取所有可选套餐
         [[HBServiceManager defaultManager] requestAllBookset:user token:token completion:^(id responseObject, NSError *error) {
             if (responseObject) {
@@ -587,8 +582,7 @@
                 }
  
                 /** type: 1 - 学生； 10 - 老师*/
-                NSInteger type = [[dict objectForKey:@"type"] integerValue];
-                if (type == 1) {
+                if (userEntity.type == 1) {
                     //获取书本列表
                     for (HBContentEntity *contentEntity in self.contentEntityArr) {
                         if (contentEntity.bookId == currentID) {
@@ -597,7 +591,7 @@
                             [self getContentDetailEntitys:booksIDsArr];
                         }
                     }
-                }else{
+                } else {
                     //老师获取所有可选套餐成功保存数据库
                     [[HBContentListDB sharedInstance] updateHBContentList:arr];
                     //获取书本列表
@@ -650,11 +644,10 @@
 
 -(void)reloadGridView
 {
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
         /** type: 1 - 学生； 10 - 老师*/
-        NSInteger type = [[dict objectForKey:@"type"] integerValue];
-        if (type == 1) {
+        if (userEntity.type == 1) {
             [self requestTaskListOfStudent];
         }
     }

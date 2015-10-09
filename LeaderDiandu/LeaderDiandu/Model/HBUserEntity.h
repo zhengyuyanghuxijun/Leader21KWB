@@ -11,8 +11,10 @@
 @interface HBUserEntity : HBBaseEntity
 
 @property (nonatomic, assign)NSInteger userid;
-@property (nonatomic, assign)NSInteger gender;/** gender 性别， 1-男，2-女 */
-@property (nonatomic, assign)NSInteger type;/** type: 1 - 学生； 10 - 老师*/
+/** gender 性别， 1-男，2-女 */
+@property (nonatomic, assign)NSInteger gender;
+/** type: 1 - 学生； 10 - 老师*/
+@property (nonatomic, assign)NSInteger type;
 @property (nonatomic, strong)NSString *display_name;
 @property (nonatomic, strong)NSString *name;
 @property (nonatomic, strong)NSString *phone;

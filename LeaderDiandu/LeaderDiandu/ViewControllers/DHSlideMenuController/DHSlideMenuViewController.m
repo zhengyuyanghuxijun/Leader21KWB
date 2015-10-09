@@ -9,6 +9,7 @@
 #import "DHSlideMenuViewController.h"
 #import "DHSlideMenuController.h"
 
+#define KTableHeaderHeight  150
 static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewControllerCellReuseId";
 
 @interface DHSlideMenuViewController ()
@@ -112,20 +113,20 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 100;
+    return KTableHeaderHeight;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] init];
     float controlX = 20;
-    float controlY = 80;
     float controlH = 50;
+    float controlY = KTableHeaderHeight - controlH - 20;
     UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlH, controlH)];
     headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
     [view addSubview:headView];
     
-    controlX += controlH;
+    controlX += controlH + 10;
     float controlW = 120;
     UIButton *buttonInfo = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     buttonInfo.backgroundColor = [UIColor clearColor];
