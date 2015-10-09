@@ -274,7 +274,6 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
-        NSString *token = [dict objectForKey:@"token"];
         [[HBServiceManager defaultManager] requestStudentList:user completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 //获取绑定老师的学生信息成功

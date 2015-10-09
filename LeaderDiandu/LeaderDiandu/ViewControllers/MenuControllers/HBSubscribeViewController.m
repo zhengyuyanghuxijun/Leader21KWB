@@ -45,6 +45,8 @@
     self.navigationController.navigationBarHidden = NO;
     self.title = @"订阅等级";
     
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
     [self initMainGrid];
     [self initConfirmButton];
     [self initRuleDescriptionButton];
@@ -56,7 +58,7 @@
 {
     _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenWidth)];
     _gridView.delegate = self;
-    _gridView.backgroundColor = [UIColor redColor];
+    [_gridView setScrollEnabled:NO];
     [self.view addSubview:_gridView];
 }
 
@@ -146,7 +148,7 @@
 
 - (CGFloat)gridView:(HBGridView *)gridView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return ScreenWidth / 3.0f;
+    return 100;
 }
 
 // 获取特定位置的单元格视图
@@ -156,16 +158,18 @@
     ButtonGridItemView *itemView = (ButtonGridItemView *)[gridView dequeueReusableGridItemAtGridIndex:gridIndex ofGridCellView:gridCell];
     if (!itemView)
     {
-        itemView = [[ButtonGridItemView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, ScreenWidth/3)];
+        itemView = [[ButtonGridItemView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, 100)];
     }
+    
+    NSString *indexStr = [NSString stringWithFormat:@"%ld", (listIndex + 1)];
     
     //说明这个等级是被订阅的，需要特殊标记一下
     if (self.subscribeId == (listIndex + 1)) {
-        [itemView updateSubscribeImgView:YES levelButton:YES];
+        [itemView updateSubscribeImgView:YES levelButton:YES index:indexStr];
     }else if(self.currentSelectIndex == listIndex){
-        [itemView updateSubscribeImgView:NO levelButton:YES];
+        [itemView updateSubscribeImgView:NO levelButton:YES index:indexStr];
     }else{
-        [itemView updateSubscribeImgView:NO levelButton:NO];
+        [itemView updateSubscribeImgView:NO levelButton:NO index:indexStr];
     }
 
     return itemView;

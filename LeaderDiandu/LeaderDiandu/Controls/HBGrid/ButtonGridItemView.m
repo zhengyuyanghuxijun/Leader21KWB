@@ -8,13 +8,14 @@
 
 #import "ButtonGridItemView.h"
 
+#define BUTTONFONTSIZE 20.0f
+
 @interface ButtonGridItemView()
 {
     UIButton *_levelButton;
 }
 
 @property (strong, nonatomic) UIButton * levelButton;
-@property (strong, nonatomic) UIImageView * subscribedImgView;
 
 @end
 
@@ -37,36 +38,29 @@
     NSInteger levelButtonWith = self.frame.size.width/2;
     self.levelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.levelButton.frame = CGRectMake((self.frame.size.width - levelButtonWith)/2, (self.frame.size.width - levelButtonWith)/2, levelButtonWith, levelButtonWith);
-    [self.levelButton setImage:[UIImage imageNamed:@"flower"] forState:UIControlStateDisabled];
-//    [self.levelButton addTarget:self action:@selector(levelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    //设置button为圆形
+    [self.levelButton.layer setMasksToBounds:YES];
+    [self.levelButton.layer setCornerRadius:levelButtonWith/2];
+    [self.levelButton setBackgroundColor:[UIColor lightGrayColor]];
+    [self.levelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:BUTTONFONTSIZE]];
     self.levelButton.enabled = NO;
     [self addSubview:self.levelButton];
-    
-    //已订阅图标
-    self.subscribedImgView =[[UIImageView alloc] initWithFrame:CGRectMake((self.levelButton.frame.origin.x + levelButtonWith - 25), self.levelButton.frame.origin.y - 10, 35, 25)];
-    [self.subscribedImgView setImage:[UIImage imageNamed:@"menu_vip"]];
-    [self addSubview:self.subscribedImgView];
 }
-
-//-(void)levelButtonPressed:(id)sender
-//{
-//    
-//}
 
 //更新订阅图标和等级按钮
 -(void)updateSubscribeImgView:(BOOL)isSubscribed
                   levelButton:(BOOL)isCurrentSelectIndex
+                        index:(NSString *)index
 {
     if (isSubscribed) {
-        self.subscribedImgView.hidden = NO;
-        [self.levelButton setImage:[UIImage imageNamed:@"flower"] forState:UIControlStateDisabled];
+        [self.levelButton setBackgroundColor:[UIColor blueColor]];
     }else if(isCurrentSelectIndex){
-        self.subscribedImgView.hidden = YES;
-        [self.levelButton setImage:[UIImage imageNamed:@"flower"] forState:UIControlStateDisabled];
+        [self.levelButton setBackgroundColor:[UIColor grayColor]];
     }else{
-        self.subscribedImgView.hidden = YES;
-        [self.levelButton setImage:[UIImage imageNamed:@"menu_user_pohoto"] forState:UIControlStateDisabled];
+        [self.levelButton setBackgroundColor:[UIColor lightGrayColor]];
     }
+    
+    [self.levelButton setTitle:index forState:UIControlStateNormal];
 }
 
 @end

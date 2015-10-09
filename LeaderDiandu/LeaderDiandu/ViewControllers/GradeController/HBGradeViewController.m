@@ -297,6 +297,7 @@
         _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, ScreenWidth, ScreenHeight - KHBNaviBarHeight)];
         _gridView.delegate = self;
         _gridView.backgroundColor = [UIColor clearColor];
+        [_gridView setBackgroundView:@"bookshelf-bg-body"];
         
         HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
         if (userEntity) {

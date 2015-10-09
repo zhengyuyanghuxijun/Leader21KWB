@@ -13,6 +13,7 @@
 
 //更新订阅图标和等级按钮
 -(void)updateSubscribeImgView:(BOOL)isSubscribed
-                  levelButton:(BOOL)isCurrentSelectIndex;
+                  levelButton:(BOOL)isCurrentSelectIndex
+                        index:(NSString *)index;
 
 @end

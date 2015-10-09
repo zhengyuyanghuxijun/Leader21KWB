@@ -48,6 +48,8 @@
 - (void)reloadData;
 -(void)hideRefreshView;
 -(void)setHeaderViewHidden:(BOOL)hidden;
+-(void)setBackgroundView:(NSString *)imgName;
+-(void)setScrollEnabled:(BOOL)enabled;
 
 @end
 

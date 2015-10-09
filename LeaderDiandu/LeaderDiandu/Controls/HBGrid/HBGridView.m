@@ -48,10 +48,6 @@ delegate = _delegate;
     _tableView = [[UITableView alloc] initWithFrame:rect];
     _tableView.delegate = self, _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    UIImageView *imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bookshelf-bg-body"]];
-    [_tableView setBackgroundView:imageView];
-    
     [self addSubview:_tableView];
     
     _headerView = [[RefreshTableHeaderView alloc]initWithFrame:CGRectMake(0, -_tableView.frame.size.height, _tableView.frame.size.width, _tableView.frame.size.height)];
@@ -63,6 +59,17 @@ delegate = _delegate;
 -(void)setHeaderViewHidden:(BOOL)hidden
 {
     _headerView.hidden = hidden;
+}
+
+-(void)setBackgroundView:(NSString *)imgName
+{
+    UIImageView *imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:imgName]];
+    [_tableView setBackgroundView:imageView];
+}
+
+-(void)setScrollEnabled:(BOOL)enabled
+{
+    [_tableView setScrollEnabled:enabled];
 }
 
 - (id)initWithFrame:(CGRect)frame
