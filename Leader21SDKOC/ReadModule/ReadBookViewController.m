@@ -696,7 +696,7 @@
 
 - (void)goBack:(id)sender
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"阅读尚未完成，是否中断阅读？" message:nil delegate:self cancelButtonTitle:@"退出" otherButtonTitles:@"继续阅读", nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"阅读尚未完成，是否中断阅读？" delegate:self cancelButtonTitle:@"退出" otherButtonTitles:@"继续阅读", nil];
     alertView.tag = 0;
     
     [alertView show];

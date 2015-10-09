@@ -62,7 +62,7 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
 
 - (void)logoutButtonPressed:(id)sender
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"您确定要退出帐号？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您确定要退出账号？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alertView.tag = 0;
     
     [alertView show];

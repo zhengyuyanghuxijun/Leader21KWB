@@ -192,7 +192,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
         NSString *viewCtlName = self.controllers[index];
         
         if ([viewCtlName isEqualToString:@""]) { //联系客服
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"您确定要拨打客服电话？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您确定要拨打客服电话？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
             alertView.tag = 0;
             
             [alertView show];
