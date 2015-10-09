@@ -114,7 +114,9 @@
         [self updateWorkData:dict];
     } else {
         //提交成绩，算分数
-        if ([_taskEntity.score length] > 0) {
+        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+        //老师和教研员不需要提交成绩
+        if ([_taskEntity.score length] > 0 || userEntity.type>1) {
             [self showScoreView];
         } else {
             [self submitScore];

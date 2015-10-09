@@ -206,6 +206,15 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
 - (void)requestDirectorAss:(NSString *)user director:(NSString *)director completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
+ *  老师解除绑定教研员
+ *
+ *  @param user             用户名
+ *  @param token            登录返回的凭证
+ *  @param receivedBlock 回调Block
+ */
+- (void)requestDirectorUnAss:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
  *  获取与一位教研员相关联的老师列表，只有教研员有权限调用该接口
  *
  *  @param user             用户名
