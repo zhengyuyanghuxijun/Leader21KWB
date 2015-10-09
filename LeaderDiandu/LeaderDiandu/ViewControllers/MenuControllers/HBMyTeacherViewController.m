@@ -117,10 +117,20 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     NSDictionary *teacherDic = userEntity.teacher;
     NSDictionary *classDic = userEntity.myClass;
-    [array addObject:teacherDic[@"name"]];
-    [array addObject:teacherDic[@"display_name"]];
-    [array addObject:classDic[@"name"]];
-    [array addObject:[classDic[@"bookset_id"] stringValue]];
+    NSString *strValue = [teacherDic stringForKey:@"name" defautValue:@""];
+    [array addObject:strValue];
+    strValue = [teacherDic stringForKey:@"display_name" defautValue:@""];
+    [array addObject:strValue];
+    strValue = [classDic stringForKey:@"name" defautValue:@""];
+    [array addObject:strValue];
+    NSNumber *booksetId = [classDic numberForKey:@"bookset_id"];
+    if (booksetId) {
+        strValue = [booksetId stringValue];
+    } else {
+        strValue = @"";
+    }
+    [array addObject:strValue];
+    
     self.desArray = array;
 }
 

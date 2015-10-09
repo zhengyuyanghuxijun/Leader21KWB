@@ -7,6 +7,7 @@
 //
 
 #import "HBDataSaveManager.h"
+#import "AFNetworkReachabilityManager.h"
 
 @implementation HBDataSaveManager
 
@@ -96,6 +97,81 @@
     
     self.wifiDownload = [wifiDownloadStr boolValue];
     self.showEnBookName = [showEnBookNameStr boolValue];
+}
+
+-(void)addObserverNet
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkStateChange) name:AFNetworkingReachabilityDidChangeNotification object:nil];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+}
+
+#pragma mark - 更新网络
+- (void)networkStateChange
+{
+//    NSString *state = [self getNetWorkStates];
+    
+    [self isNetworkEnable];
+}
+
+- (BOOL)isNetworkEnable
+{
+    BOOL flag = YES;
+    AFNetworkReachabilityStatus state=  [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+    switch (state) {
+        case AFNetworkReachabilityStatusNotReachable:
+            flag = NO;
+            NSLog(@"没网络");
+            break;
+        case AFNetworkReachabilityStatusReachableViaWWAN:;{
+        }
+            break;
+        case AFNetworkReachabilityStatusReachableViaWiFi:
+//            NSLog(@"WiFi网络");
+            break;
+        default:
+            break;
+    }
+    return flag;
+}
+
+- (NSString *)getNetWorkStates
+{
+    UIApplication *app = [UIApplication sharedApplication];
+    NSArray *children = [[[app valueForKeyPath:@"statusBar"]valueForKeyPath:@"foregroundView"]subviews];
+    
+    NSString *state = [[NSString alloc] init];
+    int netType = 0;
+    
+    //获取到网络返回码
+    for (id child in children) {
+        
+        if ([child isKindOfClass:NSClassFromString(@"UIStatusBarDataNetworkItemView")]) {
+            //获取到状态栏
+            netType = [[child valueForKeyPath:@"dataNetworkType"]intValue];
+            switch (netType) {
+                case 0:
+                    //无网模式
+                    state = @"无网络";
+                    break;
+                case 1:
+                    state = @"2G";
+                    break;
+                case 2:
+                    state = @"3G";
+                    break;
+                case 3:
+                    state = @"4G";
+                    break;
+                case 5:
+                    state = @"WIFI";
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    
+    return state;
 }
 
 @end
