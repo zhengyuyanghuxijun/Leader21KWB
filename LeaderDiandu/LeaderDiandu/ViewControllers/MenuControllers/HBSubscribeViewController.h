@@ -8,6 +8,13 @@
 
 #import "HBBaseViewController.h"
 
+@interface HBRuleCell : UITableViewCell
+
+@property (strong, nonatomic) UIImageView *imgView;
+@property (strong, nonatomic) UILabel *contentLabel;
+
+@end
+
 @interface HBSubscribeViewController : HBBaseViewController
 
 @end

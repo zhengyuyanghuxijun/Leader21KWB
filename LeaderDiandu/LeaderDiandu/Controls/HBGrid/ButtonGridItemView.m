@@ -8,7 +8,7 @@
 
 #import "ButtonGridItemView.h"
 
-#define BUTTONFONTSIZE 20.0f
+#define BUTTONFONTSIZE 30.0f
 
 @interface ButtonGridItemView()
 {

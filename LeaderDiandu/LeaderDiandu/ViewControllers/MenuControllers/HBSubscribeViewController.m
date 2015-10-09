@@ -14,9 +14,53 @@
 #import "HBServiceManager.h"
 #import "HHAlertSingleView.h"
 
-@interface HBSubscribeViewController ()<HBGridViewDelegate, UIAlertViewDelegate>
+#define KTagBgBiew 111111
+#define LABELFONTSIZE 16.0f
+
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+
+#define HHAlertSingleView_SIZE_WIDTH (ScreenWidth - 20 - 20)
+#define HHAlertSingleView_SIZE_HEIGHT (360)
+
+@implementation HBRuleCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self)
+    {
+        [self initUI];
+    }
+    return self;
+}
+
+-(void)initUI
+{
+    CGRect rc = CGRectMake(20, 5, HHAlertSingleView_SIZE_WIDTH - 20 - 20, 60 - 5 - 5);
+    //背景
+    UIView *bgView = [[UIView alloc] initWithFrame:rc];
+    bgView.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.0500];
+    [self addSubview:bgView];
+    
+    //小箭头
+    self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, (50 - 20)/2, 20, 20)];
+    self.imgView.image = [UIImage imageNamed:@"system-msg-icon"];
+    [bgView addSubview:self.imgView];
+    
+    //内容
+    self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.imgView.frame.origin.x + 20 + 10, 0, rc.size.width - 30 - 20, rc.size.height)];
+    self.contentLabel.numberOfLines = 0;
+    [self.contentLabel setFont:[UIFont boldSystemFontOfSize:14.0f]];
+    [bgView addSubview:self.contentLabel];
+}
+
+@end
+
+@interface HBSubscribeViewController ()<HBGridViewDelegate, UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     HBGridView *_gridView;
+    NSArray *_ruleArr;
 }
 
 @property (nonatomic, strong) UIButton* confirmButton;
@@ -34,6 +78,7 @@
     if (self) {
         self.subscribeId = -1;
         self.currentSelectIndex = -1;
+        _ruleArr = @[@"课外宝根据你的订阅等级，每周为你的书架更新图书", @"在你进入老师的辅导小组前，你可以更改订阅等级", @"在你进入老师的辅导小组后，你将不能更改订阅等级", @"老师可以变更你的辅导小组，辅导小组变更后，订阅等级自动更新"];
     }
     return self;
 }
@@ -71,25 +116,30 @@
     rc.size.height -= 30.0f;
     
     self.confirmButton = [[UIButton alloc] initWithFrame:rc];
-    [self.confirmButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+//    [self.confirmButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+    [self.confirmButton setBackgroundColor:[UIColor greenColor]]; //先临时用这个颜色吧
     [self.confirmButton setTitle:@"确认订阅" forState:UIControlStateNormal];
+    [self.confirmButton.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
     [self.confirmButton addTarget:self action:@selector(confirmButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.confirmButton];
 }
 
 -(void)initRuleDescriptionButton
 {
-    CGRect rc = CGRectMake(0.0f, ScreenHeight-80 - 40, self.view.frame.size.width, 70.0f);
-    rc.origin.x += 20.0f;
-    rc.size.width -= 40.0f;
-    rc.origin.y += 20.0f;
-    rc.size.height -= 30.0f;
+    CGRect rc = CGRectMake(0.0f, ScreenHeight-80 - 40, ScreenWidth/2 + 20, 70.0f);
     
     self.ruleDescriptionButton = [[UIButton alloc] initWithFrame:rc];
     [self.ruleDescriptionButton setTitle:@"规则说明" forState:UIControlStateNormal];
+    [self.ruleDescriptionButton.titleLabel setFont:[UIFont boldSystemFontOfSize:LABELFONTSIZE]];
     [self.ruleDescriptionButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [self.ruleDescriptionButton addTarget:self action:@selector(ruleDescriptionPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.ruleDescriptionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [self.view addSubview:self.ruleDescriptionButton];
+    
+    rc = CGRectMake(ScreenWidth/2 + 20 + 10, ScreenHeight-80 - 13, 15, 15);
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:rc];
+    imgView.image = [UIImage imageNamed:@"system-msg-icon"];
+    [self.view addSubview:imgView];
 }
 
 - (void)confirmButtonPressed:(id)sender
@@ -102,9 +152,28 @@
 
 - (void)ruleDescriptionPressed:(id)sender
 {
-    NSString *firstStr = @"学生在绑定老师前，或者绑定了老师未指派组时，可以自由订阅等级，在订阅的等级内按照时间推送新书";
-    NSString *secondStr = @"当被老师指定了组后，等级就被老师的组确定，且锁定，学生无法更改，直到退出组（被老师移除，或者解除绑定老师，即没有组的信息时）";
-    [HHAlertSingleView showAlertWithStyle:HHAlertStyleInstructions inView:self.view Title:@"规则说明" detailFirst:firstStr detailSecond:secondStr okButton:@"我知道了"];
+    UIView *bgView = (UIView *)[[UIApplication sharedApplication].keyWindow viewWithTag:KTagBgBiew];
+    
+    if (bgView) {
+        bgView.hidden = NO;
+    }else{
+        UIView *bgView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+        bgView.tag = KTagBgBiew;
+        bgView.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.600];
+        [[UIApplication sharedApplication].keyWindow addSubview:bgView];
+        
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake((ScreenWidth - HHAlertSingleView_SIZE_WIDTH)/2, (ScreenHeight - HHAlertSingleView_SIZE_HEIGHT)/2 , HHAlertSingleView_SIZE_WIDTH, HHAlertSingleView_SIZE_HEIGHT)];
+        [tableView setBackgroundColor:[UIColor whiteColor]];
+        tableView.dataSource = self;
+        tableView.delegate = self;
+        tableView.separatorStyle = NO;
+        tableView.scrollEnabled = NO;
+        [bgView addSubview:tableView];
+    }
+
+//    NSString *firstStr = @"学生在绑定老师前，或者绑定了老师未指派组时，可以自由订阅等级，在订阅的等级内按照时间推送新书";
+//    NSString *secondStr = @"当被老师指定了组后，等级就被老师的组确定，且锁定，学生无法更改，直到退出组（被老师移除，或者解除绑定老师，即没有组的信息时）";
+//    [HHAlertSingleView showAlertWithStyle:HHAlertStyleInstructions inView:self.view Title:@"规则说明" detailFirst:firstStr detailSecond:secondStr okButton:@"我知道了"];
 }
 
 #pragma mark - actionSheetDelegate
@@ -214,6 +283,83 @@
             }
         }];
     }
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return 4;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 60;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] init];
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 200)/2, 15, 200, 40)];
+    [btn setBackgroundImage:[UIImage imageNamed:@"menu_tag_uservip"] forState:UIControlStateNormal];
+    [btn setTitle:@"规则说明" forState:UIControlStateNormal];
+    [btn.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
+    [view addSubview:btn];
+    return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 60;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UIView *view = [[UIView alloc] init];
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 150)/2, 10, 150, 40)];
+    [btn setBackgroundImage:[UIImage imageNamed:@"menu_tag_uservip"] forState:UIControlStateNormal];
+    [btn setTitle:@"我知道了" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(knowBtnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [btn.titleLabel setFont:[UIFont boldSystemFontOfSize:16.0f]];
+    [view addSubview:btn];
+    return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60.0f;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    HBRuleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"123"];
+    if (!cell) {
+        cell = [[HBRuleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"123"];
+    }
+    
+    cell.contentLabel.text = [_ruleArr objectAtIndex:indexPath.row];
+    cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+-(void)knowBtnPressed
+{
+    UIView *bgView = (UIView *)[[UIApplication sharedApplication].keyWindow viewWithTag:KTagBgBiew];
+    bgView.hidden = YES;
 }
 
 @end
