@@ -225,6 +225,18 @@
     }
 }
 
+- (void)teacherBookDownloaded:(BookEntity *)book
+{
+    //已下载（老师和教研员账户显示“作业”）
+    self.progressView.hidden = YES;
+    self.readProgressLabel.hidden = YES;
+    self.downloadButton.hidden = NO;
+    _progressControl.hidden = YES;
+    self.isTest = YES;
+    [self.downloadButton setTitle:@"作业" forState:UIControlStateNormal];
+    [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-test"] forState:UIControlStateNormal];
+}
+
 - (void)bookDownloaded:(BookEntity *)book progress:(NSString *)progress isTask:(BOOL)isTask
 {
     //已下载（阅读完成显示“作业”，未完成显示进度条）

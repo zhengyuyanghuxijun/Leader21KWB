@@ -458,17 +458,26 @@
     NSString *progress = readprogressEntity.progress;
     
     if ([LEADERSDK isBookDownloaded:entity]) {
-        //已下载（阅读完成,并且在作业列表里面，显示“作业”；阅读完成,不在作业列表里面显示“100%”；阅读未完成显示进度条）
-        BOOL flag = YES;
-        for (HBTaskEntity *taskentity in self.taskEntityArr) {
-            if (taskentity.bookId == [entity.bookId integerValue]) {
-                [itemView bookDownloaded:entity progress:progress isTask:YES];
-                flag = NO;
-                break;
+        NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+        if (dict) {
+            /** type: 1 - 学生； 10 - 老师*/
+            NSInteger type = [[dict objectForKey:@"type"] integerValue];
+            if (type == 1) {
+                //已下载（阅读完成,并且在作业列表里面，显示“作业”；阅读完成,不在作业列表里面显示“100%”；阅读未完成显示进度条）
+                BOOL flag = YES;
+                for (HBTaskEntity *taskentity in self.taskEntityArr) {
+                    if (taskentity.bookId == [entity.bookId integerValue]) {
+                        [itemView bookDownloaded:entity progress:progress isTask:YES];
+                        flag = NO;
+                        break;
+                    }
+                }
+                if (flag) {
+                    [itemView bookDownloaded:entity progress:progress isTask:NO];
+                }
+            }else{
+                [itemView teacherBookDownloaded:entity];
             }
-        }
-        if (flag) {
-            [itemView bookDownloaded:entity progress:progress isTask:NO];
         }
     }else if([LEADERSDK isBookDownloading:entity]){
         [itemView bookDownloading:entity];  //正在下载
