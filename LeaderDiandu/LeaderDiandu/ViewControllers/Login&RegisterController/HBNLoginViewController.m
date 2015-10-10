@@ -45,6 +45,13 @@
     [self.view addGestureRecognizer:tap];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)tapToHideKeyboard:(id)sender
 {
     [_inputPassword resignFirstResponder];

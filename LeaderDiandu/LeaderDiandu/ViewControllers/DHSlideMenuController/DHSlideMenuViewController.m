@@ -113,7 +113,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] init];
-    view.backgroundColor = RGBEQ(239);
+    view.backgroundColor = [UIColor colorWithHex:0xe4e4e4];
     
     float controlX = 20;
     float controlH = 50;
@@ -151,13 +151,24 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     phoneLbl.text = _headerPhone;
     [buttonInfo addSubview:phoneLbl];
     
-    controlX = buttonInfo.frame.size.width - controlH*2;
+    float arrowX = buttonInfo.frame.size.width - controlH - 10;
     controlY = 15;
-    UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlH, controlH)];
+    UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(arrowX, controlY, controlH, controlH)];
     arrowImg.image = [UIImage imageNamed:@"menu_icon_user_open"];
     [buttonInfo addSubview:arrowImg];
     
+    controlW = 100;
+    controlX = arrowX-controlW-5;
+    UILabel *typeLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    typeLbl.font = [UIFont systemFontOfSize:16];
+    [buttonInfo addSubview:typeLbl];
+    
     return view;
+}
+
+- (void)setTypeLbl:(UILabel *)typeLbl
+{
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
