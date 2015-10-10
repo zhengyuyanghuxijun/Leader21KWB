@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *headerName;
 @property (nonatomic, strong) NSString *headerPhone;
 @property (nonatomic, strong) NSString *headerClassName;
+@property (nonatomic, assign) NSInteger viewWidth;
 
 //添加菜单项切换的TabBarControllers
 - (id)initWithMenus:(NSArray *)titles MenuImages:(NSArray *)images TabBarControllers:(NSArray*)controllers;

@@ -7,6 +7,7 @@
 //
 
 #import "DHSlideMenuController.h"
+#import "DHSlideMenuViewController.h"
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -40,7 +41,7 @@ static float canTouchAreaWidth = 40;
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        _leftViewShowWidth=200;
+        _leftViewShowWidth = SCREEN_WIDTH - 50;
         _rightViewShowWidth=200;
         _animationDuration = 0.35;
         _needShowBoundsShadow = YES;
@@ -68,6 +69,11 @@ static float canTouchAreaWidth = 40;
     [super viewDidLoad];
     baseView = self.view;
     self.needSwipeShowMenu = YES;
+    
+    if ([_leftViewController isKindOfClass:[DHSlideMenuViewController class]]) {
+        DHSlideMenuViewController *controller = (DHSlideMenuViewController *)_leftViewController;
+        controller.viewWidth = _leftViewShowWidth;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

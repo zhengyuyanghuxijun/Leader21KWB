@@ -39,7 +39,8 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 
 #pragma mark - Managing the view
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -52,19 +53,12 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.tableFooterView = nil;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kSlideMenuViewControllerCellReuseId];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-}
-
-- (void)viewDidLayoutSubviews
-{
-    [super viewDidLayoutSubviews];
-    
-//    CGSize screenSize = [UIScreen mainScreen].bounds.size;
-//    self.tableView.frame = CGRectMake(0, 100, 200, screenSize.height-100);
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 #pragma mark - Configuring the view’s layout behavior
-- (UIStatusBarStyle)preferredStatusBarStyle{
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
     // Even if this view controller hides the status bar, implementing this method is still needed to match the center view controller's
     // status bar style to avoid a flicker when the drawer is dragged and then left to open.
     return UIStatusBarStyleLightContent;
@@ -119,6 +113,8 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] init];
+    view.backgroundColor = RGBEQ(239);
+    
     float controlX = 20;
     float controlH = 50;
     float controlY = KTableHeaderHeight - controlH - 20;
@@ -127,32 +123,35 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     [view addSubview:headView];
     
     controlX += controlH + 10;
-    float controlW = 120;
+    float controlW = self.viewWidth - controlX;
     UIButton *buttonInfo = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     buttonInfo.backgroundColor = [UIColor clearColor];
     [buttonInfo addTarget:self action:@selector(headButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:buttonInfo];
     
+    UIColor *textColor = RGBCOLOR(93, 85, 95);
+    UIFont *font = [UIFont systemFontOfSize:20];
     controlX = 0;
     controlY = 0;
     controlW = 100;
-    controlH = 20;
+    controlH = 25;
     UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     nameLbl.backgroundColor = [UIColor clearColor];
-    nameLbl.textColor = [UIColor lightGrayColor];
-    nameLbl.font = [UIFont systemFontOfSize:14];
+    nameLbl.textColor = textColor;
+    nameLbl.font = font;
     nameLbl.text = _headerName;
     [buttonInfo addSubview:nameLbl];
     
     controlY += controlH;
+    controlW = 150;
     UILabel *phoneLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     phoneLbl.backgroundColor = [UIColor clearColor];
-    phoneLbl.textColor = [UIColor lightGrayColor];
-    phoneLbl.font = [UIFont systemFontOfSize:14];
+    phoneLbl.textColor = textColor;
+    phoneLbl.font = font;
     phoneLbl.text = _headerPhone;
     [buttonInfo addSubview:phoneLbl];
     
-    controlX += controlW;
+    controlX = buttonInfo.frame.size.width - controlH*2;
     controlY = 15;
     UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlH, controlH)];
     arrowImg.image = [UIImage imageNamed:@"menu_icon_user_open"];
@@ -172,11 +171,8 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     cell.backgroundColor = self.backgroundColor;
     cell.textLabel.text = [self.titles objectAtIndex:indexPath.row];
     cell.textLabel.textColor = [UIColor blackColor];
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
 //    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
-    UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(170, 20, 20, 20)];
-    arrowImg.image = [UIImage imageNamed:@"menu_icon_user_open"];
-    [cell addSubview:arrowImg];
     
     return cell;
 }
