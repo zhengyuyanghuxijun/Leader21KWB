@@ -35,6 +35,8 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 
 @property (nonatomic, assign) BOOL isShowStuView;
 
+@property (nonatomic, assign) NSInteger num;
+
 @end
 
 @implementation HBStuManViewController
@@ -138,17 +140,15 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
         _tableView.delegate = self;
         _tableView.separatorStyle = NO;
         [self.view addSubview:_tableView];
+        
+        if (self.isShowStuView) {
+            CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50.0f);
+            _tableView.frame = rc;
+        }else{
+            CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50.0f - 60.0f);
+            _tableView.frame = rc;
+        }
     }
-    
-    if (self.isShowStuView) {
-        CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50.0f);
-        _tableView.frame = rc;
-    }else{
-        CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50.0f - 60.0f);
-        _tableView.frame = rc;
-    }
-    
-    [_tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -271,6 +271,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 
 - (void)requestStudentList
 {
+    [MBHudUtil showActivityView:nil inView:nil];
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
@@ -311,18 +312,21 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
                     [self addTableView];
                 }
             }
+            [MBHudUtil hideActivityView:nil];
         }];
     }
 }
 
 -(void)requestClassList
 {
+    [MBHudUtil showActivityView:nil inView:nil];
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
         [[HBServiceManager defaultManager] requestClassList:user completion:^(id responseObject, NSError *error) {
             NSArray *arr = [responseObject objectForKey:@"classes"];
             if (arr.count > 0) {
+                self.num = 0;
                 [self.groupArr removeAllObjects];
             }
             for (NSDictionary *dic in arr)
@@ -334,17 +338,19 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
                 NSTimeInterval interval = [[dic objectForKey:@"created_time"] doubleValue];
                 classEntity.createdTime = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
                 
-                [[HBServiceManager defaultManager] requestClassMember:user class_id: classEntity.classId completion:^(id responseObject, NSError *error) {
-                    NSArray *arr = [responseObject objectForKey:@"members"];
-                    classEntity.stuCount = arr.count;
-                    [_tableView reloadData];
-                }];
-                
                 [self.groupArr addObject:classEntity];
             }
             
-            if (self.groupArr.count > 0) {
-                [self addTableView];
+            for (HBClassEntity *classEntity in self.groupArr) {
+                [[HBServiceManager defaultManager] requestClassMember:user class_id: classEntity.classId completion:^(id responseObject, NSError *error) {
+                    self.num++;
+                    NSArray *arr = [responseObject objectForKey:@"members"];
+                    classEntity.stuCount = arr.count;
+                    if (self.num == self.groupArr.count) {
+                        [MBHudUtil hideActivityView:nil];
+                        [_tableView reloadData];
+                    }
+                }];
             }
         }];
     }
@@ -367,6 +373,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 #pragma mark - DissolveDelegate
 - (void)dissolveBtnPressed:(NSInteger)classId
 {
+    [MBHudUtil showActivityView:nil inView:nil];
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
@@ -381,6 +388,8 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
             }
             
             [self.groupArr removeObjectAtIndex:index];
+            [MBHudUtil hideActivityView:nil];
+            [self requestClassList];
             [self groupButtonPressed];
         }];
     }

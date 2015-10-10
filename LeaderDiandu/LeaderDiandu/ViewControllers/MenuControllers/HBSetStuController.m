@@ -201,8 +201,10 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
 
 - (void)quitGroupBtnPressed:(HBStudentEntity *)aStudentEntity
 {
+    [MBHudUtil showActivityView:nil inView:nil];
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
+        [MBHudUtil hideActivityView:nil];
         NSString *user = [dict objectForKey:@"name"];
         NSString *classIdStr = [NSString stringWithFormat:@"%ld", aStudentEntity.classId];
         NSString *studentIdStr = [NSString stringWithFormat:@"%ld", aStudentEntity.studentId];

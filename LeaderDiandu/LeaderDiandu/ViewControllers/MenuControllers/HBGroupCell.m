@@ -99,7 +99,6 @@
         self.cellGroupName.text = self.classEntity.name;
         self.cellLevel.text = @"等级";
         self.cellLevelNum.text = [NSString stringWithFormat:@"%ld", self.classEntity.booksetId];
-//        self.cellCount.text = [NSString stringWithFormat:@"%@"@"%d", @"人数", 0];
         self.cellTime.text = self.classEntity.createdTime;
         self.classId = self.classEntity.classId;
         self.cellCount.text = @"人数";

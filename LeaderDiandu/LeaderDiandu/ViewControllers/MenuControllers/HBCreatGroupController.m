@@ -72,11 +72,13 @@
 
 -(void)okButtonPressed
 {
+    [MBHudUtil showActivityView:nil inView:nil];
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
         [[HBServiceManager defaultManager] requestClassCreate:user name:self.nameTextField.text bookset_id:self.levelTextField.text completion:^(id responseObject, NSError *error) {
             [self.delegate creatGroupComplete];
+            [MBHudUtil hideActivityView:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }
