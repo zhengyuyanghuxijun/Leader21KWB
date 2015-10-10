@@ -162,11 +162,16 @@
         bgView.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.600];
         [[UIApplication sharedApplication].keyWindow addSubview:bgView];
         
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake((ScreenWidth - HHAlertSingleView_SIZE_WIDTH)/2, (ScreenHeight - HHAlertSingleView_SIZE_HEIGHT)/2 , HHAlertSingleView_SIZE_WIDTH, HHAlertSingleView_SIZE_HEIGHT)];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake((ScreenWidth - HHAlertSingleView_SIZE_WIDTH)/2, (ScreenHeight - HHAlertSingleView_SIZE_HEIGHT)/2 , HHAlertSingleView_SIZE_WIDTH, HHAlertSingleView_SIZE_HEIGHT + 40)];
         [tableView setBackgroundColor:[UIColor whiteColor]];
         
+        //这里准备跟UI要个图，回头替换一下
 //        UIView *view = [[UIView alloc] init];
 //        view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"subscription_desc_bg"]];
+//        tableView.backgroundView = view;
+        
+//        UIImageView *view = [[UIImageView alloc] initWithFrame:tableView.bounds];
+//        view.image = [UIImage imageNamed:@"subscription_desc_bg"];
 //        tableView.backgroundView = view;
         
         tableView.dataSource = self;
@@ -305,29 +310,36 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 60;
+    return 90;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] init];
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 220)/2, 15, 220, 45)];
-    [btn setBackgroundImage:[UIImage imageNamed:@"subscription_title_bg"] forState:UIControlStateNormal];
-    [btn setTitle:@"规则说明" forState:UIControlStateNormal];
-    [btn.titleLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];
-    [view addSubview:btn];
+    
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 220)/2, 25, 220, 45)];
+    imgView.image = [UIImage imageNamed:@"subscription_title_bg"];
+    [view addSubview:imgView];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 220)/2, 25 - 4, 220, 45)];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"规则说明";
+    label.font = [UIFont boldSystemFontOfSize:18.0f];
+    label.textColor = [UIColor whiteColor];
+    [view addSubview:label];
+    
     return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 60;
+    return 70;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] init];
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 150)/2, 10, 150, 40)];
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 150)/2, 12, 150, 40)];
     [btn setBackgroundImage:[UIImage imageNamed:@"subscription_know"] forState:UIControlStateNormal];
     [btn setTitle:@"我知道了" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(knowBtnPressed) forControlEvents:UIControlEventTouchUpInside];
