@@ -581,7 +581,7 @@
                     HBContentEntity *contentEntity = [[HBContentEntity alloc] initWithDictionary:dict];
                     [self.contentEntityArr addObject:contentEntity];
                 }
- 
+
                 /** type: 1 - 学生； 10 - 老师*/
                 if (userEntity.type == 1) {
                     //获取书本列表

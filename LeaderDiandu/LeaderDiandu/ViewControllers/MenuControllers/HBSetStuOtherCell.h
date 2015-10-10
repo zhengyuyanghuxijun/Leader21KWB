@@ -24,6 +24,7 @@
 @property (strong, nonatomic) UIImageView * cellHeadImage;
 @property (strong, nonatomic) UILabel *     cellName;
 @property (strong, nonatomic) UIButton *    cellselectedBtn;
+@property (strong, nonatomic) UIImageView * cellselectedImgView;
 
 @property (assign, nonatomic) BOOL checked;
 

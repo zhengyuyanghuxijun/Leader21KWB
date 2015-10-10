@@ -46,10 +46,13 @@
     [self addSubview:self.cellName];
     
     //选择按钮
-    self.cellselectedBtn = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 40, (70 - 20)/2, 20, 20)];
-    [self.cellselectedBtn setBackgroundImage:[UIImage imageNamed:@"selected_off"] forState:UIControlStateNormal];
+    self.cellselectedBtn = [[UIButton alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 70, 0, 70, 70)];
     [self.cellselectedBtn addTarget:self action:@selector(selectedBtnPressed) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.cellselectedBtn];
+    
+    self.cellselectedImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"selected_off"]];
+    self.cellselectedImgView.frame = CGRectMake((70-20)/2, (70-20)/2, 20, 20);
+    [self.cellselectedBtn addSubview:self.cellselectedImgView];
     
     UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 70 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
     seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
@@ -66,10 +69,10 @@
 {
     if (self.checked) {
         self.checked = NO;
-        [self.cellselectedBtn setBackgroundImage:[UIImage imageNamed:@"selected_off"] forState:UIControlStateNormal];
+        self.cellselectedImgView.image = [UIImage imageNamed:@"selected_off"];
     }else{
         self.checked = YES;
-        [self.cellselectedBtn setBackgroundImage:[UIImage imageNamed:@"selected_on"] forState:UIControlStateNormal];
+        self.cellselectedImgView.image = [UIImage imageNamed:@"selected_on"];
     }
     
     [self.delegate joinGroupBtnPressed:self.studentEntity checked:self.checked];
