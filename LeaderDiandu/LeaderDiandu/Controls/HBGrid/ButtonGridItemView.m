@@ -39,9 +39,8 @@
     self.levelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.levelButton.frame = CGRectMake((self.frame.size.width - levelButtonWith)/2, (self.frame.size.width - levelButtonWith)/2, levelButtonWith, levelButtonWith);
     //设置button为圆形
-    [self.levelButton.layer setMasksToBounds:YES];
-    [self.levelButton.layer setCornerRadius:levelButtonWith/2];
-    [self.levelButton setBackgroundColor:[UIColor lightGrayColor]];
+//    [self.levelButton.layer setMasksToBounds:YES];
+//    [self.levelButton.layer setCornerRadius:levelButtonWith/2];
     [self.levelButton.titleLabel setFont:[UIFont boldSystemFontOfSize:BUTTONFONTSIZE]];
     self.levelButton.enabled = NO;
     [self addSubview:self.levelButton];
@@ -53,14 +52,14 @@
                         index:(NSString *)index
 {
     if (isSubscribed) {
-        [self.levelButton setBackgroundColor:[UIColor blueColor]];
+        [self.levelButton setBackgroundImage:[UIImage imageNamed:@"subs-btn-slected"] forState:UIControlStateDisabled];
     }else if(isCurrentSelectIndex){
-        [self.levelButton setBackgroundColor:[UIColor grayColor]];
+        [self.levelButton setBackgroundImage:[UIImage imageNamed:@"subs-btn-pressed"] forState:UIControlStateDisabled];
     }else{
-        [self.levelButton setBackgroundColor:[UIColor lightGrayColor]];
+        [self.levelButton setBackgroundImage:[UIImage imageNamed:@"subs-btn-normal"] forState:UIControlStateDisabled];
     }
     
-    [self.levelButton setTitle:index forState:UIControlStateNormal];
+    [self.levelButton setTitle:index forState:UIControlStateDisabled];
 }
 
 @end

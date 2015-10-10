@@ -21,7 +21,9 @@
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
 
 #define HHAlertSingleView_SIZE_WIDTH (ScreenWidth - 20 - 20)
-#define HHAlertSingleView_SIZE_HEIGHT (360)
+#define HHAlertSingleView_SIZE_HEIGHT 360
+
+    static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
 
 @implementation HBRuleCell
 
@@ -116,8 +118,7 @@
     rc.size.height -= 30.0f;
     
     self.confirmButton = [[UIButton alloc] initWithFrame:rc];
-//    [self.confirmButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
-    [self.confirmButton setBackgroundColor:[UIColor greenColor]]; //先临时用这个颜色吧
+    [self.confirmButton setBackgroundImage:[UIImage imageNamed:@"green-normal"] forState:UIControlStateNormal];
     [self.confirmButton setTitle:@"确认订阅" forState:UIControlStateNormal];
     [self.confirmButton.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
     [self.confirmButton addTarget:self action:@selector(confirmButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -355,10 +356,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    HBRuleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"123"];
+    HBRuleCell *cell = [tableView dequeueReusableCellWithIdentifier:kHBRuleCellReuseId];
     if (!cell) {
-        cell = [[HBRuleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"123"];
+        cell = [[HBRuleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kHBRuleCellReuseId];
     }
     
     cell.contentLabel.text = [_ruleArr objectAtIndex:indexPath.row];
