@@ -164,6 +164,11 @@
         
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake((ScreenWidth - HHAlertSingleView_SIZE_WIDTH)/2, (ScreenHeight - HHAlertSingleView_SIZE_HEIGHT)/2 , HHAlertSingleView_SIZE_WIDTH, HHAlertSingleView_SIZE_HEIGHT)];
         [tableView setBackgroundColor:[UIColor whiteColor]];
+        
+//        UIView *view = [[UIView alloc] init];
+//        view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"subscription_desc_bg"]];
+//        tableView.backgroundView = view;
+        
         tableView.dataSource = self;
         tableView.delegate = self;
         tableView.separatorStyle = NO;
@@ -306,10 +311,10 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] init];
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 200)/2, 15, 200, 40)];
-    [btn setBackgroundImage:[UIImage imageNamed:@"menu_tag_uservip"] forState:UIControlStateNormal];
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 220)/2, 15, 220, 45)];
+    [btn setBackgroundImage:[UIImage imageNamed:@"subscription_title_bg"] forState:UIControlStateNormal];
     [btn setTitle:@"规则说明" forState:UIControlStateNormal];
-    [btn.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
+    [btn.titleLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];
     [view addSubview:btn];
     return view;
 }
@@ -323,7 +328,7 @@
 {
     UIView *view = [[UIView alloc] init];
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 150)/2, 10, 150, 40)];
-    [btn setBackgroundImage:[UIImage imageNamed:@"menu_tag_uservip"] forState:UIControlStateNormal];
+    [btn setBackgroundImage:[UIImage imageNamed:@"subscription_know"] forState:UIControlStateNormal];
     [btn setTitle:@"我知道了" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(knowBtnPressed) forControlEvents:UIControlEventTouchUpInside];
     [btn.titleLabel setFont:[UIFont boldSystemFontOfSize:16.0f]];
