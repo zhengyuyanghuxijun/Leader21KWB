@@ -8,6 +8,9 @@
 
 #import "DHSlideMenuViewController.h"
 #import "DHSlideMenuController.h"
+#import "TimeIntervalUtils.h"
+#import "HBUserEntity.h"
+#import "HBDataSaveManager.h"
 
 #define KTableHeaderHeight  150
 static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewControllerCellReuseId";
@@ -131,10 +134,11 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     
     UIColor *textColor = RGBCOLOR(93, 85, 95);
     UIFont *font = [UIFont systemFontOfSize:20];
+    float typeW = 70;
     controlX = 0;
     controlY = 0;
-    controlW = 100;
     controlH = 25;
+    controlW = buttonInfo.frame.size.width-controlH-typeW-10;
     UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     nameLbl.backgroundColor = [UIColor clearColor];
     nameLbl.textColor = textColor;
@@ -157,18 +161,37 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     arrowImg.image = [UIImage imageNamed:@"menu_icon_user_open"];
     [buttonInfo addSubview:arrowImg];
     
-    controlW = 100;
-    controlX = arrowX-controlW-5;
-    UILabel *typeLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-    typeLbl.font = [UIFont systemFontOfSize:16];
-    [buttonInfo addSubview:typeLbl];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity.type == 1) {
+        controlW = 70;
+        controlX = arrowX-controlW-5;
+        controlY = 0;
+        UILabel *typeLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+        typeLbl.font = [UIFont systemFontOfSize:16];
+        typeLbl.textAlignment = NSTextAlignmentCenter;
+        [self setTypeLblText:typeLbl];
+        [buttonInfo addSubview:typeLbl];
+    }
     
     return view;
 }
 
-- (void)setTypeLbl:(UILabel *)typeLbl
+- (void)setTypeLblText:(UILabel *)typeLbl
 {
-    
+    if (_headerVipTime == 0) {
+        typeLbl.text = @"普通用户";
+        typeLbl.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"studentmanage-bg-normal-user"]];
+    } else {
+        NSTimeInterval cur = [NSDate date].timeIntervalSince1970;
+        if (_headerVipTime < cur) {
+            //vip过期
+            typeLbl.text = @"VIP过期";
+            typeLbl.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"studentmanage-bg-vipover-user"]];
+        } else {
+            typeLbl.text = @"VIP用户";
+            typeLbl.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"studentmanage-bg-vip-user"]];
+        }
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
