@@ -158,6 +158,12 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     self.title = @"我的作业";
     
     [self addTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     [self requestTaskListOfStudent];
 }
 
@@ -197,6 +203,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
             [MBHudUtil hideActivityView:nil];
             if (responseObject) {
                 //学生获取作业列表成功
+                [self.taskEntityArr removeAllObjects];
                 NSArray *arr = [responseObject arrayForKey:@"exams"];
                 for (NSDictionary *dic in arr)
                 {
