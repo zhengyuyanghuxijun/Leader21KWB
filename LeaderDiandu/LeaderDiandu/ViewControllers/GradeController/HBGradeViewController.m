@@ -701,8 +701,24 @@
     //获取书本列表
     for (HBContentEntity *contentEntity in self.contentEntityArr) {
         if (contentEntity.bookId == currentID) {
+            
+            NSMutableArray *books = (NSMutableArray *)[contentEntity.books componentsSeparatedByString:@","];
+            NSArray *assigned_books = [contentEntity.assigned_books componentsSeparatedByString:@","];
+            for (NSString * content in assigned_books) {
+                [books addObject:content];
+            }
+            NSSet *set = [NSSet setWithArray:(NSArray *)books];
+            
+            NSMutableArray *sortArray = [[NSMutableArray alloc] initWithCapacity:1];
+            for (NSString * str in set) {
+                [sortArray addObject:str];
+            }
+            
+            NSArray *destArr = [sortArray sortedArrayUsingComparator:cmptr];
+            
+            NSString *destBooksStr = [destArr componentsJoinedByString:@","];
 
-            [LEADERSDK requestBookInfo:contentEntity.books onComplete:^(NSArray *booklist, NSInteger errorCode, NSString *errorMsg) {
+            [LEADERSDK requestBookInfo:destBooksStr onComplete:^(NSArray *booklist, NSInteger errorCode, NSString *errorMsg) {
                 
                 NSMutableArray *booklistTmp = [[NSMutableArray alloc] initWithCapacity:1];
                 for (BookEntity *entityTmp in booklist) {
