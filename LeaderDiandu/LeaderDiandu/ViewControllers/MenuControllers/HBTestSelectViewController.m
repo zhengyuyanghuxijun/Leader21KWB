@@ -16,6 +16,55 @@
 
 #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 
+@implementation HBTestSelectViewCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self)
+    {
+        [self initUI];
+    }
+    return self;
+}
+
+- (void) initUI
+{
+    //书皮
+    self.cellImgView = [[UIImageView alloc] init];
+    self.cellImgView.frame = CGRectMake(10, 10, 80, 100);
+    [self addSubview:self.cellImgView];
+    
+    //书名
+    self.cellContentLabel = [[UILabel alloc] init];
+    self.cellContentLabel.frame = CGRectMake(100, 0, ScreenWidth - 100, 100);
+    [self addSubview:self.cellContentLabel];
+    
+    UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 120 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
+    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    [self addSubview:seperatorLine];
+}
+
+-(void)updateFormData:(id)sender
+{
+    HBContentDetailEntity *contentDetailEntity = (HBContentDetailEntity*)sender;
+    
+    if (contentDetailEntity) {
+        NSString *fileIdStr = contentDetailEntity.FILE_ID;
+        fileIdStr = [fileIdStr lowercaseString];
+        NSString *urlStr = [NSString stringWithFormat:KHBBookImgFormatUrl, fileIdStr, fileIdStr];
+        [self.cellImgView setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"mainGrid_defaultBookCover"]];
+        
+        if ([[HBDataSaveManager defaultManager] showEnBookName]) {
+            self.cellContentLabel.text = contentDetailEntity.BOOK_TITLE;
+        }else{
+            self.cellContentLabel.text = contentDetailEntity.BOOK_TITLE_CN;
+        }
+    }
+}
+
+@end
+
 @interface HBTestSelectViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
     UITableView *_tableView;
@@ -99,31 +148,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KHBTestSelectViewControllerCellReuseId"];
+    HBTestSelectViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KHBTestSelectViewControllerCellReuseId"];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"KHBTestSelectViewControllerCellReuseId"];
+        cell = [[HBTestSelectViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"KHBTestSelectViewControllerCellReuseId"];
     }
     
     HBContentDetailEntity *contentDetailEntity = [self.testArray objectAtIndex:indexPath.row];
-    
-    NSString *fileIdStr = contentDetailEntity.FILE_ID;
-    fileIdStr = [fileIdStr lowercaseString];
-    NSString *urlStr = [NSString stringWithFormat:KHBBookImgFormatUrl, fileIdStr, fileIdStr];
-    [cell.imageView setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"mainGrid_defaultBookCover"]];
-    
-    if ([[HBDataSaveManager defaultManager] showEnBookName]) {
-        cell.textLabel.text = contentDetailEntity.BOOK_TITLE;
-    }else{
-        cell.textLabel.text = contentDetailEntity.BOOK_TITLE_CN;
-    }
-    
+
+    [cell updateFormData:contentDetailEntity];
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.textColor = [UIColor blackColor];
-    
-    UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 120 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
-    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
-    [cell addSubview:seperatorLine];
     
     return cell;
 }

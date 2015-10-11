@@ -16,6 +16,20 @@
 
 @end
 
+@interface HBTestSelectViewCell : UITableViewCell
+
+@property (strong, nonatomic) UIImageView * cellImgView;
+@property (strong, nonatomic) UILabel     * cellContentLabel;
+
+/**
+ *	@brief	更新表格内容
+ *	@param 	NSDictionary 内容字典
+ *  @retuan nil
+ */
+-(void)updateFormData:(id)sender;
+
+@end
+
 @interface HBTestSelectViewController : HBBaseViewController
 
 @property (nonatomic, assign)NSInteger bookset_id;
