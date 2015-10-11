@@ -133,6 +133,7 @@
 
 - (void)publishWorkButtonPressed:(id)sender
 {
+    [MBHudUtil showActivityView:nil inView:nil];
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
@@ -145,12 +146,12 @@
                     if (responseObject) {
                         NSDictionary *dict = responseObject;
                         if (dict[@"exam_id"]) {
-                            [MBHudUtil showTextView:@"布置作业成功" inView:nil];
+                            [self.navigationController popViewControllerAnimated:YES];
                         }
                     }
                 }];
             }else{
-                //组内人数为0，无法布置作业！！！
+                [MBHudUtil showTextView:@"该班级无成员，无法布置作业！" inView:nil];
             }
         }];
     }

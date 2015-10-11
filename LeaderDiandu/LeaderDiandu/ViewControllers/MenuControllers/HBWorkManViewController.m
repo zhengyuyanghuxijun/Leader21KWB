@@ -148,8 +148,6 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     
     self.navigationController.navigationBarHidden = NO;
     self.title = @"作业管理";
-
-    [self requestTaskListOfTeacher];
     
     CGRect rc = CGRectMake(10.0f, ScreenHeight - 50.0f, ScreenWidth - 10 - 10, 50.0f);
     self.assignWorkButton = [[UIButton alloc] initWithFrame:rc];
@@ -157,6 +155,13 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     [self.assignWorkButton setTitle:@"布置作业" forState:UIControlStateNormal];
     [self.assignWorkButton addTarget:self action:@selector(assignWorkButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.assignWorkButton];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    [self requestTaskListOfTeacher];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -193,11 +198,13 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
 
 -(void)requestTaskListOfTeacher
 {
+    [MBHudUtil showActivityView:nil inView:nil];
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     if (dict) {
         NSString *user = [dict objectForKey:@"name"];
         [[HBServiceManager defaultManager] requestTaskListOfTeacher:user from:0 count:100 completion:^(id responseObject, NSError *error) {
             if (responseObject) {
+                [self.manageTaskEntityArr removeAllObjects];
                 NSArray *arr = [responseObject objectForKey:@"exams"];
                 for (NSDictionary *dic in arr)
                 {
@@ -235,6 +242,7 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
                     [self addTableView];
                 }
             }
+            [MBHudUtil hideActivityView:nil];
         }];
     }
 }
