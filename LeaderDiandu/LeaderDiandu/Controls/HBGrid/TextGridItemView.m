@@ -279,7 +279,7 @@
     NSLog(@"download progress:%f", progress);
 
     [self.downloadButton setTitle:@"下载中" forState:UIControlStateNormal];
-    [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-downloading"] forState:UIControlStateNormal];
+    [self.downloadButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-test"] forState:UIControlStateNormal];
 
     self.progressView.hidden = NO;
     self.progressView.alpha = 1.0f;

@@ -145,6 +145,11 @@
 
 - (void)confirmButtonPressed:(id)sender
 {
+    if (self.currentSelectIndex + 1 == self.subscribeId) {
+        [MBHudUtil showTextView:@"请选择想订阅的群组" inView:nil];
+        return;
+    }
+    
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否要订阅该等级？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alertView.tag = 0;
     
@@ -198,8 +203,16 @@
             NSString *user = [dict objectForKey:@"name"];
             NSString *token = [dict objectForKey:@"token"];
             //获取用户当前订阅的套餐
+            [MBHudUtil showActivityView:nil inView:nil];
             [[HBServiceManager defaultManager] requestBooksetSub:user token:token bookset_id:[NSString stringWithFormat:@"%ld",(self.currentSelectIndex + 1)] months:@"1" completion:^(id responseObject, NSError *error) {
-                [self requestUserBookset];
+                if (responseObject) {
+                    NSString *result = [responseObject objectForKey:@"result"];
+                    if ([result isEqualToString:@"OK"]) {
+                        [self requestUserBookset];
+                    }else{
+                        [MBHudUtil showTextView:@"您已经被老师绑定群组，无法自行修改" inView:nil];
+                    }
+                }
             }];
         }
     }
@@ -285,12 +298,14 @@
         NSString *user = [dict objectForKey:@"name"];
         NSString *token = [dict objectForKey:@"token"];
         //获取用户当前订阅的套餐
+        [MBHudUtil showActivityView:nil inView:nil];
         [[HBServiceManager defaultManager] requestUserBookset:user token:token completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 //获取用户当前订阅的套餐成功
                 id tmp = [responseObject objectForKey:@"bookset_id"];
                 self.subscribeId = [tmp integerValue];
                 [_gridView reloadData];
+                [MBHudUtil hideActivityView:nil];
             }
         }];
     }
