@@ -37,6 +37,7 @@
 {
     HBGridView *_gridView;
     NSInteger currentID;
+    NSInteger subscribeId;
 }
 
 @property (nonatomic, strong)NSMutableArray *contentEntityArr;
@@ -60,6 +61,7 @@
         self.readProgressEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         self.taskEntityArr = [[NSMutableArray alloc] initWithCapacity:1];
         currentID = 1;
+        subscribeId = -1;
         
         //用户登录成功通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:kNotification_LoginSuccess object:nil];
@@ -81,11 +83,22 @@
     [self.readProgressEntityDic removeAllObjects];
     self.readProgressEntityDic = [[HBReadProgressDB sharedInstance] getAllReadprogressDic];
     
+    //只有学生有订阅等级，老师没有，初始化为-1
+    subscribeId = -1;
+    
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
         /** type: 1 - 学生； 10 - 老师*/
         if (userEntity.type == 1) {
             [_gridView setHeaderViewHidden:NO];
+            //获取用户当前订阅的套餐
+            [[HBServiceManager defaultManager] requestUserBookset:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+                if (responseObject) {
+                    //获取用户当前订阅的套餐成功
+                    id tmp = [responseObject objectForKey:@"bookset_id"];
+                    subscribeId = [tmp integerValue];
+                }
+            }];
             //学生获取作业列表
             [self requestTaskListOfStudent];
             //从服务器拉取套餐信息
@@ -329,7 +342,7 @@
 
     CGRect menuFrame = CGRectMake(ScreenWidth - 70, 70, 60, 50 * self.contentEntityArr.count);
 
-    [FTMenu showMenuWithFrame:menuFrame inView:self.navigationController.view menuItems:menuItems currentID:currentID];
+    [FTMenu showMenuWithFrame:menuFrame inView:self.navigationController.view menuItems:menuItems currentID:subscribeId];
 }
 
 - (void) pushMenuItem:(KxMenuItem *)sender
