@@ -73,7 +73,7 @@ static NSInteger pageCount = 3;
         [self addSubview:_pageControl];
         
         _enterButton = [[UIButton alloc] init];
-//        [_enterButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+        [_enterButton setBackgroundImage:[UIImage imageNamed:@"subscription_know"] forState:UIControlStateNormal];
 //        [_enterButton setTitle:@"立即体验" forState:UIControlStateNormal];
         [_enterButton addTarget:self action:@selector(enterButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         self.enterButton.hidden = YES;
