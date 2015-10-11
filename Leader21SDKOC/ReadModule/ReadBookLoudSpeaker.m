@@ -22,7 +22,7 @@
 {
     UIImage *btnImage = [UIImage imageNamed:@"sprite_20001"];
     UIButton *louderButton = [[UIButton alloc] init];
-    louderButton.frame = CGRectMake(point.x, point.y, btnImage.size.width, btnImage.size.height);
+    louderButton.frame = CGRectMake(point.x - 10, point.y, btnImage.size.width - 5, btnImage.size.height - 5);
     [louderButton setBackgroundImage:btnImage forState:UIControlStateNormal];
     [louderButton addTarget:self action:@selector(tapHandle:) forControlEvents:UIControlEventTouchUpInside];
     self.loudSpeakerTapBlock = loudSpeakerTapBlock;
