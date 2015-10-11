@@ -10,6 +10,7 @@
 
 @interface HBUserEntity : HBBaseEntity
 
+/** 1-普通用户；2-VIP用户；3-VIP过期用户 */
 @property (nonatomic, assign)NSInteger account_status;
 @property (nonatomic, assign)NSInteger userid;
 /** gender 性别， 1-男，2-女 */

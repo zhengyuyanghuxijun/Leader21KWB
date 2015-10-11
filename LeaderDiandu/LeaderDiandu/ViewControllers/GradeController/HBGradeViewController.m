@@ -28,6 +28,7 @@
 #import "LocalSettings.h"
 #import "TimeIntervalUtils.h"
 #import "HBTestWorkManager.h"
+#import "HBPayViewController.h"
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
 
@@ -536,6 +537,31 @@
 
     BookEntity *entity = arr[index];
     
+    //VIP书籍，需要提示用户
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        /** type: 1 - 学生； 10 - 老师*/
+        if (userEntity.type == 1) {
+            if ([[self.vipBookDic objectForKey:entity.bookId] isEqualToString:@"1"]) {
+                if (userEntity.account_status == 1) {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你尚未开通VIP，无权下载阅读此书，请开通VIP后再试。" delegate:self cancelButtonTitle:@"再等等" otherButtonTitles:@"现在激活", nil];
+                    alertView.tag = 0;
+                    
+                    [alertView show];
+                    
+                    return;
+                }else if(userEntity.account_status == 3){
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你的VIP已过期，无权下载阅读此书，请重新激活后再试。" delegate:self cancelButtonTitle:@"再等等" otherButtonTitles:@"现在激活", nil];
+                    alertView.tag = 0;
+                    
+                    [alertView show];
+                    
+                    return;
+                }
+            }
+        }
+    }
+    
     if([LEADERSDK isBookDownloading:entity]){
         //正在下载，不处理
     }else{
@@ -546,6 +572,17 @@
             [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
             itemView.bookDownloadUrl = entity.bookUrl;
         }
+    }
+}
+
+#pragma mark - actionSheetDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0){
+        
+    }else{
+        HBPayViewController *controller = [[HBPayViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:YES];
     }
 }
 
