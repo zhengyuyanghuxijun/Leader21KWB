@@ -81,6 +81,7 @@
 @property (strong, nonatomic) UILabel * bookNameLabel;
 @property (strong, nonatomic) UIButton * downloadButton;
 @property (strong, nonatomic) UIButton * bookCoverButton;
+@property (strong, nonatomic) UIImageView * isVipImg;
 
 @end
 
@@ -147,6 +148,11 @@
     [self.bookCoverButton addTarget:self action:@selector(bookCoverButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.bookCoverButton];
     
+    //是否VIP的标签
+    self.isVipImg = [[UIImageView alloc] init];
+    self.isVipImg.frame = CGRectMake(self.frame.size.width - 20 - 35, 3, 30, 30);
+    [self.bookCoverButton addSubview:self.isVipImg];
+    
     CGRect rect = CGRectMake(0, CGRectGetMaxY(self.bookCoverButton.frame) - 4, self.frame.size.width, 50);
     UIImageView *navView = [[UIImageView alloc] initWithFrame:rect];
     navView.image = [UIImage imageNamed:@"bookshelf-bg-shelf"];
@@ -206,6 +212,17 @@
         fileIdStr = [fileIdStr lowercaseString];
         NSString *urlStr = [NSString stringWithFormat:KHBBookImgFormatUrl, fileIdStr, fileIdStr];
         [self.bookCoverButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"mainGrid_defaultBookCover"]];
+    }
+    
+    //是否vip标识 1:vip 0:free
+    if ([dic objectForKey:TextGridItemView_isVip])
+    {
+        NSString *isVipStr = [dic objectForKey:TextGridItemView_isVip];
+        if ([isVipStr isEqualToString:@"1"]) {
+            [self.isVipImg setImage:[UIImage imageNamed:@"bookshelf-icon-vip"]];
+        }else{
+            [self.isVipImg setImage:[UIImage imageNamed:@"bookshelf-icon-free"]];
+        }
     }
 
     //刷新cell

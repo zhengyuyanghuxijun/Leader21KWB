@@ -45,6 +45,8 @@
 @property (nonatomic, strong)NSMutableDictionary *readProgressEntityDic;
 @property (nonatomic, strong)NSMutableArray *taskEntityArr;
 
+@property (nonatomic, strong)NSMutableDictionary *vipBookDic;
+
 @property (nonatomic, strong)UIButton *rightButton;
 
 @end
@@ -60,6 +62,7 @@
         self.contentDetailEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         self.readProgressEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         self.taskEntityArr = [[NSMutableArray alloc] initWithCapacity:1];
+        self.vipBookDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         currentID = 1;
         subscribeId = -1;
         
@@ -293,6 +296,19 @@
     }
     [self.contentDetailEntityDic removeAllObjects];
     [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+    
+    //筛选出free和vip的书籍 1:vip 0:free
+    HBContentEntity *contentEntity = [self.contentEntityArr objectAtIndex:currentID - 1];
+    NSArray *freeBooksArr = [contentEntity.free_books componentsSeparatedByString:@","];
+    [self.vipBookDic removeAllObjects];
+    for (BookEntity *bookEntity in booklist) {
+        if ([freeBooksArr containsObject:[NSString stringWithFormat:@"%@", bookEntity.bookId]]) {
+            [self.vipBookDic setObject:@"0" forKey:bookEntity.bookId];
+        }else{
+            [self.vipBookDic setObject:@"1" forKey:bookEntity.bookId];
+        }
+    }
+    
     [_gridView hideRefreshView];
     [self reloadGrid];
 }
@@ -469,8 +485,9 @@
     if ([[HBDataSaveManager defaultManager] showEnBookName]) {
         bookTitle = entity.bookTitle;
     }
+    
     NSDictionary * targetData = [[NSDictionary alloc]initWithObjectsAndKeys:
-                                 bookTitle, TextGridItemView_BookName,entity.fileId, TextGridItemView_BookCover, @"mainGrid_download", TextGridItemView_downloadState, nil];
+                                 bookTitle, TextGridItemView_BookName,entity.fileId, TextGridItemView_BookCover, @"mainGrid_download", TextGridItemView_downloadState, [self.vipBookDic objectForKey:entity.bookId], TextGridItemView_isVip, nil];
 
     [itemView updateFormData:targetData];
     
@@ -672,6 +689,18 @@
                 
                 [self.contentDetailEntityDic removeAllObjects];
                 [self.contentDetailEntityDic setObject:booklistTmp forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+                
+                //筛选出free和vip的书籍 1:vip 0:free
+                HBContentEntity *contentEntity = [self.contentEntityArr objectAtIndex:currentID - 1];
+                NSArray *freeBooksArr = [contentEntity.free_books componentsSeparatedByString:@","];
+                [self.vipBookDic removeAllObjects];
+                for (BookEntity *bookEntity in booklist) {
+                    if ([freeBooksArr containsObject:[NSString stringWithFormat:@"%@", bookEntity.bookId]]) {
+                        [self.vipBookDic setObject:@"0" forKey:bookEntity.bookId];
+                    }else{
+                        [self.vipBookDic setObject:@"1" forKey:bookEntity.bookId];
+                    }
+                }
                 
                 [_gridView hideRefreshView];
                 [self reloadGrid];

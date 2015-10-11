@@ -9,6 +9,7 @@
 #define TextGridItemView_downloadState          @"downloadState"
 #define TextGridItemView_BookName               @"bookName"
 #define TextGridItemView_BookCover              @"bookCover"
+#define TextGridItemView_isVip                  @"isVip"
 
 #import "HBGridItemView.h"
 #import "MBProgressHUD.h"
