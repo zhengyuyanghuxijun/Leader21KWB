@@ -356,8 +356,21 @@
     for (HBContentEntity *contentEntity in self.contentEntityArr) {
         if (contentEntity.bookId == currentID) {
             //根据套餐id返回该套餐对应的books字符串,转换为数组格式,便于操作
-            NSArray *booksIDsArr=[contentEntity.books componentsSeparatedByString:@","];
-            [self getContentDetailEntitys:booksIDsArr];
+            NSMutableArray *books = (NSMutableArray *)[contentEntity.books componentsSeparatedByString:@","];
+            NSArray *assigned_books = [contentEntity.assigned_books componentsSeparatedByString:@","];
+            for (NSString * content in assigned_books) {
+                [books addObject:content];
+            }
+            NSSet *set = [NSSet setWithArray:(NSArray *)books];
+            
+            NSMutableArray *sortArray = [[NSMutableArray alloc] initWithCapacity:1];
+            for (NSString * str in set) {
+                [sortArray addObject:str];
+            }
+            
+            NSArray *destArr = [sortArray sortedArrayUsingComparator:cmptr];
+            
+            [self getContentDetailEntitys:destArr];
         }
     }
 }
@@ -601,8 +614,21 @@
                     for (HBContentEntity *contentEntity in self.contentEntityArr) {
                         if (contentEntity.bookId == currentID) {
                             //根据套餐id返回该套餐对应的books字符串,转换为数组格式,便于操作
-                            NSArray *booksIDsArr=[contentEntity.books componentsSeparatedByString:@","];
-                            [self getContentDetailEntitys:booksIDsArr];
+                            NSMutableArray *books = (NSMutableArray *)[contentEntity.books componentsSeparatedByString:@","];
+                            NSArray *assigned_books = [contentEntity.assigned_books componentsSeparatedByString:@","];
+                            for (NSString * content in assigned_books) {
+                                [books addObject:content];
+                            }
+                            NSSet *set = [NSSet setWithArray:(NSArray *)books];
+                            
+                            NSMutableArray *sortArray = [[NSMutableArray alloc] initWithCapacity:1];
+                            for (NSString * str in set) {
+                                [sortArray addObject:str];
+                            }
+                            
+                            NSArray *destArr = [sortArray sortedArrayUsingComparator:cmptr];
+                            
+                            [self getContentDetailEntitys:destArr];
                         }
                     }
                 } else {
@@ -720,5 +746,16 @@
         }];
     }
 }
+
+NSComparator cmptr = ^(id obj1, id obj2){
+    if ([obj1 integerValue] > [obj2 integerValue]) {
+        return (NSComparisonResult)NSOrderedDescending;
+    }
+    
+    if ([obj1 integerValue] < [obj2 integerValue]) {
+        return (NSComparisonResult)NSOrderedAscending;
+    }
+    return (NSComparisonResult)NSOrderedSame;
+};
 
 @end
