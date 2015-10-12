@@ -58,6 +58,7 @@
 		0D7A768F1B91E33900BC50A0 /* HBContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A768E1B91E33900BC50A0 /* HBContentManager.m */; };
 		0D7A76921B92064100BC50A0 /* HBBaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A76911B92064100BC50A0 /* HBBaseEntity.m */; };
 		0D7A76951B92176C00BC50A0 /* HBUserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A76941B92176C00BC50A0 /* HBUserEntity.m */; };
+		0D8C27C61BCBABE8008F2F9F /* HBOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8C27C51BCBABE8008F2F9F /* HBOptionButton.m */; };
 		0D8F03421BB9857F00D64D48 /* HBScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8F03411BB9857F00D64D48 /* HBScoreView.m */; };
 		0D9E04FD1BB52B1500055203 /* HBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9E04FC1BB52B1500055203 /* HBOptionView.m */; };
 		0DAAF4041B8D5F8900078285 /* UIViewController+AddBackBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAF4031B8D5F8900078285 /* UIViewController+AddBackBtn.m */; };
@@ -310,6 +311,8 @@
 		0D7A76911B92064100BC50A0 /* HBBaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBaseEntity.m; sourceTree = "<group>"; };
 		0D7A76931B92176C00BC50A0 /* HBUserEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBUserEntity.h; sourceTree = "<group>"; };
 		0D7A76941B92176C00BC50A0 /* HBUserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBUserEntity.m; sourceTree = "<group>"; };
+		0D8C27C41BCBABE8008F2F9F /* HBOptionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBOptionButton.h; sourceTree = "<group>"; };
+		0D8C27C51BCBABE8008F2F9F /* HBOptionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBOptionButton.m; sourceTree = "<group>"; };
 		0D8F03401BB9857F00D64D48 /* HBScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBScoreView.h; sourceTree = "<group>"; };
 		0D8F03411BB9857F00D64D48 /* HBScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreView.m; sourceTree = "<group>"; };
 		0D9E04FB1BB52B1500055203 /* HBOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBOptionView.h; sourceTree = "<group>"; };
@@ -610,6 +613,8 @@
 				0D3F6D1B1BAEA41A005B4358 /* HBMyWorkView.m */,
 				0D9E04FB1BB52B1500055203 /* HBOptionView.h */,
 				0D9E04FC1BB52B1500055203 /* HBOptionView.m */,
+				0D8C27C41BCBABE8008F2F9F /* HBOptionButton.h */,
+				0D8C27C51BCBABE8008F2F9F /* HBOptionButton.m */,
 			);
 			name = HBMyWorkViewControllers;
 			sourceTree = "<group>";
@@ -1509,6 +1514,7 @@
 				18C316901BA092B1004F716E /* HBClassEntity.m in Sources */,
 				0D7A76921B92064100BC50A0 /* HBBaseEntity.m in Sources */,
 				0D3F6D1C1BAEA41A005B4358 /* HBMyWorkView.m in Sources */,
+				0D8C27C61BCBABE8008F2F9F /* HBOptionButton.m in Sources */,
 				18C316841BA07A9D004F716E /* HBPublishWorkViewController.m in Sources */,
 				0DBE35CB1B8CD7BE00179237 /* HBForgetPwdViewController.m in Sources */,
 				18DF0ED21BCB555100376686 /* HBBillViewController.m in Sources */,

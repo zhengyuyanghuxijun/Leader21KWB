@@ -9,6 +9,7 @@
 #import "HBMyWorkView.h"
 #import "HBTestWorkManager.h"
 #import "HBOptionView.h"
+#import "HBOptionButton.h"
 #import "MBHudUtil.h"
 #import <AVFoundation/AVAudioPlayer.h>
 
@@ -26,7 +27,7 @@ typedef enum : NSUInteger {
     HBSelectionTypeText4,
 } HBSelectionType;
 
-@interface HBMyWorkView () <HBOptionViewDelegate, AVAudioPlayerDelegate>
+@interface HBMyWorkView () <HBOptionViewDelegate, HBOptionButtonDelegate, AVAudioPlayerDelegate>
 {
     UILabel *_titleLabel;
     UILabel *_descLabel;
@@ -72,7 +73,7 @@ typedef enum : NSUInteger {
     float controlX = 20;
     float controlY = 0;
     float controlW = frame.size.width - controlX*2;
-    float controlH = 250;
+    float controlH = 220;
     [self initQuestionView:CGRectMake(controlX, controlY, controlW, controlH)];
     
     controlH = 40;
@@ -124,8 +125,8 @@ typedef enum : NSUInteger {
     [_questionView addSubview:_descLabel];
 
     controlY += controlH + 10;
-    controlX += (controlW - 100) / 2;
-    controlW = controlH = 100;
+    controlX += (controlW - 80) / 2;
+    controlW = controlH = 80;
     _descButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     [_descButton addTarget:self action:@selector(voiceBtnTouched:) forControlEvents:UIControlEventTouchUpInside];
     [_questionView addSubview:_descButton];
@@ -144,8 +145,8 @@ typedef enum : NSUInteger {
         }
     } else {
         CGRect rect = _questionView.frame;
-        float selY = CGRectGetMaxY(rect) + 28;
-        float controlH = CGRectGetMinY(_finishButton.frame) - selY - 28;
+        float selY = CGRectGetMaxY(rect);
+        float controlH = CGRectGetMinY(_finishButton.frame) - selY;
         _selectionView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(rect), selY, CGRectGetWidth(rect), controlH)];
         [self addSubview:_selectionView];
     }
@@ -157,7 +158,7 @@ typedef enum : NSUInteger {
     float controlY = (frame.size.height-controlH) / 2;
     NSInteger count = [optionArray count];
     if (count == 4) {
-        controlY = (frame.size.height-controlH*2-5) / 2;
+        controlY = (frame.size.height-controlH*2-20) / 2;
     }
     for (NSInteger i=0; i<count; i++) {
         id obj = optionArray[i];
@@ -204,16 +205,14 @@ typedef enum : NSUInteger {
 
 - (void)createSelectionButton:(CGRect)frame tag:(NSInteger)tag title:(NSString *)title
 {
-    UIButton *button = [[UIButton alloc] initWithFrame:frame];
+    HBOptionButton *button = [[HBOptionButton alloc] initWithFrame:frame title:title];
     button.tag = tag;
-    [button setTitle:title forState:UIControlStateNormal];
-    button.titleLabel.numberOfLines = 0;
-    button.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-normal"] forState:UIControlStateNormal];
-    [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-press"] forState:UIControlStateHighlighted];
-    [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-selected"] forState:UIControlStateSelected];
-    [button setTitleColor:[UIColor colorWithHex:0xff8903] forState:UIControlStateNormal];
+    button.delegate = self;
     [button addTarget:self action:@selector(selectionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [button setTitle:title forState:UIControlStateNormal];
+//    button.titleLabel.numberOfLines = 0;
+//    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
     [_selectionView addSubview:button];
 }
 
@@ -387,7 +386,7 @@ typedef enum : NSUInteger {
     }
 }
 
-- (void)selectionBtnAction:(id)sender
+- (void)setOptionButtonSelected:(id)sender
 {
     isOptionSelected = NO;
     NSInteger i = 0;

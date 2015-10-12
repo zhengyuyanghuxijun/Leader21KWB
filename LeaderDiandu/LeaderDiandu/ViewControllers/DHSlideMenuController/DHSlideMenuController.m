@@ -69,11 +69,6 @@ static float canTouchAreaWidth = 40;
     [super viewDidLoad];
     baseView = self.view;
     self.needSwipeShowMenu = YES;
-    
-    if ([_leftViewController isKindOfClass:[DHSlideMenuViewController class]]) {
-        DHSlideMenuViewController *controller = (DHSlideMenuViewController *)_leftViewController;
-        controller.viewWidth = _leftViewShowWidth;
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -84,6 +79,11 @@ static float canTouchAreaWidth = 40;
     if (isInited) {
         [self resetCurrentViewToMainViewController];
         isInited = NO;
+    }
+    
+    if ([_leftViewController isKindOfClass:[DHSlideMenuViewController class]]) {
+        DHSlideMenuViewController *controller = (DHSlideMenuViewController *)_leftViewController;
+        controller.viewWidth = _leftViewShowWidth;
     }
 }
 
