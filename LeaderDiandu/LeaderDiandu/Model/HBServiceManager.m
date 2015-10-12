@@ -764,4 +764,27 @@
     [self Post:@"/api/order/list" dict:dicInfo block:receivedBlock];
 }
 
+/**
+ *  用户通过VIP码付费
+ *
+ *  @param user             用户名
+ *  @param vip_code         VIP码
+ *  @param product          一个固定值
+ *  @param receivedBlock    回调Block
+ */
+- (void)requestVipOrder:(NSString *)user vip_code:(NSString *)vip_code product:(NSString *)product completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:user     forKey:@"user"];
+    [dicInfo setObject:vip_code     forKey:@"vip_code"];
+    [dicInfo setObject:product     forKey:@"product"];
+    
+    //    if (_receivedBlock) {
+    //        return;
+    //    }
+    
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/order/vip/create" dict:dicInfo block:receivedBlock];
+}
+
 @end

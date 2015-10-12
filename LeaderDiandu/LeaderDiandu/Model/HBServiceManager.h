@@ -483,5 +483,14 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  */
 - (void)requestBillList:(NSString *)user from_time:(NSString *)from_time count:(NSInteger)count completion:(HBServiceReceivedBlock)receivedBlock;
 
+/**
+ *  用户通过VIP码付费
+ *
+ *  @param user             用户名
+ *  @param vip_code         VIP码
+ *  @param product          一个固定值
+ *  @param receivedBlock    回调Block
+ */
+- (void)requestVipOrder:(NSString *)user vip_code:(NSString *)vip_code product:(NSString *)product completion:(HBServiceReceivedBlock)receivedBlock;
 
 @end

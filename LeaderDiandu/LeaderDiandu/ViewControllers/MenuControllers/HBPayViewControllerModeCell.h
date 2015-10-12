@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol HBPayCellCheckedDelegate <NSObject>
+@protocol HBPayCellChangeDelegate <NSObject>
 
 - (void)payCellChecked:(NSString *)cellText;
+- (void)textFieldDidChange:(NSString *)str;
 
 @end
 
@@ -26,7 +27,7 @@
 @property (assign, nonatomic) BOOL checked;
 @property (assign, nonatomic) BOOL showModeText;
 
-@property (weak, nonatomic) id<HBPayCellCheckedDelegate> delegate;
+@property (weak, nonatomic) id<HBPayCellChangeDelegate> delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier showModeText:(BOOL)showModeText;
 

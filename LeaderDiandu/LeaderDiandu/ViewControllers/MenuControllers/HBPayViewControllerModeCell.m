@@ -43,6 +43,7 @@
         
         self.VIPTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, 250, 30)];
         self.VIPTextField.placeholder = @"VIP码";
+        [self.VIPTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         [editBg addSubview:self.VIPTextField];
     }
     
@@ -93,6 +94,13 @@
 -(void)selectedBtnPress
 {
     [self.delegate payCellChecked:self.checkedName];
+}
+
+- (void)textFieldDidChange:(id) sender {
+    UITextField *field = (UITextField *)sender;
+    NSLog(@"%@",[field text]);
+    
+    [self.delegate textFieldDidChange:[field text]];
 }
 
 @end

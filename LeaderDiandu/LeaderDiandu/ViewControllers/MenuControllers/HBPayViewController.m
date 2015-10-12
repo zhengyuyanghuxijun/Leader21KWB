@@ -10,13 +10,16 @@
 #import "HBPayViewControllerMoneyCell.h"
 #import "HBPayViewControllerModeCell.h"
 #import "HBBillViewController.h"
+#import "HBServiceManager.h"
+#import "HBDataSaveManager.h"
 
 static NSString * const KHBPayViewControllerMoneyCellReuseId = @"KHBPayViewControllerMoneyCellReuseId";
 static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewControllerCellModeReuseId";
 
-@interface HBPayViewController ()<UITableViewDataSource, UITableViewDelegate, HBPayCellCheckedDelegate>
+@interface HBPayViewController ()<UITableViewDataSource, UITableViewDelegate, HBPayCellChangeDelegate>
 {
     UITableView *_tableView;
+    NSString *_textFieldStr;
 }
 
 @property (nonatomic, strong) UIButton* payButton;
@@ -86,7 +89,23 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     }else if([checkedStr isEqualToString:@"pay-icn-wechat"]){ //微信支付
         [MBHudUtil showTextView:@"暂不支持微信支付，敬请期待" inView:nil];
     }else{ //VIP码
-        
+        [self requestVipOrder];
+    }
+}
+
+-(void)requestVipOrder
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        [MBHudUtil showActivityView:nil inView:nil];
+        [[HBServiceManager defaultManager] requestVipOrder:userEntity.name vip_code:_textFieldStr product:@"kwb0001" completion:^(id responseObject, NSError *error) {
+//            [MBHudUtil hideActivityView:nil];
+            if([[responseObject objectForKey:@"result"] isEqualToString:@"OK"]){
+                [MBHudUtil showTextViewAfter:@"VIP码充值成功"];
+            }else{
+                [MBHudUtil showTextViewAfter:@"VIP码充值失败"];
+            }
+        }];
     }
 }
 
@@ -179,8 +198,14 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 
 -(void)payCellChecked:(NSString *)cellText
 {
+    _textFieldStr = @"";
     [self.payModeDic setObject:cellText forKey:@"checked"];
     [_tableView reloadData];
+}
+
+- (void)textFieldDidChange:(NSString *)str
+{
+    _textFieldStr = str;
 }
 
 -(void)rightButtonPressed
