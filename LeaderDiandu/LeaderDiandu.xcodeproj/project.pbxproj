@@ -190,6 +190,7 @@
 		18D3251A1BB8275100904FA6 /* hbreadprogress.db in Resources */ = {isa = PBXBuildFile; fileRef = 18D325191BB8275100904FA6 /* hbreadprogress.db */; };
 		18DF0ED21BCB555100376686 /* HBBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF0ED11BCB555100376686 /* HBBillViewController.m */; };
 		18DF0ED61BCB588E00376686 /* HBBillViewControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF0ED51BCB588E00376686 /* HBBillViewControllerCell.m */; };
+		18DF0EDA1BCB9FBC00376686 /* HBBillEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF0ED91BCB9FBC00376686 /* HBBillEntity.m */; };
 		18E57D5F1BA52AA600198BE9 /* hbcontentlist.db in Resources */ = {isa = PBXBuildFile; fileRef = 18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */; };
 		18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D621BA52AC400198BE9 /* HBContentListDB.m */; };
 		18E57D661BA5520900198BE9 /* HBTestSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D651BA5520900198BE9 /* HBTestSelectViewController.m */; };
@@ -521,6 +522,8 @@
 		18DF0ED11BCB555100376686 /* HBBillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBillViewController.m; sourceTree = "<group>"; };
 		18DF0ED41BCB588E00376686 /* HBBillViewControllerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBBillViewControllerCell.h; sourceTree = "<group>"; };
 		18DF0ED51BCB588E00376686 /* HBBillViewControllerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBillViewControllerCell.m; sourceTree = "<group>"; };
+		18DF0ED81BCB9FBC00376686 /* HBBillEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBBillEntity.h; sourceTree = "<group>"; };
+		18DF0ED91BCB9FBC00376686 /* HBBillEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBillEntity.m; sourceTree = "<group>"; };
 		18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbcontentlist.db; sourceTree = "<group>"; };
 		18E57D611BA52AC400198BE9 /* HBContentListDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentListDB.h; sourceTree = "<group>"; };
 		18E57D621BA52AC400198BE9 /* HBContentListDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentListDB.m; sourceTree = "<group>"; };
@@ -898,46 +901,9 @@
 			isa = PBXGroup;
 			children = (
 				0DE611411B9332DA0001C763 /* HBModelConst.h */,
-				0DD214631B95568E009E3DB9 /* HBDataSaveManager.h */,
-				0DD214641B95568E009E3DB9 /* HBDataSaveManager.m */,
-				0DB537301B8F70E80023A3F7 /* HBHTTPBaseRequest.h */,
-				0DB537311B8F70E80023A3F7 /* HBHTTPBaseRequest.m */,
-				0D018FEF1B96F67500A92F59 /* HBContentBaseRequest.h */,
-				0D018FF01B96F67500A92F59 /* HBContentBaseRequest.m */,
-				0DB537331B8F78AF0023A3F7 /* HBServiceManager.h */,
-				0DB537341B8F78AF0023A3F7 /* HBServiceManager.m */,
-				0D7A768D1B91E33900BC50A0 /* HBContentManager.h */,
-				0D7A768E1B91E33900BC50A0 /* HBContentManager.m */,
-				0D3F6D0C1BADA391005B4358 /* HBTestWorkManager.h */,
-				0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */,
-				0D7A76901B92064100BC50A0 /* HBBaseEntity.h */,
-				0D7A76911B92064100BC50A0 /* HBBaseEntity.m */,
-				0D7A76931B92176C00BC50A0 /* HBUserEntity.h */,
-				0D7A76941B92176C00BC50A0 /* HBUserEntity.m */,
-				181456DB1B96D9DD003CCD6C /* HBContentEntity.h */,
-				181456DC1B96D9DD003CCD6C /* HBContentEntity.m */,
-				181456DE1B96E483003CCD6C /* HBContentDetailEntity.h */,
-				181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */,
-				189C0F5C1BB5776300DD39C0 /* HBReadprogressEntity.h */,
-				189C0F5D1BB5776300DD39C0 /* HBReadprogressEntity.m */,
-				1823061E1B9B300300A8E146 /* HBTaskEntity.h */,
-				1823061F1B9B300300A8E146 /* HBTaskEntity.m */,
-				1898BCEA1B9DA7ED00FD9A11 /* HBManageTaskEntity.h */,
-				1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */,
-				18C650001B9DF1CA0040E349 /* HBScoreEntity.h */,
-				18C650011B9DF1CA0040E349 /* HBScoreEntity.m */,
-				189719DA1B9F3405006F42A2 /* HBStudentEntity.h */,
-				189719DB1B9F3405006F42A2 /* HBStudentEntity.m */,
-				18C3168E1BA092B1004F716E /* HBClassEntity.h */,
-				18C3168F1BA092B1004F716E /* HBClassEntity.m */,
-				1864359A1BC546440068E73E /* HBSystemMsgEntity.h */,
-				1864359B1BC546440068E73E /* HBSystemMsgEntity.m */,
-				181E307E1BA2C28600BBA92F /* HBContentDetailDB.h */,
-				181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */,
-				18E57D611BA52AC400198BE9 /* HBContentListDB.h */,
-				18E57D621BA52AC400198BE9 /* HBContentListDB.m */,
-				18D325151BB820EA00904FA6 /* HBReadProgressDB.h */,
-				18D325161BB820EA00904FA6 /* HBReadProgressDB.m */,
+				18DF0EDE1BCBA03A00376686 /* HBModelManager */,
+				18DF0EDC1BCB9FE900376686 /* HBModelEntity */,
+				18DF0EDD1BCBA01400376686 /* HBModelDB */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1176,6 +1142,69 @@
 			name = HBWorkManViewControllers;
 			sourceTree = "<group>";
 		};
+		18DF0EDC1BCB9FE900376686 /* HBModelEntity */ = {
+			isa = PBXGroup;
+			children = (
+				0D7A76901B92064100BC50A0 /* HBBaseEntity.h */,
+				0D7A76911B92064100BC50A0 /* HBBaseEntity.m */,
+				0D7A76931B92176C00BC50A0 /* HBUserEntity.h */,
+				0D7A76941B92176C00BC50A0 /* HBUserEntity.m */,
+				181456DB1B96D9DD003CCD6C /* HBContentEntity.h */,
+				181456DC1B96D9DD003CCD6C /* HBContentEntity.m */,
+				181456DE1B96E483003CCD6C /* HBContentDetailEntity.h */,
+				181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */,
+				189C0F5C1BB5776300DD39C0 /* HBReadprogressEntity.h */,
+				189C0F5D1BB5776300DD39C0 /* HBReadprogressEntity.m */,
+				1823061E1B9B300300A8E146 /* HBTaskEntity.h */,
+				1823061F1B9B300300A8E146 /* HBTaskEntity.m */,
+				1898BCEA1B9DA7ED00FD9A11 /* HBManageTaskEntity.h */,
+				1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */,
+				18C650001B9DF1CA0040E349 /* HBScoreEntity.h */,
+				18C650011B9DF1CA0040E349 /* HBScoreEntity.m */,
+				189719DA1B9F3405006F42A2 /* HBStudentEntity.h */,
+				189719DB1B9F3405006F42A2 /* HBStudentEntity.m */,
+				18C3168E1BA092B1004F716E /* HBClassEntity.h */,
+				18C3168F1BA092B1004F716E /* HBClassEntity.m */,
+				1864359A1BC546440068E73E /* HBSystemMsgEntity.h */,
+				1864359B1BC546440068E73E /* HBSystemMsgEntity.m */,
+				18DF0ED81BCB9FBC00376686 /* HBBillEntity.h */,
+				18DF0ED91BCB9FBC00376686 /* HBBillEntity.m */,
+			);
+			name = HBModelEntity;
+			sourceTree = "<group>";
+		};
+		18DF0EDD1BCBA01400376686 /* HBModelDB */ = {
+			isa = PBXGroup;
+			children = (
+				181E307E1BA2C28600BBA92F /* HBContentDetailDB.h */,
+				181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */,
+				18E57D611BA52AC400198BE9 /* HBContentListDB.h */,
+				18E57D621BA52AC400198BE9 /* HBContentListDB.m */,
+				18D325151BB820EA00904FA6 /* HBReadProgressDB.h */,
+				18D325161BB820EA00904FA6 /* HBReadProgressDB.m */,
+			);
+			name = HBModelDB;
+			sourceTree = "<group>";
+		};
+		18DF0EDE1BCBA03A00376686 /* HBModelManager */ = {
+			isa = PBXGroup;
+			children = (
+				0DD214631B95568E009E3DB9 /* HBDataSaveManager.h */,
+				0DD214641B95568E009E3DB9 /* HBDataSaveManager.m */,
+				0DB537301B8F70E80023A3F7 /* HBHTTPBaseRequest.h */,
+				0DB537311B8F70E80023A3F7 /* HBHTTPBaseRequest.m */,
+				0D018FEF1B96F67500A92F59 /* HBContentBaseRequest.h */,
+				0D018FF01B96F67500A92F59 /* HBContentBaseRequest.m */,
+				0DB537331B8F78AF0023A3F7 /* HBServiceManager.h */,
+				0DB537341B8F78AF0023A3F7 /* HBServiceManager.m */,
+				0D7A768D1B91E33900BC50A0 /* HBContentManager.h */,
+				0D7A768E1B91E33900BC50A0 /* HBContentManager.m */,
+				0D3F6D0C1BADA391005B4358 /* HBTestWorkManager.h */,
+				0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */,
+			);
+			name = HBModelManager;
+			sourceTree = "<group>";
+		};
 		18E57D681BA5B1CC00198BE9 /* HBStuManViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1404,6 +1433,7 @@
 				186435A11BC54A2F0068E73E /* HBMessageViewCell.m in Sources */,
 				18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */,
 				0DBE35351B8CB8B500179237 /* DataCheckUtil.m in Sources */,
+				18DF0EDA1BCB9FBC00376686 /* HBBillEntity.m in Sources */,
 				0DB537271B8F5DEE0023A3F7 /* AFHTTPRequestOperationManager.m in Sources */,
 				0DBE35D21B8CD87900179237 /* HBNTextField.m in Sources */,
 				0D3F6D0E1BADA391005B4358 /* HBTestWorkManager.m in Sources */,

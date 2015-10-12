@@ -473,5 +473,15 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  */
 - (void)requestSystemMsg:(NSString *)user token:(NSString *)token from_time:(NSString *)from_time completion:(HBServiceReceivedBlock)receivedBlock;
 
+/**
+ *  用户获取订单记录
+ *
+ *  @param user             用户名
+ *  @param from_time        为起始时间，单位为秒。
+ *  @param count            每次列表数目
+ *  @param receivedBlock    回调Block
+ */
+- (void)requestBillList:(NSString *)user from_time:(NSString *)from_time count:(NSInteger)count completion:(HBServiceReceivedBlock)receivedBlock;
+
 
 @end

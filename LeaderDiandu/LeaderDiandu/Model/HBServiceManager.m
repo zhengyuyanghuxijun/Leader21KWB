@@ -741,4 +741,27 @@
     [self Post:@"/api/msg/list" dict:dicInfo block:receivedBlock];
 }
 
+/**
+ *  用户获取订单记录
+ *
+ *  @param user             用户名
+ *  @param from_time        为起始时间，单位为秒。
+ *  @param count            每次列表数目
+ *  @param receivedBlock    回调Block
+ */
+- (void)requestBillList:(NSString *)user from_time:(NSString *)from_time count:(NSInteger)count completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:user     forKey:@"user"];
+    [dicInfo setObject:from_time     forKey:@"from_time"];
+    [dicInfo setObject:@(count)     forKey:@"count"];
+    
+    //    if (_receivedBlock) {
+    //        return;
+    //    }
+    
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/order/list" dict:dicInfo block:receivedBlock];
+}
+
 @end
