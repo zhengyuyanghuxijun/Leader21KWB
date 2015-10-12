@@ -9,6 +9,7 @@
 #import "HBPayViewController.h"
 #import "HBPayViewControllerMoneyCell.h"
 #import "HBPayViewControllerModeCell.h"
+#import "HBBillViewController.h"
 
 static NSString * const KHBPayViewControllerMoneyCellReuseId = @"KHBPayViewControllerMoneyCellReuseId";
 static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewControllerCellModeReuseId";
@@ -50,12 +51,16 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     rc.size.height -= 30.0f;
     
     self.payButton = [[UIButton alloc] initWithFrame:rc];
-    [self.payButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+    [self.payButton setBackgroundImage:[UIImage imageNamed:@"green-normal"] forState:UIControlStateNormal];
     [self.payButton setTitle:@"支付" forState:UIControlStateNormal];
     [self.payButton addTarget:self action:@selector(payButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:self.payButton];
     
     _tableView.tableFooterView = view;
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"账单" style:UIBarButtonItemStyleDone target:self action:@selector(rightButtonPressed)];
+    [rightButton setTintColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = rightButton;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,7 +80,14 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 
 -(void)payButtonPressed
 {
-    
+    NSString *checkedStr = [self.payModeDic objectForKey:@"checked"];
+    if ([checkedStr isEqualToString:@"pay-icn-alipay"]) { //支付宝支付
+        
+    }else if([checkedStr isEqualToString:@"pay-icn-wechat"]){ //微信支付
+        [MBHudUtil showTextView:@"暂不支持微信支付，敬请期待" inView:nil];
+    }else{ //VIP码
+        
+    }
 }
 
 #pragma mark - Table view data source
@@ -169,6 +181,12 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 {
     [self.payModeDic setObject:cellText forKey:@"checked"];
     [_tableView reloadData];
+}
+
+-(void)rightButtonPressed
+{
+    HBBillViewController *vc = [[HBBillViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

@@ -85,6 +85,7 @@
     if ([checkedName isEqualToString:@"pay-icn-voucher"]) {
         [self.VIPTextField setEnabled:YES];
     }else{
+        [self.VIPTextField setText:@""];
         [self.VIPTextField setEnabled:NO];
     }
 }

@@ -188,6 +188,8 @@
 		18C650021B9DF1CA0040E349 /* HBScoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C650011B9DF1CA0040E349 /* HBScoreEntity.m */; };
 		18D325171BB820EA00904FA6 /* HBReadProgressDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D325161BB820EA00904FA6 /* HBReadProgressDB.m */; };
 		18D3251A1BB8275100904FA6 /* hbreadprogress.db in Resources */ = {isa = PBXBuildFile; fileRef = 18D325191BB8275100904FA6 /* hbreadprogress.db */; };
+		18DF0ED21BCB555100376686 /* HBBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF0ED11BCB555100376686 /* HBBillViewController.m */; };
+		18DF0ED61BCB588E00376686 /* HBBillViewControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF0ED51BCB588E00376686 /* HBBillViewControllerCell.m */; };
 		18E57D5F1BA52AA600198BE9 /* hbcontentlist.db in Resources */ = {isa = PBXBuildFile; fileRef = 18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */; };
 		18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D621BA52AC400198BE9 /* HBContentListDB.m */; };
 		18E57D661BA5520900198BE9 /* HBTestSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D651BA5520900198BE9 /* HBTestSelectViewController.m */; };
@@ -515,6 +517,10 @@
 		18D325151BB820EA00904FA6 /* HBReadProgressDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBReadProgressDB.h; sourceTree = "<group>"; };
 		18D325161BB820EA00904FA6 /* HBReadProgressDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBReadProgressDB.m; sourceTree = "<group>"; };
 		18D325191BB8275100904FA6 /* hbreadprogress.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbreadprogress.db; sourceTree = "<group>"; };
+		18DF0ED01BCB555100376686 /* HBBillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBBillViewController.h; sourceTree = "<group>"; };
+		18DF0ED11BCB555100376686 /* HBBillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBillViewController.m; sourceTree = "<group>"; };
+		18DF0ED41BCB588E00376686 /* HBBillViewControllerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBBillViewControllerCell.h; sourceTree = "<group>"; };
+		18DF0ED51BCB588E00376686 /* HBBillViewControllerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBillViewControllerCell.m; sourceTree = "<group>"; };
 		18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbcontentlist.db; sourceTree = "<group>"; };
 		18E57D611BA52AC400198BE9 /* HBContentListDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentListDB.h; sourceTree = "<group>"; };
 		18E57D621BA52AC400198BE9 /* HBContentListDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentListDB.m; sourceTree = "<group>"; };
@@ -1145,6 +1151,10 @@
 				18A21E6D1BBAE63A00EA05C6 /* HBPayViewControllerMoneyCell.m */,
 				18A21E6F1BBAFDFF00EA05C6 /* HBPayViewControllerModeCell.h */,
 				18A21E701BBAFDFF00EA05C6 /* HBPayViewControllerModeCell.m */,
+				18DF0ED01BCB555100376686 /* HBBillViewController.h */,
+				18DF0ED11BCB555100376686 /* HBBillViewController.m */,
+				18DF0ED41BCB588E00376686 /* HBBillViewControllerCell.h */,
+				18DF0ED51BCB588E00376686 /* HBBillViewControllerCell.m */,
 			);
 			name = HBPayViewControllers;
 			sourceTree = "<group>";
@@ -1368,6 +1378,7 @@
 				187AD6471BC6834C00E592F4 /* HBLeaderUnbindingCell.m in Sources */,
 				18B5FD311B983930002CCD95 /* FTMenu.m in Sources */,
 				18C650021B9DF1CA0040E349 /* HBScoreEntity.m in Sources */,
+				18DF0ED61BCB588E00376686 /* HBBillViewControllerCell.m in Sources */,
 				0D7488541B8A2071007BE4CD /* ViewController.m in Sources */,
 				0DBE35D51B8CD91500179237 /* HBHyperlinksButton.m in Sources */,
 				18C64FFF1B9DE74B0040E349 /* HBScoreListViewController.m in Sources */,
@@ -1470,6 +1481,7 @@
 				0D3F6D1C1BAEA41A005B4358 /* HBMyWorkView.m in Sources */,
 				18C316841BA07A9D004F716E /* HBPublishWorkViewController.m in Sources */,
 				0DBE35CB1B8CD7BE00179237 /* HBForgetPwdViewController.m in Sources */,
+				18DF0ED21BCB555100376686 /* HBBillViewController.m in Sources */,
 				0DBE353D1B8CB8B500179237 /* Navigator.m in Sources */,
 				181E30751BA2B14100BBA92F /* UtilFMDatabaseAdditions.m in Sources */,
 				0D018FE81B96DB3500A92F59 /* HBStuManViewController.m in Sources */,
