@@ -221,7 +221,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
 
 - (void)unbindButtonAction:(id)sender
 {
-    [MBHudUtil showTextAlert:@"确定要和老师解除绑定吗？解除绑定之后您将会自动退出该老师的群组，并且无法收到老师布置的作业。" msg:@"解除绑定" delegate:self];
+    [MBHudUtil showTextAlert:@"解除绑定" msg:@"确定要和老师解除绑定吗？解除绑定之后您将会自动退出该老师的群组，并且无法收到老师布置的作业。" delegate:self];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

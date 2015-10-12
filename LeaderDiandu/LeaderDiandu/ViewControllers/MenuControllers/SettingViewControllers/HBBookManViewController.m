@@ -220,19 +220,32 @@
 
 -(void)deleteBtnPressed
 {
-    NSMutableArray *selectedArr = [[NSMutableArray alloc] initWithCapacity:1];
-    for (NSString *selectedStrKey in self.bookSelectedDic) {
-        NSString *selectedStr = [self.bookSelectedDic objectForKey:selectedStrKey];
-        if ([selectedStr isEqualToString:@"1"]) {
-            [selectedArr addObject:[self.bookEntityDic objectForKey:selectedStrKey]];
-        }
-    }
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"删除" message:@"确认删除本地图书？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alertView.tag = 0;
+    
+    [alertView show];
+}
 
-    if (selectedArr.count > 0) {
-        //删除本地书籍
-        [LEADERSDK deleteLocalBooks:selectedArr];
+#pragma mark - actionSheetDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0){
+        //to do ...
+    }else{
+        NSMutableArray *selectedArr = [[NSMutableArray alloc] initWithCapacity:1];
+        for (NSString *selectedStrKey in self.bookSelectedDic) {
+            NSString *selectedStr = [self.bookSelectedDic objectForKey:selectedStrKey];
+            if ([selectedStr isEqualToString:@"1"]) {
+                [selectedArr addObject:[self.bookEntityDic objectForKey:selectedStrKey]];
+            }
+        }
         
-        [self updateViewDate];
+        if (selectedArr.count > 0) {
+            //删除本地书籍
+            [LEADERSDK deleteLocalBooks:selectedArr];
+            
+            [self updateViewDate];
+        }
     }
 }
 

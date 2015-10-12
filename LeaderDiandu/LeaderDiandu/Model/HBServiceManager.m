@@ -407,9 +407,9 @@
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
     
-    if (_receivedBlock) {
-        return;
-    }
+//    if (_receivedBlock) {
+//        return;
+//    }
     self.receivedBlock = receivedBlock;
     [self Post:@"/api/teacher/student" dict:dicInfo block:receivedBlock];
 }

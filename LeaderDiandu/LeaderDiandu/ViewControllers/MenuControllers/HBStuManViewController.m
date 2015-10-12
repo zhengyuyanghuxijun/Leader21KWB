@@ -33,6 +33,9 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 @property (nonatomic, strong) NSMutableArray *studentArr;
 @property (nonatomic, strong) NSMutableArray *groupArr;
 
+@property (nonatomic, assign) NSInteger unBundingStudentId;
+@property (nonatomic, assign) NSInteger unBundingClassId;
+
 @property (nonatomic, assign) BOOL isShowStuView;
 
 @property (nonatomic, assign) NSInteger num;
@@ -311,6 +314,8 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
                 if (self.studentArr.count > 0) {
                     [self addTableView];
                 }
+                
+                [_tableView reloadData];
             }
             [MBHudUtil hideActivityView:nil];
         }];
@@ -359,40 +364,63 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 #pragma mark - UnbundlingDelegate
 - (void)unbundlingBtnPressed:(NSInteger)studentId
 {
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        NSString *user = [dict objectForKey:@"name"];
-        
-        [[HBServiceManager defaultManager] requestTeacherUnAssignStu:user student_id:[NSString stringWithFormat:@"%ld", studentId] completion:^(id responseObject, NSError *error) {
-            
-            //解除绑定成功！！！
-        }];
+    self.unBundingStudentId = studentId;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"解除绑定" message:@"确定要和此学生解除绑定吗？解除之后此学生将自动退出已加入的群组。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alertView.tag = 1;
+    
+    [alertView show];
+}
+
+#pragma mark - actionSheetDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0){
+        //to do ...
+    }else{
+        if (alertView.tag == 1) {
+            NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+            if (dict) {
+                NSString *user = [dict objectForKey:@"name"];
+                
+                [MBHudUtil showActivityView:nil inView:nil];
+                [[HBServiceManager defaultManager] requestTeacherUnAssignStu:user student_id:[NSString stringWithFormat:@"%ld", self.unBundingStudentId] completion:^(id responseObject, NSError *error) {
+                    //解除绑定成功！！！
+                    [self requestStudentList];
+                }];
+            }
+        }else{
+            [MBHudUtil showActivityView:nil inView:nil];
+            NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+            if (dict) {
+                NSString *user = [dict objectForKey:@"name"];
+                
+                [[HBServiceManager defaultManager] requestClassDelete:user class_id:[NSString stringWithFormat:@"%ld", self.unBundingClassId] completion:^(id responseObject, NSError *error) {
+                    int index = 0;
+                    for (HBClassEntity *classEntity in self.groupArr) {
+                        if (classEntity.classId == self.unBundingClassId) {
+                            break;
+                        }
+                        index++;
+                    }
+                    
+                    [self.groupArr removeObjectAtIndex:index];
+                    [MBHudUtil hideActivityView:nil];
+                    [self requestClassList];
+                    [self groupButtonPressed];
+                }];
+            }
+        }
     }
 }
 
 #pragma mark - DissolveDelegate
 - (void)dissolveBtnPressed:(NSInteger)classId
 {
-    [MBHudUtil showActivityView:nil inView:nil];
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        NSString *user = [dict objectForKey:@"name"];
-        
-        [[HBServiceManager defaultManager] requestClassDelete:user class_id:[NSString stringWithFormat:@"%ld", classId] completion:^(id responseObject, NSError *error) {
-            int index = 0;
-            for (HBClassEntity *classEntity in self.groupArr) {
-                if (classEntity.classId == classId) {
-                    break;
-                }
-                index++;
-            }
-            
-            [self.groupArr removeObjectAtIndex:index];
-            [MBHudUtil hideActivityView:nil];
-            [self requestClassList];
-            [self groupButtonPressed];
-        }];
-    }
+    self.unBundingClassId = classId;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"解散" message:@"确定要解散此群组吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alertView.tag = 2;
+    
+    [alertView show];
 }
 
 - (void)editBtnPressed:(HBClassEntity *)classEntity
