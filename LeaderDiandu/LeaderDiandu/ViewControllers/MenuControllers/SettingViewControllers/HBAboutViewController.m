@@ -14,10 +14,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     self.navigationController.navigationBarHidden = NO;
     self.title = @"关于课外宝";
     
-    UIImageView *logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"flower"]];
+    UIImageView *logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"APPicon_about"]];
     logoImgView.frame = CGRectMake((ScreenWidth - 120)/2, (ScreenHeight - 120)/2 - 20, 120, 120);
     [self.view addSubview:logoImgView];
     
