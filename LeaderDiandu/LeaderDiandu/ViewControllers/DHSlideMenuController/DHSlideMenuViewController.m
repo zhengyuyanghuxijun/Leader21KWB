@@ -139,12 +139,14 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     controlY = 0;
     controlH = 25;
     controlW = buttonInfo.frame.size.width-controlH-typeW-10;
-    UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-    nameLbl.backgroundColor = [UIColor clearColor];
-    nameLbl.textColor = textColor;
-    nameLbl.font = font;
-    nameLbl.text = _headerName;
-    [buttonInfo addSubview:nameLbl];
+    if ([_headerName length] > 0) {
+        UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+        nameLbl.backgroundColor = [UIColor clearColor];
+        nameLbl.textColor = textColor;
+        nameLbl.font = font;
+        nameLbl.text = _headerName;
+        [buttonInfo addSubview:nameLbl];
+    }
     
     controlY += controlH;
     controlW = 150;
@@ -163,35 +165,42 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity.type == 1) {
-        controlW = 70;
-        controlX = arrowX-controlW-5;
+        if ([_headerName length] == 0) {
+            controlX = 0;
+        } else {
+            controlX = arrowX-typeW-5;
+        }
         controlY = 0;
-        UILabel *typeLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-        typeLbl.font = [UIFont systemFontOfSize:16];
-        typeLbl.textAlignment = NSTextAlignmentCenter;
-        [self setTypeLblText:typeLbl];
-        [buttonInfo addSubview:typeLbl];
+        UIView *typeView = [self createTypeView:CGRectMake(controlX, controlY, typeW, controlH)];
+        [buttonInfo addSubview:typeView];
     }
     
     return view;
 }
 
-- (void)setTypeLblText:(UILabel *)typeLbl
+- (UIView *)createTypeView:(CGRect)frame
 {
+    UIImageView *bgView = [[UIImageView alloc] initWithFrame:frame];
+    UILabel *typeLbl = [[UILabel alloc] initWithFrame:bgView.bounds];
+    typeLbl.textAlignment = NSTextAlignmentCenter;
+    typeLbl.textColor = [UIColor whiteColor];
+    typeLbl.font = [UIFont systemFontOfSize:16];
     if (_headerVipTime == 0) {
         typeLbl.text = @"普通用户";
-        typeLbl.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"studentmanage-bg-normal-user"]];
+        bgView.image = [UIImage imageNamed:@"studentmanage-bg-normal-user"];
     } else {
         NSTimeInterval cur = [NSDate date].timeIntervalSince1970;
         if (_headerVipTime < cur) {
             //vip过期
             typeLbl.text = @"VIP过期";
-            typeLbl.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"studentmanage-bg-vipover-user"]];
+            bgView.image = [UIImage imageNamed:@"studentmanage-bg-vipover-user"];
         } else {
-            typeLbl.text = @"VIP用户";
-            typeLbl.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"studentmanage-bg-vip-user"]];
+            typeLbl.text = @"VIP会员";
+            bgView.image = [UIImage imageNamed:@"studentmanage-bg-vip-user"];
         }
     }
+    [bgView addSubview:typeLbl];
+    return bgView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
