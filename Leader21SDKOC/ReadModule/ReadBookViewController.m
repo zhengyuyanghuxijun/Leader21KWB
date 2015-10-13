@@ -703,6 +703,8 @@
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:1];
             [dic setObject:[NSString stringWithFormat:@"%d", 100] forKey:@"progress"];
             [dic setObject:[NSString stringWithFormat:@"%lld", self.bookID] forKey:@"book_id"];
+            [dic setObject:[NSString stringWithFormat:@"%ld", index + 1] forKey:@"toPage"];
+            [dic setObject:[NSString stringWithFormat:@"%ld", count] forKey:@"totalPage"];
             
             //用户阅读书籍返回发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_ReadBookBack object:nil userInfo:dic];
@@ -740,6 +742,8 @@
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:1];
             [dic setObject:[NSString stringWithFormat:@"%ld", progress] forKey:@"progress"];
             [dic setObject:[NSString stringWithFormat:@"%lld", self.bookID] forKey:@"book_id"];
+            [dic setObject:[NSString stringWithFormat:@"%ld", index + 1] forKey:@"toPage"];
+            [dic setObject:[NSString stringWithFormat:@"%ld", count] forKey:@"totalPage"];
             
             //用户阅读书籍返回发送通知
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_ReadBookBack object:nil userInfo:dic];

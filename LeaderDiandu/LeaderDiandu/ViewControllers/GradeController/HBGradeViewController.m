@@ -40,6 +40,8 @@
     HBGridView *_gridView;
     NSInteger currentID;
     NSInteger subscribeId;
+    NSString *readBookFromTime;
+    NSString *readBookToTime;
 }
 
 @property (nonatomic, strong)NSMutableArray *contentEntityArr;
@@ -67,6 +69,7 @@
         self.vipBookDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         currentID = 1;
         subscribeId = -1;
+        readBookFromTime = @"0";
         
         //用户登录成功通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:kNotification_LoginSuccess object:nil];
@@ -143,6 +146,10 @@
 
 -(void)ReadBookBack:(NSNotification*)note
 {
+    //记录一下结束阅读时间
+    NSDate *date = [NSDate date];
+    readBookToTime = [NSString stringWithFormat:@"%.f",[date timeIntervalSince1970]];
+    
     NSMutableDictionary *dic = (NSMutableDictionary *)[note userInfo];
     NSString *bookId = [dic objectForKey:@"book_id"];
     NSString *progress = [dic objectForKey:@"progress"];
@@ -165,6 +172,8 @@
         /** type: 1 - 学生； 10 - 老师*/
         if (userEntity.type == 1) {
             [MBHudUtil showActivityView:nil inView:nil];
+            //上报用户读书行为
+            [self bookReadingReport:userEntity bookInfoDic:dic];
             //学生上报一本书的阅读进度
             [[HBServiceManager defaultManager] requestUpdateBookProgress:user token:token book_id:[bookId integerValue] progress:[progress integerValue] completion:^(id responseObject, NSError *error) {
                 [MBHudUtil hideActivityView:nil];
@@ -218,6 +227,17 @@
 #endif
         }
     }
+}
+
+-(void)bookReadingReport:(HBUserEntity *)userEntity bookInfoDic:(NSMutableDictionary *)dic
+{
+    NSString *bookId = [dic objectForKey:@"book_id"];
+    NSString *toPage = [dic objectForKey:@"toPage"];
+    NSString *totalPage = [dic objectForKey:@"totalPage"];
+    
+    [[HBServiceManager defaultManager] requestReportBookProgress:userEntity.name token:userEntity.token book_id:[bookId integerValue] bookset_id:currentID from_time:readBookFromTime to_time:readBookToTime from_page:@"1" to_page:toPage total_page:totalPage completion:^(id responseObject, NSError *error) {
+        //上报用户读书行为成功！！！
+    }];
 }
 
 -(void)requestBookProgressSuccess:(id)responseObject
@@ -589,6 +609,10 @@
             //跳转作业逻辑
             [self jumpToTestWork:[entity.bookId integerValue]];
         } else {
+            //记录一下开始阅读时间
+            NSDate *date = [NSDate date];
+            readBookFromTime = [NSString stringWithFormat:@"%.f",[date timeIntervalSince1970]];
+            
             [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
             itemView.bookDownloadUrl = entity.bookUrl;
         }
