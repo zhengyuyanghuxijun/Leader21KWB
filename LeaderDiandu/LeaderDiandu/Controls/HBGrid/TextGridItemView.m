@@ -236,7 +236,7 @@
     
     if ([book.bookUrl isEqualToString:self.bookDownloadUrl]){
         if (status == downloadStatusFinished) {
-            [self bookDownloaded:book progress:@"0" isTask:NO];
+//            [self bookDownloaded:book progress:@"0" isTask:NO];
             [self.delegate reloadGridView];
         }else if(status == downloadStatusDownloading){
             [self bookDownloading:book];

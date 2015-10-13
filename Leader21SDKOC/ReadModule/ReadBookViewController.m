@@ -700,6 +700,13 @@
     NSInteger count = [self.readBookDataSource totalCount];
     if (index >= 0 && count > 0) {
         if (index + 1 >= count) {
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:1];
+            [dic setObject:[NSString stringWithFormat:@"%d", 100] forKey:@"progress"];
+            [dic setObject:[NSString stringWithFormat:@"%lld", self.bookID] forKey:@"book_id"];
+            
+            //用户阅读书籍返回发送通知
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_ReadBookBack object:nil userInfo:dic];
+            
             [self.navigationController popViewControllerAnimated:YES];
             return;
         }
