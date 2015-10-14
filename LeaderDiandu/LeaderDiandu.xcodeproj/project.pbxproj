@@ -59,6 +59,7 @@
 		0D7A76921B92064100BC50A0 /* HBBaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A76911B92064100BC50A0 /* HBBaseEntity.m */; };
 		0D7A76951B92176C00BC50A0 /* HBUserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A76941B92176C00BC50A0 /* HBUserEntity.m */; };
 		0D8C27C61BCBABE8008F2F9F /* HBOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8C27C51BCBABE8008F2F9F /* HBOptionButton.m */; };
+		0D8C27CC1BCD0A7C008F2F9F /* HBHeaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8C27CB1BCD0A7C008F2F9F /* HBHeaderManager.m */; };
 		0D8F03421BB9857F00D64D48 /* HBScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8F03411BB9857F00D64D48 /* HBScoreView.m */; };
 		0D9E04FD1BB52B1500055203 /* HBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9E04FC1BB52B1500055203 /* HBOptionView.m */; };
 		0DAAF4041B8D5F8900078285 /* UIViewController+AddBackBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAF4031B8D5F8900078285 /* UIViewController+AddBackBtn.m */; };
@@ -170,7 +171,6 @@
 		186435AA1BC559DE0068E73E /* HBSettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186435A91BC559DE0068E73E /* HBSettingViewCell.m */; };
 		187AD6441BC6831B00E592F4 /* HBLeaderBindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187AD6431BC6831B00E592F4 /* HBLeaderBindingCell.m */; };
 		187AD6471BC6834C00E592F4 /* HBLeaderUnbindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187AD6461BC6834C00E592F4 /* HBLeaderUnbindingCell.m */; };
-		1880D85E1BCE833A005A2951 /* msgentity.db in Resources */ = {isa = PBXBuildFile; fileRef = 1880D85D1BCE833A005A2951 /* msgentity.db */; };
 		1880D8621BCE83A1005A2951 /* HBMsgEntityDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 1880D8611BCE83A1005A2951 /* HBMsgEntityDB.m */; };
 		189719DC1B9F3405006F42A2 /* HBStudentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 189719DB1B9F3405006F42A2 /* HBStudentEntity.m */; };
 		1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */; };
@@ -315,6 +315,8 @@
 		0D7A76941B92176C00BC50A0 /* HBUserEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBUserEntity.m; sourceTree = "<group>"; };
 		0D8C27C41BCBABE8008F2F9F /* HBOptionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBOptionButton.h; sourceTree = "<group>"; };
 		0D8C27C51BCBABE8008F2F9F /* HBOptionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBOptionButton.m; sourceTree = "<group>"; };
+		0D8C27CA1BCD0A7C008F2F9F /* HBHeaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBHeaderManager.h; sourceTree = "<group>"; };
+		0D8C27CB1BCD0A7C008F2F9F /* HBHeaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBHeaderManager.m; sourceTree = "<group>"; };
 		0D8F03401BB9857F00D64D48 /* HBScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBScoreView.h; sourceTree = "<group>"; };
 		0D8F03411BB9857F00D64D48 /* HBScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreView.m; sourceTree = "<group>"; };
 		0D9E04FB1BB52B1500055203 /* HBOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBOptionView.h; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 		0DB537311B8F70E80023A3F7 /* HBHTTPBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBHTTPBaseRequest.m; sourceTree = "<group>"; };
 		0DB537331B8F78AF0023A3F7 /* HBServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBServiceManager.h; sourceTree = "<group>"; };
 		0DB537341B8F78AF0023A3F7 /* HBServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBServiceManager.m; sourceTree = "<group>"; };
+		0DB5EA001BCEA6BA000855C7 /* msgentity.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = msgentity.db; sourceTree = "<group>"; };
 		0DBD1AAE1BBBAB5E00A3BD72 /* MJProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProgressHUD.h; sourceTree = "<group>"; };
 		0DBD1AAF1BBBAB5E00A3BD72 /* MJProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProgressHUD.m; sourceTree = "<group>"; };
 		0DBD1ABA1BBC501000A3BD72 /* AppDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDefine.h; path = App/AppDefine.h; sourceTree = "<group>"; };
@@ -486,7 +489,6 @@
 		187AD6431BC6831B00E592F4 /* HBLeaderBindingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBLeaderBindingCell.m; sourceTree = "<group>"; };
 		187AD6451BC6834C00E592F4 /* HBLeaderUnbindingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBLeaderUnbindingCell.h; sourceTree = "<group>"; };
 		187AD6461BC6834C00E592F4 /* HBLeaderUnbindingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBLeaderUnbindingCell.m; sourceTree = "<group>"; };
-		1880D85D1BCE833A005A2951 /* msgentity.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = msgentity.db; sourceTree = "<group>"; };
 		1880D8601BCE83A1005A2951 /* HBMsgEntityDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMsgEntityDB.h; sourceTree = "<group>"; };
 		1880D8611BCE83A1005A2951 /* HBMsgEntityDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMsgEntityDB.m; sourceTree = "<group>"; };
 		189719DA1B9F3405006F42A2 /* HBStudentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBStudentEntity.h; sourceTree = "<group>"; };
@@ -731,7 +733,7 @@
 				18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */,
 				181E30811BA2D0CF00BBA92F /* hbcontentdetail.db */,
 				18D325191BB8275100904FA6 /* hbreadprogress.db */,
-				1880D85D1BCE833A005A2951 /* msgentity.db */,
+				0DB5EA001BCEA6BA000855C7 /* msgentity.db */,
 				0DC1D4141B9BDF430043C79B /* MyStaticModels.bundle */,
 				0D7486FE1B88A884007BE4CD /* Images.xcassets */,
 			);
@@ -1212,6 +1214,8 @@
 				0DB537341B8F78AF0023A3F7 /* HBServiceManager.m */,
 				0D7A768D1B91E33900BC50A0 /* HBContentManager.h */,
 				0D7A768E1B91E33900BC50A0 /* HBContentManager.m */,
+				0D8C27CA1BCD0A7C008F2F9F /* HBHeaderManager.h */,
+				0D8C27CB1BCD0A7C008F2F9F /* HBHeaderManager.m */,
 				0D3F6D0C1BADA391005B4358 /* HBTestWorkManager.h */,
 				0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */,
 			);
@@ -1395,7 +1399,6 @@
 				0DCAE1121BAAAA3F00AB7557 /* next@2x.png in Resources */,
 				0DCAE10F1BAAAA3F00AB7557 /* menu_bar_button_pressed.png in Resources */,
 				0DCAE1151BAAAA3F00AB7557 /* online_icon.png in Resources */,
-				1880D85E1BCE833A005A2951 /* msgentity.db in Resources */,
 				0DCAE1001BAAAA3F00AB7557 /* big_button3@2x.png in Resources */,
 				0DCAE10A1BAAAA3F00AB7557 /* fnc_exit.png in Resources */,
 				0DCAE10E1BAAAA3F00AB7557 /* menu_bar_button@2x.png in Resources */,
@@ -1484,6 +1487,7 @@
 				0D018FEE1B96DB9200A92F59 /* HBLeaderViewController.m in Sources */,
 				0D7488901B8A2973007BE4CD /* NetUtil.m in Sources */,
 				181E30741BA2B14100BBA92F /* UtilFMDatabase.m in Sources */,
+				0D8C27CC1BCD0A7C008F2F9F /* HBHeaderManager.m in Sources */,
 				0DCBC29F1B99DE16003DFDD5 /* NSString+Verify.m in Sources */,
 				0D74887F1B8A226E007BE4CD /* AppDelegate.m in Sources */,
 				18A13BB01BA6F5FD004A288F /* HBGroupCell.m in Sources */,
@@ -1683,8 +1687,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: CHEN YUE (S7A22NS2N6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CHEN YUE (S7A22NS2N6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: wei chanyuan (A2Z38B538T)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: wei chanyuan (A2Z38B538T)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1704,7 +1708,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51b1bc31-da78-42c4-a83a-53ba0907c94e";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -1714,8 +1718,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: CHEN YUE (S7A22NS2N6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: CHEN YUE (S7A22NS2N6)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: wei chanyuan (X2Y6A4GX9Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: wei chanyuan (X2Y6A4GX9Q)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1735,7 +1739,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "51b1bc31-da78-42c4-a83a-53ba0907c94e";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;

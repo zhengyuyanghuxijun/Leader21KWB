@@ -213,7 +213,11 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
             if ([dict[@"result"] isEqualToString:@"OK"]) {
                 //绑定成功
                 [MBHudUtil showTextView:@"绑定成功" inView:nil];
-                [self showBindView:NO];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self getUserInfo];
+                });
+            } else {
+                [MBHudUtil showTextView:@"绑定失败，请重试" inView:nil];
             }
         }
     }];

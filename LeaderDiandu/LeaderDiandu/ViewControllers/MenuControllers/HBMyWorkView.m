@@ -208,7 +208,7 @@ typedef enum : NSUInteger {
     HBOptionButton *button = [[HBOptionButton alloc] initWithFrame:frame title:title];
     button.tag = tag;
     button.delegate = self;
-    [button addTarget:self action:@selector(selectionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [button addTarget:self action:@selector(selectionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 //    [button setTitle:title forState:UIControlStateNormal];
 //    button.titleLabel.numberOfLines = 0;
 //    button.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -386,7 +386,7 @@ typedef enum : NSUInteger {
     }
 }
 
-- (void)setOptionButtonSelected:(id)sender
+- (void)selectionBtnAction:(id)sender
 {
     isOptionSelected = NO;
     NSInteger i = 0;
@@ -404,6 +404,11 @@ typedef enum : NSUInteger {
             i++;
         }
     }
+}
+
+- (void)setOptionButtonSelected:(id)sender
+{
+    [self selectionBtnAction:sender];
 }
 
 #pragma ---HBOptionViewDelegate---

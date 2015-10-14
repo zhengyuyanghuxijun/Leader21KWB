@@ -11,6 +11,7 @@
 #import "HBEditNameViewController.h"
 #import "HBBindPhoneViewController.h"
 #import "HBDataSaveManager.h"
+#import "HBHeaderManager.h"
 
 static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewControllerCellReuseId";
 
@@ -42,6 +43,15 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     [self.view addSubview:_tableView];
     
     [self getUserInfo];
+    [self getHeaderAvatar];
+}
+
+- (void)getHeaderAvatar
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    [[HBHeaderManager defaultManager] requestGetAvatar:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+        
+    }];
 }
 
 - (void)getUserInfo
@@ -111,7 +121,7 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
         if (index == 0) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         } else if (index > 0) {
-            UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(viewWidth-40, 20, 20, 20)];
+            UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(viewWidth-40, 10, 20, 20)];
             arrowImg.image = [UIImage imageNamed:@"menu_icon_user_open"];
             [cell.contentView addSubview:arrowImg];
         }
@@ -144,6 +154,7 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
         HBBindPhoneViewController *controller = [[HBBindPhoneViewController alloc] init];
         [[AppDelegate delegate].globalNavi pushViewController:controller animated:YES];
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

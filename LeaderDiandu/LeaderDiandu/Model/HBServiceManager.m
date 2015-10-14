@@ -50,26 +50,6 @@
     }];
 }
 
-- (void)Get:(NSString *)api dict:(NSMutableDictionary *)dict block:(HBServiceReceivedBlock)receivedBlock
-{
-    [dict setObject:KAppKeyStudy forKey:KWBAppKey];
-    [[HBHTTPBaseRequest requestWithSubUrl:api] startWithMethod:HBHTTPRequestMethodGET parameters:dict completion:^(id responseObject, NSError *error) {
-        if (error) {
-            NSDictionary *userDic = error.userInfo;
-            NSString *descValue = userDic[@"NSLocalizedDescription"];
-            if ([descValue containsString:@"401"]) {
-                //token过期，需要重新登录
-                [Navigator pushLoginController];
-            }
-        }
-        if (receivedBlock) {
-            NSLog(@"responseObject=\r\n%@", responseObject);
-            receivedBlock(responseObject,error);
-        }
-        self.receivedBlock = nil;
-    }];
-}
-
 - (void)requestRegister:(NSString *)user pwd:(NSString *)pwd type:(NSString *)type smsCode:(NSString *)sms_code codeId:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
@@ -700,22 +680,6 @@
     //    }
     self.receivedBlock = receivedBlock;
     [self Post:@"/api/stat/book/reading/report" dict:dicInfo block:receivedBlock];
-}
-
-- (void)requestGetAvatar:(NSString *)user token:(NSString *)token userId:(NSString*)userId completion:(HBServiceReceivedBlock)receivedBlock
-{
-    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
-    [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
-    
-    //    if (_receivedBlock) {
-    //        return;
-    //    }
-    self.receivedBlock = receivedBlock;
-    
-    NSString *apiStr = [NSString stringWithFormat:@"/api/user/avatar?f=%@%@", userId, @".png"];
-    
-    [self Get:apiStr dict:dicInfo block:receivedBlock];
 }
 
 /**
