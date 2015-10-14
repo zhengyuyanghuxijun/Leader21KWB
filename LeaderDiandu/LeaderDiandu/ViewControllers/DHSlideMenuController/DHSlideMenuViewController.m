@@ -270,6 +270,8 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     DHSlideMenuController *svc = [DHSlideMenuController sharedInstance];
     NSInteger index = indexPath.row;
     NSLog(@"select row:%ld", (long)index);
