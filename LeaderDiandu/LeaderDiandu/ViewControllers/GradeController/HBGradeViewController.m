@@ -29,6 +29,8 @@
 #import "TimeIntervalUtils.h"
 #import "HBTestWorkManager.h"
 #import "HBPayViewController.h"
+#import "HBSystemMsgEntity.h"
+#import "HBMsgEntityDB.h"
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
 
@@ -87,8 +89,14 @@
 
 -(void)LoginSuccess
 {
-    //用户是否首次登录
-    BOOL firstLogin = [[HBDataSaveManager defaultManager] firstLogin];
+//    //用户是否首次登录
+//    BOOL firstLogin = [[HBDataSaveManager defaultManager] firstLogin];
+//    if (firstLogin) {
+//        //首次登录，不显示红点
+//    }else{
+//        //非首次登录，有新消息或者新作业显示红点
+        [self requestSystemMsg];
+//    }
 
     [self.readProgressEntityDic removeAllObjects];
 #if saveReadProgress
@@ -874,6 +882,31 @@
             }
         }];
     }
+}
+
+-(void)requestSystemMsg
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    //1443248966 是临时用来测试的时间，后续需要改成正式的！
+    [[HBServiceManager defaultManager] requestSystemMsg:userEntity.name token:userEntity.token from_time:@"1443248966" completion:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            
+            //从数据库读取本地所有消息内容
+            NSMutableArray *localMsgArr = [[HBMsgEntityDB sharedInstance] getAllMsgEntity];
+            NSString *localMaxMsgId = @"";
+            if (localMsgArr.count > 0) {
+                HBSystemMsgEntity *msgEntity = [localMsgArr objectAtIndex:0];
+                localMaxMsgId = msgEntity.systemMsgId;
+            }
+            
+            NSArray *arr = [responseObject arrayForKey:@"messages"];
+            for (NSDictionary *dic in arr)
+            {
+                NSString *newMsgId = [NSString stringWithFormat:@"%ld", [dic integerForKey:@"id"]];
+                break;
+            }
+        }
+    }];
 }
 
 NSComparator cmptr = ^(id obj1, id obj2){

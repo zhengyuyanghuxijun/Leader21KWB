@@ -170,6 +170,8 @@
 		186435AA1BC559DE0068E73E /* HBSettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186435A91BC559DE0068E73E /* HBSettingViewCell.m */; };
 		187AD6441BC6831B00E592F4 /* HBLeaderBindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187AD6431BC6831B00E592F4 /* HBLeaderBindingCell.m */; };
 		187AD6471BC6834C00E592F4 /* HBLeaderUnbindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187AD6461BC6834C00E592F4 /* HBLeaderUnbindingCell.m */; };
+		1880D85E1BCE833A005A2951 /* msgentity.db in Resources */ = {isa = PBXBuildFile; fileRef = 1880D85D1BCE833A005A2951 /* msgentity.db */; };
+		1880D8621BCE83A1005A2951 /* HBMsgEntityDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 1880D8611BCE83A1005A2951 /* HBMsgEntityDB.m */; };
 		189719DC1B9F3405006F42A2 /* HBStudentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 189719DB1B9F3405006F42A2 /* HBStudentEntity.m */; };
 		1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */; };
 		189C0F5E1BB5776300DD39C0 /* HBReadprogressEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C0F5D1BB5776300DD39C0 /* HBReadprogressEntity.m */; };
@@ -484,6 +486,9 @@
 		187AD6431BC6831B00E592F4 /* HBLeaderBindingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBLeaderBindingCell.m; sourceTree = "<group>"; };
 		187AD6451BC6834C00E592F4 /* HBLeaderUnbindingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBLeaderUnbindingCell.h; sourceTree = "<group>"; };
 		187AD6461BC6834C00E592F4 /* HBLeaderUnbindingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBLeaderUnbindingCell.m; sourceTree = "<group>"; };
+		1880D85D1BCE833A005A2951 /* msgentity.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = msgentity.db; sourceTree = "<group>"; };
+		1880D8601BCE83A1005A2951 /* HBMsgEntityDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMsgEntityDB.h; sourceTree = "<group>"; };
+		1880D8611BCE83A1005A2951 /* HBMsgEntityDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMsgEntityDB.m; sourceTree = "<group>"; };
 		189719DA1B9F3405006F42A2 /* HBStudentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBStudentEntity.h; sourceTree = "<group>"; };
 		189719DB1B9F3405006F42A2 /* HBStudentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBStudentEntity.m; sourceTree = "<group>"; };
 		1898BCEA1B9DA7ED00FD9A11 /* HBManageTaskEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBManageTaskEntity.h; sourceTree = "<group>"; };
@@ -726,6 +731,7 @@
 				18E57D5E1BA52AA600198BE9 /* hbcontentlist.db */,
 				181E30811BA2D0CF00BBA92F /* hbcontentdetail.db */,
 				18D325191BB8275100904FA6 /* hbreadprogress.db */,
+				1880D85D1BCE833A005A2951 /* msgentity.db */,
 				0DC1D4141B9BDF430043C79B /* MyStaticModels.bundle */,
 				0D7486FE1B88A884007BE4CD /* Images.xcassets */,
 			);
@@ -1187,6 +1193,8 @@
 				18E57D621BA52AC400198BE9 /* HBContentListDB.m */,
 				18D325151BB820EA00904FA6 /* HBReadProgressDB.h */,
 				18D325161BB820EA00904FA6 /* HBReadProgressDB.m */,
+				1880D8601BCE83A1005A2951 /* HBMsgEntityDB.h */,
+				1880D8611BCE83A1005A2951 /* HBMsgEntityDB.m */,
 			);
 			name = HBModelDB;
 			sourceTree = "<group>";
@@ -1387,6 +1395,7 @@
 				0DCAE1121BAAAA3F00AB7557 /* next@2x.png in Resources */,
 				0DCAE10F1BAAAA3F00AB7557 /* menu_bar_button_pressed.png in Resources */,
 				0DCAE1151BAAAA3F00AB7557 /* online_icon.png in Resources */,
+				1880D85E1BCE833A005A2951 /* msgentity.db in Resources */,
 				0DCAE1001BAAAA3F00AB7557 /* big_button3@2x.png in Resources */,
 				0DCAE10A1BAAAA3F00AB7557 /* fnc_exit.png in Resources */,
 				0DCAE10E1BAAAA3F00AB7557 /* menu_bar_button@2x.png in Resources */,
@@ -1523,6 +1532,7 @@
 				0D018FE81B96DB3500A92F59 /* HBStuManViewController.m in Sources */,
 				0D3F6D161BAE8F64005B4358 /* HBMyWorkViewController.m in Sources */,
 				0DBE35401B8CB8B500179237 /* TimeIntervalUtils.m in Sources */,
+				1880D8621BCE83A1005A2951 /* HBMsgEntityDB.m in Sources */,
 				18E57D6C1BA5B25C00198BE9 /* HBStudentCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,6 +12,7 @@
 #import "HBSystemMsgEntity.h"
 #import "TimeIntervalUtils.h"
 #import "HBMessageViewCell.h"
+#import "HBMsgEntityDB.h"
 
 static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewControllerAccessoryReuseId";
 
@@ -72,6 +73,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
                 for (NSDictionary *dic in arr)
                 {
                     HBSystemMsgEntity *msgEntity = [[HBSystemMsgEntity alloc] init];
+                    msgEntity.systemMsgId = [NSString stringWithFormat:@"%ld", [dic integerForKey:@"id"]];
                     msgEntity.body = [dic stringForKey:@"body"];
                     msgEntity.user_id = [NSString stringWithFormat:@"%ld", [dic integerForKey:@"user_id"]];
                     NSTimeInterval interval = [[dic numberForKey:@"created_time"] doubleValue];
@@ -79,6 +81,9 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
                     
                     [self.msgArr addObject:msgEntity];
                 }
+                
+                //获取消息成功保存数据库
+                [[HBMsgEntityDB sharedInstance] updateHBMsgEntity:self.msgArr];
                 
                 if (self.msgArr.count > 0) {
                     [self addTableView];
