@@ -87,6 +87,9 @@
 
 -(void)LoginSuccess
 {
+    //用户是否首次登录
+    BOOL firstLogin = [[HBDataSaveManager defaultManager] firstLogin];
+
     [self.readProgressEntityDic removeAllObjects];
 #if saveReadProgress
     //登录成功，先从本地读取一下当前用户数据库中保存的全部阅读进度

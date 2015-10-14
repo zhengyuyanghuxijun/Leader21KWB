@@ -138,6 +138,9 @@
         [MBHudUtil hideActivityView:nil];
         if (error.code == 0) {
             //登录成功
+            [[HBDataSaveManager defaultManager] loadFirstLogin];
+            [[HBDataSaveManager defaultManager] saveFirstLogin];
+            
             [[HBDataSaveManager defaultManager] loadSettings];
             self.loginButton.enabled = YES;
             [Navigator popToRootController];

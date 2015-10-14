@@ -35,6 +35,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    NSString *FirstLoginString = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogin"];
+    
     // 启动后的界面
     
 //    UIStoryboard *mainBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -59,7 +61,10 @@
         [self initDHSlideMenu];
     }
     
-    [[HBDataSaveManager defaultManager] loadSettings];
+    //这里读取数据没有意义，
+    //需要登录成功后根据userid读取对应用户的数据才准确，
+    //已经加在登陆成功的位置了。
+//    [[HBDataSaveManager defaultManager] loadSettings];
 
 //    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
 //    self.loginVC = [sb instantiateViewControllerWithIdentifier:@"HBLoginViewController"];
@@ -67,6 +72,11 @@
     if (!islogined) {
         [self.globalNavi pushViewController:_loginVC animated:NO];
     }else{
+        [[HBDataSaveManager defaultManager] loadFirstLogin];
+        [[HBDataSaveManager defaultManager] saveFirstLogin];
+        
+        [[HBDataSaveManager defaultManager] loadSettings];
+        
         //用户登录成功后发送通知
         [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_LoginSuccess object:nil];
     }

@@ -95,6 +95,9 @@
     [[HBServiceManager defaultManager] requestLogin:phone pwd:pwd completion:^(id responseObject, NSError *error) {
         if (responseObject) {
             //登录成功
+            [[HBDataSaveManager defaultManager] loadFirstLogin];
+            [[HBDataSaveManager defaultManager] saveFirstLogin];
+            
             [[HBDataSaveManager defaultManager] loadSettings];
             self.loginButton.enabled = YES;
             [Navigator popToRootController];

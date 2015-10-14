@@ -99,6 +99,24 @@
     self.showEnBookName = [showEnBookNameStr boolValue];
 }
 
+- (void)saveFirstLogin
+{
+    NSString *firstLoginKey = [NSString stringWithFormat:@"%@"@"_"@"%ld", KHBFirstLogin,self.userEntity.userid];
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:@"YES" forKey:firstLoginKey];
+    [userDefault synchronize];
+}
+
+- (void)loadFirstLogin
+{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *firstLoginKey = [NSString stringWithFormat:@"%@"@"_"@"%ld", KHBFirstLogin,self.userEntity.userid];
+    NSString *firstLoginStr = [userDefault objectForKey:firstLoginKey];
+
+    self.firstLogin = [firstLoginStr boolValue];
+}
+
 -(void)addObserverNet
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkStateChange) name:AFNetworkingReachabilityDidChangeNotification object:nil];
