@@ -114,7 +114,7 @@
     NSString *firstLoginKey = [NSString stringWithFormat:@"%@"@"_"@"%ld", KHBFirstLogin,self.userEntity.userid];
     NSString *firstLoginStr = [userDefault objectForKey:firstLoginKey];
 
-    self.firstLogin = [firstLoginStr boolValue];
+    self.notFirstLogin = [firstLoginStr boolValue];
 }
 
 -(void)addObserverNet

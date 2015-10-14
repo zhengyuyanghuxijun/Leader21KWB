@@ -13,9 +13,11 @@
 #import "HBDataSaveManager.h"
 
 #define KTableHeaderHeight  150
+#define ScreenWidth [UIScreen mainScreen].bounds.size.width
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
 static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewControllerCellReuseId";
 
-@interface DHSlideMenuViewController ()
+@interface DHSlideMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, strong) NSArray *titles;
 @property(nonatomic, strong) NSArray *images;
@@ -24,6 +26,8 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 @property(nonatomic, strong) UIColor *backgroundColor;
 @property(nonatomic, strong) UIColor *selectedColor;
 
+@property(nonatomic, strong) UIImageView *redPointView;
+
 @end
 
 @implementation DHSlideMenuViewController
@@ -31,11 +35,27 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 - (id)initWithMenus:(NSArray *)titles MenuImages:(NSArray *)images TabBarControllers:(NSArray*)controllers;{
     NSParameterAssert(titles);
     
-    self = [super initWithStyle:UITableViewStyleGrouped];
-    if (self) {
+//    self = [super initWithStyle:UITableViewStyleGrouped];
+//    if (self) {
         _titles = titles;
         _images = images;
         _controllers = controllers;
+        
+//        //获取新消息列表成功通知
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMsgSuccess) name:kNotification_GetMsgSuccess object:nil];
+//    }
+//    return self;
+    return nil;
+}
+
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        
+        //获取新消息列表成功通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMsgSuccess) name:kNotification_GetMsgSuccess object:nil];
     }
     return self;
 }
@@ -52,11 +72,21 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.tableView.backgroundColor = [UIColor whiteColor];
-    self.tableView.tableFooterView = nil;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kSlideMenuViewControllerCellReuseId];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    if (_tableView == nil) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, ScreenWidth, ScreenHeight)];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.separatorStyle = NO;
+        _tableView.backgroundColor = [UIColor whiteColor];
+        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kSlideMenuViewControllerCellReuseId];
+        [self.view addSubview:_tableView];
+    }
+    
+//    self.view.backgroundColor = [UIColor whiteColor];
+//    self.tableView.backgroundColor = [UIColor whiteColor];
+//    self.tableView.tableFooterView = nil;
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kSlideMenuViewControllerCellReuseId];
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 #pragma mark - Configuring the view’s layout behavior
@@ -211,11 +241,28 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     if ((self.images != nil) && (self.images.count > indexPath.row)){
         cell.imageView.image = [UIImage imageNamed:[self.images objectAtIndex:indexPath.row]];
     }
+    
+    NSString *viewCtlName = self.controllers[indexPath.row];
+    
     cell.backgroundColor = self.backgroundColor;
     cell.textLabel.text = [self.titles objectAtIndex:indexPath.row];
     cell.textLabel.textColor = [UIColor blackColor];
     cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
 //    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    if ([viewCtlName isEqualToString:@"HBMessageViewController"]) { //消息中心
+        if (!self.redPointView) {
+            self.redPointView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"test-btn-right-selected"]];
+            self.redPointView.frame = CGRectMake(150, (60 - 15)/2, 15, 15);
+            [cell addSubview:self.redPointView];
+        }
+        
+        if([AppDelegate delegate].hasNewMsg){
+            self.redPointView.hidden = NO;
+        }else{
+            self.redPointView.hidden = YES;
+        }
+    }
     
     return cell;
 }
@@ -257,6 +304,11 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
         NSString *allString = [NSString stringWithFormat:@"tel:4008126161"];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
     }
+}
+
+-(void)getMsgSuccess
+{
+    [_tableView reloadData];
 }
 
 #if 0

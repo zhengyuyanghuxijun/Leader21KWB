@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HBBaseViewController.h"
 
-@interface DHSlideMenuViewController : UITableViewController
+//@interface DHSlideMenuViewController : UITableViewController
+@interface DHSlideMenuViewController : HBBaseViewController
+{
+    UITableView *_tableView;
+}
 
 @property (nonatomic, strong) NSString *headerName;
 @property (nonatomic, strong) NSString *headerPhone;

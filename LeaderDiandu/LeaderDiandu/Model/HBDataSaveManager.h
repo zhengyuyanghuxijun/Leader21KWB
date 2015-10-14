@@ -19,7 +19,7 @@
 
 @property (nonatomic, assign)BOOL wifiDownload; //仅在wifi下下载
 @property (nonatomic, assign)BOOL showEnBookName;   //显示英文书名
-@property (nonatomic, assign)BOOL firstLogin;   //是否首次登录
+@property (nonatomic, assign)BOOL notFirstLogin;   //是否首次登录(NO：首次登录 YES：非首次登录)
 
 + (id)defaultManager;
 

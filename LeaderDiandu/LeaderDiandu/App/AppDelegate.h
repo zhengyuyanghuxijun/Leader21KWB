@@ -16,6 +16,9 @@
 @property (nonatomic, strong) UINavigationController* globalNavi;
 @property (nonatomic, strong) HBNLoginViewController *loginVC;
 
+@property (nonatomic, assign) BOOL hasNewMsg;
+@property (nonatomic, assign) BOOL hasNewTask;
+
 + (AppDelegate *)delegate;
 
 - (void)initDHSlideMenu;

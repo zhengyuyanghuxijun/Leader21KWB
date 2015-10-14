@@ -79,6 +79,8 @@
 #define kNotification_LoginSuccess       @"kNotification_LoginSuccess"
 #define kNotification_ReadBookBack       @"kNotification_ReadBookBack"
 
+#define kNotification_GetMsgSuccess       @"kNotification_GetMsgSuccess"
+
 #define kNotification_logoutByForce       @"kNotification_logoutByForce"
 
 #define kNotification_paySuccess       @"kNotification_paySuccess"

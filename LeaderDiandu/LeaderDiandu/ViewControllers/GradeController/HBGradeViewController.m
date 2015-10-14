@@ -89,14 +89,14 @@
 
 -(void)LoginSuccess
 {
-//    //用户是否首次登录
-//    BOOL firstLogin = [[HBDataSaveManager defaultManager] firstLogin];
-//    if (firstLogin) {
-//        //首次登录，不显示红点
-//    }else{
-//        //非首次登录，有新消息或者新作业显示红点
+    //用户是否首次登录(NO：首次登录 YES：非首次登录)
+    BOOL notFirstLogin = [[HBDataSaveManager defaultManager] notFirstLogin];
+    if (notFirstLogin) {
+        //非首次登录，有新消息或者新作业显示红点
         [self requestSystemMsg];
-//    }
+    }else{
+        //首次登录，不显示红点
+    }
 
     [self.readProgressEntityDic removeAllObjects];
 #if saveReadProgress
@@ -894,17 +894,28 @@
             //从数据库读取本地所有消息内容
             NSMutableArray *localMsgArr = [[HBMsgEntityDB sharedInstance] getAllMsgEntity];
             NSString *localMaxMsgId = @"";
+            NSString *newMaxMsgId = @"";
             if (localMsgArr.count > 0) {
                 HBSystemMsgEntity *msgEntity = [localMsgArr objectAtIndex:0];
                 localMaxMsgId = msgEntity.systemMsgId;
             }
             
-            NSArray *arr = [responseObject arrayForKey:@"messages"];
-            for (NSDictionary *dic in arr)
+            NSArray *array = [responseObject arrayForKey:@"messages"];
+            for (NSDictionary *dic in array)
             {
-                NSString *newMsgId = [NSString stringWithFormat:@"%ld", [dic integerForKey:@"id"]];
+                newMaxMsgId = [NSString stringWithFormat:@"%ld", [dic integerForKey:@"id"]];
                 break;
             }
+            
+            //如果新的消息ID值大于数据库中保存的最大消息ID值，则说明有新消息，需要显示红点
+            if ([newMaxMsgId integerValue] > [localMaxMsgId integerValue]) {
+                [AppDelegate delegate].hasNewMsg = YES;
+            }else{
+                [AppDelegate delegate].hasNewMsg = NO;
+            }
+            
+            //获取新消息列表成功后发送通知
+            [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetMsgSuccess object:nil];
         }
     }];
 }
