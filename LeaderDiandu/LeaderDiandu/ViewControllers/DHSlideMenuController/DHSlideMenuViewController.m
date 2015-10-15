@@ -26,38 +26,32 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 @property(nonatomic, strong) UIColor *backgroundColor;
 @property(nonatomic, strong) UIColor *selectedColor;
 
-@property(nonatomic, strong) UIImageView *redPointView;
+@property(nonatomic, strong) UIImageView *msgRedPointView;
+@property(nonatomic, strong) UIImageView *examRedPointView;
 
 @end
 
 @implementation DHSlideMenuViewController
-
-- (id)initWithMenus:(NSArray *)titles MenuImages:(NSArray *)images TabBarControllers:(NSArray*)controllers;{
-    NSParameterAssert(titles);
-    
-//    self = [super initWithStyle:UITableViewStyleGrouped];
-//    if (self) {
-        _titles = titles;
-        _images = images;
-        _controllers = controllers;
-        
-//        //获取新消息列表成功通知
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMsgSuccess) name:kNotification_GetMsgSuccess object:nil];
-//    }
-//    return self;
-    return nil;
-}
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
         //获取新消息列表成功通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMsgSuccess) name:kNotification_GetMsgSuccess object:nil];
+        
+        //学生获取作业列表成功通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getExamSuccess) name:kNotification_GetExamSuccess object:nil];
     }
     return self;
+}
+
+- (void)setMenus:(NSArray *)titles MenuImages:(NSArray *)images TabBarControllers:(NSArray*)controllers;{
+    NSParameterAssert(titles);
+    _titles = titles;
+    _images = images;
+    _controllers = controllers;
 }
 
 #pragma mark - Managing the view
@@ -81,12 +75,6 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kSlideMenuViewControllerCellReuseId];
         [self.view addSubview:_tableView];
     }
-    
-//    self.view.backgroundColor = [UIColor whiteColor];
-//    self.tableView.backgroundColor = [UIColor whiteColor];
-//    self.tableView.tableFooterView = nil;
-//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kSlideMenuViewControllerCellReuseId];
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 #pragma mark - Configuring the view’s layout behavior
@@ -257,16 +245,30 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 //    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     if ([viewCtlName isEqualToString:@"HBMessageViewController"]) { //消息中心
-        if (!self.redPointView) {
-            self.redPointView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"test-btn-right-selected"]];
-            self.redPointView.frame = CGRectMake(150, (60 - 15)/2, 15, 15);
-            [cell addSubview:self.redPointView];
+        if (!self.msgRedPointView) {
+            self.msgRedPointView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"test-btn-right-selected"]];
+            self.msgRedPointView.frame = CGRectMake(150, (60 - 15)/2, 15, 15);
+            [cell addSubview:self.msgRedPointView];
         }
         
         if([AppDelegate delegate].hasNewMsg){
-            self.redPointView.hidden = NO;
+            self.msgRedPointView.hidden = NO;
         }else{
-            self.redPointView.hidden = YES;
+            self.msgRedPointView.hidden = YES;
+        }
+    }
+    
+    if ([viewCtlName isEqualToString:@"HBTestWorkViewController"]) { //我的作业
+        if (!self.examRedPointView) {
+            self.examRedPointView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"test-btn-right-selected"]];
+            self.examRedPointView.frame = CGRectMake(150, (60 - 15)/2, 15, 15);
+            [cell addSubview:self.examRedPointView];
+        }
+        
+        if([AppDelegate delegate].hasNewExam){
+            self.examRedPointView.hidden = NO;
+        }else{
+            self.examRedPointView.hidden = YES;
         }
     }
     
@@ -315,6 +317,11 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 }
 
 -(void)getMsgSuccess
+{
+    [_tableView reloadData];
+}
+
+-(void)getExamSuccess
 {
     [_tableView reloadData];
 }

@@ -17,6 +17,7 @@
 #import "LocalSettings.h"
 #import "UIImageView+AFNetworking.h"
 #import "HBTestWorkManager.h"
+#import "HBExamIdDB.h"
 
 #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 
@@ -236,9 +237,45 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
           
                     [self.taskEntityArr addObject:taskEntity];
                 }
+                
+                //获取作业成功保存数据库
+                if (self.taskEntityArr.count > 0) {
+                    NSMutableArray *examArr = [[NSMutableArray alloc] initWithCapacity:1];
+                    for (HBTaskEntity *taskEntity in self.taskEntityArr) {
+                        [examArr addObject: [NSString stringWithFormat:@"%ld", taskEntity.exam_id]];
+                    }
+                    
+                    if (examArr.count > 0) {
+                        [[HBExamIdDB sharedInstance] updateHBExamId:examArr];
+                    }
+                }
+                
+                //从数据库获取所有作业ID
+                NSMutableArray *examIdArr = [[HBExamIdDB sharedInstance] getAllExamId];
+                NSString *localMaxExamId = @"";
+                NSString *newMaxExamId = @"";
+                
+                if (examIdArr.count > 0) {
+                    localMaxExamId = [examIdArr objectAtIndex:0];
+                }
+                
+                if (self.taskEntityArr.count > 0) {
+                    HBTaskEntity *taskEntity = [self.taskEntityArr objectAtIndex:0];
+                    newMaxExamId = [NSString stringWithFormat:@"%ld", taskEntity.exam_id];
+                }
+                
+                //如果新的作业ID值大于数据库中保存的最大作业ID值，则说明有新作业，需要显示红点
+                if ([newMaxExamId integerValue] > [localMaxExamId integerValue]) {
+                    [AppDelegate delegate].hasNewExam = YES;
+                }else{
+                    [AppDelegate delegate].hasNewExam = NO;
+                }
+                
+                //学生获取作业列表成功后发送通知
+                [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetExamSuccess object:nil];
+                
                 if (self.taskEntityArr.count > 0) {
                     [_tableView reloadData];
-//                    [self addTableView];
                 }
             }
         }];

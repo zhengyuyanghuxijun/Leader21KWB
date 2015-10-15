@@ -31,6 +31,7 @@
 #import "HBPayViewController.h"
 #import "HBSystemMsgEntity.h"
 #import "HBMsgEntityDB.h"
+#import "HBExamIdDB.h"
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
 
@@ -879,6 +880,36 @@
                 }
                 
                 [self reloadGrid];
+                
+                //用户是否首次登录(NO：首次登录 YES：非首次登录)
+                BOOL notFirstLogin = [[HBDataSaveManager defaultManager] notFirstLogin];
+                if (notFirstLogin) {    //非首次登录，有新消息或者新作业显示红点
+                    //从数据库获取所有作业ID
+                    NSMutableArray *examIdArr = [[HBExamIdDB sharedInstance] getAllExamId];
+                    NSString *localMaxExamId = @"";
+                    NSString *newMaxExamId = @"";
+                    
+                    if (examIdArr.count > 0) {
+                        localMaxExamId = [examIdArr objectAtIndex:0];
+                    }
+                    
+                    if (self.taskEntityArr.count > 0) {
+                        HBTaskEntity *taskEntity = [self.taskEntityArr objectAtIndex:0];
+                        newMaxExamId = [NSString stringWithFormat:@"%ld", taskEntity.exam_id];
+                    }
+                    
+                    //如果新的作业ID值大于数据库中保存的最大作业ID值，则说明有新作业，需要显示红点
+                    if ([newMaxExamId integerValue] > [localMaxExamId integerValue]) {
+                        [AppDelegate delegate].hasNewExam = YES;
+                    }else{
+                        [AppDelegate delegate].hasNewExam = NO;
+                    }
+                    
+                    //学生获取作业列表成功后发送通知
+                    [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetExamSuccess object:nil];
+                }else{
+                    //首次登录，不显示红点
+                }
             }
         }];
     }

@@ -17,7 +17,7 @@
 @property (nonatomic, strong) HBNLoginViewController *loginVC;
 
 @property (nonatomic, assign) BOOL hasNewMsg;
-@property (nonatomic, assign) BOOL hasNewTask;
+@property (nonatomic, assign) BOOL hasNewExam;
 
 + (AppDelegate *)delegate;
 
