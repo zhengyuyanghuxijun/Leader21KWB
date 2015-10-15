@@ -9,6 +9,8 @@
 #import "HBHeaderManager.h"
 #import "ASIHTTPRequest.h"
 
+#define SERVICEAPI  @"http://teach.61dear.cn:9080"
+
 @implementation HBHeaderManager
 
 + (id)defaultManager
@@ -23,21 +25,22 @@
 
 - (void)requestGetAvatar:(NSString *)user token:(NSString *)token completion:(HBHeaderReceivedBlock)receivedBlock
 {
-    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
-    
 //    self.receivedBlock = receivedBlock;
     
     NSDictionary *properties = [[NSMutableDictionary alloc] init];
     [properties setValue:token forKey:NSHTTPCookieValue];
-    NSHTTPCookie *cookie = [[NSHTTPCookie alloc] initWithProperties:properties];
-    [ASIHTTPRequest addSessionCookie:cookie];
+    [properties setValue:@"ASIHTTPRequesHeaderCookie" forKey:NSHTTPCookieName];
+    [properties setValue:@"teach.61dear.cn" forKey:NSHTTPCookieDomain];
+    [properties setValue:[NSDate dateWithTimeIntervalSinceNow:60*60] forKey:NSHTTPCookieExpires];
+    [properties setValue:@"/asi-http-request/headers" forKey:NSHTTPCookiePath];
+    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:properties];
     
-    NSString *srtUrl = [NSString stringWithFormat:@"/api/user/avatar?f=%@.png", user];
+    NSString *srtUrl = [NSString stringWithFormat:@"%@/api/user/avatar?f=%@.png",SERVICEAPI , user];
     NSURL *url = [NSURL URLWithString:srtUrl];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-//    [request setDelegate:self];
-    request.didFinishSelector = @selector(requestFinished:);
-    request.didFailSelector = @selector(requestFailed:);
+    [request setUseCookiePersistence:NO];
+    [request setRequestCookies:[NSMutableArray arrayWithObject:cookie]];
+    [request setDelegate:self];
     [request startAsynchronous];
 }
 

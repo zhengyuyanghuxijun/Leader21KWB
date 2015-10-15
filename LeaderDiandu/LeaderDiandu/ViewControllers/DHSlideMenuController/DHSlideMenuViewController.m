@@ -193,17 +193,14 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     arrowImg.image = [UIImage imageNamed:@"menu_icon_user_open"];
     [buttonInfo addSubview:arrowImg];
     
-    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    if (userEntity.type == 1) {
-        if ([_headerName length] == 0) {
-            controlX = 0;
-        } else {
-            controlX = arrowX-typeW-5;
-        }
-        controlY = 0;
-        UIView *typeView = [self createTypeView:CGRectMake(controlX, controlY, typeW, controlH)];
-        [buttonInfo addSubview:typeView];
+    if ([_headerName length] == 0) {
+        controlX = 0;
+    } else {
+        controlX = arrowX-typeW-5;
     }
+    controlY = 0;
+    UIView *typeView = [self createTypeView:CGRectMake(controlX, controlY, typeW, controlH)];
+    [buttonInfo addSubview:typeView];
     
     return view;
 }
@@ -215,19 +212,28 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     typeLbl.textAlignment = NSTextAlignmentCenter;
     typeLbl.textColor = [UIColor whiteColor];
     typeLbl.font = [UIFont systemFontOfSize:16];
-    if (_headerVipTime == 0) {
-        typeLbl.text = @"普通用户";
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity.type == 1) {
+        if (_headerVipTime == 0) {
+            typeLbl.text = @"普通用户";
+            bgView.image = [UIImage imageNamed:@"studentmanage-bg-normal-user"];
+        } else {
+            NSTimeInterval cur = [NSDate date].timeIntervalSince1970;
+            if (_headerVipTime < cur) {
+                //vip过期
+                typeLbl.text = @"VIP过期";
+                bgView.image = [UIImage imageNamed:@"studentmanage-bg-vipover-user"];
+            } else {
+                typeLbl.text = @"VIP会员";
+                bgView.image = [UIImage imageNamed:@"studentmanage-bg-vip-user"];
+            }
+        }
+    } else if (userEntity.type == 10) {
+        typeLbl.text = @"教师";
         bgView.image = [UIImage imageNamed:@"studentmanage-bg-normal-user"];
     } else {
-        NSTimeInterval cur = [NSDate date].timeIntervalSince1970;
-        if (_headerVipTime < cur) {
-            //vip过期
-            typeLbl.text = @"VIP过期";
-            bgView.image = [UIImage imageNamed:@"studentmanage-bg-vipover-user"];
-        } else {
-            typeLbl.text = @"VIP会员";
-            bgView.image = [UIImage imageNamed:@"studentmanage-bg-vip-user"];
-        }
+        typeLbl.text = @"教研员";
+        bgView.image = [UIImage imageNamed:@"studentmanage-bg-normal-user"];
     }
     [bgView addSubview:typeLbl];
     return bgView;

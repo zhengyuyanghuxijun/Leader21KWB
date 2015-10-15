@@ -76,19 +76,27 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
             }else{
                 //为空，表示没有绑定教研员，需要获取教研员列表
                 self.isBinding = NO;
-                [[HBServiceManager defaultManager] requestDirectorList:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
-                    NSArray *directorsArr = [responseObject objectForKey:@"directors"];
-                    [self.leadersArr removeAllObjects];
-                    for (NSDictionary *director in directorsArr) {
-                        [self.leadersArr addObject:director];
-                        [self.leaderSelectedDic setObject:@"0" forKey:[director objectForKey:@"name"]];
-                    }
-                    if (self.leadersArr.count > 0) {
-                        [self addTableView];
-                        [self addBottomBtn];
-                    }
-                }];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self getDirectorList];
+                });
             }
+        }
+    }];
+}
+
+- (void)getDirectorList
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    [[HBServiceManager defaultManager] requestDirectorList:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+        NSArray *directorsArr = [responseObject objectForKey:@"directors"];
+        [self.leadersArr removeAllObjects];
+        for (NSDictionary *director in directorsArr) {
+            [self.leadersArr addObject:director];
+            [self.leaderSelectedDic setObject:@"0" forKey:[director objectForKey:@"name"]];
+        }
+        if (self.leadersArr.count > 0) {
+            [self addTableView];
+            [self addBottomBtn];
         }
     }];
 }
