@@ -35,9 +35,10 @@
     
     //内容
     self.bodyLabel = [[UILabel alloc] init];
-    self.bodyLabel.frame = CGRectMake(10 + 30 + 10, (70 - 25)/2, ScreenWidth - 10 - 30 - 10, 25);
+    self.bodyLabel.frame = CGRectMake(10 + 30 + 10, (70 - 25*2)/2, ScreenWidth - 10 - 30 - 10, 25*2);
     self.bodyLabel.textAlignment = NSTextAlignmentLeft;
     self.bodyLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
+    self.bodyLabel.numberOfLines = 0;
     [self addSubview:self.bodyLabel];
     
     //时间
