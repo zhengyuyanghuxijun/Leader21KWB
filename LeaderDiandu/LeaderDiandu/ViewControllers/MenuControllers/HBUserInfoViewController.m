@@ -29,7 +29,7 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _titleArr = @[@"账号", @"姓名", @"手机"];
+    _titleArr = @[@"账号", @"姓名", @"手机", @"修改密码"];
     
     self.navigationController.navigationBarHidden = NO;
     self.title = @"个人中心";
@@ -94,11 +94,54 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     NSInteger imgWidth = 100;
     NSInteger screenWidth = [UIScreen mainScreen].bounds.size.width;
     UIView *view = [[UIView alloc] init];
-    UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-imgWidth)/2, (200-imgWidth)/2, imgWidth, imgWidth)];
+    float controlW = 70;
+    float controlH = 25;
+    float controlX = (screenWidth-imgWidth-controlW)/2;
+    float controlY = (200-imgWidth)/2;
+    UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, imgWidth, imgWidth)];
     headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
     [view addSubview:headView];
     
+    controlX += imgWidth+10;
+    controlY += (imgWidth-controlH) / 2;
+    UIView *typeView = [self createTypeView:CGRectMake(controlX, controlY, controlW, controlH)];
+    [view addSubview:typeView];
+    
     return view;
+}
+
+- (UIView *)createTypeView:(CGRect)frame
+{
+    UIImageView *bgView = [[UIImageView alloc] initWithFrame:frame];
+    UILabel *typeLbl = [[UILabel alloc] initWithFrame:bgView.bounds];
+    typeLbl.textAlignment = NSTextAlignmentCenter;
+    typeLbl.textColor = [UIColor whiteColor];
+    typeLbl.font = [UIFont systemFontOfSize:16];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity.type == 1) {
+        if (userEntity.vip_time == 0) {
+            typeLbl.text = @"普通用户";
+            bgView.image = [UIImage imageNamed:@"studentmanage-bg-normal-user"];
+        } else {
+            NSTimeInterval cur = [NSDate date].timeIntervalSince1970;
+            if (userEntity.vip_time < cur) {
+                //vip过期
+                typeLbl.text = @"VIP过期";
+                bgView.image = [UIImage imageNamed:@"studentmanage-bg-vipover-user"];
+            } else {
+                typeLbl.text = @"VIP会员";
+                bgView.image = [UIImage imageNamed:@"studentmanage-bg-vip-user"];
+            }
+        }
+    } else if (userEntity.type == 10) {
+        typeLbl.text = @"教师";
+        bgView.image = [UIImage imageNamed:@"studentmanage-bg-normal-user"];
+    } else {
+        typeLbl.text = @"教研员";
+        bgView.image = [UIImage imageNamed:@"studentmanage-bg-normal-user"];
+    }
+    [bgView addSubview:typeLbl];
+    return bgView;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -137,8 +180,10 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
         valueLbl.text = userEntity.name;
     } else if (index == 1) {
         valueLbl.text = userEntity.display_name;
-    } else {
+    } else if (index == 2) {
         valueLbl.text = userEntity.phone;
+    } else if (index == 3) {
+        valueLbl.text = @"******";
     }
     
     return cell;
