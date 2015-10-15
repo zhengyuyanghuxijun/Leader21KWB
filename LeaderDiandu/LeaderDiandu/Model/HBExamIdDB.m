@@ -54,6 +54,8 @@
  */
 - (BOOL)updateHBExamId:(NSArray *)ExamIdArr
 {
+    [self deleteAllExamId];
+    
     __block BOOL isOK = NO;
     UtilFMDatabaseQueue * queue = [UtilFMDatabaseQueue databaseQueueWithPath:[self getHBExamIdDBPath]];
     [queue inDatabase:^(UtilFMDatabase *db)
@@ -116,6 +118,28 @@
      }];
     
     return examIdArr;
+}
+
+/**
+ *  删除所有作业ID
+ *
+ *  @return 操作结果
+ */
+- (BOOL)deleteAllExamId
+{
+    __block BOOL isOK = NO;
+    
+    UtilFMDatabaseQueue * queue = [UtilFMDatabaseQueue databaseQueueWithPath:[self getHBExamIdDBPath]];
+    [queue inDatabase:^(UtilFMDatabase *db)
+    {
+        [db beginTransaction];
+        NSString *str = [NSString stringWithFormat:@"delete from exam_id"];
+        isOK = [db executeUpdate:str];
+        [db commit];
+        [db close];
+    }];
+    
+    return isOK;
 }
 
 - (NSString *)getHBExamIdDBPath
