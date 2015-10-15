@@ -17,6 +17,7 @@
 #import "LocalSettings.h"
 #import "UIImageView+AFNetworking.h"
 #import "HBTestWorkManager.h"
+#import "HBExamIdDB.h"
 
 #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 
@@ -205,6 +206,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                 //学生获取作业列表成功
                 [self.taskEntityArr removeAllObjects];
                 NSArray *arr = [responseObject arrayForKey:@"exams"];
+                NSMutableArray *examArr = [[NSMutableArray alloc] initWithCapacity:1];
                 for (NSDictionary *dic in arr)
                 {
                     HBTaskEntity *taskEntity = [[HBTaskEntity alloc] init];
@@ -235,10 +237,25 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     taskEntity.score = [dic stringForKey:@"score"];
           
                     [self.taskEntityArr addObject:taskEntity];
+                    
+                    [examArr addObject: [NSString stringWithFormat:@"%ld", taskEntity.exam_id]];
                 }
+                
                 if (self.taskEntityArr.count > 0) {
                     [_tableView reloadData];
-//                    [self addTableView];
+                }
+                
+                //获取作业成功保存数据库
+                if (self.taskEntityArr.count > 0) {
+                    if (examArr.count > 0) {
+                        [[HBExamIdDB sharedInstance] updateHBExamId:examArr];
+                        
+                        //获取到最新数据了，要去掉红点提示
+                        [AppDelegate delegate].hasNewExam = NO;
+                        
+                        //学生获取作业列表成功后发送通知
+                        [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetExamSuccess object:nil];
+                    }
                 }
             }
         }];

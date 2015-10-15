@@ -56,6 +56,8 @@
  */
 - (BOOL)updateHBMsgEntity:(NSArray *)msgEntityArr
 {
+    [self deleteAllMsgEntity];
+    
     __block BOOL isOK = NO;
     UtilFMDatabaseQueue * queue = [UtilFMDatabaseQueue databaseQueueWithPath:[self getHBMsgEntityDBPath]];
     [queue inDatabase:^(UtilFMDatabase *db)
@@ -122,6 +124,28 @@
      }];
     
     return msgEntityArr;
+}
+
+/**
+ *  删除所有消息
+ *
+ *  @return 操作结果
+ */
+- (BOOL)deleteAllMsgEntity
+{
+    __block BOOL isOK = NO;
+    
+    UtilFMDatabaseQueue * queue = [UtilFMDatabaseQueue databaseQueueWithPath:[self getHBMsgEntityDBPath]];
+    [queue inDatabase:^(UtilFMDatabase *db)
+     {
+         [db beginTransaction];
+         NSString *str = [NSString stringWithFormat:@"delete from msgEntity"];
+         isOK = [db executeUpdate:str];
+         [db commit];
+         [db close];
+     }];
+    
+    return isOK;
 }
 
 - (NSString *)getHBMsgEntityDBPath

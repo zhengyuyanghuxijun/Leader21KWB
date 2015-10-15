@@ -82,37 +82,17 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
                     [self.msgArr addObject:msgEntity];
                 }
                 
+                if (self.msgArr.count > 0) {
+                    [self addTableView];
+                
                 //获取消息成功保存数据库
                 [[HBMsgEntityDB sharedInstance] updateHBMsgEntity:self.msgArr];
                 
-                //从数据库读取本地所有消息内容
-                NSMutableArray *localMsgArr = [[HBMsgEntityDB sharedInstance] getAllMsgEntity];
-                NSString *localMaxMsgId = @"";
-                NSString *newMaxMsgId = @"";
-                if (localMsgArr.count > 0) {
-                    HBSystemMsgEntity *msgEntity = [localMsgArr objectAtIndex:0];
-                    localMaxMsgId = msgEntity.systemMsgId;
-                }
-                
-                NSArray *array = [responseObject arrayForKey:@"messages"];
-                for (NSDictionary *dic in array)
-                {
-                    newMaxMsgId = [NSString stringWithFormat:@"%ld", [dic integerForKey:@"id"]];
-                    break;
-                }
-                
-                //如果新的消息ID值大于数据库中保存的最大消息ID值，则说明有新消息，需要显示红点
-                if ([newMaxMsgId integerValue] > [localMaxMsgId integerValue]) {
-                    [AppDelegate delegate].hasNewMsg = YES;
-                }else{
-                    [AppDelegate delegate].hasNewMsg = NO;
-                }
-                
+                //获取到最新数据了，要去掉红点提示
+                [AppDelegate delegate].hasNewMsg = NO;
+
                 //获取新消息列表成功后发送通知
                 [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetMsgSuccess object:nil];
-                
-                if (self.msgArr.count > 0) {
-                    [self addTableView];
                 }
             }
         }];

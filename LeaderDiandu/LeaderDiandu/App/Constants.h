@@ -80,6 +80,7 @@
 #define kNotification_ReadBookBack       @"kNotification_ReadBookBack"
 
 #define kNotification_GetMsgSuccess       @"kNotification_GetMsgSuccess"
+#define kNotification_GetExamSuccess       @"kNotification_GetExamSuccess"
 
 #define kNotification_logoutByForce       @"kNotification_logoutByForce"
 

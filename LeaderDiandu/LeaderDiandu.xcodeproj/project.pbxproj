@@ -22,6 +22,7 @@
 		0D143F331BD006BB00F5D9EE /* hbcontentlist.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F2E1BD006BB00F5D9EE /* hbcontentlist.db */; };
 		0D143F341BD006BB00F5D9EE /* hbreadprogress.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F2F1BD006BB00F5D9EE /* hbreadprogress.db */; };
 		0D143F351BD006BB00F5D9EE /* msgentity.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F301BD006BB00F5D9EE /* msgentity.db */; };
+		0D143F391BD00FA800F5D9EE /* HBExamIdDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F381BD00FA800F5D9EE /* HBExamIdDB.m */; };
 		0D3F6D0E1BADA391005B4358 /* HBTestWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */; };
 		0D3F6D161BAE8F64005B4358 /* HBMyWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */; };
 		0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */; };
@@ -265,6 +266,8 @@
 		0D143F2E1BD006BB00F5D9EE /* hbcontentlist.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbcontentlist.db; sourceTree = "<group>"; };
 		0D143F2F1BD006BB00F5D9EE /* hbreadprogress.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbreadprogress.db; sourceTree = "<group>"; };
 		0D143F301BD006BB00F5D9EE /* msgentity.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = msgentity.db; sourceTree = "<group>"; };
+		0D143F371BD00FA800F5D9EE /* HBExamIdDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBExamIdDB.h; sourceTree = "<group>"; };
+		0D143F381BD00FA800F5D9EE /* HBExamIdDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBExamIdDB.m; sourceTree = "<group>"; };
 		0D3F6D0C1BADA391005B4358 /* HBTestWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestWorkManager.h; sourceTree = "<group>"; };
 		0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestWorkManager.m; sourceTree = "<group>"; };
 		0D3F6D141BAE8F64005B4358 /* HBMyWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkViewController.h; sourceTree = "<group>"; };
@@ -1201,6 +1204,8 @@
 		18DF0EDD1BCBA01400376686 /* HBModelDB */ = {
 			isa = PBXGroup;
 			children = (
+				0D143F371BD00FA800F5D9EE /* HBExamIdDB.h */,
+				0D143F381BD00FA800F5D9EE /* HBExamIdDB.m */,
 				181E307E1BA2C28600BBA92F /* HBContentDetailDB.h */,
 				181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */,
 				18E57D611BA52AC400198BE9 /* HBContentListDB.h */,
@@ -1528,6 +1533,7 @@
 				18F367F21BA9541100EBFEC4 /* HBSetStuGroupCell.m in Sources */,
 				0D0190141B98B1B500A92F59 /* HBBindPhoneViewController.m in Sources */,
 				0DD214721B960148009E3DB9 /* HBTestWorkViewController.m in Sources */,
+				0D143F391BD00FA800F5D9EE /* HBExamIdDB.m in Sources */,
 				0D018FF41B97513400A92F59 /* HBUserInfoViewController.m in Sources */,
 				0DB5372A1B8F5DEE0023A3F7 /* AFURLSessionManager.m in Sources */,
 				0DBE35821B8CBE4300179237 /* MBProgressHUD.m in Sources */,
