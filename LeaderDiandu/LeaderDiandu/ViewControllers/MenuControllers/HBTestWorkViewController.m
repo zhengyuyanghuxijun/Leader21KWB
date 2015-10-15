@@ -206,6 +206,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                 //学生获取作业列表成功
                 [self.taskEntityArr removeAllObjects];
                 NSArray *arr = [responseObject arrayForKey:@"exams"];
+                NSMutableArray *examArr = [[NSMutableArray alloc] initWithCapacity:1];
                 for (NSDictionary *dic in arr)
                 {
                     HBTaskEntity *taskEntity = [[HBTaskEntity alloc] init];
@@ -236,6 +237,8 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     taskEntity.score = [dic stringForKey:@"score"];
           
                     [self.taskEntityArr addObject:taskEntity];
+                    
+                    [examArr addObject: [NSString stringWithFormat:@"%ld", taskEntity.exam_id]];
                 }
                 
                 if (self.taskEntityArr.count > 0) {
@@ -244,11 +247,6 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                 
                 //获取作业成功保存数据库
                 if (self.taskEntityArr.count > 0) {
-                    NSMutableArray *examArr = [[NSMutableArray alloc] initWithCapacity:1];
-                    for (HBTaskEntity *taskEntity in self.taskEntityArr) {
-                        [examArr addObject: [NSString stringWithFormat:@"%ld", taskEntity.exam_id]];
-                    }
-                    
                     if (examArr.count > 0) {
                         [[HBExamIdDB sharedInstance] updateHBExamId:examArr];
                         

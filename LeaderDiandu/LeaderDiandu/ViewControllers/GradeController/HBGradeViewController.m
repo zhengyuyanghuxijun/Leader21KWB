@@ -54,7 +54,10 @@
 
 @property (nonatomic, strong)NSMutableDictionary *vipBookDic;
 
+@property (nonatomic, strong)UIButton *leftButton;
 @property (nonatomic, strong)UIButton *rightButton;
+
+@property (nonatomic, strong)UIImageView *redPointImgView;
 
 @end
 
@@ -79,6 +82,12 @@
         
         //用户阅读书籍返回通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReadBookBack:) name:kNotification_ReadBookBack object:nil];
+        
+        //获取新消息列表成功通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getMsgSuccess) name:kNotification_GetMsgSuccess object:nil];
+        
+        //学生获取作业列表成功通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getExamSuccess) name:kNotification_GetExamSuccess object:nil];
     }
     return self;
 }
@@ -86,6 +95,30 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)getMsgSuccess
+{
+    //有新消息或者新作业，显示红点，都没有则不显示
+    if ([AppDelegate delegate].hasNewMsg || [AppDelegate delegate].hasNewExam) {
+        [self.leftButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        self.redPointImgView.hidden = NO;
+    }else{
+        [self.leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.redPointImgView.hidden = YES;
+    }
+}
+
+-(void)getExamSuccess
+{
+    //有新消息或者新作业，显示红点，都没有则不显示
+    if ([AppDelegate delegate].hasNewMsg || [AppDelegate delegate].hasNewExam) {
+        [self.leftButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        self.redPointImgView.hidden = NO;
+    }else{
+        [self.leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.redPointImgView.hidden = YES;
+    }
 }
 
 -(void)LoginSuccess
@@ -446,10 +479,15 @@
 
 - (void)initButton
 {
-    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(8, 20, 44, 44)];
-    [leftButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-menu"] forState:UIControlStateNormal];
-    [leftButton addTarget:self action:@selector(ToggleMenuPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:leftButton];
+    self.leftButton = [[UIButton alloc] initWithFrame:CGRectMake(8, 20, 44, 44)];
+    [self.leftButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-menu"] forState:UIControlStateNormal];
+    [self.leftButton addTarget:self action:@selector(ToggleMenuPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.leftButton];
+    
+    self.redPointImgView = [[UIImageView alloc] initWithFrame:CGRectMake(44 - 15, 5, 15, 15)];
+    self.redPointImgView.image = [UIImage imageNamed:@"test-btn-right-selected"];
+    self.redPointImgView.hidden = YES;
+    [self.leftButton addSubview:self.redPointImgView];
     
     self.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 8 - 44, 20, 44, 44)];
     [self.rightButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-class"] forState:UIControlStateNormal];
@@ -890,7 +928,8 @@
                     NSString *newMaxExamId = @"";
                     
                     if (examIdArr.count > 0) {
-                        localMaxExamId = [examIdArr objectAtIndex:0];
+                        NSArray *destArr = [examIdArr sortedArrayUsingComparator:cmptr];
+                        localMaxExamId = [destArr objectAtIndex:destArr.count - 1];
                     }
                     
                     if (self.taskEntityArr.count > 0) {

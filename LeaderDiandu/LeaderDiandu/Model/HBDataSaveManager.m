@@ -97,6 +97,9 @@
     
     self.wifiDownload = [wifiDownloadStr boolValue];
     self.showEnBookName = [showEnBookNameStr boolValue];
+    
+    [AppDelegate delegate].hasNewMsg = NO;
+    [AppDelegate delegate].hasNewExam = NO;
 }
 
 - (void)saveFirstLogin
