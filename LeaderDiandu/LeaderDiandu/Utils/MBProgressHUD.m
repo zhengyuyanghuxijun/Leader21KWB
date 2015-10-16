@@ -378,6 +378,7 @@
         }
         else {
             lWidth = frame.size.width - 4 * margin;
+            lHeight *= 2;
         }
         
         if (lWidth < 100.0f) {
@@ -386,9 +387,10 @@
 		
         // Set label properties
         label.font = self.labelFont;
-        label.adjustsFontSizeToFitWidth = YES;
+        label.adjustsFontSizeToFitWidth = NO;
         label.textAlignment = NSTextAlignmentCenter;
         label.opaque = NO;
+        label.numberOfLines = 0;
         label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor whiteColor];
         label.text = self.labelText;

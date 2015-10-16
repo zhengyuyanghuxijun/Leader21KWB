@@ -125,6 +125,13 @@
 {
     NSString *phone     = self.inputPhoneNumber.text;
     NSString *smsCode   = self.inputVerifyCode.text;
+    if ( [NSString checkTextNULL:phone] || ![phone isPhoneNumInput]) {
+        [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
+        return;
+    } else if ([smsCode length] == 0) {
+        [MBHudUtil showTextView:@"请输入验证码" inView:nil];
+        return;
+    }
     if (smsCode == nil) {
         smsCode = [self.smsDict objectForKey:@"sms_code"];
     }
@@ -148,6 +155,13 @@
 {
     NSString *phone     = self.inputPhoneNumber.text;
     NSString *smsCode   = self.inputVerifyCode.text;
+    if ( [NSString checkTextNULL:phone] || ![phone isPhoneNumInput]) {
+        [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
+        return;
+    } else if ([smsCode length] == 0) {
+        [MBHudUtil showTextView:@"请输入验证码" inView:nil];
+        return;
+    }
     if (smsCode == nil) {
         smsCode = [self.smsDict objectForKey:@"sms_code"];
     }
@@ -205,8 +219,6 @@
 {
     [self tapToHideKeyboard:nil];
     
-    [self.inputPhoneNumber resignFirstResponder];
-    
     NSString *phoneNum = self.inputPhoneNumber.text;
     if ( [NSString checkTextNULL:phoneNum] || ![phoneNum isPhoneNumInput]) {
         [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
@@ -230,6 +242,9 @@
                 return ;
             }
             self.mtimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(beginCountDow) userInfo:nil repeats:YES];
+        } else if (error.code == -1011) {
+            NSString *errMsg = [NSString stringWithFormat:@"手机号%@已经被注册过课外宝账号了，不能重复注册。", phoneNum];
+            [MBHudUtil showTextViewAfter:errMsg];
         } else {
             [MBHudUtil showTextViewAfter:@"获取验证码失败"];
         }

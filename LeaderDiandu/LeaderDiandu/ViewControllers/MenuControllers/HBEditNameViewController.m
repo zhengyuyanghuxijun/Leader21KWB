@@ -64,15 +64,22 @@
     [self.view endEditing:YES];
     
     NSString *text = _textField.text;
-    if (text) {
-        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-        [[HBServiceManager defaultManager] requestUpdateUser:userEntity.name token:userEntity.token display_name:text gender:userEntity.gender completion:^(id responseObject, NSError *error) {
-            if (responseObject) {
-                [[HBDataSaveManager defaultManager] updateDisplayName:responseObject];
-                [Navigator popController];
-            }
-        }];
+    if ([text length] == 0) {
+        [MBHudUtil showTextView:@"请输入名字" inView:nil];
+        return;
     }
+    [MBHudUtil showActivityView:nil inView:nil];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    [[HBServiceManager defaultManager] requestUpdateUser:userEntity.name token:userEntity.token display_name:text gender:userEntity.gender age:12 completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
+        if (error.code == 0) {
+            [[HBDataSaveManager defaultManager] updateDisplayName:responseObject];
+            [MBHudUtil showTextView:@"修改成功" inView:nil];
+            [Navigator popController];
+        } else {
+            [MBHudUtil showTextView:@"修改失败" inView:nil];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

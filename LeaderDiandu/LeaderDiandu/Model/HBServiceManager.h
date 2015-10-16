@@ -74,10 +74,10 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param user             用户名
  *  @param token            登录返回的凭证
  *  @gender 性别， 1-男，2-女
- *  @display_name gender 等参数至少有一个即可，多值可选
+ *  @display_name gender age 等参数至少有一个即可，多值可选
  *  @param receivedBlock 回调Block
  */
-- (void)requestUpdateUser:(NSString *)user token:(NSString *)token display_name:(NSString *)display_name gender:(NSInteger)gender completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestUpdateUser:(NSString *)user token:(NSString *)token display_name:(NSString *)display_name gender:(NSInteger)gender age:(NSInteger)age  completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  绑定手机
@@ -88,7 +88,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param sms_code         短信验证码
  *  @param receivedBlock 回调Block
  */
-- (void)requestUpdatePhone:(NSString *)user token:(NSString *)token phone:(NSString *)phone sms_code:(NSString *)sms_code completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestUpdatePhone:(NSString *)user token:(NSString *)token phone:(NSString *)phone sms_code:(NSString *)sms_code code_id:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  忘记密码

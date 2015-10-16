@@ -135,13 +135,16 @@
     [self Post:@"/api/user" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestUpdateUser:(NSString *)user token:(NSString *)token display_name:(NSString *)display_name gender:(NSInteger)gender completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestUpdateUser:(NSString *)user token:(NSString *)token display_name:(NSString *)display_name gender:(NSInteger)gender age:(NSInteger)age completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
     [dicInfo setObject:token    forKey:@"token"];
-    [dicInfo setObject:display_name    forKey:@"display_name"];
+    if (display_name) {
+        [dicInfo setObject:display_name    forKey:@"display_name"];
+    }
     [dicInfo setObject:@(gender)    forKey:@"gender"];
+    [dicInfo setObject:@(age)    forKey:@"age"];
     
     if (_receivedBlock) {
         return;
@@ -150,13 +153,14 @@
     [self Post:@"/api/user/update" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestUpdatePhone:(NSString *)user token:(NSString *)token phone:(NSString *)phone sms_code:(NSString *)sms_code completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestUpdatePhone:(NSString *)user token:(NSString *)token phone:(NSString *)phone sms_code:(NSString *)sms_code code_id:(NSString *)code_id  completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
     [dicInfo setObject:token    forKey:@"token"];
     [dicInfo setObject:phone    forKey:@"phone"];
     [dicInfo setObject:sms_code    forKey:@"sms_code"];
+    [dicInfo setObject:code_id    forKey:@"code_id"];
     
     if (_receivedBlock) {
         return;

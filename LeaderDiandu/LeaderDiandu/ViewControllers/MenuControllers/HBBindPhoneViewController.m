@@ -7,12 +7,20 @@
 //
 
 #import "HBBindPhoneViewController.h"
+#import "NSString+Verify.h"
+#import "HBServiceManager.h"
 
 @interface HBBindPhoneViewController ()
 {
     UITextField     *_phoneEdit;
     UITextField     *_codeEdit;
 }
+
+@property (nonatomic, strong) UIButton *getCodeButton;
+
+@property (nonatomic, assign) int countDownNum;
+@property (nonatomic, strong) NSTimer *mtimer;
+@property (nonatomic, strong) NSDictionary *smsDict;
 
 @end
 
@@ -79,6 +87,7 @@
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitle:@"确认修改" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(modifyButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.getCodeButton = button;
     [self.view addSubview:button];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToHideKeyboard:)];
@@ -94,11 +103,93 @@
 - (void)codeBtnAction:(id)sender
 {
     [self.view endEditing:YES];
+    
+    NSString *phoneNum = _phoneEdit.text;
+    if ( [NSString checkTextNULL:phoneNum] || ![phoneNum isPhoneNumInput]) {
+        [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
+        return;
+    }
+    HBRequestSmsType smsType = HBRequestSmsByBindPhone;
+    
+    //绑定手机的短信下发
+    [MBHudUtil showActivityView:nil inView:nil];
+    [[HBServiceManager defaultManager] requestSmsCode:nil token:nil phone:phoneNum service_type:smsType completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
+        if (error.code == 0) {
+            self.smsDict = responseObject;
+            //发送了 验证码 进入倒计时
+            self.countDownNum = 60;
+            [self beginCountDow];
+            if ([_mtimer isValid]) {
+                NSLog(@"再次倒计时");
+                return ;
+            }
+            self.mtimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(beginCountDow) userInfo:nil repeats:YES];
+        } else if (error.code == -1011) {
+            NSString *errMsg = [NSString stringWithFormat:@"手机号%@已经被注册过课外宝账号了，不能重复绑定。", phoneNum];
+            [MBHudUtil showTextViewAfter:errMsg];
+        } else {
+            [MBHudUtil showTextViewAfter:@"获取验证码失败"];
+        }
+    }];
 }
 
 - (void)modifyButtonAction:(id)sender
 {
     [self.view endEditing:YES];
+    
+    NSString *phoneNum = _phoneEdit.text;
+    NSString *codeNum = _codeEdit.text;
+    if ( [NSString checkTextNULL:phoneNum] || ![phoneNum isPhoneNumInput]) {
+        [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
+        return;
+    } else if ([codeNum length] == 0) {
+        [MBHudUtil showTextView:@"请输入验证码" inView:nil];
+        return;
+    }
+
+    [MBHudUtil showActivityView:nil inView:nil];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    [[HBServiceManager defaultManager] requestUpdatePhone:userEntity.name token:userEntity.token phone:phoneNum sms_code:codeNum code_id:self.smsDict[@"code_id"] completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
+        if ([[responseObject objectForKey:@"result"] isEqualToString:@"OK"]) {
+            [MBHudUtil showTextViewAfter:@"绑定手机成功"];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [MBHudUtil showTextViewAfter:@"绑定手机失败"];
+        }
+    }];
+}
+
+#pragma mark -  验证码按钮
+- (void)beginCountDow
+{
+    if (_countDownNum <= 0) {
+        self.getCodeButton.userInteractionEnabled = YES;
+        [self.getCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [self.mtimer invalidate];
+        self.mtimer = nil;
+        
+    }else{
+        self.getCodeButton.userInteractionEnabled = NO;
+        [self.getCodeButton setTitle:[NSString stringWithFormat:@"%d秒后重试", _countDownNum] forState:UIControlStateNormal];
+    }
+    self.countDownNum--;
+}
+
+- (BOOL)checkIfNeedReturn
+{
+    BOOL needReturn = NO;
+    if (![_phoneEdit.text isPhoneNumInput]) {
+        [MBHudUtil showTextView:@"请输入手机号码" inView:nil];
+        needReturn = YES;
+    }
+    else if ([NSString checkTextNULL:_codeEdit.text]) {
+        [MBHudUtil showTextView:@"请输入验证码" inView:nil];
+        needReturn = YES;
+    }
+    return needReturn;
 }
 
 - (void)didReceiveMemoryWarning {
