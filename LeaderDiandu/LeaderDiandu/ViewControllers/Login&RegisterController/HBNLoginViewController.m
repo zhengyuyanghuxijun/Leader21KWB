@@ -66,7 +66,7 @@
     accountView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:accountView];
     
-    float controlX = 30;
+    float controlX = 20;
     controlY = 0;
     float controlW = screenW - controlX;
     float controlH = 45;
@@ -96,7 +96,7 @@
     [_forgetPassword addTarget:self action:@selector(forgetPassword:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_forgetPassword];
     
-    controlX = 30;
+    controlX = 20;
     controlY = CGRectGetMaxY(_forgetPassword.frame) + 30;
     controlW = screenW - controlX*2;
     controlH = 45;
@@ -140,8 +140,8 @@
             //登录成功
             [[HBDataSaveManager defaultManager] loadFirstLogin];
             [[HBDataSaveManager defaultManager] saveFirstLogin];
-            
             [[HBDataSaveManager defaultManager] loadSettings];
+            
             self.loginButton.enabled = YES;
             [Navigator popToRootController];
             [[AppDelegate delegate] initDHSlideMenu];

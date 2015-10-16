@@ -27,32 +27,42 @@
     self.title = @"修改名字";
     
     CGRect frame = self.view.frame;
-    float controlX = 20;
-    float controlY = 20 + KHBNaviBarHeight;
+    float controlX = 0;
+    float controlY = KHBNaviBarHeight + 50;
     float width = frame.size.width - controlX*2;
-    UIImageView *editBg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, width, 50)];
-    editBg.userInteractionEnabled = YES;
-    UIImage *image = [UIImage imageNamed:@"user_editbg"];
-    editBg.image = image;
+    UIView *editBg = [[UIView alloc] initWithFrame:CGRectMake(controlX, controlY, width, 50)];
+    editBg.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:editBg];
     
-    _textField = [[UITextField alloc] initWithFrame:CGRectMake(20, 5, width-40, 40)];
-//    _textField.placeholder = @"请输入老师ID";
+    controlX = 20;
+    width -= controlX*2;
+    _textField = [[UITextField alloc] initWithFrame:CGRectMake(controlX, 5, width, 40)];
+    _textField.placeholder = @"请输入名字";
     [editBg addSubview:_textField];
     
     controlY = CGRectGetMaxY(editBg.frame) + 30;
     float buttonHeight = 50;
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, width, buttonHeight)];
-    image = [UIImage imageNamed:@"user_button"]; //resizableImageWithCapInsets:UIEdgeInsetsMake(13, 100, 13, 100) resizingMode:UIImageResizingModeStretch];
-    [button setBackgroundImage:image forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitle:@"确认修改" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(modifyButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToHideKeyboard:)];
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void)tapToHideKeyboard:(id)sender
+{
+    [_textField resignFirstResponder];
 }
 
 - (void)modifyButtonAction:(id)sender
 {
+    [self.view endEditing:YES];
+    
     NSString *text = _textField.text;
     if (text) {
         HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];

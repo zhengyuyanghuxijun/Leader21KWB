@@ -23,6 +23,7 @@
 		0D143F341BD006BB00F5D9EE /* hbreadprogress.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F2F1BD006BB00F5D9EE /* hbreadprogress.db */; };
 		0D143F351BD006BB00F5D9EE /* msgentity.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F301BD006BB00F5D9EE /* msgentity.db */; };
 		0D143F391BD00FA800F5D9EE /* HBExamIdDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F381BD00FA800F5D9EE /* HBExamIdDB.m */; };
+		0D143F3D1BD0D6E300F5D9EE /* HBModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F3C1BD0D6E300F5D9EE /* HBModifyPwdViewController.m */; };
 		0D3F6D0E1BADA391005B4358 /* HBTestWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */; };
 		0D3F6D161BAE8F64005B4358 /* HBMyWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */; };
 		0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */; };
@@ -268,6 +269,8 @@
 		0D143F301BD006BB00F5D9EE /* msgentity.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = msgentity.db; sourceTree = "<group>"; };
 		0D143F371BD00FA800F5D9EE /* HBExamIdDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBExamIdDB.h; sourceTree = "<group>"; };
 		0D143F381BD00FA800F5D9EE /* HBExamIdDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBExamIdDB.m; sourceTree = "<group>"; };
+		0D143F3B1BD0D6E300F5D9EE /* HBModifyPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBModifyPwdViewController.h; sourceTree = "<group>"; };
+		0D143F3C1BD0D6E300F5D9EE /* HBModifyPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBModifyPwdViewController.m; sourceTree = "<group>"; };
 		0D3F6D0C1BADA391005B4358 /* HBTestWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestWorkManager.h; sourceTree = "<group>"; };
 		0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestWorkManager.m; sourceTree = "<group>"; };
 		0D3F6D141BAE8F64005B4358 /* HBMyWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkViewController.h; sourceTree = "<group>"; };
@@ -945,6 +948,8 @@
 				0D0190101B98B19200A92F59 /* HBEditNameViewController.m */,
 				0D0190121B98B1B500A92F59 /* HBBindPhoneViewController.h */,
 				0D0190131B98B1B500A92F59 /* HBBindPhoneViewController.m */,
+				0D143F3B1BD0D6E300F5D9EE /* HBModifyPwdViewController.h */,
+				0D143F3C1BD0D6E300F5D9EE /* HBModifyPwdViewController.m */,
 			);
 			name = HBUserInfoViewControllers;
 			sourceTree = "<group>";
@@ -1548,6 +1553,7 @@
 				0D7A76921B92064100BC50A0 /* HBBaseEntity.m in Sources */,
 				0D3F6D1C1BAEA41A005B4358 /* HBMyWorkView.m in Sources */,
 				0D8C27C61BCBABE8008F2F9F /* HBOptionButton.m in Sources */,
+				0D143F3D1BD0D6E300F5D9EE /* HBModifyPwdViewController.m in Sources */,
 				18C316841BA07A9D004F716E /* HBPublishWorkViewController.m in Sources */,
 				0DBE35CB1B8CD7BE00179237 /* HBForgetPwdViewController.m in Sources */,
 				18DF0ED21BCB555100376686 /* HBBillViewController.m in Sources */,

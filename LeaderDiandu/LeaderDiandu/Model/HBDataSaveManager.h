@@ -26,7 +26,7 @@
 - (void)setUserEntityByDict:(NSDictionary *)dict;
 - (void)updateDisplayName:(NSDictionary *)dict;
 
-- (void)saveUserByDict:(NSDictionary *)dict;
+- (void)saveUserByDict:(NSDictionary *)dict pwd:(NSString *)pwd;
 - (NSDictionary *)loadUser;
 
 - (void)saveSettingsByDict:(NSDictionary *)dict;

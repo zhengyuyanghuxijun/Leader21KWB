@@ -91,7 +91,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
 - (void)requestUpdatePhone:(NSString *)user token:(NSString *)token phone:(NSString *)phone sms_code:(NSString *)sms_code completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
- *  修改密码
+ *  忘记密码
  *
  *  @param user             用户名
  *  @param token            登录返回的凭证
@@ -100,6 +100,17 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param receivedBlock 回调Block
  */
 - (void)requestUpdatePwd:(NSString *)phone token:(NSString *)token password:(NSString *)password sms_code:(NSString *)sms_code code_id:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
+ *  修改密码
+ *
+ *  @param user             用户名
+ *  @param token            登录返回的凭证
+ *  @param old_password     旧密码
+ *  @param new_password     新密码
+ *  @param receivedBlock 回调Block
+ */
+- (void)requestModifyPwd:(NSString *)user token:(NSString *)token old_password:(NSString *)old_password new_password:(NSString *)new_password completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  验证邀请码

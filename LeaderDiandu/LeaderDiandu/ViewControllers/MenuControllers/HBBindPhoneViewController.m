@@ -25,59 +25,80 @@
     self.navigationController.navigationBarHidden = NO;
     self.title = @"绑定手机号";
     
-    CGRect frame = self.view.frame;
-    float controlX = 20;
-    float controlY = 20 + KHBNaviBarHeight;
-    float width = frame.size.width - controlX*2;
-    UIImageView *phoneEditBg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, width, 50)];
-    phoneEditBg.userInteractionEnabled = YES;
-    UIImage *image = [UIImage imageNamed:@"user_editbg"];
-    phoneEditBg.image = image;
-    [self.view addSubview:phoneEditBg];
+    float screenW = self.view.frame.size.width;
+    float controlX = 0;
+    float controlY = KHBNaviBarHeight + 50;
+    float controlW = screenW;
+    float controlH = 45;
+    UIView *editBg = [[UIView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH*2+1)];
+    editBg.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:editBg];
     
-    _phoneEdit = [[UITextField alloc] initWithFrame:CGRectMake(20, 5, width-40, 40)];
-    [phoneEditBg addSubview:_phoneEdit];
-    
-    controlY = CGRectGetMaxY(phoneEditBg.frame) + 20;
-    UIImageView *codeEditBg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, width, 50)];
-    codeEditBg.userInteractionEnabled = YES;
-    image = [UIImage imageNamed:@"user_editbg"];
-    codeEditBg.image = image;
-    [self.view addSubview:codeEditBg];
-    
-    float codeBtnWid = 80;
-    controlX = width - codeBtnWid - 10;
-    UIButton *codeBtn = [[UIButton alloc] initWithFrame:CGRectMake(controlX, 5, codeBtnWid, 40)];
-    codeBtn.backgroundColor = [UIColor clearColor];
-    [codeBtn setTitleColor:RGBCOLOR(249, 154, 11) forState:UIControlStateNormal];
-    [codeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
-    codeBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    [codeBtn addTarget:self action:@selector(codeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [codeEditBg addSubview:codeBtn];
-    
-    _codeEdit = [[UITextField alloc] initWithFrame:CGRectMake(20, 5, controlX-40, 40)];
-    [codeEditBg addSubview:_codeEdit];
-    
-    float buttonHeight = 50;
     controlX = 20;
-    controlY = CGRectGetMaxY(codeEditBg.frame) + 20;
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, width, buttonHeight)];
-    image = [UIImage imageNamed:@"user_button"];
-    [button setBackgroundImage:image forState:UIControlStateNormal];
+    controlY = 0;
+    controlW = screenW-controlX;
+    _phoneEdit = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    _phoneEdit.placeholder = @"请输入手机号";
+    [editBg addSubview:_phoneEdit];
+    
+    controlY += controlH;
+    UILabel *lineLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, 1)];
+    lineLbl.backgroundColor = RGBEQ(239);
+    [editBg addSubview:lineLbl];
+    
+    float buttonW = 100;
+    controlY += 1;
+    controlW -= buttonW;
+    _codeEdit = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    _codeEdit.placeholder = @"验证码";
+    [editBg addSubview:_codeEdit];
+    
+    controlX = screenW - buttonW;
+    controlH = 25;
+    controlY += 10;
+    lineLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, 1, controlH)];
+    lineLbl.backgroundColor = RGBEQ(239);
+    [editBg addSubview:lineLbl];
+    
+    controlX += 5;
+    buttonW -= 10;
+    UIButton *codeBtn = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, buttonW, controlH)];
+    codeBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    [codeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
+    [codeBtn setTitleColor:KLeaderRGB forState:UIControlStateNormal];
+    [codeBtn addTarget:self action:@selector(codeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [editBg addSubview:codeBtn];
+    
+    controlX = 20;
+    controlY = CGRectGetMaxY(editBg.frame) + 30;
+    controlW = screenW - controlX*2;
+    controlH = 45;
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    [button setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitle:@"确认修改" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(modifyButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToHideKeyboard:)];
+    [self.view addGestureRecognizer:tap];
+}
+
+- (void)tapToHideKeyboard:(id)sender
+{
+    [_phoneEdit resignFirstResponder];
+    [_codeEdit resignFirstResponder];
 }
 
 - (void)codeBtnAction:(id)sender
 {
-    
+    [self.view endEditing:YES];
 }
 
 - (void)modifyButtonAction:(id)sender
 {
-    
+    [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {

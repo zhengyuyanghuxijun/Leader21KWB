@@ -65,7 +65,7 @@
     accountView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:accountView];
     
-    float controlX = 30;
+    float controlX = 20;
     controlY = 0;
     float controlW = screenW - controlX;
     self.inputPhoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
@@ -101,7 +101,7 @@
     [_getCodeButton addTarget:self action:@selector(fetchVerifyCode:) forControlEvents:UIControlEventTouchUpInside];
     [accountView addSubview:_getCodeButton];
     
-    controlX = 30;
+    controlX = 20;
     controlY = CGRectGetMaxY(accountView.frame) + 30;
     controlW = screenW - controlX*2;
     controlH = 45;

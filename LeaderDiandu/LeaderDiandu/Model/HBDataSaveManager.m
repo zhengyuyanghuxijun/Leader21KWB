@@ -27,7 +27,7 @@
     if (newDict[@"token"] == nil) {
         newDict[@"token"] = _userEntity.token;
     }
-    [self saveUserByDict:newDict];
+    [self saveUserByDict:newDict pwd:self.userEntity.pwd];
 }
 
 - (void)updateDisplayName:(NSDictionary *)dict
@@ -41,11 +41,13 @@
     [userDefault synchronize];
 }
 
-- (void)saveUserByDict:(NSDictionary *)dict
+- (void)saveUserByDict:(NSDictionary *)dict pwd:(NSString *)pwd
 {
     self.userEntity = [[HBUserEntity alloc] initWithDictionary:dict];
+    self.userEntity.pwd = pwd;
     
     NSMutableDictionary *newDic = [NSMutableDictionary dictionaryWithDictionary:dict];
+    [newDic setValue:pwd forKey:@"pwd"];
     id phone = newDic[@"phone"];
     if ([phone isKindOfClass:[NSNull class]]) {
         [newDic setValue:@"" forKey:@"phone"];

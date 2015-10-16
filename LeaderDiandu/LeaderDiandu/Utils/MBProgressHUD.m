@@ -386,7 +386,7 @@
 		
         // Set label properties
         label.font = self.labelFont;
-        label.adjustsFontSizeToFitWidth = NO;
+        label.adjustsFontSizeToFitWidth = YES;
         label.textAlignment = NSTextAlignmentCenter;
         label.opaque = NO;
         label.backgroundColor = [UIColor clearColor];

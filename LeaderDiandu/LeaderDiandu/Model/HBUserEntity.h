@@ -20,6 +20,7 @@
 @property (nonatomic, strong)NSString *display_name;
 @property (nonatomic, strong)NSString *name;
 @property (nonatomic, strong)NSString *phone;
+@property (nonatomic, strong)NSString *pwd;
 @property (nonatomic, strong)NSString *token;
 @property (nonatomic, assign)NSTimeInterval vip_time;
 

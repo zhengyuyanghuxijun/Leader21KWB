@@ -10,8 +10,10 @@
 #import "HBServiceManager.h"
 #import "HBEditNameViewController.h"
 #import "HBBindPhoneViewController.h"
+#import "HBModifyPwdViewController.h"
 #import "HBDataSaveManager.h"
 #import "HBHeaderManager.h"
+#import "TimeIntervalUtils.h"
 
 static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewControllerCellReuseId";
 
@@ -19,6 +21,8 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
 {
     NSArray     *_titleArr;
     UITableView *_tableView;
+    
+    UIView      *_headerView;
 }
 
 @end
@@ -91,23 +95,26 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    if (_headerView) {
+        return _headerView;
+    }
     NSInteger imgWidth = 100;
     NSInteger screenWidth = [UIScreen mainScreen].bounds.size.width;
-    UIView *view = [[UIView alloc] init];
+    _headerView = [[UIView alloc] init];
     float controlW = 70;
     float controlH = 25;
     float controlX = (screenWidth-imgWidth-controlW)/2;
     float controlY = (200-imgWidth)/2;
-    UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, imgWidth, imgWidth)];
-    headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
-    [view addSubview:headView];
+    UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, imgWidth, imgWidth)];
+    headImage.image = [UIImage imageNamed:@"menu_user_pohoto"];
+    [_headerView addSubview:headImage];
     
     controlX += imgWidth+10;
     controlY += (imgWidth-controlH) / 2;
     UIView *typeView = [self createTypeView:CGRectMake(controlX, controlY, controlW, controlH)];
-    [view addSubview:typeView];
+    [_headerView addSubview:typeView];
     
-    return view;
+    return _headerView;
 }
 
 - (UIView *)createTypeView:(CGRect)frame
@@ -131,6 +138,16 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
             } else {
                 typeLbl.text = @"VIP会员";
                 bgView.image = [UIImage imageNamed:@"studentmanage-bg-vip-user"];
+                CGRect typeFrame = bgView.frame;
+                float controlX = CGRectGetMinX(typeFrame);
+                float controlW = _tableView.frame.size.width-controlX-10;
+                UILabel *validDateLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, CGRectGetMaxY(typeFrame), controlW, 40)];
+                validDateLbl.font = [UIFont systemFontOfSize:14];
+                validDateLbl.numberOfLines = 0;
+//                validDateLbl.adjustsFontSizeToFitWidth = YES;
+                NSString *dateStr = [TimeIntervalUtils getCNStringYearMonthDayFromTimeinterval:userEntity.vip_time];
+                validDateLbl.text = [NSString stringWithFormat:@"有效期:\r\n%@", dateStr];
+                [_headerView addSubview:validDateLbl];
             }
         }
     } else if (userEntity.type == 10) {
@@ -154,7 +171,7 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KUserInfoViewControllerCellReuseId];
         float viewWidth = self.view.frame.size.width;
         float width = 200;
-        UILabel *valueLbl = [[UILabel alloc] initWithFrame:CGRectMake(viewWidth-width-40, 10, width, 20)];
+        UILabel *valueLbl = [[UILabel alloc] initWithFrame:CGRectMake(viewWidth-width-40, 15, width, 20)];
         valueLbl.tag = 1001;
         valueLbl.backgroundColor = [UIColor clearColor];
         valueLbl.textColor = [UIColor lightGrayColor];
@@ -164,7 +181,7 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
         if (index == 0) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         } else if (index > 0) {
-            UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(viewWidth-40, 10, 20, 20)];
+            UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(viewWidth-40, 15, 20, 20)];
             arrowImg.image = [UIImage imageNamed:@"menu_icon_user_open"];
             [cell.contentView addSubview:arrowImg];
         }
@@ -197,6 +214,9 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
         [[AppDelegate delegate].globalNavi pushViewController:controller animated:YES];
     } else if (index == 2) {
         HBBindPhoneViewController *controller = [[HBBindPhoneViewController alloc] init];
+        [[AppDelegate delegate].globalNavi pushViewController:controller animated:YES];
+    } else if (index == 3) {
+        HBModifyPwdViewController *controller = [[HBModifyPwdViewController alloc] init];
         [[AppDelegate delegate].globalNavi pushViewController:controller animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

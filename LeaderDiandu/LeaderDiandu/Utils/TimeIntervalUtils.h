@@ -21,6 +21,7 @@
 + (NSString*)getStringMDHMSFromTimeInterval:(NSTimeInterval)timeInterval;
 + (NSString*)getStringYearMonthFromTimeinterval:(NSTimeInterval)timeInterval;
 + (NSString*)getStringYearMonthDayFromTimeinterval:(NSTimeInterval)timeInterval;
++ (NSString*)getCNStringYearMonthDayFromTimeinterval:(NSTimeInterval)timeInterval;
 + (NSString*)getStringYMDHMFromTimeinterval:(NSTimeInterval)timeInterval;
 + (NSString*)getShortStringYMDHMFromTimeinterval:(NSTimeInterval)timeInterval withDate:(NSDate*)now;
 + (NSString*)getSameStringYMDHMFromTimeinterval:(NSTimeInterval)timeInterval withDate:(NSDate*)now;
@@ -28,6 +29,7 @@
 
 + (NSString*)getStringYearMonthFromDate:(NSDate*)date;
 + (NSString*)getStringYearMonthDayFromDate:(NSDate*)date;
++ (NSString*)getCNStringYearMonthDayFromDate:(NSDate*)date;
 + (NSString*)getStringYMDHMFromDate:(NSDate*)date;
 + (NSString*)getShortStringYMDHMFromDate:(NSDate*)date withDate:(NSDate*)now;
 + (NSString*)getSameStringYMDHMFromDate:(NSDate*)date withDate:(NSDate*)now;

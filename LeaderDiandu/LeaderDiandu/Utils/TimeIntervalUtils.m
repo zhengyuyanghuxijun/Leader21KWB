@@ -488,6 +488,12 @@ static TimeIntervalUtils *singleton = nil;
     return [self getStringYearMonthDayFromDate:date];
 }
 
++ (NSString *)getCNStringYearMonthDayFromTimeinterval:(NSTimeInterval)timeInterval
+{
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    return [self getCNStringYearMonthDayFromDate:date];
+}
+
 + (NSString*)getStringYMDHMFromTimeinterval:(NSTimeInterval)timeInterval
 {
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
@@ -527,6 +533,15 @@ static TimeIntervalUtils *singleton = nil;
 {
     TimeIntervalUtils *timeutils = [TimeIntervalUtils sharedInstance];
     [timeutils.dateFormatter setDateFormat:NSLocalizedString(@"yyyy-MM-dd", @"")];
+    NSString* str = [timeutils.dateFormatter stringFromDate:date];
+    
+    return str;
+}
+
++ (NSString *)getCNStringYearMonthDayFromDate:(NSDate *)date
+{
+    TimeIntervalUtils *timeutils = [TimeIntervalUtils sharedInstance];
+    [timeutils.dateFormatter setDateFormat:NSLocalizedString(@"yyyy年MM月dd日", @"")];
     NSString* str = [timeutils.dateFormatter stringFromDate:date];
     
     return str;

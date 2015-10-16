@@ -81,7 +81,8 @@
     [[HBHTTPBaseRequest requestWithSubUrl:@"/api/auth/login"] startWithMethod:HBHTTPRequestMethodPOST parameters:dicInfo completion:^(id responseObject, NSError *error) {
         if (receivedBlock) {
             if (error.code == 0) {
-                [[HBDataSaveManager defaultManager] saveUserByDict:responseObject];
+                NSString *pwdMd5 = [pwd md5];
+                [[HBDataSaveManager defaultManager] saveUserByDict:responseObject pwd:pwdMd5];
             }
             receivedBlock(responseObject,error);
             self.receivedBlock = nil;
@@ -180,6 +181,23 @@
     }
     self.receivedBlock = receivedBlock;
     [self Post:@"/api/user/password/forget" dict:dicInfo block:receivedBlock];
+}
+
+- (void)requestModifyPwd:(NSString *)user token:(NSString *)token old_password:(NSString *)old_password new_password:(NSString *)new_password completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:user     forKey:@"user"];
+    if (token) {
+        [dicInfo setObject:token    forKey:@"token"];
+    }
+    [dicInfo setObject:old_password    forKey:@"old_password"];
+    [dicInfo setObject:new_password    forKey:@"new_password"];
+    
+    if (_receivedBlock) {
+        return;
+    }
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/user/password/update" dict:dicInfo block:receivedBlock];
 }
 
 - (void)requestVerifyCode:(NSString *)icode completion:(HBServiceReceivedBlock)receivedBlock
