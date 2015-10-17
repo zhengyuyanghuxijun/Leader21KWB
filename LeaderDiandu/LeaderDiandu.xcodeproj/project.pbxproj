@@ -187,6 +187,9 @@
 		18A244771BA7295A00E1E703 /* HBCreatGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A244761BA7295A00E1E703 /* HBCreatGroupController.m */; };
 		18AB8F4F1BB9911300409103 /* RefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AB8F4E1BB9911300409103 /* RefreshTableHeaderView.m */; };
 		18AB8F531BB9918D00409103 /* FTRotatingCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AB8F521BB9918D00409103 /* FTRotatingCircle.m */; };
+		18AC82CA1BD2B593004864A7 /* HBRankingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC82C51BD2B593004864A7 /* HBRankingListViewController.m */; };
+		18AC82CB1BD2B593004864A7 /* HBReadStatisticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC82C71BD2B593004864A7 /* HBReadStatisticalViewController.m */; };
+		18AC82CC1BD2B593004864A7 /* HBTaskStatisticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC82C91BD2B593004864A7 /* HBTaskStatisticalViewController.m */; };
 		18B5FD2E1B981454002CCD95 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5FD2D1B981454002CCD95 /* UIButton+AFNetworking.m */; };
 		18B5FD311B983930002CCD95 /* FTMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5FD301B983930002CCD95 /* FTMenu.m */; };
 		18B712E91BAC5C9F0002AB43 /* HBBookManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B712E81BAC5C9F0002AB43 /* HBBookManViewController.m */; };
@@ -520,6 +523,12 @@
 		18AB8F4E1BB9911300409103 /* RefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshTableHeaderView.m; sourceTree = "<group>"; };
 		18AB8F511BB9918D00409103 /* FTRotatingCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTRotatingCircle.h; sourceTree = "<group>"; };
 		18AB8F521BB9918D00409103 /* FTRotatingCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTRotatingCircle.m; sourceTree = "<group>"; };
+		18AC82C41BD2B593004864A7 /* HBRankingListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBRankingListViewController.h; sourceTree = "<group>"; };
+		18AC82C51BD2B593004864A7 /* HBRankingListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBRankingListViewController.m; sourceTree = "<group>"; };
+		18AC82C61BD2B593004864A7 /* HBReadStatisticalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBReadStatisticalViewController.h; sourceTree = "<group>"; };
+		18AC82C71BD2B593004864A7 /* HBReadStatisticalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBReadStatisticalViewController.m; sourceTree = "<group>"; };
+		18AC82C81BD2B593004864A7 /* HBTaskStatisticalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTaskStatisticalViewController.h; sourceTree = "<group>"; };
+		18AC82C91BD2B593004864A7 /* HBTaskStatisticalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTaskStatisticalViewController.m; sourceTree = "<group>"; };
 		18B5FD2C1B981454002CCD95 /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
 		18B5FD2D1B981454002CCD95 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
 		18B5FD2F1B983930002CCD95 /* FTMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMenu.h; sourceTree = "<group>"; };
@@ -816,6 +825,7 @@
 			isa = PBXGroup;
 			children = (
 				0DBE35971B8CCEFA00179237 /* base */,
+				18AC82C21BD2B538004864A7 /* StatisticalControllers */,
 				0D086ED71B949B110061BB1F /* DHSlideMenuController */,
 				0DBE35871B8CCE2200179237 /* Login&RegisterController */,
 				0DD214661B95FC8B009E3DB9 /* MenuControllers */,
@@ -1158,6 +1168,19 @@
 			name = HBPayViewControllers;
 			sourceTree = "<group>";
 		};
+		18AC82C21BD2B538004864A7 /* StatisticalControllers */ = {
+			isa = PBXGroup;
+			children = (
+				18AC82C41BD2B593004864A7 /* HBRankingListViewController.h */,
+				18AC82C51BD2B593004864A7 /* HBRankingListViewController.m */,
+				18AC82C61BD2B593004864A7 /* HBReadStatisticalViewController.h */,
+				18AC82C71BD2B593004864A7 /* HBReadStatisticalViewController.m */,
+				18AC82C81BD2B593004864A7 /* HBTaskStatisticalViewController.h */,
+				18AC82C91BD2B593004864A7 /* HBTaskStatisticalViewController.m */,
+			);
+			name = StatisticalControllers;
+			sourceTree = "<group>";
+		};
 		18C64FFB1B9DE4D20040E349 /* HBWorkManViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1480,6 +1503,7 @@
 				0D3F6D0E1BADA391005B4358 /* HBTestWorkManager.m in Sources */,
 				0D0190111B98B19200A92F59 /* HBEditNameViewController.m in Sources */,
 				182306201B9B300300A8E146 /* HBTaskEntity.m in Sources */,
+				18AC82CA1BD2B593004864A7 /* HBRankingListViewController.m in Sources */,
 				189719DC1B9F3405006F42A2 /* HBStudentEntity.m in Sources */,
 				181E307D1BA2B7AD00BBA92F /* FileUtil.m in Sources */,
 				181E30761BA2B14100BBA92F /* UtilFMDatabasePool.m in Sources */,
@@ -1507,6 +1531,7 @@
 				0D7292C51B9E0650006FA7EA /* HBSettingViewController.m in Sources */,
 				0D7A768F1B91E33900BC50A0 /* HBContentManager.m in Sources */,
 				18D325171BB820EA00904FA6 /* HBReadProgressDB.m in Sources */,
+				18AC82CB1BD2B593004864A7 /* HBReadStatisticalViewController.m in Sources */,
 				0DB537351B8F78AF0023A3F7 /* HBServiceManager.m in Sources */,
 				0D018FEE1B96DB9200A92F59 /* HBLeaderViewController.m in Sources */,
 				0D7488901B8A2973007BE4CD /* NetUtil.m in Sources */,
@@ -1556,6 +1581,7 @@
 				0D143F3D1BD0D6E300F5D9EE /* HBModifyPwdViewController.m in Sources */,
 				18C316841BA07A9D004F716E /* HBPublishWorkViewController.m in Sources */,
 				0DBE35CB1B8CD7BE00179237 /* HBForgetPwdViewController.m in Sources */,
+				18AC82CC1BD2B593004864A7 /* HBTaskStatisticalViewController.m in Sources */,
 				18DF0ED21BCB555100376686 /* HBBillViewController.m in Sources */,
 				0DBE353D1B8CB8B500179237 /* Navigator.m in Sources */,
 				181E30751BA2B14100BBA92F /* UtilFMDatabaseAdditions.m in Sources */,

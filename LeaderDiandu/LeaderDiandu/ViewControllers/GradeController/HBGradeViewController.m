@@ -32,6 +32,9 @@
 #import "HBSystemMsgEntity.h"
 #import "HBMsgEntityDB.h"
 #import "HBExamIdDB.h"
+#import "HBReadStatisticalViewController.h"
+#import "HBRankingListViewController.h"
+#import "HBTaskStatisticalViewController.h"
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
 
@@ -56,8 +59,9 @@
 
 @property (nonatomic, strong)UIButton *leftButton;
 @property (nonatomic, strong)UIButton *rightButton;
-
 @property (nonatomic, strong)UIImageView *redPointImgView;
+@property (nonatomic, strong)UIButton *optionButton;
+@property (nonatomic, strong)UIView *backgroundView;
 
 @end
 
@@ -123,6 +127,9 @@
 
 -(void)LoginSuccess
 {
+    //右下角功能模块
+    [self resetStatisticalBtn];
+    
     //用户是否首次登录(NO：首次登录 YES：非首次登录)
     BOOL notFirstLogin = [[HBDataSaveManager defaultManager] notFirstLogin];
     if (notFirstLogin) {
@@ -131,7 +138,7 @@
     }else{
         //首次登录，不显示红点
     }
-
+    
     [self.readProgressEntityDic removeAllObjects];
 #if saveReadProgress
     //登录成功，先从本地读取一下当前用户数据库中保存的全部阅读进度
@@ -341,12 +348,12 @@
     
     self.navigationController.navigationBarHidden = YES;
     
-//    //token失效后再进来需要重新获取数据
-//    if ([self.contentEntityArr count] == 0) {
-//        //获取所有可选套餐
-//        [self requestAllBookset];
-//    }
-
+    //    //token失效后再进来需要重新获取数据
+    //    if ([self.contentEntityArr count] == 0) {
+    //        //获取所有可选套餐
+    //        [self requestAllBookset];
+    //    }
+    
     [self reloadGrid];
 }
 
@@ -407,7 +414,7 @@
                 [_gridView setHeaderViewHidden:YES];
             }
         }
-
+        
         [self.view addSubview:_gridView];
     }
 }
@@ -425,9 +432,9 @@
                             action:@selector(pushMenuItem:)];
         [menuItems addObject:item];
     }
-
+    
     CGRect menuFrame = CGRectMake(ScreenWidth - 70, 70, 60, 50 * self.contentEntityArr.count);
-
+    
     [FTMenu showMenuWithFrame:menuFrame inView:self.navigationController.view menuItems:menuItems currentID:subscribeId];
 }
 
@@ -479,22 +486,95 @@
 
 - (void)initButton
 {
+    //左按钮
     self.leftButton = [[UIButton alloc] initWithFrame:CGRectMake(8, 20, 44, 44)];
     [self.leftButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-menu"] forState:UIControlStateNormal];
     [self.leftButton addTarget:self action:@selector(ToggleMenuPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.leftButton];
     
+    //左按钮上的红点
     self.redPointImgView = [[UIImageView alloc] initWithFrame:CGRectMake(44 - 15, 5, 15, 15)];
     self.redPointImgView.image = [UIImage imageNamed:@"msg_tips_new"];
     self.redPointImgView.hidden = YES;
     [self.leftButton addSubview:self.redPointImgView];
     
+    //右按钮
     self.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 8 - 44, 20, 44, 44)];
     [self.rightButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-class"] forState:UIControlStateNormal];
     [self.rightButton addTarget:self action:@selector(rightButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.rightButton setTitle:@"1" forState:UIControlStateNormal];
     [self.rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.view addSubview:self.rightButton];
+}
+
+-(void)resetStatisticalBtn
+{
+    //右下角调出统计菜单的按钮
+    if (!self.optionButton) {
+        self.optionButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 50, ScreenHeight - 60, 40, 40)];
+        [self.optionButton setBackgroundImage:[UIImage imageNamed:@"pop-btn-menu"] forState:UIControlStateNormal];
+        [self.optionButton addTarget:self action:@selector(optionButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.optionButton];
+    }
+    
+    //统计菜单
+    if (!self.backgroundView) {
+        self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 80)];
+        self.backgroundView.backgroundColor = [UIColor lightGrayColor];
+        [self.view addSubview:self.backgroundView];
+        
+        //统计菜单上的三个按钮
+        NSArray *optionTextArr = @[@"阅读统计", @"排行榜", @"作业统计"];
+        for (NSInteger index = 0; index < 3; index++) {
+            UIButton *statisticalBtn = [[UIButton alloc] initWithFrame:CGRectMake(index * ScreenWidth/3, 0, ScreenWidth/3, 80)];
+            [statisticalBtn setTitle:[optionTextArr objectAtIndex:index] forState:UIControlStateNormal];
+            statisticalBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+            statisticalBtn.tag = index;
+            [statisticalBtn addTarget:self action:@selector(statisticalBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+            [self.backgroundView addSubview:statisticalBtn];
+        }
+    }
+    
+    self.optionButton.frame = CGRectMake(ScreenWidth - 50, ScreenHeight - 60, 40, 40);
+    self.backgroundView.frame = CGRectMake(0, ScreenHeight, ScreenWidth, 80);
+    
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        /** type: 1 - 学生； 10 - 老师*/
+        if (userEntity.type == 1) {
+            self.optionButton.hidden = YES;
+            self.backgroundView.hidden = YES;
+        }else{
+            self.optionButton.hidden = NO;
+            self.backgroundView.hidden = NO;
+        }
+    }
+}
+
+-(void)optionButtonPressed
+{
+    if (self.backgroundView.frame.origin.y == ScreenHeight) {
+        self.optionButton.frame = CGRectMake(ScreenWidth - 50, ScreenHeight - 80 - 50, 40, 40);
+        self.backgroundView.frame = CGRectMake(0, ScreenHeight - 80, ScreenWidth, 80);
+    }else{
+        self.optionButton.frame = CGRectMake(ScreenWidth - 50, ScreenHeight - 60, 40, 40);
+        self.backgroundView.frame = CGRectMake(0, ScreenHeight, ScreenWidth, 80);
+    }
+}
+
+-(void)statisticalBtnPressed:(id)sender
+{
+    UIButton *btn = (UIButton *)sender;
+    if (0 == btn.tag) {
+        HBReadStatisticalViewController *controller = [[HBReadStatisticalViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:YES];
+    }else if(1 == btn.tag){
+        HBRankingListViewController *controller = [[HBRankingListViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:YES];
+    }else{
+        HBTaskStatisticalViewController *controller = [[HBTaskStatisticalViewController alloc] init];
+        [self.navigationController pushViewController:controller animated:YES];
+    }
 }
 
 - (void)ToggleMenuPressed:(id)sender
@@ -513,14 +593,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 #pragma mark -
 #pragma mark HBGridViewDelegate
@@ -579,7 +659,7 @@
     
     NSDictionary * targetData = [[NSDictionary alloc]initWithObjectsAndKeys:
                                  bookTitle, TextGridItemView_BookName,entity.fileId, TextGridItemView_BookCover, @"mainGrid_download", TextGridItemView_downloadState, [self.vipBookDic objectForKey:entity.bookId], TextGridItemView_isVip, nil];
-
+    
     [itemView updateFormData:targetData];
     
     itemView.bookDownloadUrl = entity.bookUrl;
@@ -621,10 +701,10 @@
 - (void)gridView:(HBGridView *)gridView didSelectGridItemAtIndex:(NSInteger)index
 {
     TextGridItemView *itemView = (TextGridItemView *)[gridView gridItemViewAtIndex:index];
-//    itemView.backgroundColor = [UIColor grayColor];
+    //    itemView.backgroundColor = [UIColor grayColor];
     
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
-
+    
     BookEntity *entity = arr[index];
     
     //VIP书籍，需要提示用户
@@ -733,7 +813,7 @@
 -(void)refreshTableHeaderDidTriggerRefresh
 {
     //下拉加载 加载数据 (从服务器拉取套餐信息）
-//    [self requestAllBookset];
+    //    [self requestAllBookset];
     
     [self LoginSuccess];
 }
@@ -755,7 +835,7 @@
                     HBContentEntity *contentEntity = [[HBContentEntity alloc] initWithDictionary:dict];
                     [self.contentEntityArr addObject:contentEntity];
                 }
-
+                
                 /** type: 1 - 学生； 10 - 老师*/
                 if (userEntity.type == 1) {
                     //获取书本列表
@@ -811,7 +891,7 @@
             NSArray *destArr = [sortArray sortedArrayUsingComparator:cmptr];
             
             NSString *destBooksStr = [destArr componentsJoinedByString:@","];
-
+            
             [LEADERSDK requestBookInfo:destBooksStr onComplete:^(NSArray *booklist, NSInteger errorCode, NSString *errorMsg) {
                 
                 NSMutableArray *booklistTmp = [[NSMutableArray alloc] initWithCapacity:1];
