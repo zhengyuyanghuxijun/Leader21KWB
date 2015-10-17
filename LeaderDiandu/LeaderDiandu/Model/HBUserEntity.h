@@ -26,5 +26,6 @@
 
 @property (nonatomic, strong)NSDictionary *myClass;
 @property (nonatomic, strong)NSDictionary *teacher;
+@property (nonatomic, strong)NSDictionary *director;
 
 @end

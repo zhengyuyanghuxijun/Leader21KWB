@@ -52,6 +52,15 @@
     if ([phone isKindOfClass:[NSNull class]]) {
         [newDic setValue:@"" forKey:@"phone"];
     }
+    NSDictionary *director = [newDic dicForKey:@"director"];
+    if (director) {
+        NSMutableDictionary *directorNew = [NSMutableDictionary dictionaryWithDictionary:director];
+        id phone = directorNew[@"phone"];
+        if ([phone isKindOfClass:[NSNull class]]) {
+            [directorNew setValue:@"" forKey:@"phone"];
+        }
+        [newDic setValue:directorNew forKey:@"director"];
+    }
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     [userDefault setObject:newDic forKey:KWBDefaultUser];
