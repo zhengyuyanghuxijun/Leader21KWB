@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 hxj. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Foundation/Foundation.h> 
 
 @interface HBExamIdDB : NSObject
 
