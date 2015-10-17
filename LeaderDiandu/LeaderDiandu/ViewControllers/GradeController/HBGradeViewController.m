@@ -520,7 +520,7 @@
     //统计菜单
     if (!self.backgroundView) {
         self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 80)];
-        self.backgroundView.backgroundColor = [UIColor lightGrayColor];
+        self.backgroundView.backgroundColor = RGBEQA(0, 0.7);
         [self.view addSubview:self.backgroundView];
         
         //统计菜单上的三个按钮

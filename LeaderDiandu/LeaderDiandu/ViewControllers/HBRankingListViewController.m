@@ -28,6 +28,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    UINavigationBar *naviBar = self.navigationController.navigationBar;
+    //设置navigationBar背景颜色
+    [naviBar setBarTintColor:[UIColor colorWithHex:0x1E90FF]];
+    
     self.navigationController.navigationBarHidden = NO;
     self.title = @"排行榜";
     
