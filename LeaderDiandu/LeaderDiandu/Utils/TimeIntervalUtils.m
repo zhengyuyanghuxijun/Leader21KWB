@@ -37,6 +37,16 @@ static TimeIntervalUtils *singleton = nil;
     return self;
 }
 
++ (NSDateComponents *)currentDateComponents
+{
+    NSDate *today = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *currentComponents = [gregorian components:(NSDayCalendarUnit | NSWeekdayCalendarUnit | NSCalendarUnitWeekOfYear) fromDate:today];
+//    NSInteger day = [currentComponents day];//当前日期
+//    NSInteger weekday = [currentComponents weekday];//星期几，周日是1
+//    NSInteger weekOfYear = [currentComponents weekOfYear];//当年的第几周
+    return currentComponents;
+}
 
 //+ (NSString*)shortTextFromTimeIntervalSince1970:(NSTimeInterval)timeInterval
 //{

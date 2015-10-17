@@ -15,6 +15,8 @@
 
 + (TimeIntervalUtils *)sharedInstance;
 
++ (NSDateComponents *)currentDateComponents;
+
 + (BOOL)isSameYear:(NSDate*)date1 withDate:(NSDate*)date2;
 + (BOOL)isSameDay:(NSDate*)date1 withDate:(NSDate*)date2;
 
