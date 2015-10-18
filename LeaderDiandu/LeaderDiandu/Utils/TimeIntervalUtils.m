@@ -48,6 +48,33 @@ static TimeIntervalUtils *singleton = nil;
     return currentComponents;
 }
 
++ (void)getWeekBeginAndEndWith:(NSDate *)newDate begin:(NSDate *)beginDate end:(NSDate*)endDate
+{
+    if (newDate == nil) {
+        newDate = [NSDate date];
+    }
+    
+    double interval = 0;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    [calendar setTimeZone:timeZone];
+//    [calendar setFirstWeekday:2];//设定周一为周首日
+    BOOL ok = [calendar rangeOfUnit:NSWeekCalendarUnit startDate:&beginDate interval:&interval forDate:newDate];
+    //分别修改为 NSDayCalendarUnit NSMonthCalendarUnit NSYearCalendarUnit
+    if (ok) {
+        endDate = [beginDate dateByAddingTimeInterval:interval-1];
+    }else {
+        return;
+    }
+    NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
+    [myDateFormatter setDateFormat:@"yyyy.MM.dd"];
+    NSString *beginString = [myDateFormatter stringFromDate:beginDate];
+    NSString *endString = [myDateFormatter stringFromDate:endDate];
+    
+    NSString *s = [NSString stringWithFormat:@"%@-%@",beginString,endString];
+    NSLog(@"%@",s);
+}
+
 //+ (NSString*)shortTextFromTimeIntervalSince1970:(NSTimeInterval)timeInterval
 //{
 //    NSDate *date = [NSDate dateWithTimeIntervalSince1970:timeInterval];

@@ -7,6 +7,7 @@
 //
 
 #import "HBTestWorkManager.h"
+#import "FileUtil.h"
 
 #define KLeaderSelection    @"selection"//选择题
 #define KLeaderJudge        @"judge"    //判断题
@@ -105,8 +106,13 @@
     for (NSString *option in array) {
         if ([[option pathExtension] isEqualToString:@"jpg"]) {
             NSString *imgFileName = [NSString stringWithFormat:@"%@/pics/%@", _workPath, option];
-            UIImage *image = [UIImage imageWithContentsOfFile:imgFileName];
-            [optionArr addObject:image];
+            if ([[FileUtil getFileUtil] isFileExist:imgFileName]) {
+                UIImage *image = [UIImage imageWithContentsOfFile:imgFileName];
+                [optionArr addObject:image];
+            } else {
+                UIImage *image = [[UIImage alloc] init];
+                [optionArr addObject:image];
+            }
         } else {
             [optionArr addObject:option];
         }

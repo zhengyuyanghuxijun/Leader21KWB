@@ -9,7 +9,7 @@
 #import "HBMyWorkView.h"
 #import "HBTestWorkManager.h"
 #import "HBOptionView.h"
-#import "HBOptionButton.h"
+//#import "HBOptionButton.h"
 #import "MBHudUtil.h"
 #import <AVFoundation/AVAudioPlayer.h>
 
@@ -27,7 +27,7 @@ typedef enum : NSUInteger {
     HBSelectionTypeText4,
 } HBSelectionType;
 
-@interface HBMyWorkView () <HBOptionViewDelegate, HBOptionButtonDelegate, AVAudioPlayerDelegate>
+@interface HBMyWorkView () <HBOptionViewDelegate, AVAudioPlayerDelegate>
 {
     UILabel *_titleLabel;
     UILabel *_descLabel;
@@ -145,41 +145,80 @@ typedef enum : NSUInteger {
         }
     } else {
         CGRect rect = _questionView.frame;
-        float selY = CGRectGetMaxY(rect);
-        float controlH = CGRectGetMinY(_finishButton.frame) - selY;
+        float selY = CGRectGetMaxY(rect) + 10;
+        float controlH = CGRectGetMinY(_finishButton.frame) - selY-20;
         _selectionView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(rect), selY, CGRectGetWidth(rect), controlH)];
         [self addSubview:_selectionView];
     }
     
-    float controlW = 110;
+    //选项内容过多时是否超高
     float controlH = 80;
+    float controlW = 110;
+    UIFont *font = [UIFont systemFontOfSize:20];
+    //计算选项文字最多时的高度
+    for (id obj in optionArray) {
+        if ([obj isKindOfClass:[UIImage class]]) {
+            break;
+        }
+        controlW = 140;
+        if ([[UIDevice currentDevice] isIphone5]) {
+            controlW = 120;
+        }
+        CGSize objSize = [obj boundingRectWithSize:CGSizeMake(controlW, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
+        if (controlH < objSize.height) {
+            controlH = objSize.height;
+        }
+    }
+    
     float controlX = 0;
     CGRect frame = _selectionView.frame;
     float controlY = (frame.size.height-controlH) / 2;
     NSInteger count = [optionArray count];
     if (count == 4) {
-        controlY = (frame.size.height-controlH*2-20) / 2;
+        controlY = (frame.size.height-controlH*2-40) / 2;
     }
+    UIScrollView *scrollView = nil;
+    if (count/2*controlH+20 > frame.size.height) {
+        scrollView = [[UIScrollView alloc] initWithFrame:_selectionView.bounds];
+        scrollView.contentSize = CGSizeMake(frame.size.width, count/2*controlH+20);
+        scrollView.showsHorizontalScrollIndicator = NO;
+        scrollView.backgroundColor = [UIColor clearColor];
+        [_selectionView addSubview:scrollView];
+    }
+    float margin = (self.frame.size.width-controlW*2) / 3;
     for (NSInteger i=0; i<count; i++) {
         id obj = optionArray[i];
-        if (i%2 == 1) {
-            controlX = frame.size.width - controlW;
-        } else {
-            controlX = 0;
-            controlY += controlH*(i/2) + 10;
-        }
         if ([obj isKindOfClass:[UIImage class]]) {
+            if (i%2 == 1) {
+                controlX += controlW + margin;
+            } else {
+                controlX = margin-20;
+                controlY += controlH*(i/2) + 20;
+            }
             HBOptionView *view = [[HBOptionView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH) image:obj];
             view.tag = KTagSelectionBegin+i;
             view.delegate = self;
             [_selectionView addSubview:view];
         } else {
+            if (i%2 == 1) {
+                controlX = frame.size.width - controlW;
+            } else {
+                controlX = 0;
+                controlY += controlH*(i/2) + 20;
+            }
             controlW = 140;
             if ([[UIDevice currentDevice] isIphone5]) {
                 controlW = 120;
             }
-            controlH = 60;
-            [self createSelectionButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin+i title:obj];
+            if (scrollView == nil) {
+                controlH = 60;
+            }
+            UIButton *button = [self createSelectionButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin+i title:obj];
+            if (scrollView) {
+                [scrollView addSubview:button];
+            } else {
+                [_selectionView addSubview:button];
+            }
         }
     }
     if (count == 0) {
@@ -203,17 +242,22 @@ typedef enum : NSUInteger {
     [_selectionView addSubview:button];
 }
 
-- (void)createSelectionButton:(CGRect)frame tag:(NSInteger)tag title:(NSString *)title
+- (UIButton *)createSelectionButton:(CGRect)frame tag:(NSInteger)tag title:(NSString *)title
 {
-    HBOptionButton *button = [[HBOptionButton alloc] initWithFrame:frame title:title];
+    UIButton * button = [[UIButton alloc] initWithFrame:frame];
+//    HBOptionButton *button = [[HBOptionButton alloc] initWithFrame:frame title:title];
+//    button.delegate = self;
     button.tag = tag;
-    button.delegate = self;
-//    [button addTarget:self action:@selector(selectionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-//    [button setTitle:title forState:UIControlStateNormal];
-//    button.titleLabel.numberOfLines = 0;
-//    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [button addTarget:self action:@selector(selectionBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [button setTitle:title forState:UIControlStateNormal];
+    button.titleLabel.numberOfLines = 0;
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [button setTitleColor:[UIColor colorWithHex:0xff8903] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-normal"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-press"] forState:UIControlStateHighlighted];
+    [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-selected"] forState:UIControlStateSelected];
     
-    [_selectionView addSubview:button];
+    return button;
 }
 
 - (void)updateData:(NSDictionary *)dict byScore:(NSString *)score
