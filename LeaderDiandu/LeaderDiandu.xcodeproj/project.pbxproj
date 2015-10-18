@@ -24,6 +24,7 @@
 		0D143F351BD006BB00F5D9EE /* msgentity.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F301BD006BB00F5D9EE /* msgentity.db */; };
 		0D143F391BD00FA800F5D9EE /* HBExamIdDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F381BD00FA800F5D9EE /* HBExamIdDB.m */; };
 		0D143F3D1BD0D6E300F5D9EE /* HBModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F3C1BD0D6E300F5D9EE /* HBModifyPwdViewController.m */; };
+		0D143F4B1BD417BA00F5D9EE /* HBWeekUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F4A1BD417BA00F5D9EE /* HBWeekUtil.m */; };
 		0D3F6D0E1BADA391005B4358 /* HBTestWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */; };
 		0D3F6D161BAE8F64005B4358 /* HBMyWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */; };
 		0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */; };
@@ -278,6 +279,8 @@
 		0D143F381BD00FA800F5D9EE /* HBExamIdDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBExamIdDB.m; sourceTree = "<group>"; };
 		0D143F3B1BD0D6E300F5D9EE /* HBModifyPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBModifyPwdViewController.h; sourceTree = "<group>"; };
 		0D143F3C1BD0D6E300F5D9EE /* HBModifyPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBModifyPwdViewController.m; sourceTree = "<group>"; };
+		0D143F491BD417BA00F5D9EE /* HBWeekUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBWeekUtil.h; sourceTree = "<group>"; };
+		0D143F4A1BD417BA00F5D9EE /* HBWeekUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBWeekUtil.m; sourceTree = "<group>"; };
 		0D3F6D0C1BADA391005B4358 /* HBTestWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestWorkManager.h; sourceTree = "<group>"; };
 		0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestWorkManager.m; sourceTree = "<group>"; };
 		0D3F6D141BAE8F64005B4358 /* HBMyWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkViewController.h; sourceTree = "<group>"; };
@@ -992,6 +995,8 @@
 				0DBE352C1B8CB8B500179237 /* Navigator.m */,
 				0DBE352D1B8CB8B500179237 /* NSDateUtilities.h */,
 				0DBE352E1B8CB8B500179237 /* NSDateUtilities.m */,
+				0D143F491BD417BA00F5D9EE /* HBWeekUtil.h */,
+				0D143F4A1BD417BA00F5D9EE /* HBWeekUtil.m */,
 				0DBE35311B8CB8B500179237 /* TimeIntervalUtils.h */,
 				0DBE35321B8CB8B500179237 /* TimeIntervalUtils.m */,
 			);
@@ -1621,6 +1626,7 @@
 				0DBE35401B8CB8B500179237 /* TimeIntervalUtils.m in Sources */,
 				18C36B841BD3D40000782969 /* HBReadStatisticalLogoCell.m in Sources */,
 				1880D8621BCE83A1005A2951 /* HBMsgEntityDB.m in Sources */,
+				0D143F4B1BD417BA00F5D9EE /* HBWeekUtil.m in Sources */,
 				18E57D6C1BA5B25C00198BE9 /* HBStudentCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,10 +15,6 @@
 
 + (TimeIntervalUtils *)sharedInstance;
 
-+ (NSDateComponents *)currentDateComponents;
-//获取一周的起始和结束时间
-+ (void)getWeekBeginAndEndWith:(NSDate *)newDate begin:(NSDate *)beginDate end:(NSDate*)endDate;
-
 + (BOOL)isSameYear:(NSDate*)date1 withDate:(NSDate*)date2;
 + (BOOL)isSameDay:(NSDate*)date1 withDate:(NSDate*)date2;
 

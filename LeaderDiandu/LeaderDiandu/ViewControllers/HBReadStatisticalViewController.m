@@ -7,7 +7,7 @@
 //
 
 #import "HBReadStatisticalViewController.h"
-#import "TimeIntervalUtils.h"
+#import "HBWeekUtil.h"
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 #import "HBReadStatisticalLogoCell.h"
@@ -52,8 +52,7 @@
     self.navigationController.navigationBarHidden = NO;
     self.title = @"阅读统计";
     
-    NSDateComponents *currentComponents = [TimeIntervalUtils currentDateComponents];
-    self.weekOfYear = [currentComponents weekOfYear];
+    self.weekOfYear = [[HBWeekUtil sharedInstance] getWeekOfYear];
     self.bookset_id = 1;
     
     //阅读人数统计
