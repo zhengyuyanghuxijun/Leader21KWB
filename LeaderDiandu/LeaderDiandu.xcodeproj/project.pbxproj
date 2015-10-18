@@ -196,6 +196,10 @@
 		18C316841BA07A9D004F716E /* HBPublishWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C316831BA07A9D004F716E /* HBPublishWorkViewController.m */; };
 		18C316881BA07F11004F716E /* HBGroupSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C316871BA07F11004F716E /* HBGroupSelectViewController.m */; };
 		18C316901BA092B1004F716E /* HBClassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3168F1BA092B1004F716E /* HBClassEntity.m */; };
+		18C36B841BD3D40000782969 /* HBReadStatisticalLogoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C36B831BD3D40000782969 /* HBReadStatisticalLogoCell.m */; };
+		18C36B871BD3D82500782969 /* HBReadStatisticalDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C36B861BD3D82500782969 /* HBReadStatisticalDateCell.m */; };
+		18C36B8A1BD3E35500782969 /* HBReadStatisticalStuNumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C36B891BD3E35500782969 /* HBReadStatisticalStuNumCell.m */; };
+		18C36B8D1BD3EC6400782969 /* HBReadStatisticalContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C36B8C1BD3EC6400782969 /* HBReadStatisticalContentCell.m */; };
 		18C64FFF1B9DE74B0040E349 /* HBScoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C64FFE1B9DE74B0040E349 /* HBScoreListViewController.m */; };
 		18C650021B9DF1CA0040E349 /* HBScoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C650011B9DF1CA0040E349 /* HBScoreEntity.m */; };
 		18D325171BB820EA00904FA6 /* HBReadProgressDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D325161BB820EA00904FA6 /* HBReadProgressDB.m */; };
@@ -541,6 +545,14 @@
 		18C316871BA07F11004F716E /* HBGroupSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGroupSelectViewController.m; sourceTree = "<group>"; };
 		18C3168E1BA092B1004F716E /* HBClassEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBClassEntity.h; sourceTree = "<group>"; };
 		18C3168F1BA092B1004F716E /* HBClassEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBClassEntity.m; sourceTree = "<group>"; };
+		18C36B821BD3D40000782969 /* HBReadStatisticalLogoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBReadStatisticalLogoCell.h; sourceTree = "<group>"; };
+		18C36B831BD3D40000782969 /* HBReadStatisticalLogoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBReadStatisticalLogoCell.m; sourceTree = "<group>"; };
+		18C36B851BD3D82500782969 /* HBReadStatisticalDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBReadStatisticalDateCell.h; sourceTree = "<group>"; };
+		18C36B861BD3D82500782969 /* HBReadStatisticalDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBReadStatisticalDateCell.m; sourceTree = "<group>"; };
+		18C36B881BD3E35500782969 /* HBReadStatisticalStuNumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBReadStatisticalStuNumCell.h; sourceTree = "<group>"; };
+		18C36B891BD3E35500782969 /* HBReadStatisticalStuNumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBReadStatisticalStuNumCell.m; sourceTree = "<group>"; };
+		18C36B8B1BD3EC6400782969 /* HBReadStatisticalContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBReadStatisticalContentCell.h; sourceTree = "<group>"; };
+		18C36B8C1BD3EC6400782969 /* HBReadStatisticalContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBReadStatisticalContentCell.m; sourceTree = "<group>"; };
 		18C64FFD1B9DE74B0040E349 /* HBScoreListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBScoreListViewController.h; sourceTree = "<group>"; };
 		18C64FFE1B9DE74B0040E349 /* HBScoreListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreListViewController.m; sourceTree = "<group>"; };
 		18C650001B9DF1CA0040E349 /* HBScoreEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBScoreEntity.h; sourceTree = "<group>"; };
@@ -1171,14 +1183,30 @@
 		18AC82C21BD2B538004864A7 /* StatisticalControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18C36B801BD3D3A700782969 /* HBReadStatisticalViewController */,
 				18AC82C41BD2B593004864A7 /* HBRankingListViewController.h */,
 				18AC82C51BD2B593004864A7 /* HBRankingListViewController.m */,
-				18AC82C61BD2B593004864A7 /* HBReadStatisticalViewController.h */,
-				18AC82C71BD2B593004864A7 /* HBReadStatisticalViewController.m */,
 				18AC82C81BD2B593004864A7 /* HBTaskStatisticalViewController.h */,
 				18AC82C91BD2B593004864A7 /* HBTaskStatisticalViewController.m */,
 			);
 			name = StatisticalControllers;
+			sourceTree = "<group>";
+		};
+		18C36B801BD3D3A700782969 /* HBReadStatisticalViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18AC82C61BD2B593004864A7 /* HBReadStatisticalViewController.h */,
+				18AC82C71BD2B593004864A7 /* HBReadStatisticalViewController.m */,
+				18C36B821BD3D40000782969 /* HBReadStatisticalLogoCell.h */,
+				18C36B831BD3D40000782969 /* HBReadStatisticalLogoCell.m */,
+				18C36B851BD3D82500782969 /* HBReadStatisticalDateCell.h */,
+				18C36B861BD3D82500782969 /* HBReadStatisticalDateCell.m */,
+				18C36B881BD3E35500782969 /* HBReadStatisticalStuNumCell.h */,
+				18C36B891BD3E35500782969 /* HBReadStatisticalStuNumCell.m */,
+				18C36B8B1BD3EC6400782969 /* HBReadStatisticalContentCell.h */,
+				18C36B8C1BD3EC6400782969 /* HBReadStatisticalContentCell.m */,
+			);
+			name = HBReadStatisticalViewController;
 			sourceTree = "<group>";
 		};
 		18C64FFB1B9DE4D20040E349 /* HBWorkManViewControllers */ = {
@@ -1497,6 +1525,7 @@
 				186435A11BC54A2F0068E73E /* HBMessageViewCell.m in Sources */,
 				18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */,
 				0DBE35351B8CB8B500179237 /* DataCheckUtil.m in Sources */,
+				18C36B8D1BD3EC6400782969 /* HBReadStatisticalContentCell.m in Sources */,
 				18DF0EDA1BCB9FBC00376686 /* HBBillEntity.m in Sources */,
 				0DB537271B8F5DEE0023A3F7 /* AFHTTPRequestOperationManager.m in Sources */,
 				0DBE35D21B8CD87900179237 /* HBNTextField.m in Sources */,
@@ -1508,6 +1537,7 @@
 				181E307D1BA2B7AD00BBA92F /* FileUtil.m in Sources */,
 				181E30761BA2B14100BBA92F /* UtilFMDatabasePool.m in Sources */,
 				0D018FEB1B96DB5C00A92F59 /* HBWorkManViewController.m in Sources */,
+				18C36B8A1BD3E35500782969 /* HBReadStatisticalStuNumCell.m in Sources */,
 				18F367F51BA9542D00EBFEC4 /* HBSetStuOtherCell.m in Sources */,
 				0DB537261B8F5DEE0023A3F7 /* AFHTTPRequestOperation.m in Sources */,
 				0DBE353E1B8CB8B500179237 /* NSDateUtilities.m in Sources */,
@@ -1571,6 +1601,7 @@
 				0DB5372D1B8F5DEE0023A3F7 /* AFURLRequestSerialization.m in Sources */,
 				18EED16F1BB147DA004E5071 /* HBAboutViewController.m in Sources */,
 				186435AA1BC559DE0068E73E /* HBSettingViewCell.m in Sources */,
+				18C36B871BD3D82500782969 /* HBReadStatisticalDateCell.m in Sources */,
 				187AD6441BC6831B00E592F4 /* HBLeaderBindingCell.m in Sources */,
 				18B712E91BAC5C9F0002AB43 /* HBBookManViewController.m in Sources */,
 				0D086EDC1B949B110061BB1F /* DHSlideMenuController.m in Sources */,
@@ -1588,6 +1619,7 @@
 				0D018FE81B96DB3500A92F59 /* HBStuManViewController.m in Sources */,
 				0D3F6D161BAE8F64005B4358 /* HBMyWorkViewController.m in Sources */,
 				0DBE35401B8CB8B500179237 /* TimeIntervalUtils.m in Sources */,
+				18C36B841BD3D40000782969 /* HBReadStatisticalLogoCell.m in Sources */,
 				1880D8621BCE83A1005A2951 /* HBMsgEntityDB.m in Sources */,
 				18E57D6C1BA5B25C00198BE9 /* HBStudentCell.m in Sources */,
 			);

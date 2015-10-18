@@ -773,4 +773,76 @@
     [self Post:@"/api/order/vip/create" dict:dicInfo block:receivedBlock];
 }
 
+/**
+ *  阅读人数统计
+ *
+ *  @param teacher_id         老师ID
+ *  @param bookset_id         套餐id
+ *  @param from_time          为起始时间，单位为秒。
+ *  @param to_time            为结束时间，单位为秒。
+ */
+- (void)requestReadingStudent:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:teacher_id     forKey:@"teacher_id"];
+    [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
+    [dicInfo setObject:from_time     forKey:@"from_time"];
+    [dicInfo setObject:to_time     forKey:@"to_time"];
+    
+    //    if (_receivedBlock) {
+    //        return;
+    //    }
+    
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/stat/book/reading/student" dict:dicInfo block:receivedBlock];
+}
+
+/**
+ *  阅读次数统计
+ *
+ *  @param teacher_id         老师ID
+ *  @param bookset_id         套餐id
+ *  @param from_time          为起始时间，单位为秒。
+ *  @param to_time            为结束时间，单位为秒。
+ */
+- (void)requestReadingTimes:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:teacher_id     forKey:@"teacher_id"];
+    [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
+    [dicInfo setObject:from_time     forKey:@"from_time"];
+    [dicInfo setObject:to_time     forKey:@"to_time"];
+    
+    //    if (_receivedBlock) {
+    //        return;
+    //    }
+    
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/stat/book/reading" dict:dicInfo block:receivedBlock];
+}
+
+/**
+ *  阅读时长统计
+ *
+ *  @param teacher_id         老师ID
+ *  @param bookset_id         套餐id
+ *  @param from_time          为起始时间，单位为秒。
+ *  @param to_time            为结束时间，单位为秒。
+ */
+- (void)requestReadingTime:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:teacher_id     forKey:@"teacher_id"];
+    [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
+    [dicInfo setObject:from_time     forKey:@"from_time"];
+    [dicInfo setObject:to_time     forKey:@"to_time"];
+    
+    //    if (_receivedBlock) {
+    //        return;
+    //    }
+    
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/stat/book/reading/time" dict:dicInfo block:receivedBlock];
+}
+
 @end

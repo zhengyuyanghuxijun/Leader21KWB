@@ -494,4 +494,34 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  */
 - (void)requestVipOrder:(NSString *)user vip_code:(NSString *)vip_code product:(NSString *)product completion:(HBServiceReceivedBlock)receivedBlock;
 
+/**
+ *  阅读人数统计
+ *
+ *  @param teacher_id         老师ID
+ *  @param bookset_id         套餐id
+ *  @param from_time          为起始时间，单位为秒。
+ *  @param to_time            为结束时间，单位为秒。
+ */
+- (void)requestReadingStudent:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
+ *  阅读次数统计
+ *
+ *  @param teacher_id         老师ID
+ *  @param bookset_id         套餐id
+ *  @param from_time          为起始时间，单位为秒。
+ *  @param to_time            为结束时间，单位为秒。
+ */
+- (void)requestReadingTimes:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
+ *  阅读时长统计
+ *
+ *  @param teacher_id         老师ID
+ *  @param bookset_id         套餐id
+ *  @param from_time          为起始时间，单位为秒。
+ *  @param to_time            为结束时间，单位为秒。
+ */
+- (void)requestReadingTime:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock;
+
 @end
