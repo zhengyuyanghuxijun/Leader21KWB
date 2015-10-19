@@ -15,9 +15,6 @@
     UITableView *_tableView;
 }
 
-@property (nonatomic, strong) NSString *headerName;
-@property (nonatomic, strong) NSString *headerPhone;
-@property (nonatomic, assign) NSTimeInterval headerVipTime;
 @property (nonatomic, strong) NSString *headerClassName;
 @property (nonatomic, assign) NSInteger viewWidth;
 

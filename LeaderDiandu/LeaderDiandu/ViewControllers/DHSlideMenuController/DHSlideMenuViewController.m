@@ -77,6 +77,13 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [_tableView reloadData];
+}
+
 #pragma mark - Configuring the view’s layout behavior
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -157,12 +164,13 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     controlY = 0;
     controlH = 25;
     controlW = buttonInfo.frame.size.width-controlH-typeW-10;
-    if ([_headerName length] > 0) {
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if ([userEntity.display_name length] > 0) {
         UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
         nameLbl.backgroundColor = [UIColor clearColor];
         nameLbl.textColor = textColor;
         nameLbl.font = font;
-        nameLbl.text = _headerName;
+        nameLbl.text = userEntity.display_name;
         [buttonInfo addSubview:nameLbl];
     }
     
@@ -172,7 +180,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     phoneLbl.backgroundColor = [UIColor clearColor];
     phoneLbl.textColor = textColor;
     phoneLbl.font = font;
-    phoneLbl.text = _headerPhone;
+    phoneLbl.text = userEntity.phone;
     [buttonInfo addSubview:phoneLbl];
     
     float arrowX = buttonInfo.frame.size.width - controlH - 10;
@@ -181,7 +189,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     arrowImg.image = [UIImage imageNamed:@"menu_icon_user_open"];
     [buttonInfo addSubview:arrowImg];
     
-    if ([_headerName length] == 0) {
+    if ([userEntity.display_name length] == 0) {
         controlX = 0;
     } else {
         controlX = arrowX-typeW-5;
@@ -202,19 +210,15 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     typeLbl.font = [UIFont systemFontOfSize:16];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity.type == 1) {
-        if (_headerVipTime == 0) {
+        if (userEntity.account_status == 1) {
             typeLbl.text = @"普通用户";
             bgView.image = [UIImage imageNamed:@"studentmanage-bg-normal-user"];
-        } else {
-            NSTimeInterval cur = [NSDate date].timeIntervalSince1970;
-            if (_headerVipTime < cur) {
-                //vip过期
-                typeLbl.text = @"VIP过期";
-                bgView.image = [UIImage imageNamed:@"studentmanage-bg-vipover-user"];
-            } else {
-                typeLbl.text = @"VIP会员";
-                bgView.image = [UIImage imageNamed:@"studentmanage-bg-vip-user"];
-            }
+        } else if (userEntity.account_status == 2) {
+            typeLbl.text = @"VIP会员";
+            bgView.image = [UIImage imageNamed:@"studentmanage-bg-vip-user"];
+        } else if (userEntity.account_status == 3) {
+            typeLbl.text = @"VIP过期";
+            bgView.image = [UIImage imageNamed:@"studentmanage-bg-vipover-user"];
         }
     } else if (userEntity.type == 10) {
         typeLbl.text = @"教师";

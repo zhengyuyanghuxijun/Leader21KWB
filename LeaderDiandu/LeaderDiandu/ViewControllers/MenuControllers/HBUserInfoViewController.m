@@ -21,9 +21,9 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
 {
     NSArray     *_titleArr;
     UITableView *_tableView;
-    
-    UIView      *_headerView;
 }
+
+@property (nonatomic, strong)UIView *headerView;
 
 @end
 
@@ -50,6 +50,15 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     [self getHeaderAvatar];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (_tableView) {
+        [_tableView reloadData];
+    }
+}
+
 - (void)getHeaderAvatar
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
@@ -60,8 +69,10 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
 
 - (void)getUserInfo
 {
+    [MBHudUtil showActivityView:nil inView:nil];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     [[HBServiceManager defaultManager] requestUserInfo:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
         if (responseObject) {
             [[HBDataSaveManager defaultManager] setUserEntityByDict:responseObject];
         }
@@ -96,7 +107,7 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (_headerView) {
-        return _headerView;
+        self.headerView = nil;
     }
     NSInteger imgWidth = 100;
     NSInteger screenWidth = [UIScreen mainScreen].bounds.size.width;

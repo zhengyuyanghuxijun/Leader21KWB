@@ -122,9 +122,6 @@
     }
     DHSlideMenuViewController *leftViewController = [[DHSlideMenuViewController alloc] init];
     [leftViewController setMenus:titleArr MenuImages:imgArray TabBarControllers:ctlArray];
-    leftViewController.headerName = userEntity.display_name;
-    leftViewController.headerPhone = userEntity.name;
-    leftViewController.headerVipTime = userEntity.vip_time;
     leftViewController.headerClassName = @"HBUserInfoViewController";
     menuVC.leftViewController = leftViewController;
 }

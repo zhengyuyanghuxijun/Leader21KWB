@@ -213,7 +213,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
             if ([dict[@"result"] isEqualToString:@"OK"]) {
                 //绑定成功
                 [MBHudUtil showTextView:@"绑定成功" inView:nil];
-                dispatch_sync(dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self getUserInfo];
                 });
             } else {
@@ -260,7 +260,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     [MBHudUtil showActivityView:nil inView:nil];
     [[HBServiceManager defaultManager] requestUserInfo:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
-        if (error.code == 0) {
+        if (error.code == 0 || error == nil) {
             [[HBDataSaveManager defaultManager] setUserEntityByDict:responseObject];
             if ([responseObject[@"teacher"] isValidDictionary]) {
                 [self showBindView:NO];

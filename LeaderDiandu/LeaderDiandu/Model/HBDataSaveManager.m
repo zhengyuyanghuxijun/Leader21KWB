@@ -32,8 +32,8 @@
 
 - (void)updateDisplayName:(NSDictionary *)dict
 {
-    self.userEntity.display_name = dict[@"display_name"];
     NSDictionary *userDict = [self loadUser];
+    self.userEntity.display_name = dict[@"display_name"];
     NSMutableDictionary *mutDict = [NSMutableDictionary dictionaryWithDictionary:userDict];
     mutDict[@"display_name"] = dict[@"display_name"];
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
