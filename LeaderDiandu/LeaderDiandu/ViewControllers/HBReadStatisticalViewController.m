@@ -82,13 +82,20 @@
 
 -(void)requestReadingStudent
 {
-    //当前时间
-    NSDate *date = [NSDate date];
-    NSString *testTime = [NSString stringWithFormat:@"%.f",[date timeIntervalSince1970]];
+    NSDate *beginDate = nil;
+    NSDate *endDate = nil;
+    
+    NSMutableDictionary *dateDic = [[HBWeekUtil sharedInstance] getWeekBeginAndEndWith:nil begin:beginDate end:endDate];
+    
+    beginDate = [dateDic objectForKey:@"beginDate"];
+    endDate = [dateDic objectForKey:@"endDate"];
+    
+    NSString *beginDateStr = [NSString stringWithFormat:@"%.f",[beginDate timeIntervalSince1970]];
+    NSString *endDateStr = [NSString stringWithFormat:@"%.f",[endDate timeIntervalSince1970]];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
-        [[HBServiceManager defaultManager] requestReadingStudent:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:@"1443248966" to_time:testTime completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestReadingStudent:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
             
         }];
     }

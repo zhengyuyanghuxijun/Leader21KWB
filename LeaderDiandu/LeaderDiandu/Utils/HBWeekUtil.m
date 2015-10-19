@@ -55,7 +55,7 @@
     return weekOfYear;
 }
 
-- (void)getWeekBeginAndEndWith:(NSDate *)newDate begin:(NSDate *)beginDate end:(NSDate*)endDate
+- (NSMutableDictionary *)getWeekBeginAndEndWith:(NSDate *)newDate begin:(NSDate *)beginDate end:(NSDate*)endDate
 {
     if (newDate == nil) {
         newDate = _curDate;
@@ -70,7 +70,7 @@
     if (ok) {
         endDate = [beginDate dateByAddingTimeInterval:interval-1];
     }else {
-        return;
+        return nil;
     }
     NSDateFormatter *myDateFormatter = [[NSDateFormatter alloc] init];
     [myDateFormatter setDateFormat:@"yyyy.MM.dd"];
@@ -79,6 +79,12 @@
     
     NSString *s = [NSString stringWithFormat:@"%@-%@",beginString,endString];
     NSLog(@"%@",s);
+    
+    NSMutableDictionary *dateDic = [[NSMutableDictionary alloc] initWithCapacity:1];
+    [dateDic setObject:beginDate forKey:@"beginDate"];
+    [dateDic setObject:endDate forKey:@"endDate"];
+    
+    return dateDic;
 }
 
 
