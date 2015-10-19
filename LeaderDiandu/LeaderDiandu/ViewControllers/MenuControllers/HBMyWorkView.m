@@ -176,11 +176,14 @@ typedef enum : NSUInteger {
     NSInteger count = [optionArray count];
     if (count == 4) {
         controlY = (frame.size.height-controlH*2-40) / 2;
+        if (controlY < 0) {
+            controlY = 0;
+        }
     }
     UIScrollView *scrollView = nil;
     if (count/2*controlH+20 > frame.size.height) {
         scrollView = [[UIScrollView alloc] initWithFrame:_selectionView.bounds];
-        scrollView.contentSize = CGSizeMake(frame.size.width, count/2*controlH+20);
+        scrollView.contentSize = CGSizeMake(frame.size.width, count/2*controlH+40);
         scrollView.showsHorizontalScrollIndicator = NO;
         scrollView.backgroundColor = [UIColor clearColor];
         [_selectionView addSubview:scrollView];
@@ -436,6 +439,23 @@ typedef enum : NSUInteger {
     NSInteger i = 0;
     NSArray *subViews = [_selectionView subviews];
     for (UIView *view in subViews) {
+        if ([view isKindOfClass:[UIScrollView class]]) {
+            NSInteger j = 0;
+            for (UIView *subView in [view subviews]) {
+                if ([subView isKindOfClass:[UIButton class]]) {
+                    UIButton *button = (UIButton *)subView;
+                    if (button == sender) {
+                        isOptionSelected = YES;
+                        button.selected = YES;
+                        selAnswerIndex = j;
+                    } else {
+                        button.selected = NO;
+                    }
+                    j++;
+                }
+            }
+            break;
+        }
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton *button = (UIButton *)view;
             if (button == sender) {
