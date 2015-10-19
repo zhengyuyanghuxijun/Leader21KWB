@@ -34,6 +34,8 @@
     if (self) {
         _curDate = [NSDate date];
         _curCalendar = [NSCalendar currentCalendar];
+        NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+        [_curCalendar setTimeZone:timeZone];
     }
     return self;
 }
@@ -55,16 +57,16 @@
     return weekOfYear;
 }
 
-- (NSMutableDictionary *)getWeekBeginAndEndWith:(NSDate *)newDate begin:(NSDate *)beginDate end:(NSDate*)endDate
+- (NSMutableDictionary *)getWeekBeginAndEndWith:(NSDate *)newDate
 {
     if (newDate == nil) {
         newDate = _curDate;
     }
     
     double interval = 0;
-    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
-    [_curCalendar setTimeZone:timeZone];
     //    [calendar setFirstWeekday:2];//设定周一为周首日
+    NSDate *beginDate = nil;
+    NSDate *endDate = nil;
     BOOL ok = [_curCalendar rangeOfUnit:NSWeekCalendarUnit startDate:&beginDate interval:&interval forDate:newDate];
     //分别修改为 NSDayCalendarUnit NSMonthCalendarUnit NSYearCalendarUnit
     if (ok) {
@@ -87,5 +89,18 @@
     return dateDic;
 }
 
+- (NSDate *)turnWeekDay:(BOOL)isPre
+{
+    NSDateComponents *components = [_curCalendar components:(NSWeekdayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:_curDate];
+    if (isPre) {
+        [components setDay:([components day] - 7)];
+    } else {
+        [components setDay:([components day] + 7)];
+    }
+    NSDate *weekDate  = [_curCalendar dateFromComponents:components];
+    NSLog(@"lastWeek=%@", weekDate);
+    
+    return weekDate;
+}
 
 @end

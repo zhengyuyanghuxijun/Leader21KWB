@@ -14,7 +14,6 @@
 #import "HBDataSaveManager.h"
 #import "HBHeaderManager.h"
 #import "TimeIntervalUtils.h"
-#import "HBWeekUtil.h"
 
 static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewControllerCellReuseId";
 
@@ -49,8 +48,6 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     
     [self getUserInfo];
     [self getHeaderAvatar];
-    
-    NSInteger weekOfYear = [[HBWeekUtil sharedInstance] getWeekOfYear];
 }
 
 - (void)getHeaderAvatar

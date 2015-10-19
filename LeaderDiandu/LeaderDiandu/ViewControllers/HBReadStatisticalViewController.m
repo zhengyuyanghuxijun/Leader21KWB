@@ -82,13 +82,10 @@
 
 -(void)requestReadingStudent
 {
-    NSDate *beginDate = nil;
-    NSDate *endDate = nil;
+    NSMutableDictionary *dateDic = [[HBWeekUtil sharedInstance] getWeekBeginAndEndWith:nil];
     
-    NSMutableDictionary *dateDic = [[HBWeekUtil sharedInstance] getWeekBeginAndEndWith:nil begin:beginDate end:endDate];
-    
-    beginDate = [dateDic objectForKey:@"beginDate"];
-    endDate = [dateDic objectForKey:@"endDate"];
+    NSDate *beginDate = [dateDic objectForKey:@"beginDate"];
+    NSDate *endDate = [dateDic objectForKey:@"endDate"];
     
     NSString *beginDateStr = [NSString stringWithFormat:@"%.f",[beginDate timeIntervalSince1970]];
     NSString *endDateStr = [NSString stringWithFormat:@"%.f",[endDate timeIntervalSince1970]];
