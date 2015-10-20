@@ -12,6 +12,8 @@
 
 - (void)payCellChecked:(NSString *)cellText;
 - (void)textFieldDidChange:(NSString *)str;
+- (void)textFieldDidBegin:(id)sender;
+- (void)textFieldDidEnd:(id)sender;
 
 @end
 

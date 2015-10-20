@@ -11,6 +11,10 @@
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
 
+@interface HBPayViewControllerModeCell () <UITextFieldDelegate>
+
+@end
+
 @implementation HBPayViewControllerModeCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier showModeText:(BOOL)showModeText
@@ -21,8 +25,17 @@
         self.showModeText = showModeText;
         self.checked = NO;
         [self initUI];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToHideKeyboard:)];
+        tap.cancelsTouchesInView = NO;
+        [self addGestureRecognizer:tap];
     }
     return self;
+}
+
+- (void)tapToHideKeyboard:(id)sender
+{
+    [self.VIPTextField resignFirstResponder];
 }
 
 - (void) initUI
@@ -35,13 +48,18 @@
     if (self.showModeText) {
         self.modeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + 30 + 10, 0, 150, 50)];
         [self addSubview:self.modeLabel];
-    }else{
-        UIImageView *editBg = [[UIImageView alloc] initWithFrame:CGRectMake(10 + 30 + 10, 0, 250, 50)];
+    } else {
+        float controlW = 250;
+        if (iPhone5) {
+            controlW = 230;
+        }
+        UIImageView *editBg = [[UIImageView alloc] initWithFrame:CGRectMake(10 + 30 + 10, 0, controlW, 50)];
         editBg.userInteractionEnabled = YES;
         editBg.image = [UIImage imageNamed:@"user_editbg"];
         [self addSubview:editBg];
         
-        self.VIPTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, 250, 30)];
+        self.VIPTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 10, controlW-20, 30)];
+        self.VIPTextField.delegate = self;
         self.VIPTextField.placeholder = @"VIP码";
         [self.VIPTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         [editBg addSubview:self.VIPTextField];
@@ -101,6 +119,26 @@
     NSLog(@"%@",[field text]);
     
     [self.delegate textFieldDidChange:[field text]];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (self.delegate) {
+        [self.delegate textFieldDidBegin:textField];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (self.delegate) {
+        [self.delegate textFieldDidEnd:textField];
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

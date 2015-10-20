@@ -50,7 +50,11 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     UIView* view = [[UIView alloc] initWithFrame:rc];
     rc.origin.x += 20.0f;
     rc.size.width -= 40.0f;
-    rc.origin.y += 20.0f;
+    if (iPhone5) {
+        rc.origin.y += 10.0f;
+    } else {
+        rc.origin.y += 20.0f;
+    }
     rc.size.height -= 30.0f;
     
     self.payButton = [[UIButton alloc] initWithFrame:rc];
@@ -133,7 +137,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (0 == indexPath.section) {
-        return 250;
+        return 320;
     }else{
         return 50;
     }
@@ -210,6 +214,20 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 - (void)textFieldDidChange:(NSString *)str
 {
     _textFieldStr = str;
+}
+
+- (void)textFieldDidBegin:(id)sender
+{
+    if (_tableView) {
+        [_tableView setContentOffset:CGPointMake(0, 200) animated:YES];
+    }
+}
+
+- (void)textFieldDidEnd:(id)sender
+{
+    if (_tableView) {
+        [_tableView setContentOffset:CGPointMake(0, -60) animated:YES];
+    }
 }
 
 -(void)rightButtonPressed

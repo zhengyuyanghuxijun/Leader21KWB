@@ -10,11 +10,4 @@
 
 @interface HBPayViewControllerMoneyCell : UITableViewCell
 
-@property (strong, nonatomic) NSMutableArray *moneyBtnArr;
-@property (strong, nonatomic) NSArray *moneyArr;
-@property (strong, nonatomic) NSArray *discountArr;
-@property (strong, nonatomic) NSArray *discountCNArr;
-@property (strong, nonatomic) UILabel *discountLabel;
-@property (strong, nonatomic) UILabel *moneyLabel;
-
 @end
