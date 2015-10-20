@@ -95,6 +95,10 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 
 -(void)requestVipOrder
 {
+    if ([_textFieldStr length] == 0) {
+        [MBHudUtil showTextView:@"请输入VIP码" inView:nil];
+        return;
+    }
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
         [MBHudUtil showActivityView:nil inView:nil];
