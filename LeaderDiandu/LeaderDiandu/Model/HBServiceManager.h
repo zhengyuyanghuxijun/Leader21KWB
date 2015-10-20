@@ -502,7 +502,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param from_time          为起始时间，单位为秒。
  *  @param to_time            为结束时间，单位为秒。
  */
-- (void)requestReadingStudent:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestReadingStudent:(NSInteger)teacher_id bookset_id:(NSInteger)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  阅读次数统计
@@ -523,5 +523,15 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param to_time            为结束时间，单位为秒。
  */
 - (void)requestReadingTime:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
+ *  阅读排行统计
+ *
+ *  @param teacher_id         老师ID
+ *  @param bookset_id         套餐id
+ *  @param from_time          为起始时间，单位为秒。
+ *  @param to_time            为结束时间，单位为秒。
+ */
+- (void)requestReadingRank:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock;
 
 @end

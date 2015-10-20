@@ -41,7 +41,6 @@
     //日期label
     self.dateLabel = [[UILabel alloc] init];
     self.dateLabel.frame = CGRectMake(40, 0, 110, 50);
-    self.dateLabel.text = @"2015年43周";
     self.dateLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.dateLabel];
     

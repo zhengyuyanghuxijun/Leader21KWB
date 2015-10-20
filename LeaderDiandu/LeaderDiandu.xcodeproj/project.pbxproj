@@ -1144,6 +1144,15 @@
 			path = UtilFMDB;
 			sourceTree = "<group>";
 		};
+		1837CB641BD67D400060B450 /* HBRankingListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18AC82C41BD2B593004864A7 /* HBRankingListViewController.h */,
+				18AC82C51BD2B593004864A7 /* HBRankingListViewController.m */,
+			);
+			name = HBRankingListViewController;
+			sourceTree = "<group>";
+		};
 		1864359E1BC549EC0068E73E /* HBMessageViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1188,9 +1197,8 @@
 		18AC82C21BD2B538004864A7 /* StatisticalControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1837CB641BD67D400060B450 /* HBRankingListViewController */,
 				18C36B801BD3D3A700782969 /* HBReadStatisticalViewController */,
-				18AC82C41BD2B593004864A7 /* HBRankingListViewController.h */,
-				18AC82C51BD2B593004864A7 /* HBRankingListViewController.m */,
 				18AC82C81BD2B593004864A7 /* HBTaskStatisticalViewController.h */,
 				18AC82C91BD2B593004864A7 /* HBTaskStatisticalViewController.m */,
 			);

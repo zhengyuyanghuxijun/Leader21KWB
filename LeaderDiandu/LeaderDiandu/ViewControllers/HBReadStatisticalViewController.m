@@ -91,11 +91,9 @@
     NSString *endDateStr = [NSString stringWithFormat:@"%.f",[endDate timeIntervalSince1970]];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    if (userEntity) {
-        [[HBServiceManager defaultManager] requestReadingStudent:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
-            
-        }];
-    }
+    [[HBServiceManager defaultManager] requestReadingStudent:userEntity.userid bookset_id:self.bookset_id from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
+        
+    }];
 }
 
 -(void)requestReadingTimes
@@ -184,6 +182,7 @@
             cell = [[HBReadStatisticalDateCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HBReadStatisticalDateCellReuseId"];
         }
         
+        cell.dateLabel.text = [NSString stringWithFormat:@"2015年%ld周", self.weekOfYear];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
