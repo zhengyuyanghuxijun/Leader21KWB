@@ -11,6 +11,7 @@
 @interface HBReadStatisticalStuNumCell : UITableViewCell
 
 @property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) UILabel *contentLabel;
+@property (strong, nonatomic) UILabel *contentStuNumLabel;
+@property (strong, nonatomic) UILabel *contentAllNumLabel;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "HBReadStatisticalDateCell.h"
+#import "FTMenu.h"
 
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 
@@ -84,7 +85,33 @@
 
 -(void)bookSetButtonPressed
 {
-    
+    [self showPullView];
 }
+
+-(void)showPullView
+{
+    NSMutableArray *menuItems = [[NSMutableArray alloc] initWithCapacity:1];
+    
+    for (NSInteger index = 1; index <= 9; index++) {
+        NSString * bookIdStr = [NSString stringWithFormat:@"%ld", index];
+        KxMenuItem *item = [KxMenuItem
+                            menuItem:bookIdStr
+                            image:nil
+                            target:self
+                            action:@selector(pushMenuItem:)];
+        [menuItems addObject:item];
+    }
+    
+    CGRect menuFrame = CGRectMake(ScreenWidth - 75, 165, 60, 50 * 9);
+    
+    [FTMenu showMenuWithFrame:menuFrame inView:self.superview menuItems:menuItems currentID:0];
+}
+
+- (void) pushMenuItem:(KxMenuItem *)sender
+{
+    [self.bookSetButton setTitle:sender.title forState:UIControlStateNormal];
+    [self.delegate pushMenuItem:[sender.title integerValue]];
+}
+
 
 @end

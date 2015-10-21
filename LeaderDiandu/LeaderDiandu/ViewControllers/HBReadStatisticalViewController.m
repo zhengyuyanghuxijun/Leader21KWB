@@ -15,7 +15,7 @@
 #import "HBReadStatisticalStuNumCell.h"
 #import "HBReadStatisticalContentCell.h"
 
-@interface HBReadStatisticalViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface HBReadStatisticalViewController ()<UITableViewDataSource, UITableViewDelegate, HBPushMenuItemDelegate>
 {
     UITableView *_tableView;
 }
@@ -82,6 +82,7 @@
 
 -(void)requestReadingStudent
 {
+    [MBHudUtil showActivityView:nil inView:nil];
     NSMutableDictionary *dateDic = [[HBWeekUtil sharedInstance] getWeekBeginAndEndWith:nil];
     
     NSDate *beginDate = [dateDic objectForKey:@"beginDate"];
@@ -92,12 +93,19 @@
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     [[HBServiceManager defaultManager] requestReadingStudent:userEntity.userid bookset_id:self.bookset_id from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            self.student_read = [[responseObject numberForKey:@"student_read"] integerValue];
+            self.student_total = [[responseObject numberForKey:@"student_total"] integerValue];
+        }
+        [MBHudUtil hideActivityView:nil];
         
+        [_tableView reloadData];
     }];
 }
 
 -(void)requestReadingTimes
 {
+    [MBHudUtil showActivityView:nil inView:nil];
     //当前时间
     NSDate *date = [NSDate date];
     NSString *testTime = [NSString stringWithFormat:@"%.f",[date timeIntervalSince1970]];
@@ -105,13 +113,20 @@
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
         [[HBServiceManager defaultManager] requestReadingTimes:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:@"1433248966" to_time:testTime completion:^(id responseObject, NSError *error) {
+            if (responseObject) {
+                self.book_count = [[responseObject numberForKey:@"book_count"] integerValue];
+                self.reading_count = [[responseObject numberForKey:@"reading_count"] integerValue];
+            }
+            [MBHudUtil hideActivityView:nil];
             
+             [_tableView reloadData];
         }];
     }
 }
 
 -(void)requestReadingTime
 {
+    [MBHudUtil showActivityView:nil inView:nil];
     //当前时间
     NSDate *date = [NSDate date];
     NSString *testTime = [NSString stringWithFormat:@"%.f",[date timeIntervalSince1970]];
@@ -119,7 +134,12 @@
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
         [[HBServiceManager defaultManager] requestReadingTime:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:@"1433248966" to_time:testTime completion:^(id responseObject, NSError *error) {
+            if (responseObject) {
+                self.reading_time = [[responseObject numberForKey:@"reading_time"] integerValue];
+            }
+            [MBHudUtil hideActivityView:nil];
             
+             [_tableView reloadData];
         }];
     }
 }
@@ -182,6 +202,7 @@
             cell = [[HBReadStatisticalDateCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HBReadStatisticalDateCellReuseId"];
         }
         
+        cell.delegate = self;
         cell.dateLabel.text = [NSString stringWithFormat:@"2015年%ld周", self.weekOfYear];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -193,6 +214,8 @@
             cell = [[HBReadStatisticalStuNumCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HBReadStatisticalStuNumCellReuseId"];
         }
         
+        cell.contentStuNumLabel.text = [NSString stringWithFormat:@"%ld", self.student_read];
+        cell.contentAllNumLabel.text = [NSString stringWithFormat:@" / %ld", self.student_total];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -203,6 +226,24 @@
             cell = [[HBReadStatisticalContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"HBReadStatisticalContentCellReuseId"];
         }
         
+        cell.totalReadCountLabel.text = [NSString stringWithFormat:@"          %ld     次", self.reading_count];
+        if (self.student_read) {
+            cell.perReadCountLabel.text = [NSString stringWithFormat:@"          %ld     次", self.reading_count/self.student_read];
+        }else{
+            cell.perReadCountLabel.text = [NSString stringWithFormat:@"          %d     次", 0];
+        }
+        cell.totalReadTimeLabel.text = [NSString stringWithFormat:@"          %ld     分钟", self.reading_time/60];
+        if (self.student_read) {
+            cell.perReadTimeLabel.text = [NSString stringWithFormat:@"          %ld     分钟", self.reading_time/(60 * self.student_read)];
+        }else{
+            cell.perReadTimeLabel.text = [NSString stringWithFormat:@"          %d     分钟", 0];
+        }
+        if (self.book_count) {
+            cell.perBookReadLabel.text = [NSString stringWithFormat:@"          %ld     次", self.reading_count/self.book_count];
+        }else{
+            cell.perBookReadLabel.text = [NSString stringWithFormat:@"          %d     次", 0];
+        }
+
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -213,6 +254,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)pushMenuItem:(NSInteger)booksetId
+{
+    self.bookset_id = booksetId;
+    //阅读人数统计
+    [self requestReadingStudent];
+    //阅读次数统计
+    [self requestReadingTimes];
+    //阅读时长统计
+    [self requestReadingTime];
 }
 
 @end

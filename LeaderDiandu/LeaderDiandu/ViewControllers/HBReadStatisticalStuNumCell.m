@@ -28,12 +28,20 @@
     self.titleLabel.text = @"阅读人数";
     [self addSubview:self.titleLabel];
     
-    //contentLabel
-    self.contentLabel = [[UILabel alloc] init];
-    self.contentLabel.frame = CGRectMake(215, 0, 150, 50);
-    self.contentLabel.text = @"0 / 0";
-    self.contentLabel.font = [UIFont boldSystemFontOfSize:20.0f];
-    [self addSubview:self.contentLabel];
+    //contentStuNumLabel
+    self.contentStuNumLabel = [[UILabel alloc] init];
+    self.contentStuNumLabel.frame = CGRectMake(215, 0, 10, 50);
+    self.contentStuNumLabel.text = @"0";
+    self.contentStuNumLabel.textColor = [UIColor colorWithHex:0x1E90FF];
+    self.contentStuNumLabel.font = [UIFont boldSystemFontOfSize:20.0f];
+    [self addSubview:self.contentStuNumLabel];
+    
+    //contentAllNumLabel
+    self.contentAllNumLabel = [[UILabel alloc] init];
+    self.contentAllNumLabel.frame = CGRectMake(225, 0, 150, 50);
+    self.contentAllNumLabel.text = @" / 0";
+    self.contentAllNumLabel.font = [UIFont boldSystemFontOfSize:20.0f];
+    [self addSubview:self.contentAllNumLabel];
     
     UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 50 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
     seperatorLine.backgroundColor = [UIColor lightGrayColor];

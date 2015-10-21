@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol HBPushMenuItemDelegate <NSObject>
+
+- (void)pushMenuItem:(NSInteger)booksetId;
+
+@end
+
 @interface HBReadStatisticalDateCell : UITableViewCell
 
 @property (strong, nonatomic) UIButton *leftButton;
@@ -15,5 +21,7 @@
 @property (strong, nonatomic) UILabel *dateLabel;
 @property (strong, nonatomic) UIButton *thisWeekButton;
 @property (strong, nonatomic) UIButton *bookSetButton;
+
+@property (weak, nonatomic) id<HBPushMenuItemDelegate> delegate;
 
 @end

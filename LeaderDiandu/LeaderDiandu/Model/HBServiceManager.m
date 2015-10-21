@@ -818,7 +818,7 @@
     //    }
     
     self.receivedBlock = receivedBlock;
-    [self Post:@"/api/stat/book/reading" dict:dicInfo block:receivedBlock];
+    [self Post:@"/api/stat/reading" dict:dicInfo block:receivedBlock];
 }
 
 /**
@@ -842,7 +842,7 @@
     //    }
     
     self.receivedBlock = receivedBlock;
-    [self Post:@"/api/stat/book/reading/time" dict:dicInfo block:receivedBlock];
+    [self Post:@"/api/stat/reading/time" dict:dicInfo block:receivedBlock];
 }
 
 /**
