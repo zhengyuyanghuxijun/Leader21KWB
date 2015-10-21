@@ -794,7 +794,7 @@
     //    }
     
     self.receivedBlock = receivedBlock;
-    [self Post:@"/api/stat/book/reading/student" dict:dicInfo block:receivedBlock];
+    [self Post:@"/api/stat/reading/student" dict:dicInfo block:receivedBlock];
 }
 
 /**
@@ -853,10 +853,14 @@
  *  @param from_time          为起始时间，单位为秒。
  *  @param to_time            为结束时间，单位为秒。
  */
-- (void)requestReadingRank:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestReadingRank:(NSString *)teacher_id token:(NSString *)token bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
-    [dicInfo setObject:teacher_id     forKey:@"teacher_id"];
+    
+    if (teacher_id) {
+        [dicInfo setObject:teacher_id     forKey:@"teacher_id"];
+    }
+    [dicInfo setObject:token    forKey:@"token"];
     [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
     [dicInfo setObject:from_time     forKey:@"from_time"];
     [dicInfo setObject:to_time     forKey:@"to_time"];
@@ -866,7 +870,7 @@
     //    }
     
     self.receivedBlock = receivedBlock;
-    [self Post:@"/api/stat/book/reading/rank" dict:dicInfo block:receivedBlock];
+    [self Post:@"/api/stat/reading/rank" dict:dicInfo block:receivedBlock];
 }
 
 @end

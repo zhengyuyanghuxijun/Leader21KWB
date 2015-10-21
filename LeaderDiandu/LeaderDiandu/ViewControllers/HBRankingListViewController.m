@@ -11,6 +11,11 @@
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 #import "FTMenu.h"
+#import "HBRankBookEntity.h"
+#import "HBRankingListCell.h"
+
+static NSString * const KHBRankingListMybookCellReuseId = @"KHBRankingListMybookCellReuseId";
+static NSString * const KHBRankingListAllbookCellReuseId = @"KHBRankingListAllbookCellReuseId";
 
 @interface HBRankingListViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -47,6 +52,8 @@
         
         self.myBooksArr = [[NSMutableArray alloc] initWithCapacity:1];
         self.allBooksArr = [[NSMutableArray alloc] initWithCapacity:1];
+        
+        self.isShowMyRanking = YES;
     }
     return self;
 }
@@ -65,7 +72,8 @@
     [self initButton];
     [self initSelectBookSetView];
 
-    [self requestReadingRank];
+    [self requestReadingRank]; //我的排行
+    [self requestAllReadingRank]; //全国排行
     
     [self addTableView];
 }
@@ -77,7 +85,7 @@
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = NO;
-        _tableView.backgroundColor = [UIColor clearColor];
+        _tableView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:_tableView];
     }
 }
@@ -119,7 +127,7 @@
 {
     UIView *bgView = [[UIView alloc] init];
     bgView.frame = CGRectMake(0, KHBNaviBarHeight + 50, ScreenWidth, 50);
-    bgView.backgroundColor = [UIColor clearColor];
+    bgView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:bgView];
     
@@ -149,25 +157,15 @@
 -(void)myRankingButtonPressed
 {
     self.isShowMyRanking = YES;
-    if (0 == self.myBooksArr.count) {
-//        [self requestReadingRank];
-    }
-    
-    [_tableView reloadData];
-    
     [self showMyRankingView:YES];
+    [_tableView reloadData];
 }
 
 -(void)allRankingButtonPressed
 {
     self.isShowMyRanking = NO;
-    if (0 == self.allBooksArr.count) {
-//        [self requestAllReadingRank];
-    }
-    
-    [_tableView reloadData];
-    
     [self showMyRankingView:NO];
+    [_tableView reloadData];
 }
 
 - (void)bookSetButtonPressed
@@ -198,6 +196,9 @@
 {
     [self.bookSetButton setTitle:sender.title forState:UIControlStateNormal];
     self.bookset_id = [sender.title integerValue];
+    
+    [self requestReadingRank]; //我的排行
+    [self requestAllReadingRank]; //全国排行
 }
 
 -(void)showMyRankingView:(BOOL)showMyRanking
@@ -214,16 +215,60 @@
 -(void)requestReadingRank
 {
     NSMutableDictionary *dateDic = [[HBWeekUtil sharedInstance] getWeekBeginAndEndWith:nil];
-    
-    NSDate *beginDate = [dateDic objectForKey:@"beginDate"];
     NSDate *endDate = [dateDic objectForKey:@"endDate"];
-    
-    NSString *beginDateStr = [NSString stringWithFormat:@"%.f",[beginDate timeIntervalSince1970]];
     NSString *endDateStr = [NSString stringWithFormat:@"%.f",[endDate timeIntervalSince1970]];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestReadingRank:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
-        
+    [[HBServiceManager defaultManager] requestReadingRank:[NSString stringWithFormat:@"%ld", userEntity.userid] token:userEntity.token bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:@"1433248966" to_time:endDateStr completion:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            [self.myBooksArr removeAllObjects];
+            NSArray *arr = [responseObject arrayForKey:@"books"];
+            NSInteger rankNum = 0;
+            for (NSDictionary *dic in arr)
+            {
+                rankNum++;
+                HBRankBookEntity *rankBookEntity = [[HBRankBookEntity alloc] init];
+                rankBookEntity.rank = [NSString stringWithFormat:@"%ld", rankNum];
+                rankBookEntity.book_title = [dic stringForKey:@"book_title"];
+                rankBookEntity.book_title_cn = [dic stringForKey:@"book_title_cn"];
+                rankBookEntity.count = [[dic numberForKey:@"count"] stringValue];
+                rankBookEntity.file_id = [dic stringForKey:@"file_id"];
+                
+                [self.myBooksArr addObject:rankBookEntity];
+            }
+            
+            [_tableView reloadData];
+        }
+    }];
+}
+
+-(void)requestAllReadingRank
+{
+    NSMutableDictionary *dateDic = [[HBWeekUtil sharedInstance] getWeekBeginAndEndWith:nil];
+    NSDate *endDate = [dateDic objectForKey:@"endDate"];
+    NSString *endDateStr = [NSString stringWithFormat:@"%.f",[endDate timeIntervalSince1970]];
+    
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    [[HBServiceManager defaultManager] requestReadingRank:nil token:userEntity.token bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:@"1433248966" to_time:endDateStr completion:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            [self.allBooksArr removeAllObjects];
+            NSArray *arr = [responseObject arrayForKey:@"books"];
+            NSInteger rankNum = 0;
+            for (NSDictionary *dic in arr)
+            {
+                rankNum++;
+                HBRankBookEntity *rankBookEntity = [[HBRankBookEntity alloc] init];
+                rankBookEntity.rank = [NSString stringWithFormat:@"%ld", rankNum];
+                rankBookEntity.book_title = [dic stringForKey:@"book_title"];
+                rankBookEntity.book_title_cn = [dic stringForKey:@"book_title_cn"];
+                rankBookEntity.count = [[dic numberForKey:@"count"] stringValue];
+                rankBookEntity.file_id = [dic stringForKey:@"file_id"];
+                
+                [self.allBooksArr addObject:rankBookEntity];
+            }
+            
+            [_tableView reloadData];
+        }
     }];
 }
 
@@ -248,7 +293,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70.0f;
+    return 100.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -256,10 +301,12 @@
     if (self.isShowMyRanking) {
         NSParameterAssert(self.myBooksArr);
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"123"];
+        HBRankingListCell *cell = [tableView dequeueReusableCellWithIdentifier:KHBRankingListMybookCellReuseId];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"123"];
+            cell = [[HBRankingListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBRankingListMybookCellReuseId];
         }
+        
+        [cell updateFormData:[self.myBooksArr objectAtIndex:indexPath.row]];
         
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -269,10 +316,12 @@
     }else{
         NSParameterAssert(self.allBooksArr);
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"456"];
+        HBRankingListCell *cell = [tableView dequeueReusableCellWithIdentifier:KHBRankingListAllbookCellReuseId];
         if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"456"];
+            cell = [[HBRankingListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBRankingListAllbookCellReuseId];
         }
+        
+        [cell updateFormData:[self.allBooksArr objectAtIndex:indexPath.row]];
         
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

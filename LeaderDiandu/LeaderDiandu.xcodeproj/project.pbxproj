@@ -188,6 +188,8 @@
 		18A244771BA7295A00E1E703 /* HBCreatGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A244761BA7295A00E1E703 /* HBCreatGroupController.m */; };
 		18AB8F4F1BB9911300409103 /* RefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AB8F4E1BB9911300409103 /* RefreshTableHeaderView.m */; };
 		18AB8F531BB9918D00409103 /* FTRotatingCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AB8F521BB9918D00409103 /* FTRotatingCircle.m */; };
+		18ABF5241BD7DEDC006E55A0 /* HBRankBookEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ABF5231BD7DEDC006E55A0 /* HBRankBookEntity.m */; };
+		18ABF5281BD7E33B006E55A0 /* HBRankingListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ABF5271BD7E33B006E55A0 /* HBRankingListCell.m */; };
 		18AC82CA1BD2B593004864A7 /* HBRankingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC82C51BD2B593004864A7 /* HBRankingListViewController.m */; };
 		18AC82CB1BD2B593004864A7 /* HBReadStatisticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC82C71BD2B593004864A7 /* HBReadStatisticalViewController.m */; };
 		18AC82CC1BD2B593004864A7 /* HBTaskStatisticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC82C91BD2B593004864A7 /* HBTaskStatisticalViewController.m */; };
@@ -530,6 +532,10 @@
 		18AB8F4E1BB9911300409103 /* RefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshTableHeaderView.m; sourceTree = "<group>"; };
 		18AB8F511BB9918D00409103 /* FTRotatingCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTRotatingCircle.h; sourceTree = "<group>"; };
 		18AB8F521BB9918D00409103 /* FTRotatingCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTRotatingCircle.m; sourceTree = "<group>"; };
+		18ABF5221BD7DEDC006E55A0 /* HBRankBookEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBRankBookEntity.h; sourceTree = "<group>"; };
+		18ABF5231BD7DEDC006E55A0 /* HBRankBookEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBRankBookEntity.m; sourceTree = "<group>"; };
+		18ABF5261BD7E33B006E55A0 /* HBRankingListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBRankingListCell.h; sourceTree = "<group>"; };
+		18ABF5271BD7E33B006E55A0 /* HBRankingListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBRankingListCell.m; sourceTree = "<group>"; };
 		18AC82C41BD2B593004864A7 /* HBRankingListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBRankingListViewController.h; sourceTree = "<group>"; };
 		18AC82C51BD2B593004864A7 /* HBRankingListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBRankingListViewController.m; sourceTree = "<group>"; };
 		18AC82C61BD2B593004864A7 /* HBReadStatisticalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBReadStatisticalViewController.h; sourceTree = "<group>"; };
@@ -1149,6 +1155,8 @@
 			children = (
 				18AC82C41BD2B593004864A7 /* HBRankingListViewController.h */,
 				18AC82C51BD2B593004864A7 /* HBRankingListViewController.m */,
+				18ABF5261BD7E33B006E55A0 /* HBRankingListCell.h */,
+				18ABF5271BD7E33B006E55A0 /* HBRankingListCell.m */,
 			);
 			name = HBRankingListViewController;
 			sourceTree = "<group>";
@@ -1266,6 +1274,8 @@
 				1864359B1BC546440068E73E /* HBSystemMsgEntity.m */,
 				18DF0ED81BCB9FBC00376686 /* HBBillEntity.h */,
 				18DF0ED91BCB9FBC00376686 /* HBBillEntity.m */,
+				18ABF5221BD7DEDC006E55A0 /* HBRankBookEntity.h */,
+				18ABF5231BD7DEDC006E55A0 /* HBRankBookEntity.m */,
 			);
 			name = HBModelEntity;
 			sourceTree = "<group>";
@@ -1538,6 +1548,7 @@
 				186435A11BC54A2F0068E73E /* HBMessageViewCell.m in Sources */,
 				18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */,
 				0DBE35351B8CB8B500179237 /* DataCheckUtil.m in Sources */,
+				18ABF5241BD7DEDC006E55A0 /* HBRankBookEntity.m in Sources */,
 				18C36B8D1BD3EC6400782969 /* HBReadStatisticalContentCell.m in Sources */,
 				18DF0EDA1BCB9FBC00376686 /* HBBillEntity.m in Sources */,
 				0DB537271B8F5DEE0023A3F7 /* AFHTTPRequestOperationManager.m in Sources */,
@@ -1588,6 +1599,7 @@
 				182306131B9B0DEE00A8E146 /* HHAlertSingleView.m in Sources */,
 				0DBE35C61B8CD60F00179237 /* HBLoginViewController.m in Sources */,
 				0D7486F41B88A884007BE4CD /* main.m in Sources */,
+				18ABF5281BD7E33B006E55A0 /* HBRankingListCell.m in Sources */,
 				0DB537291B8F5DEE0023A3F7 /* AFHTTPSessionManager.m in Sources */,
 				1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */,
 				189C0F5E1BB5776300DD39C0 /* HBReadprogressEntity.m in Sources */,

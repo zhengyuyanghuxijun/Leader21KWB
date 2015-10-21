@@ -66,8 +66,8 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
         NSString *user = [dict objectForKey:@"name"];
         NSString *token = [dict objectForKey:@"token"];
         
-        //1443248966 是临时用来测试的时间，后续需要改成正式的！
-        [[HBServiceManager defaultManager] requestSystemMsg:user token:token from_time:@"1443248966" completion:^(id responseObject, NSError *error) {
+        //1433248966 是临时用来测试的时间，后续需要改成正式的！
+        [[HBServiceManager defaultManager] requestSystemMsg:user token:token from_time:@"1433248966" completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 NSArray *arr = [responseObject arrayForKey:@"messages"];
                 for (NSDictionary *dic in arr)

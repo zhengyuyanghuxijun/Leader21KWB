@@ -1037,8 +1037,8 @@
 -(void)requestSystemMsg
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    //1443248966 是临时用来测试的时间，后续需要改成正式的！
-    [[HBServiceManager defaultManager] requestSystemMsg:userEntity.name token:userEntity.token from_time:@"1443248966" completion:^(id responseObject, NSError *error) {
+    //1433248966 是临时用来测试的时间，后续需要改成正式的！
+    [[HBServiceManager defaultManager] requestSystemMsg:userEntity.name token:userEntity.token from_time:@"1433248966" completion:^(id responseObject, NSError *error) {
         if (responseObject) {
             
             //从数据库读取本地所有消息内容

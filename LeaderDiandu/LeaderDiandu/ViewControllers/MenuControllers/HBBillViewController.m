@@ -75,7 +75,7 @@ static NSString * const KHBBillViewControllerCellReuseId = @"KHBBillViewControll
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
         [MBHudUtil showActivityView:nil inView:nil];
-        [[HBServiceManager defaultManager] requestBillList:userEntity.name from_time:@"1443248966" count:50 completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestBillList:userEntity.name from_time:@"1433248966" count:50 completion:^(id responseObject, NSError *error) {
             [MBHudUtil hideActivityView:nil];
             
             NSArray *arr = [responseObject objectForKey:@"payments"];
