@@ -18,6 +18,8 @@
 
 #import "Constants.h"
 
+#import <AlipaySDK/AlipaySDK.h>
+
 @interface AppDelegate ()
 {
     DHSlideMenuController *menuVC;
@@ -147,5 +149,18 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    //跳转支付宝钱包进行支付，处理支付结果
+    [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+        NSLog(@"result = %@",resultDic);
+        //【由于在跳转支付宝客户端支付的过程中,商户 app 在后台很可能被系统 kill 了,所以 pay 接 口的 callback 就会失效,请商户对 standbyCallback 返回的回调结果进行处理,就是在这个方法 里面处理跟 callback 一样的逻辑】
+    }];
+    
+    return YES;
+}
+
+//"alisdkdemo://safepay/?{"memo":{"result":"partner=\"2088101568353491\"&se ller_id=\"2088101568353491\"&out_trade_no=\"QU6ZOD85K4HVQFN\"&subject=\"1 \"&body=\" 我 是 测 试 数 据 \"&total_fee=\"0.02\"&notify_url=\"http:\/\/www.xxx.com\"&service=\"mobil e.securitypay.pay\"&payment_type=\"1\"&_input_charset=\"utf-8\"&it_b_pay= \"30m\"&show_url=\"m.alipay.com\"&success=\"true\"&sign_type=\"RSA\"&sign =\"pg16DPA\/cIRg1iUFCl8lYZG54de+kfw+vCj32hGWye97isZ1A4bW6RNaDXHhZXVaI5Vk2 YDxhNUl85EHRd+EL7\/+ogQTnsaEHl+D13PuZExIXRKGBnkYqaNV6kH6hDygnf5IOtoojHWLQ yem7oRBVzB0vlF\/+YGFpzFHZyTVpM8=\"","memo":"","ResultStatus":"9000"},"req uestType":"safepay"}"
 
 @end

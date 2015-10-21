@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol HBPayMoneyCellDelegate <NSObject>
+
+- (void)HBPaySelectMonth:(NSInteger)months money:(CGFloat)money;
+
+@end
+
 @interface HBPayViewControllerMoneyCell : UITableViewCell
+
+@property (nonatomic, assign)id<HBPayMoneyCellDelegate> delegate;
 
 @end

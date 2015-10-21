@@ -148,14 +148,20 @@
         }
     }
     
-    self.discountLabel.text = [self.discountCNArr objectAtIndex:moneyBtn.tag];
+    NSInteger index = moneyBtn.tag;
+    self.discountLabel.text = [self.discountCNArr objectAtIndex:index];
     
-    NSString *moneyStr = [self.moneyArr objectAtIndex:moneyBtn.tag];
-    NSString *discountStr = [self.discountArr objectAtIndex:moneyBtn.tag];
+    NSString *moneyStr = [self.moneyArr objectAtIndex:index];
+    NSString *discountStr = [self.discountArr objectAtIndex:index];
     NSInteger money = [moneyStr integerValue];
     CGFloat discount = [discountStr floatValue];
     CGFloat result = money * discount;
     self.moneyLabel.text = [NSString stringWithFormat:@"%.1f%@", result, @"元"];
+    
+    NSInteger months = money / 10;
+    if (self.delegate) {
+        [self.delegate HBPaySelectMonth:months money:result];
+    }
 }
 
 @end

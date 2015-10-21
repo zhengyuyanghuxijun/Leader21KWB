@@ -12,11 +12,14 @@
 #import "HBBillViewController.h"
 #import "HBServiceManager.h"
 #import "HBDataSaveManager.h"
+#import <AlipaySDK/AlipaySDK.h>
+#import "Order.h"
+#import "DataSigner.h"
 
 static NSString * const KHBPayViewControllerMoneyCellReuseId = @"KHBPayViewControllerMoneyCellReuseId";
 static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewControllerCellModeReuseId";
 
-@interface HBPayViewController ()<UITableViewDataSource, UITableViewDelegate, HBPayCellChangeDelegate>
+@interface HBPayViewController ()<UITableViewDataSource, UITableViewDelegate, HBPayCellChangeDelegate, HBPayMoneyCellDelegate>
 {
     UITableView *_tableView;
     NSString *_textFieldStr;
@@ -24,6 +27,10 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 
 @property (nonatomic, strong) UIButton* payButton;
 @property (nonatomic, strong) NSMutableDictionary *payModeDic;
+@property (nonatomic, strong) NSDictionary *orderDict;
+
+@property (nonatomic, assign) NSInteger months;
+@property (nonatomic, assign) CGFloat money;
 
 @end
 
@@ -35,6 +42,9 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     
     self.navigationController.navigationBarHidden = NO;
     self.title = @"支付中心";
+    
+    self.months = 1;
+    self.money = 10;
     
     self.payModeDic = [[NSMutableDictionary alloc] initWithCapacity:1];
     [self.payModeDic setObject:@"pay-icn-alipay" forKey:@"checked"];
@@ -89,10 +99,10 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 {
     NSString *checkedStr = [self.payModeDic objectForKey:@"checked"];
     if ([checkedStr isEqualToString:@"pay-icn-alipay"]) { //支付宝支付
-        
-    }else if([checkedStr isEqualToString:@"pay-icn-wechat"]){ //微信支付
+        [self requestChannelOrder];
+    } else if ([checkedStr isEqualToString:@"pay-icn-wechat"]){ //微信支付
         [MBHudUtil showTextView:@"暂不支持微信支付，敬请期待" inView:nil];
-    }else{ //VIP码
+    } else { //VIP码
         [self requestVipOrder];
     }
 }
@@ -115,6 +125,20 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
             }
         }];
     }
+}
+
+- (void)requestChannelOrder
+{
+    [MBHudUtil showActivityView:nil inView:nil];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    [[HBServiceManager defaultManager] requestChannelOrder:userEntity.name token:userEntity.token channel:@"zfb" quantity:_months product:@"kwb0001" completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
+        if (error.code == 0) {
+            [self handleAliPay:responseObject];
+        } else {
+            [MBHudUtil showTextViewAfter:@"支付失败，请重新支付"];
+        }
+    }];
 }
 
 #pragma mark - Table view data source
@@ -157,6 +181,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
             cell = [[HBPayViewControllerMoneyCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBPayViewControllerMoneyCellReuseId];
         }
         
+        cell.delegate = self;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.textColor = [UIColor blackColor];
@@ -234,6 +259,50 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 {
     HBBillViewController *vc = [[HBBillViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)HBPaySelectMonth:(NSInteger)months money:(CGFloat)money
+{
+    self.months = months;
+    self.money = money;
+}
+
+#pragma mark - AliPay
+
+- (void)handleAliPay:(NSDictionary *)orderDict
+{
+    [[NSDate date] timeIntervalSince1970];
+    NSDictionary *paymentDict = [orderDict dicForKey:@"payment_params"];
+    
+    Order *order = [[Order alloc] init];
+    order.partner = [paymentDict stringForKey:@"partner"];
+    order.seller = [paymentDict stringForKey:@"seller_id"];
+    order.tradeNO = [orderDict stringForKey:@"order_no"]; //订单ID(由商家自行制定)
+    order.productName = [orderDict stringForKey:@"subject"]; //商品标题
+    order.productDescription = [orderDict stringForKey:@"body"]; //商品描述
+    order.amount = [NSString stringWithFormat:@"%.2f",[[orderDict stringForKey:@"price"] floatValue]]; //商 品价格
+    order.notifyURL = [paymentDict stringForKey:@"notify_url"]; //回调URL
+    order.service = [paymentDict stringForKey:@"service"];
+    order.paymentType = [paymentDict stringForKey:@"payment_type"];
+    order.inputCharset = [paymentDict stringForKey:@"_input_charset"];
+    order.itBPay = [paymentDict stringForKey:@"it_b_pay"];
+    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
+    NSString *appScheme = @"LeaderDiandu";
+    //将商品信息拼接成字符串
+    NSString *orderSpec = [order description];
+    NSLog(@"orderSpec = %@",orderSpec);
+    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循 RSA 签名规范, 并将签名字符串 base64 编码和 UrlEncode
+    NSString *privateKey = [paymentDict stringForKey:@"rsa_private"];
+    id<DataSigner> signer = CreateRSADataSigner(privateKey);
+    NSString *signedString = [signer signString:orderSpec];
+    //将签名成功字符串格式化为订单字符串,请严格按照该格式 NSString *orderString = nil;
+    if (signedString != nil) {
+        NSString *orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"", orderSpec, signedString, @"RSA"];
+        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+            //【callback 处理支付结果】
+            NSLog(@"reslut = %@",resultDic);
+        }];
+    }
 }
 
 @end

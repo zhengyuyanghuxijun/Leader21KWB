@@ -495,6 +495,17 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
 - (void)requestVipOrder:(NSString *)user vip_code:(NSString *)vip_code product:(NSString *)product completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
+ *  用户通过支付宝或微信付费
+ *
+ *  @param user             用户名
+ *  @param channel          支付渠道,支付宝@"zfb"
+ *  @param quantity         几个月
+ *  @param product          一个固定值
+ *  @param receivedBlock    回调Block
+ */
+- (void)requestChannelOrder:(NSString *)user token:(NSString *)token channel:(NSString *)channel quantity:(NSInteger)quantity product:(NSString *)product completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
  *  阅读人数统计
  *
  *  @param teacher_id         老师ID

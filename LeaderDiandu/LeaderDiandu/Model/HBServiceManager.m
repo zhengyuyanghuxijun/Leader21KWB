@@ -773,6 +773,23 @@
     [self Post:@"/api/order/vip/create" dict:dicInfo block:receivedBlock];
 }
 
+- (void)requestChannelOrder:(NSString *)user token:(NSString *)token channel:(NSString *)channel quantity:(NSInteger)quantity product:(NSString *)product completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:user     forKey:@"user"];
+    [dicInfo setObject:token forKey:@"token"];
+    [dicInfo setObject:channel     forKey:@"channel"];
+    [dicInfo setObject:@(quantity)     forKey:@"quantity"];
+    [dicInfo setObject:product     forKey:@"product"];
+    
+    if (_receivedBlock) {
+        return;
+    }
+    
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/order/create" dict:dicInfo block:receivedBlock];
+}
+
 /**
  *  阅读人数统计
  *
