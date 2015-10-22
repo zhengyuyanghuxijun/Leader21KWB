@@ -22,6 +22,6 @@
 //获取一周的起始和结束时间
 - (NSMutableDictionary *)getWeekBeginAndEndWith:(NSDate *)newDate;
 //获取上一周
-- (NSDate *)turnWeekDay:(BOOL)isPre;
+- (NSDate *)turnWeekDay:(BOOL)isPre withCurrentDate:(NSDate *)currentDate;
 
 @end

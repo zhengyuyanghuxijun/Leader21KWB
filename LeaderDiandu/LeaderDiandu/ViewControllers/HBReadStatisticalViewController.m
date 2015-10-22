@@ -20,6 +20,7 @@
     UITableView *_tableView;
 }
 
+@property (nonatomic, assign)NSInteger year;  //年
 @property (nonatomic, assign)NSInteger weekOfYear;  //一年中的第几周
 @property (nonatomic, assign)NSInteger bookset_id;  //套餐ID
 @property (nonatomic, assign)NSInteger student_total;  //总人数
@@ -27,6 +28,8 @@
 @property (nonatomic, assign)NSInteger reading_count;  //阅读总量
 @property (nonatomic, assign)NSInteger book_count;  //书籍总量
 @property (nonatomic, assign)NSInteger reading_time;  //阅读总时长
+
+@property (nonatomic, strong)NSDate * currentDate;  //当前展示时间
 
 @end
 
@@ -37,6 +40,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.currentDate = [NSDate date];
+        NSDateComponents *components = [[HBWeekUtil sharedInstance] getCompontentsWithDate:self.currentDate];
+        self.year = [components year];
+        self.weekOfYear = [components weekOfYear];
+        self.bookset_id = 1;
     }
     return self;
 }
@@ -51,9 +59,6 @@
     
     self.navigationController.navigationBarHidden = NO;
     self.title = @"阅读统计";
-    
-    self.weekOfYear = [[HBWeekUtil sharedInstance] getWeekOfYear];
-    self.bookset_id = 1;
     
     //阅读人数统计
     [self requestReadingStudent];
@@ -83,7 +88,7 @@
 -(void)requestReadingStudent
 {
     [MBHudUtil showActivityView:nil inView:nil];
-    NSMutableDictionary *dateDic = [[HBWeekUtil sharedInstance] getWeekBeginAndEndWith:nil];
+    NSMutableDictionary *dateDic = [[HBWeekUtil sharedInstance] getWeekBeginAndEndWith:self.currentDate];
     
     NSDate *beginDate = [dateDic objectForKey:@"beginDate"];
     NSDate *endDate = [dateDic objectForKey:@"endDate"];
@@ -92,7 +97,7 @@
     NSString *endDateStr = [NSString stringWithFormat:@"%.f",[endDate timeIntervalSince1970]];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestReadingStudent:userEntity.userid bookset_id:self.bookset_id from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestReadingStudent:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
         if (responseObject) {
             self.student_read = [[responseObject numberForKey:@"student_read"] integerValue];
             self.student_total = [[responseObject numberForKey:@"student_total"] integerValue];
@@ -106,13 +111,17 @@
 -(void)requestReadingTimes
 {
     [MBHudUtil showActivityView:nil inView:nil];
-    //当前时间
-    NSDate *date = [NSDate date];
-    NSString *testTime = [NSString stringWithFormat:@"%.f",[date timeIntervalSince1970]];
+    NSMutableDictionary *dateDic = [[HBWeekUtil sharedInstance] getWeekBeginAndEndWith:self.currentDate];
+    
+    NSDate *beginDate = [dateDic objectForKey:@"beginDate"];
+    NSDate *endDate = [dateDic objectForKey:@"endDate"];
+    
+    NSString *beginDateStr = [NSString stringWithFormat:@"%.f",[beginDate timeIntervalSince1970]];
+    NSString *endDateStr = [NSString stringWithFormat:@"%.f",[endDate timeIntervalSince1970]];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
-        [[HBServiceManager defaultManager] requestReadingTimes:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:@"1433248966" to_time:testTime completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestReadingTimes:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 self.book_count = [[responseObject numberForKey:@"book_count"] integerValue];
                 self.reading_count = [[responseObject numberForKey:@"reading_count"] integerValue];
@@ -127,13 +136,17 @@
 -(void)requestReadingTime
 {
     [MBHudUtil showActivityView:nil inView:nil];
-    //当前时间
-    NSDate *date = [NSDate date];
-    NSString *testTime = [NSString stringWithFormat:@"%.f",[date timeIntervalSince1970]];
+    NSMutableDictionary *dateDic = [[HBWeekUtil sharedInstance] getWeekBeginAndEndWith:self.currentDate];
+    
+    NSDate *beginDate = [dateDic objectForKey:@"beginDate"];
+    NSDate *endDate = [dateDic objectForKey:@"endDate"];
+    
+    NSString *beginDateStr = [NSString stringWithFormat:@"%.f",[beginDate timeIntervalSince1970]];
+    NSString *endDateStr = [NSString stringWithFormat:@"%.f",[endDate timeIntervalSince1970]];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
-        [[HBServiceManager defaultManager] requestReadingTime:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:@"1433248966" to_time:testTime completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestReadingTime:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 self.reading_time = [[responseObject numberForKey:@"reading_time"] integerValue];
             }
@@ -203,7 +216,7 @@
         }
         
         cell.delegate = self;
-        cell.dateLabel.text = [NSString stringWithFormat:@"2015年%ld周", self.weekOfYear];
+        cell.dateLabel.text = [NSString stringWithFormat:@"%ld年%ld周", self.year, self.weekOfYear];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -259,6 +272,65 @@
 - (void)pushMenuItem:(NSInteger)booksetId
 {
     self.bookset_id = booksetId;
+    //阅读人数统计
+    [self requestReadingStudent];
+    //阅读次数统计
+    [self requestReadingTimes];
+    //阅读时长统计
+    [self requestReadingTime];
+}
+
+-(void)leftButtonPressed
+{
+    NSDate *newDate = [[HBWeekUtil sharedInstance] turnWeekDay:YES withCurrentDate:self.currentDate];
+    self.currentDate = newDate;
+    NSDateComponents *components = [[HBWeekUtil sharedInstance] getCompontentsWithDate:self.currentDate];
+    self.year = [components year];
+    self.weekOfYear = [components weekOfYear];
+    
+    [_tableView reloadData];
+    
+    //阅读人数统计
+    [self requestReadingStudent];
+    //阅读次数统计
+    [self requestReadingTimes];
+    //阅读时长统计
+    [self requestReadingTime];
+}
+
+-(void)rightButtonPressed
+{
+    NSDate *newDate = [[HBWeekUtil sharedInstance] turnWeekDay:NO withCurrentDate:self.currentDate];
+    
+    NSComparisonResult result = [newDate compare:[NSDate date]];
+    if (result == NSOrderedDescending) { //如果日期大于当前日期了，就不执行了
+        return;
+    }
+    
+    self.currentDate = newDate;
+    NSDateComponents *components = [[HBWeekUtil sharedInstance] getCompontentsWithDate:self.currentDate];
+    self.year = [components year];
+    self.weekOfYear = [components weekOfYear];
+    
+    [_tableView reloadData];
+    
+    //阅读人数统计
+    [self requestReadingStudent];
+    //阅读次数统计
+    [self requestReadingTimes];
+    //阅读时长统计
+    [self requestReadingTime];
+}
+
+-(void)thisWeekButtonPressed
+{
+    self.currentDate = [NSDate date];
+    NSDateComponents *components = [[HBWeekUtil sharedInstance] getCompontentsWithDate:self.currentDate];
+    self.year = [components year];
+    self.weekOfYear = [components weekOfYear];
+    
+    [_tableView reloadData];
+    
     //阅读人数统计
     [self requestReadingStudent];
     //阅读次数统计

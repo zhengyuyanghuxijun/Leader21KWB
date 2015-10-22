@@ -22,7 +22,6 @@ static NSString * const KHBRankingListAllbookCellReuseId = @"KHBRankingListAllbo
     UITableView *_tableView;
 }
 
-@property (nonatomic, assign)NSInteger weekOfYear;  //一年中的第几周
 @property (nonatomic, assign)NSInteger bookset_id;  //套餐ID
 
 @property (nonatomic, strong)UIButton *myRankingButton;  //我的排行
@@ -47,7 +46,7 @@ static NSString * const KHBRankingListAllbookCellReuseId = @"KHBRankingListAllbo
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.weekOfYear = [[HBWeekUtil sharedInstance] getWeekOfYear];
+        
         self.bookset_id = 1;
         
         self.myBooksArr = [[NSMutableArray alloc] initWithCapacity:1];

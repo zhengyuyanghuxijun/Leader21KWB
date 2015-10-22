@@ -11,6 +11,9 @@
 @protocol HBPushMenuItemDelegate <NSObject>
 
 - (void)pushMenuItem:(NSInteger)booksetId;
+- (void)leftButtonPressed;
+- (void)rightButtonPressed;
+- (void)thisWeekButtonPressed;
 
 @end
 

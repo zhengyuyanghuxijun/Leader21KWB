@@ -70,17 +70,17 @@
 
 -(void)leftButtonPressed
 {
-    
+    [self.delegate leftButtonPressed];
 }
 
 -(void)rightButtonPressed
 {
-    
+    [self.delegate rightButtonPressed];
 }
 
 -(void)thisWeekButtonPressed
 {
-    
+    [self.delegate thisWeekButtonPressed];
 }
 
 -(void)bookSetButtonPressed

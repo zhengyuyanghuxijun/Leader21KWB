@@ -798,11 +798,11 @@
  *  @param from_time          为起始时间，单位为秒。
  *  @param to_time            为结束时间，单位为秒。
  */
-- (void)requestReadingStudent:(NSInteger)teacher_id bookset_id:(NSInteger)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestReadingStudent:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
-    [dicInfo setObject:@(teacher_id)     forKey:@"teacher_id"];
-    [dicInfo setObject:@(bookset_id)     forKey:@"bookset_id"];
+    [dicInfo setObject:teacher_id     forKey:@"teacher_id"];
+    [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
     [dicInfo setObject:from_time     forKey:@"from_time"];
     [dicInfo setObject:to_time     forKey:@"to_time"];
     

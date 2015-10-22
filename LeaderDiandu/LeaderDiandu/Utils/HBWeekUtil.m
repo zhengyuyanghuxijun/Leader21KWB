@@ -110,9 +110,9 @@
     return dateDic;
 }
 
-- (NSDate *)turnWeekDay:(BOOL)isPre
+- (NSDate *)turnWeekDay:(BOOL)isPre withCurrentDate:(NSDate *)currentDate
 {
-    NSDateComponents *components = [_curCalendar components:(NSWeekdayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:_curDate];
+    NSDateComponents *components = [_curCalendar components:(NSWeekdayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:currentDate];
     if (isPre) {
         [components setDay:([components day] - 7)];
     } else {
