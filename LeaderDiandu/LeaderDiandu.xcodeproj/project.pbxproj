@@ -177,6 +177,9 @@
 		0DD214751B96018A009E3DB9 /* HBPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214741B96018A009E3DB9 /* HBPayViewController.m */; };
 		0DD214781B9601DA009E3DB9 /* HBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214771B9601DA009E3DB9 /* HBMessageViewController.m */; };
 		0DFBD3E51BA86839003DB2D1 /* TextGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFBD3E41BA86839003DB2D1 /* TextGridItemView.m */; };
+		1810C7031BD946CD00899BD0 /* HBExamKnowledgeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C7021BD946CD00899BD0 /* HBExamKnowledgeEntity.m */; };
+		1810C7061BD9474A00899BD0 /* HBExamAbilityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C7051BD9474A00899BD0 /* HBExamAbilityEntity.m */; };
+		1810C7091BD94BC300899BD0 /* HBTaskStatisticalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C7081BD94BC300899BD0 /* HBTaskStatisticalCell.m */; };
 		181456DD1B96D9DD003CCD6C /* HBContentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DC1B96D9DD003CCD6C /* HBContentEntity.m */; };
 		181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */; };
 		181E30741BA2B14100BBA92F /* UtilFMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E306B1BA2B14100BBA92F /* UtilFMDatabase.m */; };
@@ -521,6 +524,12 @@
 		0DD214771B9601DA009E3DB9 /* HBMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMessageViewController.m; sourceTree = "<group>"; };
 		0DE611411B9332DA0001C763 /* HBModelConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HBModelConst.h; sourceTree = "<group>"; };
 		0DFBD3E41BA86839003DB2D1 /* TextGridItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextGridItemView.m; sourceTree = "<group>"; };
+		1810C7011BD946CD00899BD0 /* HBExamKnowledgeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBExamKnowledgeEntity.h; sourceTree = "<group>"; };
+		1810C7021BD946CD00899BD0 /* HBExamKnowledgeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBExamKnowledgeEntity.m; sourceTree = "<group>"; };
+		1810C7041BD9474A00899BD0 /* HBExamAbilityEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBExamAbilityEntity.h; sourceTree = "<group>"; };
+		1810C7051BD9474A00899BD0 /* HBExamAbilityEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBExamAbilityEntity.m; sourceTree = "<group>"; };
+		1810C7071BD94BC300899BD0 /* HBTaskStatisticalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTaskStatisticalCell.h; sourceTree = "<group>"; };
+		1810C7081BD94BC300899BD0 /* HBTaskStatisticalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTaskStatisticalCell.m; sourceTree = "<group>"; };
 		181456DB1B96D9DD003CCD6C /* HBContentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentEntity.h; sourceTree = "<group>"; };
 		181456DC1B96D9DD003CCD6C /* HBContentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentEntity.m; sourceTree = "<group>"; };
 		181456DE1B96E483003CCD6C /* HBContentDetailEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentDetailEntity.h; sourceTree = "<group>"; };
@@ -1221,6 +1230,17 @@
 			path = MenuControllers;
 			sourceTree = "<group>";
 		};
+		1810C6FF1BD939F300899BD0 /* HBTaskStatisticalViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18AC82C81BD2B593004864A7 /* HBTaskStatisticalViewController.h */,
+				18AC82C91BD2B593004864A7 /* HBTaskStatisticalViewController.m */,
+				1810C7071BD94BC300899BD0 /* HBTaskStatisticalCell.h */,
+				1810C7081BD94BC300899BD0 /* HBTaskStatisticalCell.m */,
+			);
+			name = HBTaskStatisticalViewController;
+			sourceTree = "<group>";
+		};
 		181E30691BA2B14100BBA92F /* UtilFMDB */ = {
 			isa = PBXGroup;
 			children = (
@@ -1295,10 +1315,9 @@
 		18AC82C21BD2B538004864A7 /* StatisticalControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1810C6FF1BD939F300899BD0 /* HBTaskStatisticalViewController */,
 				1837CB641BD67D400060B450 /* HBRankingListViewController */,
 				18C36B801BD3D3A700782969 /* HBReadStatisticalViewController */,
-				18AC82C81BD2B593004864A7 /* HBTaskStatisticalViewController.h */,
-				18AC82C91BD2B593004864A7 /* HBTaskStatisticalViewController.m */,
 			);
 			name = StatisticalControllers;
 			sourceTree = "<group>";
@@ -1366,6 +1385,10 @@
 				18DF0ED91BCB9FBC00376686 /* HBBillEntity.m */,
 				18ABF5221BD7DEDC006E55A0 /* HBRankBookEntity.h */,
 				18ABF5231BD7DEDC006E55A0 /* HBRankBookEntity.m */,
+				1810C7011BD946CD00899BD0 /* HBExamKnowledgeEntity.h */,
+				1810C7021BD946CD00899BD0 /* HBExamKnowledgeEntity.m */,
+				1810C7041BD9474A00899BD0 /* HBExamAbilityEntity.h */,
+				1810C7051BD9474A00899BD0 /* HBExamAbilityEntity.m */,
 			);
 			name = HBModelEntity;
 			sourceTree = "<group>";
@@ -1632,6 +1655,7 @@
 				0DD214751B96018A009E3DB9 /* HBPayViewController.m in Sources */,
 				18A21E711BBAFDFF00EA05C6 /* HBPayViewControllerModeCell.m in Sources */,
 				0DD2146C1B95FF3B009E3DB9 /* HBMyTeacherViewController.m in Sources */,
+				1810C7061BD9474A00899BD0 /* HBExamAbilityEntity.m in Sources */,
 				18AB8F531BB9918D00409103 /* FTRotatingCircle.m in Sources */,
 				0D143F721BD7FA2000F5D9EE /* MD5DataSigner.m in Sources */,
 				0D7488921B8A2973007BE4CD /* NSData+MD5.m in Sources */,
@@ -1651,6 +1675,7 @@
 				0D0190111B98B19200A92F59 /* HBEditNameViewController.m in Sources */,
 				182306201B9B300300A8E146 /* HBTaskEntity.m in Sources */,
 				18AC82CA1BD2B593004864A7 /* HBRankingListViewController.m in Sources */,
+				1810C7031BD946CD00899BD0 /* HBExamKnowledgeEntity.m in Sources */,
 				189719DC1B9F3405006F42A2 /* HBStudentEntity.m in Sources */,
 				181E307D1BA2B7AD00BBA92F /* FileUtil.m in Sources */,
 				181E30761BA2B14100BBA92F /* UtilFMDatabasePool.m in Sources */,
@@ -1673,6 +1698,7 @@
 				0D7488941B8A2973007BE4CD /* NSString+MD5.mm in Sources */,
 				18A244771BA7295A00E1E703 /* HBCreatGroupController.m in Sources */,
 				0DBD1AC31BBD940900A3BD72 /* HBNLoginViewController.m in Sources */,
+				1810C7091BD94BC300899BD0 /* HBTaskStatisticalCell.m in Sources */,
 				0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */,
 				0DB5372E1B8F5DEE0023A3F7 /* AFURLResponseSerialization.m in Sources */,
 				181456DD1B96D9DD003CCD6C /* HBContentEntity.m in Sources */,

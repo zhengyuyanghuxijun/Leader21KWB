@@ -22,14 +22,14 @@
 
 @property (nonatomic, assign)NSInteger year;  //年
 @property (nonatomic, assign)NSInteger weekOfYear;  //一年中的第几周
+@property (nonatomic, strong)NSDate * currentDate;  //当前展示时间
 @property (nonatomic, assign)NSInteger bookset_id;  //套餐ID
+
 @property (nonatomic, assign)NSInteger student_total;  //总人数
 @property (nonatomic, assign)NSInteger student_read;  //阅读人数
 @property (nonatomic, assign)NSInteger reading_count;  //阅读总量
 @property (nonatomic, assign)NSInteger book_count;  //书籍总量
 @property (nonatomic, assign)NSInteger reading_time;  //阅读总时长
-
-@property (nonatomic, strong)NSDate * currentDate;  //当前展示时间
 
 @end
 

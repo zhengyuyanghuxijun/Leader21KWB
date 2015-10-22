@@ -545,4 +545,24 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  */
 - (void)requestReadingRank:(NSString *)teacher_id token:(NSString *)token bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock;
 
+/**
+ *  作业知识点统计
+ *
+ *  @param teacher_id         老师ID
+ *  @param bookset_id         套餐id
+ *  @param from_time          为起始时间，单位为秒。
+ *  @param to_time            为结束时间，单位为秒。
+ */
+- (void)requestExamKnowledge:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
+ *  作业题目认知能力统计
+ *
+ *  @param teacher_id         老师ID
+ *  @param bookset_id         套餐id
+ *  @param from_time          为起始时间，单位为秒。
+ *  @param to_time            为结束时间，单位为秒。
+ */
+- (void)requestExamAbility:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock;
+
 @end
