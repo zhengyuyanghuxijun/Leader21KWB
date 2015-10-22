@@ -18,6 +18,7 @@
 
 #import "Constants.h"
 
+#import "NSString+Extra.h"
 #import <AlipaySDK/AlipaySDK.h>
 
 @interface AppDelegate ()
@@ -153,13 +154,41 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     //跳转支付宝钱包进行支付，处理支付结果
-    [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-        NSLog(@"result = %@",resultDic);
-        //【由于在跳转支付宝客户端支付的过程中,商户 app 在后台很可能被系统 kill 了,所以 pay 接 口的 callback 就会失效,请商户对 standbyCallback 返回的回调结果进行处理,就是在这个方法 里面处理跟 callback 一样的逻辑】
-    }];
+    if ([url.host isEqualToString:@"safepay"]) {
+        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
+            NSLog(@"resultdic = %@",resultDic);
+        }];
+//        [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
+//            [self handleResultDict:resultDic];
+//        }];
+        [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
+             [self handleResultDict:resultDic];
+         }];
+    } else if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回 authCode
+        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
+            [self handleResultDict:resultDic];
+        }];
+    }
+//    NSString *resultStr = [[url absoluteString] URLDecodedString];
+//    [[AlipaySDK defaultService] processOrderWithPaymentResult:[NSURL URLWithString:resultStr] standbyCallback:^(NSDictionary *resultDic) {
+//        NSLog(@"result = %@",resultDic);
+//    }];
     
     return YES;
 }
+
+- (void)handleResultDict:(NSDictionary *)resultDic
+{
+    NSLog(@"resultdic = %@",resultDic);
+    NSInteger resultStatus = [[resultDic stringForKey:@"resultStatus"] integerValue];
+    if (resultStatus == 9000) {
+        [MBHudUtil showTextViewAfter:@"支付成功"];
+    } else {
+        [MBHudUtil showTextViewAfter:@"支付失败"];
+    }
+}
+
+//resultStatus，状态码：9000 订单支付成功；8000 正在处理中；4000 订单支付失败；6001 用户中途取消；6002 网络连接出错
 
 //"alisdkdemo://safepay/?{"memo":{"result":"partner=\"2088101568353491\"&se ller_id=\"2088101568353491\"&out_trade_no=\"QU6ZOD85K4HVQFN\"&subject=\"1 \"&body=\" 我 是 测 试 数 据 \"&total_fee=\"0.02\"&notify_url=\"http:\/\/www.xxx.com\"&service=\"mobil e.securitypay.pay\"&payment_type=\"1\"&_input_charset=\"utf-8\"&it_b_pay= \"30m\"&show_url=\"m.alipay.com\"&success=\"true\"&sign_type=\"RSA\"&sign =\"pg16DPA\/cIRg1iUFCl8lYZG54de+kfw+vCj32hGWye97isZ1A4bW6RNaDXHhZXVaI5Vk2 YDxhNUl85EHRd+EL7\/+ogQTnsaEHl+D13PuZExIXRKGBnkYqaNV6kH6hDygnf5IOtoojHWLQ yem7oRBVzB0vlF\/+YGFpzFHZyTVpM8=\"","memo":"","ResultStatus":"9000"},"req uestType":"safepay"}"
 

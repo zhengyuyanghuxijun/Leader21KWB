@@ -137,29 +137,25 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     typeLbl.font = [UIFont systemFontOfSize:16];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity.type == 1) {
-        if (userEntity.vip_time == 0) {
+        if (userEntity.account_status == 1) {
             typeLbl.text = @"普通用户";
             bgView.image = [UIImage imageNamed:@"studentmanage-bg-normal-user"];
-        } else {
-            NSTimeInterval cur = [NSDate date].timeIntervalSince1970;
-            if (userEntity.vip_time < cur) {
-                //vip过期
-                typeLbl.text = @"VIP过期";
-                bgView.image = [UIImage imageNamed:@"studentmanage-bg-vipover-user"];
-            } else {
-                typeLbl.text = @"VIP会员";
-                bgView.image = [UIImage imageNamed:@"studentmanage-bg-vip-user"];
-                CGRect typeFrame = bgView.frame;
-                float controlX = CGRectGetMinX(typeFrame);
-                float controlW = _tableView.frame.size.width-controlX-10;
-                UILabel *validDateLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, CGRectGetMaxY(typeFrame), controlW, 40)];
-                validDateLbl.font = [UIFont systemFontOfSize:14];
-                validDateLbl.numberOfLines = 0;
-//                validDateLbl.adjustsFontSizeToFitWidth = YES;
-                NSString *dateStr = [TimeIntervalUtils getCNStringYearMonthDayFromTimeinterval:userEntity.vip_time];
-                validDateLbl.text = [NSString stringWithFormat:@"有效期:\r\n%@", dateStr];
-                [_headerView addSubview:validDateLbl];
-            }
+        } else if (userEntity.account_status == 3) {
+            //vip过期
+            typeLbl.text = @"VIP过期";
+            bgView.image = [UIImage imageNamed:@"studentmanage-bg-vipover-user"];
+        } else if (userEntity.account_status == 2) {
+            typeLbl.text = @"VIP会员";
+            bgView.image = [UIImage imageNamed:@"studentmanage-bg-vip-user"];
+            CGRect typeFrame = bgView.frame;
+            float controlX = CGRectGetMinX(typeFrame);
+            float controlW = _tableView.frame.size.width-controlX-10;
+            UILabel *validDateLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, CGRectGetMaxY(typeFrame), controlW, 40)];
+            validDateLbl.font = [UIFont systemFontOfSize:14];
+            validDateLbl.numberOfLines = 0;
+            NSString *dateStr = [TimeIntervalUtils getCNStringYearMonthDayFromTimeinterval:userEntity.vip_time];
+            validDateLbl.text = [NSString stringWithFormat:@"有效期:\r\n%@", dateStr];
+            [_headerView addSubview:validDateLbl];
         }
     } else if (userEntity.type == 10) {
         typeLbl.text = @"教师";
