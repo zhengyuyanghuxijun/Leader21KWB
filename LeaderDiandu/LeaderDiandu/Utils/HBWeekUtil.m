@@ -57,6 +57,16 @@
     return weekOfYear;
 }
 
+- (NSInteger)getYearWithDate:(NSDate *)date
+{
+    if (date == nil) {
+        date = [NSDate date];
+    }
+    NSDateComponents *curComponents = [_curCalendar components:NSCalendarUnitYear fromDate:date];
+    NSInteger year = [curComponents year];
+    return year;
+}
+
 - (NSMutableDictionary *)getWeekBeginAndEndWith:(NSDate *)newDate
 {
     if (newDate == nil) {

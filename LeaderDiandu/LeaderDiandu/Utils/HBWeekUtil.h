@@ -16,6 +16,8 @@
 - (NSInteger)getWeekTotalOfYear;
 //获取当前属于一年的第几周
 - (NSInteger)getWeekOfYear;
+//获取当前年份，若date为nil则返回当前年份
+- (NSInteger)getYearWithDate:(NSDate *)date;
 //获取一周的起始和结束时间
 - (NSMutableDictionary *)getWeekBeginAndEndWith:(NSDate *)newDate;
 //获取上一周
