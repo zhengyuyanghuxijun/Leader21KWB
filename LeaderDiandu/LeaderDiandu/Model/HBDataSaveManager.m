@@ -90,7 +90,7 @@
     self.wifiDownload = [wifiDownloadStr boolValue];
     self.showEnBookName = [showEnBookNameStr boolValue];
     
-    NSString *settingDataKey = [NSString stringWithFormat:@"%@"@"_"@"%ld", KHBSettingData,self.userEntity.userid];
+    NSString *settingDataKey = [NSString stringWithFormat:@"%@"@"_"@"%ld", KHBSettingData, (long)self.userEntity.userid];
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     [userDefault setObject:dict forKey:settingDataKey];
@@ -100,7 +100,7 @@
 - (void)loadSettings
 {
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    NSString *settingDataKey = [NSString stringWithFormat:@"%@"@"_"@"%ld", KHBSettingData,self.userEntity.userid];
+    NSString *settingDataKey = [NSString stringWithFormat:@"%@"@"_"@"%ld", KHBSettingData, (long)self.userEntity.userid];
     NSDictionary *dict = [userDefault objectForKey:settingDataKey];
     
     NSString *wifiDownloadStr = [dict objectForKey:@"wifidownload"];
@@ -115,7 +115,7 @@
 
 - (void)saveFirstLogin
 {
-    NSString *firstLoginKey = [NSString stringWithFormat:@"%@"@"_"@"%ld", KHBFirstLogin,self.userEntity.userid];
+    NSString *firstLoginKey = [NSString stringWithFormat:@"%@"@"_"@"%ld", KHBFirstLogin, (long)self.userEntity.userid];
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     [userDefault setObject:@"YES" forKey:firstLoginKey];
@@ -125,7 +125,7 @@
 - (void)loadFirstLogin
 {
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    NSString *firstLoginKey = [NSString stringWithFormat:@"%@"@"_"@"%ld", KHBFirstLogin,self.userEntity.userid];
+    NSString *firstLoginKey = [NSString stringWithFormat:@"%@"@"_"@"%ld", KHBFirstLogin, (long)self.userEntity.userid];
     NSString *firstLoginStr = [userDefault objectForKey:firstLoginKey];
 
     self.notFirstLogin = [firstLoginStr boolValue];

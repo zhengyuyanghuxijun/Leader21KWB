@@ -188,7 +188,7 @@
     [CoreDataEngine sharedInstance].managedObjectContext = moContext;
 }
 
-- (void)bookPressed:(BookEntity*)book useNavigation:(UINavigationController *)navigation
+- (BOOL)bookPressed:(BookEntity*)book useNavigation:(UINavigationController *)navigation
 {
     // 如果正在下载中，不做任何处理
     if (book.download != nil) {
@@ -204,14 +204,14 @@
             [info setObject:book.bookUrl forKey:@"url"];
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_bookDownloadProgress object:book userInfo:info];
             
-            return;
+            return YES;
         }
     }
     
-    [self bookPressedCheckDownload:book useNavigation:navigation];
+    return [self bookPressedCheckDownload:book useNavigation:navigation];
 }
 
-- (void)bookPressedCheckDownload:(BookEntity*)book useNavigation:(UINavigationController *)navigation
+- (BOOL)bookPressedCheckDownload:(BookEntity*)book useNavigation:(UINavigationController *)navigation
 {
     BOOL findBook = [LocalSettings findBookLoginOrNot:book.fileId];
     if (findBook) {
@@ -265,7 +265,7 @@
             }
         }
         if (!canOpen) {
-            return;
+            return YES;
         }
         book.download.status = @(downloadStatusFinished);
         // 进入书阅读页面
@@ -288,11 +288,13 @@
             //                [self bookDidDownload:book.fileId];
             //            }
         }
+        return YES;
     }
-    else {
-        // 下载
-        [self startDownloadBook:book];
-    }
+//    else {
+//        // 下载
+//        [self startDownloadBook:book];
+//    }
+    return NO;
 }
 
 @end

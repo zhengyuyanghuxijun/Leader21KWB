@@ -73,7 +73,7 @@
         date = [NSDate date];
     }
     NSDateComponents *curComponents = [_curCalendar components:NSCalendarUnitYear | NSCalendarUnitWeekOfYear fromDate:date];
-//    NSInteger year = [curComponents year];
+//    NSInteger year = [curComponents year];//哪一年
 //    NSInteger weekOfYear = [curComponents weekOfYear];//当年的第几周
     return curComponents;
 }

@@ -34,12 +34,13 @@
     [properties setValue:[NSDate dateWithTimeIntervalSinceNow:60*60] forKey:NSHTTPCookieExpires];
     [properties setValue:@"/asi-http-request/headers" forKey:NSHTTPCookiePath];
     NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:properties];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
     
     NSString *srtUrl = [NSString stringWithFormat:@"%@/api/user/avatar?f=%@.png",SERVICEAPI , user];
     NSURL *url = [NSURL URLWithString:srtUrl];
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-    [request setUseCookiePersistence:NO];
-    [request setRequestCookies:[NSMutableArray arrayWithObject:cookie]];
+//    [request setUseCookiePersistence:NO];
+//    [request setRequestCookies:[NSMutableArray arrayWithObject:cookie]];
     [request setDelegate:self];
     [request startAsynchronous];
 }

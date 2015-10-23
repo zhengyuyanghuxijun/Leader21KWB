@@ -36,6 +36,8 @@
 #import "HBRankingListViewController.h"
 #import "HBTaskStatisticalViewController.h"
 
+#import "AFNetworkReachabilityManager.h"
+
 #define LEADERSDK [Leader21SDKOC sharedInstance]
 
 #define DataSourceCount 10
@@ -62,6 +64,8 @@
 @property (nonatomic, strong)UIImageView *redPointImgView;
 @property (nonatomic, strong)UIButton *optionButton;
 @property (nonatomic, strong)UIView *backgroundView;
+
+@property (nonatomic, assign)AFNetworkReachabilityStatus networkState;
 
 @end
 
@@ -229,9 +233,9 @@
             //学生上报一本书的阅读进度
             [[HBServiceManager defaultManager] requestUpdateBookProgress:user token:token book_id:[bookId integerValue] progress:[progress integerValue] completion:^(id responseObject, NSError *error) {
                 [MBHudUtil hideActivityView:nil];
-                NSString *book_id = [NSString stringWithFormat:@"%ld", [[responseObject objectForKey:@"book_id"] integerValue]];
-                NSString *progress = [NSString stringWithFormat:@"%ld", [[responseObject objectForKey:@"progress"] integerValue]];
-                NSString *exam_assigned = [responseObject objectForKey:@"exam_assigned"];
+                NSString *book_id = [NSString stringWithFormat:@"%ld", (long)[responseObject integerForKey:@"book_id"]];
+                NSString *progress = [NSString stringWithFormat:@"%ld", (long)[responseObject integerForKey:@"progress"]];
+                BOOL exam_assigned = [[responseObject numberForKey:@"exam_assigned"] boolValue];
                 
                 HBReadprogressEntity *readprogressEntity = [self.readProgressEntityDic objectForKey:book_id];
                 
@@ -297,8 +301,8 @@
     NSArray *arr = [responseObject objectForKey:@"progress"];
     for (NSDictionary *dict in arr)
     {
-        NSString *book_id = [NSString stringWithFormat:@"%ld", [[dict objectForKey:@"id"] integerValue]];
-        NSString *progress = [NSString stringWithFormat:@"%ld", [[dict objectForKey:@"progress"] integerValue]];
+        NSString *book_id = [NSString stringWithFormat:@"%ld", (long)[[dict objectForKey:@"id"] integerValue]];
+        NSString *progress = [NSString stringWithFormat:@"%ld", (long)[[dict objectForKey:@"progress"] integerValue]];
         
         HBReadprogressEntity *readprogressEntity = [self.readProgressEntityDic objectForKey:book_id];
         
@@ -331,6 +335,7 @@
     // Do any additional setup after loading the view.
     
     [LEADERSDK setAppKey:KAppKeyStudy];
+    [self addObserverNet];
     
     CGRect rect = self.view.frame;
     UIImageView *navView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rect), KHBNaviBarHeight)];
@@ -424,7 +429,7 @@
     NSMutableArray *menuItems = [[NSMutableArray alloc] initWithCapacity:1];
     
     for (HBContentEntity *contentEntity in self.contentEntityArr) {
-        NSString * bookIdStr = [NSString stringWithFormat:@"%ld", contentEntity.bookId];
+        NSString * bookIdStr = [NSString stringWithFormat:@"%ld", (long)contentEntity.bookId];
         KxMenuItem *item = [KxMenuItem
                             menuItem:bookIdStr
                             image:nil
@@ -608,7 +613,7 @@
 // 获取单元格的总数
 - (NSInteger)gridNumberOfGridView:(HBGridView *)gridView
 {
-    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
+    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
     return arr.count;
 }
 
@@ -621,7 +626,7 @@
 // 获取单元格的行数
 - (NSInteger)rowNumberOfGridView:(HBGridView *)gridView
 {
-    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
+    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
     
     if (arr.count % [self columnNumberOfGridView:gridView])
     {
@@ -743,8 +748,26 @@
             NSDate *date = [NSDate date];
             readBookFromTime = [NSString stringWithFormat:@"%.f",[date timeIntervalSince1970]];
             
-            [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
+            BOOL isDownload = [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
+            if (isDownload == NO) {
+                [self handleDownload:entity];
+            }
             itemView.bookDownloadUrl = entity.bookUrl;
+        }
+    }
+}
+
+- (void)handleDownload:(BookEntity *)entity
+{
+    BOOL wifiDownload = [[HBDataSaveManager defaultManager] wifiDownload];
+    if (_networkState == AFNetworkReachabilityStatusReachableViaWiFi) {
+        [LEADERSDK startDownloadBook:entity];
+    } else {
+        if (wifiDownload) {
+            //提示非wifi
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WiFi设置" message:@"已开启仅用WiFi下载，请连接WiFi网络" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
+            alertView.tag = 1;
+            [alertView show];
         }
     }
 }
@@ -752,11 +775,16 @@
 #pragma mark - actionSheetDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0){
-        
-    }else{
-        HBPayViewController *controller = [[HBPayViewController alloc] init];
-        [self.navigationController pushViewController:controller animated:YES];
+    if (alertView.tag == 0) {
+        if (buttonIndex == 1) {
+            HBPayViewController *controller = [[HBPayViewController alloc] init];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
+    } else if (alertView.tag == 1) {
+        if (buttonIndex == 1) {
+            //开启设置wifi页面
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+        }
     }
 }
 
@@ -901,7 +929,7 @@
                 
                 //如果缓存中有数据，先不要清空，可能这个时候缓存中的数据保存着正在下载书籍的URL等信息
                 if (self.contentDetailEntityDic.count > 0) {
-                    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", currentID]];
+                    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
                     
                     for (BookEntity *entity in arr) {
                         for (NSInteger index = 0; index < booklistTmp.count; index++) {
@@ -1014,7 +1042,7 @@
                     
                     if (self.taskEntityArr.count > 0) {
                         HBTaskEntity *taskEntity = [self.taskEntityArr objectAtIndex:0];
-                        newMaxExamId = [NSString stringWithFormat:@"%ld", taskEntity.exam_id];
+                        newMaxExamId = [NSString stringWithFormat:@"%ld", (long)taskEntity.exam_id];
                     }
                     
                     //如果新的作业ID值大于数据库中保存的最大作业ID值，则说明有新作业，需要显示红点
@@ -1053,7 +1081,7 @@
             NSArray *array = [responseObject arrayForKey:@"messages"];
             for (NSDictionary *dic in array)
             {
-                newMaxMsgId = [NSString stringWithFormat:@"%ld", [dic integerForKey:@"id"]];
+                newMaxMsgId = [NSString stringWithFormat:@"%ld", (long)[dic integerForKey:@"id"]];
                 break;
             }
             
@@ -1069,6 +1097,46 @@
         }
     }];
 }
+
+#pragma mark --network
+
+
+-(void)addObserverNet
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkStateChange) name:AFNetworkingReachabilityDidChangeNotification object:nil];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+}
+
+#pragma mark - 更新网络
+- (void)networkStateChange
+{
+    //    NSString *state = [self getNetWorkStates];
+    
+    [self isNetworkEnable];
+}
+
+- (BOOL)isNetworkEnable
+{
+    BOOL flag = YES;
+    AFNetworkReachabilityStatus state=  [AFNetworkReachabilityManager sharedManager].networkReachabilityStatus;
+    self.networkState = state;
+    switch (state) {
+        case AFNetworkReachabilityStatusNotReachable:
+            flag = NO;
+            NSLog(@"没网络");
+            break;
+        case AFNetworkReachabilityStatusReachableViaWWAN:;{
+        }
+            break;
+        case AFNetworkReachabilityStatusReachableViaWiFi:
+//            NSLog(@"WiFi网络");
+            break;
+        default:
+            break;
+    }
+    return flag;
+}
+
 
 NSComparator cmptr = ^(id obj1, id obj2){
     if ([obj1 integerValue] > [obj2 integerValue]) {
