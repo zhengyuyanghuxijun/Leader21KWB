@@ -96,6 +96,9 @@
         
         //学生获取作业列表成功通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getExamSuccess) name:kNotification_GetExamSuccess object:nil];
+        
+        //学生修改订阅等级成功通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSubscribeSuccess) name:kNotification_ChangeSubscribeSuccess object:nil];
     }
     return self;
 }
@@ -127,6 +130,19 @@
         [self.leftButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         self.redPointImgView.hidden = YES;
     }
+}
+
+-(void)changeSubscribeSuccess
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    //获取用户当前订阅的套餐
+    [[HBServiceManager defaultManager] requestUserBookset:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+        if (responseObject) {
+            //获取用户当前订阅的套餐成功
+            id tmp = [responseObject objectForKey:@"bookset_id"];
+            subscribeId = [tmp integerValue];
+        }
+    }];
 }
 
 -(void)LoginSuccess

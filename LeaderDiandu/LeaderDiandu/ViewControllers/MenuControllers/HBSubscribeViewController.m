@@ -209,6 +209,8 @@
                     NSString *result = [responseObject objectForKey:@"result"];
                     if ([result isEqualToString:@"OK"]) {
                         [self requestUserBookset];
+                        //学生修改订阅等级成功发通知
+                        [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_ChangeSubscribeSuccess object:nil];
                     }else{
                         [MBHudUtil showTextView:@"您已经被老师绑定群组，无法自行修改" inView:nil];
                     }

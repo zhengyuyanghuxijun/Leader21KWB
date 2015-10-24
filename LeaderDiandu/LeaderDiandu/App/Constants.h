@@ -82,6 +82,9 @@
 #define kNotification_GetMsgSuccess       @"kNotification_GetMsgSuccess"
 #define kNotification_GetExamSuccess       @"kNotification_GetExamSuccess"
 
+#define kNotification_ChangeSubscribeSuccess       @"kNotification_ChangeSubscribeSuccess"
+
+
 #define kNotification_logoutByForce       @"kNotification_logoutByForce"
 
 #define kNotification_paySuccess       @"kNotification_paySuccess"
