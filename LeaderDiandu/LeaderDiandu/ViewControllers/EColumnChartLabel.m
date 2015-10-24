@@ -17,10 +17,10 @@
     if (self) {
         [self setLineBreakMode:NSLineBreakByClipping];
         self.adjustsFontSizeToFitWidth = YES;
-        [self setMinimumScaleFactor:5.0f/13.0f];
+        [self setMinimumScaleFactor:6.0f/13.0f];
         
-        [self setNumberOfLines:1];
-        [self setFont:[UIFont boldSystemFontOfSize:13.0f]];
+        [self setNumberOfLines:0];
+        [self setFont:[UIFont boldSystemFontOfSize:14.0f]];
         [self setTextColor: EDeepGrey];
         self.backgroundColor = [UIColor clearColor];
         [self setTextAlignment:NSTextAlignmentLeft];
