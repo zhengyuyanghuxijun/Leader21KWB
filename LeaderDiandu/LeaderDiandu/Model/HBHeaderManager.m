@@ -12,6 +12,12 @@
 #import "ASINetworkQueue.h"
 #import "FileUtil.h"
 
+@interface HBHeaderManager ()
+
+@property (nonatomic, strong)NSString *user;
+
+@end
+
 @implementation HBHeaderManager
 
 + (id)defaultManager
@@ -41,16 +47,25 @@
     NSURL *url = [NSURL URLWithString:srtUrl];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setRequestMethod:@"GET"];
+    [request addRequestHeader:@"Content-Type" value:@"image/jpeg"];
 //    [request addRequestHeader:@"Cookie" value:token];
-//    [request addRequestHeader:@"Content-Type" value:@"image/jpeg"];
-//    [request addPostValue:KAppKeyStudy forKey:KWBAppKey];
-    NSString *path = [[FileUtil getFileUtil] getAvatarCachesPath];
-    path = [NSString stringWithFormat:@"%@/%@.png", path, user];
-    [request setDownloadDestinationPath:path];
 //    [request setUseCookiePersistence:NO];
 //    [request setRequestCookies:[NSMutableArray arrayWithObject:cookie]];
     [request setDelegate:self];
     [request startAsynchronous];
+    __weak typeof(request) weakRequest = request;
+    [request setCompletionBlock:^{
+        NSError *error = [weakRequest error];
+        if (error == nil) {
+            NSData *data = [weakRequest responseData];
+            if (error == nil && [data length]>100) {
+                NSString *path = [[FileUtil getFileUtil] getAvatarCachesPath];
+                path = [NSString stringWithFormat:@"%@/%@.png", path, user];
+                [[FileUtil getFileUtil] saveToFile:data filePath:path atomically:NO];
+            }
+            receivedBlock(nil, error);
+        }
+    }];
 }
 
 - (void)requestUpdateAvatar:(NSString *)user token:(NSString *)token file:(NSString *)avatarFile data:(NSData *)data completion:(HBHeaderReceivedBlock)receivedBlock
@@ -71,14 +86,6 @@
     [request setPostBody:fileData];
     [request setPostLength:[fileData length]];
     [request startSynchronous];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request
-{
-    NSError *error = [request error];
-    if (self.receivedBlock) {
-        self.receivedBlock(nil, error);
-    }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request

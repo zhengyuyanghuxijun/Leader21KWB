@@ -11,6 +11,7 @@
 #import "TimeIntervalUtils.h"
 #import "HBUserEntity.h"
 #import "HBDataSaveManager.h"
+#import "HBHeaderManager.h"
 
 #define KTableHeaderHeight  150
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
@@ -28,6 +29,8 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 
 @property(nonatomic, strong) UIImageView *msgRedPointView;
 @property(nonatomic, strong) UIImageView *examRedPointView;
+
+@property (nonatomic, strong)NSString *avatarFile;
 
 @end
 
@@ -74,6 +77,22 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
         _tableView.backgroundColor = [UIColor whiteColor];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kSlideMenuViewControllerCellReuseId];
         [self.view addSubview:_tableView];
+    }
+    
+    [self getHeadAvatar];
+}
+
+- (void)getHeadAvatar
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    self.avatarFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
+    if (self.avatarFile == nil) {
+        [[HBHeaderManager defaultManager] requestGetAvatar:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+            if (error.code == 0) {
+                self.avatarFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
+                [_tableView reloadData];
+            }
+        }];
     }
 }
 
@@ -147,7 +166,18 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     float controlH = 50;
     float controlY = KTableHeaderHeight - controlH - 20;
     UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlH, controlH)];
-    headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
+    if (self.avatarFile) {
+        headView.layer.cornerRadius = controlH/2;
+        headView.clipsToBounds = YES;
+        UIImage *image = [UIImage imageWithContentsOfFile:self.avatarFile];
+        if (image) {
+            headView.image = image;
+        } else {
+            headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
+        }
+    } else {
+        headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
+    }
     [view addSubview:headView];
     
     controlX += controlH + 10;

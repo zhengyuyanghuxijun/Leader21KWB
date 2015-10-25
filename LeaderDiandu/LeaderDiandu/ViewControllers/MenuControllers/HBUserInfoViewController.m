@@ -16,7 +16,7 @@
 #import "TimeIntervalUtils.h"
 #import "FileUtil.h"
 
-#define KTableViewHeaderHeight  150
+#define KTableViewHeaderHeight  120
 static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewControllerCellReuseId";
 
 @interface HBUserInfoViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -66,12 +66,15 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
 - (void)getHeaderAvatar
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBHeaderManager defaultManager] requestGetAvatar:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
-        if (error.code == 0) {
-            self.headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
-            [_tableView reloadData];
-        }
-    }];
+    self.headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
+    if (self.headFile == nil) {
+        [[HBHeaderManager defaultManager] requestGetAvatar:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+            if (error.code == 0) {
+                self.headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
+                [_tableView reloadData];
+            }
+        }];
+    }
 }
 
 - (void)getUserInfo
@@ -116,7 +119,7 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     if (_headerView) {
         self.headerView = nil;
     }
-    NSInteger imgWidth = 100;
+    NSInteger imgWidth = 50;
     NSInteger screenWidth = [UIScreen mainScreen].bounds.size.width;
     _headerView = [[UIView alloc] init];
     float controlW = 70;
@@ -126,9 +129,12 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     UIButton *headButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, imgWidth, imgWidth)];
     if (self.headFile) {
         //设置显示圆形头像
-        headButton.layer.cornerRadius = 50;
+        headButton.layer.cornerRadius = imgWidth/2;
         headButton.clipsToBounds = YES;
         UIImage *headImg = [UIImage imageWithContentsOfFile:self.headFile];
+        if (headImg == nil) {
+            headImg = [UIImage imageNamed:@"menu_user_pohoto"];
+        }
         [headButton setImage:headImg forState:UIControlStateNormal];
     } else {
         [headButton setImage:[UIImage imageNamed:@"menu_user_pohoto"] forState:UIControlStateNormal];

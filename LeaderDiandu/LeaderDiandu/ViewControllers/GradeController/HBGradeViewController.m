@@ -15,6 +15,8 @@
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 #import "HBContentManager.h"
+#import "HBHeaderManager.h"
+
 #import "HBContentEntity.h"
 #import "HBReadprogressEntity.h"
 #import "HBContentListDB.h"
@@ -145,7 +147,7 @@
     }];
 }
 
--(void)LoginSuccess
+- (void)LoginSuccess
 {
     //右下角功能模块
     [self resetStatisticalBtn];
@@ -194,7 +196,7 @@
                     [self requestBookProgressSuccess:responseObject];
                 }
             }];
-        }else{
+        } else {
             [_gridView setHeaderViewHidden:YES];
             //老师登录，将学生作业Id数组清空
             [self.taskEntityArr removeAllObjects];
