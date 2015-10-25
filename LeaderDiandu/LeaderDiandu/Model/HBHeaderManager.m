@@ -74,18 +74,27 @@
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:server_base]];
     [ASIHTTPRequest setShouldUpdateNetworkActivityIndicator: NO];
     [request setDelegate :self];
-//    [request setData:<#(id)#> withFileName:<#(NSString *)#> andContentType:<#(NSString *)#> forKey:<#(NSString *)#>]
+    [request addRequestHeader:@"Accept" value:@"image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, */*"];
+    [request addRequestHeader:@"Accept-Encoding" value:@"gzip, deflate"];
     [request addRequestHeader:@"Content-Type" value:@"multipart/form-data; boundary=---------------------------7d9950509b4"];
-    [request setFile:avatarFile forKey:@"avatar"];
     [request setPostFormat:ASIMultipartFormDataPostFormat];
     [request setPostValue:user forKey:@"user"];
     [request setPostValue:token forKey:@"token"];
     [request setPostValue:KAppKeyStudy forKey:KWBAppKey];
-    [request setPostBodyFilePath:avatarFile];
-    NSMutableData *fileData = [NSMutableData dataWithContentsOfFile:avatarFile];
-    [request setPostBody:fileData];
-    [request setPostLength:[fileData length]];
+//    [request setPostBodyFilePath:avatarFile];
+    UIImage *image = [UIImage imageWithContentsOfFile:avatarFile];
+    NSData *imageData = UIImageJPEGRepresentation(image, 1);
+    [request setPostValue:imageData forKey:@"avatar"];
+//    [request setData:imageData withFileName:[avatarFile lastPathComponent] andContentType:@"image/pjpeg" forKey:@"avatar"];
     [request startSynchronous];
+
+    __weak typeof(request) weakRequest = request;
+    [request setCompletionBlock:^{
+        NSError *error = [weakRequest error];
+        if (error == nil) {
+            
+        }
+    }];
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request

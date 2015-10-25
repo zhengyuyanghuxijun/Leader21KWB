@@ -23,8 +23,9 @@
 
 #define isRetina ([[UIScreen mainScreen] scale] > 1.0 ? YES : NO)
 
-#define FETION_APP_DELEGATE ((FetionAppDelegate *)[UIApplication sharedApplication].delegate)
+#define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
+#define kAppStoreUrl        @"https://itunes.apple.com/us/app/id950137846?l=zh&ls=1&mt=8"
 
 #define KLeaderRGB [UIColor colorWithHex:0xff8903]
 
