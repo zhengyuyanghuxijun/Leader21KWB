@@ -565,4 +565,13 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  */
 - (void)requestExamAbility:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock;
 
+/**
+ *  查询系统最新版本
+ *
+ *  @param client               android 或者 ios
+ *  @param current_version      版本
+ *  @param branch               stable 表示发布版本，dev 表示开发版本
+ */
+- (void)requestCheckUpdate:(NSString *)client current_version:(NSInteger)current_version branch:(NSString *)branch completion:(HBServiceReceivedBlock)receivedBlock;
+
 @end

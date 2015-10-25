@@ -24,10 +24,21 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
 }
 
 @property (nonatomic, strong) UIButton* logoutButton;
+@property (nonatomic, assign) NSInteger current_version;
 
 @end
 
 @implementation HBSettingViewController
+
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        self.current_version = 1;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -223,7 +234,18 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
         HBBookManViewController *vc = [[HBBookManViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 3){
-        [MBHudUtil showTextView:@"当前已是最新版本" inView:nil];
+        [MBHudUtil showActivityView:nil inView:nil];
+        [[HBServiceManager defaultManager] requestCheckUpdate:@"ios" current_version:self.current_version branch:@"dev" completion:^(id responseObject, NSError *error) {
+            if (responseObject) {
+                NSDictionary *dic = responseObject;
+                NSInteger latest_version = [[dic objectForKey:@"latest_version"] integerValue];
+                if (latest_version == self.current_version) {
+                    [MBHudUtil showTextView:@"当前已是最新版本" inView:nil];
+                }else{
+                    [MBHudUtil hideActivityView:nil];
+                }
+            }
+        }];
     }else if (indexPath.row == 4){
         [GuideView showGuideViewAnimated:YES];
     }else if (indexPath.row == 5){

@@ -940,4 +940,27 @@
     [self Post:@"/api/stat/exam/ability" dict:dicInfo block:receivedBlock];
 }
 
+/**
+ *  查询系统最新版本
+ *
+ *  @param client               android 或者 ios
+ *  @param current_version      版本
+ *  @param branch               stable 表示发布版本，dev 表示开发版本
+ */
+- (void)requestCheckUpdate:(NSString *)client current_version:(NSInteger)current_version branch:(NSString *)branch completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    
+    [dicInfo setObject:client     forKey:@"client"];
+    [dicInfo setObject:@(current_version)     forKey:@"current_version"];
+    [dicInfo setObject:branch     forKey:@"branch"];
+    
+    //    if (_receivedBlock) {
+    //        return;
+    //    }
+    
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/config/check/update" dict:dicInfo block:receivedBlock];
+}
+
 @end
