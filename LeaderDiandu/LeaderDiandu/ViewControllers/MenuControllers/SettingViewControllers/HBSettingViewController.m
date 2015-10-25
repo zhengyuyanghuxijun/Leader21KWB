@@ -223,7 +223,7 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
         HBBookManViewController *vc = [[HBBookManViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 3){
-        
+        [MBHudUtil showTextView:@"当前已是最新版本" inView:nil];
     }else if (indexPath.row == 4){
         [GuideView showGuideViewAnimated:YES];
     }else if (indexPath.row == 5){
