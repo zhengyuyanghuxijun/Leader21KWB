@@ -7,6 +7,7 @@
 //
 
 #import "HBSetStuOtherCell.h"
+#import "HBHeaderManager.h"
 
 @implementation HBSetStuOtherCell
 
@@ -61,6 +62,20 @@
 
 -(void)updateFormData:(HBStudentEntity *)aStudentEntity;
 {
+    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:aStudentEntity.name];
+    
+    if (headFile) {
+        //设置显示圆形头像
+        self.cellHeadImage.layer.cornerRadius = 50/2;
+        self.cellHeadImage.clipsToBounds = YES;
+        self.cellHeadImage.image = [UIImage imageWithContentsOfFile:headFile];
+        if (self.cellHeadImage.image == nil) {
+            self.cellHeadImage.image = [UIImage imageNamed:@"menu_user_pohoto"];
+        }
+    } else {
+        self.cellHeadImage.image = [UIImage imageNamed:@"menu_user_pohoto"];
+    }
+    
     self.studentEntity = aStudentEntity;
     self.cellName.text = self.studentEntity.displayName;
 }

@@ -8,6 +8,7 @@
 
 #import "HBStudentCell.h"
 #import "HBStudentEntity.h"
+#import "HBHeaderManager.h"
 
 #define LABELFONTSIZE 14.0f
 #define BUTTONFONTSIZE 15.0f
@@ -28,7 +29,7 @@
 {
     //头像
     self.cellHeadImage = [[UIImageView alloc] init];
-    self.cellHeadImage.image = [UIImage imageNamed:@"menu_user_pohoto"];
+//    self.cellHeadImage.image = [UIImage imageNamed:@"menu_user_pohoto"];
     self.cellHeadImage.frame = CGRectMake(10, 10, 50, 70 - 10 - 10);
     [self addSubview:self.cellHeadImage];
     
@@ -79,6 +80,21 @@
     HBStudentEntity *studentEntity = (HBStudentEntity *)sender;
 
     if (studentEntity) {
+        
+        NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:studentEntity.name];
+        
+        if (headFile) {
+            //设置显示圆形头像
+            self.cellHeadImage.layer.cornerRadius = 50/2;
+            self.cellHeadImage.clipsToBounds = YES;
+            self.cellHeadImage.image = [UIImage imageWithContentsOfFile:headFile];
+            if (self.cellHeadImage.image == nil) {
+                self.cellHeadImage.image = [UIImage imageNamed:@"menu_user_pohoto"];
+            }
+        } else {
+            self.cellHeadImage.image = [UIImage imageNamed:@"menu_user_pohoto"];
+        }
+        
         self.cellName.text = studentEntity.displayName;
         
         //1：普通用户 2：VIP用户 3：VIP过期用户

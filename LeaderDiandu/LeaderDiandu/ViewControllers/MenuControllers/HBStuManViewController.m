@@ -16,6 +16,7 @@
 #import "HBGroupCell.h"
 #import "HBCreatGroupController.h"
 #import "HBSetStuController.h"
+#import "HBHeaderManager.h"
 
 static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryReuseId";
 static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseId";
@@ -305,10 +306,8 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
                     
                     [self.studentArr addObject:studentEntity];
                     
-//                    //获取用户头像
-//                    [[HBServiceManager defaultManager] requestGetAvatar:user token:token userId:studentEntity.name completion:^(id responseObject, NSError *error) {
-//                        
-//                    }];
+                    //获取用户头像
+                    [self getHeaderAvatar:studentEntity];
                 }
                 
                 if (self.studentArr.count > 0) {
@@ -318,6 +317,20 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
                 [_tableView reloadData];
             }
             [MBHudUtil hideActivityView:nil];
+        }];
+    }
+}
+
+- (void)getHeaderAvatar:(HBStudentEntity *)studentEntity
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:studentEntity.name];
+    if (headFile == nil) {
+        [[HBHeaderManager defaultManager] requestGetAvatar:studentEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+            if (error.code == 0) {
+//                headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:studentEntity.name];
+                [_tableView reloadData];
+            }
         }];
     }
 }
