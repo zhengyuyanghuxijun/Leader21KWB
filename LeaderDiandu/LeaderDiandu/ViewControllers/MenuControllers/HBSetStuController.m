@@ -64,9 +64,9 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
         }
         NSString * studentIdStr=[studentIdArr componentsJoinedByString:@","];
         
-        NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-        if (dict) {
-            NSString *user = [dict objectForKey:@"name"];
+        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+        if (userEntity) {
+            NSString *user = userEntity.name;
             [[HBServiceManager defaultManager] requestClassJoin:user class_id:classIdStr user_ids:studentIdStr completion:^(id responseObject, NSError *error) {
                 [self.navigationController popViewControllerAnimated:YES];
             }];
@@ -202,10 +202,10 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
 - (void)quitGroupBtnPressed:(HBStudentEntity *)aStudentEntity
 {
     [MBHudUtil showActivityView:nil inView:nil];
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
         [MBHudUtil hideActivityView:nil];
-        NSString *user = [dict objectForKey:@"name"];
+        NSString *user = userEntity.name;
         NSString *classIdStr = [NSString stringWithFormat:@"%ld", aStudentEntity.classId];
         NSString *studentIdStr = [NSString stringWithFormat:@"%ld", aStudentEntity.studentId];
         

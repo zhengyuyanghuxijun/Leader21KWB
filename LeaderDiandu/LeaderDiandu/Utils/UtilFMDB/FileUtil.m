@@ -9,7 +9,9 @@
 #import "FileUtil.h"
 //#import "Log.h"
 #import <CommonCrypto/CommonDigest.h>
-#define APP_PATH @"HBData"
+
+#define APP_PATH        @"HBData"
+#define Avatar_Path     @"HeaderAvatar"
 
 @interface FileUtil ()
 {
@@ -60,6 +62,14 @@ static FileUtil *s_feilUtil;
 {
     NSArray *userPaths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     return [userPaths objectAtIndex:0];
+}
+
+- (NSString *)getAvatarCachesPath
+{
+    NSString *path = [self getCachesPath];
+    path = [path stringByAppendingPathComponent:Avatar_Path];
+    [self createPath:path];
+    return path;
 }
 
 + (NSString *)getLibCachePath

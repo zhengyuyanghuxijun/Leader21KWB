@@ -275,9 +275,9 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 - (void)requestStudentList
 {
     [MBHudUtil showActivityView:nil inView:nil];
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        NSString *user = [dict objectForKey:@"name"];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        NSString *user = userEntity.name;
         [[HBServiceManager defaultManager] requestStudentList:user completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 //获取绑定老师的学生信息成功
@@ -325,9 +325,9 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 -(void)requestClassList
 {
     [MBHudUtil showActivityView:nil inView:nil];
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        NSString *user = [dict objectForKey:@"name"];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        NSString *user = userEntity.name;
         [[HBServiceManager defaultManager] requestClassList:user completion:^(id responseObject, NSError *error) {
             NSArray *arr = [responseObject objectForKey:@"classes"];
             if (arr.count > 0) {
@@ -378,9 +378,9 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
         //to do ...
     }else{
         if (alertView.tag == 1) {
-            NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-            if (dict) {
-                NSString *user = [dict objectForKey:@"name"];
+            HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+            if (userEntity) {
+                NSString *user = userEntity.name;
                 
                 [MBHudUtil showActivityView:nil inView:nil];
                 [[HBServiceManager defaultManager] requestTeacherUnAssignStu:user student_id:[NSString stringWithFormat:@"%ld", self.unBundingStudentId] completion:^(id responseObject, NSError *error) {
@@ -390,9 +390,9 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
             }
         }else{
             [MBHudUtil showActivityView:nil inView:nil];
-            NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-            if (dict) {
-                NSString *user = [dict objectForKey:@"name"];
+            HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+            if (userEntity) {
+                NSString *user = userEntity.name;
                 
                 [[HBServiceManager defaultManager] requestClassDelete:user class_id:[NSString stringWithFormat:@"%ld", self.unBundingClassId] completion:^(id responseObject, NSError *error) {
                     int index = 0;

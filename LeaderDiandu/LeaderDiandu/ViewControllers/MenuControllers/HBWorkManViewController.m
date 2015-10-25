@@ -199,9 +199,9 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
 -(void)requestTaskListOfTeacher
 {
     [MBHudUtil showActivityView:nil inView:nil];
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        NSString *user = [dict objectForKey:@"name"];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        NSString *user = userEntity.name;
         [[HBServiceManager defaultManager] requestTaskListOfTeacher:user from:0 count:100 completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 [self.manageTaskEntityArr removeAllObjects];

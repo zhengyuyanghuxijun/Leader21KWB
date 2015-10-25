@@ -42,6 +42,13 @@
 - (NSString *)getCachesPath;
 
 /**
+ *	@brief	获取头像Cache目录
+ *
+ *	@return Cache目录路径
+ */
+- (NSString *)getAvatarCachesPath;
+
+/**
  *  @brief  获取数据缓存目录
  *
  *  @return 返回数据缓存存放目录

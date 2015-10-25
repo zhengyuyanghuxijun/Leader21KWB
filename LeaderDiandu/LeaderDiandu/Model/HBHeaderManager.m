@@ -8,8 +8,9 @@
 
 #import "HBHeaderManager.h"
 #import "ASIHTTPRequest.h"
-
-#define SERVICEAPI  @"http://teach.61dear.cn:9080"
+#import "ASIFormDataRequest.h"
+#import "ASINetworkQueue.h"
+#import "FileUtil.h"
 
 @implementation HBHeaderManager
 
@@ -25,38 +26,67 @@
 
 - (void)requestGetAvatar:(NSString *)user token:(NSString *)token completion:(HBHeaderReceivedBlock)receivedBlock
 {
-//    self.receivedBlock = receivedBlock;
+    self.receivedBlock = receivedBlock;
     
-    NSDictionary *properties = [[NSMutableDictionary alloc] init];
-    [properties setValue:token forKey:NSHTTPCookieValue];
-    [properties setValue:@"ASIHTTPRequesHeaderCookie" forKey:NSHTTPCookieName];
-    [properties setValue:@"teach.61dear.cn" forKey:NSHTTPCookieDomain];
-    [properties setValue:[NSDate dateWithTimeIntervalSinceNow:60*60] forKey:NSHTTPCookieExpires];
-    [properties setValue:@"/asi-http-request/headers" forKey:NSHTTPCookiePath];
-    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:properties];
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+//    NSDictionary *properties = [[NSMutableDictionary alloc] init];
+//    [properties setValue:token forKey:NSHTTPCookieValue];
+//    [properties setValue:@"ASIHTTPRequesHeaderCookie" forKey:NSHTTPCookieName];
+//    [properties setValue:@"teach.61dear.cn" forKey:NSHTTPCookieDomain];
+//    [properties setValue:[NSDate dateWithTimeIntervalSinceNow:60*60] forKey:NSHTTPCookieExpires];
+//    [properties setValue:@"/asi-http-request/headers" forKey:NSHTTPCookiePath];
+//    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:properties];
+//    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
     
-    NSString *srtUrl = [NSString stringWithFormat:@"%@/api/user/avatar?f=%@.png",SERVICEAPI , user];
+    NSString *srtUrl = [NSString stringWithFormat:@"%@/api/user/avatar?f=%@.png&token=%@&%@=%@", SERVICEAPI, user, token, KWBAppKey, KAppKeyStudy];
     NSURL *url = [NSURL URLWithString:srtUrl];
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+    [request setRequestMethod:@"GET"];
+//    [request addRequestHeader:@"Cookie" value:token];
+//    [request addRequestHeader:@"Content-Type" value:@"image/jpeg"];
+//    [request addPostValue:KAppKeyStudy forKey:KWBAppKey];
+    NSString *path = [[FileUtil getFileUtil] getAvatarCachesPath];
+    path = [NSString stringWithFormat:@"%@/%@.png", path, user];
+    [request setDownloadDestinationPath:path];
 //    [request setUseCookiePersistence:NO];
 //    [request setRequestCookies:[NSMutableArray arrayWithObject:cookie]];
     [request setDelegate:self];
     [request startAsynchronous];
 }
 
+- (void)requestUpdateAvatar:(NSString *)user token:(NSString *)token file:(NSString *)avatarFile data:(NSData *)data completion:(HBHeaderReceivedBlock)receivedBlock
+{
+    NSString *server_base = [NSString stringWithFormat:@"%@/api/user/avatar/update", SERVICEAPI];
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:server_base]];
+    [ASIHTTPRequest setShouldUpdateNetworkActivityIndicator: NO];
+    [request setDelegate :self];
+//    [request setData:<#(id)#> withFileName:<#(NSString *)#> andContentType:<#(NSString *)#> forKey:<#(NSString *)#>]
+    [request addRequestHeader:@"Content-Type" value:@"multipart/form-data; boundary=---------------------------7d9950509b4"];
+    [request setFile:avatarFile forKey:@"avatar"];
+    [request setPostFormat:ASIMultipartFormDataPostFormat];
+    [request setPostValue:user forKey:@"user"];
+    [request setPostValue:token forKey:@"token"];
+    [request setPostValue:KAppKeyStudy forKey:KWBAppKey];
+    [request setPostBodyFilePath:avatarFile];
+    NSMutableData *fileData = [NSMutableData dataWithContentsOfFile:avatarFile];
+    [request setPostBody:fileData];
+    [request setPostLength:[fileData length]];
+    [request startSynchronous];
+}
+
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
-//    if (self.delegate&&[self.delegate respondsToSelector:@selector(requestFinished:)]) {
-//        [self.delegate requestFinished:self];
-//    }
+    NSError *error = [request error];
+    if (self.receivedBlock) {
+        self.receivedBlock(nil, error);
+    }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(requestFailed:)]) {
-//        [self.delegate requestFailed:self];
-//    }
+    NSError *error = [request error];
+    if (self.receivedBlock) {
+        self.receivedBlock(nil, error);
+    }
 }
 
 - (void)Get:(NSString *)api dict:(NSMutableDictionary *)dict block:(HBHeaderReceivedBlock)receivedBlock
@@ -78,6 +108,16 @@
 //        }
 //        self.receivedBlock = nil;
 //    }];
+}
+
+- (NSString *)getAvatarFileByUser:(NSString *)user
+{
+    NSString *path = [[FileUtil getFileUtil] getAvatarCachesPath];
+    path = [NSString stringWithFormat:@"%@/%@.png", path, user];
+    if ([[FileUtil getFileUtil] isFileExist:path]) {
+        return path;
+    }
+    return nil;
 }
 
 @end

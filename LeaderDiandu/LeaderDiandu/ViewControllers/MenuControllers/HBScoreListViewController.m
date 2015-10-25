@@ -142,9 +142,9 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
 
 -(void)requestUserScore
 {
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        NSString *user = [dict objectForKey:@"name"];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        NSString *user = userEntity.name;
         [[HBServiceManager defaultManager] requestUserScore:user exam_id:self.examId completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 NSArray *arr = [responseObject objectForKey:@"students"];

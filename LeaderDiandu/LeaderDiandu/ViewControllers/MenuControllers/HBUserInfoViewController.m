@@ -14,16 +14,20 @@
 #import "HBDataSaveManager.h"
 #import "HBHeaderManager.h"
 #import "TimeIntervalUtils.h"
+#import "FileUtil.h"
 
+#define KTableViewHeaderHeight  150
 static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewControllerCellReuseId";
 
-@interface HBUserInfoViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface HBUserInfoViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     NSArray     *_titleArr;
     UITableView *_tableView;
 }
 
 @property (nonatomic, strong)UIView *headerView;
+@property (nonatomic, strong)NSString *headFile;
+@property (nonatomic, strong)NSString *filePath;
 
 @end
 
@@ -63,7 +67,10 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     [[HBHeaderManager defaultManager] requestGetAvatar:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
-        
+        if (error.code == 0) {
+            self.headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
+            [_tableView reloadData];
+        }
     }];
 }
 
@@ -101,7 +108,7 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 200;
+    return KTableViewHeaderHeight;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -115,15 +122,28 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     float controlW = 70;
     float controlH = 25;
     float controlX = (screenWidth-imgWidth-controlW)/2;
-    float controlY = (200-imgWidth)/2;
-    UIImageView *headImage = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, imgWidth, imgWidth)];
-    headImage.image = [UIImage imageNamed:@"menu_user_pohoto"];
-    [_headerView addSubview:headImage];
+    float controlY = (KTableViewHeaderHeight-imgWidth)/2;
+    UIButton *headButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, imgWidth, imgWidth)];
+    if (self.headFile) {
+        //设置显示圆形头像
+        headButton.layer.cornerRadius = 50;
+        headButton.clipsToBounds = YES;
+        UIImage *headImg = [UIImage imageWithContentsOfFile:self.headFile];
+        [headButton setImage:headImg forState:UIControlStateNormal];
+    } else {
+        [headButton setImage:[UIImage imageNamed:@"menu_user_pohoto"] forState:UIControlStateNormal];
+    }
+    [headButton addTarget:self action:@selector(headButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_headerView addSubview:headButton];
     
     controlX += imgWidth+10;
     controlY += (imgWidth-controlH) / 2;
     UIView *typeView = [self createTypeView:CGRectMake(controlX, controlY, controlW, controlH)];
     [_headerView addSubview:typeView];
+    
+    UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, KTableViewHeaderHeight-1, screenWidth, 1)];
+    lineLabel.backgroundColor = RGBEQ(239);
+    [_headerView addSubview:lineLabel];
     
     return _headerView;
 }
@@ -240,6 +260,112 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
         [cell setPreservesSuperviewLayoutMargins:NO];
     }
+}
+
+- (void)headButtonAction:(id)sender
+{
+    //在这里呼出下方菜单按钮项
+    UIActionSheet *myActionSheet = [[UIActionSheet alloc]                     initWithTitle:@"头像设置" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles: @"拍照", @"选择本地图片",nil];
+    [myActionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:  //打开照相机拍照
+            [self takePhoto];
+            break;
+        case 1:  //打开本地相册
+            [self LocalPhoto];
+            break;
+        default:
+            break;
+    }
+}
+
+//开始拍照
+- (void)takePhoto
+{
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        //设置拍照后的图片可被编辑
+        picker.allowsEditing = YES;
+        picker.sourceType = sourceType;
+        [self presentViewController:picker animated:YES completion:^{
+            
+        }];
+    } else {
+        NSLog(@"模拟其中无法打开照相机,请在真机中使用");
+    }
+}
+
+//打开本地相册
+- (void)LocalPhoto
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.delegate = self;
+    //设置选择后的图片可被编辑
+    picker.allowsEditing = YES;
+    [self presentViewController:picker animated:YES completion:^{
+        
+    }];
+}
+
+//当选择一张图片后进入这里
+-(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"]) {
+        //先把图片转成NSData
+        UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+        NSData *data;
+        if (UIImagePNGRepresentation(image) == nil) {
+            data = UIImageJPEGRepresentation(image, 1.0);
+        } else {
+            data = UIImagePNGRepresentation(image);
+        }
+        
+        //图片保存的路径
+        //这里将图片放在沙盒的documents文件夹中
+        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+        //文件管理器
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
+        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/image.png"] contents:data attributes:nil];
+        
+        //得到选择后沙盒中图片的完整路径
+        self.filePath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath,  @"/image.png"];
+        
+        //关闭相册界面
+        [picker dismissViewControllerAnimated:YES completion:^{
+            //开始上传
+            HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+            [[HBHeaderManager defaultManager] requestUpdateAvatar:userEntity.name token:userEntity.token file:_filePath data:data completion:^(id responseObject, NSError *error) {
+                
+            }];
+        }];
+        
+        //创建一个选择后图片的小图标放在下方
+        //类似微薄选择图后的效果
+//        UIImageView *smallimage = [[UIImageView alloc] initWithFrame: CGRectMake(50, 120, 40, 40)];
+//        smallimage.image = image;
+//        [self.view addSubview:smallimage];
+    } else {
+        [MBHudUtil showTextViewAfter:@"请选择图片"];
+    }
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    NSLog(@"您取消了选择图片");
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -61,10 +61,10 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
 
 -(void)requestSystemMsg
 {
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        NSString *user = [dict objectForKey:@"name"];
-        NSString *token = [dict objectForKey:@"token"];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        NSString *user = userEntity.name;
+        NSString *token = userEntity.token;
         
         //1433248966 是临时用来测试的时间，后续需要改成正式的！
         [[HBServiceManager defaultManager] requestSystemMsg:user token:token from_time:@"1433248966" completion:^(id responseObject, NSError *error) {

@@ -134,9 +134,9 @@
 - (void)publishWorkButtonPressed:(id)sender
 {
     [MBHudUtil showActivityView:nil inView:nil];
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        NSString *user = [dict objectForKey:@"name"];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        NSString *user = userEntity.name;
         
         [[HBServiceManager defaultManager] requestClassMember:user class_id:self.classEntity.classId completion:^(id responseObject, NSError *error) {
             NSArray *arr = [responseObject objectForKey:@"members"];

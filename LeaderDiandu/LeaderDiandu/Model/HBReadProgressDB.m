@@ -131,10 +131,10 @@
 
 - (NSString *)getHBReadprogressDBPath
 {
-    NSString *user;
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        user = [dict objectForKey:@"name"];
+    NSString *user = nil;
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        user = userEntity.name;
     }
     
     NSString *path = [[[kFileUtil getAppDataPath] stringByAppendingPathComponent:user]  stringByAppendingPathComponent:HBReadProgress_DB_FILENAME];

@@ -9,8 +9,6 @@
 #import "HBContentBaseRequest.h"
 #import "AFNetworking.h"
 
-#define CONTENTAPI  @"http://teach.61dear.cn:9081"
-
 @interface HBContentBaseRequest ()
 
 @property (nonatomic, strong)AFHTTPSessionManager *httpManager;

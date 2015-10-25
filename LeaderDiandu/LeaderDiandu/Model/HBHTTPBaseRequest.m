@@ -9,8 +9,6 @@
 #import "HBHTTPBaseRequest.h"
 #import "AFNetworking.h"
 
-#define SERVICEAPI  @"http://teach.61dear.cn:9080"
-
 @interface HBHTTPBaseRequest ()
 
 @property (nonatomic, strong)AFHTTPSessionManager *httpManager;

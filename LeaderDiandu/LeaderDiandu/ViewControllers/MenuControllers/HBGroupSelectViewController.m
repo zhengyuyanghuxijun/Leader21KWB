@@ -43,9 +43,9 @@
 
 -(void)requestClassList
 {
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        NSString *user = [dict objectForKey:@"name"];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        NSString *user = userEntity.name;
         [[HBServiceManager defaultManager] requestClassList:user completion:^(id responseObject, NSError *error) {
             NSArray *arr = [responseObject objectForKey:@"classes"];
             for (NSDictionary *dic in arr)
