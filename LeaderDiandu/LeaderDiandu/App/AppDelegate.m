@@ -122,7 +122,12 @@
         imgArray = @[@"menu-icn-student", @"menu-icn-homework", @"menu-icn-instructor", @"menu-icn-message", @"menu-icn-service", @"menu-icn-setting"];
         titleArr = @[@"学生管理", @"作业管理", @"我的教研员", @"消息中心", @"联系客服", @"设置"];
         ctlArray = @[@"HBStuManViewController", @"HBWorkManViewController", @"HBLeaderViewController", @"HBMessageViewController", @"", @"HBSettingViewController"];
+    } else if (userEntity.type == 20) {//教研员
+        imgArray = @[@"menu-icn-teachers", @"menu-icn-homework", @"menu-icn-message", @"menu-icn-service", @"menu-icn-setting"];
+        titleArr = @[@"教师管理", @"每周作业", @"消息中心", @"联系客服", @"设置"];
+        ctlArray = @[@"HBTeacherManViewController", @"HBWeekWorkViewController", @"HBMessageViewController", @"", @"HBSettingViewController"];
     }
+    
     DHSlideMenuViewController *leftViewController = [[DHSlideMenuViewController alloc] init];
     [leftViewController setMenus:titleArr MenuImages:imgArray TabBarControllers:ctlArray];
     leftViewController.headerClassName = @"HBUserInfoViewController";

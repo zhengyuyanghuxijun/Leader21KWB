@@ -197,6 +197,9 @@
 		181E30801BA2C28600BBA92F /* HBContentDetailDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */; };
 		182306131B9B0DEE00A8E146 /* HHAlertSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182306121B9B0DEE00A8E146 /* HHAlertSingleView.m */; };
 		182306201B9B300300A8E146 /* HBTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823061F1B9B300300A8E146 /* HBTaskEntity.m */; };
+		182621791BDCC2D3006DFF0D /* HBTeacherEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 182621781BDCC2D3006DFF0D /* HBTeacherEntity.m */; };
+		1826217E1BDCC929006DFF0D /* HBTeacherManCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1826217D1BDCC929006DFF0D /* HBTeacherManCell.m */; };
+		1834F7301BDBE32000A5DE65 /* HBTeacherManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1834F72F1BDBE32000A5DE65 /* HBTeacherManViewController.m */; };
 		1864359C1BC546440068E73E /* HBSystemMsgEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864359B1BC546440068E73E /* HBSystemMsgEntity.m */; };
 		186435A11BC54A2F0068E73E /* HBMessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186435A01BC54A2F0068E73E /* HBMessageViewCell.m */; };
 		186435AA1BC559DE0068E73E /* HBSettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186435A91BC559DE0068E73E /* HBSettingViewCell.m */; };
@@ -568,6 +571,12 @@
 		182306121B9B0DEE00A8E146 /* HHAlertSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHAlertSingleView.m; sourceTree = "<group>"; };
 		1823061E1B9B300300A8E146 /* HBTaskEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTaskEntity.h; sourceTree = "<group>"; };
 		1823061F1B9B300300A8E146 /* HBTaskEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTaskEntity.m; sourceTree = "<group>"; };
+		182621771BDCC2D3006DFF0D /* HBTeacherEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTeacherEntity.h; sourceTree = "<group>"; };
+		182621781BDCC2D3006DFF0D /* HBTeacherEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTeacherEntity.m; sourceTree = "<group>"; };
+		1826217C1BDCC929006DFF0D /* HBTeacherManCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTeacherManCell.h; sourceTree = "<group>"; };
+		1826217D1BDCC929006DFF0D /* HBTeacherManCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTeacherManCell.m; sourceTree = "<group>"; };
+		1834F72E1BDBE32000A5DE65 /* HBTeacherManViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBTeacherManViewController.h; path = MenuControllers/HBTeacherManViewController.h; sourceTree = "<group>"; };
+		1834F72F1BDBE32000A5DE65 /* HBTeacherManViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBTeacherManViewController.m; path = MenuControllers/HBTeacherManViewController.m; sourceTree = "<group>"; };
 		1864359A1BC546440068E73E /* HBSystemMsgEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSystemMsgEntity.h; sourceTree = "<group>"; };
 		1864359B1BC546440068E73E /* HBSystemMsgEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSystemMsgEntity.m; sourceTree = "<group>"; };
 		1864359F1BC54A2F0068E73E /* HBMessageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMessageViewCell.h; sourceTree = "<group>"; };
@@ -958,6 +967,7 @@
 			isa = PBXGroup;
 			children = (
 				0DBE35971B8CCEFA00179237 /* base */,
+				1826217B1BDCC8DF006DFF0D /* HBTeacherManViewController */,
 				18AC82C21BD2B538004864A7 /* StatisticalControllers */,
 				0D086ED71B949B110061BB1F /* DHSlideMenuController */,
 				0DBE35871B8CCE2200179237 /* Login&RegisterController */,
@@ -1285,6 +1295,17 @@
 			path = UtilFMDB;
 			sourceTree = "<group>";
 		};
+		1826217B1BDCC8DF006DFF0D /* HBTeacherManViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1834F72E1BDBE32000A5DE65 /* HBTeacherManViewController.h */,
+				1834F72F1BDBE32000A5DE65 /* HBTeacherManViewController.m */,
+				1826217C1BDCC929006DFF0D /* HBTeacherManCell.h */,
+				1826217D1BDCC929006DFF0D /* HBTeacherManCell.m */,
+			);
+			name = HBTeacherManViewController;
+			sourceTree = "<group>";
+		};
 		1837CB641BD67D400060B450 /* HBRankingListViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1414,6 +1435,8 @@
 				1810C7021BD946CD00899BD0 /* HBExamKnowledgeEntity.m */,
 				1810C7041BD9474A00899BD0 /* HBExamAbilityEntity.h */,
 				1810C7051BD9474A00899BD0 /* HBExamAbilityEntity.m */,
+				182621771BDCC2D3006DFF0D /* HBTeacherEntity.h */,
+				182621781BDCC2D3006DFF0D /* HBTeacherEntity.m */,
 			);
 			name = HBModelEntity;
 			sourceTree = "<group>";
@@ -1680,6 +1703,7 @@
 				0DBE35CC1B8CD7BE00179237 /* HBRegistViewController.m in Sources */,
 				0DD214751B96018A009E3DB9 /* HBPayViewController.m in Sources */,
 				18A21E711BBAFDFF00EA05C6 /* HBPayViewControllerModeCell.m in Sources */,
+				1826217E1BDCC929006DFF0D /* HBTeacherManCell.m in Sources */,
 				0DD2146C1B95FF3B009E3DB9 /* HBMyTeacherViewController.m in Sources */,
 				1810C7061BD9474A00899BD0 /* HBExamAbilityEntity.m in Sources */,
 				18AB8F531BB9918D00409103 /* FTRotatingCircle.m in Sources */,
@@ -1692,6 +1716,7 @@
 				186435A11BC54A2F0068E73E /* HBMessageViewCell.m in Sources */,
 				18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */,
 				0DBE35351B8CB8B500179237 /* DataCheckUtil.m in Sources */,
+				1834F7301BDBE32000A5DE65 /* HBTeacherManViewController.m in Sources */,
 				18ABF5241BD7DEDC006E55A0 /* HBRankBookEntity.m in Sources */,
 				18C36B8D1BD3EC6400782969 /* HBReadStatisticalContentCell.m in Sources */,
 				18DF0EDA1BCB9FBC00376686 /* HBBillEntity.m in Sources */,
@@ -1750,6 +1775,7 @@
 				0DBE35C61B8CD60F00179237 /* HBLoginViewController.m in Sources */,
 				0D143F701BD7FA2000F5D9EE /* DataSigner.m in Sources */,
 				0D7486F41B88A884007BE4CD /* main.m in Sources */,
+				182621791BDCC2D3006DFF0D /* HBTeacherEntity.m in Sources */,
 				18ABF5281BD7E33B006E55A0 /* HBRankingListCell.m in Sources */,
 				0DB537291B8F5DEE0023A3F7 /* AFHTTPSessionManager.m in Sources */,
 				1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */,
