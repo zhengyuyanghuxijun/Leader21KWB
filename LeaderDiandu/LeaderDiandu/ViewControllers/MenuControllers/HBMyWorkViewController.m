@@ -131,6 +131,10 @@
     self.title = @"成绩展示";
     
     CGRect frame = _myWorkView.frame;
+    if (iPhone4) {
+        frame.origin.y = CGRectGetMinY(_progressView.frame);
+        frame.size.height = CGRectGetMaxY(_myWorkView.frame) - frame.origin.y;
+    }
     HBScoreView *scoreView = [[HBScoreView alloc] initWithFrame:frame score:_scoreNum];
     [scoreView.finishBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:scoreView];

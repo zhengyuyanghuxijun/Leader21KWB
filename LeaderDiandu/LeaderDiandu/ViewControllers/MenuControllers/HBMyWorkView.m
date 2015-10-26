@@ -74,11 +74,14 @@ typedef enum : NSUInteger {
     float controlY = 0;
     float controlW = frame.size.width - controlX*2;
     float controlH = 220;
+    if (iPhone4) {
+        controlH = 180;
+    }
     [self initQuestionView:CGRectMake(controlX, controlY, controlW, controlH)];
     
     controlH = 40;
     NSInteger margin = 20;
-    if ([[UIDevice currentDevice] isIphone5]) {
+    if (iPhone5) {
         margin = 20;
     }
     controlY = frame.size.height-margin-controlH;
@@ -116,6 +119,9 @@ typedef enum : NSUInteger {
     
     controlY += controlH + 10;
     controlH = 60;
+    if (iPhone4) {
+        controlH = 50;
+    }
     _descLabel = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _descLabel.backgroundColor = [UIColor clearColor];
     _descLabel.textColor = [UIColor colorWithHex:0x817b72];
@@ -124,7 +130,11 @@ typedef enum : NSUInteger {
     _descLabel.numberOfLines = 0;
     [_questionView addSubview:_descLabel];
 
-    controlY += controlH + 10;
+    if (iPhone4) {
+        controlY += controlH;
+    } else {
+        controlY += controlH + 10;
+    }
     controlX += (controlW - 80) / 2;
     controlW = controlH = 80;
     _descButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
@@ -145,8 +155,12 @@ typedef enum : NSUInteger {
         }
     } else {
         CGRect rect = _questionView.frame;
-        float selY = CGRectGetMaxY(rect) + 10;
-        float controlH = CGRectGetMinY(_finishButton.frame) - selY-20;
+        NSInteger margin = 10;
+        if (iPhone4) {
+            margin = 0;
+        }
+        float selY = CGRectGetMaxY(rect) + margin;
+        float controlH = CGRectGetMinY(_finishButton.frame) - selY-margin*2;
         _selectionView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(rect), selY, CGRectGetWidth(rect), controlH)];
         [self addSubview:_selectionView];
     }
@@ -196,7 +210,7 @@ typedef enum : NSUInteger {
                 controlX += controlW + margin;
             } else {
                 controlX = margin-20;
-                controlY += controlH*(i/2) + 20;
+                controlY += (controlH+20) * (i/2);
             }
             HBOptionView *view = [[HBOptionView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH) image:obj];
             view.tag = KTagSelectionBegin+i;
@@ -210,8 +224,10 @@ typedef enum : NSUInteger {
                 controlY += controlH*(i/2) + 20;
             }
             controlW = 140;
-            if ([[UIDevice currentDevice] isIphone5]) {
+            if (iPhone5) {
                 controlW = 120;
+            } else if (iPhone4) {
+                controlW = 100;
             }
             if (scrollView == nil) {
                 controlH = 60;
