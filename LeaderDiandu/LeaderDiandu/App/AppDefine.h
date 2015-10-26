@@ -25,7 +25,7 @@
 
 #define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
-#define kAppStoreUrl        @"https://itunes.apple.com/us/app/id950137846?l=zh&ls=1&mt=8"
+#define kAppStoreUrl        @"https://itunes.apple.com/us/app/id1052643347?l=zh&ls=1&mt=8"
 
 #define KLeaderRGB [UIColor colorWithHex:0xff8903]
 

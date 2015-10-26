@@ -82,9 +82,12 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
 #pragma mark - actionSheetDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0){
-        //to do ...
-    }else{
+    if (alertView.tag == 1001) {
+        //升级
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kAppStoreUrl]];
+        return;
+    }
+    if (buttonIndex == 1){
         //to do 注销...
         HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
         [[HBServiceManager defaultManager] requestLogout:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
@@ -236,13 +239,16 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
     }else if (indexPath.row == 3){
         [MBHudUtil showActivityView:nil inView:nil];
         [[HBServiceManager defaultManager] requestCheckUpdate:@"ios" current_version:self.current_version branch:@"dev" completion:^(id responseObject, NSError *error) {
+            [MBHudUtil hideActivityView:nil];
             if (responseObject) {
                 NSDictionary *dic = responseObject;
                 NSInteger latest_version = [[dic objectForKey:@"latest_version"] integerValue];
                 if (latest_version == self.current_version) {
                     [MBHudUtil showTextView:@"当前已是最新版本" inView:nil];
-                }else{
-                    [MBHudUtil hideActivityView:nil];
+                } else if (latest_version > self.current_version) {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"升级" message:@"当前不是最新版本，是否升级？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"立即升级", nil];
+                    alertView.tag = 1001;
+                    [alertView show];
                 }
             }
         }];
@@ -254,7 +260,6 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
