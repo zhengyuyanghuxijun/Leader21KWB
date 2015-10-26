@@ -141,16 +141,21 @@
     //书籍封皮
     self.bookCoverButton = [UIButton buttonWithType:UIButtonTypeCustom];
     NSInteger height = 120;
-    if ([[UIDevice currentDevice] isIphone5]) {
+    NSInteger controlX = 10;
+    if (iPhone5) {
         height = 100;
+    } else if (iPhone6) {
+        controlX = 15;
+    } else if (iPhone6Plus) {
+        controlX = 20;
     }
-    self.bookCoverButton.frame = CGRectMake(10, CGRectGetMaxY(self.bookNameLabel.frame), self.frame.size.width - 20, height);
+    self.bookCoverButton.frame = CGRectMake(controlX, CGRectGetMaxY(self.bookNameLabel.frame), self.frame.size.width - controlX*2, height);
     [self.bookCoverButton addTarget:self action:@selector(bookCoverButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.bookCoverButton];
     
     //是否VIP的标签
     self.isVipImg = [[UIImageView alloc] init];
-    self.isVipImg.frame = CGRectMake(self.frame.size.width - 20 - 35, 3, 30, 30);
+    self.isVipImg.frame = CGRectMake(self.bookCoverButton.frame.size.width-30, 0, 30, 30);
     [self.bookCoverButton addSubview:self.isVipImg];
     
     CGRect rect = CGRectMake(0, CGRectGetMaxY(self.bookCoverButton.frame) - 4, self.frame.size.width, 50);

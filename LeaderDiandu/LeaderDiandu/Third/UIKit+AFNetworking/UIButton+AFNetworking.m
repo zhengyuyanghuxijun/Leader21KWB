@@ -176,13 +176,13 @@ static const char * af_backgroundImageRequestOperationKeyForState(UIControlState
         if (success) {
             success(nil, nil, cachedImage);
         } else {
-            [self setImage:cachedImage forState:state];
+            [self setBackgroundImage:cachedImage forState:state];
         }
 
         [self af_setImageRequestOperation:nil forState:state];
     } else {
         if (placeholderImage) {
-            [self setImage:placeholderImage forState:state];
+            [self setBackgroundImage:placeholderImage forState:state];
         }
 
         __weak __typeof(self)weakSelf = self;
@@ -194,7 +194,7 @@ static const char * af_backgroundImageRequestOperationKeyForState(UIControlState
                 if (success) {
                     success(operation.request, operation.response, responseObject);
                 } else if (responseObject) {
-                    [strongSelf setImage:responseObject forState:state];
+                    [strongSelf setBackgroundImage:responseObject forState:state];
                 }
             }
             [[[strongSelf class] sharedImageCache] cacheImage:responseObject forRequest:urlRequest];
