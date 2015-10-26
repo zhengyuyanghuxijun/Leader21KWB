@@ -43,7 +43,7 @@
 //    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:properties];
 //    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
     
-    NSString *srtUrl = [NSString stringWithFormat:@"%@/api/user/avatar?f=%@.png&token=%@&%@=%@", SERVICEAPI, user, token, KWBAppKey, KAppKeyStudy];
+    NSString *srtUrl = [NSString stringWithFormat:@"%@/api/user/avatar?f=%@.png&token=%@&%@=%@", SERVICEAPI, user, token, KWBAppKey, KAppKeyKWB];
     NSURL *url = [NSURL URLWithString:srtUrl];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
     [request setRequestMethod:@"GET"];
@@ -72,20 +72,22 @@
 {
     NSString *server_base = [NSString stringWithFormat:@"%@/api/user/avatar/update", SERVICEAPI];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:server_base]];
-    [ASIHTTPRequest setShouldUpdateNetworkActivityIndicator: NO];
     [request setDelegate :self];
+    [request setTimeOutSeconds:30];
     [request addRequestHeader:@"Accept" value:@"image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, */*"];
     [request addRequestHeader:@"Accept-Encoding" value:@"gzip, deflate"];
-    [request addRequestHeader:@"Content-Type" value:@"multipart/form-data; boundary=---------------------------7d9950509b4"];
-    [request setPostFormat:ASIMultipartFormDataPostFormat];
+    [request addRequestHeader:@"Content-Type" value:@"multipart/form-data; boundary=----WebKitFormBoundaryxAJEmMnwJ4PeQUyH"];
+//    [request setPostFormat:ASIMultipartFormDataPostFormat];
     [request setPostValue:user forKey:@"user"];
     [request setPostValue:token forKey:@"token"];
-    [request setPostValue:KAppKeyStudy forKey:KWBAppKey];
-//    [request setPostBodyFilePath:avatarFile];
+    [request setPostValue:KAppKeyKWB forKey:KWBAppKey];
+    [request setPostValue:avatarFile forKey:@"avatar"];
     UIImage *image = [UIImage imageWithContentsOfFile:avatarFile];
     NSData *imageData = UIImageJPEGRepresentation(image, 1);
-    [request setPostValue:imageData forKey:@"avatar"];
-//    [request setData:imageData withFileName:[avatarFile lastPathComponent] andContentType:@"image/pjpeg" forKey:@"avatar"];
+    [request setPostBody:[NSMutableData dataWithData:imageData]];
+    [request setFile:avatarFile withFileName:[avatarFile lastPathComponent] andContentType:@"image/jpeg" forKey:@"avatar"];
+    [request buildRequestHeaders];
+    [request buildPostBody];
     [request startSynchronous];
 
     __weak typeof(request) weakRequest = request;
@@ -107,7 +109,7 @@
 
 - (void)Get:(NSString *)api dict:(NSMutableDictionary *)dict block:(HBHeaderReceivedBlock)receivedBlock
 {
-    [dict setObject:KAppKeyStudy forKey:KWBAppKey];
+    [dict setObject:KAppKeyKWB forKey:KWBAppKey];
 //    [[HBHTTPBaseRequest requestWithSubUrl:api] startWithMethod:HBHTTPRequestMethodGET parameters:dict completion:^(id responseObject, NSError *error)
 //     {
 //        if (error) {

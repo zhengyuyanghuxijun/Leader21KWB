@@ -170,11 +170,11 @@
     }
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     [[HBServiceManager defaultManager] requestSubmitScore:userEntity.name book_id:_taskEntity.bookId exam_id:_taskEntity.exam_id score:_scoreNum fromTime:_fromTime toTime:_toTime question_stat:jsonStr completion:^(id responseObject, NSError *error) {
-        if (responseObject) {
-            NSString *result = [responseObject stringForKey:@"result"];
-            if ([result isEqualToString:@"OK"]) {
-                [self showScoreView];
-            }
+        NSString *result = [responseObject stringForKey:@"result"];
+        if ([result isEqualToString:@"OK"]) {
+            [self showScoreView];
+        } else {
+            [MBHudUtil showTextViewAfter:@"作业提交失败，请重新提交"];
         }
     }];
 }

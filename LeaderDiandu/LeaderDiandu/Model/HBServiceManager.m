@@ -32,7 +32,7 @@
 
 - (void)Post:(NSString *)api dict:(NSMutableDictionary *)dict block:(HBServiceReceivedBlock)receivedBlock
 {
-    [dict setObject:KAppKeyStudy forKey:KWBAppKey];
+    [dict setObject:KAppKeyKWB forKey:KWBAppKey];
     [[HBHTTPBaseRequest requestWithSubUrl:api] startWithMethod:HBHTTPRequestMethodPOST parameters:dict completion:^(id responseObject, NSError *error) {
         if (error) {
             NSDictionary *userDic = error.userInfo;
@@ -71,7 +71,7 @@
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
     [dicInfo setObject:pwd      forKey:@"password"];
-    [dicInfo setObject:KAppKeyStudy forKey:KWBAppKey];
+    [dicInfo setObject:KAppKeyKWB forKey:KWBAppKey];
     
     if (_receivedBlock) {
         return;
