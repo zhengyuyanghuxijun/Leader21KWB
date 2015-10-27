@@ -543,15 +543,29 @@
     //统计菜单
     if (!self.backgroundView) {
         self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 80)];
-        self.backgroundView.backgroundColor = RGBEQA(0, 0.7);
+        self.backgroundView.backgroundColor = RGBEQA(0, 0.8);
         [self.view addSubview:self.backgroundView];
         
         //统计菜单上的三个按钮
         NSArray *optionTextArr = @[@"阅读统计", @"排行榜", @"作业统计"];
+        NSArray *imgViewArr = @[@"pop-icn-reading", @"pop-icn-ranking", @"pop-icn-homework"];
         for (NSInteger index = 0; index < 3; index++) {
             UIButton *statisticalBtn = [[UIButton alloc] initWithFrame:CGRectMake(index * ScreenWidth/3, 0, ScreenWidth/3, 80)];
-            [statisticalBtn setTitle:[optionTextArr objectAtIndex:index] forState:UIControlStateNormal];
-            statisticalBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+            
+            UIImageView *readingImgView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth/3-40)/2, 5, 40, 40)];
+            readingImgView.image = [UIImage imageNamed:[imgViewArr objectAtIndex:index]];
+            [statisticalBtn addSubview:readingImgView];
+            
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, ScreenWidth/3, 40)];
+            label.text = [optionTextArr objectAtIndex:index];
+            label.textColor = [UIColor whiteColor];
+            label.textAlignment = NSTextAlignmentCenter;
+            [statisticalBtn addSubview:label];
+            
+            UILabel *verticalLine = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth/3 + 2, 15, 2, 80 - 15 - 15)];
+            verticalLine.backgroundColor = [UIColor colorWithHex:0x484848];
+            [statisticalBtn addSubview:verticalLine];
+            
             statisticalBtn.tag = index;
             [statisticalBtn addTarget:self action:@selector(statisticalBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
             [self.backgroundView addSubview:statisticalBtn];
