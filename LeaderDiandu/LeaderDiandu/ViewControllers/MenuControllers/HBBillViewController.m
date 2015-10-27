@@ -126,7 +126,7 @@ static NSString * const KHBBillViewControllerCellReuseId = @"KHBBillViewControll
         cell = [[HBBillViewControllerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBBillViewControllerCellReuseId];
     }
     
-    HBBillEntity *billEntity = [self.billArr objectAtIndex:indexPath.row];
+    HBBillEntity *billEntity = [self.billArr objectAtIndex:(self.billArr.count - 1 - indexPath.row)];
     [cell updateFormData:billEntity];
     
     cell.backgroundColor = [UIColor clearColor];
