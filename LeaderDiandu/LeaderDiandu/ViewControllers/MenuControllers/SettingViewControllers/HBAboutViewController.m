@@ -21,6 +21,8 @@
     
     UIImageView *logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"APPicon_about"]];
     logoImgView.frame = CGRectMake((ScreenWidth - 120)/2, (ScreenHeight - 120)/2 - 20, 120, 120);
+    logoImgView.layer.cornerRadius = 30;
+    logoImgView.clipsToBounds = YES;
     [self.view addSubview:logoImgView];
     
     UILabel *versionLabel = [[UILabel alloc] init];
