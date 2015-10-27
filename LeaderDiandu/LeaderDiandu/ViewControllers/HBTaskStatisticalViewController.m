@@ -106,25 +106,27 @@
     //知识点按钮
     CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight, self.view.frame.size.width/2, 50.0f);
     self.knowledgeButton = [[UIButton alloc] initWithFrame:rc];
-    [self.knowledgeButton setBackgroundColor:[UIColor colorWithHex:0x1E90FF]];
+    [self.knowledgeButton setBackgroundColor:[UIColor whiteColor]];
     [self.knowledgeButton setTitle:@"知识点" forState:UIControlStateNormal];
+    [self.knowledgeButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.knowledgeButton addTarget:self action:@selector(knowledgeButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.knowledgeButton];
     
     self.knowledgeSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.knowledgeButton.frame.size.height - 2, self.knowledgeButton.frame.size.width, 2)];
-    self.knowledgeSeperator.backgroundColor = [UIColor blueColor];
+    self.knowledgeSeperator.backgroundColor = [UIColor colorWithHex:0x1E90FF];
     [self.knowledgeButton addSubview:self.knowledgeSeperator];
     
     //能力值按钮
     rc = CGRectMake(self.view.frame.size.width/2, KHBNaviBarHeight, self.view.frame.size.width/2, 50.0f);
     self.abilityButton = [[UIButton alloc] initWithFrame:rc];
-    [self.abilityButton setBackgroundColor:[UIColor colorWithHex:0x1E90FF]];
+    [self.abilityButton setBackgroundColor:[UIColor whiteColor]];
     [self.abilityButton setTitle:@"能力值" forState:UIControlStateNormal];
+    [self.abilityButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.abilityButton addTarget:self action:@selector(abilityButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.abilityButton];
     
     self.abilitySeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.abilityButton.frame.size.height - 2, self.abilityButton.frame.size.width, 2)];
-    self.abilitySeperator.backgroundColor = [UIColor blueColor];
+    self.abilitySeperator.backgroundColor = [UIColor colorWithHex:0x1E90FF];
     [self.abilityButton addSubview:self.abilitySeperator];
     
     [self showKnowledgeView:YES];

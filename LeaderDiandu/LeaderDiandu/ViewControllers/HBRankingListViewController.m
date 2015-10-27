@@ -98,25 +98,27 @@ static NSString * const KHBRankingListAllbookCellReuseId = @"KHBRankingListAllbo
     //我的排行按钮
     CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight, self.view.frame.size.width/2, 50.0f);
     self.myRankingButton = [[UIButton alloc] initWithFrame:rc];
-    [self.myRankingButton setBackgroundColor:[UIColor colorWithHex:0x1E90FF]];
+    [self.myRankingButton setBackgroundColor:[UIColor whiteColor]];
     [self.myRankingButton setTitle:@"我的" forState:UIControlStateNormal];
+    [self.myRankingButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.myRankingButton addTarget:self action:@selector(myRankingButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.myRankingButton];
     
     self.myRankingSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.myRankingButton.frame.size.height - 2, self.myRankingButton.frame.size.width, 2)];
-    self.myRankingSeperator.backgroundColor = [UIColor blueColor];
+    self.myRankingSeperator.backgroundColor = [UIColor colorWithHex:0x1E90FF];
     [self.myRankingButton addSubview:self.myRankingSeperator];
     
     //全国排行按钮
     rc = CGRectMake(self.view.frame.size.width/2, KHBNaviBarHeight, self.view.frame.size.width/2, 50.0f);
     self.allRankingButton = [[UIButton alloc] initWithFrame:rc];
-    [self.allRankingButton setBackgroundColor:[UIColor colorWithHex:0x1E90FF]];
+    [self.allRankingButton setBackgroundColor:[UIColor whiteColor]];
     [self.allRankingButton setTitle:@"全国" forState:UIControlStateNormal];
+    [self.allRankingButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.allRankingButton addTarget:self action:@selector(allRankingButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.allRankingButton];
     
     self.allRankingSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.allRankingButton.frame.size.height - 2, self.allRankingButton.frame.size.width, 2)];
-    self.allRankingSeperator.backgroundColor = [UIColor blueColor];
+    self.allRankingSeperator.backgroundColor = [UIColor colorWithHex:0x1E90FF];
     [self.allRankingButton addSubview:self.allRankingSeperator];
     
     [self showMyRankingView:YES];
