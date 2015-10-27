@@ -1986,6 +1986,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LeaderDiandu/Third/AliPay",
@@ -2027,6 +2028,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LeaderDiandu/Third/AliPay",

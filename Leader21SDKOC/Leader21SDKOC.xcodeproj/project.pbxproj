@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D0D8EE51BDEB9AD006DE4B7 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0D8EE41BDEB9AD006DE4B7 /* libz.1.2.5.dylib */; };
 		0D3F6D0B1BAD56DB005B4358 /* LeaderSDKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D0A1BAD56DB005B4358 /* LeaderSDKUtil.m */; };
 		0D7487751B89DD1B007BE4CD /* DownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487671B89DD1B007BE4CD /* DownloadItem.m */; };
 		0D7487771B89DD1B007BE4CD /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487691B89DD1B007BE4CD /* DownloadManager.m */; };
@@ -90,7 +91,6 @@
 		68A2C3851B47DEA100A0BB71 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A2C3841B47DEA100A0BB71 /* BaseViewController.m */; };
 		68A2C3881B47DECD00A0BB71 /* BasePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A2C3871B47DECD00A0BB71 /* BasePageViewController.m */; };
 		68A2C38B1B47DF4200A0BB71 /* CustomNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A2C38A1B47DF4200A0BB71 /* CustomNavView.m */; };
-		68A2C42F1B49052B00A0BB71 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A2C28F1B4781AD00A0BB71 /* libz.1.2.5.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +119,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0D0D8EE01BDEB6B7006DE4B7 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		0D0D8EE21BDEB998006DE4B7 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
+		0D0D8EE41BDEB9AD006DE4B7 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = ../../../../../../usr/lib/libz.1.2.5.dylib; sourceTree = "<group>"; };
 		0D3F6D091BAD56DB005B4358 /* LeaderSDKUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderSDKUtil.h; sourceTree = "<group>"; };
 		0D3F6D0A1BAD56DB005B4358 /* LeaderSDKUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderSDKUtil.m; sourceTree = "<group>"; };
 		0D7487631B89DD1B007BE4CD /* LeaderSDKConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderSDKConstants.h; sourceTree = "<group>"; };
@@ -300,7 +303,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68A2C42F1B49052B00A0BB71 /* libz.1.2.5.dylib in Frameworks */,
+				0D0D8EE51BDEB9AD006DE4B7 /* libz.1.2.5.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +321,9 @@
 		0D7486E41B88A6CA007BE4CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0D0D8EE41BDEB9AD006DE4B7 /* libz.1.2.5.dylib */,
+				0D0D8EE21BDEB998006DE4B7 /* libz.1.dylib */,
+				0D0D8EE01BDEB6B7006DE4B7 /* libz.1.2.5.tbd */,
 				68A2C28F1B4781AD00A0BB71 /* libz.1.2.5.dylib */,
 				68A2C28D1B47819900A0BB71 /* CoreGraphics.framework */,
 				68A2C28B1B47818D00A0BB71 /* MobileCoreServices.framework */,
@@ -919,7 +925,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -960,7 +966,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",

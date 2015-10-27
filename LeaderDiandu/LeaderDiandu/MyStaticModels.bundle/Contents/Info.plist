@@ -6,8 +6,6 @@
 	<string>14D2134</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>CFBundleExecutable</key>
-	<string>MyStaticModels</string>
 	<key>CFBundleIdentifier</key>
 	<string>leader21.MyStaticModels</string>
 	<key>CFBundleInfoDictionaryVersion</key>
