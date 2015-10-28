@@ -41,7 +41,7 @@ typedef enum : NSUInteger {
     UIButton *_leftButton;
     UIButton *_rightButton;
     
-    UIView *_questionView;
+    UIScrollView *_questionView;
     
     HBQuestionType _questionType;
     HBSelectionType _selectionType;
@@ -51,7 +51,7 @@ typedef enum : NSUInteger {
 }
 
 @property (nonatomic, strong)AVAudioPlayer *audioPlayer;
-@property (nonatomic, strong)UIView *selectionView;
+@property (nonatomic, strong)UIScrollView *selectionView;
 
 @end
 
@@ -98,7 +98,9 @@ typedef enum : NSUInteger {
 
 - (void)initQuestionView:(CGRect)frame
 {
-    _questionView = [[UIView alloc] initWithFrame:frame];
+    _questionView = [[UIScrollView alloc] initWithFrame:frame];
+    _questionView.scrollEnabled = NO;
+    _questionView.showsHorizontalScrollIndicator = NO;
     _questionView.backgroundColor = [UIColor clearColor];
     [_questionView.layer setMasksToBounds:YES];
     [_questionView.layer setCornerRadius:10.0];
@@ -125,7 +127,7 @@ typedef enum : NSUInteger {
     _descLabel = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _descLabel.backgroundColor = [UIColor clearColor];
     _descLabel.textColor = [UIColor colorWithHex:0x817b72];
-    _descLabel.font = [UIFont systemFontOfSize:22];
+    _descLabel.font = [UIFont systemFontOfSize:19];
     _descLabel.textAlignment = NSTextAlignmentCenter;
     _descLabel.numberOfLines = 0;
     [_questionView addSubview:_descLabel];
@@ -161,22 +163,32 @@ typedef enum : NSUInteger {
         }
         float selY = CGRectGetMaxY(rect) + margin;
         float controlH = CGRectGetMinY(_finishButton.frame) - selY-margin*2;
-        _selectionView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(rect), selY, CGRectGetWidth(rect), controlH)];
+        _selectionView = [[UIScrollView alloc] initWithFrame:CGRectMake(CGRectGetMinX(rect), selY, CGRectGetWidth(rect), controlH)];
+        _selectionView.showsHorizontalScrollIndicator = NO;
         [self addSubview:_selectionView];
     }
+    _selectionView.contentOffset = CGPointMake(0, 0);
+    _selectionView.scrollEnabled = NO;
     
-    //选项内容过多时是否超高
     float controlH = 80;
     float controlW = 110;
     UIFont *font = [UIFont systemFontOfSize:20];
     //计算选项文字最多时的高度
+    NSInteger count = [optionArray count];
+    if (count > 0) {
+        if ([optionArray[0] isKindOfClass:[UIImage class]] == NO) {
+            controlW = 140;
+            if (iPhone5) {
+                controlW = 120;
+                controlH = 60;
+            } else if (iPhone4) {
+                controlW = 100;
+            }
+        }
+    }
     for (id obj in optionArray) {
         if ([obj isKindOfClass:[UIImage class]]) {
             break;
-        }
-        controlW = 140;
-        if ([[UIDevice currentDevice] isIphone5]) {
-            controlW = 120;
         }
         CGSize objSize = [obj boundingRectWithSize:CGSizeMake(controlW, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
         if (controlH < objSize.height) {
@@ -187,20 +199,15 @@ typedef enum : NSUInteger {
     float controlX = 0;
     CGRect frame = _selectionView.frame;
     float controlY = (frame.size.height-controlH) / 2;
-    NSInteger count = [optionArray count];
     if (count == 4) {
         controlY = (frame.size.height-controlH*2-40) / 2;
         if (controlY < 0) {
             controlY = 0;
         }
     }
-    UIScrollView *scrollView = nil;
-    if (count/2*controlH+20 > frame.size.height) {
-        scrollView = [[UIScrollView alloc] initWithFrame:_selectionView.bounds];
-        scrollView.contentSize = CGSizeMake(frame.size.width, count/2*controlH+40);
-        scrollView.showsHorizontalScrollIndicator = NO;
-        scrollView.backgroundColor = [UIColor clearColor];
-        [_selectionView addSubview:scrollView];
+    if (count/2*controlH+30 > frame.size.height) {
+        _selectionView.scrollEnabled = YES;
+        _selectionView.contentSize = CGSizeMake(frame.size.width, count/2*controlH+40);
     }
     float margin = (self.frame.size.width-controlW*2) / 3;
     for (NSInteger i=0; i<count; i++) {
@@ -223,21 +230,8 @@ typedef enum : NSUInteger {
                 controlX = 0;
                 controlY += controlH*(i/2) + 20;
             }
-            controlW = 140;
-            if (iPhone5) {
-                controlW = 120;
-            } else if (iPhone4) {
-                controlW = 100;
-            }
-            if (scrollView == nil) {
-                controlH = 60;
-            }
             UIButton *button = [self createSelectionButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin+i title:obj];
-            if (scrollView) {
-                [scrollView addSubview:button];
-            } else {
-                [_selectionView addSubview:button];
-            }
+            [_selectionView addSubview:button];
         }
     }
     if (count == 0) {
@@ -282,6 +276,7 @@ typedef enum : NSUInteger {
 - (void)updateData:(NSDictionary *)dict byScore:(NSString *)score
 {
     isOptionSelected = NO;
+    _questionView.scrollEnabled = NO;
     
     NSString *typeStr = dict[@"Type"];
     [self updateTitle:typeStr];
@@ -298,7 +293,7 @@ typedef enum : NSUInteger {
     } else if (_questionType == HBQuestionTypeTAA) {
         _descButton.hidden = NO;
         _descImg.hidden = YES;
-        CGSize size = [_descLabel.text boundingRectWithSize:rect.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_descLabel.font} context:nil].size;
+        CGSize size = [_descLabel.text boundingRectWithSize:CGSizeMake(rect.size.width, CGRectGetHeight(_questionView.bounds)) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_descLabel.font} context:nil].size;
         rect.size.height = size.height;
         _descLabel.frame = rect;
         [_descButton setBackgroundImage:[UIImage imageNamed:@"test-btn-sound-normal"] forState:UIControlStateNormal];
@@ -314,10 +309,22 @@ typedef enum : NSUInteger {
         UIImage *image = [_workManager getPictureByDict:dict];
         _descImg.image = image;
         CGSize imgSize = image.size;
-        imgSize = CGSizeMake(imgSize.width/3, imgSize.height/3);
-        rect = _questionView.bounds;
+        NSInteger scale = 3;
+        if (iPhone4 || iPhone5) {
+            scale = 4;
+        }
+        imgSize = CGSizeMake(imgSize.width/scale, imgSize.height/scale);
+        CGSize questionSize = _questionView.bounds.size;
         float controlX = (rect.size.width-imgSize.width) / 2;
-        float controlY = rect.size.height-imgSize.height-10;
+        float controlY = 0;
+        float descMaxY = CGRectGetMaxY(rect);
+        if (descMaxY+imgSize.height+10 > questionSize.height) {
+            controlY = descMaxY + 10;
+            _questionView.scrollEnabled = YES;
+            _questionView.contentSize = CGSizeMake(questionSize.width, descMaxY+imgSize.height+20);
+        } else {
+            controlY = rect.size.height-imgSize.height-10;
+        }
         _descImg.frame = CGRectMake(controlX, controlY, imgSize.width, imgSize.height);
     }
     
@@ -327,7 +334,7 @@ typedef enum : NSUInteger {
     //若不是最后一题，显示“下一题”，若是最后一题，则未提交过的显示“交作业”。已提交过的显示“完成”
     BOOL isLast = [_workManager isLastObject];
     if (isLast) {
-        if (score) {
+        if ([score length] > 0) {
             [_finishButton setTitle:@"完成" forState:UIControlStateNormal];
         } else {
             [_finishButton setTitle:@"交作业" forState:UIControlStateNormal];

@@ -57,7 +57,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     self.cellImageBookCover.frame = CGRectMake(10, 35, 50, 60);
     [self addSubview:self.cellImageBookCover];
     
-    float controlW = 80;
+    float controlW = 85;
     float controlX = ScreenWidth-controlW-25;
     //分数
     self.cellScore = [[UILabel alloc] init];
@@ -330,7 +330,9 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     [MBHudUtil showTextViewAfter:@"服务器资源缺失，敬请期待"];
                 } else {
                     NSString *url = dict[@"url"];
-                    [self downloadTestWork:url onSelect:taskEntity];
+                    if (url) {
+                        [self downloadTestWork:url onSelect:taskEntity];
+                    }
                 }
             }
         }];
