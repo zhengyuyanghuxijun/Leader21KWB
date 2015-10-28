@@ -757,7 +757,7 @@
                     [alertView show];
                     
                     return;
-                }else if(userEntity.account_status == 3){
+                } else if (userEntity.account_status == 3){
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你的VIP已过期，无权下载阅读此书，请重新激活后再试。" delegate:self cancelButtonTitle:@"再等等" otherButtonTitles:@"现在激活", nil];
                     alertView.tag = 0;
                     

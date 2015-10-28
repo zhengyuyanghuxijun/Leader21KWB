@@ -1441,8 +1441,8 @@ totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
 #ifdef DEBUG
     NSLog(@"RESPONSE======");
     if ([returnValue isKindOfClass:[NSDictionary class]]) {
-        NSString* str = [returnValue JSONString];
-        NSLog(@"RESPONSE DIC:%@", str);
+//        NSString* str = [returnValue JSONString];
+//        NSLog(@"RESPONSE DIC:%@", str);
     }
     else if ([returnValue isKindOfClass:[NSArray class]]) {
         NSString* str = [returnValue JSONString];

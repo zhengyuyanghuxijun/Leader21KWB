@@ -331,9 +331,9 @@ typedef enum : NSUInteger {
             [_finishButton setTitle:@"完成" forState:UIControlStateNormal];
         } else {
             [_finishButton setTitle:@"交作业" forState:UIControlStateNormal];
+            [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-finish-normal"] forState:UIControlStateNormal];
+            [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-finish-press"] forState:UIControlStateHighlighted];
         }
-        [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-finish-normal"] forState:UIControlStateNormal];
-        [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-finish-press"] forState:UIControlStateHighlighted];
     } else {
         [_finishButton setTitle:@"下一题" forState:UIControlStateNormal];
     }

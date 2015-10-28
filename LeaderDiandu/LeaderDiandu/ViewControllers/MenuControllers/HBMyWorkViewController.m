@@ -103,8 +103,8 @@
 {
     //更新进度条
     NSInteger index = _workManager.selIndex;
-    NSInteger total = [_workManager.workArray count]-1;
-    _progressView.progress = ((double)index+1) / total;
+    NSInteger total = [_workManager.workArray count];
+    _progressView.progress = ((double)index+1) / (total-1);
     //统计成绩
     [self handleScore];
     
@@ -113,6 +113,8 @@
     if (dict) {
         [self updateWorkData:dict];
     } else {
+        //替换成百分制
+        _scoreNum = _scoreNum*10/total;
         //提交成绩，算分数
         HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
         //老师和教研员不需要提交成绩

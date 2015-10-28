@@ -21,6 +21,15 @@
     return manager;
 }
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.wifiDownload = YES;
+    }
+    return self;
+}
+
 - (void)setUserEntityByDict:(NSDictionary *)dict
 {
     NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithDictionary:dict];
@@ -106,7 +115,9 @@
     NSString *wifiDownloadStr = [dict objectForKey:@"wifidownload"];
     NSString *showEnBookNameStr = [dict objectForKey:@"showenbookname"];
     
-    self.wifiDownload = [wifiDownloadStr boolValue];
+    if (wifiDownloadStr) {
+        self.wifiDownload = [wifiDownloadStr boolValue];
+    }
     self.showEnBookName = [showEnBookNameStr boolValue];
     
     [AppDelegate delegate].hasNewMsg = NO;
