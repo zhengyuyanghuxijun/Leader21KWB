@@ -31,7 +31,7 @@
     
     //图标
     self.LogoImg = [[UIImageView alloc] init];
-    self.LogoImg.image = [UIImage imageNamed:@"flower"];
+    self.LogoImg.image = [UIImage imageNamed:@"Statistics-icn-reading"];
     self.LogoImg.frame = CGRectMake((ScreenWidth - 90)/2, (120 - 90)/2, 90, 90);
     [self addSubview:self.LogoImg];
     
