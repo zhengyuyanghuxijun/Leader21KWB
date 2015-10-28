@@ -21,39 +21,46 @@
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
 
 #define HHAlertSingleView_SIZE_WIDTH (ScreenWidth - 20 - 20)
-#define HHAlertSingleView_SIZE_HEIGHT 360
+#define HHAlertSingleView_SIZE_HEIGHT (ScreenHeight - 40 - 40)
 
     static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
 
 @implementation HBRuleCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier isShowLine:(BOOL)aShowLine
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
-        [self initUI];
+        [self initUI:aShowLine];
     }
     return self;
 }
 
--(void)initUI
+-(void)initUI:(BOOL)aShowLine
 {
-    CGRect rc = CGRectMake(20, 5, HHAlertSingleView_SIZE_WIDTH - 20 - 20, 60 - 5 - 5);
+    CGRect rc = CGRectMake(20, 5, HHAlertSingleView_SIZE_WIDTH - 20 - 20, (HHAlertSingleView_SIZE_HEIGHT - 90 - 70)/4 - 5 - 5);
     //背景
     UIView *bgView = [[UIView alloc] initWithFrame:rc];
-    bgView.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.0500];
     [self addSubview:bgView];
     
+    if (aShowLine) {
+        //分隔线
+        UIImageView *separateImgView = [[UIImageView alloc] initWithFrame:CGRectMake(rc.origin.x + 30, rc.origin.y + rc.size.height - 2, rc.size.width - 30 - 30, 2)];
+        separateImgView.image = [UIImage imageNamed:@"Line"];
+        [bgView addSubview:separateImgView];
+    }
+    
     //小箭头
-    self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, (50 - 20)/2, 20, 20)];
+    self.imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, ((HHAlertSingleView_SIZE_HEIGHT - 90 - 70)/4 - 30)/2, 30, 30)];
     self.imgView.image = [UIImage imageNamed:@"system-msg-icon"];
     [bgView addSubview:self.imgView];
     
     //内容
-    self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.imgView.frame.origin.x + 20 + 10, 0, rc.size.width - 30 - 20, rc.size.height)];
+    self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.imgView.frame.origin.x + 30 + 10, 0, rc.size.width - 30 - 30, rc.size.height)];
     self.contentLabel.numberOfLines = 0;
-    [self.contentLabel setFont:[UIFont boldSystemFontOfSize:14.0f]];
+    [self.contentLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
+    [self.contentLabel setTextColor:RGB(65, 65, 65)];
     [bgView addSubview:self.contentLabel];
 }
 
@@ -168,7 +175,7 @@
         bgView.backgroundColor = [UIColor colorWithWhite:0.000 alpha:0.600];
         [[UIApplication sharedApplication].keyWindow addSubview:bgView];
         
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake((ScreenWidth - HHAlertSingleView_SIZE_WIDTH)/2, (ScreenHeight - HHAlertSingleView_SIZE_HEIGHT)/2 , HHAlertSingleView_SIZE_WIDTH, HHAlertSingleView_SIZE_HEIGHT + 40)];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake((ScreenWidth - HHAlertSingleView_SIZE_WIDTH)/2, (ScreenHeight - HHAlertSingleView_SIZE_HEIGHT)/2 , HHAlertSingleView_SIZE_WIDTH, HHAlertSingleView_SIZE_HEIGHT)];
         [tableView setBackgroundColor:[UIColor whiteColor]];
         
         //这里准备跟UI要个图，回头替换一下
@@ -335,14 +342,14 @@
 {
     UIView *view = [[UIView alloc] init];
     
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 220)/2, 25, 220, 45)];
-    imgView.image = [UIImage imageNamed:@"subscription_title_bg"];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - (HHAlertSingleView_SIZE_WIDTH - 20 - 20))/2, 25, (HHAlertSingleView_SIZE_WIDTH - 20 - 20), 55)];
+    imgView.image = [UIImage imageNamed:@"title-bg"];
     [view addSubview:imgView];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 220)/2, 25 - 4, 220, 45)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 220)/2, 25 - 4, 220, 55)];
     label.textAlignment = NSTextAlignmentCenter;
     label.text = @"规则说明";
-    label.font = [UIFont boldSystemFontOfSize:18.0f];
+    label.font = [UIFont boldSystemFontOfSize:22.0f];
     label.textColor = [UIColor whiteColor];
     [view addSubview:label];
     
@@ -357,25 +364,32 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] init];
-    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - 150)/2, 12, 150, 40)];
-    [btn setBackgroundImage:[UIImage imageNamed:@"subscription_know"] forState:UIControlStateNormal];
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - (HHAlertSingleView_SIZE_WIDTH - 30 - 30))/2, 10, HHAlertSingleView_SIZE_WIDTH - 30 - 30, 50)];
+    [btn setBackgroundImage:[UIImage imageNamed:@"btn-normal"] forState:UIControlStateNormal];
     [btn setTitle:@"我知道了" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(knowBtnPressed) forControlEvents:UIControlEventTouchUpInside];
-    [btn.titleLabel setFont:[UIFont boldSystemFontOfSize:16.0f]];
+    [btn.titleLabel setFont:[UIFont boldSystemFontOfSize:26.0f]];
     [view addSubview:btn];
     return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60.0f;
+    return (HHAlertSingleView_SIZE_HEIGHT - 90 - 70 - 10)/4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     HBRuleCell *cell = [tableView dequeueReusableCellWithIdentifier:kHBRuleCellReuseId];
-    if (!cell) {
-        cell = [[HBRuleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kHBRuleCellReuseId];
+    
+    if (indexPath.row == 3) {
+        if (!cell) {
+            cell = [[HBRuleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kHBRuleCellReuseId isShowLine:NO];
+        }
+    }else{
+        if (!cell) {
+            cell = [[HBRuleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kHBRuleCellReuseId isShowLine:YES];
+        }
     }
     
     cell.contentLabel.text = [_ruleArr objectAtIndex:indexPath.row];
