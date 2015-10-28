@@ -8,6 +8,7 @@
 
 #import "HBTestWorkViewController.h"
 #import "HBMyWorkViewController.h"
+#import "HBPayViewController.h"
 
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
@@ -306,9 +307,20 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
-        NSString *user = userEntity.name;
         HBTaskEntity *taskEntity = [self.taskEntityArr objectAtIndex:indexPath.row];
+        NSMutableDictionary *vipBookDic = [[HBDataSaveManager defaultManager] vipBookDic];
+        if ([[vipBookDic objectForKey:[NSNumber numberWithInteger:taskEntity.bookId]] isEqualToString:@"1"]) {
+            if (userEntity.account_status == 1) {
+                [self showAlertView:@"你尚未开通VIP，无权下载阅读此书，请开通VIP后再试。"];
+                return;
+            } else if (userEntity.account_status == 3){
+                [self showAlertView:@"你的VIP已过期，无权下载阅读此书，请重新激活后再试。"];
+                return;
+            }
+        }
+        
         [MBHudUtil showActivityView:nil inView:nil];
+        NSString *user = userEntity.name;
         [[HBServiceManager defaultManager] requestBookInfo:user book_id:taskEntity.bookId completion:^(id responseObject, NSError *error) {
             // to do ...
             if (responseObject) {
@@ -322,6 +334,26 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                 }
             }
         }];
+    }
+}
+
+- (void)showAlertView:(NSString *)text
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:text delegate:self cancelButtonTitle:@"再等等" otherButtonTitles:@"现在激活", nil];
+        alertView.tag = 0;
+        [alertView show];
+    });
+}
+
+#pragma mark - actionSheetDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 0) {
+        if (buttonIndex == 1) {
+            HBPayViewController *controller = [[HBPayViewController alloc] init];
+            [self.navigationController pushViewController:controller animated:YES];
+        }
     }
 }
 

@@ -59,8 +59,6 @@
 @property (nonatomic, strong)NSMutableDictionary *readProgressEntityDic;
 @property (nonatomic, strong)NSMutableArray *taskEntityArr;
 
-@property (nonatomic, strong)NSMutableDictionary *vipBookDic;
-
 @property (nonatomic, strong)UIButton *leftButton;
 @property (nonatomic, strong)UIButton *rightButton;
 @property (nonatomic, strong)UIImageView *redPointImgView;
@@ -82,7 +80,6 @@
         self.contentDetailEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         self.readProgressEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         self.taskEntityArr = [[NSMutableArray alloc] initWithCapacity:1];
-        self.vipBookDic = [[NSMutableDictionary alloc] initWithCapacity:1];
         currentID = 1;
         subscribeId = -1;
         readBookFromTime = @"0";
@@ -400,12 +397,13 @@
     //筛选出free和vip的书籍 1:vip 0:free
     HBContentEntity *contentEntity = [self.contentEntityArr objectAtIndex:currentID - 1];
     NSArray *freeBooksArr = [contentEntity.free_books componentsSeparatedByString:@","];
-    [self.vipBookDic removeAllObjects];
+    NSMutableDictionary *vipBookDic = [[HBDataSaveManager defaultManager] vipBookDic];
+    [vipBookDic removeAllObjects];
     for (BookEntity *bookEntity in booklist) {
         if ([freeBooksArr containsObject:[NSString stringWithFormat:@"%@", bookEntity.bookId]]) {
-            [self.vipBookDic setObject:@"0" forKey:bookEntity.bookId];
+            [vipBookDic setObject:@"0" forKey:bookEntity.bookId];
         }else{
-            [self.vipBookDic setObject:@"1" forKey:bookEntity.bookId];
+            [vipBookDic setObject:@"1" forKey:bookEntity.bookId];
         }
     }
     
@@ -694,8 +692,9 @@
         bookTitle = entity.bookTitle;
     }
     
+    NSMutableDictionary *vipBookDic = [[HBDataSaveManager defaultManager] vipBookDic];
     NSDictionary * targetData = [[NSDictionary alloc]initWithObjectsAndKeys:
-                                 bookTitle, TextGridItemView_BookName,entity.fileId, TextGridItemView_BookCover, @"mainGrid_download", TextGridItemView_downloadState, [self.vipBookDic objectForKey:entity.bookId], TextGridItemView_isVip, nil];
+                                 bookTitle, TextGridItemView_BookName,entity.fileId, TextGridItemView_BookCover, @"mainGrid_download", TextGridItemView_downloadState, [vipBookDic objectForKey:entity.bookId], TextGridItemView_isVip, nil];
     
     [itemView updateFormData:targetData];
     
@@ -749,7 +748,8 @@
     if (userEntity) {
         /** type: 1 - 学生； 10 - 老师*/
         if (userEntity.type == 1) {
-            if ([[self.vipBookDic objectForKey:entity.bookId] isEqualToString:@"1"]) {
+            NSMutableDictionary *vipBookDic = [[HBDataSaveManager defaultManager] vipBookDic];
+            if ([[vipBookDic objectForKey:entity.bookId] isEqualToString:@"1"]) {
                 if (userEntity.account_status == 1) {
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你尚未开通VIP，无权下载阅读此书，请开通VIP后再试。" delegate:self cancelButtonTitle:@"再等等" otherButtonTitles:@"现在激活", nil];
                     alertView.tag = 0;
@@ -980,12 +980,13 @@
                 //筛选出free和vip的书籍 1:vip 0:free
                 HBContentEntity *contentEntity = [self.contentEntityArr objectAtIndex:currentID - 1];
                 NSArray *freeBooksArr = [contentEntity.free_books componentsSeparatedByString:@","];
-                [self.vipBookDic removeAllObjects];
+                NSMutableDictionary *vipBookDic = [[HBDataSaveManager defaultManager] vipBookDic];
+                [vipBookDic removeAllObjects];
                 for (BookEntity *bookEntity in booklist) {
                     if ([freeBooksArr containsObject:[NSString stringWithFormat:@"%@", bookEntity.bookId]]) {
-                        [self.vipBookDic setObject:@"0" forKey:bookEntity.bookId];
+                        [vipBookDic setObject:@"0" forKey:bookEntity.bookId];
                     }else{
-                        [self.vipBookDic setObject:@"1" forKey:bookEntity.bookId];
+                        [vipBookDic setObject:@"1" forKey:bookEntity.bookId];
                     }
                 }
                 

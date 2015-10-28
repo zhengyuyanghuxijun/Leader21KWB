@@ -26,6 +26,7 @@
     self = [super init];
     if (self) {
         self.wifiDownload = YES;
+        self.vipBookDic = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
