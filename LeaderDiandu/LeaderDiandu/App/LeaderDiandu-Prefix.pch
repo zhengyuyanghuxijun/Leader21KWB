@@ -14,12 +14,23 @@
 //#define NSLog(...) {}
 //#endif
 
-#define SERVICEAPI  @"http://teach.61dear.cn:9080"
-#define CONTENTAPI  @"http://teach.61dear.cn:9081"
-
 #define KWBAppKey       @"app_key"
 #define KAppKeyStudy    @"a8cffcee338038dd35d9e81ad93540d9c1b13e5d"
 #define KAppKeyKWB      @"3164809f635225668555a168d42b8f4c908aa02e"
+
+#define LEADER_SERVICE_RELEASE  0
+
+#if LEADER_SERVICE_RELEASE
+    #define SERVICEAPI          @"http://reader.61dear.com"
+    #define CONTENTAPI          @"http://teach.61dear.com:9081"
+    #define BOOKIMGURL          @"http://teach.61dear.com:9083"
+    #define KHBBookImgFormatUrl @"http://teach.61dear.com:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
+#else
+    #define SERVICEAPI          @"http://teach.61dear.cn:9080"
+    #define CONTENTAPI          @"http://teach.61dear.cn:9081"
+    #define BOOKIMGURL          @"http://teach.61dear.cn:9083"
+    #define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
+#endif
 
 #ifndef __IPHONE_5_0
 #warning "This project uses features only available in iOS SDK 5.0 and later."

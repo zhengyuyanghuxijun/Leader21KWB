@@ -40,7 +40,7 @@ static DataEngine *dataEngineInstance = nil;
         
         [self configApp];
         
-        _networkEngine = [[MKNetworkEngine alloc] initWithHostName:HOST];
+        _networkEngine = [[MKNetworkEngine alloc] initWithHostName:self.hostUrl];
         
         //        _downloadEngine = [[MKNetworkEngine alloc] initWithHostName:@"http://boss.61dear.com"];
         //        _downloadEngine.wifiOnlyMode = YES;
@@ -61,9 +61,6 @@ static DataEngine *dataEngineInstance = nil;
 }
 - (void)configApp
 {
-    // 线上环境参数
-    self.hostUrl = HOST;
-    
     self.version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(__bridge NSString *)kCFBundleVersionKey];
     
     self.deviceScreenSize = [[UIScreen mainScreen] bounds].size;

@@ -14,8 +14,6 @@
 #import "HBContentDetailDB.h"
 #import "UIImageView+AFNetworking.h"
 
-#define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
-
 @implementation HBTestSelectViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

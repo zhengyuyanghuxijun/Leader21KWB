@@ -20,8 +20,6 @@
 #import "HBTestWorkManager.h"
 #import "HBExamIdDB.h"
 
-#define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
-
 static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewControllerCellReuseId";
 
 @implementation HBTestWorkViewCell
@@ -132,6 +130,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
 {
     UITableView *_tableView;
     HBTestWorkManager *_workManager;
+    UIView *_emptyView;
 }
 
 @property (nonatomic, strong)NSMutableArray *taskEntityArr;
@@ -194,6 +193,41 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     [self.view addSubview:_tableView];
 }
 
+- (void)hideEmptyView
+{
+    if (_emptyView) {
+        [_emptyView removeFromSuperview];
+    }
+}
+
+- (void)showEmptyView
+{
+    if (_emptyView) {
+        [self.view addSubview:_emptyView];
+        return;
+    }
+    _emptyView = [[UIView alloc] initWithFrame:self.view.bounds];
+    _emptyView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_emptyView];
+    
+    CGSize viewSize = self.view.frame.size;
+    float imgSide = 80;
+    float controlX = (viewSize.width-imgSide) / 2;
+    float controlY = viewSize.height / 3;
+    UIImageView *emptyImg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, imgSide, imgSide)];
+    emptyImg.image = [UIImage imageNamed:@"test_empty"];
+    [_emptyView addSubview:emptyImg];
+    
+    controlX = 0;
+    controlY += imgSide + 20;
+    UILabel *emptyLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, viewSize.width, 20)];
+    emptyLbl.backgroundColor = [UIColor clearColor];
+    emptyLbl.textColor = [UIColor lightGrayColor];
+    emptyLbl.text = @"你的老师还没有布置作业哦";
+    emptyLbl.textAlignment = NSTextAlignmentCenter;
+    [_emptyView addSubview:emptyLbl];
+}
+
 -(void)requestTaskListOfStudent
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
@@ -242,12 +276,16 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                     [examArr addObject: [NSString stringWithFormat:@"%ld", taskEntity.exam_id]];
                 }
                 
-                if (self.taskEntityArr.count > 0) {
+                NSInteger count = self.taskEntityArr.count;
+                if (count > 0) {
+                    [self hideEmptyView];
                     [_tableView reloadData];
+                } else {
+                    [self showEmptyView];
                 }
                 
                 //获取作业成功保存数据库
-                if (self.taskEntityArr.count > 0) {
+                if (count > 0) {
                     if (examArr.count > 0) {
                         [[HBExamIdDB sharedInstance] updateHBExamId:examArr];
                         

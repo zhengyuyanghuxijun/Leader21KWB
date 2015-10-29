@@ -8,8 +8,6 @@
 
 #import "HBContentDetailEntity.h"
 
-//#define KHBBookImgFormatUrl @" http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
-
 @implementation HBContentDetailEntity
 
 //- (NSString *)getBookImageUrl

@@ -12,7 +12,6 @@
 #import "HBDataSaveManager.h"
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
-#define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 
 @implementation HBBookInfoCell
 

@@ -12,7 +12,6 @@
 
 #import "Leader21SDKOC.h"
 
-#define KHBBookImgFormatUrl @"http://teach.61dear.cn:9083/bookImgStorage/%@.jpg?t=BASE64(%@)"
 #define LABELFONTSIZE 14.0f
 
 @interface MyProgressView()

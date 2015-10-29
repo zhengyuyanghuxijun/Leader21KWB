@@ -49,7 +49,6 @@
 		0D6BEEF61BBA38090080F342 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 0D6BEEF41BBA38090080F342 /* iTunesArtwork@2x */; };
 		0D7292C51B9E0650006FA7EA /* HBSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7292C41B9E0650006FA7EA /* HBSettingViewController.m */; };
 		0D7486F41B88A884007BE4CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7486F31B88A884007BE4CD /* main.m */; };
-		0D7486FD1B88A884007BE4CD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D7486FB1B88A884007BE4CD /* Main.storyboard */; };
 		0D7486FF1B88A884007BE4CD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D7486FE1B88A884007BE4CD /* Images.xcassets */; };
 		0D7487021B88A884007BE4CD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D7487001B88A884007BE4CD /* LaunchScreen.xib */; };
 		0D74870E1B88A884007BE4CD /* LeaderDianduTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74870D1B88A884007BE4CD /* LeaderDianduTests.m */; };
@@ -351,7 +350,6 @@
 		0D7486EE1B88A884007BE4CD /* LeaderDiandu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeaderDiandu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D7486F21B88A884007BE4CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D7486F31B88A884007BE4CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		0D7486FC1B88A884007BE4CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0D7486FE1B88A884007BE4CD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = LeaderDiandu/Images.xcassets; sourceTree = "<group>"; };
 		0D7487011B88A884007BE4CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0D7487071B88A884007BE4CD /* LeaderDianduTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeaderDianduTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -916,7 +914,6 @@
 				0DCBC2A01B99E380003DFDD5 /* Constants.h */,
 				0D74887D1B8A226E007BE4CD /* AppDelegate.h */,
 				0D74887E1B8A226E007BE4CD /* AppDelegate.m */,
-				0D7486FB1B88A884007BE4CD /* Main.storyboard */,
 				0D7487001B88A884007BE4CD /* LaunchScreen.xib */,
 			);
 			name = App;
@@ -1644,7 +1641,6 @@
 				0DCAE1161BAAAA3F00AB7557 /* online_icon@2x.png in Resources */,
 				0DCAE0FC1BAAAA3F00AB7557 /* back_button_pressed.png in Resources */,
 				0DCAE1101BAAAA3F00AB7557 /* menu_bar_button_pressed@2x.png in Resources */,
-				0D7486FD1B88A884007BE4CD /* Main.storyboard in Resources */,
 				0DC1D4151B9BDF430043C79B /* MyStaticModels.bundle in Resources */,
 				0DCAE1171BAAAA3F00AB7557 /* orientation_land.png in Resources */,
 				0DCAE1091BAAAA3F00AB7557 /* flying_arrow.png in Resources */,
@@ -1868,14 +1864,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0D7486FB1B88A884007BE4CD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0D7486FC1B88A884007BE4CD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0D7487001B88A884007BE4CD /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2014,8 +2002,9 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baofeng.study;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d2e09844-d5db-4880-938c-ff75af6188a2";
+				PROVISIONING_PROFILE = "";
 				REZ_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -2026,8 +2015,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: wei chanyuan (X2Y6A4GX9Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: wei chanyuan (X2Y6A4GX9Q)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2056,8 +2045,9 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.baofeng.study;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d2e09844-d5db-4880-938c-ff75af6188a2";
+				PROVISIONING_PROFILE = "";
 				REZ_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};

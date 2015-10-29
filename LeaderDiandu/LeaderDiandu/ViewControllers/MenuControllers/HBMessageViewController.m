@@ -17,6 +17,9 @@
 static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewControllerAccessoryReuseId";
 
 @interface HBMessageViewController ()<UITableViewDataSource, UITableViewDelegate>
+{
+    UIView *_emptyView;
+}
 
 @property (nonatomic, strong) NSMutableArray *msgArr;
 
@@ -49,6 +52,41 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
     // Dispose of any resources that can be recreated.
 }
 
+- (void)hideEmptyView
+{
+    if (_emptyView) {
+        [_emptyView removeFromSuperview];
+    }
+}
+
+- (void)showEmptyView
+{
+    if (_emptyView) {
+        [self.view addSubview:_emptyView];
+        return;
+    }
+    _emptyView = [[UIView alloc] initWithFrame:self.view.bounds];
+    _emptyView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_emptyView];
+    
+    CGSize viewSize = self.view.frame.size;
+    float imgSide = 80;
+    float controlX = (viewSize.width-imgSide) / 2;
+    float controlY = viewSize.height / 3;
+    UIImageView *emptyImg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, imgSide, imgSide)];
+    emptyImg.image = [UIImage imageNamed:@"msg_tip_empty"];
+    [_emptyView addSubview:emptyImg];
+    
+    controlX = 0;
+    controlY += imgSide + 20;
+    UILabel *emptyLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, viewSize.width, 20)];
+    emptyLbl.backgroundColor = [UIColor clearColor];
+    emptyLbl.textColor = [UIColor lightGrayColor];
+    emptyLbl.text = @"暂无系统消息";
+    emptyLbl.textAlignment = NSTextAlignmentCenter;
+    [_emptyView addSubview:emptyLbl];
+}
+
 /*
 #pragma mark - Navigation
 
@@ -66,8 +104,10 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
         NSString *user = userEntity.name;
         NSString *token = userEntity.token;
         
+        [MBHudUtil showActivityView:nil inView:nil];
         //1433248966 是临时用来测试的时间，后续需要改成正式的！
         [[HBServiceManager defaultManager] requestSystemMsg:user token:token from_time:@"1433248966" completion:^(id responseObject, NSError *error) {
+            [MBHudUtil hideActivityView:nil];
             if (responseObject) {
                 NSArray *arr = [responseObject arrayForKey:@"messages"];
                 for (NSDictionary *dic in arr)
@@ -85,14 +125,14 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
                 if (self.msgArr.count > 0) {
                     [self addTableView];
                 
-                //获取消息成功保存数据库
-                [[HBMsgEntityDB sharedInstance] updateHBMsgEntity:self.msgArr];
-                
-                //获取到最新数据了，要去掉红点提示
-                [AppDelegate delegate].hasNewMsg = NO;
-
-                //获取新消息列表成功后发送通知
-                [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetMsgSuccess object:nil];
+                    //获取消息成功保存数据库
+                    [[HBMsgEntityDB sharedInstance] updateHBMsgEntity:self.msgArr];
+                    //获取到最新数据了，要去掉红点提示
+                    [AppDelegate delegate].hasNewMsg = NO;
+                    //获取新消息列表成功后发送通知
+                    [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetMsgSuccess object:nil];
+                } else {
+                    [self showEmptyView];
                 }
             }
         }];

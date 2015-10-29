@@ -15,6 +15,8 @@
 //#import "BookEntity+NSDictionary.h"
 
 @interface Leader21SDKOC()
+
+@property (nonatomic, strong) NSString *hostUrl;
 @property (nonatomic, strong) NSString *mAppId;
 
 @end
@@ -29,6 +31,12 @@
     });
     
     return _sharedInstance;
+}
+
+- (void)setLeaderHost:(NSString *)hostUrl
+{
+    self.hostUrl = hostUrl;
+    [DataEngine sharedInstance].hostUrl = hostUrl;
 }
 
 - (void)setAppKey:(NSString *)appKey
@@ -65,7 +73,7 @@
     //TODO generate download url "?book_id=%s&file_id=%s&app_key=%s"
     NSString* bookUrl = [NSString stringWithFormat:
                          @"%@%@?book_id=%@&file_id=%@&app_key=%@",
-                         HOST,API_DOWNLOAD_BOOK,book.bookId,book.fileId,_mAppId];
+                         _hostUrl,API_DOWNLOAD_BOOK,book.bookId,book.fileId,_mAppId];
 
     NSLog(@"book download url %@",bookUrl);
     NSString* path = [LocalSettings bookPathForDefaultUser:book.bookTitle];
@@ -93,7 +101,7 @@
 {
     NSString* bookUrl = [NSString stringWithFormat:
                          @"%@%@?book_id=%@&file_id=%@&app_key=%@",
-                         HOST,API_DOWNLOAD_BOOK,book.bookId,book.fileId,_mAppId];
+                         _hostUrl,API_DOWNLOAD_BOOK,book.bookId,book.fileId,_mAppId];
     
     NSLog(@"book download url %@",bookUrl);
     

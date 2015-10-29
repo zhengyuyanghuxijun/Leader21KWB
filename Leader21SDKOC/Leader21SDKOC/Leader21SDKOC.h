@@ -35,20 +35,21 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
 
 + (Leader21SDKOC *)sharedInstance;
 
-/**设置app的appKey，此appKey从leader21网站获取
- 
+/**设置服务器地址
  @param appKey leader21 appKey
  */
+- (void)setLeaderHost:(NSString *)hostUrl;
 
+/**设置app的appKey，此appKey从leader21网站获取
+ @param appKey leader21 appKey
+ */
 - (void)setAppKey:(NSString *)appKey;
 
-
 /**获取设置的leader21 appKey
- 
  */
 - (NSString *)appKey;
+
 /**根据bookId获取book的详细信息
- 
  @param bookIds bookId列表
         block： 回调，返回书本详细信息
  */

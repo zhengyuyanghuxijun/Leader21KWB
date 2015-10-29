@@ -350,6 +350,7 @@
     // Do any additional setup after loading the view.
     
     [LEADERSDK setAppKey:KAppKeyKWB];
+    [LEADERSDK setLeaderHost:CONTENTAPI];
     [self addObserverNet];
     
     CGRect rect = self.view.frame;
