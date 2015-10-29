@@ -40,8 +40,6 @@
             if ([descValue containsString:@"401"]) {
                 //token过期，需要重新登录
                 [Navigator pushLoginController];
-                self.receivedBlock = nil;
-                return;
             }
         }
         if (receivedBlock) {

@@ -50,6 +50,9 @@
     [super viewDidAppear:animated];
     
     self.navigationController.navigationBarHidden = NO;
+    UINavigationBar *naviBar = self.navigationController.navigationBar;
+    //设置navigationBar背景颜色
+    [naviBar setBarTintColor:KLeaderRGB];
 }
 
 - (void)tapToHideKeyboard:(id)sender
