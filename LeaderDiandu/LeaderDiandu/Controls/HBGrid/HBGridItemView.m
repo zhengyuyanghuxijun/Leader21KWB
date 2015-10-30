@@ -21,6 +21,7 @@
     if (self) 
     {
         // Initialization code
+        self.touchEnable = YES;
     }
     return self;
 }
@@ -51,7 +52,9 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self didTap];
+    if (self.touchEnable) {
+        [self didTap];
+    }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event

@@ -14,6 +14,8 @@
     SEL _action;
 }
 
+@property (nonatomic, assign)BOOL touchEnable;
+
 - (void)setTarget:(id)target action:(SEL)action;
 - (void)didTap;
 

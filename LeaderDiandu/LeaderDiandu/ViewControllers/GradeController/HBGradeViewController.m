@@ -685,6 +685,7 @@
     }
     
     itemView.delegate = self;
+    itemView.touchEnable = NO;
     
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
     BookEntity *entity = arr[listIndex];
