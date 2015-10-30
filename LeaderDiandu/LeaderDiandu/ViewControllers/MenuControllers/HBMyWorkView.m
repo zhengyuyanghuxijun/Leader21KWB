@@ -313,7 +313,11 @@ typedef enum : NSUInteger {
         if (iPhone4 || iPhone5) {
             scale = 4;
         }
-        imgSize = CGSizeMake(imgSize.width/scale, imgSize.height/scale);
+        if ([typeStr isEqualToString:@"judge"]) {
+            imgSize = CGSizeMake(30*imgSize.width/imgSize.height, 30);
+        } else {
+            imgSize = CGSizeMake(imgSize.width/scale, imgSize.height/scale);
+        }
         CGSize questionSize = _questionView.bounds.size;
         float controlX = (rect.size.width-imgSize.width) / 2;
         float controlY = 0;
@@ -322,8 +326,10 @@ typedef enum : NSUInteger {
             controlY = descMaxY + 10;
             _questionView.scrollEnabled = YES;
             _questionView.contentSize = CGSizeMake(questionSize.width, descMaxY+imgSize.height+20);
+        } else if (descMaxY+imgSize.height+10 < questionSize.height) {
+            controlY = descMaxY + (questionSize.height-descMaxY-imgSize.height) / 2;
         } else {
-            controlY = rect.size.height-imgSize.height-10;
+            controlY = questionSize.height-imgSize.height-10;
         }
         _descImg.frame = CGRectMake(controlX, controlY, imgSize.width, imgSize.height);
     }
