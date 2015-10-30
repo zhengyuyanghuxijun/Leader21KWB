@@ -461,7 +461,14 @@ static TimeIntervalUtils *singleton = nil;
 + (NSString*)getStringMDHMSFromTimeInterval:(NSTimeInterval)timeInterval
 {
 #if 1
-    NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    NSDate *curDate = [NSDate date];
+    NSTimeInterval curItv = curDate.timeIntervalSince1970;
+    NSDate *date = nil;
+    if (timeInterval/curItv > 100) {//毫秒级的时间
+        date = [NSDate dateWithTimeIntervalSince1970:timeInterval/1000];
+    } else {
+        date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    }
     TimeIntervalUtils *timeutils = [TimeIntervalUtils sharedInstance];
     [timeutils.dateFormatter setDateFormat:NSLocalizedString(@"MM-dd HH:mm", @"")];
     NSString* str = [timeutils.dateFormatter stringFromDate:date];

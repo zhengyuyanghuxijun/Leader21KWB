@@ -36,7 +36,7 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
 + (Leader21SDKOC *)sharedInstance;
 
 /**设置服务器地址
- @param appKey leader21 appKey
+ @param hostUrl 服务器地址
  */
 - (void)setLeaderHost:(NSString *)hostUrl;
 
