@@ -179,8 +179,8 @@
 
 - (void)userRegister:(id)sender
 {
-    HBForgetPwdViewController *vc = [[HBForgetPwdViewController alloc] init];
-    vc.viewType = KLeaderViewTypeRegister;
+    HBRegistViewController *vc = [[HBRegistViewController alloc] init];
+//    vc.viewType = KLeaderViewTypeRegister;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

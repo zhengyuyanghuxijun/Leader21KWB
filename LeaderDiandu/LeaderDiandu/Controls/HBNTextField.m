@@ -185,6 +185,7 @@ attributes:@{NSFontAttributeName:font} context:nil].size : CGSizeZero;
 #pragma mark - MessageLabel
 - (void)setupMessageLabel
 {
+    self.backgroundColor = [UIColor whiteColor];
     self.font = [UIFont systemFontOfSize:14];
     if (self.placeholder.length == 0) {
         self.placeholder = @" ";

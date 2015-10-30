@@ -7,14 +7,16 @@
 //
 
 #import "HBRegistViewController.h"
+#import "HBNTextField.h"
 #import "NSString+Verify.h"
 #import "HBServiceManager.h"
 
 @interface HBRegistViewController ()
 
-@property (nonatomic, strong) UITextField *inputPhoneNumber;
-@property (nonatomic, strong) UITextField *inputPassword;
-@property (nonatomic, strong) UITextField *inputVerifyCode;
+@property (nonatomic, strong) HBNTextField *inputPhoneNumber;
+@property (nonatomic, strong) HBNTextField *inputVerifyCode;
+@property (nonatomic, strong) HBNTextField *inputPassword;
+@property (nonatomic, strong) HBNTextField *againPassword;
 @property (nonatomic, strong) UIButton *getCodeButton;
 @property (nonatomic, strong) UIButton *registerButton;
 
@@ -48,57 +50,52 @@
 {
     self.title = @"注册";
     
+    float margin = 10;
     float controlY = KHBNaviBarHeight + 50;
     float controlH = 45;
     float screenW = self.view.frame.size.width;
     UIView *accountView = [[UIView alloc] initWithFrame:CGRectMake(0, controlY, screenW, controlH*3+2)];
-    accountView.backgroundColor = [UIColor whiteColor];
+    accountView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:accountView];
     
-    float controlX = 30;
+    float controlX = 10;
     controlY = 0;
-    float controlW = screenW - controlX;
-    self.inputPhoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    float controlW = screenW - controlX*2;
+    self.inputPhoneNumber = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _inputPhoneNumber.placeholder = @"请输入手机号";
+    [_inputPhoneNumber setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
     [accountView addSubview:_inputPhoneNumber];
     
-    controlY += controlH;
-    UILabel *lineLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, 1)];
-    lineLbl.backgroundColor = RGBEQ(239);
-    [accountView addSubview:lineLbl];
-    
-    controlY += 1;
-    self.inputPassword = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-    _inputPassword.placeholder = @"请输入密码";
-    [accountView addSubview:_inputPassword];
-    
-    controlY += controlH;
-    lineLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, 1)];
-    lineLbl.backgroundColor = RGBEQ(239);
-    [accountView addSubview:lineLbl];
-    
-    float buttonW = 100;
-    controlY += 1;
-    controlW -= buttonW;
-    self.inputVerifyCode = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    float buttonW = 90;
+    controlY += controlH+margin;
+    controlW -= buttonW+30;
+    self.inputVerifyCode = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _inputVerifyCode.placeholder = @"验证码";
+    [self.inputVerifyCode setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
     [accountView addSubview:_inputVerifyCode];
     
-    controlX = screenW - buttonW;
-    controlH = 25;
-    controlY += 10;
-    lineLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, 1, controlH)];
-    lineLbl.backgroundColor = RGBEQ(239);
-    [accountView addSubview:lineLbl];
-    
-    controlX += 5;
-    buttonW -= 10;
+    controlX = screenW - buttonW - 10;
     self.getCodeButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, buttonW, controlH)];
+    _getCodeButton.backgroundColor = [UIColor whiteColor];
     _getCodeButton.titleLabel.font = [UIFont systemFontOfSize:16];
     [_getCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
     [_getCodeButton setTitleColor:KLeaderRGB forState:UIControlStateNormal];
     [_getCodeButton addTarget:self action:@selector(fetchVerifyCode:) forControlEvents:UIControlEventTouchUpInside];
     [accountView addSubview:_getCodeButton];
+    
+    controlX = 10;
+    controlY += controlH+margin;
+    controlW = screenW - controlX*2;
+    self.inputPassword = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    _inputPassword.placeholder = @"请输入密码";
+    [_inputPassword setupTextFieldWithType:HBNTextFieldTypePassword withIconName:@"lock"];
+    [accountView addSubview:_inputPassword];
+    
+    controlY += controlH+margin;
+    self.againPassword = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    _againPassword.placeholder = @"请重复输入密码";
+    [_againPassword setupTextFieldWithType:HBNTextFieldTypePassword withIconName:@"lock"];
+    [accountView addSubview:_againPassword];
 }
 
 - (void)tapToHideKeyboard:(id)sender
