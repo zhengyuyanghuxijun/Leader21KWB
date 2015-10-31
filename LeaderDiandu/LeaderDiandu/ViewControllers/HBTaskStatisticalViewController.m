@@ -353,10 +353,7 @@
         cell = [[HBTaskStatisticalCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"KHBTaskStatisticalViewCellReuseId"];
     }
     
-    if (arr.count > 0) {
-        [cell updateFormData:arr isKnowledge:self.isShowKnowledge];
-    }
-    
+    [cell updateFormData:arr isKnowledge:self.isShowKnowledge];
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
