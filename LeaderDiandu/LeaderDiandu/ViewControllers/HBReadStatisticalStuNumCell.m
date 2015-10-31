@@ -30,8 +30,9 @@
     
     //contentStuNumLabel
     self.contentStuNumLabel = [[UILabel alloc] init];
-    self.contentStuNumLabel.frame = CGRectMake(215, 0, 10, 50);
+    self.contentStuNumLabel.frame = CGRectMake(195, 0, 30, 50);
     self.contentStuNumLabel.text = @"0";
+    self.contentStuNumLabel.textAlignment = NSTextAlignmentRight;
     self.contentStuNumLabel.textColor = [UIColor colorWithHex:0x1E90FF];
     self.contentStuNumLabel.font = [UIFont boldSystemFontOfSize:20.0f];
     [self addSubview:self.contentStuNumLabel];
