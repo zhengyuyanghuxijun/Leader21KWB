@@ -15,6 +15,6 @@
  *	@param 	NSDictionary 内容字典
  *  @retuan nil
  */
--(void)updateFormData:(NSMutableArray *)arr isKnowledge:(BOOL)knowledge;
+-(void)updateFormData:(NSArray *)arr isKnowledge:(BOOL)knowledge;
 
 @end

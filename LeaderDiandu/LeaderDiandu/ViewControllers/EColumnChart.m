@@ -79,7 +79,11 @@
             eColumn = [[EColumn alloc] initWithFrame:CGRectMake(widthOfTheColumnShouldBe * 0.5 + (i * widthOfTheColumnShouldBe * 1.5), 0, widthOfTheColumnShouldBe, self.frame.size.height)];
             eColumn.barColor = [UIColor purpleColor];
             eColumn.backgroundColor = [UIColor clearColor];
-            eColumn.grade = eColumnDataModel.value / highestValueEColumnChart;
+            if (0 == highestValueEColumnChart) {
+                eColumn.grade = 0;
+            }else{
+                eColumn.grade = eColumnDataModel.value / highestValueEColumnChart;
+            }
             eColumn.eColumnDataModel = eColumnDataModel;
             [self addSubview:eColumn];
             [_eColumns setObject:eColumn forKey:[NSNumber numberWithInteger:currentIndex]];

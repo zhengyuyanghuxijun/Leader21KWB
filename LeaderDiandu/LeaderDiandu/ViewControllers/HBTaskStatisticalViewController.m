@@ -320,15 +320,21 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-//    if (self.isShowKnowledge) {
-//        NSParameterAssert(self.knowledgeArr);
-//        return self.knowledgeArr.count;
-//    }else{
-//        NSParameterAssert(self.abilityArr);
-//        return self.abilityArr.count;
-//    }
-    
-    return 1;
+    if (self.isShowKnowledge) {
+        NSParameterAssert(self.knowledgeArr);
+        if (0 == self.knowledgeArr.count % 4) {
+            return self.knowledgeArr.count/4;
+        }else{
+            return self.knowledgeArr.count/4 + 1;
+        }
+    }else{
+        NSParameterAssert(self.abilityArr);
+        if (0 == self.abilityArr.count % 4) {
+            return self.abilityArr.count/4;
+        }else{
+            return self.abilityArr.count/4 + 1;
+        }
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -347,13 +353,26 @@
         arr = self.abilityArr;
     }
     
+    NSInteger tempInt = arr.count / ((indexPath.row + 1) * 4);
+    NSInteger currentRowCount;
+    NSInteger beginIndex;
+    if (0 == tempInt) {
+        currentRowCount = arr.count % 4;
+        beginIndex = indexPath.row * 4;
+    }else{
+        currentRowCount = 4;
+        beginIndex = indexPath.row * 4;
+    }
+    
+    NSRange range = NSMakeRange(beginIndex, currentRowCount);
+    NSArray *destArr = [arr subarrayWithRange:range];
     
     HBTaskStatisticalCell *cell = [tableView dequeueReusableCellWithIdentifier:@"KHBTaskStatisticalViewCellReuseId"];
     if (!cell) {
         cell = [[HBTaskStatisticalCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"KHBTaskStatisticalViewCellReuseId"];
     }
     
-    [cell updateFormData:arr isKnowledge:self.isShowKnowledge];
+    [cell updateFormData:destArr isKnowledge:self.isShowKnowledge];
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     

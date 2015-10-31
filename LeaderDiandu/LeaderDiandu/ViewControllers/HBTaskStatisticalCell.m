@@ -43,7 +43,7 @@
 //    [self addSubview:_eColumnChart];
 }
 
--(void)updateFormData:(NSMutableArray *)arr isKnowledge:(BOOL)knowledge
+-(void)updateFormData:(NSArray *)arr isKnowledge:(BOOL)knowledge
 {
     if (_eColumnChart) {
         [_eColumnChart removeFromSuperview];
