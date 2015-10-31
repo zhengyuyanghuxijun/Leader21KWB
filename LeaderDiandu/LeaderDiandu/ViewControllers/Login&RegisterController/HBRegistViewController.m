@@ -18,7 +18,7 @@
 @property (nonatomic, strong) HBNTextField *inputPassword;
 @property (nonatomic, strong) HBNTextField *againPassword;
 @property (nonatomic, strong) UIButton *getCodeButton;
-@property (nonatomic, strong) UIButton *registerButton;
+@property (nonatomic, strong) UIButton *finishButton;
 
 @property (nonatomic, assign) int countDownNum;
 @property (nonatomic, strong) NSTimer *mtimer;
@@ -48,7 +48,11 @@
 #pragma mark - init Method
 - (void)initMainView
 {
-    self.title = @"注册";
+    if (self.viewType == KLeaderViewTypeRegister) {
+        self.title = @"注册";
+    } else if (self.viewType == KLeaderViewTypeForgetPwd) {
+        self.title = @"忘记密码";
+    }
     
     float margin = 10;
     float controlY = KHBNaviBarHeight + 50;
@@ -96,37 +100,81 @@
     _againPassword.placeholder = @"请重复输入密码";
     [_againPassword setupTextFieldWithType:HBNTextFieldTypePassword withIconName:@"lock"];
     [accountView addSubview:_againPassword];
+    
+    controlX = 20;
+    controlY = CGRectGetMaxY(accountView.frame) + 30;
+    controlW = screenW - controlX*2;
+    controlH = 45;
+    self.finishButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    [_finishButton setTitle:@"下一步" forState:UIControlStateNormal];
+    _finishButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    [_finishButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_finishButton setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [_finishButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
+    [_finishButton addTarget:self action:@selector(finishButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_finishButton];
 }
 
 - (void)tapToHideKeyboard:(id)sender
 {
-    [self.inputPassword resignFirstResponder];
     [self.inputPhoneNumber resignFirstResponder];
     [self.inputVerifyCode resignFirstResponder];
+    [self.inputPassword resignFirstResponder];
+    [self.againPassword resignFirstResponder];
 }
 
 #pragma mark - Target Action
 
-- (void)registerUser:(id)sender
+- (void)finishButtonPressed:(id)sender
 {
     [self tapToHideKeyboard:nil];
     
     if ([self checkIfNeedReturn]) {
         return;
     }
-    NSString *phone     = self.inputPhoneNumber.text;
-    NSString *password  = self.inputPassword.text;
-    NSString *smsCode   = self.inputVerifyCode.text;
-    if (smsCode == nil) {
-        smsCode = [self.smsDict objectForKey:@"sms_code"];
+    
+    NSString *passward  = self.inputPassword.text;
+    if (self.viewType == KLeaderViewTypeRegister) {
+        [self registerUser:passward];
+    } else if (self.viewType == KLeaderViewTypeForgetPwd) {
+        [self modifyPassword:passward];
     }
-    self.registerButton.enabled = NO;
+}
+
+- (void)registerUser:(NSString *)password
+{
+    NSString *phone     = self.inputPhoneNumber.text;
+    NSString *smsCode   = self.inputVerifyCode.text;
     //注册
+    [MBHudUtil showActivityView:nil inView:nil];
     [[HBServiceManager defaultManager] requestRegister:phone pwd:password type:@"1" smsCode:smsCode codeId:[self.smsDict objectForKey:@"code_id"] completion:^(id responseObject, NSError *error) {
-        self.registerButton.enabled = YES;
+        [MBHudUtil hideActivityView:nil];
         NSDictionary *dict = responseObject;
         if ([[dict objectForKey:@"result"] isEqualToString:@"OK"]) {
             //注册成功
+            [MBHudUtil showTextViewAfter:@"注册成功，请登录"];
+            //返回登录界面
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [MBHudUtil showTextViewAfter:@"注册失败，请重试"];
+        }
+    }];
+}
+
+- (void)modifyPassword:(NSString *)password
+{
+    NSString *phone     = self.inputPhoneNumber.text;
+    NSString *smsCode   = self.inputVerifyCode.text;
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    [MBHudUtil showActivityView:nil inView:nil];
+    [[HBServiceManager defaultManager] requestUpdatePwd:phone token:userEntity.token password:password sms_code:smsCode code_id:self.smsDict[@"code_id"] completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
+        if ([[responseObject objectForKey:@"result"] isEqualToString:@"OK"]) {
+            [MBHudUtil showTextViewAfter:@"修改密码成功，请登录"];
+            //返回登录界面
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [MBHudUtil showTextViewAfter:@"修改密码失败，请重试"];
         }
     }];
 }
@@ -163,14 +211,12 @@
 {
     if (_countDownNum <= 0) {
         _getCodeButton.userInteractionEnabled = YES;
-//        [_getCodeButton setBackgroundImage:[UIImage imageNamed:@"user_captcha_input"] forState:UIControlStateNormal];
-        [_getCodeButton setTitle:@"免费获取短信" forState:UIControlStateNormal];
+        [_getCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
         
         [self.mtimer invalidate];
         self.mtimer = nil;
     }else{
         _getCodeButton.userInteractionEnabled = NO;
-//        [_getCodeButton setBackgroundImage:[UIImage imageNamed:@"user_captcha_input"] forState:UIControlStateNormal];
         [_getCodeButton setTitle:[NSString stringWithFormat:@"%d秒后重新获取", _countDownNum] forState:UIControlStateNormal];
     }
     self.countDownNum--;
@@ -179,31 +225,26 @@
 - (BOOL)checkIfNeedReturn
 {
     BOOL needReturn = NO;
+    NSString *pwd1 = self.inputPassword.text;
+    NSString *pwd2 = self.againPassword.text;
     if (![self.inputPhoneNumber.text isPhoneNumInput]){
         [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
         needReturn = YES;
-    }
-    if (![self.inputPassword.text isPasswordInput]){
-        [MBHudUtil showTextView:@"密码长度只能在6-32位字符之间" inView:nil];
+    } else if ([NSString checkTextNULL:self.inputVerifyCode.text]){
+        [MBHudUtil showTextView:@"请输入验证码" inView:nil];
+        needReturn = YES;
+    } else if ([pwd1 length]==0 || [pwd2 length]==0) {
+        [MBHudUtil showTextView:@"请填写完整的密码" inView:nil];
+        needReturn = YES;
+    } else if ([pwd1 isEqualToString:pwd2] == NO) {
+        [MBHudUtil showTextView:@"输入的密码不一致" inView:nil];
         needReturn = YES;
     }
-    if ([NSString checkTextNULL:self.inputVerifyCode.text]){
-        [MBHudUtil showTextView:@"验证码错误" inView:nil];
-        needReturn = YES;
-    }
+//    if (![self.inputPassword.text isPasswordInput]){
+//        [MBHudUtil showTextView:@"密码长度只能在6-32位字符之间" inView:nil];
+//        needReturn = YES;
+//    }
     return needReturn;
-}
-
-#pragma mark - CheckPhone
-- (void)loginCheckPhone:(NSString *)phone{
-    //是否注册
-    
-}
-
-#pragma mark - 注册
-- (void)registerPhone:(NSString *)phone pw:(NSString *)pw code:(NSString *)code Nickname:nickname{
-    //注册
-    
 }
 
 @end

@@ -8,6 +8,14 @@
 
 #import "HBBaseViewController.h"
 
+typedef enum : NSUInteger {
+    KLeaderViewTypeNull,
+    KLeaderViewTypeRegister,
+    KLeaderViewTypeForgetPwd,
+} KLeaderViewType;
+
 @interface HBRegistViewController : HBBaseViewController
+
+@property (nonatomic, assign)KLeaderViewType viewType;
 
 @end
