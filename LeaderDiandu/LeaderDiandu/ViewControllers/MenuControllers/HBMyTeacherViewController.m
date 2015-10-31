@@ -9,6 +9,7 @@
 #import "HBMyTeacherViewController.h"
 #import "HBServiceManager.h"
 #import "HBDataSaveManager.h"
+#import "HBHeaderManager.h"
 
 #define KTagBindView        10001
 
@@ -132,6 +133,21 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     [array addObject:strValue];
     
     self.desArray = array;
+    
+    [self getHeaderAvatar:[teacherDic stringForKey:@"name" defautValue:@""]];
+}
+
+- (void)getHeaderAvatar:(NSString *)name
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:name];
+    if (headFile == nil) {
+        [[HBHeaderManager defaultManager] requestGetAvatar:name token:userEntity.token completion:^(id responseObject, NSError *error) {
+            if (error.code == 0) {
+                [_tableView reloadData];
+            }
+        }];
+    }
 }
 
 - (void)createTableView:(CGRect)frame
@@ -304,8 +320,24 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     NSInteger screenWidth = [UIScreen mainScreen].bounds.size.width;
     UIView *view = [[UIView alloc] init];
     UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-imgWidth)/2, (150-imgWidth)/2, imgWidth, imgWidth)];
-    headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
     [view addSubview:headView];
+    
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    NSString *name = userEntity.teacher[@"name"];
+    
+    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:name];
+    
+    if (headFile) {
+        //设置显示圆形头像
+        headView.layer.cornerRadius = 100/2;
+        headView.clipsToBounds = YES;
+        headView.image = [UIImage imageWithContentsOfFile:headFile];
+        if (headView.image == nil) {
+            headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
+        }
+    } else {
+        headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
+    }
     
     return view;
 }
