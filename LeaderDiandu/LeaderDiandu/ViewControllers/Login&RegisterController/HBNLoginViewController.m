@@ -8,7 +8,8 @@
 
 #import "HBNLoginViewController.h"
 #import "HBRegistViewController.h"
-#import "HBForgetPwdViewController.h"
+//#import "HBForgetPwdViewController.h"
+#import "HBNTextField.h"
 
 #import "NSString+Verify.h"
 #import "HBServiceManager.h"
@@ -17,8 +18,8 @@
 
 @property(nonatomic, assign) BOOL isLoginChecking;
 
-@property (nonatomic, strong) UITextField *inputPhoneNumber;
-@property (nonatomic, strong) UITextField *inputPassword;
+@property (nonatomic, strong) HBNTextField *inputPhoneNumber;
+@property (nonatomic, strong) HBNTextField *inputPassword;
 @property (nonatomic, strong) UIButton *loginButton;
 @property (nonatomic, strong) UIButton *userRegister;
 @property (nonatomic, strong) UIButton *forgetPassword;
@@ -73,8 +74,9 @@
     controlY = 0;
     float controlW = screenW - controlX;
     float controlH = 45;
-    self.inputPhoneNumber = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    self.inputPhoneNumber = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _inputPhoneNumber.placeholder = @"手机号/ID";
+    [_inputPhoneNumber setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
     [accountView addSubview:_inputPhoneNumber];
     
     controlY += controlH;
@@ -83,9 +85,10 @@
     [accountView addSubview:lineLbl];
     
     controlY += 1;
-    self.inputPassword = [[UITextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    self.inputPassword = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _inputPassword.placeholder = @"输入密码";
     _inputPassword.secureTextEntry = YES;
+    [_inputPassword setupTextFieldWithType:HBNTextFieldTypePassword withIconName:@"lock"];
     [accountView addSubview:_inputPassword];
     
     controlW = 100;
@@ -172,7 +175,7 @@
 
 - (void)forgetPassword:(id)sender
 {
-    HBForgetPwdViewController *vc = [[HBForgetPwdViewController alloc] init];
+    HBRegistViewController *vc = [[HBRegistViewController alloc] init];
     vc.viewType = KLeaderViewTypeForgetPwd;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -180,7 +183,7 @@
 - (void)userRegister:(id)sender
 {
     HBRegistViewController *vc = [[HBRegistViewController alloc] init];
-//    vc.viewType = KLeaderViewTypeRegister;
+    vc.viewType = KLeaderViewTypeRegister;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

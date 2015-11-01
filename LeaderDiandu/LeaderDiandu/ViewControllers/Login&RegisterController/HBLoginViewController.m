@@ -8,7 +8,7 @@
 
 #import "HBLoginViewController.h"
 #import "HBRegistViewController.h"
-#import "HBForgetPwdViewController.h"
+//#import "HBForgetPwdViewController.h"
 #import "UIViewController+AddBackBtn.h"
 //#import "MJThirdLoginView.h"
 //#import "MJMainViewController.h"
@@ -125,9 +125,9 @@
 }
 
 - (IBAction)forgetPassword:(id)sender {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-    HBForgetPwdViewController *vc = [sb instantiateViewControllerWithIdentifier:@"HBForgetPwdViewController"];
-    [self.navigationController pushViewController:vc animated:YES];
+//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+//    HBForgetPwdViewController *vc = [sb instantiateViewControllerWithIdentifier:@"HBForgetPwdViewController"];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)userRegister:(id)sender {

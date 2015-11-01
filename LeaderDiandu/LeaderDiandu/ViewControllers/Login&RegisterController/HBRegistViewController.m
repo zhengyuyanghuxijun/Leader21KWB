@@ -7,9 +7,11 @@
 //
 
 #import "HBRegistViewController.h"
+#import "HBNLoginViewController.h"
 #import "HBNTextField.h"
 #import "NSString+Verify.h"
 #import "HBServiceManager.h"
+#import "HBHyperlinksButton.h"
 
 @interface HBRegistViewController ()
 
@@ -58,7 +60,7 @@
     float controlY = KHBNaviBarHeight + 50;
     float controlH = 45;
     float screenW = self.view.frame.size.width;
-    UIView *accountView = [[UIView alloc] initWithFrame:CGRectMake(0, controlY, screenW, controlH*3+2)];
+    UIView *accountView = [[UIView alloc] initWithFrame:CGRectMake(0, controlY, screenW, controlH*4+30)];
     accountView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:accountView];
     
@@ -113,6 +115,29 @@
     [_finishButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
     [_finishButton addTarget:self action:@selector(finishButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_finishButton];
+    
+    if (self.viewType == KLeaderViewTypeRegister) {
+        controlX = 0;
+        controlY = CGRectGetMaxY(_finishButton.frame) + 30;
+        controlW = screenW * 2/3;
+        controlH = 20;
+        UILabel *tipLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+        tipLbl.backgroundColor = [UIColor clearColor];
+        tipLbl.textColor = [UIColor lightGrayColor];
+        tipLbl.text = @"如果您已拥有课外宝账户，则可在此";
+        tipLbl.textAlignment = NSTextAlignmentRight;
+        tipLbl.font = [UIFont systemFontOfSize:12];
+        [self.view addSubview:tipLbl];
+        
+        controlX += controlW;
+        controlW = 40;
+        HBHyperlinksButton *linkBtn = [[HBHyperlinksButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+        [linkBtn setTitle:@"登录" forState:UIControlStateNormal];
+        [linkBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        linkBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        [linkBtn addTarget:self action:@selector(linkBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:linkBtn];
+    }
 }
 
 - (void)tapToHideKeyboard:(id)sender
@@ -124,6 +149,12 @@
 }
 
 #pragma mark - Target Action
+
+- (void)linkBtnAction:(id)sender
+{
+    HBNLoginViewController *loginCtl = [[HBNLoginViewController alloc] init];
+    [self.navigationController pushViewController:loginCtl animated:YES];
+}
 
 - (void)finishButtonPressed:(id)sender
 {
