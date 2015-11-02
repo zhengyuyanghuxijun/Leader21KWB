@@ -31,7 +31,7 @@ typedef void (^RequestBlock)(NSDictionary *sourceDic, NSInteger errorCode, NSStr
 #define DE [DataEngine sharedInstance]
 @interface DataEngine : NSObject
 
-@property (nonatomic, copy) NSString* hostUrl;
+@property (nonatomic, copy) NSString* serverUrl;
 @property (nonatomic, copy) NSString *version;
 @property (nonatomic, copy) NSString *appName;
 @property (nonatomic, copy) NSString *deviceUniqueId;
@@ -71,7 +71,12 @@ typedef void (^RequestBlock)(NSDictionary *sourceDic, NSInteger errorCode, NSStr
 - (MKHttpRequest*)requestBookInfo:(NSString*)bookIds
                        onComplete:(ResponseBookListBlock)block;
 
-
+/**
+ * 下载确认
+ * @param bookIds   书本ID列表
+ * @param block  返回数据的回调
+ */
+- (MKHttpRequest*)requestBookNotify:(BookEntity*)bookEntity success:(BOOL)isSuccess onComplete:(ResponseBookListBlock)block;
 
 @end
 

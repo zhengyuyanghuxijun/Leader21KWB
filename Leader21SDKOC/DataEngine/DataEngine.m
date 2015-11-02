@@ -40,7 +40,7 @@ static DataEngine *dataEngineInstance = nil;
         
         [self configApp];
         
-        _networkEngine = [[MKNetworkEngine alloc] initWithHostName:self.hostUrl];
+        _networkEngine = [[MKNetworkEngine alloc] initWithHostName:self.serverUrl];
         
         //        _downloadEngine = [[MKNetworkEngine alloc] initWithHostName:@"http://boss.61dear.com"];
         //        _downloadEngine.wifiOnlyMode = YES;
@@ -116,7 +116,7 @@ static DataEngine *dataEngineInstance = nil;
         method = @"POST";
     }
     
-    NSString* fullUrl = self.hostUrl;
+    NSString* fullUrl = self.serverUrl;
     if (url.length > 0) {
         fullUrl = url;
     }
@@ -267,6 +267,27 @@ static DataEngine *dataEngineInstance = nil;
     
     return r;
 }
+
+/**
+ * 下载确认
+ * @param bookIds   书本ID列表
+ * @param block  返回数据的回调
+ */
+- (MKHttpRequest*)requestBookNotify:(BookEntity*)bookEntity success:(BOOL)isSuccess onComplete:(ResponseBookListBlock)block
+{
+    NSMutableDictionary* param = [NSMutableDictionary dictionaryWithCapacity:4];
+    [param setObject:mAppId forKey:@"app_key"];
+    [param setObject:bookEntity.fileId forKey:@"file_id"];
+    [param setObject:@(isSuccess) forKey:@"status"];
+    
+    MKHttpRequest *r = [self requestGETWithApi:API_DOWNLOAD_NOTIFY param:param completOpeartion:^(MKNetworkOperation *completedOperation) {
+        
+    } errorOperation:^(MKNetworkOperation *completedOperation, NSError *error) {
+        
+    }];
+    return r;
+}
+
 - (void)serverError:(NSInteger)code data:(NSDictionary*)dic onComplete:(ResponseBookListBlock)block
 {
     

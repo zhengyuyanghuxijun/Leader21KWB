@@ -16,6 +16,7 @@
 #define HTTP_KEYNAME_FAIL_RETURN_CODE       @"HttpKeyName_FailReturnCode"
 
 #define API_GET_BOOK_INFO                   @"/api/book"
+#define API_DOWNLOAD_NOTIFY                 @"/api/book/download/notify"
 #define API_DOWNLOAD_BOOK                   @"/api/book/download"
 #define kNotification_bookDownloadProgress  @"kNotification_bookDownloadProgress"
 

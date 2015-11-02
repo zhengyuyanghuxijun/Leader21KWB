@@ -215,7 +215,7 @@
         NSString *fileIdStr = [dic objectForKey:TextGridItemView_BookCover];
         fileIdStr = [fileIdStr lowercaseString];
         NSString *urlStr = [NSString stringWithFormat:KHBBookImgFormatUrl, fileIdStr, fileIdStr];
-        [self.bookCoverButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"mainGrid_defaultBookCover"]];
+        [self.bookCoverButton setBackgroundImageForState:UIControlStateNormal withURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"mainGrid_defaultBookCover"]];
     }
     
     //是否vip标识 1:vip 0:free

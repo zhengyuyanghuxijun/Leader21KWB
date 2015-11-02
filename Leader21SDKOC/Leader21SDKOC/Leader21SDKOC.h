@@ -38,7 +38,7 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
 /**设置服务器地址
  @param hostUrl 服务器地址
  */
-- (void)setLeaderHost:(NSString *)hostUrl;
+- (void)setServerUrl:(NSString *)serverUrl;
 
 /**设置app的appKey，此appKey从leader21网站获取
  @param appKey leader21 appKey

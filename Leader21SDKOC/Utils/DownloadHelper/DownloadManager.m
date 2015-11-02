@@ -168,14 +168,13 @@ static DownloadManager *_instance;
                         NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
                         [info setObject:@(1.0) forKey:@"progress"];
                         [info setObject:book.bookUrl forKey:@"url"];
-                        [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_bookDownloadProgress
-                                                                            object:book
-                                                                          userInfo:info];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_bookDownloadProgress object:book  userInfo:info];
                         [CoreDataHelper save];
+                        // 通知服务端，这本书下载完了
+                        [DE requestBookNotify:book success:YES onComplete:nil];
                     });
                 });
                 
-                // 通知服务端，这本书下载完了
 //                [BookOperateUtil bookDidDownload:book.bookId];
 
             }
