@@ -16,7 +16,7 @@
 
 @interface Leader21SDKOC()
 
-@property (nonatomic, strong) NSString *serverUrl;
+@property (nonatomic, strong) NSString *hostUrl;
 @property (nonatomic, strong) NSString *mAppId;
 
 @end
@@ -35,7 +35,7 @@
 
 - (void)setServerUrl:(NSString *)serverUrl
 {
-    self.serverUrl = serverUrl;
+    self.hostUrl = serverUrl;
     [DataEngine sharedInstance].serverUrl = serverUrl;
 }
 
@@ -73,7 +73,7 @@
     //TODO generate download url "?book_id=%s&file_id=%s&app_key=%s"
     NSString* bookUrl = [NSString stringWithFormat:
                          @"%@%@?book_id=%@&file_id=%@&app_key=%@",
-                         _serverUrl,API_DOWNLOAD_BOOK,book.bookId,book.fileId,_mAppId];
+                         _hostUrl,API_DOWNLOAD_BOOK,book.bookId,book.fileId,_mAppId];
 
     NSLog(@"book download url %@",bookUrl);
     NSString* path = [LocalSettings bookPathForDefaultUser:book.bookTitle];
@@ -101,7 +101,7 @@
 {
     NSString* bookUrl = [NSString stringWithFormat:
                          @"%@%@?book_id=%@&file_id=%@&app_key=%@",
-                         _serverUrl,API_DOWNLOAD_BOOK,book.bookId,book.fileId,_mAppId];
+                         _hostUrl,API_DOWNLOAD_BOOK,book.bookId,book.fileId,_mAppId];
     
     NSLog(@"book download url %@",bookUrl);
     
