@@ -23,7 +23,7 @@
         _chartLine.fillColor    = [[UIColor whiteColor] CGColor];
         _chartLine.lineWidth    = self.frame.size.width;
         _chartLine.strokeEnd    = 0.0;
-        self.clipsToBounds      = YES;
+//        self.clipsToBounds      = YES;
 		[self.layer addSublayer:_chartLine];
     }
     return self;
@@ -40,7 +40,7 @@
 	[progressline addLineToPoint:CGPointMake(self.frame.size.width/2.0, (1 - grade) * self.frame.size.height)];
 	
     [progressline setLineWidth:1.0];
-    [progressline setLineCapStyle:kCGLineCapSquare];
+    [progressline setLineCapStyle:kCGLineCapRound];
 	_chartLine.path = progressline.CGPath;
 	if (_barColor) {
 		_chartLine.strokeColor = [_barColor CGColor];
@@ -56,6 +56,11 @@
     [_chartLine addAnimation:pathAnimation forKey:@"strokeEndAnimation"];
     
     _chartLine.strokeEnd = 1.0;
+    
+    UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (1 - grade) * self.frame.size.height - 15, self.frame.size.width, 15)];
+    tempLabel.textAlignment = NSTextAlignmentCenter;
+    tempLabel.text = [NSString stringWithFormat:@"%.f", _grade * 100];
+    [self addSubview:tempLabel];
 }
 
 - (void)setBarColor:(UIColor *)barColor
