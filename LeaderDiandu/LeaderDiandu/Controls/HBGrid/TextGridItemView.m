@@ -242,9 +242,11 @@
         if (status == downloadStatusFinished) {
 //            [self bookDownloaded:book progress:@"0" isTask:NO];
             [self.delegate reloadGridView];
-        }else if(status == downloadStatusDownloading){
+        } else if (status == downloadStatusDownloading){
             [self bookDownloading:book];
-        }else if (status == downloadStatusNone){
+        } else if (status == downloadStatusNone){
+            [self bookUnDownload:book];
+        } else if (status == downloadStatusDownloadFailed) {
             [self bookUnDownload:book];
         }
     }

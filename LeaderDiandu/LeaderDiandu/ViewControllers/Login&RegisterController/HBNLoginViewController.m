@@ -70,9 +70,9 @@
     accountView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:accountView];
     
-    float controlX = 20;
+    float controlX = 0;
     controlY = 0;
-    float controlW = screenW - controlX;
+    float controlW = screenW - controlX*2;
     float controlH = 45;
     self.inputPhoneNumber = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _inputPhoneNumber.placeholder = @"手机号/ID";

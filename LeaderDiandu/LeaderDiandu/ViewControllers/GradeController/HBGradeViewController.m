@@ -771,23 +771,19 @@
         }
     }
     
-    if([LEADERSDK isBookDownloading:entity]){
-        //正在下载，不处理
-    }else{
-        if (itemView.isTest) {
-            //跳转作业逻辑
-            [self jumpToTestWork:[entity.bookId integerValue]];
-        } else {
-            //记录一下开始阅读时间
-            NSDate *date = [NSDate date];
-            readBookFromTime = [NSString stringWithFormat:@"%.f",[date timeIntervalSince1970]];
-            
-            BOOL isDownload = [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
-            if (isDownload == NO) {
-                [self handleDownload:entity];
-            }
-            itemView.bookDownloadUrl = entity.bookUrl;
+    if (itemView.isTest && [LEADERSDK isBookDownloading:entity]==NO) {
+        //跳转作业逻辑
+        [self jumpToTestWork:[entity.bookId integerValue]];
+    } else {
+        //记录一下开始阅读时间
+        NSDate *date = [NSDate date];
+        readBookFromTime = [NSString stringWithFormat:@"%.f",[date timeIntervalSince1970]];
+        
+        BOOL isDownloaded = [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
+        if (isDownloaded == NO) {
+            [self handleDownload:entity];
         }
+        itemView.bookDownloadUrl = entity.bookUrl;
     }
 }
 

@@ -108,11 +108,18 @@ static DownloadManager *_instance;
                 NSPredicate* predicate = [NSPredicate predicateWithFormat:@"bookUrl == %@", callbackItem.originalURL];
                 BookEntity* book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
                 book.download.status = [NSNumber numberWithInteger:downloadStatusDownloadFailed];
-
                 [CoreDataHelper save];
+
                 NSString* bookName = [NSString stringWithFormat:@"下载《%@》失败", book.bookTitle];
                 [LDHudUtil showTextView:bookName inView:nil];
-
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // 下载失败
+                    NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
+//                    [info setObject:@(progress) forKey:@"progress"];
+                    [info setObject:book.bookUrl forKey:@"url"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_bookDownloadProgress object:book userInfo:info];
+                });
             }
                 break;
             case DownloadFinished:
@@ -237,7 +244,7 @@ static DownloadManager *_instance;
 {
     [_pauseQueue.allValues enumerateObjectsUsingBlock:^(id obj,NSUInteger index,BOOL *stop){
         DownloadItem *item=obj;
-        NSString *url=[item.url description];
+        NSString *url=[item.originalURL description];
 
         if([_downlodingQueue objectForKey:url])
         {

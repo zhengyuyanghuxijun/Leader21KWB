@@ -64,7 +64,7 @@
     accountView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:accountView];
     
-    float controlX = 10;
+    float controlX = 0;
     controlY = 0;
     float controlW = screenW - controlX*2;
     self.inputPhoneNumber = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
@@ -89,7 +89,7 @@
     [_getCodeButton addTarget:self action:@selector(fetchVerifyCode:) forControlEvents:UIControlEventTouchUpInside];
     [accountView addSubview:_getCodeButton];
     
-    controlX = 10;
+    controlX = 0;
     controlY += controlH+margin;
     controlW = screenW - controlX*2;
     self.inputPassword = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
