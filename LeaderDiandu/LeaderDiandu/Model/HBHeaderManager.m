@@ -75,28 +75,27 @@
     [request setDelegate :self];
     [request setTimeOutSeconds:30];
     [request addRequestHeader:@"Accept" value:@"image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, */*"];
-    [request addRequestHeader:@"Accept-Encoding" value:@"gzip, deflate"];
-    [request addRequestHeader:@"Content-Type" value:@"multipart/form-data; boundary=----WebKitFormBoundaryxAJEmMnwJ4PeQUyH"];
-//    [request setPostFormat:ASIMultipartFormDataPostFormat];
+    //添加http头
+    NSString *identifier = [[NSBundle mainBundle] bundleIdentifier];
+    [request addRequestHeader:@"X-Requested-By" value:identifier];
+    [request addRequestHeader:@"X-Requested-With" value:@"XMLHttpRequest"];
+    [request setPostFormat:ASIMultipartFormDataPostFormat];
     [request setPostValue:user forKey:@"user"];
     [request setPostValue:token forKey:@"token"];
     [request setPostValue:KAppKeyKWB forKey:KWBAppKey];
-    [request setPostValue:avatarFile forKey:@"avatar"];
     UIImage *image = [UIImage imageWithContentsOfFile:avatarFile];
-    NSData *imageData = UIImageJPEGRepresentation(image, 1);
-    [request setPostBody:[NSMutableData dataWithData:imageData]];
-    [request setFile:avatarFile withFileName:[avatarFile lastPathComponent] andContentType:@"image/jpeg" forKey:@"avatar"];
-    [request buildRequestHeaders];
-    [request buildPostBody];
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
+    [request setData:imageData withFileName:[avatarFile lastPathComponent] andContentType:@"image/jpeg" forKey:@"avatar"];
+//    [request setFile:avatarFile withFileName:[avatarFile lastPathComponent] andContentType:@"image/jpeg" forKey:@"avatar"];
     [request startSynchronous];
+}
 
-    __weak typeof(request) weakRequest = request;
-    [request setCompletionBlock:^{
-        NSError *error = [weakRequest error];
-        if (error == nil) {
-            
-        }
-    }];
+- (void)requestFinished:(ASIHTTPRequest *)request
+{
+    NSError *error = [request error];
+    if (error.code) {
+        
+    }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request

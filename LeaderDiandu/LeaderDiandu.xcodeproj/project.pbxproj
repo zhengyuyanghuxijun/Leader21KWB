@@ -1972,49 +1972,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/LeaderDiandu/Third/AliPay",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../Leader21SDKOC/Additional",
-					"$(SRCROOT)/../Leader21SDKOC/DataEngine/**",
-					"$(SRCROOT)/../Leader21SDKOC/ReadModule/**",
-					"$(SRCROOT)/../Leader21SDKOC/Utils/**",
-					"$(SRCROOT)/../Leader21SDKOC/Third/**",
-					"$(SRCROOT)/../Leader21SDKOC/Http",
-					"$(SRCROOT)/../Leader21SDKOC/Leader21SDKOC",
-					"$(SRCROOT)/LeaderDiandu/Third/AliPay/**",
-				);
-				INFOPLIST_FILE = LeaderDiandu/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				OTHER_LDFLAGS = "-all_load";
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.ikwb;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				REZ_SEARCH_PATHS = "";
-				USER_HEADER_SEARCH_PATHS = "";
-			};
-			name = Debug;
-		};
-		0D7487131B88A884007BE4CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jidong Guo (257X5EDALE)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jidong Guo (257X5EDALE)";
 				ENABLE_BITCODE = NO;
@@ -2045,7 +2002,50 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.ikwb;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.study;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				REZ_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		0D7487131B88A884007BE4CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LeaderDiandu/Third/AliPay",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../Leader21SDKOC/Additional",
+					"$(SRCROOT)/../Leader21SDKOC/DataEngine/**",
+					"$(SRCROOT)/../Leader21SDKOC/ReadModule/**",
+					"$(SRCROOT)/../Leader21SDKOC/Utils/**",
+					"$(SRCROOT)/../Leader21SDKOC/Third/**",
+					"$(SRCROOT)/../Leader21SDKOC/Http",
+					"$(SRCROOT)/../Leader21SDKOC/Leader21SDKOC",
+					"$(SRCROOT)/LeaderDiandu/Third/AliPay/**",
+				);
+				INFOPLIST_FILE = LeaderDiandu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-all_load";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.study;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				REZ_SEARCH_PATHS = "";
