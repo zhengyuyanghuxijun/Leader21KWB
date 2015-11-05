@@ -70,11 +70,12 @@
 
 - (void)requestUpdateAvatar:(NSString *)user token:(NSString *)token file:(NSString *)avatarFile data:(NSData *)data completion:(HBHeaderReceivedBlock)receivedBlock
 {
+    self.receivedBlock = receivedBlock;
+    
     NSString *server_base = [NSString stringWithFormat:@"%@/api/user/avatar/update", SERVICEAPI];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:server_base]];
     [request setDelegate :self];
     [request setTimeOutSeconds:30];
-    [request addRequestHeader:@"Accept" value:@"image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, */*"];
     //添加http头
     NSString *identifier = [[NSBundle mainBundle] bundleIdentifier];
     [request addRequestHeader:@"X-Requested-By" value:identifier];
@@ -87,15 +88,17 @@
     NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
     [request setData:imageData withFileName:[avatarFile lastPathComponent] andContentType:@"image/jpeg" forKey:@"avatar"];
 //    [request setFile:avatarFile withFileName:[avatarFile lastPathComponent] andContentType:@"image/jpeg" forKey:@"avatar"];
+    
+    __weak typeof(request) weakRequest = request;
+    [request setCompletionBlock:^{
+        NSError *error = [weakRequest error];
+        if (error == nil) {
+            if (receivedBlock) {
+                receivedBlock(image, error);
+            }
+        }
+    }];
     [request startSynchronous];
-}
-
-- (void)requestFinished:(ASIHTTPRequest *)request
-{
-    NSError *error = [request error];
-    if (error.code) {
-        
-    }
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request

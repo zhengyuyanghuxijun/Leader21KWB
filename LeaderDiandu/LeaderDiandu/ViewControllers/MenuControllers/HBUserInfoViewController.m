@@ -26,7 +26,7 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
 }
 
 @property (nonatomic, strong)UIView *headerView;
-@property (nonatomic, strong)NSString *headFile;
+@property (nonatomic, strong)UIImage *headImage;
 @property (nonatomic, strong)NSString *filePath;
 
 @end
@@ -66,11 +66,14 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
 - (void)getHeaderAvatar
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    self.headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
-    if (self.headFile == nil) {
+    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
+    if (headFile) {
+        self.headImage = [UIImage imageWithContentsOfFile:headFile];
+    } else {
         [[HBHeaderManager defaultManager] requestGetAvatar:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
             if (error.code == 0) {
-                self.headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
+                NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
+                self.headImage = [UIImage imageWithContentsOfFile:headFile];
                 [_tableView reloadData];
             }
         }];
@@ -127,11 +130,11 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     float controlX = (screenWidth-imgWidth-controlW)/2;
     float controlY = (KTableViewHeaderHeight-imgWidth)/2;
     UIButton *headButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, imgWidth, imgWidth)];
-    if (self.headFile) {
+    if (self.headImage) {
         //设置显示圆形头像
         headButton.layer.cornerRadius = imgWidth/2;
         headButton.clipsToBounds = YES;
-        UIImage *headImg = [UIImage imageWithContentsOfFile:self.headFile];
+        UIImage *headImg = self.headImage;
         if (headImg == nil) {
             headImg = [UIImage imageNamed:@"menu_user_pohoto"];
         }
@@ -352,7 +355,11 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
             //开始上传
             HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
             [[HBHeaderManager defaultManager] requestUpdateAvatar:userEntity.name token:userEntity.token file:_filePath data:data completion:^(id responseObject, NSError *error) {
-                
+                if (error == nil) {
+                    self.headImage = responseObject;
+                } else {
+                    //上传错误提示
+                }
             }];
         }];
         
