@@ -129,6 +129,13 @@ static DownloadManager *_instance;
 
                 NSPredicate* predicate = [NSPredicate predicateWithFormat:@"bookUrl == %@", callbackItem.originalURL];
                 BookEntity* book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
+                if (book == nil) {
+                    predicate = [NSPredicate predicateWithFormat:@"bookUrl == %@", callbackItem.url];
+                    book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
+                    if (book == nil) {
+                        break;
+                    }
+                }
                 book.download.status = @(downloadStatusDownloadSuccess);
                 book.download.progress = @(0.98);
                 NSString* path = [LocalSettings bookPathForDefaultUser:book.bookTitle];

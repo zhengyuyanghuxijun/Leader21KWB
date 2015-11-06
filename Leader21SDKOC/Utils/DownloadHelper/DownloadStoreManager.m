@@ -104,6 +104,13 @@ static DownloadStoreManager *_instance;
         DownloadEntity* entity = (DownloadEntity*)[CoreDataHelper createEntity:@"DownloadEntity"];
         NSPredicate* pre = [NSPredicate predicateWithFormat:@"bookUrl == %@", item.url];
         BookEntity* book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:pre];
+        if (book == nil) {
+            pre = [NSPredicate predicateWithFormat:@"bookUrl == %@", item.originalURL];
+            book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:pre];
+            if (book == nil) {
+                return;
+            }
+        }
         
         [DownloadStoreManager transfer:item toEntity:entity];
 
