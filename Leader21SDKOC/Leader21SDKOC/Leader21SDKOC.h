@@ -53,7 +53,7 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
  @param bookIds bookId列表
         block： 回调，返回书本详细信息
  */
-- (void) requestBookInfo:(NSString *)bookIds
+- (void)requestBookInfo:(NSString *)bookIds
               onComplete:(ResponseBookListBlock)block;
 
 /**根据bookId下载一本book
@@ -63,14 +63,25 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
             name:kNotification_bookDownloadProgress
             object:nil];
  */
-- (void) startDownloadBook:(BookEntity *)book;
-- (void) startDownloadBookByDict:(NSDictionary *)dict;
+- (void)startDownloadBook:(BookEntity *)book;
+- (void)startDownloadBookByDict:(NSDictionary *)dict;
+/**
+ * 暂停下载
+ * @param book
+ */
+- (void)pauseDownload:(BookEntity *)book;
+/**
+ * 取消下载
+ * @param book
+ */
+- (void)cancelDownload:(BookEntity *)book;
+
 /**
  * 书籍是否正在下载
  * @param book
  * @return 如正在下载，返回true，否则返回false
  */
-- (BOOL) isBookDownloading:(BookEntity *)book;
+- (BOOL)isBookDownloading:(BookEntity *)book;
 /**
  * 书籍是否已经下载到本地
  * @param book  书本对象

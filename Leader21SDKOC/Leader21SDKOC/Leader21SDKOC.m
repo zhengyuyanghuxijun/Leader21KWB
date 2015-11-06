@@ -89,6 +89,42 @@
     [CoreDataHelper save];
 }
 
+- (void)pauseDownload:(BookEntity *)book
+{
+    if (book) {
+        NSString *bookUrl = book.bookUrl;
+        if (bookUrl == nil) {
+            bookUrl = [NSString stringWithFormat:@"%@%@?book_id=%@&file_id=%@&app_key=%@", _hostUrl,API_DOWNLOAD_BOOK,book.bookId,book.fileId,_mAppId];
+        }
+        [[DownloadManager sharedInstance] pauseDownload:bookUrl];
+        book.download.status = @(downloadStatusPause);
+        [CoreDataHelper save];
+        // 暂停
+        NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
+        [info setObject:@(-1.0) forKey:@"progress"];
+        [info setObject:book.bookUrl forKey:@"url"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_bookDownloadProgress object:book userInfo:info];
+    }
+}
+
+- (void)cancelDownload:(BookEntity *)book
+{
+    if (book) {
+        NSString *bookUrl = book.bookUrl;
+        if (bookUrl == nil) {
+            bookUrl = [NSString stringWithFormat:@"%@%@?book_id=%@&file_id=%@&app_key=%@", _hostUrl,API_DOWNLOAD_BOOK,book.bookId,book.fileId,_mAppId];
+        }
+        [[DownloadManager sharedInstance] cancelDownload:bookUrl];
+        book.download.status = @(downloadStatusNone);
+        [CoreDataHelper save];
+        // 取消下载
+        NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
+        [info setObject:@(-1.0) forKey:@"progress"];
+        [info setObject:book.bookUrl forKey:@"url"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_bookDownloadProgress object:book userInfo:info];
+    }
+}
+
 - (BOOL)isBookDownloaded:(BookEntity *)book
 {
     BOOL isdownloaded = [LocalSettings findBookLoginOrNot:book.fileId];

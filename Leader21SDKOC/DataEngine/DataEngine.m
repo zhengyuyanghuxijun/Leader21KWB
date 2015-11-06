@@ -280,7 +280,7 @@ static DataEngine *dataEngineInstance = nil;
     [param setObject:bookEntity.fileId forKey:@"file_id"];
     [param setObject:@(isSuccess) forKey:@"status"];
     
-    MKHttpRequest *r = [self requestGETWithApi:API_DOWNLOAD_NOTIFY param:param completOpeartion:^(MKNetworkOperation *completedOperation) {
+    MKHttpRequest *r = [self requestPOSTWithApi:API_DOWNLOAD_NOTIFY param:param completOpeartion:^(MKNetworkOperation *completedOperation) {
         
     } errorOperation:^(MKNetworkOperation *completedOperation, NSError *error) {
         
