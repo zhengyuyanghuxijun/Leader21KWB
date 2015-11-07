@@ -11,6 +11,7 @@
 #import "HBServiceManager.h"
 #import "HBLeaderBindingCell.h"
 #import "HBLeaderUnbindingCell.h"
+#import "HBHeaderManager.h"
 
 static NSString * const KLeaderBindingCellReuseId = @"KLeaderBindingCellReuseId";
 static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReuseId";
@@ -73,6 +74,9 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
                 self.nameStr = [dic objectForKey:@"display_name"];
                 [self addTableView];
                 [self addBottomBtn];
+                
+                //获取头像
+                [self getHeaderAvatar:self.accountStr];
             }else{
                 //为空，表示没有绑定教研员，需要获取教研员列表
                 self.isBinding = NO;
@@ -93,12 +97,28 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
         for (NSDictionary *director in directorsArr) {
             [self.leadersArr addObject:director];
             [self.leaderSelectedDic setObject:@"0" forKey:[director objectForKey:@"name"]];
+            //获取头像
+            [self getHeaderAvatar:[director objectForKey:@"name"]];
         }
         if (self.leadersArr.count > 0) {
             [self addTableView];
             [self addBottomBtn];
         }
     }];
+}
+
+- (void)getHeaderAvatar:(NSString *)nameStr
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:nameStr];
+    if (headFile == nil) {
+        [[HBHeaderManager defaultManager] requestGetAvatar:nameStr token:userEntity.token completion:^(id responseObject, NSError *error) {
+            if (error.code == 0) {
+                //                headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:studentEntity.name];
+                [_tableView reloadData];
+            }
+        }];
+    }
 }
 
 -(void)addTableView
@@ -198,7 +218,21 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
     NSInteger screenWidth = [UIScreen mainScreen].bounds.size.width;
     UIView *view = [[UIView alloc] init];
     UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-imgWidth)/2, (200-imgWidth)/2, imgWidth, imgWidth)];
-    headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
+    
+    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:self.accountStr];
+    
+    if (headFile) {
+        //设置显示圆形头像
+        headView.layer.cornerRadius = 100/2;
+        headView.clipsToBounds = YES;
+        headView.image = [UIImage imageWithContentsOfFile:headFile];
+        if (headView.image == nil) {
+            headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
+        }
+    } else {
+        headView.image = [UIImage imageNamed:@"menu_user_pohoto"];
+    }
+
     [view addSubview:headView];
     
     return view;

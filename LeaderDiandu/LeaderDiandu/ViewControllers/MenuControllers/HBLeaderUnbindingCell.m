@@ -7,6 +7,7 @@
 //
 
 #import "HBLeaderUnbindingCell.h"
+#import "HBHeaderManager.h"
 
 #define LABELFONTSIZE 15.0f
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
@@ -55,6 +56,20 @@
 
 -(void)updateFormData:(NSDictionary *)dic
 {
+    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:[dic objectForKey:@"name"]];
+    
+    if (headFile) {
+        //设置显示圆形头像
+        self.headImgView.layer.cornerRadius = 50/2;
+        self.headImgView.clipsToBounds = YES;
+        self.headImgView.image = [UIImage imageWithContentsOfFile:headFile];
+        if (self.headImgView.image == nil) {
+            self.headImgView.image = [UIImage imageNamed:@"menu_user_pohoto"];
+        }
+    } else {
+        self.headImgView.image = [UIImage imageNamed:@"menu_user_pohoto"];
+    }
+    
     if ([dic objectForKey:@"name"]) {
         self.nameLabel.text = [dic objectForKey:@"name"];
     }
