@@ -378,6 +378,20 @@
     [self Post:@"/api/teacher/list" dict:dicInfo block:receivedBlock];
 }
 
+- (void)requestTeacherTaskList:(NSString *)user fromTime:(NSInteger)fromTime toTime:(NSInteger)toTime completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:user     forKey:@"user"];
+    [dicInfo setObject:@(fromTime)      forKey:@"from_time"];
+    [dicInfo setObject:@(toTime)        forKey:@"to_time"];
+    
+    //    if (_receivedBlock) {
+    //        return;
+    //    }
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/exam/director/list" dict:dicInfo block:receivedBlock];
+}
+
 - (void)requestClass:(NSString *)user class_id:(NSString *)class_id completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];

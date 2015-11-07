@@ -233,6 +233,14 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  */
 - (void)requestTeacherList:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock;
 
+/**
+ *  教研员获取相关老师的作业统计信息
+ *
+ *  @param user             用户名
+ *  @param receivedBlock 回调Block
+ */
+- (void)requestTeacherTaskList:(NSString *)user fromTime:(NSInteger)fromTime toTime:(NSInteger)toTime completion:(HBServiceReceivedBlock)receivedBlock;
+
 #pragma mark --- teacher API
 /**
  *  获取班级信息,只有老师有权限调用该接口

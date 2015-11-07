@@ -245,6 +245,9 @@
 		18F367E71BA90C7800EBFEC4 /* HBSetStuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367E61BA90C7800EBFEC4 /* HBSetStuController.m */; };
 		18F367F21BA9541100EBFEC4 /* HBSetStuGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */; };
 		18F367F51BA9542D00EBFEC4 /* HBSetStuOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */; };
+		4322FE861BEDD0BC00775D3A /* HBWeekWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322FE851BEDD0BC00775D3A /* HBWeekWorkViewController.m */; };
+		4322FE891BEDE25000775D3A /* HBExamEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322FE881BEDE25000775D3A /* HBExamEntity.m */; };
+		4322FE8C1BEDE40A00775D3A /* HBWeekWorkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322FE8B1BEDE40A00775D3A /* HBWeekWorkCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -669,6 +672,12 @@
 		18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuGroupCell.m; sourceTree = "<group>"; };
 		18F367F31BA9542D00EBFEC4 /* HBSetStuOtherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuOtherCell.h; sourceTree = "<group>"; };
 		18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuOtherCell.m; sourceTree = "<group>"; };
+		4322FE841BEDD0BC00775D3A /* HBWeekWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBWeekWorkViewController.h; sourceTree = "<group>"; };
+		4322FE851BEDD0BC00775D3A /* HBWeekWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBWeekWorkViewController.m; sourceTree = "<group>"; };
+		4322FE871BEDE25000775D3A /* HBExamEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBExamEntity.h; sourceTree = "<group>"; };
+		4322FE881BEDE25000775D3A /* HBExamEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBExamEntity.m; sourceTree = "<group>"; };
+		4322FE8A1BEDE40A00775D3A /* HBWeekWorkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBWeekWorkCell.h; sourceTree = "<group>"; };
+		4322FE8B1BEDE40A00775D3A /* HBWeekWorkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBWeekWorkCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -980,6 +989,7 @@
 			children = (
 				0DBE35971B8CCEFA00179237 /* base */,
 				1826217B1BDCC8DF006DFF0D /* HBTeacherManViewController */,
+				4322FE821BEDD04800775D3A /* HBWeekWorkViewController */,
 				18AC82C21BD2B538004864A7 /* StatisticalControllers */,
 				0D086ED71B949B110061BB1F /* DHSlideMenuController */,
 				0DBE35871B8CCE2200179237 /* Login&RegisterController */,
@@ -1450,6 +1460,8 @@
 				1810C7051BD9474A00899BD0 /* HBExamAbilityEntity.m */,
 				182621771BDCC2D3006DFF0D /* HBTeacherEntity.h */,
 				182621781BDCC2D3006DFF0D /* HBTeacherEntity.m */,
+				4322FE871BEDE25000775D3A /* HBExamEntity.h */,
+				4322FE881BEDE25000775D3A /* HBExamEntity.m */,
 			);
 			name = HBModelEntity;
 			sourceTree = "<group>";
@@ -1511,6 +1523,17 @@
 				18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */,
 			);
 			name = HBStuManViewControllers;
+			sourceTree = "<group>";
+		};
+		4322FE821BEDD04800775D3A /* HBWeekWorkViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4322FE841BEDD0BC00775D3A /* HBWeekWorkViewController.h */,
+				4322FE851BEDD0BC00775D3A /* HBWeekWorkViewController.m */,
+				4322FE8A1BEDE40A00775D3A /* HBWeekWorkCell.h */,
+				4322FE8B1BEDE40A00775D3A /* HBWeekWorkCell.m */,
+			);
+			name = HBWeekWorkViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1759,6 +1782,7 @@
 				0D8F03421BB9857F00D64D48 /* HBScoreView.m in Sources */,
 				1810C71A1BD951E000899BD0 /* EColor.m in Sources */,
 				0D143F741BD7FA2000F5D9EE /* openssl_wrapper.m in Sources */,
+				4322FE891BEDE25000775D3A /* HBExamEntity.m in Sources */,
 				18EED16A1BB12802004E5071 /* GuideView.m in Sources */,
 				0D74875C1B88C2C4007BE4CD /* HBGridItemView.m in Sources */,
 				1864359C1BC546440068E73E /* HBSystemMsgEntity.m in Sources */,
@@ -1771,6 +1795,7 @@
 				181456DD1B96D9DD003CCD6C /* HBContentEntity.m in Sources */,
 				0D7A76951B92176C00BC50A0 /* HBUserEntity.m in Sources */,
 				0D7292C51B9E0650006FA7EA /* HBSettingViewController.m in Sources */,
+				4322FE8C1BEDE40A00775D3A /* HBWeekWorkCell.m in Sources */,
 				0D7A768F1B91E33900BC50A0 /* HBContentManager.m in Sources */,
 				18D325171BB820EA00904FA6 /* HBReadProgressDB.m in Sources */,
 				18AC82CB1BD2B593004864A7 /* HBReadStatisticalViewController.m in Sources */,
@@ -1817,6 +1842,7 @@
 				0DB5372A1B8F5DEE0023A3F7 /* AFURLSessionManager.m in Sources */,
 				0DBE35821B8CBE4300179237 /* MBProgressHUD.m in Sources */,
 				0DBE35AF1B8CCEFA00179237 /* TableSecitonDataObject.m in Sources */,
+				4322FE861BEDD0BC00775D3A /* HBWeekWorkViewController.m in Sources */,
 				0DB5372D1B8F5DEE0023A3F7 /* AFURLRequestSerialization.m in Sources */,
 				18EED16F1BB147DA004E5071 /* HBAboutViewController.m in Sources */,
 				186435AA1BC559DE0068E73E /* HBSettingViewCell.m in Sources */,
