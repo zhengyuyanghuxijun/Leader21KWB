@@ -57,10 +57,16 @@
     
     _chartLine.strokeEnd = 1.0;
     
-    UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, (1 - grade) * self.frame.size.height - 15, self.frame.size.width, 15)];
-    tempLabel.textAlignment = NSTextAlignmentCenter;
-    tempLabel.text = [NSString stringWithFormat:@"%.f", _grade * 100];
-    [self addSubview:tempLabel];
+    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^
+     {
+        UILabel *tempLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 15, self.frame.size.width, 15)];
+        tempLabel.textAlignment = NSTextAlignmentCenter;
+        tempLabel.text = [NSString stringWithFormat:@"%.f", _grade * 100];
+        [self addSubview:tempLabel];
+         
+        [tempLabel setFrame:CGRectMake(0, (1 - grade) * self.frame.size.height - 15, self.frame.size.width, 15)];
+
+     } completion:nil];
 }
 
 - (void)setBarColor:(UIColor *)barColor

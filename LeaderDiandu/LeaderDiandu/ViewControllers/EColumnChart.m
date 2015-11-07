@@ -122,7 +122,7 @@
          [bottomLine setFrame:CGRectMake(0, self.frame.size.height, self.frame.size.width, BOTTOM_LINE_HEIGHT)];
          
 //     } completion:nil];
-    
+
 }
 
 #pragma -mark- Custom Methed
