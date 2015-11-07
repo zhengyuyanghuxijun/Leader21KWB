@@ -378,17 +378,18 @@
     [self Post:@"/api/teacher/list" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestUnBindingTeacher:(NSString *)user teacher:(NSString *)teacher completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestUnBindingTeacher:(NSString *)user teacher:(NSString *)teacher token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
     [dicInfo setObject:teacher     forKey:@"teacher"];
+    [dicInfo setObject:token forKey:@"token"];
     
     //    if (_receivedBlock) {
     //        return;
     //    }
     self.receivedBlock = receivedBlock;
-    [self Post:@"/api/director/s/associate" dict:dicInfo block:receivedBlock];
+    [self Post:@"/api/director/s/unassociate" dict:dicInfo block:receivedBlock];
 }
 
 - (void)requestTeacherTaskList:(NSString *)user fromTime:(NSInteger)fromTime toTime:(NSInteger)toTime completion:(HBServiceReceivedBlock)receivedBlock

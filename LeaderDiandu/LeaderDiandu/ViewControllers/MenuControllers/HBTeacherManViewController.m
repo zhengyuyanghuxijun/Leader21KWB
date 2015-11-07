@@ -159,13 +159,13 @@ static NSString * const KHBTeacherManViewControllerCellAccessoryReuseId = @"KHBT
         //教研员解除一位老师的绑定
         [MBHudUtil showActivityView:nil inView:nil];
         
-        [[HBServiceManager defaultManager] requestUnBindingTeacher:user teacher:teacher completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestUnBindingTeacher:user teacher:teacher token:userEntity.token completion:^(id responseObject, NSError *error) {
+            [MBHudUtil hideActivityView:nil];
             if (responseObject) {
                 //教研员解除一位老师的绑定成功
                 
                 [_tableView reloadData];
                 
-                [MBHudUtil hideActivityView:nil];
             }
         }];
     }

@@ -12,9 +12,19 @@
 #import "HBBillViewController.h"
 #import "HBServiceManager.h"
 #import "HBDataSaveManager.h"
+
 #import <AlipaySDK/AlipaySDK.h>
 #import "Order.h"
 #import "DataSigner.h"
+#import "WXApi.h"
+#import "WXApiObject.h"
+#import "payRequsestHandler.h"
+
+#define KLeaderAliPay   @"zfb"
+#define KLeaderWXPay    @"tenpay"
+
+//获取服务器端支付数据地址（商户自定义）
+#define SP_URL          @"http://wxpay.weixin.qq.com/pub_v2/app/app_pay.php"
 
 static NSString * const KHBPayViewControllerMoneyCellReuseId = @"KHBPayViewControllerMoneyCellReuseId";
 static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewControllerCellModeReuseId";
@@ -99,9 +109,9 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 {
     NSString *checkedStr = [self.payModeDic objectForKey:@"checked"];
     if ([checkedStr isEqualToString:@"pay-icn-alipay"]) { //支付宝支付
-        [self requestChannelOrder:@"zfb"];
+        [self requestChannelOrder:KLeaderAliPay];
     } else if ([checkedStr isEqualToString:@"pay-icn-wechat"]){ //微信支付
-        [self requestChannelOrder:@"tenpay"];
+        [self requestChannelOrder:KLeaderWXPay];
 //        [MBHudUtil showTextView:@"暂不支持微信支付，敬请期待" inView:nil];
     } else { //VIP码
         [self requestVipOrder];
@@ -135,7 +145,15 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     [[HBServiceManager defaultManager] requestChannelOrder:userEntity.name token:userEntity.token channel:channel quantity:_months product:@"kwb0001" completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
         if (error.code == 0) {
-            [self handleAliPay:responseObject];
+            if (responseObject == nil) {
+                [MBHudUtil showTextViewAfter:@"支付失败，请重新支付"];
+                return;
+            }
+            if ([channel isEqualToString:KLeaderAliPay]) {
+                [self handleAliPay:responseObject];
+            } else if ([channel isEqualToString:KLeaderWXPay]) {
+                [self handleWXPay:responseObject];
+            }
         } else {
             [MBHudUtil showTextViewAfter:@"支付失败，请重新支付"];
         }
@@ -272,7 +290,6 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 
 - (void)handleAliPay:(NSDictionary *)orderDict
 {
-    [[NSDate date] timeIntervalSince1970];
     NSDictionary *paymentDict = [orderDict dicForKey:@"payment_params"];
     
     Order *order = [[Order alloc] init];
@@ -303,6 +320,76 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
             //【callback 处理支付结果】
             NSLog(@"reslut = %@",resultDic);
         }];
+    }
+}
+
+- (void)handleWXPay:(NSDictionary *)orderDict
+{
+    NSDictionary *paymentParams = orderDict[@"payment_params"];
+    NSDictionary *orderParams = orderDict[@"order_params"];
+    //创建支付签名对象
+    payRequsestHandler *req = [payRequsestHandler alloc];
+    //初始化支付签名对象
+    [req init:paymentParams[@"appid"] mch_id:paymentParams[@"mch_id"]];
+    //设置密钥
+    [req setKey:[orderParams objectForKey:@"partnerid"]];
+        
+    //获取到实际调起微信支付的参数后，在app端调起支付
+    NSMutableDictionary *dict = [req sendPay_demo];
+    
+    if(dict == nil){
+        //错误提示
+        NSString *debug = [req getDebugifo];
+        
+//        [self alert:@"提示信息" msg:debug];
+        
+        NSLog(@"%@\n\n",debug);
+    }else{
+        NSLog(@"%@\n\n",[req getDebugifo]);
+        //[self alert:@"确认" msg:@"下单成功，点击OK后调起支付！"];
+        
+        NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
+        
+        //调起微信支付
+        PayReq* req             = [[PayReq alloc] init];
+        req.openID              = [dict objectForKey:@"appid"];
+        req.partnerId           = [dict objectForKey:@"partnerid"];
+        req.prepayId            = [dict objectForKey:@"prepayid"];
+        req.nonceStr            = [dict objectForKey:@"noncestr"];
+        req.timeStamp           = stamp.intValue;
+        req.package             = [dict objectForKey:@"package"];
+        req.sign                = [dict objectForKey:@"sign"];
+        
+        [WXApi sendReq:req];
+    }
+}
+
+- (void)sendWXParam:(NSDictionary *)orderDict
+{
+    //从服务器获取支付参数，服务端自定义处理逻辑和格式
+    //订单号
+    NSString *ORDER_NO      = [orderDict objectForKey:@"order_no"];
+    //订单标题
+    NSString *ORDER_NAME    = [orderDict stringForKey:@"subject"];
+    //订单金额，单位（元）
+    NSString *ORDER_PRICE   = @"0.01";//[orderDict objectForKey:@"price"];
+    
+    NSDictionary *orderParams = orderDict[@"order_params"];
+    if ( orderParams != nil) {
+        NSMutableString *stamp  = [orderParams objectForKey:@"timeStamp"];
+        
+        //调起微信支付
+        PayReq* req             = [[PayReq alloc] init];
+        req.openID              = [orderParams objectForKey:@"appid"];
+        req.partnerId           = [orderParams objectForKey:@"partnerid"];
+        req.prepayId            = [orderParams objectForKey:@"prepayid"];
+        req.nonceStr            = [orderParams objectForKey:@"nonceStr"];
+        req.timeStamp           = stamp.intValue;
+        req.package             = [orderParams objectForKey:@"package_value"];
+        req.sign                = [orderParams objectForKey:@"sign"];
+        [WXApi sendReq:req];
+        //日志输出
+        NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",req.openID,req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
     }
 }
 

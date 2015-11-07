@@ -240,7 +240,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param teacher_id       老师ID
  *  @param receivedBlock 回调Block
  */
-- (void)requestUnBindingTeacher:(NSString *)user teacher:(NSString *)teacher completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestUnBindingTeacher:(NSString *)user teacher:(NSString *)teacher token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  教研员获取相关老师的作业统计信息
