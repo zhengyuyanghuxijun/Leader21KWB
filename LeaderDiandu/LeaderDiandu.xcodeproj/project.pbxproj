@@ -41,6 +41,7 @@
 		0D143F761BD7FA2000F5D9EE /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F6E1BD7FA2000F5D9EE /* RSADataVerifier.m */; };
 		0D143FC61BD7FBD300F5D9EE /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D143FC51BD7FBD300F5D9EE /* libssl.a */; };
 		0D1440141BD8138A00F5D9EE /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1440131BD8138A00F5D9EE /* libcrypto.a */; };
+		0D2676F11BEDAE1A006FB4ED /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D2676EE1BEDAE1A006FB4ED /* libWeChatSDK.a */; };
 		0D3F6D0E1BADA391005B4358 /* HBTestWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */; };
 		0D3F6D161BAE8F64005B4358 /* HBMyWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */; };
 		0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */; };
@@ -335,6 +336,9 @@
 		0D143F6E1BD7FA2000F5D9EE /* RSADataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataVerifier.m; sourceTree = "<group>"; };
 		0D143FC51BD7FBD300F5D9EE /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		0D1440131BD8138A00F5D9EE /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		0D2676EE1BEDAE1A006FB4ED /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		0D2676EF1BEDAE1A006FB4ED /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		0D2676F01BEDAE1A006FB4ED /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		0D3F6D0C1BADA391005B4358 /* HBTestWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestWorkManager.h; sourceTree = "<group>"; };
 		0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestWorkManager.m; sourceTree = "<group>"; };
 		0D3F6D141BAE8F64005B4358 /* HBMyWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkViewController.h; sourceTree = "<group>"; };
@@ -684,6 +688,7 @@
 				0DC1D3F41B9B33B40043C79B /* MapKit.framework in Frameworks */,
 				0DAAF4141B8E06C200078285 /* libz.dylib in Frameworks */,
 				0D74887C1B8A2229007BE4CD /* QuartzCore.framework in Frameworks */,
+				0D2676F11BEDAE1A006FB4ED /* libWeChatSDK.a in Frameworks */,
 				0D7488781B8A2213007BE4CD /* CFNetwork.framework in Frameworks */,
 				0D7488761B8A21FA007BE4CD /* SystemConfiguration.framework in Frameworks */,
 				0D7488741B8A21CB007BE4CD /* UIKit.framework in Frameworks */,
@@ -770,6 +775,16 @@
 				0D143F6E1BD7FA2000F5D9EE /* RSADataVerifier.m */,
 			);
 			path = RSADataSigner;
+			sourceTree = "<group>";
+		};
+		0D2676ED1BEDAE1A006FB4ED /* WXPay */ = {
+			isa = PBXGroup;
+			children = (
+				0D2676EE1BEDAE1A006FB4ED /* libWeChatSDK.a */,
+				0D2676EF1BEDAE1A006FB4ED /* WXApi.h */,
+				0D2676F01BEDAE1A006FB4ED /* WXApiObject.h */,
+			);
+			path = WXPay;
 			sourceTree = "<group>";
 		};
 		0D3F6D121BAE8E67005B4358 /* HBMyWorkViewControllers */ = {
@@ -980,6 +995,7 @@
 			isa = PBXGroup;
 			children = (
 				0D143F4E1BD775B500F5D9EE /* AliPay */,
+				0D2676ED1BEDAE1A006FB4ED /* WXPay */,
 				0D143F5D1BD7FA2000F5D9EE /* RSADataSigner */,
 				0DB5370D1B8F5DEE0023A3F7 /* AFNetworking */,
 				0D7488831B8A2973007BE4CD /* MD5 */,
@@ -1999,6 +2015,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/LeaderDiandu/Third/WXPay",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
@@ -2042,6 +2059,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/LeaderDiandu/Third/WXPay",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;

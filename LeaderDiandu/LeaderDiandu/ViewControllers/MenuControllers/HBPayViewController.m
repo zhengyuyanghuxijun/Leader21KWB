@@ -99,9 +99,10 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 {
     NSString *checkedStr = [self.payModeDic objectForKey:@"checked"];
     if ([checkedStr isEqualToString:@"pay-icn-alipay"]) { //支付宝支付
-        [self requestChannelOrder];
+        [self requestChannelOrder:@"zfb"];
     } else if ([checkedStr isEqualToString:@"pay-icn-wechat"]){ //微信支付
-        [MBHudUtil showTextView:@"暂不支持微信支付，敬请期待" inView:nil];
+        [self requestChannelOrder:@"tenpay"];
+//        [MBHudUtil showTextView:@"暂不支持微信支付，敬请期待" inView:nil];
     } else { //VIP码
         [self requestVipOrder];
     }
@@ -127,11 +128,11 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     }
 }
 
-- (void)requestChannelOrder
+- (void)requestChannelOrder:(NSString *)channel
 {
     [MBHudUtil showActivityView:nil inView:nil];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestChannelOrder:userEntity.name token:userEntity.token channel:@"zfb" quantity:_months product:@"kwb0001" completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestChannelOrder:userEntity.name token:userEntity.token channel:channel quantity:_months product:@"kwb0001" completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
         if (error.code == 0) {
             [self handleAliPay:responseObject];
