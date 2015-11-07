@@ -18,6 +18,7 @@
 
 @property (nonatomic, assign) BOOL hasNewMsg;
 @property (nonatomic, assign) BOOL hasNewExam;
+@property (nonatomic, strong) NSString *wxAppId;
 
 + (AppDelegate *)delegate;
 

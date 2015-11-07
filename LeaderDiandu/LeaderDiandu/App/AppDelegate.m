@@ -19,9 +19,10 @@
 #import "Constants.h"
 
 #import "NSString+Extra.h"
+#import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
 
-@interface AppDelegate ()
+@interface AppDelegate ()<WXApiDelegate>
 {
     DHSlideMenuController *menuVC;
 }
@@ -38,7 +39,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    NSString *FirstLoginString = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogin"];
+//    NSString *FirstLoginString = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogin"];
     
     // 启动后的界面
     
@@ -173,13 +174,39 @@
         [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
             [self handleResultDict:resultDic];
         }];
+    } else if ([url.absoluteString rangeOfString:self.wxAppId].length > 0) {
+        [WXApi handleOpenURL:url delegate:self];
     }
-//    NSString *resultStr = [[url absoluteString] URLDecodedString];
-//    [[AlipaySDK defaultService] processOrderWithPaymentResult:[NSURL URLWithString:resultStr] standbyCallback:^(NSDictionary *resultDic) {
-//        NSLog(@"result = %@",resultDic);
-//    }];
     
     return YES;
+}
+
+- (void)onReq:(BaseReq *)req
+{
+    
+}
+
+- (void)onResp:(BaseResp *)resp
+{
+    NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+    NSString *strTitle;
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        strTitle = [NSString stringWithFormat:@"支付结果"];
+        
+        switch (resp.errCode) {
+            case WXSuccess:
+                strMsg = @"支付成功";
+                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
+                break;
+                
+            default:
+                strMsg = @"支付失败";
+                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+                break;
+        }
+    }
+    [MBHudUtil showTextViewAfter:strMsg];
 }
 
 - (void)handleResultDict:(NSDictionary *)resultDic

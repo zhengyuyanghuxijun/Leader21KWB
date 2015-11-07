@@ -18,13 +18,9 @@
 #import "DataSigner.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
-#import "payRequsestHandler.h"
 
 #define KLeaderAliPay   @"zfb"
 #define KLeaderWXPay    @"tenpay"
-
-//获取服务器端支付数据地址（商户自定义）
-#define SP_URL          @"http://wxpay.weixin.qq.com/pub_v2/app/app_pay.php"
 
 static NSString * const KHBPayViewControllerMoneyCellReuseId = @"KHBPayViewControllerMoneyCellReuseId";
 static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewControllerCellModeReuseId";
@@ -323,73 +319,28 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     }
 }
 
+#pragma mark - WXPay
+
 - (void)handleWXPay:(NSDictionary *)orderDict
 {
-    NSDictionary *paymentParams = orderDict[@"payment_params"];
-    NSDictionary *orderParams = orderDict[@"order_params"];
-    //创建支付签名对象
-    payRequsestHandler *req = [payRequsestHandler alloc];
-    //初始化支付签名对象
-    [req init:paymentParams[@"appid"] mch_id:paymentParams[@"mch_id"]];
-    //设置密钥
-    [req setKey:[orderParams objectForKey:@"partnerid"]];
-        
-    //获取到实际调起微信支付的参数后，在app端调起支付
-    NSMutableDictionary *dict = [req sendPay_demo];
-    
-    if(dict == nil){
-        //错误提示
-        NSString *debug = [req getDebugifo];
-        
-//        [self alert:@"提示信息" msg:debug];
-        
-        NSLog(@"%@\n\n",debug);
-    }else{
-        NSLog(@"%@\n\n",[req getDebugifo]);
-        //[self alert:@"确认" msg:@"下单成功，点击OK后调起支付！"];
-        
-        NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
-        
-        //调起微信支付
-        PayReq* req             = [[PayReq alloc] init];
-        req.openID              = [dict objectForKey:@"appid"];
-        req.partnerId           = [dict objectForKey:@"partnerid"];
-        req.prepayId            = [dict objectForKey:@"prepayid"];
-        req.nonceStr            = [dict objectForKey:@"noncestr"];
-        req.timeStamp           = stamp.intValue;
-        req.package             = [dict objectForKey:@"package"];
-        req.sign                = [dict objectForKey:@"sign"];
-        
-        [WXApi sendReq:req];
-    }
-}
-
-- (void)sendWXParam:(NSDictionary *)orderDict
-{
     //从服务器获取支付参数，服务端自定义处理逻辑和格式
-    //订单号
-    NSString *ORDER_NO      = [orderDict objectForKey:@"order_no"];
-    //订单标题
-    NSString *ORDER_NAME    = [orderDict stringForKey:@"subject"];
-    //订单金额，单位（元）
-    NSString *ORDER_PRICE   = @"0.01";//[orderDict objectForKey:@"price"];
-    
     NSDictionary *orderParams = orderDict[@"order_params"];
     if ( orderParams != nil) {
-        NSMutableString *stamp  = [orderParams objectForKey:@"timeStamp"];
+        NSMutableString *stamp  = [orderParams objectForKey:@"timestamp"];
+        NSString *appID = [orderParams objectForKey:@"appid"];
+        APP_DELEGATE.wxAppId = appID;
+        [WXApi registerApp:appID];
         
         //调起微信支付
         PayReq* req             = [[PayReq alloc] init];
-        req.openID              = [orderParams objectForKey:@"appid"];
+        req.openID              = appID;
         req.partnerId           = [orderParams objectForKey:@"partnerid"];
         req.prepayId            = [orderParams objectForKey:@"prepayid"];
-        req.nonceStr            = [orderParams objectForKey:@"nonceStr"];
+        req.nonceStr            = [orderParams objectForKey:@"noncestr"];
         req.timeStamp           = stamp.intValue;
-        req.package             = [orderParams objectForKey:@"package_value"];
+        req.package             = [orderParams objectForKey:@"package"];
         req.sign                = [orderParams objectForKey:@"sign"];
         [WXApi sendReq:req];
-        //日志输出
-        NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",req.openID,req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
     }
 }
 

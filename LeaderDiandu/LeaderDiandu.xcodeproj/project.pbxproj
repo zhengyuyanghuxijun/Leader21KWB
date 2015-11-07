@@ -42,9 +42,6 @@
 		0D143FC61BD7FBD300F5D9EE /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D143FC51BD7FBD300F5D9EE /* libssl.a */; };
 		0D1440141BD8138A00F5D9EE /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1440131BD8138A00F5D9EE /* libcrypto.a */; };
 		0D2676F11BEDAE1A006FB4ED /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D2676EE1BEDAE1A006FB4ED /* libWeChatSDK.a */; };
-		0D2676F51BEDC949006FB4ED /* payRequsestHandler.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D2676F41BEDC949006FB4ED /* payRequsestHandler.mm */; };
-		0D2676FA1BEDDC9F006FB4ED /* ApiXml.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D2676F71BEDDC9F006FB4ED /* ApiXml.mm */; };
-		0D2676FB1BEDDC9F006FB4ED /* WXUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D2676F91BEDDC9F006FB4ED /* WXUtil.mm */; };
 		0D3F6D0E1BADA391005B4358 /* HBTestWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */; };
 		0D3F6D161BAE8F64005B4358 /* HBMyWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */; };
 		0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */; };
@@ -54,7 +51,6 @@
 		0D7292C51B9E0650006FA7EA /* HBSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7292C41B9E0650006FA7EA /* HBSettingViewController.m */; };
 		0D7486F41B88A884007BE4CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7486F31B88A884007BE4CD /* main.m */; };
 		0D7486FF1B88A884007BE4CD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D7486FE1B88A884007BE4CD /* Images.xcassets */; };
-		0D7487021B88A884007BE4CD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D7487001B88A884007BE4CD /* LaunchScreen.xib */; };
 		0D74870E1B88A884007BE4CD /* LeaderDianduTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74870D1B88A884007BE4CD /* LeaderDianduTests.m */; };
 		0D74875A1B88C2C4007BE4CD /* HBGridCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487531B88C2C4007BE4CD /* HBGridCellView.m */; };
 		0D74875B1B88C2C4007BE4CD /* HBGridCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487531B88C2C4007BE4CD /* HBGridCellView.m */; };
@@ -345,12 +341,6 @@
 		0D2676EE1BEDAE1A006FB4ED /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		0D2676EF1BEDAE1A006FB4ED /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		0D2676F01BEDAE1A006FB4ED /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		0D2676F31BEDC949006FB4ED /* payRequsestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = payRequsestHandler.h; sourceTree = "<group>"; };
-		0D2676F41BEDC949006FB4ED /* payRequsestHandler.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = payRequsestHandler.mm; sourceTree = "<group>"; };
-		0D2676F61BEDDC9F006FB4ED /* ApiXml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiXml.h; sourceTree = "<group>"; };
-		0D2676F71BEDDC9F006FB4ED /* ApiXml.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ApiXml.mm; sourceTree = "<group>"; };
-		0D2676F81BEDDC9F006FB4ED /* WXUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXUtil.h; sourceTree = "<group>"; };
-		0D2676F91BEDDC9F006FB4ED /* WXUtil.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WXUtil.mm; sourceTree = "<group>"; };
 		0D3F6D0C1BADA391005B4358 /* HBTestWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestWorkManager.h; sourceTree = "<group>"; };
 		0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestWorkManager.m; sourceTree = "<group>"; };
 		0D3F6D141BAE8F64005B4358 /* HBMyWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkViewController.h; sourceTree = "<group>"; };
@@ -367,7 +357,6 @@
 		0D7486F21B88A884007BE4CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D7486F31B88A884007BE4CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0D7486FE1B88A884007BE4CD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = LeaderDiandu/Images.xcassets; sourceTree = "<group>"; };
-		0D7487011B88A884007BE4CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0D7487071B88A884007BE4CD /* LeaderDianduTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeaderDianduTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D74870C1B88A884007BE4CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0D74870D1B88A884007BE4CD /* LeaderDianduTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeaderDianduTests.m; sourceTree = "<group>"; };
@@ -801,12 +790,6 @@
 				0D2676EE1BEDAE1A006FB4ED /* libWeChatSDK.a */,
 				0D2676EF1BEDAE1A006FB4ED /* WXApi.h */,
 				0D2676F01BEDAE1A006FB4ED /* WXApiObject.h */,
-				0D2676F31BEDC949006FB4ED /* payRequsestHandler.h */,
-				0D2676F41BEDC949006FB4ED /* payRequsestHandler.mm */,
-				0D2676F61BEDDC9F006FB4ED /* ApiXml.h */,
-				0D2676F71BEDDC9F006FB4ED /* ApiXml.mm */,
-				0D2676F81BEDDC9F006FB4ED /* WXUtil.h */,
-				0D2676F91BEDDC9F006FB4ED /* WXUtil.mm */,
 			);
 			path = WXPay;
 			sourceTree = "<group>";
@@ -953,7 +936,6 @@
 				0DCBC2A01B99E380003DFDD5 /* Constants.h */,
 				0D74887D1B8A226E007BE4CD /* AppDelegate.h */,
 				0D74887E1B8A226E007BE4CD /* AppDelegate.m */,
-				0D7487001B88A884007BE4CD /* LaunchScreen.xib */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -1603,7 +1585,7 @@
 				TargetAttributes = {
 					0D7486ED1B88A884007BE4CD = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = XUDX9J32JL;
+						DevelopmentTeam = X2Y6A4GX9Q;
 					};
 					0D7487061B88A884007BE4CD = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -1704,7 +1686,6 @@
 				0DCAE1041BAAAA3F00AB7557 /* block_arrow_series.png in Resources */,
 				0D143F351BD006BB00F5D9EE /* msgentity.db in Resources */,
 				0DCAE1201BAAAA3F00AB7557 /* question_mark.png in Resources */,
-				0D7487021B88A884007BE4CD /* LaunchScreen.xib in Resources */,
 				0DCAE10C1BAAAA3F00AB7557 /* highlight.png in Resources */,
 				0D143F341BD006BB00F5D9EE /* hbreadprogress.db in Resources */,
 				0D143F511BD775B500F5D9EE /* AlipaySDK.bundle in Resources */,
@@ -1811,12 +1792,10 @@
 				0DB5372E1B8F5DEE0023A3F7 /* AFURLResponseSerialization.m in Sources */,
 				181456DD1B96D9DD003CCD6C /* HBContentEntity.m in Sources */,
 				0D7A76951B92176C00BC50A0 /* HBUserEntity.m in Sources */,
-				0D2676FB1BEDDC9F006FB4ED /* WXUtil.mm in Sources */,
 				0D7292C51B9E0650006FA7EA /* HBSettingViewController.m in Sources */,
 				4322FE8C1BEDE40A00775D3A /* HBWeekWorkCell.m in Sources */,
 				0D7A768F1B91E33900BC50A0 /* HBContentManager.m in Sources */,
 				18D325171BB820EA00904FA6 /* HBReadProgressDB.m in Sources */,
-				0D2676FA1BEDDC9F006FB4ED /* ApiXml.mm in Sources */,
 				18AC82CB1BD2B593004864A7 /* HBReadStatisticalViewController.m in Sources */,
 				0DB537351B8F78AF0023A3F7 /* HBServiceManager.m in Sources */,
 				0D018FEE1B96DB9200A92F59 /* HBLeaderViewController.m in Sources */,
@@ -1857,7 +1836,6 @@
 				0D0190141B98B1B500A92F59 /* HBBindPhoneViewController.m in Sources */,
 				0DD214721B960148009E3DB9 /* HBTestWorkViewController.m in Sources */,
 				0D143F391BD00FA800F5D9EE /* HBExamIdDB.m in Sources */,
-				0D2676F51BEDC949006FB4ED /* payRequsestHandler.mm in Sources */,
 				0D018FF41B97513400A92F59 /* HBUserInfoViewController.m in Sources */,
 				0DB5372A1B8F5DEE0023A3F7 /* AFURLSessionManager.m in Sources */,
 				0DBE35821B8CBE4300179237 /* MBProgressHUD.m in Sources */,
@@ -1926,14 +1904,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0D7487001B88A884007BE4CD /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0D7487011B88A884007BE4CD /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
 		0DAAF4151B8E0DE900078285 /* Login.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2035,7 +2005,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jidong Guo (257X5EDALE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2065,9 +2035,9 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.study;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.ikwb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "db0fc6ae-01c6-4eed-86e5-530383432645";
+				PROVISIONING_PROFILE = "";
 				REZ_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -2079,7 +2049,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jidong Guo (257X5EDALE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2109,9 +2079,9 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.study;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.ikwb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "db0fc6ae-01c6-4eed-86e5-530383432645";
+				PROVISIONING_PROFILE = "";
 				REZ_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = "";
 			};
