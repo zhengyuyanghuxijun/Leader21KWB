@@ -10,6 +10,7 @@
 
 @interface HBTeacherEntity : NSObject
 
+@property (nonatomic, strong)NSString *name;
 @property (nonatomic, strong)NSString *display_name;
 @property (nonatomic, strong)NSString *associate_time;
 @property (nonatomic, assign)NSInteger total;

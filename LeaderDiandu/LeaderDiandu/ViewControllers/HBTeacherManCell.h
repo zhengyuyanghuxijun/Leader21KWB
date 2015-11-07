@@ -15,6 +15,7 @@
 @property (strong, nonatomic) UILabel *associate_timeLabel;
 @property (strong, nonatomic) UILabel *totalLabel;
 @property (strong, nonatomic) UILabel *vipLabel;
+@property (strong, nonatomic) UIButton *cellUnbundlingBtn;
 
 /**
  *	@brief	更新表格内容

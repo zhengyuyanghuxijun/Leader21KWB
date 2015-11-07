@@ -11,6 +11,8 @@
 #import "HBServiceManager.h"
 #import "HBTeacherEntity.h"
 #import "TimeIntervalUtils.h"
+#import "HBTeacherManCell.h"
+#import "HBHeaderManager.h"
 
 static NSString * const KHBTeacherManViewControllerCellAccessoryReuseId = @"KHBTeacherManViewControllerCellAccessoryReuseId";
 
@@ -67,6 +69,7 @@ static NSString * const KHBTeacherManViewControllerCellAccessoryReuseId = @"KHBT
                 for (NSDictionary *dict in arr)
                 {
                     HBTeacherEntity *teacher = [[HBTeacherEntity alloc] init];
+                    teacher.name = [dict objectForKey:@"name"];
                     teacher.display_name = [dict objectForKey:@"display_name"];
                     
                     NSTimeInterval interval = [[dict objectForKey:@"associate_time"] doubleValue];
@@ -77,11 +80,28 @@ static NSString * const KHBTeacherManViewControllerCellAccessoryReuseId = @"KHBT
                     teacher.vip = [[student_statDic objectForKey:@"vip"] integerValue];
                 
                     [_teacherArr addObject:teacher];
+                    
+                    //获取用户头像
+                    [self getHeaderAvatar:teacher];
                 }
                 
                 [_tableView reloadData];
                 
                 [MBHudUtil hideActivityView:nil];
+            }
+        }];
+    }
+}
+
+- (void)getHeaderAvatar:(HBTeacherEntity *)teacherEntity
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:teacherEntity.name];
+    if (headFile == nil) {
+        [[HBHeaderManager defaultManager] requestGetAvatar:teacherEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+            if (error.code == 0) {
+                //                headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:studentEntity.name];
+                [_tableView reloadData];
             }
         }];
     }
@@ -103,25 +123,24 @@ static NSString * const KHBTeacherManViewControllerCellAccessoryReuseId = @"KHBT
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return 70;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSParameterAssert(_teacherArr);
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KHBTeacherManViewControllerCellAccessoryReuseId];
+    HBTeacherManCell *cell = [tableView dequeueReusableCellWithIdentifier:KHBTeacherManViewControllerCellAccessoryReuseId];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBTeacherManViewControllerCellAccessoryReuseId];
+        cell = [[HBTeacherManCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBTeacherManViewControllerCellAccessoryReuseId];
     }
-    
-    HBTeacherEntity *teacher = [_teacherArr objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = teacher.display_name;
     
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textColor = [UIColor blackColor];
+    
+    HBTeacherEntity *teacher = [_teacherArr objectAtIndex:indexPath.row];
+    [cell updateFormData:teacher];
     
     return cell;
 }
