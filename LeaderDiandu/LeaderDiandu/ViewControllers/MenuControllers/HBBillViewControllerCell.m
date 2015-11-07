@@ -42,8 +42,9 @@
     [self addSubview:self.statusLabel];
     
     //内容
-    self.bodyLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + 30 + 10, 70/2, 200, 35/2)];
+    self.bodyLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + 30 + 10, 70/2, 250, 70/2)];
     self.bodyLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
+    self.bodyLabel.numberOfLines = 0;
     [self addSubview:self.bodyLabel];
     
     //时间
@@ -63,7 +64,6 @@
     
     if (billEntity) {
         self.subjectLabel.text = billEntity.subject;
-        self.bodyLabel.text = billEntity.body;
         self.timeLabel.text = billEntity.created_time;
         
         //0-未支付；1-已支付
@@ -75,10 +75,13 @@
 
         //1-支付宝；2-微信支付；3-VIP码支付
         if ([billEntity.type isEqualToString:@"1"]) {
+            self.bodyLabel.text = [NSString stringWithFormat:@"%@，通过支付宝支付，共需支付%@元", billEntity.body, billEntity.total_fee];
             self.iconImg.image = [UIImage imageNamed:@"pay-icn-alipay"];
         }else if([billEntity.type isEqualToString:@"2"]){
+            self.bodyLabel.text = [NSString stringWithFormat:@"%@，通过微信支付，共需支付%@元", billEntity.body, billEntity.total_fee];
             self.iconImg.image = [UIImage imageNamed:@"pay-icn-wechat"];
         }else{
+            self.bodyLabel.text = [NSString stringWithFormat:@"%@，通过VIP码支付，共需支付0.00元", billEntity.body];
             self.iconImg.image = [UIImage imageNamed:@"pay-icn-voucher"];
         }
     }

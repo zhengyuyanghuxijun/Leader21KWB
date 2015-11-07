@@ -92,6 +92,7 @@ static NSString * const KHBBillViewControllerCellReuseId = @"KHBBillViewControll
                 NSTimeInterval interval = [[dic numberForKey:@"created_time"] doubleValue];
                 billEntity.created_time = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
                 billEntity.status = [NSString stringWithFormat:@"%ld", [dic integerForKey:@"status"]];
+                billEntity.total_fee = [dic stringForKey:@"total_fee"];
                 
                 [self.billArr addObject:billEntity];
             }

@@ -17,5 +17,7 @@
 @property (nonatomic, strong)NSString *created_time;
 //0-未支付；1-已支付
 @property (nonatomic, strong)NSString *status;
+//共需支付
+@property (nonatomic, strong)NSString *total_fee;
 
 @end
