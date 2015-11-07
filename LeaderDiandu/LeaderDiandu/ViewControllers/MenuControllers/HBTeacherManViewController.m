@@ -65,6 +65,7 @@ static NSString * const KHBTeacherManViewControllerCellAccessoryReuseId = @"KHBT
         [[HBServiceManager defaultManager] requestTeacherList:user completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 //获取教师列表成功
+                [_teacherArr removeAllObjects];
                 NSArray *arr = [responseObject objectForKey:@"teachers"];
                 for (NSDictionary *dict in arr)
                 {
@@ -163,9 +164,8 @@ static NSString * const KHBTeacherManViewControllerCellAccessoryReuseId = @"KHBT
             [MBHudUtil hideActivityView:nil];
             if (responseObject) {
                 //教研员解除一位老师的绑定成功
-                
-                [_tableView reloadData];
-                
+                //获取教师列表
+                [self requestTeacherList];
             }
         }];
     }
