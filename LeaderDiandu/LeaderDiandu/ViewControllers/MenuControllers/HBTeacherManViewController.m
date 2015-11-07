@@ -16,7 +16,7 @@
 
 static NSString * const KHBTeacherManViewControllerCellAccessoryReuseId = @"KHBTeacherManViewControllerCellAccessoryReuseId";
 
-@interface HBTeacherManViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface HBTeacherManViewController ()<UITableViewDataSource, UITableViewDelegate, HBTeacherManCellDelegate>
 {
     NSMutableArray  *_teacherArr;
     UITableView     *_tableView;
@@ -135,6 +135,7 @@ static NSString * const KHBTeacherManViewControllerCellAccessoryReuseId = @"KHBT
         cell = [[HBTeacherManCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBTeacherManViewControllerCellAccessoryReuseId];
     }
     
+    cell.delegate = self;
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textColor = [UIColor blackColor];
@@ -148,6 +149,26 @@ static NSString * const KHBTeacherManViewControllerCellAccessoryReuseId = @"KHBT
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)unbundlingBtnPressed:(NSString *)teacher
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        NSString *user = userEntity.name;
+        //教研员解除一位老师的绑定
+        [MBHudUtil showActivityView:nil inView:nil];
+        
+        [[HBServiceManager defaultManager] requestUnBindingTeacher:user teacher:teacher completion:^(id responseObject, NSError *error) {
+            if (responseObject) {
+                //教研员解除一位老师的绑定成功
+                
+                [_tableView reloadData];
+                
+                [MBHudUtil hideActivityView:nil];
+            }
+        }];
+    }
 }
 
 @end

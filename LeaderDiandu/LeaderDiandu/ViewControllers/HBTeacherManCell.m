@@ -78,12 +78,14 @@
 
 -(void)unbundlingBtnPressed
 {
-    
+    [self.delegate unbundlingBtnPressed:self.teacherName];
 }
 
 -(void)updateFormData:(id)sender
 {
     HBTeacherEntity *teacherEntity = (HBTeacherEntity *)sender;
+    
+    self.teacherName = teacherEntity.name;
     
     if (teacherEntity) {
         NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:teacherEntity.name];

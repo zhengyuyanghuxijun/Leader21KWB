@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol HBTeacherManCellDelegate <NSObject>
+
+- (void)unbundlingBtnPressed:(NSString *)teacher;
+
+@end
+
 @interface HBTeacherManCell : UITableViewCell
 
 @property (strong, nonatomic) UIImageView *headImgView;
@@ -16,6 +22,9 @@
 @property (strong, nonatomic) UILabel *totalLabel;
 @property (strong, nonatomic) UILabel *vipLabel;
 @property (strong, nonatomic) UIButton *cellUnbundlingBtn;
+
+@property (copy, nonatomic) NSString *teacherName;
+@property (assign, nonatomic)id<HBTeacherManCellDelegate> delegate;
 
 /**
  *	@brief	更新表格内容

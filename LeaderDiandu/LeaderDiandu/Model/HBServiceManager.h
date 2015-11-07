@@ -234,6 +234,15 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
 - (void)requestTeacherList:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
+ *  教研员解除一位老师的绑定
+ *
+ *  @param user             用户名
+ *  @param teacher_id       老师ID
+ *  @param receivedBlock 回调Block
+ */
+- (void)requestUnBindingTeacher:(NSString *)user teacher:(NSString *)teacher completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
  *  教研员获取相关老师的作业统计信息
  *
  *  @param user             用户名
