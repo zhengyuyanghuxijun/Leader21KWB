@@ -44,7 +44,7 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _titleArr = @[@"仅用WiFi下载图书", @"显示英文书名", @"本地图书管理", @"检查更新", @"欢迎页", @"关于课外宝"];
+    _titleArr = @[@"仅用WiFi下载图书", @"显示英文书名", @"本地图书管理", @"欢迎页", @"关于课外宝"];
     
     self.navigationController.navigationBarHidden = NO;
     self.title = @"设置";
@@ -236,7 +236,8 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
     if (indexPath.row == 2){
         HBBookManViewController *vc = [[HBBookManViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == 3){
+    } else if (indexPath.row == 3)
+    /*{
         [MBHudUtil showActivityView:nil inView:nil];
         [[HBServiceManager defaultManager] requestCheckUpdate:@"ios" current_version:self.current_version branch:@"dev" completion:^(id responseObject, NSError *error) {
             [MBHudUtil hideActivityView:nil];
@@ -252,11 +253,16 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
                 }
             }
         }];
-    }else if (indexPath.row == 4){
+    } else if (indexPath.row == 4)*/
+    {
         [GuideView showGuideViewAnimated:YES];
-    }else if (indexPath.row == 5){
+    }else if (indexPath.row == 4){
         HBAboutViewController *vc = [[HBAboutViewController alloc] init];
-        [vc setVersionStr:@"1.0.0 beta"];
+        NSDictionary *dict = [[NSBundle mainBundle] infoDictionary];
+        NSString *mainVersion = [dict objectForKey:@"CFBundleShortVersionString"];
+        NSString *buildVersion = [dict objectForKey:@"CFBundleVersion"];
+        NSString *localVersion = [NSString stringWithFormat:@"%@.%@", mainVersion, buildVersion];
+        [vc setVersionStr:localVersion];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

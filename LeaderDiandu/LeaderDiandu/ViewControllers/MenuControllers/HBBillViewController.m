@@ -86,12 +86,12 @@ static NSString * const KHBBillViewControllerCellReuseId = @"KHBBillViewControll
             for (NSDictionary *dic in arr)
             {
                 HBBillEntity *billEntity = [[HBBillEntity alloc] init];
-                billEntity.type = [NSString stringWithFormat:@"%ld", [dic integerForKey:@"type"]];
+                billEntity.type = [NSString stringWithFormat:@"%ld", (long)[dic integerForKey:@"type"]];
                 billEntity.subject = [dic stringForKey:@"subject"];
                 billEntity.body = [dic stringForKey:@"body"];
                 NSTimeInterval interval = [[dic numberForKey:@"created_time"] doubleValue];
                 billEntity.created_time = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
-                billEntity.status = [NSString stringWithFormat:@"%ld", [dic integerForKey:@"status"]];
+                billEntity.status = [NSString stringWithFormat:@"%ld", (long)[dic integerForKey:@"status"]];
                 billEntity.total_fee = [dic stringForKey:@"total_fee"];
                 
                 [self.billArr addObject:billEntity];

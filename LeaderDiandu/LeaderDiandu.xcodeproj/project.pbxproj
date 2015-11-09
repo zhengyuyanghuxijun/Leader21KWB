@@ -42,6 +42,7 @@
 		0D143FC61BD7FBD300F5D9EE /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D143FC51BD7FBD300F5D9EE /* libssl.a */; };
 		0D1440141BD8138A00F5D9EE /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1440131BD8138A00F5D9EE /* libcrypto.a */; };
 		0D2676F11BEDAE1A006FB4ED /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D2676EE1BEDAE1A006FB4ED /* libWeChatSDK.a */; };
+		0D2677091BF0E1FD006FB4ED /* HBVersionCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2677081BF0E1FD006FB4ED /* HBVersionCheck.m */; };
 		0D3F6D0E1BADA391005B4358 /* HBTestWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */; };
 		0D3F6D161BAE8F64005B4358 /* HBMyWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */; };
 		0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */; };
@@ -341,6 +342,8 @@
 		0D2676EE1BEDAE1A006FB4ED /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		0D2676EF1BEDAE1A006FB4ED /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		0D2676F01BEDAE1A006FB4ED /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		0D2677071BF0E1FD006FB4ED /* HBVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBVersionCheck.h; sourceTree = "<group>"; };
+		0D2677081BF0E1FD006FB4ED /* HBVersionCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBVersionCheck.m; sourceTree = "<group>"; };
 		0D3F6D0C1BADA391005B4358 /* HBTestWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestWorkManager.h; sourceTree = "<group>"; };
 		0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestWorkManager.m; sourceTree = "<group>"; };
 		0D3F6D141BAE8F64005B4358 /* HBMyWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkViewController.h; sourceTree = "<group>"; };
@@ -1133,8 +1136,10 @@
 				181E30691BA2B14100BBA92F /* UtilFMDB */,
 				0DBE35181B8CB8B500179237 /* DataCheckUtil.h */,
 				0DBE35191B8CB8B500179237 /* DataCheckUtil.m */,
-				0DBE351A1B8CB8B500179237 /* DoubleCompare.c */,
+				0D2677071BF0E1FD006FB4ED /* HBVersionCheck.h */,
+				0D2677081BF0E1FD006FB4ED /* HBVersionCheck.m */,
 				0DBE351B1B8CB8B500179237 /* DoubleCompare.h */,
+				0DBE351A1B8CB8B500179237 /* DoubleCompare.c */,
 				0DBE35261B8CB8B500179237 /* MBHudUtil.h */,
 				0DBE35271B8CB8B500179237 /* MBHudUtil.m */,
 				0DBE35801B8CBE4300179237 /* MBProgressHUD.h */,
@@ -1585,7 +1590,6 @@
 				TargetAttributes = {
 					0D7486ED1B88A884007BE4CD = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = X2Y6A4GX9Q;
 					};
 					0D7487061B88A884007BE4CD = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -1785,6 +1789,7 @@
 				0D74875C1B88C2C4007BE4CD /* HBGridItemView.m in Sources */,
 				1864359C1BC546440068E73E /* HBSystemMsgEntity.m in Sources */,
 				0D7488941B8A2973007BE4CD /* NSString+MD5.mm in Sources */,
+				0D2677091BF0E1FD006FB4ED /* HBVersionCheck.m in Sources */,
 				18A244771BA7295A00E1E703 /* HBCreatGroupController.m in Sources */,
 				0DBD1AC31BBD940900A3BD72 /* HBNLoginViewController.m in Sources */,
 				1810C7091BD94BC300899BD0 /* HBTaskStatisticalCell.m in Sources */,
@@ -2035,7 +2040,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.ikwb;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.study;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				REZ_SEARCH_PATHS = "";
@@ -2048,8 +2053,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2079,7 +2084,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.ikwb;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.study;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				REZ_SEARCH_PATHS = "";

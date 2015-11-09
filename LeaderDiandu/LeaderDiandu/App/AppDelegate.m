@@ -17,6 +17,7 @@
 #import "HBGradeViewController.h"
 
 #import "Constants.h"
+#import "HBVersionCheck.h"
 
 #import "NSString+Extra.h"
 #import "WXApi.h"
@@ -38,6 +39,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    HBVersionCheck *version = [[HBVersionCheck alloc] init];
+    [version checkVersion];
     
 //    NSString *FirstLoginString = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogin"];
     
