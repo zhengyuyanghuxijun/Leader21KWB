@@ -43,6 +43,8 @@
 		0D1440141BD8138A00F5D9EE /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1440131BD8138A00F5D9EE /* libcrypto.a */; };
 		0D2676F11BEDAE1A006FB4ED /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D2676EE1BEDAE1A006FB4ED /* libWeChatSDK.a */; };
 		0D2677091BF0E1FD006FB4ED /* HBVersionCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2677081BF0E1FD006FB4ED /* HBVersionCheck.m */; };
+		0D2677101BF245A9006FB4ED /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D26770F1BF245A9006FB4ED /* StoreKit.framework */; };
+		0D2677131BF247DD006FB4ED /* HBSKPayService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2677121BF247DD006FB4ED /* HBSKPayService.m */; };
 		0D3F6D0E1BADA391005B4358 /* HBTestWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */; };
 		0D3F6D161BAE8F64005B4358 /* HBMyWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */; };
 		0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */; };
@@ -344,6 +346,9 @@
 		0D2676F01BEDAE1A006FB4ED /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		0D2677071BF0E1FD006FB4ED /* HBVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBVersionCheck.h; sourceTree = "<group>"; };
 		0D2677081BF0E1FD006FB4ED /* HBVersionCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBVersionCheck.m; sourceTree = "<group>"; };
+		0D26770F1BF245A9006FB4ED /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0D2677111BF247DD006FB4ED /* HBSKPayService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSKPayService.h; sourceTree = "<group>"; };
+		0D2677121BF247DD006FB4ED /* HBSKPayService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSKPayService.m; sourceTree = "<group>"; };
 		0D3F6D0C1BADA391005B4358 /* HBTestWorkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestWorkManager.h; sourceTree = "<group>"; };
 		0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestWorkManager.m; sourceTree = "<group>"; };
 		0D3F6D141BAE8F64005B4358 /* HBMyWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkViewController.h; sourceTree = "<group>"; };
@@ -686,6 +691,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D2677101BF245A9006FB4ED /* StoreKit.framework in Frameworks */,
 				0D1440141BD8138A00F5D9EE /* libcrypto.a in Frameworks */,
 				0D143FC61BD7FBD300F5D9EE /* libssl.a in Frameworks */,
 				0D143F591BD7768100F5D9EE /* CoreGraphics.framework in Frameworks */,
@@ -899,6 +905,7 @@
 		0D7487171B88A8BC007BE4CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0D26770F1BF245A9006FB4ED /* StoreKit.framework */,
 				0D1440131BD8138A00F5D9EE /* libcrypto.a */,
 				0D143FC51BD7FBD300F5D9EE /* libssl.a */,
 				0D143F581BD7768100F5D9EE /* CoreGraphics.framework */,
@@ -1489,6 +1496,8 @@
 		18DF0EDE1BCBA03A00376686 /* HBModelManager */ = {
 			isa = PBXGroup;
 			children = (
+				0D2677111BF247DD006FB4ED /* HBSKPayService.h */,
+				0D2677121BF247DD006FB4ED /* HBSKPayService.m */,
 				0DD214631B95568E009E3DB9 /* HBDataSaveManager.h */,
 				0DD214641B95568E009E3DB9 /* HBDataSaveManager.m */,
 				0DB537301B8F70E80023A3F7 /* HBHTTPBaseRequest.h */,
@@ -1731,6 +1740,7 @@
 				0DB5372B1B8F5DEE0023A3F7 /* AFNetworkReachabilityManager.m in Sources */,
 				0DBE35361B8CB8B500179237 /* DoubleCompare.c in Sources */,
 				0DAAF40E1B8E01EB00078285 /* HBGradeViewController.m in Sources */,
+				0D2677131BF247DD006FB4ED /* HBSKPayService.m in Sources */,
 				0D018FF11B96F67500A92F59 /* HBContentBaseRequest.m in Sources */,
 				18B5FD2E1B981454002CCD95 /* UIButton+AFNetworking.m in Sources */,
 				18F367E71BA90C7800EBFEC4 /* HBSetStuController.m in Sources */,
