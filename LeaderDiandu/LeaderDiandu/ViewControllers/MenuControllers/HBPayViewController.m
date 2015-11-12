@@ -18,6 +18,13 @@
 #import "DataSigner.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
+#import "HBSKPayService.h"
+#import "MBProgressHUD.h"
+#import "HHAlertSingleView.h"
+
+#define KEnableThirdPay 0
+#define KHBPayReceipt   @"HBPayReceipt"
+#define KHBPayMonths    @"HBPayMonths"
 
 #define KLeaderAliPay   @"zfb"
 #define KLeaderWXPay    @"tenpay"
@@ -25,10 +32,12 @@
 static NSString * const KHBPayViewControllerMoneyCellReuseId = @"KHBPayViewControllerMoneyCellReuseId";
 static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewControllerCellModeReuseId";
 
-@interface HBPayViewController ()<UITableViewDataSource, UITableViewDelegate, HBPayCellChangeDelegate, HBPayMoneyCellDelegate>
+@interface HBPayViewController ()<UITableViewDataSource, UITableViewDelegate, HBPayCellChangeDelegate, HBPayMoneyCellDelegate, HBSKPayServiceDelegate>
 {
     UITableView *_tableView;
     NSString *_textFieldStr;
+    
+    NSDictionary *_payMonthDic;
 }
 
 @property (nonatomic, strong) UIButton* payButton;
@@ -37,6 +46,10 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 
 @property (nonatomic, assign) NSInteger months;
 @property (nonatomic, assign) CGFloat money;
+
+@property (nonatomic, strong) NSTimer *mtimer;
+@property (nonatomic, strong) HBSKPayService *skPayService;
+@property (nonatomic, strong) MBProgressHUD *progressView;
 
 @end
 
@@ -48,6 +61,10 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     
     self.navigationController.navigationBarHidden = NO;
     self.title = @"支付中心";
+    
+    self.skPayService = [HBSKPayService defaultService];
+    self.skPayService.payDelegate = self;
+    _payMonthDic = @{@(1):@(12), @(3):@(30), @(6):@(60), @(12):@(118)};
     
     self.months = 1;
     self.money = 10;
@@ -86,6 +103,32 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     self.navigationItem.rightBarButtonItem = rightButton;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSString *payReceipt = [userDefault objectForKey:KHBPayReceipt];
+    if (payReceipt) {
+        //提示用户恢复充值，重新连接服务器
+        [HHAlertSingleView showAlertWithStyle:HHAlertStyleOk inView:[UIApplication sharedApplication].keyWindow Title:@"恢复支付" detail:@"上一次支付有误，\r\n点击“确定”恢复支付" cancelButton:nil Okbutton:@"确定" block:^(HHAlertButton buttonindex) {
+            //延时触发，避免两个弹框冲突
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self showMBProgressHUD:@"恢复支付"];
+                [self inAppPurchase_ConnectServer:payReceipt];
+            });
+        }];
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    //取消充值
+    [self.skPayService cancelTier];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -103,15 +146,17 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 
 -(void)payButtonPressed
 {
-    NSString *checkedStr = [self.payModeDic objectForKey:@"checked"];
-    if ([checkedStr isEqualToString:@"pay-icn-alipay"]) { //支付宝支付
-        [self requestChannelOrder:KLeaderAliPay];
-    } else if ([checkedStr isEqualToString:@"pay-icn-wechat"]){ //微信支付
-        [self requestChannelOrder:KLeaderWXPay];
-//        [MBHudUtil showTextView:@"暂不支持微信支付，敬请期待" inView:nil];
-    } else { //VIP码
-        [self requestVipOrder];
-    }
+    [self showMBProgressHUD:@"正在载入..."];
+    [[HBSKPayService defaultService] requestTierByMonth:_months];
+    
+//    NSString *checkedStr = [self.payModeDic objectForKey:@"checked"];
+//    if ([checkedStr isEqualToString:@"pay-icn-alipay"]) { //支付宝支付
+//        [self requestChannelOrder:KLeaderAliPay];
+//    } else if ([checkedStr isEqualToString:@"pay-icn-wechat"]){ //微信支付
+//        [self requestChannelOrder:KLeaderWXPay];
+//    } else { //VIP码
+//        [self requestVipOrder];
+//    }
 }
 
 -(void)requestVipOrder
@@ -168,8 +213,12 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     // Return the number of rows in the section.
     if (0 == section) {
         return 1;
-    }else{
-        return 3;
+    } else {
+        if (KEnableThirdPay) {
+            return 4;
+        } else {
+            return 1;
+        }
     }
 }
 
@@ -207,20 +256,27 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     {
         HBPayViewControllerModeCell *cell = [tableView dequeueReusableCellWithIdentifier:KHBPayViewControllerCellModeReuseId];
         
-        if (0 == indexPath.row) {
+        NSInteger index = indexPath.row;
+        if (0 == index) {
+            if (!cell) {
+                cell = [[HBPayViewControllerModeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBPayViewControllerCellModeReuseId showModeText:YES];
+            }
+            [self.payModeDic setObject:@"pay-normal" forKey:@"iconImg"];
+            [self.payModeDic setObject:@"其他支付" forKey:@"modeLabel"];
+        } else if (1 == index) {
             if (!cell) {
                 cell = [[HBPayViewControllerModeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBPayViewControllerCellModeReuseId showModeText:YES];
             }
             [self.payModeDic setObject:@"pay-icn-alipay" forKey:@"iconImg"];
             [self.payModeDic setObject:@"支付宝支付" forKey:@"modeLabel"];
-        }else if (1 == indexPath.row){
+        } else if (2 == index){
             if (!cell) {
                 cell = [[HBPayViewControllerModeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBPayViewControllerCellModeReuseId showModeText:YES];
             }
             
             [self.payModeDic setObject:@"pay-icn-wechat" forKey:@"iconImg"];
             [self.payModeDic setObject:@"微信支付" forKey:@"modeLabel"];
-        }else{
+        } else {
             if (!cell) {
                 cell = [[HBPayViewControllerModeCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBPayViewControllerCellModeReuseId showModeText:NO];
             }
@@ -342,6 +398,145 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
         req.sign                = [orderParams objectForKey:@"sign"];
         [WXApi sendReq:req];
     }
+}
+
+- (void)showMBProgressHUD:(NSString *)string
+{
+    [MBHudUtil showActivityView:nil inView:nil];
+//    [self hideMBProgressHUD];
+//    self.progressView = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].keyWindow];
+//    self.progressView.detailsLabelText = string;
+//    self.progressView.detailsLabelFont = [UIFont systemFontOfSize:13];
+//    [self.progressView show:YES];
+}
+
+- (void)hideMBProgressHUD
+{
+    [MBHudUtil hideActivityView:nil];
+//    if (self.progressView) {
+//        [self.progressView removeFromSuperview];
+//        self.progressView = nil;
+//    }
+}
+
+#pragma mark - Timer
+- (void)startTimer
+{
+    [self endTimer];
+    self.mtimer = [NSTimer scheduledTimerWithTimeInterval:20 target:self selector:@selector(handleTimer:) userInfo:nil repeats:NO];
+}
+
+- (void)endTimer
+{
+    if (_mtimer) {
+        [_mtimer invalidate];
+        _mtimer = nil;
+    }
+}
+
+- (void)handleTimer:(NSTimer *)timer
+{
+    //取消魔豆充值
+    [self.skPayService cancelTier];
+    [self hideMBProgressHUD];
+    [MBHudUtil showTextView:@"网络异常，请检查网络连接" inView:nil];
+}
+
+#pragma mark ------HBSKPayServiceDelegate
+/**
+ *  获取商品信息
+ */
+-(void)inAppPurchase_LoadProduct:(NSString*)msg
+{
+    self.progressView.detailsLabelText = msg;
+}
+/**
+ *  获取商品信息失败
+ */
+-(void)inAppPurchase_LoadProductFail
+{
+    [self hideMBProgressHUD];
+    [self endTimer];
+    [MBHudUtil showTextView:@"从AppStore获取商品失败" inView:nil];
+}
+/**
+ *  开始支付
+ */
+-(void)inAppPurchase_InPay
+{
+    [self endTimer];
+    self.progressView.detailsLabelText = @"开始支付";
+}
+/**
+ *  支付成功
+ */
+-(void)inAppPurchase_PaySuccess
+{
+    self.progressView.detailsLabelText = @"支付成功";
+}
+/**
+ *  支付失败
+ */
+-(void)inAppPurchase_PayFail:(NSString*)errorMsg
+{
+    [self hideMBProgressHUD];
+    [self endTimer];
+    [MBHudUtil showTextView:@"支付失败" inView:nil];
+}
+/**
+ *  支付恢复
+ */
+-(void)inAppPurchase_PayRestored
+{
+//    self.progressView.detailsLabelText = @"恢复充值";
+}
+/**
+ *  连接服务器
+ */
+-(void)inAppPurchase_ConnectServer:(NSString*)payReceipt
+{
+    self.progressView.detailsLabelText = @"连接服务器";
+    NSInteger month = self.months;
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    if ([userDefault objectForKey:KHBPayMonths]) {
+        month = [[userDefault objectForKey:KHBPayMonths] integerValue];
+    }
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    [[HBServiceManager defaultManager] requestIAPNotify:userEntity.name token:userEntity.token total_fee:_payMonthDic[@(month)] quantity:month payReceipt:payReceipt completion:^(id responseObject, NSError *error) {
+        NSString *result = nil;
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            result = responseObject[@"result"];
+        }
+        if ([result isEqualToString:@"OK"]) {
+            //充值成功，删除payReceipt
+            [userDefault removeObjectForKey:KHBPayReceipt];
+            [userDefault removeObjectForKey:KHBPayMonths];
+            [MBHudUtil showTextViewAfter:@"支付成功"];
+        } else {
+            //存储payReceipt
+            [userDefault setObject:payReceipt forKey:KHBPayReceipt];
+            [userDefault setObject:@(_months) forKey:KHBPayMonths];
+            [userDefault synchronize];
+            [MBHudUtil showTextViewAfter:@"支付失败"];
+        }
+    }];
+}
+/**
+ *  连接服务器成功
+ */
+-(void)inAppPurchase_ConnectServerSuccess:(NSString*)errorMsg
+{
+    
+}
+/**
+ *  连接服务器失败
+ */
+-(void)inAppPurchase_ConnectServerFail:(NSString*)errorMsg
+{
+//    [HHAlertSingleView showAlertWithStyle:HHAlertStyleError inView:[UIApplication sharedApplication].keyWindow Title:@"充值失败" detail:errorMsg cancelButton:nil Okbutton:@"确定" block:^(HHAlertButton buttonindex) {
+//        
+//    }];
+//    [self hideMJProgressHUD];
 }
 
 @end

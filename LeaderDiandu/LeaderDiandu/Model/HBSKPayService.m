@@ -9,9 +9,10 @@
 #import "HBSKPayService.h"
 #import <StoreKit/StoreKit.h>
 
-#define KWBTierMonth3   kwbios_tier5
-#define KWBTierMonth6   kwbios_tier9
-#define KWBTierMonth12  kwbios_tier18
+#define KWBTierMonth1   @"kwbios_tier2"
+#define KWBTierMonth3   @"kwbios_tier5"
+#define KWBTierMonth6   @"kwbios_tier9"
+#define KWBTierMonth12  @"kwbios_tier18"
 
 @interface HBSKPayService () < SKPaymentTransactionObserver,SKProductsRequestDelegate >
 {
@@ -43,38 +44,17 @@
     return self;
 }
 
-- (void)requestTier:(NSInteger)modou
+- (void)requestTierByMonth:(NSInteger)months
 {
     NSString *requestStr = nil;
-    if (modou == 60) {
-        requestStr = @"com.baofengHBtest.modou1";
-    } else if (modou == 120) {
-        requestStr = @"com.baofengHBtest.modou2";
-    } else if (modou == 180) {
-        requestStr = @"com.baofengHBtest.modou3";
-    } else if (modou == 250) {
-        requestStr = @"com.baofengHBtest.modou4";
-    } else if (modou == 300) {
-        requestStr = @"com.baofengHBtest.modou5";
-    } else if (modou == 500) {
-        requestStr = @"com.baofengHBtest.modou8";
-    }
-    [self requestPremium:requestStr];
-}
-
-- (void)requestNewTier:(NSInteger)modou
-{
-    NSString *requestStr = nil;
-    if (modou == 60) {
-        requestStr = @"modou60";
-    } else if (modou == 120) {
-        requestStr = @"modou120";
-    } else if (modou == 250) {
-        requestStr = @"modou250";
-    } else if (modou == 300) {
-        requestStr = @"modou300";
-    } else if (modou == 500) {
-        requestStr = @"modou500";
+    if (months == 1) {
+        requestStr = KWBTierMonth1;
+    } else if (months == 3) {
+        requestStr = KWBTierMonth3;
+    } else if (months == 6) {
+        requestStr = KWBTierMonth6;
+    } else if (months == 12) {
+        requestStr = KWBTierMonth12;
     }
     [self requestPremium:requestStr];
 }
@@ -88,10 +68,7 @@
 }
 
 -(void)requestTier1{
-    [self requestPremium:@"com.baofengHBtest.modou1"];
-}
--(void)requestTier2{
-    [self requestPremium:@"com.baofengHBtest.modou2"];
+    [self requestPremium:KWBTierMonth3];
 }
 
 -(void)requestPremium:(NSString*)productIdentifiers{

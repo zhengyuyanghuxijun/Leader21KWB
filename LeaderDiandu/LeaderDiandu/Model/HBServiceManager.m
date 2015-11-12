@@ -818,6 +818,27 @@
     [self Post:@"/api/order/create" dict:dicInfo block:receivedBlock];
 }
 
+- (void)requestIAPNotify:(NSString *)user token:(NSString *)token total_fee:(NSString *)total_fee quantity:(NSInteger)quantity payReceipt:(NSString *)payReceipt completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:user     forKey:@"user"];
+    [dicInfo setObject:token forKey:@"token"];
+    [dicInfo setObject:@"ios" forKey:@"channel"];
+    [dicInfo setObject:@"kwb0002" forKey:@"product"];
+    [dicInfo setObject:@([NSDate date].timeIntervalSince1970) forKey:@"created_time"];
+    [dicInfo setObject:total_fee     forKey:@"total_fee"];
+    [dicInfo setObject:@(quantity)     forKey:@"quantity"];
+    [dicInfo setObject:@(1) forKey:@"status"];
+    [dicInfo setObject:payReceipt     forKey:@"payReceipt"];
+    
+    if (_receivedBlock) {
+        return;
+    }
+    
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/order/notify/ios" dict:dicInfo block:receivedBlock];
+}
+
 /**
  *  阅读人数统计
  *

@@ -66,16 +66,9 @@
 /**
  *  连接苹果服务器
  *
- *  @param modou 魔豆数
+ *  @param months 几个月
  */
--(void)requestTier:(NSInteger)modou;
-
-/**
- *  连接正式苹果服务器
- *
- *  @param modou 魔豆数
- */
--(void)requestNewTier:(NSInteger)modou;
+-(void)requestTierByMonth:(NSInteger)months;
 
 /**
  *  取消魔豆充值
@@ -88,10 +81,5 @@
  *
  */
 -(void)requestTier1;
-/**
- *  等级2
- *
- */
--(void)requestTier2;
 
 @end

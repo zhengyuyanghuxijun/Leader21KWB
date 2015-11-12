@@ -23,7 +23,8 @@
     #define SERVICEAPI      @"http://reader.61dear.com"
     #define CONTENTAPI      @"http://teach.61dear.com:9081"
 #else
-    #define KAppKeyKWB      @"a8cffcee338038dd35d9e81ad93540d9c1b13e5d"
+//    #define KAppKeyKWB      @"a8cffcee338038dd35d9e81ad93540d9c1b13e5d"
+#define KAppKeyKWB      @"3164809f635225668555a168d42b8f4c908aa02e"
     #define SERVICEAPI      @"http://teach.61dear.cn:9080"
     #define CONTENTAPI      @"http://teach.61dear.cn:9081"
 //    #define BOOKIMGURL          @"http://teach.61dear.cn:9083"

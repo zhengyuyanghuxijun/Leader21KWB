@@ -523,6 +523,17 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
 - (void)requestChannelOrder:(NSString *)user token:(NSString *)token channel:(NSString *)channel quantity:(NSInteger)quantity product:(NSString *)product completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
+ *  用户通过支付宝或微信付费
+ *
+ *  @param user             用户名
+ *  @param total_fee        支付金额
+ *  @param quantity         几个月
+ *  @param payReceipt       苹果支付凭证
+ *  @param receivedBlock    回调Block
+ */
+- (void)requestIAPNotify:(NSString *)user token:(NSString *)token total_fee:(NSString *)total_fee quantity:(NSInteger)quantity payReceipt:(NSString *)payReceipt completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
  *  阅读人数统计
  *
  *  @param teacher_id         老师ID
