@@ -205,7 +205,8 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
+//    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

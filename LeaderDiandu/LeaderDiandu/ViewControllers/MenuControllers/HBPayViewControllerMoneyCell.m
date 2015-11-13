@@ -8,6 +8,8 @@
 
 #import "HBPayViewControllerMoneyCell.h"
 
+#define KShowDiscount   0
+
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
 
@@ -32,10 +34,15 @@
     {
         self.moneyBtnArr = [[NSMutableArray alloc] initWithCapacity:1];
         //@[@"10(不打折)", @"30(95折)", @"60(9折)", @"120(85折)", @"240(8折)", @"360(75折)"]
+#if KShowDiscount
         self.timeArray = @[@"1月", @"1季", @"半年", @"1年", @"2年", @"3年"];
-        self.moneyArr = @[@"10", @"30", @"60", @"120", @"240", @"360"];
+        self.moneyArr = @[@"12", @"30", @"60", @"118", @"240", @"360"];
         self.discountArr = @[@"1.0", @"0.95", @"0.9", @"0.85", @"0.8", @"0.75"];
         self.discountCNArr = @[@"", @"95折", @"9折", @"85折", @"8折", @"75折"];
+#else
+        self.timeArray = @[@"1月", @"1季", @"半年", @"1年"];
+        self.moneyArr = @[@"12", @"30", @"60", @"118"];
+#endif
         [self initUI];
     }
     return self;
@@ -47,11 +54,17 @@
     CGFloat height = 108;
     CGFloat marginY = 20;
     CGFloat controlY = marginY;
+#if KShowDiscount
     CGFloat margin = (ScreenWidth-width*3) / 4;
-    for (NSInteger index = 0; index < 6; index++) {
+#else
+    CGFloat margin = (ScreenWidth-width*2) / 3;
+#endif
+    NSInteger count = [self.timeArray count];
+    NSInteger flag = count/2;
+    for (NSInteger index = 0; index < count; index++) {
         
-        CGFloat controlX = index%3*width + (index%3+1)*margin;
-        if (index > 2) {
+        CGFloat controlX = index%flag*width + (index%flag+1)*margin;
+        if (index > flag-1) {
             controlY = marginY*2 + height;
         }
         UIButton *moneyBtn = [self createMoneyBtn:CGRectMake(controlX, controlY, width, height) index:index];
@@ -72,11 +85,13 @@
     paylabel.text = @"应付金额";
     [self addSubview:paylabel];
     
+#if KShowDiscount
     self.discountLabel = [[UILabel alloc] init];
     self.discountLabel.frame = CGRectMake(ScreenWidth-80-60, controlY, 60, controlH);
     self.discountLabel.text = @"";
     self.discountLabel.font = [UIFont systemFontOfSize:16];
     [self addSubview:self.discountLabel];
+#endif
     
     self.moneyLabel = [[UILabel alloc] init];
     self.moneyLabel.frame = CGRectMake(ScreenWidth-80-20, controlY, 80, controlH);
@@ -115,6 +130,7 @@
     moneyLbl.textAlignment = NSTextAlignmentCenter;
     [moneyBtn addSubview:moneyLbl];
     
+#if KShowDiscount
     NSString *text = self.discountCNArr[index];
     if ([text length] > 0) {
         controlW = 34;
@@ -132,6 +148,7 @@
         label.font = [UIFont systemFontOfSize:14];
         [imgBg addSubview:label];
     }
+#endif
     
     return moneyBtn;
 }
@@ -149,13 +166,20 @@
     }
     
     NSInteger index = moneyBtn.tag;
+#if KShowDiscount
     self.discountLabel.text = [self.discountCNArr objectAtIndex:index];
+#endif
     
     NSString *moneyStr = [self.moneyArr objectAtIndex:index];
-    NSString *discountStr = [self.discountArr objectAtIndex:index];
     NSInteger money = [moneyStr integerValue];
+    NSString *discountStr = [self.discountArr objectAtIndex:index];
     CGFloat discount = [discountStr floatValue];
-    CGFloat result = money * discount;
+    CGFloat result = 0;
+    if (self.discountArr) {
+        result = money * discount;
+    } else {
+        result = money;
+    }
     self.moneyLabel.text = [NSString stringWithFormat:@"%.1f%@", result, @"元"];
     
     NSInteger months = money / 10;
