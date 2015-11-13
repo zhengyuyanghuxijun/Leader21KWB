@@ -59,6 +59,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
     
     //获取教研员信息，知道是否绑定状态
     [self getUserInfo];
+    [self addTableView];
 }
 
 - (void)getUserInfo

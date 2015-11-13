@@ -44,6 +44,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
     self.navigationController.navigationBarHidden = NO;
     self.title = @"消息中心";
     
+    [self addTableView];
     [self requestSystemMsg];
 }
 
@@ -123,7 +124,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
                 }
                 
                 if (self.msgArr.count > 0) {
-                    [self addTableView];
+                    [_tableView reloadData];
                 
                     //获取消息成功保存数据库
                     [[HBMsgEntityDB sharedInstance] updateHBMsgEntity:self.msgArr];
