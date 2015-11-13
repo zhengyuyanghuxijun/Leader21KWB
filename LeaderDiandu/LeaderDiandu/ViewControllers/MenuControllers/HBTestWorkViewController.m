@@ -19,6 +19,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "HBTestWorkManager.h"
 #import "HBExamIdDB.h"
+#import "HBTableView.h"
 
 static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewControllerCellReuseId";
 
@@ -128,9 +129,8 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
 
 @interface HBTestWorkViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
-    UITableView *_tableView;
+    HBTableView *_tableView;
     HBTestWorkManager *_workManager;
-    UIView *_emptyView;
 }
 
 @property (nonatomic, strong)NSMutableArray *taskEntityArr;
@@ -187,45 +187,10 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
 {
     CGRect rect = self.view.frame;
     CGRect viewFrame = CGRectMake(0, 0, rect.size.width, rect.size.height);
-    _tableView = [[UITableView alloc] initWithFrame:viewFrame];
+    _tableView = [[HBTableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [self.view addSubview:_tableView];
-}
-
-- (void)hideEmptyView
-{
-    if (_emptyView) {
-        [_emptyView removeFromSuperview];
-    }
-}
-
-- (void)showEmptyView
-{
-    if (_emptyView) {
-        [self.view addSubview:_emptyView];
-        return;
-    }
-    _emptyView = [[UIView alloc] initWithFrame:self.view.bounds];
-    _emptyView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_emptyView];
-    
-    CGSize viewSize = self.view.frame.size;
-    float imgSide = 80;
-    float controlX = (viewSize.width-imgSide) / 2;
-    float controlY = viewSize.height / 3;
-    UIImageView *emptyImg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, imgSide, imgSide)];
-    emptyImg.image = [UIImage imageNamed:@"test_empty"];
-    [_emptyView addSubview:emptyImg];
-    
-    controlX = 0;
-    controlY += imgSide + 20;
-    UILabel *emptyLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, viewSize.width, 20)];
-    emptyLbl.backgroundColor = [UIColor clearColor];
-    emptyLbl.textColor = [UIColor lightGrayColor];
-    emptyLbl.text = @"你的老师还没有布置作业哦";
-    emptyLbl.textAlignment = NSTextAlignmentCenter;
-    [_emptyView addSubview:emptyLbl];
 }
 
 -(void)requestTaskListOfStudent
@@ -278,10 +243,9 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                 
                 NSInteger count = self.taskEntityArr.count;
                 if (count > 0) {
-                    [self hideEmptyView];
                     [_tableView reloadData];
                 } else {
-                    [self showEmptyView];
+                    [_tableView showEmptyView:@"test_empty" tips:@"你的老师还没有布置作业哦"];
                 }
                 
                 //获取作业成功保存数据库

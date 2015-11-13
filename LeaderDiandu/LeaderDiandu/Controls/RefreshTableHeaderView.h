@@ -26,8 +26,6 @@ typedef enum{
 	UILabel *_statusLabel;
 	CALayer *_arrowImage;
 	FTRotatingCircle *_activityView;
-	
-    
 }
 
 @property(strong,nonatomic)NSString *sourceType;//刷新类型来源 只有好友列表请求刷新数据需要设置 解决ios7 好友列表下拉刷新闪过竖线bug

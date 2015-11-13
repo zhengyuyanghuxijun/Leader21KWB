@@ -13,12 +13,13 @@
 #import "TimeIntervalUtils.h"
 #import "HBMessageViewCell.h"
 #import "HBMsgEntityDB.h"
+#import "HBTableView.h"
 
 static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewControllerAccessoryReuseId";
 
 @interface HBMessageViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
-    UIView *_emptyView;
+    HBTableView *_tableView;
 }
 
 @property (nonatomic, strong) NSMutableArray *msgArr;
@@ -51,41 +52,6 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)hideEmptyView
-{
-    if (_emptyView) {
-        [_emptyView removeFromSuperview];
-    }
-}
-
-- (void)showEmptyView
-{
-    if (_emptyView) {
-        [self.view addSubview:_emptyView];
-        return;
-    }
-    _emptyView = [[UIView alloc] initWithFrame:self.view.bounds];
-    _emptyView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_emptyView];
-    
-    CGSize viewSize = self.view.frame.size;
-    float imgSide = 80;
-    float controlX = (viewSize.width-imgSide) / 2;
-    float controlY = viewSize.height / 3;
-    UIImageView *emptyImg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, imgSide, imgSide)];
-    emptyImg.image = [UIImage imageNamed:@"msg_tip_empty"];
-    [_emptyView addSubview:emptyImg];
-    
-    controlX = 0;
-    controlY += imgSide + 20;
-    UILabel *emptyLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, viewSize.width, 20)];
-    emptyLbl.backgroundColor = [UIColor clearColor];
-    emptyLbl.textColor = [UIColor lightGrayColor];
-    emptyLbl.text = @"暂无系统消息";
-    emptyLbl.textAlignment = NSTextAlignmentCenter;
-    [_emptyView addSubview:emptyLbl];
 }
 
 /*
@@ -133,7 +99,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
                     //获取新消息列表成功后发送通知
                     [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetMsgSuccess object:nil];
                 } else {
-                    [self showEmptyView];
+                    [_tableView showEmptyView:@"msg_tip_empty" tips:@"暂无系统消息"];
                 }
             }
         }];
@@ -143,7 +109,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
 -(void)addTableView
 {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, ScreenWidth, ScreenHeight)];
+        _tableView = [[HBTableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, ScreenWidth, ScreenHeight)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = NO;

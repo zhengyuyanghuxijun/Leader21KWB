@@ -17,6 +17,7 @@
 		0D0190141B98B1B500A92F59 /* HBBindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0190131B98B1B500A92F59 /* HBBindPhoneViewController.m */; };
 		0D086EDC1B949B110061BB1F /* DHSlideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D086ED91B949B110061BB1F /* DHSlideMenuController.m */; };
 		0D086EDD1B949B110061BB1F /* DHSlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D086EDB1B949B110061BB1F /* DHSlideMenuViewController.m */; };
+		0D10EA351BF5951600DDE52D /* HBTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D10EA341BF5951600DDE52D /* HBTableView.m */; };
 		0D143F311BD006BB00F5D9EE /* examid.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F2C1BD006BB00F5D9EE /* examid.db */; };
 		0D143F321BD006BB00F5D9EE /* hbcontentdetail.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F2D1BD006BB00F5D9EE /* hbcontentdetail.db */; };
 		0D143F331BD006BB00F5D9EE /* hbcontentlist.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F2E1BD006BB00F5D9EE /* hbcontentlist.db */; };
@@ -304,6 +305,8 @@
 		0D086ED91B949B110061BB1F /* DHSlideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHSlideMenuController.m; sourceTree = "<group>"; };
 		0D086EDA1B949B110061BB1F /* DHSlideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHSlideMenuViewController.h; sourceTree = "<group>"; };
 		0D086EDB1B949B110061BB1F /* DHSlideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHSlideMenuViewController.m; sourceTree = "<group>"; };
+		0D10EA331BF5951600DDE52D /* HBTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTableView.h; sourceTree = "<group>"; };
+		0D10EA341BF5951600DDE52D /* HBTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTableView.m; sourceTree = "<group>"; };
 		0D143F2C1BD006BB00F5D9EE /* examid.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = examid.db; sourceTree = "<group>"; };
 		0D143F2D1BD006BB00F5D9EE /* hbcontentdetail.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbcontentdetail.db; sourceTree = "<group>"; };
 		0D143F2E1BD006BB00F5D9EE /* hbcontentlist.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbcontentlist.db; sourceTree = "<group>"; };
@@ -957,6 +960,8 @@
 				0DBD1AAF1BBBAB5E00A3BD72 /* MJProgressHUD.m */,
 				18AB8F511BB9918D00409103 /* FTRotatingCircle.h */,
 				18AB8F521BB9918D00409103 /* FTRotatingCircle.m */,
+				0D10EA331BF5951600DDE52D /* HBTableView.h */,
+				0D10EA341BF5951600DDE52D /* HBTableView.m */,
 				18AB8F4D1BB9911300409103 /* RefreshTableHeaderView.h */,
 				18AB8F4E1BB9911300409103 /* RefreshTableHeaderView.m */,
 				182306111B9B0DEE00A8E146 /* HHAlertSingleView.h */,
@@ -1745,6 +1750,7 @@
 				18B5FD2E1B981454002CCD95 /* UIButton+AFNetworking.m in Sources */,
 				18F367E71BA90C7800EBFEC4 /* HBSetStuController.m in Sources */,
 				0DBE35C31B8CD46500179237 /* HBBaseViewController.m in Sources */,
+				0D10EA351BF5951600DDE52D /* HBTableView.m in Sources */,
 				0D086EDD1B949B110061BB1F /* DHSlideMenuViewController.m in Sources */,
 				0DD214651B95568E009E3DB9 /* HBDataSaveManager.m in Sources */,
 				1810C7171BD9514700899BD0 /* EColumnChartLabel.m in Sources */,
