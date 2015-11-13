@@ -307,31 +307,33 @@ typedef enum : NSUInteger {
         _descButton.hidden = YES;
         _descImg.hidden = NO;
         UIImage *image = [_workManager getPictureByDict:dict];
-        _descImg.image = image;
-        CGSize imgSize = image.size;
-        NSInteger scale = 3;
-        if (iPhone4 || iPhone5) {
-            scale = 4;
+        if (image) {
+            _descImg.image = image;
+            CGSize imgSize = image.size;
+            NSInteger scale = 3;
+            if (iPhone4 || iPhone5) {
+                scale = 4;
+            }
+            if ([typeStr isEqualToString:@"judge"]) {
+                imgSize = CGSizeMake(30*imgSize.width/imgSize.height, 30);
+            } else {
+                imgSize = CGSizeMake(imgSize.width/scale, imgSize.height/scale);
+            }
+            CGSize questionSize = _questionView.bounds.size;
+            float controlX = (rect.size.width-imgSize.width) / 2;
+            float controlY = 0;
+            float descMaxY = CGRectGetMaxY(rect);
+            if (descMaxY+imgSize.height+10 > questionSize.height) {
+                controlY = descMaxY + 10;
+                _questionView.scrollEnabled = YES;
+                _questionView.contentSize = CGSizeMake(questionSize.width, descMaxY+imgSize.height+20);
+            } else if (descMaxY+imgSize.height+10 < questionSize.height) {
+                controlY = descMaxY + (questionSize.height-descMaxY-imgSize.height) / 2;
+            } else {
+                controlY = questionSize.height-imgSize.height-10;
+            }
+            _descImg.frame = CGRectMake(controlX, controlY, imgSize.width, imgSize.height);
         }
-        if ([typeStr isEqualToString:@"judge"]) {
-            imgSize = CGSizeMake(30*imgSize.width/imgSize.height, 30);
-        } else {
-            imgSize = CGSizeMake(imgSize.width/scale, imgSize.height/scale);
-        }
-        CGSize questionSize = _questionView.bounds.size;
-        float controlX = (rect.size.width-imgSize.width) / 2;
-        float controlY = 0;
-        float descMaxY = CGRectGetMaxY(rect);
-        if (descMaxY+imgSize.height+10 > questionSize.height) {
-            controlY = descMaxY + 10;
-            _questionView.scrollEnabled = YES;
-            _questionView.contentSize = CGSizeMake(questionSize.width, descMaxY+imgSize.height+20);
-        } else if (descMaxY+imgSize.height+10 < questionSize.height) {
-            controlY = descMaxY + (questionSize.height-descMaxY-imgSize.height) / 2;
-        } else {
-            controlY = questionSize.height-imgSize.height-10;
-        }
-        _descImg.frame = CGRectMake(controlX, controlY, imgSize.width, imgSize.height);
     }
     
     NSArray *optionsArr = [_workManager getOptionArray:dict];

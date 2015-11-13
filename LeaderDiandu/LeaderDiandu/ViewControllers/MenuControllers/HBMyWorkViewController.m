@@ -173,6 +173,9 @@
         NSError *error = nil;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:_scoreArray options:NSJSONWritingPrettyPrinted error:&error];
         jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    } else {
+        [MBHudUtil showTextViewAfter:@"作业提交失败，请重新提交"];
+        return;
     }
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     [[HBServiceManager defaultManager] requestSubmitScore:userEntity.name book_id:_taskEntity.bookId exam_id:_taskEntity.exam_id score:_scoreNum fromTime:_fromTime toTime:_toTime question_stat:jsonStr completion:^(id responseObject, NSError *error) {

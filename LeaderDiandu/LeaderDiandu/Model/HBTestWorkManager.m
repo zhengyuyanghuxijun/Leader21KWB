@@ -82,7 +82,7 @@
 - (UIImage *)getPicture:(NSString *)fileName
 {
     UIImage *image = nil;
-    if (fileName) {
+    if ([fileName length] > 0) {
         NSString *imgFileName = [NSString stringWithFormat:@"%@/pics/%@", _workPath, fileName];
         image = [UIImage imageWithContentsOfFile:imgFileName];
     }
