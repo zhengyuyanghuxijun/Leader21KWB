@@ -20,6 +20,8 @@ static NSString * const KHBTeacherManViewControllerCellAccessoryReuseId = @"KHBT
 {
     NSMutableArray  *_teacherArr;
     UITableView     *_tableView;
+    
+    NSString *_unbindingTeacherStr;
 }
 @end
 
@@ -152,23 +154,37 @@ static NSString * const KHBTeacherManViewControllerCellAccessoryReuseId = @"KHBT
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - actionSheetDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 0) {
+        if (buttonIndex == 1) {
+            HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+            if (userEntity) {
+                NSString *user = userEntity.name;
+                //教研员解除一位老师的绑定
+                [MBHudUtil showActivityView:nil inView:nil];
+                
+                [[HBServiceManager defaultManager] requestUnBindingTeacher:user teacher:_unbindingTeacherStr token:userEntity.token completion:^(id responseObject, NSError *error) {
+                    [MBHudUtil hideActivityView:nil];
+                    if (responseObject) {
+                        //教研员解除一位老师的绑定成功
+                        //获取教师列表
+                        [self requestTeacherList];
+                    }
+                }];
+            }
+        }
+    }
+}
+
 - (void)unbundlingBtnPressed:(NSString *)teacher
 {
-    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    if (userEntity) {
-        NSString *user = userEntity.name;
-        //教研员解除一位老师的绑定
-        [MBHudUtil showActivityView:nil inView:nil];
-        
-        [[HBServiceManager defaultManager] requestUnBindingTeacher:user teacher:teacher token:userEntity.token completion:^(id responseObject, NSError *error) {
-            [MBHudUtil hideActivityView:nil];
-            if (responseObject) {
-                //教研员解除一位老师的绑定成功
-                //获取教师列表
-                [self requestTeacherList];
-            }
-        }];
-    }
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"解除绑定" message:@"确定要和老师解除绑定吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alertView.tag = 0;
+    _unbindingTeacherStr = teacher;
+    
+    [alertView show];
 }
 
 @end

@@ -153,15 +153,27 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
     }
 }
 
+#pragma mark - actionSheetDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 0) {
+        if (buttonIndex == 1) {
+            //解除绑定
+            HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+            [[HBServiceManager defaultManager] requestDirectorUnAss:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+                [self getUserInfo];
+            }];
+        }
+    }
+}
+
 -(void)bottomBtnPressed
 {
     if (self.isBinding) {
-        //解除绑定
-        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-        [[HBServiceManager defaultManager] requestDirectorUnAss:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
-            [self getUserInfo];
-        }];
-         
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"解除绑定" message:@"确定要和教研员解除绑定吗？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alertView.tag = 0;
+        
+        [alertView show];
     }else{
         NSString *leaderName = nil;
         for (NSString *keyStr in [self.leaderSelectedDic allKeys]) {
