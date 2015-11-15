@@ -818,7 +818,7 @@
     [self Post:@"/api/order/create" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestIAPNotify:(NSString *)user token:(NSString *)token total_fee:(NSString *)total_fee quantity:(NSInteger)quantity payReceipt:(NSString *)payReceipt completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestIAPNotify:(NSString *)user token:(NSString *)token total_fee:(NSString *)total_fee quantity:(NSInteger)quantity payReceipt:(NSString *)payReceipt transactionID:(NSString *)transactionID completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
@@ -830,6 +830,7 @@
     [dicInfo setObject:@(quantity)     forKey:@"quantity"];
     [dicInfo setObject:@(1) forKey:@"status"];
     [dicInfo setObject:payReceipt     forKey:@"payReceipt"];
+    [dicInfo setObject:transactionID forKey:@"transaction_id"];
     
     if (_receivedBlock) {
         return;

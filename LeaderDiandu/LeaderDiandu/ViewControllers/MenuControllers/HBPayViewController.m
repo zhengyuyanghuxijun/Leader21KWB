@@ -115,7 +115,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
             //延时触发，避免两个弹框冲突
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self showMBProgressHUD:@"恢复支付"];
-                [self inAppPurchase_ConnectServer:payReceipt];
+                [self inAppPurchase_ConnectServer:payReceipt transactionID:@""];
             });
         }];
     }
@@ -494,7 +494,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 /**
  *  连接服务器
  */
--(void)inAppPurchase_ConnectServer:(NSString*)payReceipt
+-(void)inAppPurchase_ConnectServer:(NSString*)payReceipt transactionID:(NSString *)transactionID
 {
     self.progressView.detailsLabelText = @"连接服务器";
     NSInteger month = self.months;
@@ -503,7 +503,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
         month = [[userDefault objectForKey:KHBPayMonths] integerValue];
     }
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestIAPNotify:userEntity.name token:userEntity.token total_fee:_payMonthDic[@(month)] quantity:month payReceipt:payReceipt completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestIAPNotify:userEntity.name token:userEntity.token total_fee:_payMonthDic[@(month)] quantity:month payReceipt:payReceipt transactionID:transactionID completion:^(id responseObject, NSError *error) {
         NSString *result = nil;
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             result = responseObject[@"result"];

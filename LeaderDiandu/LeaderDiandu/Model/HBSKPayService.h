@@ -43,7 +43,7 @@
  *  连接服务器
  *
  */
--(void)inAppPurchase_ConnectServer:(NSString*)payReceipt;
+-(void)inAppPurchase_ConnectServer:(NSString*)payReceipt transactionID:(NSString *)transactionID;
 /**
  *  连接服务器成功
  *

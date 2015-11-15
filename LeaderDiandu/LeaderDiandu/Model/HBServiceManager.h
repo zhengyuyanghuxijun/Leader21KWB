@@ -531,7 +531,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param payReceipt       苹果支付凭证
  *  @param receivedBlock    回调Block
  */
-- (void)requestIAPNotify:(NSString *)user token:(NSString *)token total_fee:(NSString *)total_fee quantity:(NSInteger)quantity payReceipt:(NSString *)payReceipt completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestIAPNotify:(NSString *)user token:(NSString *)token total_fee:(NSString *)total_fee quantity:(NSInteger)quantity payReceipt:(NSString *)payReceipt transactionID:(NSString *)transactionID completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  阅读人数统计

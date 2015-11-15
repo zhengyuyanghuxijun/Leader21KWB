@@ -138,14 +138,15 @@
 {
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[[NSBundle mainBundle] appStoreReceiptURL]];
     NSError *error = nil;
-    NSString *productIdentifier = transaction.payment.productIdentifier;
+//    NSString *productIdentifier = transaction.payment.productIdentifier;
+    NSString *transactionID = transaction.transactionIdentifier;
     NSData *receiptData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:nil error:&error];
     if (receiptData&&!error) {
         NSLog(@"购买成功:%@",receiptData);
+//        [self verifyPayReceipt:[self base64Encoding:receiptData]];
         if (self.payDelegate) {
-            [self.payDelegate inAppPurchase_ConnectServer:[self base64Encoding:receiptData]];
+            [self.payDelegate inAppPurchase_ConnectServer:[self base64Encoding:receiptData] transactionID:transactionID];
         }
-        //        [self vipPay:[self base64Encoding:receiptData]];
     }else{
         if (self.payDelegate) {
             [self.payDelegate inAppPurchase_PayFail:@"没有获取到购买凭证"];
@@ -175,11 +176,12 @@
 - (void)restoreTransaction:(SKPaymentTransaction *)transaction {
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[[NSBundle mainBundle] appStoreReceiptURL]];
     NSError *error = nil;
+    NSString *transactionID = transaction.transactionIdentifier;
     NSData *receiptData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:nil error:&error];
     if (receiptData&&!error) {
         NSLog(@"购买成功:%@",receiptData);
         if (self.payDelegate) {
-            [self.payDelegate inAppPurchase_ConnectServer:[self base64Encoding:receiptData]];
+            [self.payDelegate inAppPurchase_ConnectServer:[self base64Encoding:receiptData] transactionID:transactionID];
         }
         //        [self vipPay:[self base64Encoding:receiptData]];
     }else{
