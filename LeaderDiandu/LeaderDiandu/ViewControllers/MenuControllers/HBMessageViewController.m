@@ -22,7 +22,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
     HBTableView *_tableView;
 }
 
-@property (nonatomic, strong) NSMutableArray *msgArr;
+@property (nonatomic, strong) NSArray *msgArr;
 
 @end
 
@@ -33,7 +33,6 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.msgArr = [[NSMutableArray alloc] initWithCapacity:1];
     }
     return self;
 }
@@ -76,20 +75,27 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
         [[HBServiceManager defaultManager] requestSystemMsg:user token:token from_time:@"1433248966" completion:^(id responseObject, NSError *error) {
             [MBHudUtil hideActivityView:nil];
             if (responseObject) {
+                NSMutableArray *msgArr = [[NSMutableArray alloc] initWithCapacity:1];
                 NSArray *arr = [responseObject arrayForKey:@"messages"];
                 for (NSDictionary *dic in arr)
                 {
                     HBSystemMsgEntity *msgEntity = [[HBSystemMsgEntity alloc] init];
-                    msgEntity.systemMsgId = [NSString stringWithFormat:@"%ld", [dic integerForKey:@"id"]];
+                    msgEntity.systemMsgId = [NSString stringWithFormat:@"%ld", (long)[dic integerForKey:@"id"]];
                     msgEntity.body = [dic stringForKey:@"body"];
-                    msgEntity.user_id = [NSString stringWithFormat:@"%ld", [dic integerForKey:@"user_id"]];
+                    msgEntity.user_id = [NSString stringWithFormat:@"%ld", (long)[dic integerForKey:@"user_id"]];
                     NSTimeInterval interval = [[dic numberForKey:@"created_time"] doubleValue];
                     msgEntity.created_time = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
                     
-                    [self.msgArr addObject:msgEntity];
+                    [msgArr addObject:msgEntity];
                 }
                 
-                if (self.msgArr.count > 0) {
+                if (msgArr.count > 0) {
+                    self.msgArr = [msgArr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                        HBSystemMsgEntity *entity1 = obj1;
+                        HBSystemMsgEntity *entity2 = obj2;
+                        NSComparisonResult result = [entity1.systemMsgId compare:entity2.systemMsgId];
+                        return result == NSOrderedAscending;//升序
+                    }];
                     [_tableView reloadData];
                 
                     //获取消息成功保存数据库
@@ -127,7 +133,6 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSParameterAssert(self.msgArr);
     return self.msgArr.count;
 }
 

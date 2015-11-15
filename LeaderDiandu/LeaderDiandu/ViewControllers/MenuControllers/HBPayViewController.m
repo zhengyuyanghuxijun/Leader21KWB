@@ -146,7 +146,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 
 -(void)payButtonPressed
 {
-    [self showMBProgressHUD:@"正在载入..."];
+    [self showMBProgressHUD:@"正在连接支付..."];
     [[HBSKPayService defaultService] requestTierByMonth:_months];
     
 //    NSString *checkedStr = [self.payModeDic objectForKey:@"checked"];
@@ -403,7 +403,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 
 - (void)showMBProgressHUD:(NSString *)string
 {
-    [MBHudUtil showActivityView:nil inView:nil];
+    [MBHudUtil showActivityView:string inView:nil];
 //    [self hideMBProgressHUD];
 //    self.progressView = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].keyWindow];
 //    self.progressView.detailsLabelText = string;
@@ -466,7 +466,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 -(void)inAppPurchase_InPay
 {
     [self endTimer];
-    self.progressView.detailsLabelText = @"开始支付";
+    [self showMBProgressHUD:@"正在支付..."];
 }
 /**
  *  支付成功
