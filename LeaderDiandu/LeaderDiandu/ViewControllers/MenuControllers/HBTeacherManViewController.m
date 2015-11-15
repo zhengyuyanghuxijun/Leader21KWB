@@ -99,15 +99,11 @@ static NSString * const KHBTeacherManViewControllerCellAccessoryReuseId = @"KHBT
 - (void)getHeaderAvatar:(HBTeacherEntity *)teacherEntity
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:teacherEntity.name];
-    if (headFile == nil) {
-        [[HBHeaderManager defaultManager] requestGetAvatar:teacherEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
-            if (error.code == 0) {
-                //                headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:studentEntity.name];
-                [_tableView reloadData];
-            }
-        }];
-    }
+    [[HBHeaderManager defaultManager] requestGetAvatar:teacherEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+        if (error.code == 0) {
+            [_tableView reloadData];
+        }
+    }];
 }
 
 #pragma mark - Table view data source

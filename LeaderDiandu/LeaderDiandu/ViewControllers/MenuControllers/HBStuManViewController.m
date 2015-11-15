@@ -324,15 +324,11 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 - (void)getHeaderAvatar:(HBStudentEntity *)studentEntity
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:studentEntity.name];
-    if (headFile == nil) {
-        [[HBHeaderManager defaultManager] requestGetAvatar:studentEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
-            if (error.code == 0) {
-//                headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:studentEntity.name];
-                [_tableView reloadData];
-            }
-        }];
-    }
+    [[HBHeaderManager defaultManager] requestGetAvatar:studentEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+        if (error.code == 0) {
+            [_tableView reloadData];
+        }
+    }];
 }
 
 -(void)requestClassList

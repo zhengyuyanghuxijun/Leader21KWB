@@ -111,15 +111,11 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
 - (void)getHeaderAvatar:(NSString *)nameStr
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:nameStr];
-    if (headFile == nil) {
-        [[HBHeaderManager defaultManager] requestGetAvatar:nameStr token:userEntity.token completion:^(id responseObject, NSError *error) {
-            if (error.code == 0) {
-                //                headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:studentEntity.name];
-                [_tableView reloadData];
-            }
-        }];
-    }
+    [[HBHeaderManager defaultManager] requestGetAvatar:nameStr token:userEntity.token completion:^(id responseObject, NSError *error) {
+        if (error.code == 0) {
+            [_tableView reloadData];
+        }
+    }];
 }
 
 -(void)addTableView

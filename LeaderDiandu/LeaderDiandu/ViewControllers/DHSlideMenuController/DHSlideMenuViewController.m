@@ -78,6 +78,11 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kSlideMenuViewControllerCellReuseId];
         [self.view addSubview:_tableView];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
     [self getHeadAvatar];
 }
@@ -85,22 +90,12 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 - (void)getHeadAvatar
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    self.avatarFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
-    if (self.avatarFile == nil) {
-        [[HBHeaderManager defaultManager] requestGetAvatar:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
-            if (error.code == 0) {
-                self.avatarFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
-                [_tableView reloadData];
-            }
-        }];
-    }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [_tableView reloadData];
+    [[HBHeaderManager defaultManager] requestGetAvatar:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+        if (error.code == 0) {
+            self.avatarFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
+            [_tableView reloadData];
+        }
+    }];
 }
 
 #pragma mark - Configuring the view’s layout behavior

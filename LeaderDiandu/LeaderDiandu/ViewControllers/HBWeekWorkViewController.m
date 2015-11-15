@@ -214,15 +214,11 @@
 - (void)getHeaderAvatar:(HBExamEntity *)examEntity
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:examEntity.name];
-    if (headFile == nil) {
-        [[HBHeaderManager defaultManager] requestGetAvatar:examEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
-            if (error.code == 0) {
-                //                headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:studentEntity.name];
-                [_tableView reloadData];
-            }
-        }];
-    }
+    [[HBHeaderManager defaultManager] requestGetAvatar:examEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+        if (error.code == 0) {
+            [_tableView reloadData];
+        }
+    }];
 }
 
 #pragma mark - Table view data source

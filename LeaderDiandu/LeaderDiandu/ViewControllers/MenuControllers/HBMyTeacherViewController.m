@@ -140,14 +140,11 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
 - (void)getHeaderAvatar:(NSString *)name
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:name];
-    if (headFile == nil) {
-        [[HBHeaderManager defaultManager] requestGetAvatar:name token:userEntity.token completion:^(id responseObject, NSError *error) {
-            if (error.code == 0) {
-                [_tableView reloadData];
-            }
-        }];
-    }
+    [[HBHeaderManager defaultManager] requestGetAvatar:name token:userEntity.token completion:^(id responseObject, NSError *error) {
+        if (error.code == 0) {
+            [_tableView reloadData];
+        }
+    }];
 }
 
 - (void)createTableView:(CGRect)frame

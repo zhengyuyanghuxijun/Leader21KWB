@@ -66,18 +66,13 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
 - (void)getHeaderAvatar
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
-    if (headFile) {
-        self.headImage = [UIImage imageWithContentsOfFile:headFile];
-    } else {
-        [[HBHeaderManager defaultManager] requestGetAvatar:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
-            if (error.code == 0) {
-                NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
-                self.headImage = [UIImage imageWithContentsOfFile:headFile];
-                [_tableView reloadData];
-            }
-        }];
-    }
+    [[HBHeaderManager defaultManager] requestGetAvatar:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+        if (error.code == 0) {
+            NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
+            self.headImage = [UIImage imageWithContentsOfFile:headFile];
+            [_tableView reloadData];
+        }
+    }];
 }
 
 - (void)getUserInfo
