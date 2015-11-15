@@ -97,10 +97,14 @@
     NSString *endDateStr = [NSString stringWithFormat:@"%.f",[endDate timeIntervalSince1970]];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestReadingStudent:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestReadingStudent:userEntity bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
         if (responseObject) {
             self.student_read = [[responseObject numberForKey:@"student_read"] integerValue];
-            self.student_total = [[responseObject numberForKey:@"student_total"] integerValue];
+            if (self.student_read == 0) {
+                self.student_total = 0;
+            } else {
+                self.student_total = [[responseObject numberForKey:@"student_total"] integerValue];
+            }
         }
         [MBHudUtil hideActivityView:nil];
         
@@ -121,7 +125,7 @@
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
-        [[HBServiceManager defaultManager] requestReadingTimes:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestReadingTimes:userEntity bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 self.book_count = [[responseObject numberForKey:@"book_count"] integerValue];
                 self.reading_count = [[responseObject numberForKey:@"reading_count"] integerValue];
@@ -146,7 +150,7 @@
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
-        [[HBServiceManager defaultManager] requestReadingTime:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestReadingTime:userEntity bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 self.reading_time = [[responseObject numberForKey:@"reading_time"] integerValue];
             }

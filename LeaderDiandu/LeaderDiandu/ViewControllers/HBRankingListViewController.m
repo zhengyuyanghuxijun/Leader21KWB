@@ -220,7 +220,7 @@ static NSString * const KHBRankingListAllbookCellReuseId = @"KHBRankingListAllbo
     NSString *endDateStr = [NSString stringWithFormat:@"%.f",[endDate timeIntervalSince1970]];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestReadingRank:[NSString stringWithFormat:@"%ld", userEntity.userid] token:userEntity.token bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:@"1433248966" to_time:endDateStr completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestReadingRank:userEntity token:userEntity.token bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:@"1433248966" to_time:endDateStr completion:^(id responseObject, NSError *error) {
         if (responseObject) {
             [self.myBooksArr removeAllObjects];
             NSArray *arr = [responseObject arrayForKey:@"books"];

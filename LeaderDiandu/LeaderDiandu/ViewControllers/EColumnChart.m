@@ -61,9 +61,10 @@
     }
     
     NSInteger totalColumnsRequired = [_dataSource numberOfColumnsPresentedEveryTime:self];
-    float highestValueEColumnChart = [_dataSource highestValueEColumnChart:self].value * 1.0;
-    
-    float widthOfTheColumnShouldBe = self.frame.size.width / (float)(totalColumnsRequired + (totalColumnsRequired + 1) * 0.5);
+    float highestValueEColumnChart = 1.0;//[_dataSource highestValueEColumnChart:self].value * 1.0;
+    //modify by hxj
+    NSInteger columNum = 4;//totalColumnsRequired
+    float widthOfTheColumnShouldBe = self.frame.size.width / (float)(columNum + (columNum + 1) * 0.5);
     
     for (int i = 0; i < totalColumnsRequired; i++)
     {

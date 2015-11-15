@@ -26,6 +26,7 @@
 @interface AppDelegate ()<WXApiDelegate>
 {
     DHSlideMenuController *menuVC;
+    UIViewController      *_currentVC;
 }
 
 @end
@@ -102,10 +103,12 @@
 - (void)showLoginVC
 {
     if (_loginVC) {
-        UIViewController *curVC = self.globalNavi.visibleViewController;
-        if (curVC == _loginVC) {
+        UIViewController *curVC = self.globalNavi.topViewController;
+        NSLog(@"showLoginVC---curVC=%@", curVC);
+        if (_currentVC == _loginVC) {
             return;
         }
+        _currentVC = _loginVC;
         [self.globalNavi popToRootViewControllerAnimated:NO];
         [self.globalNavi pushViewController:_loginVC animated:YES];
     }
@@ -137,6 +140,7 @@
     [leftViewController setMenus:titleArr MenuImages:imgArray TabBarControllers:ctlArray];
     leftViewController.headerClassName = @"HBUserInfoViewController";
     menuVC.leftViewController = leftViewController;
+    _currentVC = menuVC;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

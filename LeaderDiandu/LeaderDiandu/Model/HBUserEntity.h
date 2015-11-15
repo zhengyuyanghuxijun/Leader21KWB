@@ -15,7 +15,7 @@
 @property (nonatomic, assign)NSInteger userid;
 /** gender 性别， 1-男，2-女 */
 @property (nonatomic, assign)NSInteger gender;
-/** type: 1 - 学生； 10 - 老师*/
+/** type: 1 - 学生； 10 - 老师； 20 - 教研员*/
 @property (nonatomic, assign)NSInteger type;
 @property (nonatomic, strong)NSString *display_name;
 @property (nonatomic, strong)NSString *name;

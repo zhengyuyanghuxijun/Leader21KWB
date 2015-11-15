@@ -14,10 +14,11 @@
 #import "HBExamKnowledgeEntity.h"
 #import "HBExamAbilityEntity.h"
 #import "HBTaskStatisticalCell.h"
+#import "HBTableView.h"
 
 @interface HBTaskStatisticalViewController ()<UITableViewDataSource, UITableViewDelegate>
 {
-    UITableView *_tableView;
+    HBTableView *_tableView;
 }
 
 @property (nonatomic, assign)NSInteger year;  //年
@@ -88,7 +89,7 @@
 -(void)addTableView
 {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, KHBNaviBarHeight + 50 + 50, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50 - 50)];
+        _tableView = [[HBTableView alloc] initWithFrame:CGRectMake(0.0f, KHBNaviBarHeight + 50 + 50, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50 - 50)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = NO;
@@ -384,6 +385,15 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (void)reloadTableViewByArray:(NSArray *)array
+{
+    if ([array count] > 0) {
+        [_tableView reloadData];
+    } else {
+//        [_tableView showEmptyView:@"statistics_empty" tips:@"还没有数据，请稍候刷新"];
+    }
+}
+
 -(void)requestExamKnowledge
 {
     [MBHudUtil showActivityView:nil inView:nil];
@@ -396,7 +406,7 @@
     NSString *endDateStr = [NSString stringWithFormat:@"%.f",[endDate timeIntervalSince1970]];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestExamKnowledge:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestExamKnowledge:userEntity bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
         if (responseObject) {
             [self.knowledgeArr removeAllObjects];
             NSArray *arr = [responseObject arrayForKey:@"knowledge_stat"];
@@ -406,14 +416,18 @@
                 knowledgeEntity.knowledge = [dic stringForKey:@"knowledge"];
                 knowledgeEntity.total = [[dic numberForKey:@"total"] integerValue];
                 knowledgeEntity.correct = [[dic numberForKey:@"correct"] integerValue];
-                knowledgeEntity.tag = [dic stringForKey:@"tag"];
+                if ([knowledgeEntity.knowledge integerValue] == 11) {
+                    knowledgeEntity.tag = @"惯用短语";
+                } else {
+                    knowledgeEntity.tag = [dic stringForKey:@"tag"];
+                }
                 
                 [self.knowledgeArr addObject:knowledgeEntity];
             }
         }
         [MBHudUtil hideActivityView:nil];
         
-        [_tableView reloadData];
+        [self reloadTableViewByArray:self.knowledgeArr];
     }];
 }
 
@@ -429,7 +443,7 @@
     NSString *endDateStr = [NSString stringWithFormat:@"%.f",[endDate timeIntervalSince1970]];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestExamAbility:[NSString stringWithFormat:@"%ld", userEntity.userid] bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestExamAbility:userEntity bookset_id:[NSString stringWithFormat:@"%ld", self.bookset_id] from_time:beginDateStr to_time:endDateStr completion:^(id responseObject, NSError *error) {
         if (responseObject) {
             [self.abilityArr removeAllObjects];
             NSArray *arr = [responseObject arrayForKey:@"ability_stat"];
@@ -446,7 +460,7 @@
         }
         [MBHudUtil hideActivityView:nil];
         
-        [_tableView reloadData];
+        [self reloadTableViewByArray:self.abilityArr];
     }];
 }
 

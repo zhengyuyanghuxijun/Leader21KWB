@@ -848,10 +848,14 @@
  *  @param from_time          为起始时间，单位为秒。
  *  @param to_time            为结束时间，单位为秒。
  */
-- (void)requestReadingStudent:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestReadingStudent:(HBUserEntity *)entity bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
-    [dicInfo setObject:teacher_id     forKey:@"teacher_id"];
+    if (entity.type == 10) {
+        [dicInfo setObject:@(entity.userid) forKey:@"teacher_id"];
+    } else {
+        [dicInfo setObject:@(entity.userid) forKey:@"director_id"];
+    }
     [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
     [dicInfo setObject:from_time     forKey:@"from_time"];
     [dicInfo setObject:to_time     forKey:@"to_time"];
@@ -872,10 +876,14 @@
  *  @param from_time          为起始时间，单位为秒。
  *  @param to_time            为结束时间，单位为秒。
  */
-- (void)requestReadingTimes:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestReadingTimes:(HBUserEntity *)entity bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
-    [dicInfo setObject:teacher_id     forKey:@"teacher_id"];
+    if (entity.type == 10) {
+        [dicInfo setObject:@(entity.userid) forKey:@"teacher_id"];
+    } else {
+        [dicInfo setObject:@(entity.userid) forKey:@"director_id"];
+    }
     [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
     [dicInfo setObject:from_time     forKey:@"from_time"];
     [dicInfo setObject:to_time     forKey:@"to_time"];
@@ -896,10 +904,14 @@
  *  @param from_time          为起始时间，单位为秒。
  *  @param to_time            为结束时间，单位为秒。
  */
-- (void)requestReadingTime:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestReadingTime:(HBUserEntity *)entity bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
-    [dicInfo setObject:teacher_id     forKey:@"teacher_id"];
+    if (entity.type == 10) {
+        [dicInfo setObject:@(entity.userid) forKey:@"teacher_id"];
+    } else {
+        [dicInfo setObject:@(entity.userid) forKey:@"director_id"];
+    }
     [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
     [dicInfo setObject:from_time     forKey:@"from_time"];
     [dicInfo setObject:to_time     forKey:@"to_time"];
@@ -920,12 +932,16 @@
  *  @param from_time          为起始时间，单位为秒。
  *  @param to_time            为结束时间，单位为秒。
  */
-- (void)requestReadingRank:(NSString *)teacher_id token:(NSString *)token bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestReadingRank:(HBUserEntity *)entity token:(NSString *)token bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     
-    if (teacher_id) {
-        [dicInfo setObject:teacher_id     forKey:@"teacher_id"];
+    if (entity) {
+        if (entity.type == 10) {
+            [dicInfo setObject:@(entity.userid) forKey:@"teacher_id"];
+        } else {
+            [dicInfo setObject:@(entity.userid) forKey:@"director_id"];
+        }
     }
     [dicInfo setObject:token    forKey:@"token"];
     [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
@@ -948,14 +964,19 @@
  *  @param from_time          为起始时间，单位为秒。
  *  @param to_time            为结束时间，单位为秒。
  */
-- (void)requestExamKnowledge:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestExamKnowledge:(HBUserEntity *)entity bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     
-    [dicInfo setObject:teacher_id     forKey:@"teacher_id"];
+    if (entity.type == 10) {
+        [dicInfo setObject:@(entity.userid) forKey:@"teacher_id"];
+    } else {
+        [dicInfo setObject:@(entity.userid) forKey:@"director_id"];
+    }
     [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
     [dicInfo setObject:from_time     forKey:@"from_time"];
     [dicInfo setObject:to_time     forKey:@"to_time"];
+    [dicInfo setObject:entity.token forKey:@"token"];
     
     //    if (_receivedBlock) {
     //        return;
@@ -973,11 +994,15 @@
  *  @param from_time          为起始时间，单位为秒。
  *  @param to_time            为结束时间，单位为秒。
  */
-- (void)requestExamAbility:(NSString *)teacher_id bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestExamAbility:(HBUserEntity *)entity bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     
-    [dicInfo setObject:teacher_id     forKey:@"teacher_id"];
+    if (entity.type == 10) {
+        [dicInfo setObject:@(entity.userid) forKey:@"teacher_id"];
+    } else {
+        [dicInfo setObject:@(entity.userid) forKey:@"director_id"];
+    }
     [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
     [dicInfo setObject:from_time     forKey:@"from_time"];
     [dicInfo setObject:to_time     forKey:@"to_time"];
