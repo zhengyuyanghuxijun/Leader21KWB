@@ -798,6 +798,8 @@
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WiFi设置" message:@"已开启仅用WiFi下载，请连接WiFi网络" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"设置", nil];
             alertView.tag = 1;
             [alertView show];
+        } else {
+            [LEADERSDK startDownloadBook:entity];
         }
     }
 }

@@ -138,6 +138,7 @@
 {
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[[NSBundle mainBundle] appStoreReceiptURL]];
     NSError *error = nil;
+    NSString *productIdentifier = transaction.payment.productIdentifier;
     NSData *receiptData = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:nil error:&error];
     if (receiptData&&!error) {
         NSLog(@"购买成功:%@",receiptData);
@@ -190,6 +191,22 @@
     productsRequest=nil;
 }
 
+- (void)verifyPayReceipt:(NSString *)payReceipt
+{
+    NSURL *sandboxStoreURL = [[NSURL alloc] initWithString:@"https://sandbox.itunes.apple.com/verifyReceipt"];
+    NSData *postData = [NSData dataWithBytes:[payReceipt UTF8String] length:[payReceipt length]];
+    NSMutableURLRequest *connectionRequest = [NSMutableURLRequest requestWithURL:sandboxStoreURL];
+    [connectionRequest setHTTPMethod:@"POST"];
+    [connectionRequest setTimeoutInterval:20.0];
+    [connectionRequest setCachePolicy:NSURLRequestUseProtocolCachePolicy];
+    [connectionRequest setHTTPBody:postData];
+    
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:connectionRequest returningResponse:nil error:&error];
+    NSString *str = [[NSString alloc] initWithBytes:data.bytes length:[data length] encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", str);
+}
+
 static const char base64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 - (NSString *)base64Encoding:(NSData*)convertData;
@@ -224,4 +241,30 @@ static const char base64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijk
     return [[NSString alloc] initWithBytesNoCopy:characters length:length encoding:NSASCIIStringEncoding freeWhenDone:YES];
 }
 
+- (NSString *)encode:(const uint8_t *)input length:(NSInteger)length
+{
+    static char table[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+    
+    NSMutableData *data = [NSMutableData dataWithLength:((length + 2) / 3) * 4];
+    uint8_t *output = (uint8_t *)data.mutableBytes;
+    
+    for (NSInteger i = 0; i < length; i += 3) {
+        NSInteger value = 0;
+        for (NSInteger j = i; j < (i + 3); j++) {
+            value <<= 8;
+            
+            if (j < length) {
+                value |= (0xFF & input[j]);
+            }
+        }
+        
+        NSInteger index = (i / 3) * 4;
+        output[index + 0] =                    table[(value >> 18) & 0x3F];
+        output[index + 1] =                    table[(value >> 12) & 0x3F];
+        output[index + 2] = (i + 1) < length ? table[(value >> 6)  & 0x3F] : '=';
+        output[index + 3] = (i + 2) < length ? table[(value >> 0)  & 0x3F] : '=';
+    }
+    
+    return [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+}
 @end

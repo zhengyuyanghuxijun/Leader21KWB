@@ -36,12 +36,12 @@
         //@[@"10(不打折)", @"30(95折)", @"60(9折)", @"120(85折)", @"240(8折)", @"360(75折)"]
 #if KShowDiscount
         self.timeArray = @[@"1月", @"1季", @"半年", @"1年", @"2年", @"3年"];
-        self.moneyArr = @[@"12", @"30", @"60", @"118", @"240", @"360"];
+        self.moneyArr = @[@"12元", @"30元", @"60元", @"118元", @"240元", @"360元"];
         self.discountArr = @[@"1.0", @"0.95", @"0.9", @"0.85", @"0.8", @"0.75"];
         self.discountCNArr = @[@"", @"95折", @"9折", @"85折", @"8折", @"75折"];
 #else
         self.timeArray = @[@"1月", @"1季", @"半年", @"1年"];
-        self.moneyArr = @[@"12", @"30", @"60", @"118"];
+        self.moneyArr = @[@"12元", @"30元", @"60元", @"118元"];
 #endif
         [self initUI];
     }
@@ -95,7 +95,7 @@
     
     self.moneyLabel = [[UILabel alloc] init];
     self.moneyLabel.frame = CGRectMake(ScreenWidth-80-20, controlY, 80, controlH);
-    self.moneyLabel.text = @"10.0元";
+    self.moneyLabel.text = @"12.0元";
     self.moneyLabel.textColor = KLeaderRGB;
     self.moneyLabel.textAlignment = NSTextAlignmentRight;
     self.moneyLabel.font = [UIFont boldSystemFontOfSize:20];
