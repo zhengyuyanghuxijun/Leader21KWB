@@ -23,8 +23,11 @@
 #import "HHAlertSingleView.h"
 
 #define KEnableThirdPay 0
+
+#define KHBPayUserID    @"HBPayUserID"
 #define KHBPayReceipt   @"HBPayReceipt"
 #define KHBPayMonths    @"HBPayMonths"
+#define KHBPayTransID   @"HBPayTransactionID"
 
 #define KLeaderAliPay   @"zfb"
 #define KLeaderWXPay    @"tenpay"
@@ -107,15 +110,16 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 {
     [super viewDidAppear:animated];
     
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    NSString *payReceipt = [userDefault objectForKey:KHBPayReceipt];
-    if (payReceipt) {
+    NSDictionary *payDic = [userDefault objectForKey:userEntity.name];
+    if (payDic) {
         //提示用户恢复充值，重新连接服务器
         [HHAlertSingleView showAlertWithStyle:HHAlertStyleOk inView:[UIApplication sharedApplication].keyWindow Title:@"恢复支付" detail:@"上一次支付有误，\r\n点击“确定”恢复支付" cancelButton:nil Okbutton:@"确定" block:^(HHAlertButton buttonindex) {
             //延时触发，避免两个弹框冲突
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self showMBProgressHUD:@"恢复支付"];
-                [self inAppPurchase_ConnectServer:payReceipt transactionID:@""];
+                [self inAppPurchase_ConnectServer:payDic[KHBPayReceipt] transactionID:payDic[KHBPayTransID]];
             });
         }];
     }
@@ -497,12 +501,13 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 -(void)inAppPurchase_ConnectServer:(NSString*)payReceipt transactionID:(NSString *)transactionID
 {
     self.progressView.detailsLabelText = @"连接服务器";
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     NSInteger month = self.months;
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    if ([userDefault objectForKey:KHBPayMonths]) {
-        month = [[userDefault objectForKey:KHBPayMonths] integerValue];
+    NSDictionary *payDic = [userDefault objectForKey:userEntity.name];
+    if (payDic) {
+        month = [payDic[KHBPayMonths] integerValue];
     }
-    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     [[HBServiceManager defaultManager] requestIAPNotify:userEntity.name token:userEntity.token total_fee:_payMonthDic[@(month)] quantity:month payReceipt:payReceipt transactionID:transactionID completion:^(id responseObject, NSError *error) {
         NSString *result = nil;
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -510,13 +515,15 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
         }
         if ([result isEqualToString:@"OK"]) {
             //充值成功，删除payReceipt
-            [userDefault removeObjectForKey:KHBPayReceipt];
-            [userDefault removeObjectForKey:KHBPayMonths];
+            [userDefault removeObjectForKey:userEntity.name];
             [MBHudUtil showTextViewAfter:@"支付成功"];
         } else {
             //存储payReceipt
-            [userDefault setObject:payReceipt forKey:KHBPayReceipt];
-            [userDefault setObject:@(_months) forKey:KHBPayMonths];
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setObject:transactionID forKey:KHBPayTransID];
+            [dic setObject:payReceipt forKey:KHBPayReceipt];
+            [dic setObject:@(_months) forKey:KHBPayMonths];
+            [userDefault setObject:dic forKey:userEntity.name];
             [userDefault synchronize];
             [MBHudUtil showTextViewAfter:@"支付失败"];
         }

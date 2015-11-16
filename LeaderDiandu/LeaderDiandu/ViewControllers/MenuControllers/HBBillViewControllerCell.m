@@ -45,7 +45,7 @@
     
     //内容
     self.bodyLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + 30 + 10, KCellHeight/2-10, 250, KCellHeight/2)];
-    self.bodyLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
+    self.bodyLabel.font = [UIFont systemFontOfSize:LABELFONTSIZE];
     self.bodyLabel.numberOfLines = 0;
     [self addSubview:self.bodyLabel];
     
@@ -100,7 +100,7 @@
     if (range.length > 0) {
         return [body substringToIndex:range.location];
     } else {
-        return @"";
+        return body;
     }
 }
 

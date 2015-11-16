@@ -10,6 +10,7 @@
 
 @interface HBBillEntity : NSObject
 
+@property (nonatomic, assign)NSNumber *billID;
 //1-支付宝；2-微信支付；3-VIP码支付
 @property (nonatomic, strong)NSString *type;
 @property (nonatomic, strong)NSString *subject;

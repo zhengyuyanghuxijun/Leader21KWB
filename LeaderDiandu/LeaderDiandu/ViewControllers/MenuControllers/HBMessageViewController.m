@@ -94,7 +94,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
                         HBSystemMsgEntity *entity1 = obj1;
                         HBSystemMsgEntity *entity2 = obj2;
                         NSComparisonResult result = [entity1.systemMsgId compare:entity2.systemMsgId];
-                        return result == NSOrderedAscending;//升序
+                        return result == NSOrderedAscending;
                     }];
                     [_tableView reloadData];
                 

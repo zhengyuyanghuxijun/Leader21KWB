@@ -20,7 +20,7 @@ static NSString * const KHBBillViewControllerCellReuseId = @"KHBBillViewControll
     UITableView *_tableView;
 }
 
-@property (nonatomic, strong) NSMutableArray *billArr;
+@property (nonatomic, strong) NSArray *billArr;
 
 @end
 
@@ -31,7 +31,6 @@ static NSString * const KHBBillViewControllerCellReuseId = @"KHBBillViewControll
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.billArr = [[NSMutableArray alloc] initWithCapacity:1];
     }
     return self;
 }
@@ -79,13 +78,11 @@ static NSString * const KHBBillViewControllerCellReuseId = @"KHBBillViewControll
             [MBHudUtil hideActivityView:nil];
             
             NSArray *arr = [responseObject objectForKey:@"payments"];
-            if (arr.count > 0) {
-                [self.billArr removeAllObjects];
-            }
-            
+            NSMutableArray *billArr = [[NSMutableArray alloc] init];
             for (NSDictionary *dic in arr)
             {
                 HBBillEntity *billEntity = [[HBBillEntity alloc] init];
+                billEntity.billID = [dic numberForKey:@"id"];
                 billEntity.type = [NSString stringWithFormat:@"%ld", (long)[dic integerForKey:@"type"]];
                 billEntity.subject = [dic stringForKey:@"subject"];
                 billEntity.body = [dic stringForKey:@"body"];
@@ -94,7 +91,15 @@ static NSString * const KHBBillViewControllerCellReuseId = @"KHBBillViewControll
                 billEntity.status = [NSString stringWithFormat:@"%ld", (long)[dic integerForKey:@"status"]];
                 billEntity.total_fee = [dic stringForKey:@"total_fee"];
                 
-                [self.billArr addObject:billEntity];
+                [billArr addObject:billEntity];
+            }
+            if ([billArr count] > 0) {
+                self.billArr = [billArr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                    HBBillEntity *entity1 = obj1;
+                    HBBillEntity *entity2 = obj2;
+                    NSComparisonResult result = [entity1.billID compare:entity2.billID];
+                    return result == NSOrderedAscending;
+                }];
             }
             
             [_tableView reloadData];
@@ -127,7 +132,7 @@ static NSString * const KHBBillViewControllerCellReuseId = @"KHBBillViewControll
         cell = [[HBBillViewControllerCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KHBBillViewControllerCellReuseId];
     }
     
-    HBBillEntity *billEntity = [self.billArr objectAtIndex:(self.billArr.count - 1 - indexPath.row)];
+    HBBillEntity *billEntity = [self.billArr objectAtIndex:(indexPath.row)];
     [cell updateFormData:billEntity];
     
     cell.backgroundColor = [UIColor clearColor];
