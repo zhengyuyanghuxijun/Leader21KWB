@@ -13,16 +13,17 @@
 #import "HBServiceManager.h"
 #import "HBDataSaveManager.h"
 
+#import "HBSKPayService.h"
+#import "MBProgressHUD.h"
+#import "HHAlertSingleView.h"
+
+#if KEnableThirdPay
 #import <AlipaySDK/AlipaySDK.h>
 #import "Order.h"
 #import "DataSigner.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
-#import "HBSKPayService.h"
-#import "MBProgressHUD.h"
-#import "HHAlertSingleView.h"
-
-#define KEnableThirdPay 0
+#endif
 
 #define KHBPayUserID    @"HBPayUserID"
 #define KHBPayReceipt   @"HBPayReceipt"
@@ -219,11 +220,11 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     if (0 == section) {
         return 1;
     } else {
-        if (KEnableThirdPay) {
-            return 4;
-        } else {
-            return 1;
-        }
+#if KEnableThirdPay
+        return 4;
+#else
+        return 1;
+#endif
     }
 }
 
@@ -347,6 +348,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 
 - (void)handleAliPay:(NSDictionary *)orderDict
 {
+#if KEnableThirdPay
     NSDictionary *paymentDict = [orderDict dicForKey:@"payment_params"];
     
     Order *order = [[Order alloc] init];
@@ -378,12 +380,14 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
             NSLog(@"reslut = %@",resultDic);
         }];
     }
+#endif
 }
 
 #pragma mark - WXPay
 
 - (void)handleWXPay:(NSDictionary *)orderDict
 {
+#if KEnableThirdPay
     //从服务器获取支付参数，服务端自定义处理逻辑和格式
     NSDictionary *orderParams = orderDict[@"order_params"];
     if ( orderParams != nil) {
@@ -403,6 +407,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
         req.sign                = [orderParams objectForKey:@"sign"];
         [WXApi sendReq:req];
     }
+#endif
 }
 
 - (void)showMBProgressHUD:(NSString *)string

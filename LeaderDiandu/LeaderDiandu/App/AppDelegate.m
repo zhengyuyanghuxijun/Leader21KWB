@@ -19,11 +19,13 @@
 #import "Constants.h"
 #import "HBVersionCheck.h"
 
+#if KEnableThirdPay
 #import "NSString+Extra.h"
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
+#endif
 
-@interface AppDelegate ()<WXApiDelegate>
+@interface AppDelegate ()/*<WXApiDelegate>*/
 {
     DHSlideMenuController *menuVC;
     UIViewController      *_currentVC;
@@ -167,6 +169,7 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+#if KEnableThirdPay
     //跳转支付宝钱包进行支付，处理支付结果
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
@@ -185,10 +188,12 @@
     } else if ([url.absoluteString rangeOfString:self.wxAppId].length > 0) {
         [WXApi handleOpenURL:url delegate:self];
     }
+#endif
     
     return YES;
 }
 
+#if KEnableThirdPay
 - (void)onReq:(BaseReq *)req
 {
     
@@ -227,6 +232,7 @@
         [MBHudUtil showTextViewAfter:@"支付失败"];
     }
 }
+#endif
 
 //resultStatus，状态码：9000 订单支付成功；8000 正在处理中；4000 订单支付失败；6001 用户中途取消；6002 网络连接出错
 

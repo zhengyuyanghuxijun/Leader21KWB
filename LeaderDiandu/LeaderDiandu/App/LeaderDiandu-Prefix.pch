@@ -18,6 +18,8 @@
 
 #define LEADER_SERVICE_RELEASE  1
 
+#define KEnableThirdPay 0
+
 #if LEADER_SERVICE_RELEASE
     #define KAppKeyKWB      @"3164809f635225668555a168d42b8f4c908aa02e"
     #define SERVICEAPI      @"http://reader.61dear.com"
