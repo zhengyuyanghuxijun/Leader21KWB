@@ -93,9 +93,10 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
                     self.msgArr = [msgArr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
                         HBSystemMsgEntity *entity1 = obj1;
                         HBSystemMsgEntity *entity2 = obj2;
-                        NSComparisonResult result = [entity1.systemMsgId compare:entity2.systemMsgId];
+                        NSComparisonResult result = [entity1.created_time compare:entity2.created_time];
                         return result == NSOrderedAscending;
                     }];
+                    
                     [_tableView reloadData];
                 
                     //获取消息成功保存数据库
