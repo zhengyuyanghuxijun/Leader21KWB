@@ -119,7 +119,7 @@
         return;
     }
     self.receivedBlock = receivedBlock;
-    [self Post:@"/api/auth/smscodev2/v2" dict:dicInfo block:receivedBlock];
+    [self Post:@"/api/auth/smscode/v2" dict:dicInfo block:receivedBlock];
 }
 
 - (void)requestUserInfo:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock
