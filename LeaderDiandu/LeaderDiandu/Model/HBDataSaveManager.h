@@ -28,6 +28,7 @@
 
 - (void)setUserEntityByDict:(NSDictionary *)dict;
 - (void)updateDisplayName:(NSDictionary *)dict;
+- (void)updatePhoneByStr:(NSString *)phone;
 
 - (void)saveUserByDict:(NSDictionary *)dict pwd:(NSString *)pwd;
 - (NSDictionary *)loadUser;

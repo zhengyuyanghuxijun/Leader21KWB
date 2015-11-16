@@ -75,6 +75,7 @@
     [codeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
     [codeBtn setTitleColor:KLeaderRGB forState:UIControlStateNormal];
     [codeBtn addTarget:self action:@selector(codeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.getCodeButton = codeBtn;
     [editBg addSubview:codeBtn];
     
     controlX = 20;
@@ -87,7 +88,6 @@
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button setTitle:@"确认修改" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(modifyButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.getCodeButton = button;
     [self.view addSubview:button];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToHideKeyboard:)];
@@ -152,10 +152,15 @@
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     [[HBServiceManager defaultManager] requestUpdatePhone:userEntity.name token:userEntity.token phone:phoneNum sms_code:codeNum code_id:self.smsDict[@"code_id"] completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
-        if ([[responseObject objectForKey:@"result"] isEqualToString:@"OK"]) {
-            [MBHudUtil showTextViewAfter:@"绑定手机成功"];
-            
-            [self.navigationController popViewControllerAnimated:YES];
+        if (error == nil) {
+            NSString *phone = [responseObject objectForKey:@"phone"];
+            if (phone) {
+                [[HBDataSaveManager defaultManager] updatePhoneByStr:phone];
+                [MBHudUtil showTextViewAfter:@"绑定手机成功"];
+                [self.navigationController popViewControllerAnimated:YES];
+            } else {
+                [MBHudUtil showTextViewAfter:@"绑定手机失败"];
+            }
         } else {
             [MBHudUtil showTextViewAfter:@"绑定手机失败"];
         }

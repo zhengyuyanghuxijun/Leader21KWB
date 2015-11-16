@@ -8,6 +8,7 @@
 
 #import "HBMyWorkView.h"
 #import "HBTestWorkManager.h"
+#import "HBDataSaveManager.h"
 #import "HBOptionView.h"
 //#import "HBOptionButton.h"
 #import "MBHudUtil.h"
@@ -341,8 +342,9 @@ typedef enum : NSUInteger {
     
     //若不是最后一题，显示“下一题”，若是最后一题，则未提交过的显示“交作业”。已提交过的显示“完成”
     BOOL isLast = [_workManager isLastObject];
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (isLast) {
-        if ([score length] > 0) {
+        if ([score length] > 0 || userEntity.type > 1) {
             [_finishButton setTitle:@"完成" forState:UIControlStateNormal];
         } else {
             [_finishButton setTitle:@"交作业" forState:UIControlStateNormal];

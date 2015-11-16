@@ -42,13 +42,15 @@
     CGSize viewSize = self.frame.size;
     float imgSide = 80;
     float controlX = (viewSize.width-imgSide) / 2;
-    float controlY = viewSize.height / 3;
-    UIImageView *emptyImg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, imgSide, imgSide)];
-    emptyImg.image = [UIImage imageNamed:icon];
-    [_emptyView addSubview:emptyImg];
+    float controlY = viewSize.height / 4;
+    if (icon) {
+        UIImageView *emptyImg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, imgSide, imgSide)];
+        emptyImg.image = [UIImage imageNamed:icon];
+        [_emptyView addSubview:emptyImg];
+        controlY += imgSide + 20;
+    }
     
     controlX = 0;
-    controlY += imgSide + 20;
     UILabel *emptyLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, viewSize.width, 20)];
     emptyLbl.backgroundColor = [UIColor clearColor];
     emptyLbl.textColor = [UIColor lightGrayColor];

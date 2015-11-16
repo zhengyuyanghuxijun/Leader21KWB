@@ -51,6 +51,17 @@
     [userDefault synchronize];
 }
 
+- (void)updatePhoneByStr:(NSString *)phone
+{
+    NSDictionary *userDict = [self loadUser];
+    self.userEntity.phone = phone;
+    NSMutableDictionary *mutDict = [NSMutableDictionary dictionaryWithDictionary:userDict];
+    mutDict[@"phone"] = phone;
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:mutDict forKey:KWBDefaultUser];
+    [userDefault synchronize];
+}
+
 - (void)saveUserByDict:(NSDictionary *)dict pwd:(NSString *)pwd
 {
     self.userEntity = [[HBUserEntity alloc] initWithDictionary:dict];

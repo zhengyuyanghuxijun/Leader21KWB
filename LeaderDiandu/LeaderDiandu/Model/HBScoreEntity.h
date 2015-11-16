@@ -10,6 +10,7 @@
 
 @interface HBScoreEntity : NSObject
 
+@property (nonatomic, strong)NSString *name;
 @property (nonatomic, strong)NSString *displayName;
 @property (nonatomic, strong)NSString *taskTime;
 @property (nonatomic, strong)NSString *score;

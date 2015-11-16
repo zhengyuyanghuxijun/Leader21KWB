@@ -200,14 +200,14 @@
 {
     self.isShowKnowledge = YES;
     [self showKnowledgeView:YES];
-    [_tableView reloadData];
+    [self reloadTableViewByArray];
 }
 
 -(void)abilityButtonPressed
 {
     self.isShowKnowledge = NO;
     [self showKnowledgeView:NO];
-    [_tableView reloadData];
+    [self reloadTableViewByArray];
 }
 
 -(void)leftButtonPressed
@@ -219,7 +219,7 @@
     self.weekOfYear = [components weekOfYear];
     
     self.dateLabel.text = [NSString stringWithFormat:@"%ld年%ld周", self.year, self.weekOfYear];
-    [_tableView reloadData];
+    [self reloadTableViewByArray];
     
     //作业知识点统计
     [self requestExamKnowledge];
@@ -233,6 +233,7 @@
     
     NSComparisonResult result = [newDate compare:[NSDate date]];
     if (result == NSOrderedDescending) { //如果日期大于当前日期了，就不执行了
+        [MBHudUtil showTextView:@"已到达最新日期" inView:nil];
         return;
     }
     
@@ -242,7 +243,7 @@
     self.weekOfYear = [components weekOfYear];
     
     self.dateLabel.text = [NSString stringWithFormat:@"%ld年%ld周", self.year, self.weekOfYear];
-    [_tableView reloadData];
+    [self reloadTableViewByArray];
     
     //作业知识点统计
     [self requestExamKnowledge];
@@ -258,7 +259,7 @@
     self.weekOfYear = [components weekOfYear];
     
     self.dateLabel.text = [NSString stringWithFormat:@"%ld年%ld周", self.year, self.weekOfYear];
-    [_tableView reloadData];
+    [self reloadTableViewByArray];
     
     //作业知识点统计
     [self requestExamKnowledge];
@@ -385,12 +386,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)reloadTableViewByArray:(NSArray *)array
+- (void)reloadTableViewByArray
 {
-    if ([array count] > 0) {
-        [_tableView reloadData];
-    } else {
-//        [_tableView showEmptyView:@"statistics_empty" tips:@"还没有数据，请稍候刷新"];
+    NSMutableArray *arr = nil;
+    if (self.isShowKnowledge) {
+        arr = self.knowledgeArr;
+    }else{
+        arr = self.abilityArr;
+    }
+    [_tableView reloadData];
+    if ([arr count] == 0) {
+        [_tableView showEmptyView:nil tips:@"还没有数据，请稍候刷新"];
     }
 }
 
@@ -427,7 +433,7 @@
         }
         [MBHudUtil hideActivityView:nil];
         
-        [self reloadTableViewByArray:self.knowledgeArr];
+        [self reloadTableViewByArray];
     }];
 }
 
@@ -460,7 +466,7 @@
         }
         [MBHudUtil hideActivityView:nil];
         
-        [self reloadTableViewByArray:self.abilityArr];
+        [self reloadTableViewByArray];
     }];
 }
 

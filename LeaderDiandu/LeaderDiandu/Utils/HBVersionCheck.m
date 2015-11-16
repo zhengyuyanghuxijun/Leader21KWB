@@ -82,6 +82,9 @@
 //将json 格式的原始数据转解析成数据字典
 -(NSMutableDictionary *)dictionaryFromJsonFormatOriginalData:(NSString *)str
 {
+    if (str == nil) {
+        return nil;
+    }
     NSError *error = nil;
     NSData *jsonData = [str dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableDictionary *tempDictionary = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&error];

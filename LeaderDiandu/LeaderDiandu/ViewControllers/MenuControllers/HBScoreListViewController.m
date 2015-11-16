@@ -11,6 +11,7 @@
 #import "HBServiceManager.h"
 #import "HBScoreEntity.h"
 #import "TimeIntervalUtils.h"
+#import "HBHeaderManager.h"
 
 static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewControllerCellReuseId";
 
@@ -65,8 +66,20 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
 -(void)updateFormData:(id)sender
 {
     HBScoreEntity *scoreEntity = (HBScoreEntity*)sender;
-    
     if (scoreEntity) {
+        NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:scoreEntity.name];
+        if (headFile) {
+            //设置显示圆形头像
+            self.cellHeadImage.layer.cornerRadius = 50/2;
+            self.cellHeadImage.clipsToBounds = YES;
+            self.cellHeadImage.image = [UIImage imageWithContentsOfFile:headFile];
+            if (self.cellHeadImage.image == nil) {
+                self.cellHeadImage.image = [UIImage imageNamed:@"menu_user_pohoto"];
+            }
+        } else {
+            self.cellHeadImage.image = [UIImage imageNamed:@"menu_user_pohoto"];
+        }
+
         self.cellName.text = scoreEntity.displayName;
         self.cellTime.text = scoreEntity.taskTime;
         if (scoreEntity.score) {
@@ -140,6 +153,16 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
     [self.view addSubview:_tableView];
 }
 
+- (void)getHeaderAvatar:(NSString *)nameStr
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    [[HBHeaderManager defaultManager] requestGetAvatar:nameStr token:userEntity.token completion:^(id responseObject, NSError *error) {
+        if (error.code == 0) {
+            [_tableView reloadData];
+        }
+    }];
+}
+
 -(void)requestUserScore
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
@@ -151,10 +174,10 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
                 for (NSDictionary *dic in arr)
                 {
                     HBScoreEntity *scoreEntity = [[HBScoreEntity alloc] init];
+                    scoreEntity.name = [dic objectForKey:@"name"];
                     NSString *displayName = [dic objectForKey:@"display_name"];
                     if ([displayName isEqualToString:@""]) {
-                        NSString *name = [dic objectForKey:@"name"];
-                        scoreEntity.displayName = name;
+                        scoreEntity.displayName = scoreEntity.name;
                     }else{
                         scoreEntity.displayName = displayName;
                     }
@@ -169,6 +192,8 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
                         scoreEntity.score = scoreStr;
                     }
                     [self.scoreEntityArr addObject:scoreEntity];
+                    //获取头像
+                    [self getHeaderAvatar:dic[@"name"]];
                 }
                 
                 if (self.scoreEntityArr.count > 0) {

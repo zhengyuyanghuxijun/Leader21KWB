@@ -72,7 +72,7 @@
     [_inputPhoneNumber setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
     [accountView addSubview:_inputPhoneNumber];
     
-    float buttonW = 90;
+    float buttonW = 120;
     controlY += controlH+margin;
     controlW -= buttonW+30;
     self.inputVerifyCode = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
@@ -108,7 +108,7 @@
     controlW = screenW - controlX*2;
     controlH = 45;
     self.finishButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-    [_finishButton setTitle:@"下一步" forState:UIControlStateNormal];
+    [_finishButton setTitle:@"提交" forState:UIControlStateNormal];
     _finishButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
     [_finishButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_finishButton setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
@@ -222,7 +222,11 @@
         return;
     }
     
-    [[HBServiceManager defaultManager] requestSmsCode:nil token:nil phone:phoneNum service_type:HBRequestSmsByRegister completion:^(id responseObject, NSError *error) {
+    HBRequestSmsType smsType = HBRequestSmsByRegister;
+    if (self.viewType == KLeaderViewTypeForgetPwd) {
+        smsType = HBRequestSmsByForgetPwd;
+    }
+    [[HBServiceManager defaultManager] requestSmsCode:nil token:nil phone:phoneNum service_type:smsType completion:^(id responseObject, NSError *error) {
         if (error.code == 0) {
             self.smsDict = responseObject;
             //发送了 验证码 进入倒计时
@@ -233,6 +237,11 @@
                 return ;
             }
             self.mtimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(beginCountDow) userInfo:nil repeats:YES];
+        } else {
+            if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                NSString *msg = [responseObject objectForKey:@"msg"];
+                [MBHudUtil showTextViewAfter:msg];
+            }
         }
     }];
 }
@@ -248,7 +257,7 @@
         self.mtimer = nil;
     }else{
         _getCodeButton.userInteractionEnabled = NO;
-        [_getCodeButton setTitle:[NSString stringWithFormat:@"%d秒后重新获取", _countDownNum] forState:UIControlStateNormal];
+        [_getCodeButton setTitle:[NSString stringWithFormat:@"%d秒后重试", _countDownNum] forState:UIControlStateNormal];
     }
     self.countDownNum--;
 }
