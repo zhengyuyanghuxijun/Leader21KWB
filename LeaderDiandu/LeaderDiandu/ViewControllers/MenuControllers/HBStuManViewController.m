@@ -17,13 +17,14 @@
 #import "HBCreatGroupController.h"
 #import "HBSetStuController.h"
 #import "HBHeaderManager.h"
+#import "HBTableView.h"
 
 static NSString * const KStudentCellAccessoryReuseId = @"KStudentCellAccessoryReuseId";
 static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseId";
 
 @interface HBStuManViewController ()<UITableViewDataSource, UITableViewDelegate, UnbundlingDelegate, DissolveDelegate, CreatGroupDelegate>
 {
-    UITableView *_tableView;
+    HBTableView *_tableView;
 }
 
 @property (nonatomic, strong) UIButton* studentButton;
@@ -139,7 +140,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
 -(void)addTableView
 {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] init];
+        _tableView = [[HBTableView alloc] init];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = NO;
@@ -338,6 +339,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     if (userEntity) {
         NSString *user = userEntity.name;
         [[HBServiceManager defaultManager] requestClassList:user completion:^(id responseObject, NSError *error) {
+            
             NSArray *arr = [responseObject objectForKey:@"classes"];
             if (arr.count > 0) {
                 self.num = 0;
@@ -365,6 +367,10 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
                         [_tableView reloadData];
                     }
                 }];
+            }
+            if ([self.groupArr count] == 0) {
+                [MBHudUtil hideActivityView:nil];
+                [_tableView showEmptyView:nil tips:@"您还没有群组，赶快添加吧"];
             }
         }];
     }

@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "HBUserEntity.h"
 
+#define KSaveDefaultUser    0
+
+#define KWBDefaultAccount   @"KWBDefaultAccount"
+#define KWBDefaultUser      @"KWBDefaultUser"
+#define KWBDefaultPwd       @"KWBDefaultPwd"
+
 #define KWBDefaultUser      @"KWBDefaultUser"
 #define KHBSettingData      @"KHBSettingData"
 #define KHBFirstLogin       @"KHBFirstLogin"
@@ -29,6 +35,9 @@
 - (void)setUserEntityByDict:(NSDictionary *)dict;
 - (void)updateDisplayName:(NSDictionary *)dict;
 - (void)updatePhoneByStr:(NSString *)phone;
+
+- (void)saveDefaultAccount:(NSString *)user pwd:(NSString *)pwd;
+- (NSDictionary *)loadDefaultAccount;
 
 - (void)saveUserByDict:(NSDictionary *)dict pwd:(NSString *)pwd;
 - (NSDictionary *)loadUser;

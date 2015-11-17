@@ -29,14 +29,6 @@
 		0D143F551BD7761A00F5D9EE /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D143F541BD7761A00F5D9EE /* CoreTelephony.framework */; };
 		0D143F571BD7765D00F5D9EE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D143F561BD7765D00F5D9EE /* CoreText.framework */; };
 		0D143F591BD7768100F5D9EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D143F581BD7768100F5D9EE /* CoreGraphics.framework */; };
-		0D143F6F1BD7FA2000F5D9EE /* base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F5F1BD7FA2000F5D9EE /* base64.m */; };
-		0D143F701BD7FA2000F5D9EE /* DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F621BD7FA2000F5D9EE /* DataSigner.m */; };
-		0D143F711BD7FA2000F5D9EE /* DataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F641BD7FA2000F5D9EE /* DataVerifier.m */; };
-		0D143F721BD7FA2000F5D9EE /* MD5DataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F661BD7FA2000F5D9EE /* MD5DataSigner.m */; };
-		0D143F731BD7FA2000F5D9EE /* NSDataEx.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F681BD7FA2000F5D9EE /* NSDataEx.m */; };
-		0D143F741BD7FA2000F5D9EE /* openssl_wrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F6A1BD7FA2000F5D9EE /* openssl_wrapper.m */; };
-		0D143F751BD7FA2000F5D9EE /* RSADataSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F6C1BD7FA2000F5D9EE /* RSADataSigner.m */; };
-		0D143F761BD7FA2000F5D9EE /* RSADataVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F6E1BD7FA2000F5D9EE /* RSADataVerifier.m */; };
 		0D143FC61BD7FBD300F5D9EE /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D143FC51BD7FBD300F5D9EE /* libssl.a */; };
 		0D1440141BD8138A00F5D9EE /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1440131BD8138A00F5D9EE /* libcrypto.a */; };
 		0D2677091BF0E1FD006FB4ED /* HBVersionCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2677081BF0E1FD006FB4ED /* HBVersionCheck.m */; };
@@ -317,23 +309,6 @@
 		0D143F541BD7761A00F5D9EE /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		0D143F561BD7765D00F5D9EE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		0D143F581BD7768100F5D9EE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		0D143F5E1BD7FA2000F5D9EE /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
-		0D143F5F1BD7FA2000F5D9EE /* base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = base64.m; sourceTree = "<group>"; };
-		0D143F601BD7FA2000F5D9EE /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
-		0D143F611BD7FA2000F5D9EE /* DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSigner.h; sourceTree = "<group>"; };
-		0D143F621BD7FA2000F5D9EE /* DataSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSigner.m; sourceTree = "<group>"; };
-		0D143F631BD7FA2000F5D9EE /* DataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataVerifier.h; sourceTree = "<group>"; };
-		0D143F641BD7FA2000F5D9EE /* DataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataVerifier.m; sourceTree = "<group>"; };
-		0D143F651BD7FA2000F5D9EE /* MD5DataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5DataSigner.h; sourceTree = "<group>"; };
-		0D143F661BD7FA2000F5D9EE /* MD5DataSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5DataSigner.m; sourceTree = "<group>"; };
-		0D143F671BD7FA2000F5D9EE /* NSDataEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataEx.h; sourceTree = "<group>"; };
-		0D143F681BD7FA2000F5D9EE /* NSDataEx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataEx.m; sourceTree = "<group>"; };
-		0D143F691BD7FA2000F5D9EE /* openssl_wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = openssl_wrapper.h; sourceTree = "<group>"; };
-		0D143F6A1BD7FA2000F5D9EE /* openssl_wrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = openssl_wrapper.m; sourceTree = "<group>"; };
-		0D143F6B1BD7FA2000F5D9EE /* RSADataSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataSigner.h; sourceTree = "<group>"; };
-		0D143F6C1BD7FA2000F5D9EE /* RSADataSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataSigner.m; sourceTree = "<group>"; };
-		0D143F6D1BD7FA2000F5D9EE /* RSADataVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSADataVerifier.h; sourceTree = "<group>"; };
-		0D143F6E1BD7FA2000F5D9EE /* RSADataVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSADataVerifier.m; sourceTree = "<group>"; };
 		0D143FC51BD7FBD300F5D9EE /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
 		0D1440131BD8138A00F5D9EE /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		0D2677071BF0E1FD006FB4ED /* HBVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBVersionCheck.h; sourceTree = "<group>"; };
@@ -748,30 +723,6 @@
 			path = DBResources;
 			sourceTree = "<group>";
 		};
-		0D143F5D1BD7FA2000F5D9EE /* RSADataSigner */ = {
-			isa = PBXGroup;
-			children = (
-				0D143F5E1BD7FA2000F5D9EE /* base64.h */,
-				0D143F5F1BD7FA2000F5D9EE /* base64.m */,
-				0D143F601BD7FA2000F5D9EE /* config.h */,
-				0D143F611BD7FA2000F5D9EE /* DataSigner.h */,
-				0D143F621BD7FA2000F5D9EE /* DataSigner.m */,
-				0D143F631BD7FA2000F5D9EE /* DataVerifier.h */,
-				0D143F641BD7FA2000F5D9EE /* DataVerifier.m */,
-				0D143F651BD7FA2000F5D9EE /* MD5DataSigner.h */,
-				0D143F661BD7FA2000F5D9EE /* MD5DataSigner.m */,
-				0D143F671BD7FA2000F5D9EE /* NSDataEx.h */,
-				0D143F681BD7FA2000F5D9EE /* NSDataEx.m */,
-				0D143F691BD7FA2000F5D9EE /* openssl_wrapper.h */,
-				0D143F6A1BD7FA2000F5D9EE /* openssl_wrapper.m */,
-				0D143F6B1BD7FA2000F5D9EE /* RSADataSigner.h */,
-				0D143F6C1BD7FA2000F5D9EE /* RSADataSigner.m */,
-				0D143F6D1BD7FA2000F5D9EE /* RSADataVerifier.h */,
-				0D143F6E1BD7FA2000F5D9EE /* RSADataVerifier.m */,
-			);
-			path = RSADataSigner;
-			sourceTree = "<group>";
-		};
 		0D3F6D121BAE8E67005B4358 /* HBMyWorkViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -980,7 +931,6 @@
 		0D7488821B8A2973007BE4CD /* Third */ = {
 			isa = PBXGroup;
 			children = (
-				0D143F5D1BD7FA2000F5D9EE /* RSADataSigner */,
 				0DB5370D1B8F5DEE0023A3F7 /* AFNetworking */,
 				0D7488831B8A2973007BE4CD /* MD5 */,
 				0D018FF51B980E8200A92F59 /* UIKit+AFNetworking */,
@@ -1695,9 +1645,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DD214781B9601DA009E3DB9 /* HBMessageViewController.m in Sources */,
-				0D143F6F1BD7FA2000F5D9EE /* base64.m in Sources */,
 				18C316881BA07F11004F716E /* HBGroupSelectViewController.m in Sources */,
-				0D143F751BD7FA2000F5D9EE /* RSADataSigner.m in Sources */,
 				187AD6471BC6834C00E592F4 /* HBLeaderUnbindingCell.m in Sources */,
 				18B5FD311B983930002CCD95 /* FTMenu.m in Sources */,
 				18C650021B9DF1CA0040E349 /* HBScoreEntity.m in Sources */,
@@ -1724,7 +1672,6 @@
 				0DD2146C1B95FF3B009E3DB9 /* HBMyTeacherViewController.m in Sources */,
 				1810C7061BD9474A00899BD0 /* HBExamAbilityEntity.m in Sources */,
 				18AB8F531BB9918D00409103 /* FTRotatingCircle.m in Sources */,
-				0D143F721BD7FA2000F5D9EE /* MD5DataSigner.m in Sources */,
 				0D7488921B8A2973007BE4CD /* NSData+MD5.m in Sources */,
 				181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */,
 				0DFBD3E51BA86839003DB2D1 /* TextGridItemView.m in Sources */,
@@ -1762,7 +1709,6 @@
 				181E30801BA2C28600BBA92F /* HBContentDetailDB.m in Sources */,
 				0D8F03421BB9857F00D64D48 /* HBScoreView.m in Sources */,
 				1810C71A1BD951E000899BD0 /* EColor.m in Sources */,
-				0D143F741BD7FA2000F5D9EE /* openssl_wrapper.m in Sources */,
 				4322FE891BEDE25000775D3A /* HBExamEntity.m in Sources */,
 				18EED16A1BB12802004E5071 /* GuideView.m in Sources */,
 				0D74875C1B88C2C4007BE4CD /* HBGridItemView.m in Sources */,
@@ -1793,7 +1739,6 @@
 				0D74875A1B88C2C4007BE4CD /* HBGridCellView.m in Sources */,
 				182306131B9B0DEE00A8E146 /* HHAlertSingleView.m in Sources */,
 				0DBE35C61B8CD60F00179237 /* HBLoginViewController.m in Sources */,
-				0D143F701BD7FA2000F5D9EE /* DataSigner.m in Sources */,
 				0D7486F41B88A884007BE4CD /* main.m in Sources */,
 				182621791BDCC2D3006DFF0D /* HBTeacherEntity.m in Sources */,
 				18ABF5281BD7E33B006E55A0 /* HBRankingListCell.m in Sources */,
@@ -1811,11 +1756,9 @@
 				0D7488961B8A2973007BE4CD /* RC4.m in Sources */,
 				0D74888E1B8A2973007BE4CD /* md5.cpp in Sources */,
 				18AB8F4F1BB9911300409103 /* RefreshTableHeaderView.m in Sources */,
-				0D143F761BD7FA2000F5D9EE /* RSADataVerifier.m in Sources */,
 				0DBE35B21B8CCEFA00179237 /* UIViewAdditions.m in Sources */,
 				0DBD1AB01BBBAB5E00A3BD72 /* MJProgressHUD.m in Sources */,
 				18F367F21BA9541100EBFEC4 /* HBSetStuGroupCell.m in Sources */,
-				0D143F731BD7FA2000F5D9EE /* NSDataEx.m in Sources */,
 				0D0190141B98B1B500A92F59 /* HBBindPhoneViewController.m in Sources */,
 				0DD214721B960148009E3DB9 /* HBTestWorkViewController.m in Sources */,
 				0D143F391BD00FA800F5D9EE /* HBExamIdDB.m in Sources */,
@@ -1849,7 +1792,6 @@
 				1880D8621BCE83A1005A2951 /* HBMsgEntityDB.m in Sources */,
 				0D143F4B1BD417BA00F5D9EE /* HBWeekUtil.m in Sources */,
 				18E57D6C1BA5B25C00198BE9 /* HBStudentCell.m in Sources */,
-				0D143F711BD7FA2000F5D9EE /* DataVerifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2006,7 +1948,6 @@
 					"$(SRCROOT)/../Leader21SDKOC/Third/**",
 					"$(SRCROOT)/../Leader21SDKOC/Http",
 					"$(SRCROOT)/../Leader21SDKOC/Leader21SDKOC",
-					"$(SRCROOT)/LeaderDiandu/Third/AliPay/**",
 				);
 				INFOPLIST_FILE = LeaderDiandu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -2014,7 +1955,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/LeaderDiandu/Third/WXPay",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
@@ -2050,7 +1990,6 @@
 					"$(SRCROOT)/../Leader21SDKOC/Third/**",
 					"$(SRCROOT)/../Leader21SDKOC/Http",
 					"$(SRCROOT)/../Leader21SDKOC/Leader21SDKOC",
-					"$(SRCROOT)/LeaderDiandu/Third/AliPay/**",
 				);
 				INFOPLIST_FILE = LeaderDiandu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -2058,7 +1997,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/LeaderDiandu/Third/WXPay",
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;

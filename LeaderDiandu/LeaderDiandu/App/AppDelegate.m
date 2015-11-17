@@ -65,32 +65,10 @@
     self.globalNavi = [[UINavigationController alloc] initWithRootViewController:menuVC];
 //    self.globalNavi.navigationBarHidden = YES;
     
-    BOOL islogined = NO;
-    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
-    if (dict) {
-        islogined = YES;
-        [self initDHSlideMenu];
-    }
-    
     //这里读取数据没有意义，
     //需要登录成功后根据userid读取对应用户的数据才准确，
     //已经加在登陆成功的位置了。
 //    [[HBDataSaveManager defaultManager] loadSettings];
-
-//    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-//    self.loginVC = [sb instantiateViewControllerWithIdentifier:@"HBLoginViewController"];
-    self.loginVC = [[HBNLoginViewController alloc] init];
-    if (!islogined) {
-        [self.globalNavi pushViewController:_loginVC animated:NO];
-    }else{
-        [[HBDataSaveManager defaultManager] loadFirstLogin];
-        [[HBDataSaveManager defaultManager] saveFirstLogin];
-        
-        [[HBDataSaveManager defaultManager] loadSettings];
-        
-        //用户登录成功后发送通知
-        [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_LoginSuccess object:nil];
-    }
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor clearColor];
@@ -99,7 +77,67 @@
     [self.window setRootViewController:self.globalNavi];
     [self.window makeKeyAndVisible];
     
+    [self verifyLogin];
+    
     return YES;
+}
+
+- (void)verifyLogin
+{
+    //    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    //    self.loginVC = [sb instantiateViewControllerWithIdentifier:@"HBLoginViewController"];
+    self.loginVC = [[HBNLoginViewController alloc] init];
+#if KSaveDefaultUser
+    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
+    BOOL islogined = NO;
+    if (dict) {
+        islogined = YES;
+        [self initDHSlideMenu];
+    }
+    if (!islogined) {
+        [self.globalNavi pushViewController:_loginVC animated:NO];
+    } else {
+        [[HBDataSaveManager defaultManager] loadFirstLogin];
+        [[HBDataSaveManager defaultManager] saveFirstLogin];
+        
+        [[HBDataSaveManager defaultManager] loadSettings];
+        
+        //用户登录成功后发送通知
+        [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_LoginSuccess object:nil];
+    }
+#else
+    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadDefaultAccount];
+    if (dict) {
+        NSString *phone = dict[KWBDefaultUser];
+        NSString *pwd = dict[KWBDefaultPwd];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBHudUtil showActivityView:nil inView:nil];
+            [[HBServiceManager defaultManager] requestLogin:phone pwd:pwd completion:^(id responseObject, NSError *error) {
+                [MBHudUtil hideActivityView:nil];
+                if (error.code == 0) {
+                    //登录成功
+                    [[HBDataSaveManager defaultManager] loadFirstLogin];
+                    [[HBDataSaveManager defaultManager] saveFirstLogin];
+                    [[HBDataSaveManager defaultManager] loadSettings];
+                    
+                    [self initDHSlideMenu];
+                    
+                    NSString *message = [NSString stringWithFormat:@"用户%@登录成功", phone];
+                    [MBHudUtil showTextViewAfter:message];
+                    
+                    //用户登录成功后发送通知
+                    [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_LoginSuccess object:nil];
+                } else {
+                    NSString *message = [NSString stringWithFormat:@"用户%@登录失败", phone];
+                    [MBHudUtil showTextViewAfter:message];
+                    [self.globalNavi pushViewController:_loginVC animated:NO];
+                }
+            }];
+        });
+    } else {
+        [self.globalNavi pushViewController:_loginVC animated:NO];
+    }
+#endif
 }
 
 - (void)showLoginVC
@@ -142,6 +180,7 @@
     [leftViewController setMenus:titleArr MenuImages:imgArray TabBarControllers:ctlArray];
     leftViewController.headerClassName = @"HBUserInfoViewController";
     menuVC.leftViewController = leftViewController;
+    menuVC.leftViewShowWidth = ScreenWidth - 50;
     _currentVC = menuVC;
 }
 

@@ -41,7 +41,6 @@ static float canTouchAreaWidth = 40;
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        _leftViewShowWidth = SCREEN_WIDTH - 50;
         _rightViewShowWidth=200;
         _animationDuration = 0.35;
         _needShowBoundsShadow = YES;
@@ -65,6 +64,15 @@ static float canTouchAreaWidth = 40;
     return self;
 }
 
+- (void)setLeftViewShowWidth:(CGFloat)leftViewShowWidth
+{
+    _leftViewShowWidth = leftViewShowWidth;
+    if ([_leftViewController isKindOfClass:[DHSlideMenuViewController class]]) {
+        DHSlideMenuViewController *controller = (DHSlideMenuViewController *)_leftViewController;
+        controller.viewWidth = _leftViewShowWidth;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     baseView = self.view;
@@ -79,11 +87,6 @@ static float canTouchAreaWidth = 40;
     if (isInited) {
         [self resetCurrentViewToMainViewController];
         isInited = NO;
-    }
-    
-    if ([_leftViewController isKindOfClass:[DHSlideMenuViewController class]]) {
-        DHSlideMenuViewController *controller = (DHSlideMenuViewController *)_leftViewController;
-        controller.viewWidth = _leftViewShowWidth;
     }
 }
 

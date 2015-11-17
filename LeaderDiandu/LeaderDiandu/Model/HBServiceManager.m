@@ -82,6 +82,7 @@
         if (receivedBlock) {
             if (error.code == 0) {
                 NSString *pwdMd5 = [pwd md5];
+                [[HBDataSaveManager defaultManager] saveDefaultAccount:user pwd:pwd];
                 [[HBDataSaveManager defaultManager] saveUserByDict:responseObject pwd:pwdMd5];
             }
             receivedBlock(responseObject,error);

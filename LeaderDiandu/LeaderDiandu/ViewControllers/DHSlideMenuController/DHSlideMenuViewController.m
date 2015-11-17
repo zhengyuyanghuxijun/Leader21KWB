@@ -205,7 +205,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     phoneLbl.backgroundColor = [UIColor clearColor];
     phoneLbl.textColor = textColor;
     phoneLbl.font = font;
-    phoneLbl.text = userEntity.phone;
+    phoneLbl.text = userEntity.name;
     [buttonInfo addSubview:phoneLbl];
     
     float arrowX = buttonInfo.frame.size.width - controlH - 10;

@@ -31,6 +31,15 @@
     return self;
 }
 
+- (void)saveDefaultUser:(NSDictionary *)dict
+{
+#if KSaveDefaultUser
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:dict forKey:KWBDefaultUser];
+    [userDefault synchronize];
+#endif
+}
+
 - (void)setUserEntityByDict:(NSDictionary *)dict
 {
     NSMutableDictionary *newDict = [NSMutableDictionary dictionaryWithDictionary:dict];
@@ -42,24 +51,41 @@
 
 - (void)updateDisplayName:(NSDictionary *)dict
 {
-    NSDictionary *userDict = [self loadUser];
     self.userEntity.display_name = dict[@"display_name"];
+#if KSaveDefaultUser
+    NSDictionary *userDict = [self loadUser];
     NSMutableDictionary *mutDict = [NSMutableDictionary dictionaryWithDictionary:userDict];
     mutDict[@"display_name"] = dict[@"display_name"];
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    [userDefault setObject:mutDict forKey:KWBDefaultUser];
-    [userDefault synchronize];
+    [self saveDefaultUser:mutDict];
+#endif
 }
 
 - (void)updatePhoneByStr:(NSString *)phone
 {
-    NSDictionary *userDict = [self loadUser];
     self.userEntity.phone = phone;
+#if KSaveDefaultUser
+    NSDictionary *userDict = [self loadUser];
     NSMutableDictionary *mutDict = [NSMutableDictionary dictionaryWithDictionary:userDict];
     mutDict[@"phone"] = phone;
+    [self saveDefaultUser:mutDict];
+#endif
+}
+
+- (void)saveDefaultAccount:(NSString *)user pwd:(NSString *)pwd
+{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] initWithCapacity:1];
+    [dic setObject:user forKey:KWBDefaultUser];
+    [dic setObject:pwd forKey:KWBDefaultPwd];
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    [userDefault setObject:mutDict forKey:KWBDefaultUser];
+    [userDefault setObject:dic forKey:KWBDefaultAccount];
     [userDefault synchronize];
+}
+
+- (NSDictionary *)loadDefaultAccount
+{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSDictionary *dict = [userDefault objectForKey:KWBDefaultAccount];
+    return dict;
 }
 
 - (void)saveUserByDict:(NSDictionary *)dict pwd:(NSString *)pwd
@@ -67,6 +93,7 @@
     self.userEntity = [[HBUserEntity alloc] initWithDictionary:dict];
     self.userEntity.pwd = pwd;
     
+#if KSaveDefaultUser
     NSMutableDictionary *newDic = [NSMutableDictionary dictionaryWithDictionary:dict];
     [newDic setValue:pwd forKey:@"pwd"];
     id phone = newDic[@"phone"];
@@ -83,9 +110,8 @@
         [newDic setValue:directorNew forKey:@"director"];
     }
     
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    [userDefault setObject:newDic forKey:KWBDefaultUser];
-    [userDefault synchronize];
+    [self saveDefaultUser:newDic];
+#endif
 }
 
 - (NSDictionary *)loadUser
