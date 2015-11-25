@@ -98,6 +98,9 @@
         
         //学生修改订阅等级成功通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSubscribeSuccess) name:kNotification_ChangeSubscribeSuccess object:nil];
+        
+        //学生购买VIP成功
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payVIPSuccess) name:kNotification_PayVIPSuccess object:nil];
     }
     return self;
 }
@@ -140,6 +143,19 @@
             //获取用户当前订阅的套餐成功
             id tmp = [responseObject objectForKey:@"bookset_id"];
             subscribeId = [tmp integerValue];
+        }
+    }];
+}
+
+- (void)payVIPSuccess
+{
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    //重新获取个人资料
+    [[HBServiceManager defaultManager] requestUserInfo:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+        if (error == nil) {
+            [[HBDataSaveManager defaultManager] setUserEntityByDict:responseObject];
+        } else {
+//            userEntity.account_status = 2;
         }
     }];
 }

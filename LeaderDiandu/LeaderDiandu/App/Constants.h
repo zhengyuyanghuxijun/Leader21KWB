@@ -36,6 +36,8 @@
 
 #define kNotification_GetMsgSuccess      @"kNotification_GetMsgSuccess"
 #define kNotification_GetExamSuccess     @"kNotification_GetExamSuccess"
+//学生购买VIP成功
+#define kNotification_PayVIPSuccess      @"kNotification_PayVIPSuccess"
 
 #define kNotification_ChangeSubscribeSuccess       @"kNotification_ChangeSubscribeSuccess"
 

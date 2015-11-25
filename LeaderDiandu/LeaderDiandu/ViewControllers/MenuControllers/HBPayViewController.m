@@ -522,6 +522,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
             //充值成功，删除payReceipt
             [userDefault removeObjectForKey:userEntity.name];
             [MBHudUtil showTextViewAfter:@"支付成功"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_PayVIPSuccess object:nil];
         } else {
             //存储payReceipt
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
