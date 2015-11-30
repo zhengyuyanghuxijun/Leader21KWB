@@ -126,6 +126,7 @@
 {
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     [userDefault removeObjectForKey:KWBDefaultUser];
+    [userDefault removeObjectForKey:KWBDefaultAccount];
     [userDefault synchronize];
 }
 
