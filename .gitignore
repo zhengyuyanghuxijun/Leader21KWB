@@ -23,3 +23,9 @@ LeaderDiandu/LeaderDiandu.xcodeproj/project.pbxproj
 LeaderDiandu/LeaderDiandu/Controls/HBGrid/TextGridItemView.h
 
 LeaderDiandu/LeaderDiandu/Info.plist
+
+*.xcscheme
+
+Leader21SDKOC/Leader21SDKOC.xcodeproj/xcuserdata/huxijun.xcuserdatad/xcschemes/xcschememanagement.plist
+
+LeaderDiandu/LeaderDiandu.xcodeproj/xcuserdata/huxijun.xcuserdatad/xcschemes/xcschememanagement.plist
