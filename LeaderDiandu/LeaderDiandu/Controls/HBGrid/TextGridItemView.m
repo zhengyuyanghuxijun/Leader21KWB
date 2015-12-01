@@ -79,7 +79,6 @@
 @property (strong, nonatomic) UILabel *readProgressLabel;
 @property (strong, nonatomic) UILabel * bookNameLabel;
 @property (strong, nonatomic) UIButton * downloadButton;
-@property (strong, nonatomic) UIButton * bookCoverButton;
 @property (strong, nonatomic) UIImageView * isVipImg;
 
 @end

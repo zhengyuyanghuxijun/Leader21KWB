@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D0D8EE51BDEB9AD006DE4B7 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0D8EE41BDEB9AD006DE4B7 /* libz.1.2.5.dylib */; };
 		0D3F6D0B1BAD56DB005B4358 /* LeaderSDKUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D0A1BAD56DB005B4358 /* LeaderSDKUtil.m */; };
 		0D7487751B89DD1B007BE4CD /* DownloadItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487671B89DD1B007BE4CD /* DownloadItem.m */; };
 		0D7487771B89DD1B007BE4CD /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487691B89DD1B007BE4CD /* DownloadManager.m */; };
@@ -60,6 +59,7 @@
 		0DC1D40F1B9BA77E0043C79B /* NSDictionary+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC1D40E1B9BA77E0043C79B /* NSDictionary+Safe.m */; };
 		0DC1D4211B9CA0290043C79B /* UIImage+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC1D4201B9CA0290043C79B /* UIImage+Extra.m */; };
 		0DCBC2991B99DAE5003DFDD5 /* NSString+Extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCBC2981B99DAE5003DFDD5 /* NSString+Extra.m */; };
+		26E99B051C05A15100D92552 /* libz.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E99B041C05A15100D92552 /* libz.1.dylib */; };
 		68A2C1E71B441DE600A0BB71 /* Leader21SDKOC.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 68A2C1E61B441DE600A0BB71 /* Leader21SDKOC.h */; };
 		68A2C1E91B441DE600A0BB71 /* Leader21SDKOC.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A2C1E81B441DE600A0BB71 /* Leader21SDKOC.m */; };
 		68A2C1EF1B441DE600A0BB71 /* libLeader21SDKOC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A2C1E31B441DE600A0BB71 /* libLeader21SDKOC.a */; };
@@ -230,6 +230,9 @@
 		0DC1D4201B9CA0290043C79B /* UIImage+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extra.m"; sourceTree = "<group>"; };
 		0DCBC2971B99DAE5003DFDD5 /* NSString+Extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extra.h"; sourceTree = "<group>"; };
 		0DCBC2981B99DAE5003DFDD5 /* NSString+Extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extra.m"; sourceTree = "<group>"; };
+		26E99B001C059FE000D92552 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		26E99B021C05A08600D92552 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		26E99B041C05A15100D92552 /* libz.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.dylib; path = ../../../../../../../usr/lib/libz.1.dylib; sourceTree = "<group>"; };
 		68A2C1E31B441DE600A0BB71 /* libLeader21SDKOC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLeader21SDKOC.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		68A2C1E61B441DE600A0BB71 /* Leader21SDKOC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Leader21SDKOC.h; sourceTree = "<group>"; };
 		68A2C1E81B441DE600A0BB71 /* Leader21SDKOC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Leader21SDKOC.m; sourceTree = "<group>"; };
@@ -303,7 +306,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D0D8EE51BDEB9AD006DE4B7 /* libz.1.2.5.dylib in Frameworks */,
+				26E99B051C05A15100D92552 /* libz.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +324,9 @@
 		0D7486E41B88A6CA007BE4CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26E99B041C05A15100D92552 /* libz.1.dylib */,
+				26E99B021C05A08600D92552 /* libc++.tbd */,
+				26E99B001C059FE000D92552 /* libz.tbd */,
 				0D0D8EE41BDEB9AD006DE4B7 /* libz.1.2.5.dylib */,
 				0D0D8EE21BDEB998006DE4B7 /* libz.1.dylib */,
 				0D0D8EE01BDEB6B7006DE4B7 /* libz.1.2.5.tbd */,

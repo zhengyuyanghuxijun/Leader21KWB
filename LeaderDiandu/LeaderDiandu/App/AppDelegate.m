@@ -165,7 +165,11 @@
     if (userEntity.type <= 1) {
         imgArray = @[@"menu-icn-myteacher", @"menu-icn-subs", @"menu-icn-test", @"menu-icn-pay", @"menu-icn-message", @"menu-icn-service", @"menu-icn-setting"];
         titleArr = @[@"我的老师", @"订阅等级", @"我的作业", @"支付中心", @"消息中心", @"联系客服", @"设置"];
-        ctlArray = @[@"HBMyTeacherViewController", @"HBSubscribeViewController", @"HBTestWorkViewController", @"HBPayViewController", @"HBMessageViewController", @"", @"HBSettingViewController"];
+        if (userEntity) {
+            ctlArray = @[@"HBMyTeacherViewController", @"HBSubscribeViewController", @"HBTestWorkViewController", @"HBPayViewController", @"HBMessageViewController", @"", @"HBSettingViewController"];
+        } else {
+            ctlArray = @[@"HBNLoginViewController", @"HBNLoginViewController", @"HBNLoginViewController", @"HBNLoginViewController", @"HBNLoginViewController", @"", @"HBSettingViewController"];
+        }
     } else if (userEntity.type == 10) {//老师
         imgArray = @[@"menu-icn-student", @"menu-icn-homework", @"menu-icn-instructor", @"menu-icn-message", @"menu-icn-service", @"menu-icn-setting"];
         titleArr = @[@"学生管理", @"作业管理", @"我的教研员", @"消息中心", @"联系客服", @"设置"];

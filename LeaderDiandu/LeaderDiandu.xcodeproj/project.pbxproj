@@ -80,7 +80,6 @@
 		0DAAF4041B8D5F8900078285 /* UIViewController+AddBackBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAF4031B8D5F8900078285 /* UIViewController+AddBackBtn.m */; };
 		0DAAF4071B8D651500078285 /* HBTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAF4061B8D651500078285 /* HBTitleView.m */; };
 		0DAAF40E1B8E01EB00078285 /* HBGradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAF40D1B8E01EB00078285 /* HBGradeViewController.m */; };
-		0DAAF4141B8E06C200078285 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DAAF4131B8E06C200078285 /* libz.dylib */; };
 		0DAAF4171B8E0DE900078285 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DAAF4151B8E0DE900078285 /* Login.storyboard */; };
 		0DB537261B8F5DEE0023A3F7 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537111B8F5DEE0023A3F7 /* AFHTTPRequestOperation.m */; };
 		0DB537271B8F5DEE0023A3F7 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537131B8F5DEE0023A3F7 /* AFHTTPRequestOperationManager.m */; };
@@ -236,6 +235,8 @@
 		18F367E71BA90C7800EBFEC4 /* HBSetStuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367E61BA90C7800EBFEC4 /* HBSetStuController.m */; };
 		18F367F21BA9541100EBFEC4 /* HBSetStuGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */; };
 		18F367F51BA9542D00EBFEC4 /* HBSetStuOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */; };
+		26E99AFF1C059F8C00D92552 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E99AFE1C059F8C00D92552 /* libz.tbd */; };
+		26ECFA111C0D50A7008B690A /* HBGradeDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECFA101C0D50A7008B690A /* HBGradeDemoViewController.m */; };
 		4322FE861BEDD0BC00775D3A /* HBWeekWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322FE851BEDD0BC00775D3A /* HBWeekWorkViewController.m */; };
 		4322FE891BEDE25000775D3A /* HBExamEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322FE881BEDE25000775D3A /* HBExamEntity.m */; };
 		4322FE8C1BEDE40A00775D3A /* HBWeekWorkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322FE8B1BEDE40A00775D3A /* HBWeekWorkCell.m */; };
@@ -645,6 +646,9 @@
 		18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuGroupCell.m; sourceTree = "<group>"; };
 		18F367F31BA9542D00EBFEC4 /* HBSetStuOtherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuOtherCell.h; sourceTree = "<group>"; };
 		18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuOtherCell.m; sourceTree = "<group>"; };
+		26E99AFE1C059F8C00D92552 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		26ECFA0F1C0D50A7008B690A /* HBGradeDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGradeDemoViewController.h; sourceTree = "<group>"; };
+		26ECFA101C0D50A7008B690A /* HBGradeDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGradeDemoViewController.m; sourceTree = "<group>"; };
 		4322FE841BEDD0BC00775D3A /* HBWeekWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBWeekWorkViewController.h; sourceTree = "<group>"; };
 		4322FE851BEDD0BC00775D3A /* HBWeekWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBWeekWorkViewController.m; sourceTree = "<group>"; };
 		4322FE871BEDE25000775D3A /* HBExamEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBExamEntity.h; sourceTree = "<group>"; };
@@ -658,6 +662,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26E99AFF1C059F8C00D92552 /* libz.tbd in Frameworks */,
 				0D2677101BF245A9006FB4ED /* StoreKit.framework in Frameworks */,
 				0D1440141BD8138A00F5D9EE /* libcrypto.a in Frameworks */,
 				0D143FC61BD7FBD300F5D9EE /* libssl.a in Frameworks */,
@@ -669,7 +674,6 @@
 				0DC1D3F81B9B348F0043C79B /* AVFoundation.framework in Frameworks */,
 				0DC1D3F61B9B33BD0043C79B /* ImageIO.framework in Frameworks */,
 				0DC1D3F41B9B33B40043C79B /* MapKit.framework in Frameworks */,
-				0DAAF4141B8E06C200078285 /* libz.dylib in Frameworks */,
 				0D74887C1B8A2229007BE4CD /* QuartzCore.framework in Frameworks */,
 				0D7488781B8A2213007BE4CD /* CFNetwork.framework in Frameworks */,
 				0D7488761B8A21FA007BE4CD /* SystemConfiguration.framework in Frameworks */,
@@ -825,6 +829,7 @@
 		0D7487171B88A8BC007BE4CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				26E99AFE1C059F8C00D92552 /* libz.tbd */,
 				0D26770F1BF245A9006FB4ED /* StoreKit.framework */,
 				0D1440131BD8138A00F5D9EE /* libcrypto.a */,
 				0D143FC51BD7FBD300F5D9EE /* libssl.a */,
@@ -960,6 +965,8 @@
 			children = (
 				0DAAF40C1B8E01EB00078285 /* HBGradeViewController.h */,
 				0DAAF40D1B8E01EB00078285 /* HBGradeViewController.m */,
+				26ECFA0F1C0D50A7008B690A /* HBGradeDemoViewController.h */,
+				26ECFA101C0D50A7008B690A /* HBGradeDemoViewController.m */,
 			);
 			path = GradeController;
 			sourceTree = "<group>";
@@ -1726,6 +1733,7 @@
 				0D7292C51B9E0650006FA7EA /* HBSettingViewController.m in Sources */,
 				4322FE8C1BEDE40A00775D3A /* HBWeekWorkCell.m in Sources */,
 				0D7A768F1B91E33900BC50A0 /* HBContentManager.m in Sources */,
+				26ECFA111C0D50A7008B690A /* HBGradeDemoViewController.m in Sources */,
 				18D325171BB820EA00904FA6 /* HBReadProgressDB.m in Sources */,
 				18AC82CB1BD2B593004864A7 /* HBReadStatisticalViewController.m in Sources */,
 				0DB537351B8F78AF0023A3F7 /* HBServiceManager.m in Sources */,

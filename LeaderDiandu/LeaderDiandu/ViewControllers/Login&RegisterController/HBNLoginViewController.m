@@ -9,6 +9,7 @@
 #import "HBNLoginViewController.h"
 #import "HBRegistViewController.h"
 //#import "HBForgetPwdViewController.h"
+#import "HBGradeDemoViewController.h"
 #import "HBNTextField.h"
 
 #import "NSString+Verify.h"
@@ -197,7 +198,8 @@
 
 - (void)linkBtnAction:(id)sender
 {
-    
+    HBGradeDemoViewController *controller = [[HBGradeDemoViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - Notification
