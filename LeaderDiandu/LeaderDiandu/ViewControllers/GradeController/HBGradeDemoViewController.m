@@ -173,13 +173,14 @@
 // 获取单元格的行数
 - (NSInteger)rowNumberOfGridView:(HBGridView *)gridView
 {
-    if (_bookEntityArr.count % [self columnNumberOfGridView:gridView])
+    NSInteger count = _bookEntityArr.count + 1;
+    if (count % [self columnNumberOfGridView:gridView])
     {
-        return _bookEntityArr.count / [self columnNumberOfGridView:gridView] + 1;
+        return count / [self columnNumberOfGridView:gridView] + 1;
     }
     else
     {
-        return _bookEntityArr.count / [self columnNumberOfGridView:gridView];
+        return count / [self columnNumberOfGridView:gridView];
     }
 }
 
@@ -204,7 +205,7 @@
     if (listIndex == [_bookEntityArr count]) {
         //默认封皮
         [itemView.bookCoverButton setBackgroundImage:[UIImage imageNamed:@"cover_get_more"] forState:UIControlStateNormal];
-        [itemView setNeedsLayout];
+        itemView.bookNameLabel.text = @"更多资源";
         return itemView;
     }
     
@@ -233,6 +234,10 @@
 
 - (void)gridView:(HBGridView *)gridView didSelectGridItemAtIndex:(NSInteger)index
 {
+    if (index == _bookEntityArr.count) {
+        [self showLoginAlert];
+        return;
+    }
     TextGridItemView *itemView = (TextGridItemView *)[gridView gridItemViewAtIndex:index];
     
     BookEntity *entity = _bookEntityArr[index];

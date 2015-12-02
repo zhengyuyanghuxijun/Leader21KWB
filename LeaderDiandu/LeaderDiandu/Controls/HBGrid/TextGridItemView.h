@@ -30,6 +30,7 @@
 
 @interface TextGridItemView : HBGridItemView
 
+@property (strong, nonatomic) UILabel * bookNameLabel;
 @property (strong, nonatomic) UIButton * bookCoverButton;
 @property (nonatomic, strong) MBProgressHUD *progressView;
 @property (nonatomic, copy) NSString* bookDownloadUrl;
