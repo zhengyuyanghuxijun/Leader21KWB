@@ -15,6 +15,7 @@
 #import "TextGridItemView.h"
 #import "HBDataSaveManager.h"
 #import "HBContentManager.h"
+#import "HBReadprogressEntity.h"
 
 #import "AppDelegate.h"
 #import "Leader21SDKOC.h"
@@ -34,6 +35,7 @@
 
 @property (nonatomic, strong)NSArray *bookIdArray;
 @property (nonatomic, strong)NSArray *bookEntityArr;
+@property (nonatomic, strong)NSMutableDictionary *readProgressEntityDic;
 
 @property (nonatomic, assign)AFNetworkReachabilityStatus networkState;
 
@@ -46,6 +48,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.bookIdArray = @[@"5", @"6", @"10", @"12", @"16", @"17"];
+        self.readProgressEntityDic = [[NSMutableDictionary alloc] initWithCapacity:1];
+        
+        //用户阅读书籍返回通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReadBookBack:) name:kNotification_ReadBookBack object:nil];
     }
     return self;
 }
@@ -126,7 +132,7 @@
 {
     //左按钮
     self.leftButton = [[UIButton alloc] initWithFrame:CGRectMake(8, 20, 44, 44)];
-    [self.leftButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-menu"] forState:UIControlStateNormal];
+    [self.leftButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-menu"] forState:UIControlStateNormal];//menu_user_pohoto//
     [self.leftButton addTarget:self action:@selector(ToggleMenuPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.leftButton];
     
@@ -148,7 +154,7 @@
 
 - (void)ToggleMenuPressed:(id)sender
 {
-    [_slideMenuVC showLeftViewController:YES];
+    [self showLoginAlert];
 }
 
 - (void)rightButtonPressed:(id)sender
@@ -221,8 +227,11 @@
     [itemView updateFormData:targetData];
     
     itemView.bookDownloadUrl = entity.bookUrl;
+    NSString *book_id = [NSString stringWithFormat:@"%@", entity.bookId];
+    HBReadprogressEntity *readprogressEntity = [_readProgressEntityDic objectForKey:book_id];
+    NSString *progress = readprogressEntity.progress;
     if ([LEADERSDK isBookDownloaded:entity]) {
-        [itemView bookDownloaded:entity progress:0 isTask:NO];
+        [itemView bookDownloaded:entity progress:progress isTask:NO];
     }else if([LEADERSDK isBookDownloading:entity]){
         [itemView bookDownloading:entity];  //正在下载
     }else{
@@ -327,6 +336,20 @@
         [_gridView hideRefreshView];
         [_gridView reloadData];
     }];
+}
+
+-(void)ReadBookBack:(NSNotification*)note
+{
+    //记录一下结束阅读时间
+    NSMutableDictionary *dic = (NSMutableDictionary *)[note userInfo];
+    NSString *bookId = [dic objectForKey:@"book_id"];
+    NSString *progress = [dic objectForKey:@"progress"];
+    HBReadprogressEntity *readprogressEntity = [[HBReadprogressEntity alloc] init];
+    readprogressEntity.book_id = bookId;
+    readprogressEntity.progress = progress;
+    readprogressEntity.exam_assigned = NO; //先临时设置为NO
+    [self.readProgressEntityDic setObject:readprogressEntity forKey:bookId];
+    [_gridView reloadData];
 }
 
 #pragma mark - 更新网络

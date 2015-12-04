@@ -93,7 +93,7 @@
     [accountView addSubview:_inputPassword];
     
     controlX = 20;
-    controlY += CGRectGetMaxY(accountView.frame) + 20;
+    controlY = CGRectGetMaxY(accountView.frame) + 20;
     controlW = 100;
     controlH = 20;
     UIButton *linkBtn = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
