@@ -89,4 +89,9 @@
     [[AppDelegate delegate] showLoginVC];
 }
 
++ (void)pushLoginControllerNow
+{
+    [[AppDelegate delegate] showLoginVCNow];
+}
+
 @end

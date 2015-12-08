@@ -90,12 +90,14 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 - (void)getHeadAvatar
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBHeaderManager defaultManager] requestGetAvatar:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
-        if (error.code == 0) {
-            self.avatarFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
-            [_tableView reloadData];
-        }
-    }];
+    if (userEntity) {
+        [[HBHeaderManager defaultManager] requestGetAvatar:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+            if (error.code == 0) {
+                self.avatarFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
+                [_tableView reloadData];
+            }
+        }];
+    }
 }
 
 #pragma mark - Configuring the view’s layout behavior
@@ -161,7 +163,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     float controlH = 50;
     float controlY = KTableHeaderHeight - controlH - 20;
     UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlH, controlH)];
-    if (self.avatarFile) {
+    if (_avatarFile) {
         headView.layer.cornerRadius = controlH/2;
         headView.clipsToBounds = YES;
         UIImage *image = [UIImage imageWithContentsOfFile:self.avatarFile];
@@ -234,7 +236,11 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     typeLbl.textColor = [UIColor whiteColor];
     typeLbl.font = [UIFont systemFontOfSize:16];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    if (userEntity.type == 1) {
+    if (userEntity == nil) {
+        typeLbl.text = @"未登录";
+        bgView.image = [UIImage imageNamed:@"studentmanage-bg-vipover-user"];
+    }
+    else if (userEntity.type == 1) {
         if (userEntity.account_status == 1) {
             typeLbl.text = @"普通用户";
             bgView.image = [UIImage imageNamed:@"studentmanage-bg-normal-user"];

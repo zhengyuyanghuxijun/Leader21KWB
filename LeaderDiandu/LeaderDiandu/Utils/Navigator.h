@@ -32,5 +32,6 @@
 + (void)showRootController;
 
 + (void)pushLoginController;
++ (void)pushLoginControllerNow;
 
 @end

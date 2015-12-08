@@ -62,6 +62,7 @@
     menuVC.animationType = SlideAnimationTypeMove;
     menuVC.needPanFromViewBounds = YES;
     
+    self.loginVC = [[HBNLoginViewController alloc] init];
     self.globalNavi = [[UINavigationController alloc] initWithRootViewController:menuVC];
 //    self.globalNavi.navigationBarHidden = YES;
     
@@ -77,16 +78,13 @@
     [self.window setRootViewController:self.globalNavi];
     [self.window makeKeyAndVisible];
     
-    [self verifyLogin];
+//    [self verifyLogin];
     
     return YES;
 }
 
 - (void)verifyLogin
 {
-    //    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-    //    self.loginVC = [sb instantiateViewControllerWithIdentifier:@"HBLoginViewController"];
-    self.loginVC = [[HBNLoginViewController alloc] init];
 #if KSaveDefaultUser
     NSDictionary *dict = [[HBDataSaveManager defaultManager] loadUser];
     BOOL islogined = NO;
@@ -130,12 +128,12 @@
                 } else {
                     NSString *message = [NSString stringWithFormat:@"用户%@登录失败", phone];
                     [MBHudUtil showTextViewAfter:message];
-                    [self.globalNavi pushViewController:_loginVC animated:NO];
+//                    [self.globalNavi pushViewController:_loginVC animated:NO];
                 }
             }];
         });
     } else {
-        [self.globalNavi pushViewController:_loginVC animated:NO];
+//        [self.globalNavi pushViewController:_loginVC animated:NO];
     }
 #endif
 }
@@ -148,6 +146,15 @@
         if (_currentVC == _loginVC) {
             return;
         }
+        _currentVC = _loginVC;
+        [self.globalNavi popToRootViewControllerAnimated:NO];
+        [self.globalNavi pushViewController:_loginVC animated:YES];
+    }
+}
+
+- (void)showLoginVCNow
+{
+    if (_loginVC) {
         _currentVC = _loginVC;
         [self.globalNavi popToRootViewControllerAnimated:NO];
         [self.globalNavi pushViewController:_loginVC animated:YES];
@@ -182,7 +189,11 @@
     
     DHSlideMenuViewController *leftViewController = [[DHSlideMenuViewController alloc] init];
     [leftViewController setMenus:titleArr MenuImages:imgArray TabBarControllers:ctlArray];
-    leftViewController.headerClassName = @"HBUserInfoViewController";
+    if (userEntity) {
+        leftViewController.headerClassName = @"HBUserInfoViewController";
+    } else {
+        leftViewController.headerClassName = @"HBNLoginViewController";
+    }
     menuVC.leftViewController = leftViewController;
     menuVC.leftViewShowWidth = ScreenWidth - 50;
     _currentVC = menuVC;

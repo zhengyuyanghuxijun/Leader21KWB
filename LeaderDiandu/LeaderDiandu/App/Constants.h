@@ -32,6 +32,8 @@
 #define kNotification_bookDownloadProgress  @"kNotification_bookDownloadProgress"
 
 #define kNotification_LoginSuccess       @"kNotification_LoginSuccess"
+#define kNotification_LoginOut           @"kNotification_LoginOut"
+
 #define kNotification_ReadBookBack       @"kNotification_ReadBookBack"
 
 #define kNotification_GetMsgSuccess      @"kNotification_GetMsgSuccess"

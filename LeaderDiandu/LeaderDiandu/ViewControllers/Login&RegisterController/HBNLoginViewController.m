@@ -9,7 +9,7 @@
 #import "HBNLoginViewController.h"
 #import "HBRegistViewController.h"
 //#import "HBForgetPwdViewController.h"
-#import "HBGradeDemoViewController.h"
+//#import "HBGradeDemoViewController.h"
 #import "HBNTextField.h"
 
 #import "NSString+Verify.h"
@@ -117,7 +117,7 @@
     [self.view addSubview:_loginButton];
     
     controlW = 100;
-    controlH = 20;
+    controlH = 50;
     controlX = (screenW - controlW) / 2;
     controlY = ScreenHeight - 20 - 50;
     UIButton *linkBtn = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
@@ -201,8 +201,9 @@
 
 - (void)linkBtnAction:(id)sender
 {
-    HBGradeDemoViewController *controller = [[HBGradeDemoViewController alloc] init];
-    [self.navigationController pushViewController:controller animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+//    HBGradeDemoViewController *controller = [[HBGradeDemoViewController alloc] init];
+//    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - Notification

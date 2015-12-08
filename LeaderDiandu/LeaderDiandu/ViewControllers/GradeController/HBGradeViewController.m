@@ -85,6 +85,7 @@
         
         //用户登录成功通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:kNotification_LoginSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginOut) name:kNotification_LoginOut object:nil];
         
         //用户阅读书籍返回通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReadBookBack:) name:kNotification_ReadBookBack object:nil];
@@ -181,6 +182,7 @@
     
     //只有学生有订阅等级，老师没有，初始化为-1
     subscribeId = -1;
+    currentID = 1;
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
@@ -230,6 +232,12 @@
     }
 }
 
+- (void)LoginOut
+{
+    currentID = 1;
+    [self verifyLogin];
+}
+
 -(void)ReadBookBack:(NSNotification*)note
 {
     //记录一下结束阅读时间
@@ -240,8 +248,8 @@
     NSString *bookId = [dic objectForKey:@"book_id"];
     NSString *progress = [dic objectForKey:@"progress"];
     
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if ([progress integerValue] == 100) {
-        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
         if (userEntity) {
             /** type: 1 - 学生； 10 - 老师*/
             if (userEntity.type == 1) {
@@ -250,7 +258,6 @@
         }
     }
     
-    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
         NSString *user = userEntity.name;
         NSString *token = userEntity.token;
@@ -291,27 +298,29 @@
             }];
         }else{
 #if saveReadProgress
-            HBReadprogressEntity *readprogressEntity = [self.readProgressEntityDic objectForKey:bookId];
             
-            if (readprogressEntity) {
-                readprogressEntity.progress = progress;
-                readprogressEntity.exam_assigned = NO; //先临时设置为NO
-            }else{
-                readprogressEntity = [[HBReadprogressEntity alloc] init];
-                readprogressEntity.book_id = bookId;
-                readprogressEntity.progress = progress;
-                readprogressEntity.exam_assigned = NO; //先临时设置为NO
-                [self.readProgressEntityDic setObject:readprogressEntity forKey:bookId];
-            }
-            
-            NSMutableArray *progressArr = [[NSMutableArray alloc] initWithCapacity:1];
-            [progressArr addObject:readprogressEntity];
-            
-            [[HBReadProgressDB sharedInstance] updateHBReadprogress:progressArr];
-            
-            [self reloadGrid];
 #endif
         }
+    }  else {
+        HBReadprogressEntity *readprogressEntity = [self.readProgressEntityDic objectForKey:bookId];
+        
+        if (readprogressEntity) {
+            readprogressEntity.progress = progress;
+            readprogressEntity.exam_assigned = NO; //先临时设置为NO
+        }else{
+            readprogressEntity = [[HBReadprogressEntity alloc] init];
+            readprogressEntity.book_id = bookId;
+            readprogressEntity.progress = progress;
+            readprogressEntity.exam_assigned = NO; //先临时设置为NO
+            [self.readProgressEntityDic setObject:readprogressEntity forKey:bookId];
+        }
+        
+        NSMutableArray *progressArr = [[NSMutableArray alloc] initWithCapacity:1];
+        [progressArr addObject:readprogressEntity];
+        
+        [[HBReadProgressDB sharedInstance] updateHBReadprogress:progressArr];
+        
+        [self reloadGrid];
     }
 }
 
@@ -360,6 +369,118 @@
     [self reloadGrid];
 }
 
+- (HBContentEntity *)createDemoEntity:(NSString *)freeBooks bookid:(NSInteger)bookid
+{
+    HBContentEntity *contentEntity = [[HBContentEntity alloc] init];
+    contentEntity.free_books = freeBooks;
+    contentEntity.bookId = bookid;
+    return contentEntity;
+}
+
+- (void)initDemoData
+{
+    NSMutableArray *entityArr = [[NSMutableArray alloc] initWithCapacity:2];
+    [entityArr addObject:[self createDemoEntity:@"5,6,10,12,16,17" bookid:1]];
+    [entityArr addObject:[self createDemoEntity:@"104,105,106,107,108,111,114" bookid:2]];
+    [entityArr addObject:[self createDemoEntity:@"164,180,210,212,213,215" bookid:3]];
+    [entityArr addObject:[self createDemoEntity:@"326,327,328,330,331,332" bookid:4]];
+    [entityArr addObject:[self createDemoEntity:@"419,421,423,424,425,427,437,438" bookid:5]];
+    [entityArr addObject:[self createDemoEntity:@"467,491,505,513,529,530,532,533,534" bookid:6]];
+    [entityArr addObject:[self createDemoEntity:@"625,627,630,634,641,648" bookid:7]];
+    [entityArr addObject:[self createDemoEntity:@"691,692,694,697,705,710,716,722,724" bookid:8]];
+    [entityArr addObject:[self createDemoEntity:@"689,709,711,712,834,835" bookid:9]];
+    self.contentEntityArr = entityArr;
+    
+    //未登录体验，先从本地读取一下当前用户数据库中保存的全部阅读进度
+    self.readProgressEntityDic = [[HBReadProgressDB sharedInstance] getAllReadprogressDic];
+    [[AppDelegate delegate] initDHSlideMenu];
+}
+
+- (void)requestDemoBookList
+{
+    //获取书本列表
+    for (HBContentEntity *contentEntity in _contentEntityArr) {
+        if (contentEntity.bookId == currentID) {
+            
+            [LEADERSDK requestBookInfo:contentEntity.free_books onComplete:^(NSArray *booklist, NSInteger errorCode, NSString *errorMsg) {
+                
+                NSMutableArray *booklistTmp = [[NSMutableArray alloc] initWithCapacity:1];
+                for (BookEntity *entityTmp in booklist) {
+                    [booklistTmp addObject:entityTmp];
+                }
+                
+                //如果缓存中有数据，先不要清空，可能这个时候缓存中的数据保存着正在下载书籍的URL等信息
+                if (self.contentDetailEntityDic.count > 0) {
+                    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+                    
+                    for (BookEntity *entity in arr) {
+                        for (NSInteger index = 0; index < booklistTmp.count; index++) {
+                            BookEntity *newEntity = [booklistTmp objectAtIndex:index];
+                            if ([entity.fileId isEqualToString:newEntity.fileId]) {
+                                [booklistTmp replaceObjectAtIndex:index withObject:entity];
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                [self.contentDetailEntityDic removeAllObjects];
+                [self.contentDetailEntityDic setObject:booklistTmp forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+                
+                //筛选出free和vip的书籍 1:vip 0:free
+                NSMutableDictionary *vipBookDic = [[HBDataSaveManager defaultManager] vipBookDic];
+                [vipBookDic removeAllObjects];
+                for (BookEntity *bookEntity in booklist) {
+                    [vipBookDic setObject:@"0" forKey:bookEntity.bookId];
+                }
+                
+                [self reloadGrid];
+            }];
+            
+            break;
+        }
+    }
+}
+
+- (void)verifyLogin
+{
+    NSDictionary *dict = [[HBDataSaveManager defaultManager] loadDefaultAccount];
+    if (dict) {
+        NSString *phone = dict[KWBDefaultUser];
+        NSString *pwd = dict[KWBDefaultPwd];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [MBHudUtil showActivityView:nil inView:nil];
+            [[HBServiceManager defaultManager] requestLogin:phone pwd:pwd completion:^(id responseObject, NSError *error) {
+                [MBHudUtil hideActivityView:nil];
+                if (error.code == 0) {
+                    //登录成功
+                    [[HBDataSaveManager defaultManager] loadFirstLogin];
+                    [[HBDataSaveManager defaultManager] saveFirstLogin];
+                    [[HBDataSaveManager defaultManager] loadSettings];
+                    
+                    [[AppDelegate delegate] initDHSlideMenu];
+                    
+                    NSString *message = [NSString stringWithFormat:@"用户%@登录成功", phone];
+                    [MBHudUtil showTextViewAfter:message];
+                    
+                    //用户登录成功后发送通知
+//                    [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_LoginSuccess object:nil];
+                    [self LoginSuccess];
+                } else {
+                    NSString *message = [NSString stringWithFormat:@"用户%@登录失败", phone];
+                    [MBHudUtil showTextViewAfter:message];
+                    
+                    [self initDemoData];
+                    [self requestDemoBookList];
+                }
+            }];
+        });
+    } else {
+        [self initDemoData];
+        [self requestDemoBookList];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -376,6 +497,8 @@
     [self initMainView];
     [self initMainGrid];
     [self initButton];
+    
+    [self verifyLogin];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -482,6 +605,12 @@
     [self.rightButton setTitle:sender.title forState:UIControlStateNormal];
     [self.rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity == nil) {
+        [self requestDemoBookList];
+        return;
+    }
+
     //获取书本列表
     for (HBContentEntity *contentEntity in self.contentEntityArr) {
         if (contentEntity.bookId == currentID) {
@@ -504,20 +633,17 @@
         }
     }
     
-    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    if (userEntity) {
-        /** type: 1 - 学生； 10 - 老师*/
-        if (userEntity.type == 1) {
-            //学生用户从服务器拉取最新的书籍阅读进度,老师用户直接从本地读取(本期老师不显示进度)
-            NSString *user = userEntity.name;
-            NSString *token = userEntity.token;
-            [[HBServiceManager defaultManager] requestBookProgress:user token:token bookset_id:currentID completion:^(id responseObject, NSError *error) {
-                if (responseObject) {
-                    //获取阅读进度成功
-                    [self requestBookProgressSuccess:responseObject];
-                }
-            }];
-        }
+    /** type: 1 - 学生； 10 - 老师*/
+    if (userEntity.type == 1) {
+        //学生用户从服务器拉取最新的书籍阅读进度,老师用户直接从本地读取(本期老师不显示进度)
+        NSString *user = userEntity.name;
+        NSString *token = userEntity.token;
+        [[HBServiceManager defaultManager] requestBookProgress:user token:token bookset_id:currentID completion:^(id responseObject, NSError *error) {
+            if (responseObject) {
+                //获取阅读进度成功
+                [self requestBookProgressSuccess:responseObject];
+            }
+        }];
     }
 }
 
@@ -660,7 +786,14 @@
 - (NSInteger)gridNumberOfGridView:(HBGridView *)gridView
 {
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
-    return arr.count;
+    if (arr) {
+        if ([[HBDataSaveManager defaultManager] userEntity]) {
+            return arr.count;
+        } else {
+            return arr.count+1;
+        }
+    }
+    return 0;
 }
 
 // 获取gridview每行显示的grid数
@@ -673,14 +806,18 @@
 - (NSInteger)rowNumberOfGridView:(HBGridView *)gridView
 {
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+    NSInteger count = arr.count;
+    if ([[HBDataSaveManager defaultManager] userEntity] == nil) {
+        count += 1;
+    }
     
-    if (arr.count % [self columnNumberOfGridView:gridView])
+    if (count % [self columnNumberOfGridView:gridView])
     {
-        return arr.count / [self columnNumberOfGridView:gridView] + 1;
+        return count / [self columnNumberOfGridView:gridView] + 1;
     }
     else
     {
-        return arr.count / [self columnNumberOfGridView:gridView];
+        return count / [self columnNumberOfGridView:gridView];
     }
 }
 
@@ -701,8 +838,16 @@
     
     itemView.delegate = self;
     itemView.touchEnable = NO;
-    
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+    if (listIndex!=0 && listIndex==[arr count]) {
+        //默认封皮
+        [itemView.bookCoverButton setBackgroundImage:[UIImage imageNamed:@"cover_get_more"] forState:UIControlStateNormal];
+//        itemView.bookNameLabel.text = @"更多资源";
+        return itemView;
+    }
+    
     BookEntity *entity = arr[listIndex];
     NSString *bookTitle = entity.bookTitleCN;
     if ([[HBDataSaveManager defaultManager] showEnBookName]) {
@@ -722,7 +867,6 @@
     NSString *progress = readprogressEntity.progress;
     
     if ([LEADERSDK isBookDownloaded:entity]) {
-        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
         if (userEntity) {
             /** type: 1 - 学生； 10 - 老师*/
             if (userEntity.type == 1) {
@@ -741,6 +885,8 @@
             }else{
                 [itemView teacherBookDownloaded:entity];
             }
+        } else {
+            [itemView bookDownloaded:entity progress:progress isTask:NO];
         }
     }else if([LEADERSDK isBookDownloading:entity]){
         [itemView bookDownloading:entity];  //正在下载
@@ -757,6 +903,10 @@
     //    itemView.backgroundColor = [UIColor grayColor];
     
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+    if (index == arr.count) {
+        [self showLoginAlert:@"获取更多内容，请登录。"];
+        return;
+    }
     
     BookEntity *entity = arr[index];
     
@@ -819,6 +969,13 @@
     }
 }
 
+- (void)showLoginAlert:(NSString *)tips
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:tips delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"马上登录", nil];
+    alertView.tag = 1001;
+    [alertView show];
+}
+
 #pragma mark - actionSheetDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -831,6 +988,10 @@
         if (buttonIndex == 1) {
             //开启设置wifi页面
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+        }
+    } else if (alertView.tag == 1001) {
+        if (buttonIndex == 1) {
+            [Navigator pushLoginControllerNow];
         }
     }
 }

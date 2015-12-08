@@ -31,7 +31,6 @@
 
 @property (nonatomic, strong)UIButton *leftButton;
 @property (nonatomic, strong)UIButton *rightButton;
-@property (nonatomic, strong)UIImageView *redPointImgView;
 
 @property (nonatomic, strong)NSArray *bookIdArray;
 @property (nonatomic, strong)NSArray *bookEntityArr;
@@ -69,11 +68,10 @@
     navView.image = [UIImage imageNamed:@"bookshelf-bg-navi"];
     [self.view addSubview:navView];
     
-//    [self addBackButton];
     [self initMainView];
     [self initMainGrid];
     [self initButton];
-//    [self initSlideMenu];
+    
     [self requestContentDetailEntity];
 }
 
@@ -87,25 +85,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)initSlideMenu
-{
-    _slideMenuVC = [[DHSlideMenuController alloc] init];
-    _slideMenuVC.mainViewController = self;
-    _slideMenuVC.rightViewController = nil;
-    _slideMenuVC.animationType = SlideAnimationTypeMove;
-    _slideMenuVC.needPanFromViewBounds = YES;
-    
-    NSArray *imgArray = @[@"menu-icn-myteacher", @"menu-icn-subs", @"menu-icn-test", @"menu-icn-pay", @"menu-icn-message", @"menu-icn-service", @"menu-icn-setting"];
-    NSArray *titleArr = @[@"我的老师", @"订阅等级", @"我的作业", @"支付中心", @"消息中心", @"联系客服", @"设置"];
-    NSArray *ctlArray = @[@"HBNLoginViewController", @"HBNLoginViewController", @"HBNLoginViewController", @"HBNLoginViewController", @"HBNLoginViewController", @"", @"HBSettingViewController"];
-    
-    DHSlideMenuViewController *leftViewController = [[DHSlideMenuViewController alloc] init];
-    [leftViewController setMenus:titleArr MenuImages:imgArray TabBarControllers:ctlArray];
-    leftViewController.headerClassName = @"HBNLoginViewController";
-    _slideMenuVC.leftViewController = leftViewController;
-    _slideMenuVC.leftViewShowWidth = ScreenWidth - 50;
 }
 
 - (void)initMainView
@@ -143,11 +122,6 @@
     [self.rightButton setTitle:@"1" forState:UIControlStateNormal];
     [self.rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.view addSubview:self.rightButton];
-    
-    //右按钮上的红点
-    self.redPointImgView = [[UIImageView alloc] initWithFrame:CGRectMake(44 - 15, 5, 15, 15)];
-    self.redPointImgView.image = [UIImage imageNamed:@"msg_tips_new"];
-    [self.rightButton addSubview:self.redPointImgView];
 }
 
 #pragma mark - Button Action

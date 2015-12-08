@@ -25,6 +25,7 @@
 - (void)initDHSlideMenu;
 
 - (void)showLoginVC;
+- (void)showLoginVCNow;
 
 @end
 

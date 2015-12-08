@@ -65,7 +65,11 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
     
     self.logoutButton = [[UIButton alloc] initWithFrame:rc];
     [self.logoutButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
-    [self.logoutButton setTitle:@"退出帐号" forState:UIControlStateNormal];
+    if ([[HBDataSaveManager defaultManager] userEntity]) {
+        [self.logoutButton setTitle:@"退出帐号" forState:UIControlStateNormal];
+    } else {
+        [self.logoutButton setTitle:@"立即登录" forState:UIControlStateNormal];
+    }
     [self.logoutButton addTarget:self action:@selector(logoutButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:self.logoutButton];
     _tableView.tableFooterView = view;
@@ -73,10 +77,14 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
 
 - (void)logoutButtonPressed:(id)sender
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您确定要退出账号？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-    alertView.tag = 0;
-    
-    [alertView show];
+    UIButton *button = sender;
+    if ([button.titleLabel.text isEqualToString:@"立即登录"]) {
+        [Navigator pushLoginControllerNow];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您确定要退出账号？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alertView.tag = 0;
+        [alertView show];
+    }
 }
 
 #pragma mark - actionSheetDelegate

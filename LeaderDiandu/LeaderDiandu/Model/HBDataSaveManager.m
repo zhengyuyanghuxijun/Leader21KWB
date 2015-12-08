@@ -131,6 +131,8 @@
     [userDefault removeObjectForKey:KWBDefaultUser];
     [userDefault removeObjectForKey:KWBDefaultAccount];
     [userDefault synchronize];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_LoginOut object:nil];
 }
 
 - (void)saveSettingsByDict:(NSDictionary *)dict
