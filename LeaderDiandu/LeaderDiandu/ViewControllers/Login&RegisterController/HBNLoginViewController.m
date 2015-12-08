@@ -92,18 +92,10 @@
     [_inputPassword setupTextFieldWithType:HBNTextFieldTypePassword withIconName:@"lock"];
     [accountView addSubview:_inputPassword];
     
-    controlX = 20;
-    controlY = CGRectGetMaxY(accountView.frame) + 20;
     controlW = 100;
-    controlH = 20;
-    UIButton *linkBtn = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-    [linkBtn setTitle:@"立即体验" forState:UIControlStateNormal];
-    [linkBtn setTitleColor:RGBCOLOR(249, 156, 0) forState:UIControlStateNormal];
-    linkBtn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
-    [linkBtn addTarget:self action:@selector(linkBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:linkBtn];
-    
     controlX = screenW - 20 - controlW;
+    controlY = CGRectGetMaxY(accountView.frame) + 20;
+    controlH = 20;
     self.forgetPassword = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     [_forgetPassword setTitle:@"忘记密码？" forState:UIControlStateNormal];
     _forgetPassword.titleLabel.font = [UIFont boldSystemFontOfSize:18];
@@ -123,6 +115,17 @@
     [_loginButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
     [_loginButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_loginButton];
+    
+    controlW = 100;
+    controlH = 20;
+    controlX = (screenW - controlW) / 2;
+    controlY = ScreenHeight - 20 - 50;
+    UIButton *linkBtn = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    [linkBtn setTitle:@"跳过" forState:UIControlStateNormal];
+    [linkBtn setTitleColor:RGBCOLOR(249, 156, 0) forState:UIControlStateNormal];
+    linkBtn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
+    [linkBtn addTarget:self action:@selector(linkBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:linkBtn];
 }
 
 - (void)didReceiveMemoryWarning

@@ -39,6 +39,7 @@
             NSString *descValue = userDic[@"NSLocalizedDescription"];
             if ([descValue containsString:@"401"]) {
                 //token过期，需要重新登录
+                [[HBDataSaveManager defaultManager] clearUserData];
                 [Navigator pushLoginController];
             }
         }

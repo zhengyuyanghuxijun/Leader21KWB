@@ -122,8 +122,8 @@
         _gridView.delegate = self;
         _gridView.backgroundColor = [UIColor clearColor];
         [_gridView setBackgroundView:@"bookshelf-bg-body"];
-        [_gridView setHeaderViewHidden:NO];
-                
+//        [_gridView setHeaderViewHidden:NO];
+
         [self.view addSubview:_gridView];
     }
 }
@@ -154,12 +154,13 @@
 
 - (void)ToggleMenuPressed:(id)sender
 {
-    [self showLoginAlert];
+    [self.navigationController popViewControllerAnimated:YES];
+//    [self showLoginAlert:@"你尚未登录，无法完成操作，请登录后重试。"];
 }
 
 - (void)rightButtonPressed:(id)sender
 {
-    [self showLoginAlert];
+    [self showLoginAlert:@"获取更多等级内容，请登录。"];
 }
 
 #pragma mark HBGridViewDelegate
@@ -211,7 +212,7 @@
     if (listIndex == [_bookEntityArr count]) {
         //默认封皮
         [itemView.bookCoverButton setBackgroundImage:[UIImage imageNamed:@"cover_get_more"] forState:UIControlStateNormal];
-        itemView.bookNameLabel.text = @"更多资源";
+//        itemView.bookNameLabel.text = @"更多资源";
         return itemView;
     }
     
@@ -244,7 +245,7 @@
 - (void)gridView:(HBGridView *)gridView didSelectGridItemAtIndex:(NSInteger)index
 {
     if (index == _bookEntityArr.count) {
-        [self showLoginAlert];
+        [self showLoginAlert:@"获取更多内容，请登录。"];
         return;
     }
     TextGridItemView *itemView = (TextGridItemView *)[gridView gridItemViewAtIndex:index];
@@ -286,9 +287,9 @@
     }
 }
 
-- (void)showLoginAlert
+- (void)showLoginAlert:(NSString *)tips
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"想获取更多资源，请登录。" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"马上登录", nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:tips delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"马上登录", nil];
     alertView.tag = 1001;
     [alertView show];
 }
