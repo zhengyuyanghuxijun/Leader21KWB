@@ -406,9 +406,9 @@
     //获取书本列表
     for (HBContentEntity *contentEntity in _contentEntityArr) {
         if (contentEntity.bookId == currentID) {
-            
+            [MBHudUtil showActivityView:nil inView:nil];
             [LEADERSDK requestBookInfo:contentEntity.free_books onComplete:^(NSArray *booklist, NSInteger errorCode, NSString *errorMsg) {
-                
+                [MBHudUtil hideActivityView:nil];
                 NSMutableArray *booklistTmp = [[NSMutableArray alloc] initWithCapacity:1];
                 for (BookEntity *entityTmp in booklist) {
                     [booklistTmp addObject:entityTmp];
@@ -429,8 +429,8 @@
                     }
                 }
                 
-                [self.contentDetailEntityDic removeAllObjects];
-                [self.contentDetailEntityDic setObject:booklistTmp forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+                [_contentDetailEntityDic removeAllObjects];
+                [_contentDetailEntityDic setObject:booklistTmp forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
                 
                 //筛选出free和vip的书籍 1:vip 0:free
                 NSMutableDictionary *vipBookDic = [[HBDataSaveManager defaultManager] vipBookDic];
@@ -445,6 +445,41 @@
             break;
         }
     }
+}
+
+- (void)getDemoBookList
+{
+    for (HBContentEntity *contentEntity in _contentEntityArr) {
+        if (contentEntity.bookId == currentID) {
+            [self getDemoContentDetailEntitys:contentEntity.free_books];
+        }
+    }
+}
+
+-(void)getDemoContentDetailEntitys:(NSString *)bookIDs
+{
+    NSMutableArray *booklist = [[NSMutableArray alloc] initWithCapacity:1];
+    NSArray *bookIDArr = [bookIDs componentsSeparatedByString:@","];
+    //筛选出free和vip的书籍 1:vip 0:free
+    NSMutableDictionary *vipBookDic = [[HBDataSaveManager defaultManager] vipBookDic];
+    [vipBookDic removeAllObjects];
+    for (NSString *bookId in bookIDArr) {
+        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"bookId == %@", bookId];
+        BookEntity *bookEntity = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
+        if (bookEntity != nil) {
+            [vipBookDic setObject:@"0" forKey:bookEntity.bookId];
+            [booklist addObject:bookEntity];
+        }else{
+            //获取书本列表
+            [self requestDemoBookList];
+            return;
+        }
+    }
+    [self.contentDetailEntityDic removeAllObjects];
+    [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+    
+    [_gridView hideRefreshView];
+    [self reloadGrid];
 }
 
 - (void)verifyLogin
@@ -476,13 +511,13 @@
                     [MBHudUtil showTextViewAfter:message];
                     
                     [self initDemoData];
-                    [self requestDemoBookList];
+                    [self getDemoBookList];
                 }
             }];
         });
     } else {
         [self initDemoData];
-        [self requestDemoBookList];
+        [self getDemoBookList];
     }
 }
 
@@ -612,7 +647,7 @@
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity == nil) {
-        [self requestDemoBookList];
+        [self getDemoBookList];
         return;
     }
 

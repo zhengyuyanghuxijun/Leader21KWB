@@ -125,7 +125,7 @@
 - (void)clearUserData
 {
     self.userEntity = nil;
-    self.vipBookDic = nil;
+//    self.vipBookDic = nil;
     
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     [userDefault removeObjectForKey:KWBDefaultUser];
