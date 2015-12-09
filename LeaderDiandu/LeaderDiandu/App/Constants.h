@@ -34,6 +34,8 @@
 #define kNotification_LoginSuccess       @"kNotification_LoginSuccess"
 #define kNotification_LoginOut           @"kNotification_LoginOut"
 
+//暂停全部下载通知
+#define kNotification_PauseAllDownload   @"kNotification_PauseAllDownload"
 #define kNotification_ReadBookBack       @"kNotification_ReadBookBack"
 
 #define kNotification_GetMsgSuccess      @"kNotification_GetMsgSuccess"

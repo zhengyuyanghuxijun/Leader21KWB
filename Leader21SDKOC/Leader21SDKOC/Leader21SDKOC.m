@@ -107,6 +107,11 @@
     }
 }
 
+- (void)pauseAllDownloadTask
+{
+    [[DownloadManager sharedInstance] pauseAllDownloadTask];
+}
+
 - (void)cancelDownload:(BookEntity *)book
 {
     if (book) {

@@ -97,6 +97,7 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
     }
     if (buttonIndex == 1){
         //to do 注销...
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_PauseAllDownload object:nil];
         HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
         [[HBServiceManager defaultManager] requestLogout:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
             if (responseObject) {

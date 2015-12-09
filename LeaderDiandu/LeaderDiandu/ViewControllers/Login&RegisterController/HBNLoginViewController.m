@@ -201,6 +201,7 @@
 
 - (void)linkBtnAction:(id)sender
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_PauseAllDownload object:nil];
     [self.navigationController popViewControllerAnimated:YES];
 //    HBGradeDemoViewController *controller = [[HBGradeDemoViewController alloc] init];
 //    [self.navigationController pushViewController:controller animated:YES];

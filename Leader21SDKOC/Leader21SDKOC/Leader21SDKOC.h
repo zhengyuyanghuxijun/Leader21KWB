@@ -70,6 +70,8 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
  * @param book
  */
 - (void)pauseDownload:(BookEntity *)book;
+- (void)pauseAllDownloadTask;
+
 /**
  * 取消下载
  * @param book

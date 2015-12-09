@@ -87,6 +87,8 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:kNotification_LoginSuccess object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginOut) name:kNotification_LoginOut object:nil];
         
+        //暂停全部下载通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pauseAllDownloadTask) name:kNotification_PauseAllDownload object:nil];
         //用户阅读书籍返回通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReadBookBack:) name:kNotification_ReadBookBack object:nil];
         
@@ -108,6 +110,11 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)pauseAllDownloadTask
+{
+    [LEADERSDK pauseAllDownloadTask];
 }
 
 -(void)getMsgSuccess
