@@ -107,6 +107,23 @@
     self.bookNameLabel.text = text;
 }
 
+- (void)setDemoImage:(NSString *)imgFile
+{
+    if (_bookCoverButton) {
+        [_bookCoverButton setBackgroundImage:[UIImage imageNamed:@"cover_get_more"] forState:UIControlStateNormal];
+    }
+    [self setContorlHidden:YES];
+}
+
+- (void)setContorlHidden:(BOOL)isHidden
+{
+    _bookNameLabel.hidden = isHidden;
+    _downloadButton.hidden = isHidden;
+    _isVipImg.hidden = isHidden;
+    _readProgressLabel.hidden = isHidden;
+    _progressView.hidden = isHidden;
+}
+
 - (void) initUI
 {
     //阅读进度Label
@@ -195,6 +212,7 @@
 
 -(void)updateFormData:(NSDictionary*)dic
 {
+    [self setContorlHidden:NO];
     //下载按钮
     if ([dic objectForKey:TextGridItemView_downloadState])
     {

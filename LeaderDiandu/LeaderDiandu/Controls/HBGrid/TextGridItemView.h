@@ -47,4 +47,6 @@
 - (void)bookDownloading:(BookEntity *)book;
 - (void)bookUnDownload:(BookEntity *)book;
 
+- (void)setDemoImage:(NSString *)imgFile;
+
 @end

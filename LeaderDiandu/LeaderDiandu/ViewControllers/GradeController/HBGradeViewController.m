@@ -183,6 +183,7 @@
     //只有学生有订阅等级，老师没有，初始化为-1
     subscribeId = -1;
     currentID = 1;
+    [self.rightButton setTitle:@"1" forState:UIControlStateNormal];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
@@ -235,6 +236,10 @@
 - (void)LoginOut
 {
     currentID = 1;
+    subscribeId = -1;
+    self.redPointImgView.hidden = YES;
+    [_gridView setHeaderViewHidden:YES];
+    [self.rightButton setTitle:@"1" forState:UIControlStateNormal];
     [self verifyLogin];
 }
 
@@ -838,13 +843,11 @@
     
     itemView.delegate = self;
     itemView.touchEnable = NO;
-    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
 
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
     if (listIndex!=0 && listIndex==[arr count]) {
         //默认封皮
-        [itemView.bookCoverButton setBackgroundImage:[UIImage imageNamed:@"cover_get_more"] forState:UIControlStateNormal];
-//        itemView.bookNameLabel.text = @"更多资源";
+        [itemView setDemoImage:@"cover_get_more"];
         return itemView;
     }
     
@@ -867,6 +870,7 @@
     NSString *progress = readprogressEntity.progress;
     
     if ([LEADERSDK isBookDownloaded:entity]) {
+        HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
         if (userEntity) {
             /** type: 1 - 学生； 10 - 老师*/
             if (userEntity.type == 1) {
