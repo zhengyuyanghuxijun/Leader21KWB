@@ -27,6 +27,8 @@
 @property (nonatomic, assign)BOOL showEnBookName;   //显示英文书名
 @property (nonatomic, assign)BOOL notFirstLogin;   //是否首次登录(NO：首次登录 YES：非首次登录)
 
+//免费书籍ID数组
+@property (nonatomic, strong)NSArray *freeBookIDArr;
 //vip书籍
 @property (nonatomic, strong)NSMutableDictionary *vipBookDic;
 

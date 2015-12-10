@@ -84,7 +84,7 @@
         readBookFromTime = @"0";
         
         //用户登录成功通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginSuccess) name:kNotification_LoginSuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleLoginSuccess) name:kNotification_LoginSuccess object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LoginOut) name:kNotification_LoginOut object:nil];
         
         //暂停全部下载通知
@@ -189,8 +189,6 @@
     
     //只有学生有订阅等级，老师没有，初始化为-1
     subscribeId = -1;
-    currentID = 1;
-    [self.rightButton setTitle:@"1" forState:UIControlStateNormal];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
@@ -238,6 +236,13 @@
             }
         }
     }
+}
+
+- (void)handleLoginSuccess
+{
+    currentID = 1;
+    [self.rightButton setTitle:@"1" forState:UIControlStateNormal];
+    [self LoginSuccess];
 }
 
 - (void)LoginOut
@@ -313,7 +318,7 @@
             
 #endif
         }
-    }  else {
+    } else {
         HBReadprogressEntity *readprogressEntity = [self.readProgressEntityDic objectForKey:bookId];
         
         if (readprogressEntity) {
@@ -512,7 +517,7 @@
                     
                     //用户登录成功后发送通知
 //                    [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_LoginSuccess object:nil];
-                    [self LoginSuccess];
+                    [self handleLoginSuccess];
                 } else {
                     NSString *message = [NSString stringWithFormat:@"用户%@登录失败", phone];
                     [MBHudUtil showTextViewAfter:message];

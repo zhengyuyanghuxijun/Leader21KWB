@@ -14,6 +14,7 @@
 
 @interface HBServiceManager ()
 
+@property (nonatomic, strong) NSTimer *mtimer;
 @property (nonatomic, copy)HBServiceReceivedBlock receivedBlock;
 
 @end
@@ -38,9 +39,7 @@
             NSDictionary *userDic = error.userInfo;
             NSString *descValue = userDic[@"NSLocalizedDescription"];
             if ([descValue containsString:@"401"]) {
-                //token过期，需要重新登录
-                [[HBDataSaveManager defaultManager] clearUserData];
-                [Navigator pushLoginController];
+                [self startTimer];
             }
         }
         if (receivedBlock) {
@@ -49,6 +48,29 @@
         }
         self.receivedBlock = nil;
     }];
+}
+
+#pragma mark - Timer
+- (void)startTimer
+{
+    [self endTimer];
+    self.mtimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(handleTimer:) userInfo:nil repeats:NO];
+}
+
+- (void)endTimer
+{
+    if (_mtimer) {
+        [_mtimer invalidate];
+        _mtimer = nil;
+    }
+}
+
+- (void)handleTimer:(NSTimer *)timer
+{
+    //token过期，需要重新登录
+    [MBHudUtil hideActivityView:nil];
+    [[HBDataSaveManager defaultManager] clearUserData];
+    [Navigator pushLoginController];
 }
 
 - (void)requestRegister:(NSString *)user pwd:(NSString *)pwd type:(NSString *)type smsCode:(NSString *)sms_code codeId:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock

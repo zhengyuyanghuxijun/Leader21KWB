@@ -219,7 +219,7 @@
     self.weekOfYear = [components weekOfYear];
     
     self.dateLabel.text = [NSString stringWithFormat:@"%ld年%ld周", self.year, self.weekOfYear];
-    [self reloadTableViewByArray];
+//    [self reloadTableViewByArray];
     
     //作业知识点统计
     [self requestExamKnowledge];
@@ -243,7 +243,7 @@
     self.weekOfYear = [components weekOfYear];
     
     self.dateLabel.text = [NSString stringWithFormat:@"%ld年%ld周", self.year, self.weekOfYear];
-    [self reloadTableViewByArray];
+//    [self reloadTableViewByArray];
     
     //作业知识点统计
     [self requestExamKnowledge];
@@ -394,10 +394,12 @@
     }else{
         arr = self.abilityArr;
     }
-    [_tableView reloadData];
-    if ([arr count] == 0) {
-        [_tableView showEmptyView:nil tips:@"还没有数据，请稍候刷新"];
-    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [_tableView reloadData];
+        if ([arr count] == 0) {
+            [_tableView showEmptyView:nil tips:@"还没有数据，请稍候刷新"];
+        }
+    });
 }
 
 -(void)requestExamKnowledge
@@ -433,7 +435,9 @@
         }
         [MBHudUtil hideActivityView:nil];
         
-        [self reloadTableViewByArray];
+        if (self.isShowKnowledge) {
+            [self reloadTableViewByArray];
+        }
     }];
 }
 
@@ -466,7 +470,9 @@
         }
         [MBHudUtil hideActivityView:nil];
         
-        [self reloadTableViewByArray];
+        if (self.isShowKnowledge == NO) {
+            [self reloadTableViewByArray];
+        }
     }];
 }
 

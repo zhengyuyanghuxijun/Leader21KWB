@@ -311,7 +311,10 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     if (userEntity) {
         HBTaskEntity *taskEntity = [self.taskEntityArr objectAtIndex:indexPath.row];
         NSMutableDictionary *vipBookDic = [[HBDataSaveManager defaultManager] vipBookDic];
-        if ([[vipBookDic objectForKey:[NSNumber numberWithInteger:taskEntity.bookId]] isEqualToString:@"1"]) {
+        NSNumber *bookID = [NSNumber numberWithInteger:taskEntity.bookId];
+        BOOL isBookVip = [[vipBookDic objectForKey:bookID] isEqualToString:@"1"];
+        BOOL isFree = [self isFreeBook:[bookID stringValue]];
+        if (isBookVip || isFree==NO) {
             if (userEntity.account_status == 1) {
                 [self showAlertView:@"你尚未开通VIP，无权下载阅读此书，请开通VIP后再试。"];
                 return;
@@ -339,6 +342,20 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
             }
         }];
     }
+}
+
+- (BOOL)isFreeBook:(NSString *)bookId
+{
+    BOOL isFree = NO;
+    NSArray *freeBookArr = [[HBDataSaveManager defaultManager] freeBookIDArr];
+    for (NSString *bookIds in freeBookArr) {
+        NSRange range = [bookIds rangeOfString:bookId];
+        if (range.length > 0) {
+            isFree = YES;
+            break;
+        }
+    }
+    return isFree;
 }
 
 - (void)showAlertView:(NSString *)text

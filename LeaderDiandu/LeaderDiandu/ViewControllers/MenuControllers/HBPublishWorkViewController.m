@@ -133,6 +133,14 @@
 
 - (void)publishWorkButtonPressed:(id)sender
 {
+    if (self.classEntity == nil) {
+        [MBHudUtil showTextView:@"请选择群租" inView:nil];
+        return;
+    } else if (self.contentDetailEntity == nil) {
+        [MBHudUtil showTextView:@"请选择作业" inView:nil];
+        return;
+    }
+    
     [MBHudUtil showActivityView:nil inView:nil];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {

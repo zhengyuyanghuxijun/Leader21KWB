@@ -91,7 +91,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
 //        [self showBindView:NO];
 //        [self handleDescArray];
 //    } else {
-        [self getUserInfo];
+    [self getUserInfo:YES];
 //    }
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
@@ -219,18 +219,20 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
         //TODO提示
         return;
     }
+    [MBHudUtil showActivityView:nil inView:nil];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     [[HBServiceManager defaultManager] requestTeacherAssign:userEntity.name teacher:text completion:^(id responseObject, NSError *error) {
         if (responseObject) {
             NSDictionary *dict = responseObject;
             if ([dict[@"result"] isEqualToString:@"OK"]) {
                 //绑定成功
-                [MBHudUtil showTextView:@"绑定成功" inView:nil];
+                [MBHudUtil showTextViewAfter:@"绑定成功"];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self getUserInfo];
+                    [self getUserInfo:NO];
                 });
             } else {
-                [MBHudUtil showTextView:@"绑定失败，请重试" inView:nil];
+                [MBHudUtil hideActivityView:nil];
+                [MBHudUtil showTextViewAfter:@"绑定失败，请重试"];
             }
         }
     }];
@@ -267,10 +269,12 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     }];
 }
 
-- (void)getUserInfo
+- (void)getUserInfo:(BOOL)showLoading
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [MBHudUtil showActivityView:nil inView:nil];
+    if (showLoading) {
+        [MBHudUtil showActivityView:nil inView:nil];
+    }
     [[HBServiceManager defaultManager] requestUserInfo:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
         if (error.code == 0 || error == nil) {
