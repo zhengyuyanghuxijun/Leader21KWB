@@ -144,7 +144,7 @@
                          @"%@%@?book_id=%@&file_id=%@&app_key=%@",
                          _hostUrl,API_DOWNLOAD_BOOK,book.bookId,book.fileId,_mAppId];
     
-    NSLog(@"book download url %@",bookUrl);
+//    NSLog(@"book download url %@",bookUrl);
     
     BOOL isdownload = [[DownloadManager sharedInstance] isExistInDowningQueue:bookUrl];
     
