@@ -40,7 +40,7 @@
     
     //等级
     self.cellLevel = [[UILabel alloc] init];
-    self.cellLevel.frame = CGRectMake(10 + 100 + 10, 70/2, 30, 70/2 - 10);
+    self.cellLevel.frame = CGRectMake(10 + 100, 70/2, 30, 70/2 - 10);
     self.cellLevel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     [self addSubview:self.cellLevel];
     
@@ -52,7 +52,7 @@
     
     //人数
     self.cellCount = [[UILabel alloc] init];
-    self.cellCount.frame = CGRectMake(10 + 100 + 10 + 50 + 10, 70/2, 30, 70/2 - 10);
+    self.cellCount.frame = CGRectMake(10 + 100 + 10 + 50, 70/2, 30, 70/2 - 10);
     self.cellCount.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     [self addSubview:self.cellCount];
     

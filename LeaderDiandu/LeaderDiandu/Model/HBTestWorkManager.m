@@ -167,7 +167,7 @@
         }
         else
         {
-            [self fileSizeForDir:fullPath];
+            size += [self fileSizeForDir:fullPath];
         }
     }
 

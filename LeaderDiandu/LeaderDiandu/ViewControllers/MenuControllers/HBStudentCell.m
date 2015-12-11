@@ -35,7 +35,7 @@
     
     //姓名
     self.cellName = [[UILabel alloc] init];
-    self.cellName.frame = CGRectMake(10 + 50 + 10, 10, 70, 70/2 - 10);
+    self.cellName.frame = CGRectMake(10 + 50 + 10, 10, 100, 70/2 - 10);
     self.cellName.textAlignment = NSTextAlignmentLeft;
     self.cellName.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     [self addSubview:self.cellName];

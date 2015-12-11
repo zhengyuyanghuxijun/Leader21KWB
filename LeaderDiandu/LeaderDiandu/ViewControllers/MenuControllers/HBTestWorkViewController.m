@@ -190,6 +190,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     _tableView = [[HBTableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
 }
 

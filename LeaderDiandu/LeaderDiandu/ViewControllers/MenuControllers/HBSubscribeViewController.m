@@ -59,7 +59,7 @@
     //内容
     self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.imgView.frame.origin.x + 30 + 10, 0, rc.size.width - 30 - 30, rc.size.height)];
     self.contentLabel.numberOfLines = 0;
-    [self.contentLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
+    [self.contentLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];
     [self.contentLabel setTextColor:RGB(65, 65, 65)];
     [bgView addSubview:self.contentLabel];
 }

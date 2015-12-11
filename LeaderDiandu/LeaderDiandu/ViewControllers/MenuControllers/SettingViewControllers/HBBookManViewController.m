@@ -277,13 +277,14 @@
     for (BookEntity *bookEntity in self.bookEntityarr) {
         NSString* fileName = [bookEntity.fileId lowercaseString];
         NSString* path = [LocalSettings bookPathForDefaultUser:fileName];
-        long bookSize = [HBTestWorkManager fileSizeForDir:path];
+        long bookSizeK = [HBTestWorkManager fileSizeForDir:path];
         
         [self.bookSelectedDic setObject:@"0" forKey:bookEntity.fileId];
         [self.bookEntityDic setObject:bookEntity forKey:bookEntity.fileId];
-        [self.bookSizeDic setObject:[NSString stringWithFormat:@"%ld", bookSize / 1024] forKey:bookEntity.fileId];
+        NSInteger bookSizeM = bookSizeK/1024/1024;
+        [self.bookSizeDic setObject:[NSString stringWithFormat:@"%ld", bookSizeM] forKey:bookEntity.fileId];
         
-        self.localBookSize += bookSize / 1024;
+        self.localBookSize += bookSizeM;
     }
 }
 

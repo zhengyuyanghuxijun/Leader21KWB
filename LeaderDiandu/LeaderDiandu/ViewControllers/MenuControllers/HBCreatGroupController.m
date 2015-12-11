@@ -72,6 +72,12 @@
 
 -(void)okButtonPressed
 {
+    NSString *nameText = self.nameTextField.text;
+    NSString *levelText = self.levelTextField.text;
+    if ([nameText length]==0 || [levelText length]==0) {
+        [MBHudUtil showTextView:@"请填写正确的信息" inView:nil];
+        return;
+    }
     [MBHudUtil showActivityView:nil inView:nil];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
@@ -84,11 +90,14 @@
     }
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    
-    if (range.location>= 1)
-        
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([string isEqualToString:@"0"]) {
         return NO;
+    }
+    if (range.location>= 1) {
+        return NO;
+    }
     
     return YES;
 }
