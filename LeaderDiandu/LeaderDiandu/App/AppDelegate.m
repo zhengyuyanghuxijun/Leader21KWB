@@ -19,6 +19,8 @@
 #import "Constants.h"
 #import "HBVersionCheck.h"
 
+#import <Bugly/CrashReporter.h>
+
 #if KEnableThirdPay
 #import "NSString+Extra.h"
 #import "WXApi.h"
@@ -43,8 +45,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    //苹果应用内升级
     HBVersionCheck *version = [[HBVersionCheck alloc] init];
     [version checkVersion];
+    
+    //bugly初始化
+//    [[CrashReporter sharedInstance] enableLog:YES];
+    [[CrashReporter sharedInstance] installWithAppId:KWBBuglyAppID];
     
 //    NSString *FirstLoginString = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogin"];
     

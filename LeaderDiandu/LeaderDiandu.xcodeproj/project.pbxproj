@@ -235,6 +235,9 @@
 		18F367E71BA90C7800EBFEC4 /* HBSetStuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367E61BA90C7800EBFEC4 /* HBSetStuController.m */; };
 		18F367F21BA9541100EBFEC4 /* HBSetStuGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */; };
 		18F367F51BA9542D00EBFEC4 /* HBSetStuOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */; };
+		265566F11C1AAAE900150C3C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265566F01C1AAAE900150C3C /* Security.framework */; };
+		265566F41C1AAB0100150C3C /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 265566F31C1AAB0100150C3C /* libc++.tbd */; };
+		265566F81C1AABC400150C3C /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265566F71C1AABC400150C3C /* Bugly.framework */; };
 		26E99AFF1C059F8C00D92552 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E99AFE1C059F8C00D92552 /* libz.tbd */; };
 		26ECFA111C0D50A7008B690A /* HBGradeDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECFA101C0D50A7008B690A /* HBGradeDemoViewController.m */; };
 		4322FE861BEDD0BC00775D3A /* HBWeekWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322FE851BEDD0BC00775D3A /* HBWeekWorkViewController.m */; };
@@ -646,6 +649,9 @@
 		18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuGroupCell.m; sourceTree = "<group>"; };
 		18F367F31BA9542D00EBFEC4 /* HBSetStuOtherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuOtherCell.h; sourceTree = "<group>"; };
 		18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuOtherCell.m; sourceTree = "<group>"; };
+		265566F01C1AAAE900150C3C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		265566F31C1AAB0100150C3C /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		265566F71C1AABC400150C3C /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
 		26E99AFE1C059F8C00D92552 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		26ECFA0F1C0D50A7008B690A /* HBGradeDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGradeDemoViewController.h; sourceTree = "<group>"; };
 		26ECFA101C0D50A7008B690A /* HBGradeDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGradeDemoViewController.m; sourceTree = "<group>"; };
@@ -662,6 +668,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				265566F41C1AAB0100150C3C /* libc++.tbd in Frameworks */,
+				265566F11C1AAAE900150C3C /* Security.framework in Frameworks */,
 				26E99AFF1C059F8C00D92552 /* libz.tbd in Frameworks */,
 				0D2677101BF245A9006FB4ED /* StoreKit.framework in Frameworks */,
 				0D1440141BD8138A00F5D9EE /* libcrypto.a in Frameworks */,
@@ -669,6 +677,7 @@
 				0D143F591BD7768100F5D9EE /* CoreGraphics.framework in Frameworks */,
 				0D143F571BD7765D00F5D9EE /* CoreText.framework in Frameworks */,
 				0D143F551BD7761A00F5D9EE /* CoreTelephony.framework in Frameworks */,
+				265566F81C1AABC400150C3C /* Bugly.framework in Frameworks */,
 				181E307A1BA2B30A00BBA92F /* libsqlite3.dylib in Frameworks */,
 				0D74887A1B8A2219007BE4CD /* CoreData.framework in Frameworks */,
 				0DC1D3F81B9B348F0043C79B /* AVFoundation.framework in Frameworks */,
@@ -829,6 +838,8 @@
 		0D7487171B88A8BC007BE4CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				265566F31C1AAB0100150C3C /* libc++.tbd */,
+				265566F01C1AAAE900150C3C /* Security.framework */,
 				26E99AFE1C059F8C00D92552 /* libz.tbd */,
 				0D26770F1BF245A9006FB4ED /* StoreKit.framework */,
 				0D1440131BD8138A00F5D9EE /* libcrypto.a */,
@@ -937,6 +948,7 @@
 			isa = PBXGroup;
 			children = (
 				0DB5370D1B8F5DEE0023A3F7 /* AFNetworking */,
+				265566F61C1AABC400150C3C /* Bugly */,
 				0D7488831B8A2973007BE4CD /* MD5 */,
 				0D018FF51B980E8200A92F59 /* UIKit+AFNetworking */,
 			);
@@ -1463,6 +1475,14 @@
 			name = HBStuManViewControllers;
 			sourceTree = "<group>";
 		};
+		265566F61C1AABC400150C3C /* Bugly */ = {
+			isa = PBXGroup;
+			children = (
+				265566F71C1AABC400150C3C /* Bugly.framework */,
+			);
+			path = Bugly;
+			sourceTree = "<group>";
+		};
 		4322FE821BEDD04800775D3A /* HBWeekWorkViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1944,6 +1964,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LeaderDiandu/Third/AliPay",
+					"$(PROJECT_DIR)/LeaderDiandu/Third/Bugly",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
@@ -1986,6 +2007,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LeaderDiandu/Third/AliPay",
+					"$(PROJECT_DIR)/LeaderDiandu/Third/Bugly",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";

@@ -14,6 +14,8 @@
 //#define NSLog(...) {}
 //#endif
 
+#define KWBBuglyAppID   @"900014908"
+
 #define KWBAppKey       @"app_key"
 
 #define LEADER_SERVICE_RELEASE  1
