@@ -29,6 +29,15 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
 - (void)requestRegister:(NSString *)user pwd:(NSString *)pwd type:(NSString *)type smsCode:(NSString *)sms_code codeId:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
+ *  通过用户昵称注册
+ *
+ *  @param display_name     用户名
+ *  @param pwd              密码
+ *  @param receivedBlock 回调Block
+ */
+- (void)requestRegistByName:(NSString *)display_name pwd:(NSString *)pwd completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
  *  登录
  *
  *  @param user             用户名

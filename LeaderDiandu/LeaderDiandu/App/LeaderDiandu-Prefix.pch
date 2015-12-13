@@ -18,7 +18,7 @@
 
 #define KWBAppKey       @"app_key"
 
-#define LEADER_SERVICE_RELEASE  1
+#define LEADER_SERVICE_RELEASE  0
 
 #define KEnableThirdPay 0
 

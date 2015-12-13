@@ -89,6 +89,19 @@
     [self Post:@"/api/auth/register" dict:dicInfo block:receivedBlock];
 }
 
+- (void)requestRegistByName:(NSString *)display_name pwd:(NSString *)pwd completion:(HBServiceReceivedBlock)receivedBlock
+{
+    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    [dicInfo setObject:display_name     forKey:@"display_name"];
+    [dicInfo setObject:pwd      forKey:@"password"];
+    
+    if (_receivedBlock) {
+        return;
+    }
+    self.receivedBlock = receivedBlock;
+    [self Post:@"/api/auth/register/nickname" dict:dicInfo block:receivedBlock];
+}
+
 - (void)requestLogin:(NSString *)user pwd:(NSString *)pwd completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];

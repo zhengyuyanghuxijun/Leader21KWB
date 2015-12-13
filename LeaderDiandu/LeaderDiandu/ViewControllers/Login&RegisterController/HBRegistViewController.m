@@ -50,9 +50,11 @@
 #pragma mark - init Method
 - (void)initMainView
 {
+    NSInteger editNum = 4;
     if (self.viewType == KLeaderViewTypeRegister) {
         self.title = @"注册";
-    } else if (self.viewType == KLeaderViewTypeForgetPwd) {
+        editNum = 3;
+    } else {
         self.title = @"忘记密码";
     }
     
@@ -60,7 +62,7 @@
     float controlY = KHBNaviBarHeight + 50;
     float controlH = 45;
     float screenW = self.view.frame.size.width;
-    UIView *accountView = [[UIView alloc] initWithFrame:CGRectMake(0, controlY, screenW, controlH*4+30)];
+    UIView *accountView = [[UIView alloc] initWithFrame:CGRectMake(0, controlY, screenW, controlH*editNum+30)];
     accountView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:accountView];
     
@@ -68,26 +70,32 @@
     controlY = 0;
     float controlW = screenW - controlX*2;
     self.inputPhoneNumber = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-    _inputPhoneNumber.placeholder = @"请输入手机号";
+    if (self.viewType == KLeaderViewTypeRegister) {
+        _inputPhoneNumber.placeholder = @"请输入昵称";
+    } else {
+        _inputPhoneNumber.placeholder = @"请输入手机号";
+    }
     [_inputPhoneNumber setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
     [accountView addSubview:_inputPhoneNumber];
     
-    float buttonW = 120;
-    controlY += controlH+margin;
-    controlW -= buttonW+30;
-    self.inputVerifyCode = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-    _inputVerifyCode.placeholder = @"验证码";
-    [self.inputVerifyCode setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
-    [accountView addSubview:_inputVerifyCode];
-    
-    controlX = screenW - buttonW - 10;
-    self.getCodeButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, buttonW, controlH)];
-    _getCodeButton.backgroundColor = [UIColor whiteColor];
-    _getCodeButton.titleLabel.font = [UIFont systemFontOfSize:16];
-    [_getCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-    [_getCodeButton setTitleColor:KLeaderRGB forState:UIControlStateNormal];
-    [_getCodeButton addTarget:self action:@selector(fetchVerifyCode:) forControlEvents:UIControlEventTouchUpInside];
-    [accountView addSubview:_getCodeButton];
+    if (self.viewType != KLeaderViewTypeRegister) {
+        float buttonW = 120;
+        controlY += controlH+margin;
+        controlW -= buttonW+30;
+        self.inputVerifyCode = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+        _inputVerifyCode.placeholder = @"验证码";
+        [self.inputVerifyCode setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
+        [accountView addSubview:_inputVerifyCode];
+        
+        controlX = screenW - buttonW - 10;
+        self.getCodeButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, buttonW, controlH)];
+        _getCodeButton.backgroundColor = [UIColor whiteColor];
+        _getCodeButton.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_getCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [_getCodeButton setTitleColor:KLeaderRGB forState:UIControlStateNormal];
+        [_getCodeButton addTarget:self action:@selector(fetchVerifyCode:) forControlEvents:UIControlEventTouchUpInside];
+        [accountView addSubview:_getCodeButton];
+    }
     
     controlX = 0;
     controlY += controlH+margin;
@@ -170,6 +178,28 @@
     } else if (self.viewType == KLeaderViewTypeForgetPwd) {
         [self modifyPassword:passward];
     }
+}
+
+- (void)registerNickname:(NSString *)password
+{
+    NSString *nickname = self.inputPassword.text;
+    
+    [MBHudUtil showActivityView:nil inView:nil];
+    [[HBServiceManager defaultManager] requestRegistByName:nickname pwd:password completion:^(id responseObject, NSError *error) {
+        //{ user: "100107", display_name: "tome.lee" }
+        [MBHudUtil hideActivityView:nil];
+        if (error == nil) {
+            NSDictionary *dict = responseObject;
+            if ([[dict objectForKey:@"user"] isEqualToString:@"OK"]) {
+                //注册成功
+                [MBHudUtil showTextViewAfter:@"注册成功，请登录"];
+                //返回登录界面
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        } else {
+            [MBHudUtil showTextViewAfter:@"注册失败，请重试"];
+        }
+    }];
 }
 
 - (void)registerUser:(NSString *)password
