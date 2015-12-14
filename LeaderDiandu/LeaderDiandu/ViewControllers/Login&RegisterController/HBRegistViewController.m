@@ -174,7 +174,8 @@
     
     NSString *passward  = self.inputPassword.text;
     if (self.viewType == KLeaderViewTypeRegister) {
-        [self registerUser:passward];
+        [self registerNickname:passward];
+//        [self registerUser:passward];
     } else if (self.viewType == KLeaderViewTypeForgetPwd) {
         [self modifyPassword:passward];
     }
@@ -297,13 +298,21 @@
     BOOL needReturn = NO;
     NSString *pwd1 = self.inputPassword.text;
     NSString *pwd2 = self.againPassword.text;
-    if (![self.inputPhoneNumber.text isPhoneNumInput]){
-        [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
-        needReturn = YES;
-    } else if ([NSString checkTextNULL:self.inputVerifyCode.text]){
-        [MBHudUtil showTextView:@"请输入验证码" inView:nil];
-        needReturn = YES;
-    } else if ([pwd1 length]==0 || [pwd2 length]==0) {
+    if (self.viewType == KLeaderViewTypeRegister) {
+        if ([NSString checkTextNULL:self.inputPhoneNumber.text]) {
+            [MBHudUtil showTextView:@"请输入昵称" inView:nil];
+            return YES;
+        }
+    } else {
+        if (![self.inputPhoneNumber.text isPhoneNumInput]){
+            [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
+            return YES;
+        } else if ([NSString checkTextNULL:self.inputVerifyCode.text]){
+            [MBHudUtil showTextView:@"请输入验证码" inView:nil];
+            return YES;
+        }
+    }
+    if ([pwd1 length]==0 || [pwd2 length]==0) {
         [MBHudUtil showTextView:@"请填写完整的密码" inView:nil];
         needReturn = YES;
     } else if ([pwd1 isEqualToString:pwd2] == NO) {
