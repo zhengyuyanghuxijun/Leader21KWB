@@ -164,7 +164,7 @@
     if (_loginVC) {
         _currentVC = _loginVC;
         [self.globalNavi popToRootViewControllerAnimated:NO];
-        [self.globalNavi pushViewController:_loginVC animated:YES];
+        [self.globalNavi pushViewController:_loginVC animated:NO];
     }
 }
 

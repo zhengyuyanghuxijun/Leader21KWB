@@ -38,6 +38,7 @@
 		0D3F6D161BAE8F64005B4358 /* HBMyWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */; };
 		0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */; };
 		0D3F6D1C1BAEA41A005B4358 /* HBMyWorkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D1B1BAEA41A005B4358 /* HBMyWorkView.m */; };
+		0D5573501C1F153600EB437C /* HBRegInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D55734F1C1F153600EB437C /* HBRegInfoViewController.m */; };
 		0D6BEEF51BBA38090080F342 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 0D6BEEF31BBA38090080F342 /* iTunesArtwork */; };
 		0D6BEEF61BBA38090080F342 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 0D6BEEF41BBA38090080F342 /* iTunesArtwork@2x */; };
 		0D7292C51B9E0650006FA7EA /* HBSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7292C41B9E0650006FA7EA /* HBSettingViewController.m */; };
@@ -328,6 +329,8 @@
 		0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+TKCategory.m"; sourceTree = "<group>"; };
 		0D3F6D1A1BAEA41A005B4358 /* HBMyWorkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkView.h; sourceTree = "<group>"; };
 		0D3F6D1B1BAEA41A005B4358 /* HBMyWorkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMyWorkView.m; sourceTree = "<group>"; };
+		0D55734E1C1F153600EB437C /* HBRegInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBRegInfoViewController.h; sourceTree = "<group>"; };
+		0D55734F1C1F153600EB437C /* HBRegInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBRegInfoViewController.m; sourceTree = "<group>"; };
 		0D6BEEF31BBA38090080F342 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = LeaderDiandu/iTunesArtwork; sourceTree = "<group>"; };
 		0D6BEEF41BBA38090080F342 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; name = "iTunesArtwork@2x"; path = "LeaderDiandu/iTunesArtwork@2x"; sourceTree = "<group>"; };
 		0D7292C31B9E0650006FA7EA /* HBSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSettingViewController.h; sourceTree = "<group>"; };
@@ -1124,6 +1127,8 @@
 				0DBE35C81B8CD7BE00179237 /* HBForgetPwdViewController.m */,
 				0DBE35C91B8CD7BE00179237 /* HBRegistViewController.h */,
 				0DBE35CA1B8CD7BE00179237 /* HBRegistViewController.m */,
+				0D55734E1C1F153600EB437C /* HBRegInfoViewController.h */,
+				0D55734F1C1F153600EB437C /* HBRegInfoViewController.m */,
 				0DBD1AC11BBD940900A3BD72 /* HBNLoginViewController.h */,
 				0DBD1AC21BBD940900A3BD72 /* HBNLoginViewController.m */,
 			);
@@ -1804,6 +1809,7 @@
 				18AB8F4F1BB9911300409103 /* RefreshTableHeaderView.m in Sources */,
 				0DBE35B21B8CCEFA00179237 /* UIViewAdditions.m in Sources */,
 				0DBD1AB01BBBAB5E00A3BD72 /* MJProgressHUD.m in Sources */,
+				0D5573501C1F153600EB437C /* HBRegInfoViewController.m in Sources */,
 				18F367F21BA9541100EBFEC4 /* HBSetStuGroupCell.m in Sources */,
 				0D0190141B98B1B500A92F59 /* HBBindPhoneViewController.m in Sources */,
 				0DD214721B960148009E3DB9 /* HBTestWorkViewController.m in Sources */,

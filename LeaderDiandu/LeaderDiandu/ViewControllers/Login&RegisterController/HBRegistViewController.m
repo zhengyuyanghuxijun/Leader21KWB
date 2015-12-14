@@ -8,6 +8,7 @@
 
 #import "HBRegistViewController.h"
 #import "HBNLoginViewController.h"
+#import "HBRegInfoViewController.h"
 #import "HBNTextField.h"
 #import "NSString+Verify.h"
 #import "HBServiceManager.h"
@@ -191,12 +192,9 @@
         [MBHudUtil hideActivityView:nil];
         if (error == nil) {
             NSDictionary *dict = responseObject;
-            if ([[dict objectForKey:@"user"] isEqualToString:@"OK"]) {
-                //注册成功
-                [MBHudUtil showTextViewAfter:@"注册成功，请登录"];
-                //返回登录界面
-                [self.navigationController popViewControllerAnimated:YES];
-            }
+            [[HBDataSaveManager defaultManager] setUserID:[dict stringForKey:@"user"]];
+            HBRegInfoViewController *vc = [[HBRegInfoViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         } else {
             [MBHudUtil showTextViewAfter:@"注册失败，请重试"];
         }
