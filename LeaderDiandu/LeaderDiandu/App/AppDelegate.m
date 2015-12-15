@@ -46,8 +46,10 @@
     // Override point for customization after application launch.
     
     //苹果应用内升级
-    HBVersionCheck *version = [[HBVersionCheck alloc] init];
-    [version checkVersion];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        HBVersionCheck *version = [[HBVersionCheck alloc] init];
+        [version checkVersion];
+    });
     
     //bugly初始化
 //    [[CrashReporter sharedInstance] enableLog:YES];

@@ -21,7 +21,6 @@
 
 @interface HBDataSaveManager : NSObject
 
-@property (nonatomic, strong)NSString *userID;
 @property (nonatomic, strong)HBUserEntity *userEntity;
 
 @property (nonatomic, assign)BOOL wifiDownload; //仅在wifi下下载

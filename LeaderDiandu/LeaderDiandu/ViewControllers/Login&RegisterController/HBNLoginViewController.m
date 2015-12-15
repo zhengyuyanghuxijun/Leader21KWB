@@ -55,6 +55,17 @@
     UINavigationBar *naviBar = self.navigationController.navigationBar;
     //设置navigationBar背景颜色
     [naviBar setBarTintColor:KLeaderRGB];
+    
+    if (self.userID && _inputPhoneNumber) {
+        [_inputPhoneNumber setText:self.userID];
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    self.userID = nil;
 }
 
 - (void)tapToHideKeyboard:(id)sender

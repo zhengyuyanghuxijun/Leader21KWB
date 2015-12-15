@@ -10,4 +10,6 @@
 
 @interface HBRegInfoViewController : HBBaseViewController
 
+@property (nonatomic, strong)NSString *userID;
+
 @end

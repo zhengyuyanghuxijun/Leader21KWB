@@ -10,4 +10,6 @@
 
 @interface HBNLoginViewController : HBBaseViewController
 
+@property (nonatomic, strong)NSString *userID;
+
 @end

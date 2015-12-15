@@ -192,8 +192,8 @@
         [MBHudUtil hideActivityView:nil];
         if (error == nil) {
             NSDictionary *dict = responseObject;
-            [[HBDataSaveManager defaultManager] setUserID:[dict stringForKey:@"user"]];
             HBRegInfoViewController *vc = [[HBRegInfoViewController alloc] init];
+            vc.userID = [dict stringForKey:@"user"];
             [self.navigationController pushViewController:vc animated:YES];
         } else {
             [MBHudUtil showTextViewAfter:@"注册失败，请重试"];

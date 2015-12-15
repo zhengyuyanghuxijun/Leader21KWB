@@ -7,6 +7,7 @@
 //
 
 #import "HBRegInfoViewController.h"
+#import "HBNLoginViewController.h"
 #import "HBDataSaveManager.h"
 
 @interface HBRegInfoViewController ()
@@ -34,9 +35,9 @@
     NSMutableArray *descArr = [NSMutableArray array];
     [descArr addObject:@"欢迎你来到课外宝，"];
     [descArr addObject:@"你的账号（ID）为"];
-    [descArr addObject:[[HBDataSaveManager defaultManager] userID]];
+    [descArr addObject:self.userID];
     [descArr addObject:@"请牢记你的账号和密码。"];
-    [descArr addObject:@"你可以在个人中心内，"];
+    [descArr addObject:@"你可以在“个人中心”内，"];
     [descArr addObject:@"绑定手机号码，"];
     [descArr addObject:@"方便你使用手机号码"];
     [descArr addObject:@"登录和找回密码。"];
@@ -54,6 +55,10 @@
 //        CGSize descSize = [descStr boundingRectWithSize:CGSizeMake(descWidth, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:[NSDictionary dictionaryWithObjectsAndKeys:descFont,NSFontAttributeName, nil] context:nil].size;
         
         descLabel = [self createTextLabel:CGRectMake(currX, currY, descWidth, descHeight) text:descStr font:descFont];
+        if (i == 2) {
+            descLabel.font = [UIFont boldSystemFontOfSize:20];
+            descLabel.textColor = KLeaderRGB;
+        }
         [self.view addSubview:descLabel];
         
         currY += descHeight+lineSpace;
@@ -78,14 +83,16 @@
     UILabel *textLabel = [[UILabel alloc] initWithFrame:frame];
     textLabel.font = font;
     textLabel.backgroundColor = [UIColor clearColor];
-    textLabel.textColor = RGB(168, 167, 172);
+//    textLabel.textColor = RGB(168, 167, 172);
     textLabel.numberOfLines = 0;
     textLabel.text = text;
+    textLabel.textAlignment = NSTextAlignmentCenter;
     return textLabel;
 }
 
 - (void)buttonAction:(id)sender
 {
+    [AppDelegate delegate].loginVC.userID = self.userID;
     [Navigator pushLoginControllerNow];
 }
 
