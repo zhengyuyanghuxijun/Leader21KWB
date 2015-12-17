@@ -66,6 +66,9 @@
     [super viewDidDisappear:animated];
     
     self.userID = nil;
+    if (_inputPassword) {
+        [_inputPassword setText:nil];
+    }
 }
 
 - (void)tapToHideKeyboard:(id)sender
@@ -87,7 +90,7 @@
     float controlW = screenW - controlX*2;
     float controlH = 45;
     self.inputPhoneNumber = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-    _inputPhoneNumber.placeholder = @"手机号/ID";
+    _inputPhoneNumber.placeholder = @"ID/手机号码";
     [_inputPhoneNumber setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
     [accountView addSubview:_inputPhoneNumber];
     
