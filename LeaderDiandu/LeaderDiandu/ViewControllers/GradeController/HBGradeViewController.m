@@ -892,7 +892,7 @@
     itemView.touchEnable = NO;
 
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
-    if (listIndex!=0 && listIndex==[arr count]) {
+    if (listIndex==[arr count]) {
         //默认封皮
         [itemView setDemoImage:@"cover_get_more"];
         return itemView;

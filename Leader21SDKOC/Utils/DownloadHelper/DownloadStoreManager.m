@@ -123,13 +123,11 @@ static DownloadStoreManager *_instance;
         [CoreDataHelper save];
         
         // 开始下载
+        NSLog(@"sdk---book开始下载---progress=%@", entity.progress);
         NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
         [info setObject:@(0.005) forKey:@"progress"];
         [info setObject:book.bookUrl forKey:@"url"];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_bookDownloadProgress
-                                                            object:book
-                                                          userInfo:info];
-
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_bookDownloadProgress object:book userInfo:info];
     }
     });
 }

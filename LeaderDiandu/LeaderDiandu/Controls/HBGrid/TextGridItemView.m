@@ -253,6 +253,8 @@
 {
     BookEntity* book = (BookEntity*)notification.object;
     NSInteger status = book.download.status.integerValue;
+//    NSDictionary *userInfo = notification.userInfo;
+//    float progress = [userInfo[@"progress"] floatValue];
     
     if ([book.bookUrl isEqualToString:self.bookDownloadUrl]){
         if (status == downloadStatusFinished) {

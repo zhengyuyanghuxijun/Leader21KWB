@@ -115,6 +115,7 @@ static DownloadManager *_instance;
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // 下载失败
+                    NSLog(@"sdk---book下载失败---progress=%@", book.download.progress);
                     NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
 //                    [info setObject:@(progress) forKey:@"progress"];
                     [info setObject:book.bookUrl forKey:@"url"];
@@ -141,6 +142,7 @@ static DownloadManager *_instance;
                 NSString* path = [LocalSettings bookPathForDefaultUser:book.bookTitle];
 
                 // 下载完成，准备解压
+                NSLog(@"sdk---book下载完成准备解压---progress=%@", book.download.progress);
                 NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
                 [info setObject:@(0.98) forKey:@"progress"];
                 [info setObject:book.bookUrl forKey:@"url"];
@@ -179,6 +181,7 @@ static DownloadManager *_instance;
                         book.download.status = @(downloadStatusFinished);
 
                         // 解压完成，可以用了
+                        NSLog(@"sdk---book解压完成---progress=%@", book.download.progress);
                         NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
                         [info setObject:@(1.0) forKey:@"progress"];
                         [info setObject:book.bookUrl forKey:@"url"];
@@ -225,16 +228,21 @@ static DownloadManager *_instance;
         NSPredicate* predicate = [NSPredicate predicateWithFormat:@"bookUrl == %@", downloadurl];
         NSLog(@"download progress PRE:%@", predicate);
         BookEntity* book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
-        NSLog(@"BOOK:%@", book.bookUrl);
+        NSLog(@"BOOK:%@-----bookUrl=%@", book, book.bookUrl);
         if (book == nil) {
-            NSLog(@"url error:%@", callbackItem.originalURL);
-            return;
+            predicate = [NSPredicate predicateWithFormat:@"bookUrl == %@", callbackItem.url];
+            book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
+            if (book == nil) {
+                NSLog(@"url error:%@", callbackItem.originalURL);
+                return;
+            }
         }
         book.download.progress = [NSNumber numberWithDouble:progress];
         book.download.status = [NSNumber numberWithInteger:downloadStatusDownloading];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             // 下载中
+            NSLog(@"sdk---book下载中---progress=%@", book.download.progress);
             NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
             [info setObject:@(progress) forKey:@"progress"];
             [info setObject:book.bookUrl forKey:@"url"];

@@ -100,6 +100,7 @@
         book.download.status = @(downloadStatusPause);
         [CoreDataHelper save];
         // 暂停
+        NSLog(@"sdk---book下载暂停---progress=%@", book.download.progress);
         NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
         [info setObject:@(-1.0) forKey:@"progress"];
         [info setObject:book.bookUrl forKey:@"url"];
@@ -123,6 +124,7 @@
         book.download.status = @(downloadStatusNone);
         [CoreDataHelper save];
         // 取消下载
+        NSLog(@"sdk---book下载取消---progress=%@", book.download.progress);
         NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
         [info setObject:@(-1.0) forKey:@"progress"];
         [info setObject:book.bookUrl forKey:@"url"];
@@ -248,6 +250,7 @@
             [CoreDataHelper save];
             
             // 暂停
+            NSLog(@"sdk---book下载暂停---progress=%@", book.download.progress);
             NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
             [info setObject:@(-1.0) forKey:@"progress"];
             [info setObject:book.bookUrl forKey:@"url"];
@@ -304,6 +307,7 @@
                         book.download.status = @(downloadStatusFinished);
                         
                         // 解压完成，可以用了
+                        NSLog(@"sdk---book解压完成---progress=%@", book.download.progress);
                         NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
                         [info setObject:@(1.0) forKey:@"progress"];
                         [info setObject:book.bookUrl forKey:@"url"];
