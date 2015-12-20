@@ -36,8 +36,9 @@
     [dict setObject:KAppKeyKWB forKey:KWBAppKey];
     [[HBHTTPBaseRequest requestWithSubUrl:api] startWithMethod:HBHTTPRequestMethodPOST parameters:dict completion:^(id responseObject, NSError *error) {
         if (error) {
-            NSDictionary *userDic = error.userInfo;
-            NSString *descValue = userDic[@"NSLocalizedDescription"];
+//            NSDictionary *userDic = error.userInfo;
+//            NSString *descValue = userDic[@"NSLocalizedDescription"];
+            NSString *descValue = error.localizedDescription;
             if ([descValue containsString:@"401"]) {
                 [self startTimer];
             }

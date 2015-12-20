@@ -16,7 +16,7 @@
 
 #import "UIButton+AFNetworking.h"
 
-#define KVerifyImgUrl   @"http://teach.61dear.cn:9080/api/auth/captcha"
+#define KVerifyImgApi   @"/api/auth/captcha"
 
 @interface HBRegistViewController ()
 
@@ -46,12 +46,15 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToHideKeyboard:)];
     [self.view addGestureRecognizer:tap];
     
-    [self getVerifyImage];
+    if (self.viewType == KLeaderViewTypeRegister) {
+        [self getVerifyImage];
+    }
 }
 
 - (void)getVerifyImage
 {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:KVerifyImgUrl]];
+    NSString *imgUrl = [NSString stringWithFormat:@"%@%@", SERVICEAPI, KVerifyImgApi];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:imgUrl]];
     [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
     
     [_getCodeButton setTitle:@"载入..." forState:UIControlStateNormal];
