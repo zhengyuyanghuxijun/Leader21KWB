@@ -89,17 +89,43 @@
     [self Post:@"/api/auth/register" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestRegistByName:(NSString *)display_name pwd:(NSString *)pwd completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestRegistByName:(NSString *)display_name pwd:(NSString *)pwd smsCode:(NSString *)sms_code codeId:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:display_name     forKey:@"display_name"];
     [dicInfo setObject:pwd      forKey:@"password"];
+    [dicInfo setObject:sms_code forKey:@"sms_code"];
+    [dicInfo setObject:code_id  forKey:@"code_id"];
     
     if (_receivedBlock) {
         return;
     }
     self.receivedBlock = receivedBlock;
     [self Post:@"/api/auth/register/nickname" dict:dicInfo block:receivedBlock];
+}
+
+- (void)requestGetVerifyImg:(HBServiceReceivedBlock)receivedBlock
+{
+//    NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
+    
+//    if (_receivedBlock) {
+//        return;
+//    }
+//    self.receivedBlock = receivedBlock;
+//    [self Post:@"/api/auth/captcha" dict:dicInfo block:receivedBlock];
+    
+    NSString *imgUrl = @"http://teach.61dear.cn:9080/api/auth/captcha";
+    NSURL *url = [NSURL URLWithString:imgUrl];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:5.0];
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    
+    AFHTTPRequestOperation *afOperation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    afOperation.responseSerializer = [AFImageResponseSerializer serializer];
+    [afOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
 }
 
 - (void)requestLogin:(NSString *)user pwd:(NSString *)pwd completion:(HBServiceReceivedBlock)receivedBlock

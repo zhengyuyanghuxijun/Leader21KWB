@@ -35,7 +35,14 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param pwd              密码
  *  @param receivedBlock 回调Block
  */
-- (void)requestRegistByName:(NSString *)display_name pwd:(NSString *)pwd completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestRegistByName:(NSString *)display_name pwd:(NSString *)pwd smsCode:(NSString *)sms_code codeId:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock;
+
+/**
+ *  获取验证码图片
+ *
+ *  @param receivedBlock 回调Block
+ */
+- (void)requestGetVerifyImg:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  登录

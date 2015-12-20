@@ -14,6 +14,10 @@
 #import "HBServiceManager.h"
 #import "HBHyperlinksButton.h"
 
+#import "UIButton+AFNetworking.h"
+
+#define KVerifyImgUrl   @"http://teach.61dear.cn:9080/api/auth/captcha"
+
 @interface HBRegistViewController ()
 
 @property (nonatomic, strong) HBNTextField *inputPhoneNumber;
@@ -27,6 +31,7 @@
 @property (nonatomic, strong) NSTimer *mtimer;
 
 @property (nonatomic, strong) NSDictionary *smsDict;
+@property (nonatomic, strong) NSString *x_code_id;
 
 @end
 
@@ -40,6 +45,27 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapToHideKeyboard:)];
     [self.view addGestureRecognizer:tap];
+    
+    [self getVerifyImage];
+}
+
+- (void)getVerifyImage
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:KVerifyImgUrl]];
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    
+    __strong __typeof(self)strongSelf = self;
+    [_getCodeButton setBackgroundImageForState:UIControlStateNormal withURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        if (image) {
+            strongSelf.x_code_id = response.allHeaderFields[@"X-Code-Id"];
+            [strongSelf.getCodeButton setBackgroundImage:image forState:UIControlStateNormal];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+//    [[HBServiceManager defaultManager] requestGetVerifyImg:^(id responseObject, NSError *error) {
+//        
+//    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,7 +80,6 @@
     NSInteger editNum = 4;
     if (self.viewType == KLeaderViewTypeRegister) {
         self.title = @"注册";
-        editNum = 3;
     } else {
         self.title = @"忘记密码";
     }
@@ -79,23 +104,23 @@
     [_inputPhoneNumber setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
     [accountView addSubview:_inputPhoneNumber];
     
+    float buttonW = 120;
+    controlY += controlH+margin;
+    controlW -= buttonW+30;
+    self.inputVerifyCode = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    _inputVerifyCode.placeholder = @"验证码";
+    [self.inputVerifyCode setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
+    [accountView addSubview:_inputVerifyCode];
+    
+    controlX = screenW - buttonW - 10;
+    self.getCodeButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, buttonW, controlH)];
+    _getCodeButton.backgroundColor = [UIColor whiteColor];
+    _getCodeButton.titleLabel.font = [UIFont systemFontOfSize:16];
+    [_getCodeButton setTitleColor:KLeaderRGB forState:UIControlStateNormal];
+    [_getCodeButton addTarget:self action:@selector(fetchVerifyCode:) forControlEvents:UIControlEventTouchUpInside];
+    [accountView addSubview:_getCodeButton];
     if (self.viewType != KLeaderViewTypeRegister) {
-        float buttonW = 120;
-        controlY += controlH+margin;
-        controlW -= buttonW+30;
-        self.inputVerifyCode = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-        _inputVerifyCode.placeholder = @"验证码";
-        [self.inputVerifyCode setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
-        [accountView addSubview:_inputVerifyCode];
-        
-        controlX = screenW - buttonW - 10;
-        self.getCodeButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, buttonW, controlH)];
-        _getCodeButton.backgroundColor = [UIColor whiteColor];
-        _getCodeButton.titleLabel.font = [UIFont systemFontOfSize:16];
         [_getCodeButton setTitle:@"获取验证码" forState:UIControlStateNormal];
-        [_getCodeButton setTitleColor:KLeaderRGB forState:UIControlStateNormal];
-        [_getCodeButton addTarget:self action:@selector(fetchVerifyCode:) forControlEvents:UIControlEventTouchUpInside];
-        [accountView addSubview:_getCodeButton];
     }
     
     controlX = 0;
@@ -185,9 +210,10 @@
 - (void)registerNickname:(NSString *)password
 {
     NSString *nickname = self.inputPassword.text;
-    
+    NSString *smsCode   = self.inputVerifyCode.text;
+
     [MBHudUtil showActivityView:nil inView:nil];
-    [[HBServiceManager defaultManager] requestRegistByName:nickname pwd:password completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestRegistByName:nickname pwd:password smsCode:smsCode codeId:self.x_code_id completion:^(id responseObject, NSError *error) {
         //{ user: "100107", display_name: "tome.lee" }
         [MBHudUtil hideActivityView:nil];
         if (error == nil) {
@@ -242,8 +268,11 @@
 - (void)fetchVerifyCode:(id)sender
 {
     [self tapToHideKeyboard:nil];
-
-    [self.inputPhoneNumber resignFirstResponder];
+    
+    if (self.viewType == KLeaderViewTypeRegister) {
+        [self getVerifyImage];
+        return;
+    }
     
     NSString *phoneNum = self.inputPhoneNumber.text;
     if (![phoneNum isPhoneNumInput]){
@@ -296,21 +325,17 @@
     BOOL needReturn = NO;
     NSString *pwd1 = self.inputPassword.text;
     NSString *pwd2 = self.againPassword.text;
-    if (self.viewType == KLeaderViewTypeRegister) {
-        if ([NSString checkTextNULL:self.inputPhoneNumber.text]) {
+    if ([NSString checkTextNULL:self.inputPhoneNumber.text]){
+        if (self.viewType == KLeaderViewTypeRegister) {
             [MBHudUtil showTextView:@"请输入昵称" inView:nil];
-            return YES;
+        } else {
+            [MBHudUtil showTextView:@"请输入手机号" inView:nil];
         }
-    } else {
-        if (![self.inputPhoneNumber.text isPhoneNumInput]){
-            [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
-            return YES;
-        } else if ([NSString checkTextNULL:self.inputVerifyCode.text]){
-            [MBHudUtil showTextView:@"请输入验证码" inView:nil];
-            return YES;
-        }
-    }
-    if ([pwd1 length]==0 || [pwd2 length]==0) {
+        return YES;
+    } else if ([NSString checkTextNULL:self.inputVerifyCode.text]){
+        [MBHudUtil showTextView:@"请输入验证码" inView:nil];
+        return YES;
+    } else if ([pwd1 length]==0 || [pwd2 length]==0) {
         [MBHudUtil showTextView:@"请填写完整的密码" inView:nil];
         needReturn = YES;
     } else if ([pwd1 isEqualToString:pwd2] == NO) {
