@@ -140,7 +140,7 @@
     }
     self.receivedBlock = receivedBlock;
 
-    [[HBHTTPBaseRequest requestWithSubUrl:@"/api/auth/login"] startWithMethod:HBHTTPRequestMethodPOST parameters:dicInfo completion:^(id responseObject, NSError *error) {
+    [[HBHTTPBaseRequest requestWithSubUrl:@"/api/auth/login/v2"] startWithMethod:HBHTTPRequestMethodPOST parameters:dicInfo completion:^(id responseObject, NSError *error) {
         if (receivedBlock) {
             if (error.code == 0) {
                 NSString *pwdMd5 = [pwd md5];

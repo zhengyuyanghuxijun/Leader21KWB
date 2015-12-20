@@ -68,10 +68,10 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     
     self.skPayService = [HBSKPayService defaultService];
     self.skPayService.payDelegate = self;
-    _payMonthDic = @{@(1):@(12), @(3):@(30), @(6):@(60), @(12):@(118)};
+    _payMonthDic = @{@(1):@(30), @(3):@(90), @(6):@(178), @(12):@(348)};
     
     self.months = 1;
-    self.money = 12;
+    self.money = 30;
     
     self.payModeDic = [[NSMutableDictionary alloc] initWithCapacity:1];
     [self.payModeDic setObject:@"pay-icn-alipay" forKey:@"checked"];

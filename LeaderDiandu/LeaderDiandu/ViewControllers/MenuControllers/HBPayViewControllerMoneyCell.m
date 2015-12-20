@@ -41,7 +41,7 @@
         self.discountCNArr = @[@"", @"95折", @"9折", @"85折", @"8折", @"75折"];
 #else
         self.timeArray = @[@"1月", @"1季", @"半年", @"1年"];
-        self.moneyArr = @[@"12元", @"30元", @"60元", @"118元"];
+        self.moneyArr = @[@"30元", @"90元", @"178元", @"348元"];
 #endif
         [self initUI];
     }
@@ -95,7 +95,7 @@
     
     self.moneyLabel = [[UILabel alloc] init];
     self.moneyLabel.frame = CGRectMake(ScreenWidth-80-20, controlY, 80, controlH);
-    self.moneyLabel.text = @"12.0元";
+    self.moneyLabel.text = @"30.0元";
     self.moneyLabel.textColor = KLeaderRGB;
     self.moneyLabel.textAlignment = NSTextAlignmentRight;
     self.moneyLabel.font = [UIFont boldSystemFontOfSize:20];
