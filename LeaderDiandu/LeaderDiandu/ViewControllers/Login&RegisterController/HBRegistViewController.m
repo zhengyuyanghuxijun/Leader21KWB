@@ -54,14 +54,18 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:KVerifyImgUrl]];
     [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
     
+    [_getCodeButton setTitle:@"载入..." forState:UIControlStateNormal];
     __strong __typeof(self)strongSelf = self;
     [_getCodeButton setBackgroundImageForState:UIControlStateNormal withURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         if (image) {
+            [strongSelf.getCodeButton setTitle:@"" forState:UIControlStateNormal];
             strongSelf.x_code_id = response.allHeaderFields[@"X-Code-Id"];
             [strongSelf.getCodeButton setBackgroundImage:image forState:UIControlStateNormal];
+        } else {
+            [strongSelf.getCodeButton setTitle:@"刷新" forState:UIControlStateNormal];
         }
     } failure:^(NSError *error) {
-        
+        [strongSelf.getCodeButton setTitle:@"刷新" forState:UIControlStateNormal];
     }];
 //    [[HBServiceManager defaultManager] requestGetVerifyImg:^(id responseObject, NSError *error) {
 //        
@@ -209,7 +213,7 @@
 
 - (void)registerNickname:(NSString *)password
 {
-    NSString *nickname = self.inputPassword.text;
+    NSString *nickname = self.inputPhoneNumber.text;
     NSString *smsCode   = self.inputVerifyCode.text;
 
     [MBHudUtil showActivityView:nil inView:nil];
