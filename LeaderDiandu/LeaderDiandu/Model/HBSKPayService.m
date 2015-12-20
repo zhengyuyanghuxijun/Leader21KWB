@@ -9,10 +9,10 @@
 #import "HBSKPayService.h"
 #import <StoreKit/StoreKit.h>
 
-#define KWBTierMonth1   @"kwbios_tier2"
-#define KWBTierMonth3   @"kwbios_tier5"
-#define KWBTierMonth6   @"kwbios_tier9"
-#define KWBTierMonth12  @"kwbios_tier18"
+#define KWBTierMonth1   @"kwbios_tier5"
+#define KWBTierMonth3   @"kwbios_tier9"
+#define KWBTierMonth6   @"kwbios_tier27"
+#define KWBTierMonth12  @"kwbios_tier51"
 
 @interface HBSKPayService () < SKPaymentTransactionObserver,SKProductsRequestDelegate >
 {

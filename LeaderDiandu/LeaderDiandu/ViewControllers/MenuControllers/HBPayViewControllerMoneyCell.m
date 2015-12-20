@@ -182,7 +182,7 @@
     }
     self.moneyLabel.text = [NSString stringWithFormat:@"%.1f%@", result, @"元"];
     
-    NSInteger months = ceilf(money / 10.0);//向上取整
+    NSInteger months = ceilf(money / 30.0);//向上取整
     if (self.delegate) {
         [self.delegate HBPaySelectMonth:months money:result];
     }
