@@ -242,6 +242,9 @@
     
     CGFloat maxImageWidth = 33;
     CGFloat maxItemHeight = 47;
+    if (iPhone5) {
+        maxItemHeight = 35;
+    }
     CGFloat maxItemWidth = contentFrame.size.width;
     
 
@@ -255,7 +258,7 @@
     contentView.autoresizingMask = UIViewAutoresizingNone;
     contentView.opaque = NO;
     
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(-3, -10, 60, 440)];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(-3, -10, 60, maxItemHeight*[_menuItems count]+10)];
     imgView.image = [UIImage imageNamed:@"bookshelf-bg-class"];
     [contentView addSubview:imgView];
     
@@ -378,6 +381,9 @@
     
     CGFloat maxImageWidth = 33;
     CGFloat maxItemHeight = 47;
+    if (iPhone5) {
+        maxItemHeight = 35;
+    }
     CGFloat maxItemWidth = contentFrame.size.width;
     
     
@@ -391,7 +397,7 @@
     contentView.autoresizingMask = UIViewAutoresizingNone;
     contentView.opaque = NO;
     
-    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(-3, -10, 60, 440)];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(-3, -10, 60, maxItemHeight*[_menuItems count]+10)];
     imgView.image = [UIImage imageNamed:@"bookshelf-bg-class"];
     [contentView addSubview:imgView];
     

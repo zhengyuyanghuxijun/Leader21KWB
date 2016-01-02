@@ -41,7 +41,7 @@
         self.discountCNArr = @[@"", @"95折", @"9折", @"85折", @"8折", @"75折"];
 #else
         self.timeArray = @[@"1月", @"1季", @"半年", @"1年"];
-        self.moneyArr = @[@"30元", @"90元", @"178元", @"348元"];
+        self.moneyArr = @[@"30元", @"88元", @"178元", @"348元"];
 #endif
         [self initUI];
     }

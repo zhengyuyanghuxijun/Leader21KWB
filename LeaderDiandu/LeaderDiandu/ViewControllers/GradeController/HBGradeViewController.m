@@ -1037,13 +1037,25 @@
         }
     } else if (alertView.tag == 1) {
         if (buttonIndex == 1) {
-            //开启设置wifi页面
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+            [self jumpToSetting];
         }
     } else if (alertView.tag == 1001) {
         if (buttonIndex == 1) {
             [Navigator pushLoginControllerNow];
         }
+    }
+}
+
+- (void)jumpToSetting
+{
+    //开启设置wifi页面
+    if (SYSTEM_VERSION >= 9.0) {
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+    } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
     }
 }
 

@@ -9,8 +9,8 @@
 #import "HBSKPayService.h"
 #import <StoreKit/StoreKit.h>
 
-#define KWBTierMonth1   @"kwbios_tier5"
-#define KWBTierMonth3   @"kwbios_tier9"
+#define KWBTierMonth1   @"kwbios_tier6"
+#define KWBTierMonth3   @"kwbios_tier8"
 #define KWBTierMonth6   @"kwbios_tier27"
 #define KWBTierMonth12  @"kwbios_tier51"
 

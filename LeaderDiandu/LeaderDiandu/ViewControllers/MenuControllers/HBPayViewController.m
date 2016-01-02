@@ -68,7 +68,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     
     self.skPayService = [HBSKPayService defaultService];
     self.skPayService.payDelegate = self;
-    _payMonthDic = @{@(1):@(30), @(3):@(90), @(6):@(178), @(12):@(348)};
+    _payMonthDic = @{@(1):@(30), @(3):@(88), @(6):@(178), @(12):@(348)};
     
     self.months = 1;
     self.money = 30;
