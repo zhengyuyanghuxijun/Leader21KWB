@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "HBBaseViewController.h"
 #import "Leader21SDKOC.h"
-#import "LeaderSDKUtil.h"
 
 @interface HBBookInfoCell : UITableViewCell
 

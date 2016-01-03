@@ -10,6 +10,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "HBTestWorkManager.h"
 #import "HBDataSaveManager.h"
+#import "LocalSettings.h"
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
 

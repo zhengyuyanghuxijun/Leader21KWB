@@ -9,7 +9,6 @@
 #import "GuideView.h"
 
 #import "ViewCreatorHelper.h"
-#import "LocalSettings.h"
 //#import "ExamLevelViewController.h"
 #import "Navigator.h"
 

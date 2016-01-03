@@ -62,7 +62,7 @@
  *  从数据库里面获取某个表的排序过数据。
  *  @param  entryName  表名。
  *  @param  sortTerm   排序的名称。
- *  @param  ascending  从大到小还是从小到大排序。
+ *  @param  ascending  YES从小到大,NO从大到小。
  */
 + (NSArray *)getAllSortedBy:(NSString *)sortTerm
                   ascending:(BOOL)ascending

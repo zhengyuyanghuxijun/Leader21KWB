@@ -45,9 +45,10 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
  */
 - (void)setAppKey:(NSString *)appKey;
 
-/**获取设置的leader21 appKey
+/*
+ *  从数据库里面获取存储的书籍。
  */
-- (NSString *)appKey;
+- (NSArray *)getAllStoredBooks;
 
 /**根据bookId获取book的详细信息
  @param bookIds bookId列表
@@ -103,10 +104,21 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
 - (BOOL)bookPressed:(BookEntity*)book useNavigation:(UINavigationController *)navigation;
 - (BOOL)bookPressedCheckDownload:(BookEntity*)book useNavigation:(UINavigationController *)navigation;
 
+// TODO 暂留，原则上不需要
 - (DownloadEntity *)getCoreDataDownload:(NSString *)url;
 
+/**
+ * 获取本地书籍
+ * @param
+ * @return 本地书籍数组
+ */
 - (NSMutableArray *)getLocalBooks;
 
+/**
+ * 删除几本书，删除之后需要重新调用getAllStoredBooks获取书籍数组
+ * @param books 书的数组
+ * @return 删除成功返回YES，失败返回NO
+ */
 - (BOOL) deleteLocalBooks:(NSMutableArray *)books;
 
 - (void) setManagedObjectContext:(NSManagedObjectContext *) moContext;

@@ -12,6 +12,7 @@
 #import "ReadBookViewController.h"
 #import "DownloadEntity.h"
 #import "ReadBookDecrypt.h"
+#import "CoreDataHelper.h"
 //#import "BookEntity+NSDictionary.h"
 
 @interface Leader21SDKOC()
@@ -49,9 +50,11 @@
     [self setManagedObjectContext:managedObjectContext];
 }
 
-- (NSString *)appKey
+- (NSArray *)getAllStoredBooks
 {
-    return self.mAppId;
+    //[CoreDataHelper getAllWithEntryName:@"BookEntity"]
+    NSArray *array = [CoreDataHelper getAllSortedBy:@"bookId" ascending:YES entryName:@"BookEntity"];
+    return array;
 }
 
 -(void)requestBookInfo:(NSString *)bookIds onComplete:(ResponseBookListBlock)block
@@ -207,6 +210,7 @@
 
 - (BOOL)deleteLocalBooks:(NSMutableArray *)books
 {
+    BOOL ret = NO;
     for (BookEntity* item in books) {
         // 删除
         NSString* fileId = [item.fileId lowercaseString];
@@ -214,7 +218,7 @@
         NSError* error = nil;
         NSLog(@"delete book %@",path1);
         if ([[NSFileManager defaultManager] fileExistsAtPath:path1]) {
-            [[NSFileManager defaultManager] removeItemAtPath:path1 error:&error];
+            ret = [[NSFileManager defaultManager] removeItemAtPath:path1 error:&error];
         }
         
         NSPredicate* predicate = [NSPredicate predicateWithFormat:@"fileId == %@", fileId];
@@ -233,7 +237,7 @@
 
         [CoreDataHelper save];
     }
-    return YES;
+    return ret;
 }
 
 -(void)setManagedObjectContext:(NSManagedObjectContext *)moContext
@@ -247,17 +251,7 @@
     if (book.download != nil) {
         if([[DownloadManager sharedInstance] isExistInDowningQueue:book.bookUrl])
         {
-            [[DownloadManager sharedInstance] pauseDownload:book.bookUrl];
-            book.download.status = @(downloadStatusPause);
-            [CoreDataHelper save];
-            
-            // 暂停
-            NSLog(@"sdk---book下载暂停---progress=%@", book.download.progress);
-            NSMutableDictionary* info = [NSMutableDictionary dictionaryWithCapacity:2];
-            [info setObject:@(-1.0) forKey:@"progress"];
-            [info setObject:book.bookUrl forKey:@"url"];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_bookDownloadProgress object:book userInfo:info];
-            
+            [self pauseDownload:book];
             return YES;
         }
     }
