@@ -117,7 +117,7 @@
     }
     
     [MBHudUtil showActivityView:nil inView:nil];
-    [[HBServiceManager defaultManager] requestModifyPwd:userEntity.name token:userEntity.token old_password:oldPwdText new_password:newPwdText completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestModifyPwd:userEntity.name old_password:oldPwdText new_password:newPwdText completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
         if ([[responseObject objectForKey:@"result"] isEqualToString:@"OK"]) {
             [MBHudUtil showTextViewAfter:@"修改密码成功"];

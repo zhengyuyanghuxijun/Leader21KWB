@@ -113,7 +113,7 @@
     
     //绑定手机的短信下发
     [MBHudUtil showActivityView:nil inView:nil];
-    [[HBServiceManager defaultManager] requestSmsCode:nil token:nil phone:phoneNum service_type:smsType completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestSmsCode:nil phone:phoneNum service_type:smsType completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
         if (error.code == 0) {
             self.smsDict = responseObject;
@@ -150,7 +150,7 @@
 
     [MBHudUtil showActivityView:nil inView:nil];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestUpdatePhone:userEntity.name token:userEntity.token phone:phoneNum sms_code:codeNum code_id:self.smsDict[@"code_id"] completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestUpdatePhone:userEntity.name phone:phoneNum sms_code:codeNum code_id:self.smsDict[@"code_id"] completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
         if (error == nil) {
             NSString *phone = [responseObject objectForKey:@"phone"];

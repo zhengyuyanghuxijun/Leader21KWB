@@ -98,6 +98,7 @@ static DownloadStoreManager *_instance;
 
 -(void)insertDownloadTask:(DownloadItem *)item
 {
+    NSLog(@"sdk---book开始下载---insertDownloadTask");
     dispatch_async(dispatch_get_main_queue(), ^{
     if(![self isExistDownloadTask:[item.url description]])
     {
@@ -108,6 +109,7 @@ static DownloadStoreManager *_instance;
             pre = [NSPredicate predicateWithFormat:@"bookUrl == %@", item.originalURL];
             book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:pre];
             if (book == nil) {
+                NSLog(@"sdk---book开始下载---book == nil");
                 return;
             }
         }
@@ -115,6 +117,10 @@ static DownloadStoreManager *_instance;
         [DownloadStoreManager transfer:item toEntity:entity];
 
         entity.book = book;
+        if (book.download == nil) {
+            NSLog(@"sdk---book开始下载---book.download=nil，重新赋值");
+            book.download = entity;
+        }
         entity.progress = @(0.005);
         entity.status = [NSNumber numberWithInteger:downloadStatusDownloading];
         entity.isFree = @(0);
@@ -128,6 +134,17 @@ static DownloadStoreManager *_instance;
         [info setObject:@(0.005) forKey:@"progress"];
         [info setObject:book.bookUrl forKey:@"url"];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_bookDownloadProgress object:book userInfo:info];
+    } else {
+        NSLog(@"sdk---book开始下载---已有下载任务");
+        NSPredicate* pre = [NSPredicate predicateWithFormat:@"bookUrl == %@", item.url];
+        BookEntity* book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:pre];
+        if (book && book.download==nil) {
+            NSLog(@"sdk---book开始下载---book.download=nil，重新赋值");
+            NSPredicate* predicate = [NSPredicate predicateWithFormat:@"userId == %@ AND downloadUrl == %@", @(0), item.url];
+            DownloadEntity* e = (DownloadEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"DownloadEntity" withPredicate:predicate];
+            book.download = e;
+            NSLog(@"sdk---book开始下载---book.download=%@", book.download);
+        }
     }
     });
 }

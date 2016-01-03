@@ -228,7 +228,7 @@ static DownloadManager *_instance;
         NSPredicate* predicate = [NSPredicate predicateWithFormat:@"bookUrl == %@", downloadurl];
         NSLog(@"download progress PRE:%@", predicate);
         BookEntity* book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
-        NSLog(@"BOOK:%@-----bookUrl=%@", book, book.bookUrl);
+        NSLog(@"bookUrl:%@-----BOOK=%@", book.bookUrl, book);
         if (book == nil) {
             predicate = [NSPredicate predicateWithFormat:@"bookUrl == %@", callbackItem.url];
             book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];

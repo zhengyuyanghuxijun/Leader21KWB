@@ -167,7 +167,7 @@
     }
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     [MBHudUtil showActivityView:nil inView:nil];
-    [[HBServiceManager defaultManager] requestUpdatePwd:phone token:userEntity.token password:password sms_code:smsCode code_id:self.smsDict[@"code_id"] completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestUpdatePwd:phone password:password sms_code:smsCode code_id:self.smsDict[@"code_id"] completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
         if ([[responseObject objectForKey:@"result"] isEqualToString:@"OK"]) {
             [MBHudUtil showTextViewAfter:@"修改密码成功，请登录"];
@@ -230,7 +230,7 @@
     }
     //手机找回密码 的短信下发
     [MBHudUtil showActivityView:nil inView:nil];
-    [[HBServiceManager defaultManager] requestSmsCode:nil token:nil phone:phoneNum service_type:smsType completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestSmsCode:nil phone:phoneNum service_type:smsType completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
         if (error.code == 0) {
             self.smsDict = responseObject;

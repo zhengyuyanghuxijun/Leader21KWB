@@ -208,10 +208,9 @@
         HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
         if (userEntity) {
             NSString *user = userEntity.name;
-            NSString *token = userEntity.token;
             //获取用户当前订阅的套餐
             [MBHudUtil showActivityView:nil inView:nil];
-            [[HBServiceManager defaultManager] requestBooksetSub:user token:token bookset_id:[NSString stringWithFormat:@"%ld",(self.currentSelectIndex + 1)] months:@"1" completion:^(id responseObject, NSError *error) {
+            [[HBServiceManager defaultManager] requestBooksetSub:user bookset_id:[NSString stringWithFormat:@"%ld",(self.currentSelectIndex + 1)] months:@"1" completion:^(id responseObject, NSError *error) {
                 if (responseObject) {
                     NSString *result = [responseObject objectForKey:@"result"];
                     if ([result isEqualToString:@"OK"]) {
@@ -305,10 +304,9 @@
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
         NSString *user = userEntity.name;
-        NSString *token = userEntity.token;
         //获取用户当前订阅的套餐
         [MBHudUtil showActivityView:nil inView:nil];
-        [[HBServiceManager defaultManager] requestUserBookset:user token:token completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestUserBookset:user completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 //获取用户当前订阅的套餐成功
                 id tmp = [responseObject objectForKey:@"bookset_id"];

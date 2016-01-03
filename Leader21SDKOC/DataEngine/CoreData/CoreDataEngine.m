@@ -8,6 +8,8 @@
 
 #import "CoreDataEngine.h"
 
+#define KCoreDataNet    1
+
 @implementation CoreDataEngine
 
 @synthesize managedObjectContext=_managedObjectContext;
@@ -48,7 +50,9 @@
  If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
  */
 - (NSManagedObjectContext *)managedObjectContext {
-    if (_managedObjectContext != nil) return _managedObjectContext;
+    if (_managedObjectContext != nil)
+        return _managedObjectContext;
+    NSLog(@"sdk---managedObjectContext---");
     
     if (![NSThread isMainThread]) {
 		[self performSelectorOnMainThread:@selector(managedObjectContext)
@@ -58,10 +62,16 @@
 	}
     
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    NSLog(@"sdk---managedObjectContext---coordinator=%@", coordinator);
     if (coordinator != nil) {
+#if KCoreDataNet
+        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+#else
         _managedObjectContext = [[NSManagedObjectContext alloc] init];
+#endif
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     }
+    NSLog(@"sdk---managedObjectContext=%@---", _managedObjectContext);
     return _managedObjectContext;
 }
 
@@ -70,12 +80,15 @@
  If the model doesn't already exist, it is created from the application's model.
  */
 - (NSManagedObjectModel *)managedObjectModel {
-    if (_managedObjectModel != nil) return _managedObjectModel;
-    
+    if (_managedObjectModel != nil)
+        return _managedObjectModel;
+    NSLog(@"sdk---managedObjectModel---");
+
     NSString *staticLibraryBundlePath = [[NSBundle mainBundle] pathForResource:@"MyStaticModels" ofType:@"bundle"];
     NSURL *staticLibraryMOMURL = [[NSBundle bundleWithPath:staticLibraryBundlePath] URLForResource:@"db" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:staticLibraryMOMURL];
-    
+
+    NSLog(@"sdk---managedObjectModel=%@", _managedObjectModel);
     return _managedObjectModel;
 }
 
@@ -84,7 +97,8 @@
  If the coordinator doesn't already exist, it is created and the application's store added to it.
  */
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    if (_persistentStoreCoordinator != nil) return _persistentStoreCoordinator;
+    if (_persistentStoreCoordinator != nil)
+        return _persistentStoreCoordinator;
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"db.sqlite"];
     NSDictionary *option = [NSDictionary dictionaryWithObjectsAndKeys:

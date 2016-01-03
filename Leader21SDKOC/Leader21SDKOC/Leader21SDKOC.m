@@ -41,6 +41,7 @@
 
 - (void)setAppKey:(NSString *)appKey
 {
+    NSLog(@"sdk---setAppKey---");
     self.mAppId = appKey;
     DE.mAppId = appKey;
     
@@ -61,6 +62,7 @@
 - (void)startDownloadBookByDict:(NSDictionary *)dict
 {
     BookEntity *entity = [BookEntity itemWithDictionary:dict];
+    [CoreDataHelper save];
     [self startDownloadBook:entity];
 }
 

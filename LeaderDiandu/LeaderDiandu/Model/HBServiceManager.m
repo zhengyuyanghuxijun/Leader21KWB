@@ -33,7 +33,13 @@
 
 - (void)Post:(NSString *)api dict:(NSMutableDictionary *)dict block:(HBServiceReceivedBlock)receivedBlock
 {
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity.token) {
+        [dict setObject:userEntity.token forKey:@"token"];
+    }
     [dict setObject:KAppKeyKWB forKey:KWBAppKey];
+    NSLog(@"调用的api：%@", api);
+    NSLog(@"发送的数据：%@", dict);
     [[HBHTTPBaseRequest requestWithSubUrl:api] startWithMethod:HBHTTPRequestMethodPOST parameters:dict completion:^(id responseObject, NSError *error) {
         if (error) {
 //            NSDictionary *userDic = error.userInfo;
@@ -141,6 +147,8 @@
     }
     self.receivedBlock = receivedBlock;
 
+    NSLog(@"调用的api：%@", @"/api/auth/login/v2");
+    NSLog(@"发送的数据：%@", dicInfo);
     [[HBHTTPBaseRequest requestWithSubUrl:@"/api/auth/login/v2"] startWithMethod:HBHTTPRequestMethodPOST parameters:dicInfo completion:^(id responseObject, NSError *error) {
         if (receivedBlock) {
             if (error.code == 0) {
@@ -154,11 +162,10 @@
     }];
 }
 
-- (void)requestLogout:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestLogout:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     
     if (_receivedBlock) {
         return;
@@ -167,14 +174,11 @@
     [self Post:@"/api/auth/logout" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestSmsCode:(NSString *)user token:(NSString *)token phone:(NSString *)phone service_type:(HBRequestSmsType)service_type completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestSmsCode:(NSString *)user phone:(NSString *)phone service_type:(HBRequestSmsType)service_type completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     if (user) {
         [dicInfo setObject:user     forKey:@"user"];
-    }
-    if (token) {
-        [dicInfo setObject:token    forKey:@"token"];
     }
     [dicInfo setObject:phone        forKey:@"phone"];
     [dicInfo setObject:@(service_type) forKey:@"service_type"];
@@ -186,11 +190,10 @@
     [self Post:@"/api/auth/smscode/v2" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestUserInfo:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestUserInfo:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     
 //    if (_receivedBlock) {
 //        return;
@@ -199,11 +202,10 @@
     [self Post:@"/api/user" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestUpdateUser:(NSString *)user token:(NSString *)token display_name:(NSString *)display_name gender:(NSInteger)gender age:(NSInteger)age completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestUpdateUser:(NSString *)user display_name:(NSString *)display_name gender:(NSInteger)gender age:(NSInteger)age completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     if (display_name) {
         [dicInfo setObject:display_name    forKey:@"display_name"];
     }
@@ -217,11 +219,10 @@
     [self Post:@"/api/user/update" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestUpdatePhone:(NSString *)user token:(NSString *)token phone:(NSString *)phone sms_code:(NSString *)sms_code code_id:(NSString *)code_id  completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestUpdatePhone:(NSString *)user phone:(NSString *)phone sms_code:(NSString *)sms_code code_id:(NSString *)code_id  completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     [dicInfo setObject:phone    forKey:@"phone"];
     [dicInfo setObject:sms_code    forKey:@"sms_code"];
     [dicInfo setObject:code_id    forKey:@"code_id"];
@@ -233,13 +234,10 @@
     [self Post:@"/api/user/phone/update" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestUpdatePwd:(NSString *)phone token:(NSString *)token password:(NSString *)password sms_code:(NSString *)sms_code code_id:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestUpdatePwd:(NSString *)phone password:(NSString *)password sms_code:(NSString *)sms_code code_id:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:phone     forKey:@"phone"];
-    if (token) {
-        [dicInfo setObject:token    forKey:@"token"];
-    }
     [dicInfo setObject:password    forKey:@"password"];
     [dicInfo setObject:sms_code    forKey:@"sms_code"];
     [dicInfo setObject:code_id     forKey:@"code_id"];
@@ -251,13 +249,10 @@
     [self Post:@"/api/user/password/forget" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestModifyPwd:(NSString *)user token:(NSString *)token old_password:(NSString *)old_password new_password:(NSString *)new_password completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestModifyPwd:(NSString *)user old_password:(NSString *)old_password new_password:(NSString *)new_password completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    if (token) {
-        [dicInfo setObject:token    forKey:@"token"];
-    }
     [dicInfo setObject:old_password    forKey:@"old_password"];
     [dicInfo setObject:new_password    forKey:@"new_password"];
     
@@ -280,11 +275,10 @@
     [self Post:@"/api/icode/verify" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestUserBookset:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestUserBookset:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     
 //    if (_receivedBlock) {
 //        return;
@@ -293,11 +287,10 @@
     [self Post:@"/api/bookset/mine" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestAllBookset:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestAllBookset:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     
 //    if (_receivedBlock) {
 //        return;
@@ -306,11 +299,10 @@
     [self Post:@"/api/bookset/all" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestBooksetCreate:(NSString *)user token:(NSString *)token name:(NSString *)name books:(NSString *)bookIds free:(NSString *)freeIds completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestBooksetCreate:(NSString *)user name:(NSString *)name books:(NSString *)bookIds free:(NSString *)freeIds completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     [dicInfo setObject:name    forKey:@"name"];
     [dicInfo setObject:bookIds    forKey:@"books"];
     [dicInfo setObject:freeIds    forKey:@"free"];
@@ -322,11 +314,10 @@
     [self Post:@"/api/bookset/create" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestBooksetSub:(NSString *)user token:(NSString *)token bookset_id:(NSString *)bookset_id months:(NSString *)months completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestBooksetSub:(NSString *)user bookset_id:(NSString *)bookset_id months:(NSString *)months completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     [dicInfo setObject:bookset_id    forKey:@"bookset_id"];
     [dicInfo setObject:months    forKey:@"months"];
     
@@ -391,11 +382,10 @@
     [self Post:@"/api/teacher/s/unassociate" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestDirectorList:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestDirectorList:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     
 //    if (_receivedBlock) {
 //        return;
@@ -417,11 +407,10 @@
     [self Post:@"/api/director/associate" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestDirectorUnAss:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestDirectorUnAss:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     
 //    if (_receivedBlock) {
 //        return;
@@ -442,12 +431,11 @@
     [self Post:@"/api/teacher/list" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestUnBindingTeacher:(NSString *)user teacher:(NSString *)teacher token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestUnBindingTeacher:(NSString *)user teacher:(NSString *)teacher completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
     [dicInfo setObject:teacher     forKey:@"teacher"];
-    [dicInfo setObject:token forKey:@"token"];
     
     //    if (_receivedBlock) {
     //        return;
@@ -724,11 +712,10 @@
     [self Post:@"/api/exam/score/class/list" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestUpdateBookProgress:(NSString *)user token:(NSString *)token book_id:(NSInteger)book_id progress:(NSInteger)progress completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestUpdateBookProgress:(NSString *)user book_id:(NSInteger)book_id progress:(NSInteger)progress completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     [dicInfo setObject:@(book_id)     forKey:@"book_id"];
     [dicInfo setObject:@(progress)     forKey:@"progress"];
     
@@ -739,11 +726,10 @@
     [self Post:@"/api/stat/book/progress/update" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestBookProgress:(NSString *)user token:(NSString *)token book_id:(NSInteger)book_id completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestBookProgress:(NSString *)user book_id:(NSInteger)book_id completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     [dicInfo setObject:@(book_id)     forKey:@"book_id"];
     
     //    if (_receivedBlock) {
@@ -753,11 +739,10 @@
     [self Post:@"/api/stat/book/progress" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestBookProgress:(NSString *)user token:(NSString *)token bookset_id:(NSInteger)bookset_id completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestBookProgress:(NSString *)user bookset_id:(NSInteger)bookset_id completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     [dicInfo setObject:@(bookset_id)     forKey:@"bookset_id"];
     
     //    if (_receivedBlock) {
@@ -768,7 +753,6 @@
 }
 
 - (void)requestReportBookProgress:(NSString *)user
-                            token:(NSString *)token
                           book_id:(NSInteger)book_id
                        bookset_id:(NSInteger)bookset_id
                         from_time:(NSString *)from_time
@@ -780,7 +764,6 @@
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     [dicInfo setObject:@(book_id)     forKey:@"book_id"];
     [dicInfo setObject:@(bookset_id)     forKey:@"bookset_id"];
     [dicInfo setObject:from_time     forKey:@"from_time"];
@@ -800,15 +783,13 @@
  *  获取系统消息
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param from_time        为起始时间，单位为秒。
  *  @param receivedBlock    回调Block
  */
-- (void)requestSystemMsg:(NSString *)user token:(NSString *)token from_time:(NSString *)from_time completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestSystemMsg:(NSString *)user from_time:(NSString *)from_time completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token    forKey:@"token"];
     [dicInfo setObject:from_time     forKey:@"from_time"];
     
     //    if (_receivedBlock) {
@@ -865,11 +846,10 @@
     [self Post:@"/api/order/vip/create" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestChannelOrder:(NSString *)user token:(NSString *)token channel:(NSString *)channel quantity:(NSInteger)quantity product:(NSString *)product completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestChannelOrder:(NSString *)user channel:(NSString *)channel quantity:(NSInteger)quantity product:(NSString *)product completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token forKey:@"token"];
     [dicInfo setObject:channel     forKey:@"channel"];
     [dicInfo setObject:@(quantity)     forKey:@"quantity"];
     [dicInfo setObject:product     forKey:@"product"];
@@ -882,11 +862,10 @@
     [self Post:@"/api/order/create" dict:dicInfo block:receivedBlock];
 }
 
-- (void)requestIAPNotify:(NSString *)user token:(NSString *)token total_fee:(NSString *)total_fee quantity:(NSInteger)quantity payReceipt:(NSString *)payReceipt transactionID:(NSString *)transactionID completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestIAPNotify:(NSString *)user total_fee:(NSString *)total_fee quantity:(NSInteger)quantity payReceipt:(NSString *)payReceipt transactionID:(NSString *)transactionID completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     [dicInfo setObject:user     forKey:@"user"];
-    [dicInfo setObject:token forKey:@"token"];
     [dicInfo setObject:@"ios" forKey:@"channel"];
     [dicInfo setObject:@"kwb0002" forKey:@"product"];
     [dicInfo setObject:@([NSDate date].timeIntervalSince1970) forKey:@"created_time"];
@@ -996,7 +975,7 @@
  *  @param from_time          为起始时间，单位为秒。
  *  @param to_time            为结束时间，单位为秒。
  */
-- (void)requestReadingRank:(HBUserEntity *)entity token:(NSString *)token bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
+- (void)requestReadingRank:(HBUserEntity *)entity bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock
 {
     NSMutableDictionary *dicInfo = [[NSMutableDictionary alloc] init];
     
@@ -1007,7 +986,6 @@
             [dicInfo setObject:@(entity.userid) forKey:@"director_id"];
         }
     }
-    [dicInfo setObject:token    forKey:@"token"];
     [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
     [dicInfo setObject:from_time     forKey:@"from_time"];
     [dicInfo setObject:to_time     forKey:@"to_time"];
@@ -1040,7 +1018,6 @@
     [dicInfo setObject:bookset_id     forKey:@"bookset_id"];
     [dicInfo setObject:from_time     forKey:@"from_time"];
     [dicInfo setObject:to_time     forKey:@"to_time"];
-    [dicInfo setObject:entity.token forKey:@"token"];
     
     //    if (_receivedBlock) {
     //        return;

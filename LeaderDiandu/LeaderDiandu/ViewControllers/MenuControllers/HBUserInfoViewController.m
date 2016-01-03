@@ -81,7 +81,7 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
 {
     [MBHudUtil showActivityView:nil inView:nil];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestUserInfo:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestUserInfo:userEntity.name completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
         if (error == nil) {
             [[HBDataSaveManager defaultManager] setUserEntityByDict:responseObject];

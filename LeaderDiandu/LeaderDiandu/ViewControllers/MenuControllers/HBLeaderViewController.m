@@ -65,7 +65,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
 - (void)getUserInfo
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestUserInfo:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestUserInfo:userEntity.name completion:^(id responseObject, NSError *error) {
         if (responseObject) {
             NSDictionary *dic = [responseObject objectForKey:@"director"];
             if (dic.count > 0) {
@@ -92,7 +92,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
 - (void)getDirectorList
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestDirectorList:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestDirectorList:userEntity.name completion:^(id responseObject, NSError *error) {
         NSArray *directorsArr = [responseObject objectForKey:@"directors"];
         [self.leadersArr removeAllObjects];
         for (NSDictionary *director in directorsArr) {
@@ -156,7 +156,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
         if (buttonIndex == 1) {
             //解除绑定
             HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-            [[HBServiceManager defaultManager] requestDirectorUnAss:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+            [[HBServiceManager defaultManager] requestDirectorUnAss:userEntity.name completion:^(id responseObject, NSError *error) {
                 [self getUserInfo];
             }];
         }

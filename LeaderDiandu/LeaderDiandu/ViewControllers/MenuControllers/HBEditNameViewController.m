@@ -70,7 +70,7 @@
     }
     [MBHudUtil showActivityView:nil inView:nil];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestUpdateUser:userEntity.name token:userEntity.token display_name:text gender:userEntity.gender age:12 completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestUpdateUser:userEntity.name display_name:text gender:userEntity.gender age:12 completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
         if (error.code == 0) {
             [[HBDataSaveManager defaultManager] updateDisplayName:responseObject];

@@ -145,7 +145,7 @@
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     //获取用户当前订阅的套餐
-    [[HBServiceManager defaultManager] requestUserBookset:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestUserBookset:userEntity.name completion:^(id responseObject, NSError *error) {
         if (responseObject) {
             //获取用户当前订阅的套餐成功
             id tmp = [responseObject objectForKey:@"bookset_id"];
@@ -158,7 +158,7 @@
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     //重新获取个人资料
-    [[HBServiceManager defaultManager] requestUserInfo:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestUserInfo:userEntity.name completion:^(id responseObject, NSError *error) {
         if (error == nil) {
             [[HBDataSaveManager defaultManager] setUserEntityByDict:responseObject];
         } else {
@@ -196,7 +196,7 @@
         if (userEntity.type == 1) {
             [_gridView setHeaderViewHidden:NO];
             //获取用户当前订阅的套餐
-            [[HBServiceManager defaultManager] requestUserBookset:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+            [[HBServiceManager defaultManager] requestUserBookset:userEntity.name completion:^(id responseObject, NSError *error) {
                 if (responseObject) {
                     //获取用户当前订阅的套餐成功
                     id tmp = [responseObject objectForKey:@"bookset_id"];
@@ -209,8 +209,7 @@
             [self requestAllBookset];
             //学生用户从服务器拉取最新的书籍阅读进度,老师用户直接从本地读取(本期老师不显示进度)
             NSString *user = userEntity.name;
-            NSString *token = userEntity.token;
-            [[HBServiceManager defaultManager] requestBookProgress:user token:token bookset_id:currentID completion:^(id responseObject, NSError *error) {
+            [[HBServiceManager defaultManager] requestBookProgress:user bookset_id:currentID completion:^(id responseObject, NSError *error) {
                 if (responseObject) {
                     //获取阅读进度成功
                     [self requestBookProgressSuccess:responseObject];
@@ -277,7 +276,6 @@
     
     if (userEntity) {
         NSString *user = userEntity.name;
-        NSString *token = userEntity.token;
         
         /** type: 1 - 学生； 10 - 老师*/
         if (userEntity.type == 1) {
@@ -285,7 +283,7 @@
             //上报用户读书行为
             [self bookReadingReport:userEntity bookInfoDic:dic];
             //学生上报一本书的阅读进度
-            [[HBServiceManager defaultManager] requestUpdateBookProgress:user token:token book_id:[bookId integerValue] progress:[progress integerValue] completion:^(id responseObject, NSError *error) {
+            [[HBServiceManager defaultManager] requestUpdateBookProgress:user book_id:[bookId integerValue] progress:[progress integerValue] completion:^(id responseObject, NSError *error) {
                 [MBHudUtil hideActivityView:nil];
                 NSString *book_id = [NSString stringWithFormat:@"%ld", (long)[responseObject integerForKey:@"book_id"]];
                 NSString *progress = [NSString stringWithFormat:@"%ld", (long)[responseObject integerForKey:@"progress"]];
@@ -347,7 +345,7 @@
     NSString *toPage = [dic objectForKey:@"toPage"];
     NSString *totalPage = [dic objectForKey:@"totalPage"];
     
-    [[HBServiceManager defaultManager] requestReportBookProgress:userEntity.name token:userEntity.token book_id:[bookId integerValue] bookset_id:currentID from_time:readBookFromTime to_time:readBookToTime from_page:@"1" to_page:toPage total_page:totalPage completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestReportBookProgress:userEntity.name book_id:[bookId integerValue] bookset_id:currentID from_time:readBookFromTime to_time:readBookToTime from_page:@"1" to_page:toPage total_page:totalPage completion:^(id responseObject, NSError *error) {
         //上报用户读书行为成功！！！
     }];
 }
@@ -689,8 +687,7 @@
     if (userEntity.type == 1) {
         //学生用户从服务器拉取最新的书籍阅读进度,老师用户直接从本地读取(本期老师不显示进度)
         NSString *user = userEntity.name;
-        NSString *token = userEntity.token;
-        [[HBServiceManager defaultManager] requestBookProgress:user token:token bookset_id:currentID completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestBookProgress:user bookset_id:currentID completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 //获取阅读进度成功
                 [self requestBookProgressSuccess:responseObject];
@@ -1122,9 +1119,8 @@
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
         NSString *user = userEntity.name;
-        NSString *token = userEntity.token;
         //获取所有可选套餐
-        [[HBServiceManager defaultManager] requestAllBookset:user token:token completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestAllBookset:user completion:^(id responseObject, NSError *error) {
             if (responseObject) {
                 //获取所有可选套餐成功
                 [self.contentEntityArr removeAllObjects];
@@ -1338,7 +1334,7 @@
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     //1433248966 是临时用来测试的时间，后续需要改成正式的！
-    [[HBServiceManager defaultManager] requestSystemMsg:userEntity.name token:userEntity.token from_time:@"1433248966" completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestSystemMsg:userEntity.name from_time:@"1433248966" completion:^(id responseObject, NSError *error) {
         if (responseObject) {
             
             //从数据库读取本地所有消息内容

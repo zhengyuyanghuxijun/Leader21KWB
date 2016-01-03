@@ -72,7 +72,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
         
         [MBHudUtil showActivityView:nil inView:nil];
         //1433248966 是临时用来测试的时间，后续需要改成正式的！
-        [[HBServiceManager defaultManager] requestSystemMsg:user token:token from_time:@"1433248966" completion:^(id responseObject, NSError *error) {
+        [[HBServiceManager defaultManager] requestSystemMsg:user from_time:@"1433248966" completion:^(id responseObject, NSError *error) {
             [MBHudUtil hideActivityView:nil];
             if (responseObject) {
                 NSMutableArray *msgArr = [[NSMutableArray alloc] initWithCapacity:1];

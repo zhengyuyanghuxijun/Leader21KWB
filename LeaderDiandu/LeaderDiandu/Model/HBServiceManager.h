@@ -57,10 +57,9 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  退出登录
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param receivedBlock 回调Block
  */
-- (void)requestLogout:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestLogout:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  获取短信验证码
@@ -68,65 +67,59 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  客户端应提供保护机制，避免用户短时间内重复获取短信验证码
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param phone            手机号
  *  @param service_type 表示验证码用途。 1-注册；2-修改密码；3-忘记密码；4-绑定手机
  *  @param receivedBlock 回调Block
  */
-- (void)requestSmsCode:(NSString *)user token:(NSString *)token phone:(NSString *)phone service_type:(HBRequestSmsType)service_type completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestSmsCode:(NSString *)user phone:(NSString *)phone service_type:(HBRequestSmsType)service_type completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  获取用户信息
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param receivedBlock 回调Block
  */
-- (void)requestUserInfo:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestUserInfo:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  更新用户信息
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @gender 性别， 1-男，2-女
  *  @display_name gender age 等参数至少有一个即可，多值可选
  *  @param receivedBlock 回调Block
  */
-- (void)requestUpdateUser:(NSString *)user token:(NSString *)token display_name:(NSString *)display_name gender:(NSInteger)gender age:(NSInteger)age  completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestUpdateUser:(NSString *)user display_name:(NSString *)display_name gender:(NSInteger)gender age:(NSInteger)age  completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  绑定手机
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param phone            电话号码
  *  @param sms_code         短信验证码
  *  @param receivedBlock 回调Block
  */
-- (void)requestUpdatePhone:(NSString *)user token:(NSString *)token phone:(NSString *)phone sms_code:(NSString *)sms_code code_id:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestUpdatePhone:(NSString *)user phone:(NSString *)phone sms_code:(NSString *)sms_code code_id:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  忘记密码
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param password         新密码
  *  @param sms_code         短信验证码
  *  @param receivedBlock 回调Block
  */
-- (void)requestUpdatePwd:(NSString *)phone token:(NSString *)token password:(NSString *)password sms_code:(NSString *)sms_code code_id:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestUpdatePwd:(NSString *)phone password:(NSString *)password sms_code:(NSString *)sms_code code_id:(NSString *)code_id completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  修改密码
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param old_password     旧密码
  *  @param new_password     新密码
  *  @param receivedBlock 回调Block
  */
-- (void)requestModifyPwd:(NSString *)user token:(NSString *)token old_password:(NSString *)old_password new_password:(NSString *)new_password completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestModifyPwd:(NSString *)user old_password:(NSString *)old_password new_password:(NSString *)new_password completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  验证邀请码
@@ -140,42 +133,38 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  获取用户当前订阅的套餐
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param receivedBlock 回调Block
  */
-- (void)requestUserBookset:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestUserBookset:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  获取所有可选套餐
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param receivedBlock 回调Block
  */
-- (void)requestAllBookset:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestAllBookset:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  创建套餐
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param name             套餐名
  *  @param bookIds          "book_id_1,book_id_2,book_id_3"
  *  @param free 是免费书本列表，不论它是否列在 books 中，缺省都会将其记做 books 的一部分
  *  @param receivedBlock 回调Block
  */
-- (void)requestBooksetCreate:(NSString *)user token:(NSString *)token name:(NSString *)name books:(NSString *)bookIds free:(NSString *)freeIds completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestBooksetCreate:(NSString *)user name:(NSString *)name books:(NSString *)bookIds free:(NSString *)freeIds completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  订阅套餐
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param bookset_id       套餐id
  *  @param months           订阅时间（可能改为 weeks 更便于计算）
  *  @param receivedBlock 回调Block
  */
-- (void)requestBooksetSub:(NSString *)user token:(NSString *)token bookset_id:(NSString *)bookset_id months:(NSString *)months completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestBooksetSub:(NSString *)user bookset_id:(NSString *)bookset_id months:(NSString *)months completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  获取老师信息
@@ -218,10 +207,9 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  老师获取教研员列表
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param receivedBlock 回调Block
  */
-- (void)requestDirectorList:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestDirectorList:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  绑定一位教导员
@@ -236,10 +224,9 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  老师解除绑定教研员
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param receivedBlock 回调Block
  */
-- (void)requestDirectorUnAss:(NSString *)user token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestDirectorUnAss:(NSString *)user completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  获取与一位教研员相关联的老师列表，只有教研员有权限调用该接口
@@ -256,7 +243,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param teacher_id       老师ID
  *  @param receivedBlock 回调Block
  */
-- (void)requestUnBindingTeacher:(NSString *)user teacher:(NSString *)teacher token:(NSString *)token completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestUnBindingTeacher:(NSString *)user teacher:(NSString *)teacher completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  教研员获取相关老师的作业统计信息
@@ -445,38 +432,34 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  当进度为100时，并且该学生没有绑定老师，系统会自动为其布置作业（参考返回应答中的 exam_assigned 参数）
  *
  *  @param user             用户ID
- *  @param token            登录返回的凭证
  *  @param book_id          书本ID
  *  @param progress为0-100 之间的数字。如果上报的进度小于当前服务器端进度，则保持后者
  *  @param receivedBlock 回调Block
  */
-- (void)requestUpdateBookProgress:(NSString *)user token:(NSString *)token book_id:(NSInteger)book_id progress:(NSInteger)progress completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestUpdateBookProgress:(NSString *)user book_id:(NSInteger)book_id progress:(NSInteger)progress completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  获取用户书本阅读进度
  *
  *  @param user             用户ID
- *  @param token            登录返回的凭证
  *  @param book_id          书本ID
  *  @param receivedBlock 回调Block
  */
-- (void)requestBookProgress:(NSString *)user token:(NSString *)token book_id:(NSInteger)book_id completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestBookProgress:(NSString *)user book_id:(NSInteger)book_id completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  获取用户某个套餐的书本阅读进度
  *
  *  @param user             用户ID
- *  @param token            登录返回的凭证
  *  @param bookset_id       套餐ID
  *  @param receivedBlock 回调Block
  */
-- (void)requestBookProgress:(NSString *)user token:(NSString *)token bookset_id:(NSInteger)bookset_id completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestBookProgress:(NSString *)user bookset_id:(NSInteger)bookset_id completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  上报用户读书行为
  *
  *  @param user             用户ID
- *  @param token            登录返回的凭证
  *  @param book_id          书本ID
  *  @param bookset_id       套餐ID
  *  @param from_time        阅读开始时间
@@ -487,7 +470,6 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param receivedBlock    回调Block
  */
 - (void)requestReportBookProgress:(NSString *)user
-                            token:(NSString *)token
                           book_id:(NSInteger)book_id
                        bookset_id:(NSInteger)bookset_id
                         from_time:(NSString *)from_time
@@ -501,11 +483,10 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  获取系统消息
  *
  *  @param user             用户名
- *  @param token            登录返回的凭证
  *  @param from_time        为起始时间，单位为秒。
  *  @param receivedBlock    回调Block
  */
-- (void)requestSystemMsg:(NSString *)user token:(NSString *)token from_time:(NSString *)from_time completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestSystemMsg:(NSString *)user from_time:(NSString *)from_time completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  用户获取订单记录
@@ -536,7 +517,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param product          一个固定值
  *  @param receivedBlock    回调Block
  */
-- (void)requestChannelOrder:(NSString *)user token:(NSString *)token channel:(NSString *)channel quantity:(NSInteger)quantity product:(NSString *)product completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestChannelOrder:(NSString *)user channel:(NSString *)channel quantity:(NSInteger)quantity product:(NSString *)product completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  用户通过支付宝或微信付费
@@ -547,7 +528,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param payReceipt       苹果支付凭证
  *  @param receivedBlock    回调Block
  */
-- (void)requestIAPNotify:(NSString *)user token:(NSString *)token total_fee:(NSString *)total_fee quantity:(NSInteger)quantity payReceipt:(NSString *)payReceipt transactionID:(NSString *)transactionID completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestIAPNotify:(NSString *)user total_fee:(NSString *)total_fee quantity:(NSInteger)quantity payReceipt:(NSString *)payReceipt transactionID:(NSString *)transactionID completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  阅读人数统计
@@ -587,7 +568,7 @@ typedef void(^HBServiceReceivedBlock) (id responseObject, NSError *error);
  *  @param from_time          为起始时间，单位为秒。
  *  @param to_time            为结束时间，单位为秒。
  */
-- (void)requestReadingRank:(HBUserEntity *)entity token:(NSString *)token bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock;
+- (void)requestReadingRank:(HBUserEntity *)entity bookset_id:(NSString *)bookset_id from_time:(NSString *)from_time to_time:(NSString *)to_time completion:(HBServiceReceivedBlock)receivedBlock;
 
 /**
  *  作业知识点统计

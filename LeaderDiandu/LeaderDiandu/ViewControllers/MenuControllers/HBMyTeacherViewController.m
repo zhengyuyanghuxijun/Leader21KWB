@@ -275,7 +275,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     if (showLoading) {
         [MBHudUtil showActivityView:nil inView:nil];
     }
-    [[HBServiceManager defaultManager] requestUserInfo:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestUserInfo:userEntity.name completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
         if (error.code == 0 || error == nil) {
             [[HBDataSaveManager defaultManager] setUserEntityByDict:responseObject];

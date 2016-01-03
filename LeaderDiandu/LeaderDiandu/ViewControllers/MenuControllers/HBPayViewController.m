@@ -188,7 +188,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 {
     [MBHudUtil showActivityView:nil inView:nil];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    [[HBServiceManager defaultManager] requestChannelOrder:userEntity.name token:userEntity.token channel:channel quantity:_months product:@"kwb0001" completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestChannelOrder:userEntity.name channel:channel quantity:_months product:@"kwb0001" completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
         if (error.code == 0) {
             if (responseObject == nil) {
@@ -513,7 +513,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     if (payDic) {
         month = [payDic[KHBPayMonths] integerValue];
     }
-    [[HBServiceManager defaultManager] requestIAPNotify:userEntity.name token:userEntity.token total_fee:_payMonthDic[@(month)] quantity:month payReceipt:payReceipt transactionID:transactionID completion:^(id responseObject, NSError *error) {
+    [[HBServiceManager defaultManager] requestIAPNotify:userEntity.name total_fee:_payMonthDic[@(month)] quantity:month payReceipt:payReceipt transactionID:transactionID completion:^(id responseObject, NSError *error) {
         NSString *result = nil;
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             result = responseObject[@"result"];
