@@ -1005,6 +1005,9 @@
     BOOL wifiDownload = [[HBDataSaveManager defaultManager] wifiDownload];
     if (_networkState == AFNetworkReachabilityStatusReachableViaWiFi) {
         [LEADERSDK startDownloadBook:entity];
+//        [LEADERSDK unzipBookByPath:nil entity:entity block:^(NSString *bookDir) {
+//            [LEADERSDK readBook:entity folder:nil useNavigation:self.navigationController];
+//        }];
     } else {
         if (wifiDownload) {
             //提示非wifi

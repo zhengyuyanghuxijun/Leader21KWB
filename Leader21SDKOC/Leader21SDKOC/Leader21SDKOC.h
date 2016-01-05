@@ -31,6 +31,9 @@ typedef enum {
 
 typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NSString* errorMsg);
 
+//解压书籍block，bookDir为空时解压失败，需要重新下载书籍
+typedef void (^UnzipBookBlock)(NSString *bookDir);
+
 @interface Leader21SDKOC : NSObject
 
 + (Leader21SDKOC *)sharedInstance;
@@ -49,6 +52,14 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
  *  从数据库里面获取存储的书籍。
  */
 - (NSArray *)getAllStoredBooks;
+
+/* 解压书籍
+ * @param path 书籍压缩包路径，可以传空，为默认下载路径
+ * @param book 一本书
+ * @param block 解压回调block
+ * @return
+ */
+- (void)unzipBookByPath:(NSString *)path entity:(BookEntity *)book block:(UnzipBookBlock)block;
 
 /**根据bookId获取book的详细信息
  @param bookIds bookId列表
@@ -96,10 +107,11 @@ typedef void (^ResponseBookListBlock)(NSArray *booklist, NSInteger errorCode, NS
 /**
  * 阅读书籍
  * @param book 
+ * @param folder 书籍路径，可以传空，为默认路径
  * @param UINavigationController  viewController
  * @return void
  */
-- (void) readBook:(BookEntity *)book useNavigation:(UINavigationController*)navigationController;
+- (void)readBook:(BookEntity *)book folder:(NSString *)folder useNavigation:(UINavigationController*)navigationController;
 
 - (BOOL)bookPressed:(BookEntity*)book useNavigation:(UINavigationController *)navigation;
 - (BOOL)bookPressedCheckDownload:(BookEntity*)book useNavigation:(UINavigationController *)navigation;

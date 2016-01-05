@@ -159,14 +159,51 @@
     return isdownload;
 }
 
-- (void)readBook:(BookEntity *)book useNavigation:(UINavigationController *)navigationController
+- (void)unzipBookByPath:(NSString *)path entity:(BookEntity *)book block:(UnzipBookBlock)block
 {
-    NSString* folder = [LocalSettings bookPathForDefaultUser:[book.fileId lowercaseString]];
-    ReadBookViewController* vc = [[ReadBookViewController alloc] init];
-    vc.folderName = folder;
-    vc.navBarTitle = book.bookTitle;
-    vc.bookID = book.bookId.longLongValue;
-    [navigationController pushViewController:vc animated:YES];
+    if (path == nil) {
+        path = [LocalSettings bookPathForDefaultUser:book.bookTitle];
+    }
+    
+    // 解压
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0UL), ^{
+        // 解压
+        book.download.status = @(downloadStatusUnZipping);
+        NSString* dir = [LocalSettings bookDirectoryForUser:@"0"];
+        
+        BOOL unziped = [DE unZipFile:path toPath:dir];
+        if (unziped) {
+            NSError* error = nil;
+            [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+            
+            BOOL isBookFree = YES;
+            [[ReadBookDecrypt sharedInstance] decryptAllFile:[book.fileId lowercaseString] isBookFree:isBookFree];
+        }
+        else {
+            // 文件解压出错，重下
+            dir = nil;
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [[DownloadManager sharedInstance] startDownload:book.bookUrl withLocalPath:path reStartFinished:YES isFree:YES];
+//            });
+        }
+        if (block != nil) {
+            block(dir);
+        }
+    });
+}
+
+- (void)readBook:(BookEntity *)book folder:(NSString *)folder useNavigation:(UINavigationController *)navigationController
+{
+    if (folder == nil) {
+        folder = [LocalSettings bookPathForDefaultUser:[book.fileId lowercaseString]];
+    }
+    if ([folder length] > 0) {
+        ReadBookViewController* vc = [[ReadBookViewController alloc] init];
+        vc.folderName = folder;
+        vc.navBarTitle = book.bookTitle;
+        vc.bookID = book.bookId.longLongValue;
+        [navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (DownloadEntity *)getCoreDataDownload:(NSString *)url
@@ -202,7 +239,7 @@
             BookEntity* book = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
             [bookArray addObject:book];
             
-            NSInteger integerTmp = [CoreDataHelper getCountByEntryName:@"BookEntity"];
+//            NSInteger integerTmp = [CoreDataHelper getCountByEntryName:@"BookEntity"];
         }
     }
     return bookArray;
