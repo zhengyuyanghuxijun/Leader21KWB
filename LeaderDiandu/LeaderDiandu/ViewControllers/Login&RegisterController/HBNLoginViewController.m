@@ -113,7 +113,7 @@
     self.forgetPassword = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     [_forgetPassword setTitle:@"忘记密码？" forState:UIControlStateNormal];
     _forgetPassword.titleLabel.font = [UIFont boldSystemFontOfSize:18];
-    [_forgetPassword setTitleColor:RGBCOLOR(249, 156, 0) forState:UIControlStateNormal];
+    [_forgetPassword setTitleColor:RGB(249, 156, 0) forState:UIControlStateNormal];
     [_forgetPassword addTarget:self action:@selector(forgetPassword:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_forgetPassword];
     
@@ -136,7 +136,7 @@
     controlY = ScreenHeight - 20 - 50;
     UIButton *linkBtn = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     [linkBtn setTitle:@"跳过" forState:UIControlStateNormal];
-    [linkBtn setTitleColor:RGBCOLOR(249, 156, 0) forState:UIControlStateNormal];
+    [linkBtn setTitleColor:RGB(249, 156, 0) forState:UIControlStateNormal];
     linkBtn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
     [linkBtn addTarget:self action:@selector(linkBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:linkBtn];

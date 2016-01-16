@@ -64,7 +64,7 @@
     float controlW = rect.size.width - controlX*2;
     CGRect viewFrame = CGRectMake(controlX, controlY, controlW, 10);
     _progressView = [[UIProgressView alloc] initWithFrame:viewFrame];
-    _progressView.trackTintColor = RGBCOLOR(216, 212, 202);
+    _progressView.trackTintColor = RGB(216, 212, 202);
     _progressView.progressTintColor = [UIColor colorWithHex:0xff8903];
     CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 5.0f);
     _progressView.transform = transform;

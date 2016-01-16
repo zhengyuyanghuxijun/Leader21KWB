@@ -500,7 +500,6 @@
 		0DCBC28E1B99D4EA003DFDD5 /* Leader21SDKOC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Leader21SDKOC.xcodeproj; path = ../Leader21SDKOC/Leader21SDKOC.xcodeproj; sourceTree = "<group>"; };
 		0DCBC29D1B99DE16003DFDD5 /* NSString+Verify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Verify.h"; sourceTree = "<group>"; };
 		0DCBC29E1B99DE16003DFDD5 /* NSString+Verify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Verify.m"; sourceTree = "<group>"; };
-		0DCBC2A01B99E380003DFDD5 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = App/Constants.h; sourceTree = "<group>"; };
 		0DD214631B95568E009E3DB9 /* HBDataSaveManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBDataSaveManager.h; sourceTree = "<group>"; };
 		0DD214641B95568E009E3DB9 /* HBDataSaveManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBDataSaveManager.m; sourceTree = "<group>"; };
 		0DD2146A1B95FF3B009E3DB9 /* HBMyTeacherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyTeacherViewController.h; sourceTree = "<group>"; };
@@ -880,7 +879,6 @@
 			isa = PBXGroup;
 			children = (
 				0DBD1ABA1BBC501000A3BD72 /* AppDefine.h */,
-				0DCBC2A01B99E380003DFDD5 /* Constants.h */,
 				0D74887D1B8A226E007BE4CD /* AppDelegate.h */,
 				0D74887E1B8A226E007BE4CD /* AppDelegate.m */,
 			);

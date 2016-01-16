@@ -19,6 +19,8 @@
 #define KTableViewHeaderHeight  120
 static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewControllerCellReuseId";
 
+static const CGFloat kImgLength = 800.0f;
+
 @interface HBUserInfoViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     NSArray     *_titleArr;
@@ -320,6 +322,15 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     }];
 }
 
+- (UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 //当选择一张图片后进入这里
 -(void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -327,13 +338,19 @@ static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewCont
     //当选择的类型是图片
     if ([type isEqualToString:@"public.image"]) {
         //先把图片转成NSData
-        UIImage* image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-        NSData *data;
-        if (UIImagePNGRepresentation(image) == nil) {
-            data = UIImageJPEGRepresentation(image, 1.0);
-        } else {
-            data = UIImagePNGRepresentation(image);
+        UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+        if (image == nil) {
+            image = [info objectForKey:UIImagePickerControllerOriginalImage];
         }
+        if (image.size.width > kImgLength || image.size.height > kImgLength) {
+            image = [self imageWithImageSimple:image scaledToSize:CGSizeMake(kImgLength, kImgLength)];
+        }
+        NSData* data = UIImageJPEGRepresentation(image, 0.8f);
+//        if (UIImagePNGRepresentation(image) == nil) {
+//            data = UIImageJPEGRepresentation(image, 1.0);
+//        } else {
+//            data = UIImagePNGRepresentation(image);
+//        }
         
         //图片保存的路径
         //这里将图片放在沙盒的documents文件夹中

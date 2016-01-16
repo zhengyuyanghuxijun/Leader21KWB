@@ -69,10 +69,7 @@ DEF_SINGLETON(ReadBookDecrypt);
     if (initData.length > 0) {
         
         CCCryptorStatus status = kCCSuccess;
-        NSData *decryptData = [initData decryptedDataUsingAlgorithm:kCCAlgorithmAES128
-                                                                key:self.keyData
-                                                            options:kCCOptionECBMode
-                                                              error:&status];
+        NSData *decryptData = [initData decryptedDataUsingAlgorithm:kCCAlgorithmAES128 key:self.keyData options:kCCOptionECBMode error:&status];
         
         if (decryptData && status == kCCSuccess) {
             if ([filePath rangeOfString:@".xml"].location != NSNotFound) {

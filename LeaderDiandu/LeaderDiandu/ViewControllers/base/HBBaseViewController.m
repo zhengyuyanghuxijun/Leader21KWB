@@ -43,7 +43,7 @@
 //    UIImageView *backgroundImg = [[UIImageView alloc] initWithFrame:self.view.bounds];
 //    backgroundImg.image = [UIImage imageNamed:@"star_bg"];
 //    [self.view addSubview:backgroundImg];
-    self.view.backgroundColor = RGBCOLOR(239, 239, 239);
+    self.view.backgroundColor = RGB(239, 239, 239);
 }
 
 -(void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion{

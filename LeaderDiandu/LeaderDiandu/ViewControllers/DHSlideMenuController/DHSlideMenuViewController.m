@@ -184,7 +184,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     [buttonInfo addTarget:self action:@selector(headButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:buttonInfo];
     
-    UIColor *textColor = RGBCOLOR(93, 85, 95);
+    UIColor *textColor = RGB(93, 85, 95);
     UIFont *font = [UIFont systemFontOfSize:20];
     float typeW = 70;
     controlX = 0;

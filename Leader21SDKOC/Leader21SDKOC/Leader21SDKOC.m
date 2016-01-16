@@ -192,11 +192,9 @@
     });
 }
 
-- (void)readBook:(BookEntity *)book folder:(NSString *)folder useNavigation:(UINavigationController *)navigationController
+- (void)readBook:(BookEntity *)book useNavigation:(UINavigationController *)navigationController
 {
-    if (folder == nil) {
-        folder = [LocalSettings bookPathForDefaultUser:[book.fileId lowercaseString]];
-    }
+    NSString *folder = [LocalSettings bookPathForDefaultUser:[book.fileId lowercaseString]];
     if ([folder length] > 0) {
         ReadBookViewController* vc = [[ReadBookViewController alloc] init];
         vc.folderName = folder;

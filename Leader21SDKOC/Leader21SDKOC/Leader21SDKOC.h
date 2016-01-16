@@ -107,11 +107,10 @@ typedef void (^UnzipBookBlock)(NSString *bookDir);
 /**
  * 阅读书籍
  * @param book 
- * @param folder 书籍路径，可以传空，为默认路径
  * @param UINavigationController  viewController
  * @return void
  */
-- (void)readBook:(BookEntity *)book folder:(NSString *)folder useNavigation:(UINavigationController*)navigationController;
+- (void)readBook:(BookEntity *)book useNavigation:(UINavigationController*)navigationController;
 
 - (BOOL)bookPressed:(BookEntity*)book useNavigation:(UINavigationController *)navigation;
 - (BOOL)bookPressedCheckDownload:(BookEntity*)book useNavigation:(UINavigationController *)navigation;

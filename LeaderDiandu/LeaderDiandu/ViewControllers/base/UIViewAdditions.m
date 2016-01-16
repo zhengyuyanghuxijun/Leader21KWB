@@ -293,9 +293,9 @@ static   UIInterfaceOrientation TTInterfaceOrientation() {
  */
 - (void)markBorderWithRandomColor{
 
-    UIColor* color = RGBCOLOR(arc4random() % 255,
-                             arc4random() % 255,
-                             arc4random() % 255);
+    UIColor* color = RGB(arc4random() % 255,
+                         arc4random() % 255,
+                         arc4random() % 255);
     self.layer.borderColor = color.CGColor;
     self.layer.borderWidth = 1.0f;
 }
