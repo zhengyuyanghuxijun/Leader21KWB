@@ -19,4 +19,15 @@
     }
 }
 
+- (NSString *)getUpAccountName
+{
+    if (self.type == 1) {
+        return self.name;
+    }
+    if (self.name) {
+        return [self.name uppercaseString];
+    }
+    return self.name;
+}
+
 @end

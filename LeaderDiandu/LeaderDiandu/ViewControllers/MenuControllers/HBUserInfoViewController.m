@@ -229,7 +229,7 @@ static const CGFloat kImgLength = 800.0f;
     UILabel *valueLbl = (UILabel *)[cell.contentView viewWithTag:1001];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (index == 0) {
-        valueLbl.text = userEntity.name;
+        valueLbl.text = [userEntity getUpAccountName];
     } else if (index == 1) {
         valueLbl.text = userEntity.display_name;
     } else if (index == 2) {

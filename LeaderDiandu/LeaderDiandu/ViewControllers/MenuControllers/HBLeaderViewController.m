@@ -263,7 +263,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
         
         if (0 == indexPath.row) {
             [dic setObject:@"账号" forKey:@"title"];
-            [dic setObject:self.accountStr forKey:@"content"];
+            [dic setObject:[self.accountStr uppercaseString] forKey:@"content"];
         }else{
             [dic setObject:@"名字" forKey:@"title"];
             [dic setObject:self.nameStr forKey:@"content"];

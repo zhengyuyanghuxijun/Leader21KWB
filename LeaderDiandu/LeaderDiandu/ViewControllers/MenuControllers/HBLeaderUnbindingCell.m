@@ -71,7 +71,7 @@
     }
     
     if ([dic objectForKey:@"name"]) {
-        self.nameLabel.text = [dic objectForKey:@"name"];
+        self.nameLabel.text = [[dic objectForKey:@"name"] uppercaseString];
     }
     
     if ([dic objectForKey:@"display_name"]) {

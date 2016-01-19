@@ -68,7 +68,6 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
         NSString *user = userEntity.name;
-        NSString *token = userEntity.token;
         
         [MBHudUtil showActivityView:nil inView:nil];
         //1433248966 是临时用来测试的时间，后续需要改成正式的！

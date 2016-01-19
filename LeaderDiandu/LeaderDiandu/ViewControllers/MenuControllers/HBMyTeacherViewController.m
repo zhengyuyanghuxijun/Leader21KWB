@@ -119,7 +119,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     NSDictionary *teacherDic = userEntity.teacher;
     NSDictionary *classDic = userEntity.myClass;
     NSString *strValue = [teacherDic stringForKey:@"name" defautValue:@""];
-    [array addObject:strValue];
+    [array addObject:[strValue uppercaseString]];
     strValue = [teacherDic stringForKey:@"display_name" defautValue:@""];
     [array addObject:strValue];
     strValue = [classDic stringForKey:@"name" defautValue:@""];
@@ -324,7 +324,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     [view addSubview:headView];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    NSString *name = userEntity.teacher[@"name"];
+    NSString *name = [userEntity.teacher[@"name"] uppercaseString];
     
     NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:name];
     

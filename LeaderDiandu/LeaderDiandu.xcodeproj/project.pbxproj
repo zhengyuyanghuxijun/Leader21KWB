@@ -1969,7 +1969,6 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/LeaderDiandu/Third/AliPay",
 					"$(PROJECT_DIR)/LeaderDiandu/Third/Bugly",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2012,7 +2011,6 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/LeaderDiandu/Third/AliPay",
 					"$(PROJECT_DIR)/LeaderDiandu/Third/Bugly",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

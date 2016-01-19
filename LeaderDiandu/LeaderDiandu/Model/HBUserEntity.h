@@ -28,4 +28,6 @@
 @property (nonatomic, strong)NSDictionary *teacher;
 @property (nonatomic, strong)NSDictionary *director;
 
+- (NSString *)getUpAccountName;
+
 @end
