@@ -44,6 +44,11 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
     self.navigationController.navigationBarHidden = NO;
     self.title = @"消息中心";
     
+    if ([[HBDataSaveManager defaultManager] userEntity] == nil) {
+        [self createNoLoginLabel:@"暂无系统消息，请登录后查看。"];
+        return;
+    }
+    
     [self addTableView];
     [self requestSystemMsg];
 }
@@ -79,11 +84,11 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
                 for (NSDictionary *dic in arr)
                 {
                     HBSystemMsgEntity *msgEntity = [[HBSystemMsgEntity alloc] init];
-                    msgEntity.systemMsgId = [NSString stringWithFormat:@"%ld", (long)[dic integerForKey:@"id"]];
+                    msgEntity.systemMsgId = [dic numberForKey:@"id"];
                     msgEntity.body = [dic stringForKey:@"body"];
                     msgEntity.user_id = [NSString stringWithFormat:@"%ld", (long)[dic integerForKey:@"user_id"]];
                     NSTimeInterval interval = [[dic numberForKey:@"created_time"] doubleValue];
-                    msgEntity.created_time = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];
+                    msgEntity.created_time = [TimeIntervalUtils getStringMDHMSFromTimeInterval:interval];//getStringMDHMSFromTimeInterval
                     
                     [msgArr addObject:msgEntity];
                 }
@@ -92,7 +97,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
                     self.msgArr = [msgArr sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
                         HBSystemMsgEntity *entity1 = obj1;
                         HBSystemMsgEntity *entity2 = obj2;
-                        NSComparisonResult result = [entity1.created_time compare:entity2.created_time];
+                        NSComparisonResult result = [entity1.systemMsgId compare:entity2.systemMsgId];
                         return result == NSOrderedAscending;
                     }];
                     

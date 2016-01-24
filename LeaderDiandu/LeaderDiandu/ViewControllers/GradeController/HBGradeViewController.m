@@ -249,6 +249,7 @@
     currentID = 1;
     subscribeId = -1;
     self.redPointImgView.hidden = YES;
+    [AppDelegate delegate].hasNewMsg = NO;
     [_gridView setHeaderViewHidden:YES];
     [self.rightButton setTitle:@"1" forState:UIControlStateNormal];
     [self verifyLogin];

@@ -46,6 +46,18 @@
     self.view.backgroundColor = RGB(239, 239, 239);
 }
 
+- (void)createNoLoginLabel:(NSString *)text
+{
+    float controlX = 0;
+    float controlY = ScreenHeight / 3;
+    UILabel *noLoginLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, ScreenWidth, 20)];
+    noLoginLbl.backgroundColor = [UIColor clearColor];
+    noLoginLbl.textColor = [UIColor lightGrayColor];
+    noLoginLbl.text = text;
+    noLoginLbl.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:noLoginLbl];
+}
+
 -(void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion{
     [self willPop];
     [super dismissViewControllerAnimated:flag completion:completion];

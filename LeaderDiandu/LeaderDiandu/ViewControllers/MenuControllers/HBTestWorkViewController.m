@@ -158,6 +158,11 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     self.navigationController.navigationBarHidden = NO;
     self.title = @"我的作业";
     
+    if ([[HBDataSaveManager defaultManager] userEntity] == nil) {
+        [self createNoLoginLabel:@"暂无作业信息，请登录后查看。"];
+        return;
+    }
+    
     [self addTableView];
 }
 

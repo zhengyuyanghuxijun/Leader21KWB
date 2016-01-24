@@ -16,6 +16,8 @@
 
 - (void)willPop;
 
+- (void)createNoLoginLabel:(NSString *)text;
+
 @end
 
 @interface HBBaseViewController(CallBack)

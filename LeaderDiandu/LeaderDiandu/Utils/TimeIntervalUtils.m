@@ -460,7 +460,6 @@ static TimeIntervalUtils *singleton = nil;
 
 + (NSString*)getStringMDHMSFromTimeInterval:(NSTimeInterval)timeInterval
 {
-#if 1
     NSDate *curDate = [NSDate date];
     NSTimeInterval curItv = curDate.timeIntervalSince1970;
     NSDate *date = nil;
@@ -470,16 +469,17 @@ static TimeIntervalUtils *singleton = nil;
         date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
     }
     TimeIntervalUtils *timeutils = [TimeIntervalUtils sharedInstance];
-    [timeutils.dateFormatter setDateFormat:NSLocalizedString(@"MM-dd HH:mm", @"")];
-    NSString* str = [timeutils.dateFormatter stringFromDate:date];
-#else
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"]];//location设置为中国
-    [dateFormatter setDateFormat:@"MM-dd HH:mm"];
-    NSString* str = [dateFormatter stringFromDate:date];
-#endif
-    
-    return str;
+    [timeutils.dateFormatter setDateFormat:NSLocalizedString(@"yyyy", @"")];
+    NSString *curYear = [timeutils.dateFormatter stringFromDate:curDate];
+    NSString *yearStr = [timeutils.dateFormatter stringFromDate:date];
+    if ([yearStr isEqualToString:curYear]) {
+        //在同一年
+        [timeutils.dateFormatter setDateFormat:NSLocalizedString(@"MM-dd HH:mm", @"")];
+        return [timeutils.dateFormatter stringFromDate:date];
+    } else {
+        [timeutils.dateFormatter setDateFormat:NSLocalizedString(@"yyyy-MM-dd", @"")];
+        return [timeutils.dateFormatter stringFromDate:date];
+    }
 }
 
 + (NSString*)getStringYearMonthFromTimeinterval:(NSTimeInterval)timeInterval
@@ -490,7 +490,14 @@ static TimeIntervalUtils *singleton = nil;
 
 + (NSString*)getStringYearMonthDayFromTimeinterval:(NSTimeInterval)timeInterval
 {
-    NSDate* date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    NSDate *curDate = [NSDate date];
+    NSTimeInterval curItv = curDate.timeIntervalSince1970;
+    NSDate *date = nil;
+    if (timeInterval/curItv > 100) {//毫秒级的时间
+        date = [NSDate dateWithTimeIntervalSince1970:timeInterval/1000];
+    } else {
+        date = [NSDate dateWithTimeIntervalSince1970:timeInterval];
+    }
     return [self getStringYearMonthDayFromDate:date];
 }
 

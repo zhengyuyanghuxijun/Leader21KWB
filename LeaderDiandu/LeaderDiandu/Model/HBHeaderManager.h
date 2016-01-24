@@ -30,11 +30,10 @@ typedef void(^HBHeaderReceivedBlock) (id responseObject, NSError *error);
  *
  *  @param user             用户ID
  *  @param token            登录返回的凭证
- *  @param avatarFile       头像文件
  *  @param data             图片数据
  *  @param receivedBlock 回调Block
  */
-- (void)requestUpdateAvatar:(NSString *)user token:(NSString *)token file:(NSString *)avatarFile data:(NSData *)data completion:(HBHeaderReceivedBlock)receivedBlock;
+- (void)requestUpdateAvatar:(NSString *)user token:(NSString *)token data:(NSData *)data completion:(HBHeaderReceivedBlock)receivedBlock;
 
 //获取头像文件
 - (NSString *)getAvatarFileByUser:(NSString *)user;

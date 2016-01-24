@@ -181,15 +181,13 @@
     if (userEntity.type <= 1) {
         imgArray = @[@"menu-icn-myteacher", @"menu-icn-subs", @"menu-icn-test", @"menu-icn-pay", @"menu-icn-message", @"menu-icn-service", @"menu-icn-setting"];
         titleArr = @[@"我的老师", @"订阅等级", @"我的作业", @"支付中心", @"消息中心", @"联系客服", @"设置"];
-        if (userEntity) {
-            ctlArray = @[@"HBMyTeacherViewController", @"HBSubscribeViewController", @"HBTestWorkViewController", @"HBPayViewController", @"HBMessageViewController", @"", @"HBSettingViewController"];
-        } else {
-            ctlArray = @[@"HBNLoginViewController", @"HBNLoginViewController", @"HBNLoginViewController", @"HBNLoginViewController", @"HBNLoginViewController", @"", @"HBSettingViewController"];
-        }
+        ctlArray = @[@"HBMyTeacherViewController", @"HBSubscribeViewController", @"HBTestWorkViewController", @"HBPayViewController", @"HBMessageViewController", @"", @"HBSettingViewController"];
+        
     } else if (userEntity.type == 10) {//老师
         imgArray = @[@"menu-icn-student", @"menu-icn-homework", @"menu-icn-instructor", @"menu-icn-message", @"menu-icn-service", @"menu-icn-setting"];
         titleArr = @[@"学生管理", @"作业管理", @"我的教研员", @"消息中心", @"联系客服", @"设置"];
         ctlArray = @[@"HBStuManViewController", @"HBWorkManViewController", @"HBLeaderViewController", @"HBMessageViewController", @"", @"HBSettingViewController"];
+        
     } else if (userEntity.type == 20) {//教研员
         imgArray = @[@"menu-icn-teachers", @"menu-icn-homework", @"menu-icn-message", @"menu-icn-service", @"menu-icn-setting"];
         titleArr = @[@"教师管理", @"每周作业", @"消息中心", @"联系客服", @"设置"];
@@ -198,11 +196,7 @@
     
     DHSlideMenuViewController *leftViewController = [[DHSlideMenuViewController alloc] init];
     [leftViewController setMenus:titleArr MenuImages:imgArray TabBarControllers:ctlArray];
-    if (userEntity) {
-        leftViewController.headerClassName = @"HBUserInfoViewController";
-    } else {
-        leftViewController.headerClassName = @"HBNLoginViewController";
-    }
+    leftViewController.headerClassName = @"HBUserInfoViewController";
     menuVC.leftViewController = leftViewController;
     menuVC.leftViewShowWidth = ScreenWidth - 50;
     _currentVC = menuVC;

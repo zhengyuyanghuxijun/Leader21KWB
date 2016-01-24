@@ -16,10 +16,11 @@
 #import "TimeIntervalUtils.h"
 #import "FileUtil.h"
 
-#define KTableViewHeaderHeight  120
+static CGFloat const KTableViewHeaderHeight = 120;
+static CGFloat const KUserCellHeight = 50;
 static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewControllerCellReuseId";
 
-static const CGFloat kImgLength = 800.0f;
+static const CGFloat kImgLength = 1000;
 
 @interface HBUserInfoViewController () <UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
@@ -29,7 +30,6 @@ static const CGFloat kImgLength = 800.0f;
 
 @property (nonatomic, strong)UIView *headerView;
 @property (nonatomic, strong)UIImage *headImage;
-@property (nonatomic, strong)NSString *filePath;
 
 @end
 
@@ -52,6 +52,10 @@ static const CGFloat kImgLength = 800.0f;
     _tableView.tableFooterView = [[UIView alloc] init];
     [self.view addSubview:_tableView];
     
+    if ([[HBDataSaveManager defaultManager] userEntity] == nil) {
+        [self createLoginButton];
+    }
+    
     [self getUserInfo];
     [self getHeaderAvatar];
 }
@@ -65,9 +69,33 @@ static const CGFloat kImgLength = 800.0f;
     }
 }
 
+- (void)createLoginButton
+{
+    float controlX = 20;
+    float controlY = KHBNaviBarHeight + KTableViewHeaderHeight + KUserCellHeight*[_titleArr count] + 30;
+    float controlW = ScreenWidth - controlX*2;
+    float controlH = 45;
+    UIButton *loginButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    [loginButton setTitle:@"马上登录" forState:UIControlStateNormal];
+    loginButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [loginButton setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [loginButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
+    [loginButton addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:loginButton];
+}
+
+- (void)loginAction:(id)sender
+{
+    [Navigator pushLoginControllerNow];
+}
+
 - (void)getHeaderAvatar
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity == nil) {
+        return;
+    }
     [[HBHeaderManager defaultManager] requestGetAvatar:userEntity.name token:userEntity.token completion:^(id responseObject, NSError *error) {
         if (error.code == 0) {
             NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:userEntity.name];
@@ -81,8 +109,11 @@ static const CGFloat kImgLength = 800.0f;
 
 - (void)getUserInfo
 {
-    [MBHudUtil showActivityView:nil inView:nil];
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity == nil) {
+        return;
+    }
+    [MBHudUtil showActivityView:nil inView:nil];
     [[HBServiceManager defaultManager] requestUserInfo:userEntity.name completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];
         if (error == nil) {
@@ -108,7 +139,7 @@ static const CGFloat kImgLength = 800.0f;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return KUserCellHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -141,7 +172,9 @@ static const CGFloat kImgLength = 800.0f;
     } else {
         [headButton setImage:[UIImage imageNamed:@"menu_user_pohoto"] forState:UIControlStateNormal];
     }
-    [headButton addTarget:self action:@selector(headButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    if ([[HBDataSaveManager defaultManager] userEntity] != nil) {
+        [headButton addTarget:self action:@selector(headButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
     [_headerView addSubview:headButton];
     
     controlX += imgWidth+10;
@@ -163,7 +196,14 @@ static const CGFloat kImgLength = 800.0f;
     typeLbl.textAlignment = NSTextAlignmentCenter;
     typeLbl.textColor = [UIColor whiteColor];
     typeLbl.font = [UIFont systemFontOfSize:16];
+    [bgView addSubview:typeLbl];
+
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity == nil) {
+        typeLbl.text = @"未登录";
+        bgView.image = [UIImage imageNamed:@"studentmanage-bg-vipover-user"];
+        return bgView;
+    }
     if (userEntity.type == 1) {
         if (userEntity.account_status == 1) {
             typeLbl.text = @"普通用户";
@@ -192,7 +232,6 @@ static const CGFloat kImgLength = 800.0f;
         typeLbl.text = @"教研员";
         bgView.image = [UIImage imageNamed:@"studentmanage-bg-normal-user"];
     }
-    [bgView addSubview:typeLbl];
     return bgView;
 }
 
@@ -202,6 +241,7 @@ static const CGFloat kImgLength = 800.0f;
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:KUserInfoViewControllerCellReuseId];
     NSInteger index = indexPath.row;
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KUserInfoViewControllerCellReuseId];
         float viewWidth = self.view.frame.size.width;
@@ -213,7 +253,7 @@ static const CGFloat kImgLength = 800.0f;
         valueLbl.textAlignment = NSTextAlignmentRight;
         [cell.contentView addSubview:valueLbl];
         
-        if (index == 0) {
+        if (index == 0 || userEntity == nil) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         } else if (index > 0) {
             UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(viewWidth-40, 15, 20, 20)];
@@ -226,16 +266,17 @@ static const CGFloat kImgLength = 800.0f;
     cell.textLabel.text = [_titleArr objectAtIndex:index];
     cell.textLabel.textColor = [UIColor blackColor];
     
-    UILabel *valueLbl = (UILabel *)[cell.contentView viewWithTag:1001];
-    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    if (index == 0) {
-        valueLbl.text = [userEntity getUpAccountName];
-    } else if (index == 1) {
-        valueLbl.text = userEntity.display_name;
-    } else if (index == 2) {
-        valueLbl.text = userEntity.phone;
-    } else if (index == 3) {
-        valueLbl.text = @"******";
+    if (userEntity != nil) {
+        UILabel *valueLbl = (UILabel *)[cell.contentView viewWithTag:1001];
+        if (index == 0) {
+            valueLbl.text = [userEntity getUpAccountName];
+        } else if (index == 1) {
+            valueLbl.text = userEntity.display_name;
+        } else if (index == 2) {
+            valueLbl.text = userEntity.phone;
+        } else if (index == 3) {
+            valueLbl.text = @"******";
+        }
     }
     
     return cell;
@@ -243,6 +284,9 @@ static const CGFloat kImgLength = 800.0f;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([[HBDataSaveManager defaultManager] userEntity] == nil) {
+        return;
+    }
     NSInteger index = indexPath.row;
     if (index == 1) {
         HBEditNameViewController *controller = [[HBEditNameViewController alloc] init];
@@ -342,35 +386,20 @@ static const CGFloat kImgLength = 800.0f;
         if (image == nil) {
             image = [info objectForKey:UIImagePickerControllerOriginalImage];
         }
-        if (image.size.width > kImgLength || image.size.height > kImgLength) {
-            image = [self imageWithImageSimple:image scaledToSize:CGSizeMake(kImgLength, kImgLength)];
+        NSData* data = UIImageJPEGRepresentation(image, 1.0);
+        float fileLength = [data length];
+        float maxLength = 1 * kImgLength * kImgLength;
+        if (fileLength > maxLength) {
+            data = UIImageJPEGRepresentation(image, maxLength/fileLength);
         }
-        NSData* data = UIImageJPEGRepresentation(image, 0.8f);
-//        if (UIImagePNGRepresentation(image) == nil) {
-//            data = UIImageJPEGRepresentation(image, 1.0);
-//        } else {
-//            data = UIImagePNGRepresentation(image);
-//        }
-        
-        //图片保存的路径
-        //这里将图片放在沙盒的documents文件夹中
-        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-        //文件管理器
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
-        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
-        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/image.png"] contents:data attributes:nil];
-        
-        //得到选择后沙盒中图片的完整路径
-        self.filePath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath,  @"/image.png"];
         
         //关闭相册界面
         [picker dismissViewControllerAnimated:YES completion:^{
             //开始上传
             HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-            [[HBHeaderManager defaultManager] requestUpdateAvatar:userEntity.name token:userEntity.token file:_filePath data:data completion:^(id responseObject, NSError *error) {
+            [[HBHeaderManager defaultManager] requestUpdateAvatar:userEntity.name token:userEntity.token data:data completion:^(id responseObject, NSError *error) {
                 if (error == nil) {
-                    self.headImage = responseObject;
+                    self.headImage = image;
                 } else {
                     //上传错误提示
                 }

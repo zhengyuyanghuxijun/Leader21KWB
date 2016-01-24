@@ -438,9 +438,9 @@
             
             CGRect bgImgFrame = itemView.bounds;
             bgImgFrame.origin.x = 15;
-            bgImgFrame.origin.y = 10;
             bgImgFrame.size.width -= 30;
             bgImgFrame.size.height = bgImgFrame.size.width;
+            bgImgFrame.origin.y = (maxItemHeight-bgImgFrame.size.width) / 2;
             
             if (index == (currentID - 1)) {
                 UIImageView *bgImgView = [[UIImageView alloc] initWithFrame:bgImgFrame];

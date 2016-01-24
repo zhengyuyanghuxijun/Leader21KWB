@@ -80,19 +80,17 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     self.navigationController.navigationBarHidden = NO;
     self.title = @"我的老师";
     
+    if ([[HBDataSaveManager defaultManager] userEntity] == nil) {
+        [self createNoLoginLabel:@"暂无老师信息，请登录后查看。"];
+        return;
+    }
+    
     CGRect rect = self.view.frame;
     CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight);
     [self createBindView:viewFrame];
     [self createTableView:viewFrame];
     
-    //有可能从其他客户端解除绑定老师
-//    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-//    if ([[userEntity.teacher allKeys] count] > 0) {
-//        [self showBindView:NO];
-//        [self handleDescArray];
-//    } else {
     [self getUserInfo:YES];
-//    }
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
@@ -124,7 +122,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     [array addObject:strValue];
     strValue = [classDic stringForKey:@"name" defautValue:@""];
     [array addObject:strValue];
-    NSNumber *booksetId = [classDic numberForKey:@"bookset_id"];
+    NSNumber *booksetId = [classDic numberForKey:@"bookset_id" defautValue:@(1)];
     if (booksetId) {
         strValue = [booksetId stringValue];
     } else {

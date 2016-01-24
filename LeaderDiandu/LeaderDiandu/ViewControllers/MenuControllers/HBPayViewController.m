@@ -112,6 +112,9 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     [super viewDidAppear:animated];
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity == nil) {
+        return;
+    }
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSDictionary *payDic = [userDefault objectForKey:userEntity.name];
     if (payDic) {
@@ -139,18 +142,26 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (void)showLoginAlert
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您尚未登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"马上登录", nil];
+    [alertView show];
+}
+
+#pragma mark - actionSheetDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [Navigator pushLoginControllerNow];
+    }
+}
 
 -(void)payButtonPressed
 {
+    if ([[HBDataSaveManager defaultManager] userEntity] == nil) {
+        [self showLoginAlert];
+        return;
+    }
     [self showMBProgressHUD:@"正在连接支付..."];
     [[HBSKPayService defaultService] requestTierByMonth:_months];
     
@@ -334,6 +345,10 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 
 -(void)rightButtonPressed
 {
+    if ([[HBDataSaveManager defaultManager] userEntity] == nil) {
+        [self showLoginAlert];
+        return;
+    }
     HBBillViewController *vc = [[HBBillViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }

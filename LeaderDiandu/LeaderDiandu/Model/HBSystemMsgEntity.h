@@ -10,7 +10,7 @@
 
 @interface HBSystemMsgEntity : NSObject
 
-@property (nonatomic, strong)NSString *systemMsgId;
+@property (nonatomic, strong)NSNumber *systemMsgId;
 @property (nonatomic, strong)NSString *user_id;
 @property (nonatomic, strong)NSString *type;
 @property (nonatomic, strong)NSString *subject;

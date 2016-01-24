@@ -97,9 +97,13 @@
     // Do any additional setup after loading the view.
     
     self.navigationController.navigationBarHidden = NO;
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     self.title = @"订阅等级";
     
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    if ([[HBDataSaveManager defaultManager] userEntity] == nil) {
+        [self createNoLoginLabel:@"暂无订阅信息，请登录后查看。"];
+        return;
+    }
     
     [self initConfirmButton];
     [self initRuleDescriptionButton];

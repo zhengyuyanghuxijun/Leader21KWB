@@ -68,10 +68,12 @@
     }];
 }
 
-- (void)requestUpdateAvatar:(NSString *)user token:(NSString *)token file:(NSString *)avatarFile data:(NSData *)data completion:(HBHeaderReceivedBlock)receivedBlock
+- (void)requestUpdateAvatar:(NSString *)user token:(NSString *)token data:(NSData *)data completion:(HBHeaderReceivedBlock)receivedBlock
 {
     self.receivedBlock = receivedBlock;
     
+    UInt64 timeNow = [[NSDate date] timeIntervalSince1970];
+    NSString *imageName = [NSString stringWithFormat:@"%@%llu", user, timeNow];
     NSString *server_base = [NSString stringWithFormat:@"%@/api/user/avatar/update", SERVICEAPI];
     ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:server_base]];
     [request setDelegate :self];
@@ -84,9 +86,7 @@
     [request setPostValue:user forKey:@"user"];
     [request setPostValue:token forKey:@"token"];
     [request setPostValue:KAppKeyKWB forKey:KWBAppKey];
-    UIImage *image = [UIImage imageWithContentsOfFile:avatarFile];
-    NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
-    [request setData:imageData withFileName:[avatarFile lastPathComponent] andContentType:@"image/jpeg" forKey:@"avatar"];
+    [request setData:data withFileName:imageName andContentType:@"image/jpeg" forKey:@"avatar"];
 //    [request setFile:avatarFile withFileName:[avatarFile lastPathComponent] andContentType:@"image/jpeg" forKey:@"avatar"];
     
     __weak typeof(request) weakRequest = request;
@@ -94,7 +94,7 @@
         NSError *error = [weakRequest error];
         if (error == nil) {
             if (receivedBlock) {
-                receivedBlock(image, error);
+                receivedBlock(nil, error);
             }
         }
     }];
