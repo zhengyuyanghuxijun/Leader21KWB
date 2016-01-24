@@ -286,7 +286,12 @@
         [menuItems addObject:item];
     }
     
-    CGRect menuFrame = CGRectMake(ScreenWidth - 75, 160, 60, 50 * 9);
+    CGFloat menuY = 160;
+    CGFloat menuH = 50 * 9;
+    if (iPhone4 || [UIDevice isiPad]) {
+        menuH = ScreenHeight-menuY;
+    }
+    CGRect menuFrame = CGRectMake(ScreenWidth - 75, menuY, 60, menuH);
     
     [FTMenu showMenuWithFrame:menuFrame inView:self.navigationController.view menuItems:menuItems currentID:0];
 }

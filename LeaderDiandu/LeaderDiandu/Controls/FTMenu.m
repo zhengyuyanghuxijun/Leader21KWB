@@ -371,24 +371,19 @@
         [v removeFromSuperview];
     }
     
-    if (!_menuItems.count)
+    NSUInteger itemCount = [_menuItems count];
+    if (itemCount == 0)
         return nil;
     
     CGFloat kLeftMarginX =18.0f;
-    //    CGFloat kMidMarginX = 16.0f;
-    CGFloat kRightMarginX = 18.0f;
     CGFloat kMarginY = 8.0f;
     
     CGFloat maxImageWidth = 33;
     CGFloat maxItemHeight = 47;
-    if (iPhone5) {
-        maxItemHeight = 35;
+    if (iPhone5 || iPhone4 || [UIDevice isiPad]) {
+        maxItemHeight = 30;
     }
     CGFloat maxItemWidth = contentFrame.size.width;
-    
-    
-    //    const CGFloat titleX = kLeftMarginX  + maxImageWidth + kMidMarginX;
-    //    const CGFloat titleWidth = maxItemWidth - titleX - kRightMarginX;
     
     const CGFloat titleX = 0.0f;
     const CGFloat titleWidth = maxItemWidth;
@@ -403,7 +398,6 @@
     
     CGFloat itemY = 10;
     NSUInteger itemNum = 0;
-//    for (KxMenuItem *menuItem in _menuItems) {
     for (NSInteger index = 0; index < _menuItems.count; index++) {
         
         KxMenuItem *menuItem = [_menuItems objectAtIndex:index];

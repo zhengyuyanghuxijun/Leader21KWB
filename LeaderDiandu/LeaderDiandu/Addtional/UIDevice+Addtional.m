@@ -58,7 +58,9 @@
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     
-    if ([device.model hasPrefix:@"iPad"] && screenWidth>=768.0f && screenHeight>=1024.0f) {
+    //没有iPad的加载图
+    if ([device.model hasPrefix:@"iPad"]
+        /*&& screenWidth>=768.0f && screenHeight>=1024.0f*/) {
         return YES;
     }
     else {

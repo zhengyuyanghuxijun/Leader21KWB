@@ -121,10 +121,11 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
 -(void)addTableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 60)];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 60) style:UITableViewStyleGrouped];
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        _tableView.separatorStyle = NO;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.scrollEnabled = NO;
         [self.view addSubview:_tableView];
     }
     
@@ -215,7 +216,11 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (self.isBinding){
-        return 200;
+        if (iPhone4 || [UIDevice isiPad]) {
+            return 150;
+        } else {
+            return 200;
+        }
     }else{
         return 0;
     }
@@ -226,7 +231,13 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
     NSInteger imgWidth = 100;
     NSInteger screenWidth = [UIScreen mainScreen].bounds.size.width;
     UIView *view = [[UIView alloc] init];
-    UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-imgWidth)/2, (200-imgWidth)/2, imgWidth, imgWidth)];
+    CGFloat imgY = 0;
+    if (iPhone4 || [UIDevice isiPad]) {
+        imgY = (150-imgWidth) / 2;
+    } else {
+        imgY = (200-imgWidth) / 2;
+    }
+    UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake((screenWidth-imgWidth)/2, imgY, imgWidth, imgWidth)];
     
     NSString *headFile = [[HBHeaderManager defaultManager] getAvatarFileByUser:self.accountStr];
     

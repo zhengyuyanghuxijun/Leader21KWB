@@ -103,10 +103,7 @@
     }
     
     NSInteger height = 50;
-    if (iPhone5) {
-        height = 40;
-    }
-    CGRect menuFrame = CGRectMake(ScreenWidth - 75, 165, 60, height * 9);
+    CGRect menuFrame = CGRectMake(ScreenWidth - 75, 150, 60, height * 9);
     
     [FTMenu showMenuWithFrame:menuFrame inView:self.superview menuItems:menuItems currentID:0];
 }

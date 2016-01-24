@@ -36,7 +36,11 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     //时间
     self.cellTime = [[UILabel alloc] init];
     self.cellTime.frame = CGRectMake(10, 5, 80, 25);
-    self.cellTime.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
+    if (iPhone4 || [UIDevice isiPad]) {
+        self.cellTime.font = [UIFont boldSystemFontOfSize:12];
+    } else {
+        self.cellTime.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
+    }
     [self addSubview:self.cellTime];
     
     //群组图标
