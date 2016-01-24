@@ -17,7 +17,6 @@
 		0D7487911B89DDF5007BE4CD /* CoreDataEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487871B89DDF5007BE4CD /* CoreDataEngine.m */; };
 		0D7487931B89DDF5007BE4CD /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487891B89DDF5007BE4CD /* CoreDataHelper.m */; };
 		0D7487951B89DDF5007BE4CD /* DataEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74878B1B89DDF5007BE4CD /* DataEngine.m */; };
-		0D7487A01B89DE72007BE4CD /* UIDevice+Addtional.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74879A1B89DE72007BE4CD /* UIDevice+Addtional.m */; };
 		0D7487FA1B89DF42007BE4CD /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487A61B89DF42007BE4CD /* AESCrypt.m */; };
 		0D7487FC1B89DF42007BE4CD /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487A91B89DF42007BE4CD /* NSData+Base64.m */; };
 		0D7487FE1B89DF42007BE4CD /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487AB1B89DF42007BE4CD /* NSData+CommonCrypto.m */; };
@@ -144,8 +143,6 @@
 		0D7487891B89DDF5007BE4CD /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
 		0D74878A1B89DDF5007BE4CD /* DataEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataEngine.h; sourceTree = "<group>"; };
 		0D74878B1B89DDF5007BE4CD /* DataEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataEngine.m; sourceTree = "<group>"; };
-		0D7487991B89DE72007BE4CD /* UIDevice+Addtional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Addtional.h"; sourceTree = "<group>"; };
-		0D74879A1B89DE72007BE4CD /* UIDevice+Addtional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Addtional.m"; sourceTree = "<group>"; };
 		0D7487A51B89DF42007BE4CD /* AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESCrypt.h; sourceTree = "<group>"; };
 		0D7487A61B89DF42007BE4CD /* AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESCrypt.m; sourceTree = "<group>"; };
 		0D7487A71B89DF42007BE4CD /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -402,8 +399,6 @@
 				0DC1D40E1B9BA77E0043C79B /* NSDictionary+Safe.m */,
 				0DCBC2971B99DAE5003DFDD5 /* NSString+Extra.h */,
 				0DCBC2981B99DAE5003DFDD5 /* NSString+Extra.m */,
-				0D7487991B89DE72007BE4CD /* UIDevice+Addtional.h */,
-				0D74879A1B89DE72007BE4CD /* UIDevice+Addtional.m */,
 			);
 			path = Additional;
 			sourceTree = "<group>";
@@ -865,7 +860,6 @@
 				0D7488081B89DF42007BE4CD /* ASIDataDecompressor.m in Sources */,
 				0D7487931B89DDF5007BE4CD /* CoreDataHelper.m in Sources */,
 				68A2C3731B47DD5B00A0BB71 /* ReadBookPRController.m in Sources */,
-				0D7487A01B89DE72007BE4CD /* UIDevice+Addtional.m in Sources */,
 				0D7487FC1B89DF42007BE4CD /* NSData+Base64.m in Sources */,
 				0D7488061B89DF42007BE4CD /* ASIDataCompressor.m in Sources */,
 				0D7488451B89E022007BE4CD /* db.xcdatamodeld in Sources */,

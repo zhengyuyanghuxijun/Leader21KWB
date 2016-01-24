@@ -59,7 +59,11 @@
     //内容
     self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.imgView.frame.origin.x + 30 + 10, 0, rc.size.width - 30 - 30, rc.size.height)];
     self.contentLabel.numberOfLines = 0;
-    [self.contentLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];
+    if (iPhone4) {
+        self.contentLabel.font = [UIFont boldSystemFontOfSize:12];
+    } else {
+        [self.contentLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];
+    }
     [self.contentLabel setTextColor:RGB(65, 65, 65)];
     [bgView addSubview:self.contentLabel];
 }
@@ -214,7 +218,7 @@
             NSString *user = userEntity.name;
             //获取用户当前订阅的套餐
             [MBHudUtil showActivityView:nil inView:nil];
-            [[HBServiceManager defaultManager] requestBooksetSub:user bookset_id:[NSString stringWithFormat:@"%ld",(self.currentSelectIndex + 1)] months:@"1" completion:^(id responseObject, NSError *error) {
+            [[HBServiceManager defaultManager] requestBooksetSub:user bookset_id:[NSString stringWithFormat:@"%ld",(long)(self.currentSelectIndex+1)] months:@"1" completion:^(id responseObject, NSError *error) {
                 if (responseObject) {
                     NSString *result = [responseObject objectForKey:@"result"];
                     if ([result isEqualToString:@"OK"]) {
@@ -259,14 +263,14 @@
 // 获取特定位置的单元格视图
 - (HBGridItemView *)gridView:(HBGridView *)gridView inGridCell:(HBGridCellView *)gridCell gridItemViewAtGridIndex:(GridIndex *)gridIndex listIndex:(NSInteger)listIndex
 {
-    NSLog(@"list index:%ld", listIndex);
+    NSLog(@"list index:%ld", (long)listIndex);
     ButtonGridItemView *itemView = (ButtonGridItemView *)[gridView dequeueReusableGridItemAtGridIndex:gridIndex ofGridCellView:gridCell];
     if (!itemView)
     {
         itemView = [[ButtonGridItemView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, 100)];
     }
     
-    NSString *indexStr = [NSString stringWithFormat:@"%ld", (listIndex + 1)];
+    NSString *indexStr = [NSString stringWithFormat:@"%ld", (long)(listIndex+1)];
     
     //说明这个等级是被订阅的，需要特殊标记一下
     if (self.subscribeId == (listIndex + 1)) {

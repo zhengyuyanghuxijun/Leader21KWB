@@ -339,7 +339,7 @@ static const CGFloat navBarBgAlpha = 1.0f;
     }
     
     CGFloat detalX = 0.0f;
-    if ([[UIDevice currentDevice] systemVersionNotLowerThan:@"7.0"]) {
+    if (IOS7_Later) {
         detalX = detalHeightForIos7;
     }
 

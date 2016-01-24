@@ -39,7 +39,7 @@
 
 //    self.userId = [DE currentUserId];
     
-    if ([[UIDevice currentDevice] systemVersionNotLowerThan:@"7.0"]) {
+    if (IOS7_Later) {
 //        self.edgesForExtendedLayout = UIRectEdgeNone;
 //        self.extendedLayoutIncludesOpaqueBars = YES;
         self.automaticallyAdjustsScrollViewInsets = NO;
@@ -127,7 +127,7 @@
     
     rc = self.view.bounds;
     h = 0.0f;
-    if ([[UIDevice currentDevice] systemVersionNotLowerThan:@"7.0"]) {
+    if (IOS7_Later) {
         h = 20.0f;
     }
     
@@ -150,7 +150,7 @@
     if (![self isViewLoaded]) {
         return;
     }
-    if ([[UIDevice currentDevice] systemVersionNotLowerThan:@"6.0"]) {
+    if (IOS7_Later) {
         if (self.view.window == nil)// 是否是正在使用的视图
         {
             [self handleMemoryWarning];
@@ -232,7 +232,7 @@
 
 + (CGFloat)navBarHeight
 {
-    if ([[UIDevice currentDevice] systemVersionNotLowerThan:@"7.0"]) {
+    if (IOS7_Later) {
         return 64.0f;
     }
     else {
@@ -242,7 +242,7 @@
 
 + (CGFloat)navBarHeight2
 {
-    if ([[UIDevice currentDevice] systemVersionNotLowerThan:@"7.0"]) {
+    if (IOS7_Later) {
         return 85.0f;
     }
     else {

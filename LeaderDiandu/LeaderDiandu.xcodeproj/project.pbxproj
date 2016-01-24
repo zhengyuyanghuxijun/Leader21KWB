@@ -235,6 +235,7 @@
 		18F367E71BA90C7800EBFEC4 /* HBSetStuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367E61BA90C7800EBFEC4 /* HBSetStuController.m */; };
 		18F367F21BA9541100EBFEC4 /* HBSetStuGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */; };
 		18F367F51BA9542D00EBFEC4 /* HBSetStuOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */; };
+		260085D21C5506E300D5932F /* UIDevice+Addtional.m in Sources */ = {isa = PBXBuildFile; fileRef = 260085D11C5506E300D5932F /* UIDevice+Addtional.m */; };
 		265566F11C1AAAE900150C3C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265566F01C1AAAE900150C3C /* Security.framework */; };
 		265566F41C1AAB0100150C3C /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 265566F31C1AAB0100150C3C /* libc++.tbd */; };
 		265566F81C1AABC400150C3C /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265566F71C1AABC400150C3C /* Bugly.framework */; };
@@ -649,6 +650,8 @@
 		18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuGroupCell.m; sourceTree = "<group>"; };
 		18F367F31BA9542D00EBFEC4 /* HBSetStuOtherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuOtherCell.h; sourceTree = "<group>"; };
 		18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuOtherCell.m; sourceTree = "<group>"; };
+		260085D01C5506E300D5932F /* UIDevice+Addtional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Addtional.h"; sourceTree = "<group>"; };
+		260085D11C5506E300D5932F /* UIDevice+Addtional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Addtional.m"; sourceTree = "<group>"; };
 		265566F01C1AAAE900150C3C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		265566F31C1AAB0100150C3C /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		265566F71C1AABC400150C3C /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
@@ -1105,6 +1108,8 @@
 			children = (
 				0D3F6D171BAE9E68005B4358 /* UIColor+TKCategory.h */,
 				0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */,
+				260085D01C5506E300D5932F /* UIDevice+Addtional.h */,
+				260085D11C5506E300D5932F /* UIDevice+Addtional.m */,
 				0DCBC29D1B99DE16003DFDD5 /* NSString+Verify.h */,
 				0DCBC29E1B99DE16003DFDD5 /* NSString+Verify.m */,
 				0DAAF4021B8D5F8900078285 /* UIViewController+AddBackBtn.h */,
@@ -1809,6 +1814,7 @@
 				0DD214721B960148009E3DB9 /* HBTestWorkViewController.m in Sources */,
 				0D143F391BD00FA800F5D9EE /* HBExamIdDB.m in Sources */,
 				0D018FF41B97513400A92F59 /* HBUserInfoViewController.m in Sources */,
+				260085D21C5506E300D5932F /* UIDevice+Addtional.m in Sources */,
 				0DB5372A1B8F5DEE0023A3F7 /* AFURLSessionManager.m in Sources */,
 				0DBE35821B8CBE4300179237 /* MBProgressHUD.m in Sources */,
 				0DBE35AF1B8CCEFA00179237 /* TableSecitonDataObject.m in Sources */,

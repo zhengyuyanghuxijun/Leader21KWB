@@ -38,7 +38,6 @@
 #import "UIViewAdditions.h"
 #import "NSString+Extra.h"
 #import "UIImage+Extra.h"
-#import "UIDevice+Addtional.h"
 
 #endif
 

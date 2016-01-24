@@ -18,7 +18,7 @@
 #include <sys/mount.h>
 #import <mach/mach.h>
 #import <MessageUI/MFMailComposeViewController.h>
-//#import "NSString+MD5.h"
+#import "NSString+MD5.h"
 
 @implementation UIDevice (Addtional)
 
@@ -255,9 +255,9 @@
         NSString *im20SecretCode = @"im20interactive.com+ajvGGILjwtZ30feLFmLn";
         
         NSString *stringToHash = [NSString stringWithFormat:@"%@%@",macaddress,im20SecretCode];
-//        NSString *identifier = [stringToHash md5];
+        NSString *identifier = [stringToHash md5];
         
-        return stringToHash;
+        return identifier;
     }
 }
 

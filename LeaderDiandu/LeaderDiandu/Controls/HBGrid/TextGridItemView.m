@@ -156,7 +156,10 @@
     self.bookCoverButton = [UIButton buttonWithType:UIButtonTypeCustom];
     NSInteger height = 120;
     NSInteger controlX = 10;
-    if (iPhone5) {
+    if (iPhone4) {
+        controlX = 20;
+        height = 80;
+    } else if (iPhone5) {
         height = 100;
     } else if (iPhone6) {
         controlX = 15;

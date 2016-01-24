@@ -11,7 +11,6 @@
 #import "MKHttpRequest.h"
 #import "DataEngine.h"
 #import "BookEntity.h"
-#import "UIDevice+Addtional.h"
 #import "MKNetworkEngine.h"
 #import "ErrorCodeUtils.h"
 #import "ZipArchive.h"

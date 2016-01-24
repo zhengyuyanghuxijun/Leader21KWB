@@ -164,7 +164,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     [_teacherView addSubview:button];
     
     controlH = controlY - 10;
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, controlH)];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, controlH) style:UITableViewStyleGrouped];
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.tableFooterView = [[UIView alloc] init];

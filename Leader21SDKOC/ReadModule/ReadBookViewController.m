@@ -116,7 +116,7 @@
     
     self.rotateButton = [[ReadBookOrientationButton alloc] initOriButton];
     self.rotateButton.origin = CGPointMake(self.view.width - 50, 5);
-    if ([[UIDevice currentDevice] systemVersionNotLowerThan:@"7.0"]) {
+    if (IOS7_Later) {
         self.rotateButton.top = self.rotateButton.top + 64;
     }
     [self.rotateButton addTarget:self action:@selector(rotateButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -409,7 +409,7 @@
         self.rotateButton.right = self.view.width - 10;
         
         self.rotateButton.top = 5;
-        if ([[UIDevice currentDevice] systemVersionNotLowerThan:@"7.0"]) {
+        if (IOS7_Later) {
             self.rotateButton.top = self.rotateButton.top + 64;
         }
         

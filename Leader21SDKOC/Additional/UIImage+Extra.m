@@ -11,7 +11,7 @@
 @implementation UIImage (UIImageExtra)
 + (UIImage *)retina4ImageNamed:(NSString *)name;
 {
-    if ([[UIDevice currentDevice] isIphone5]) {
+    if (iPhone5) {
         NSMutableString *imageNameMutable = [name mutableCopy];
         NSRange retinaAtSymbol = [name rangeOfString:@"@"];
         if (retinaAtSymbol.location != NSNotFound) {
