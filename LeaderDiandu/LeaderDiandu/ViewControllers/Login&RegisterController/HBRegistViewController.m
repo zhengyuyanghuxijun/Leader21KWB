@@ -258,7 +258,6 @@
 {
     NSString *phone     = self.inputPhoneNumber.text;
     NSString *smsCode   = self.inputVerifyCode.text;
-    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     [MBHudUtil showActivityView:nil inView:nil];
     [[HBServiceManager defaultManager] requestUpdatePwd:phone password:password sms_code:smsCode code_id:self.smsDict[@"code_id"] completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];

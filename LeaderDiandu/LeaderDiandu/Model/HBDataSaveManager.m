@@ -92,8 +92,10 @@
 
 - (void)saveUserByDict:(NSDictionary *)dict pwd:(NSString *)pwd
 {
+    NSInteger subscribeId = self.userEntity.subscribeId;
     self.userEntity = [[HBUserEntity alloc] initWithDictionary:dict];
     self.userEntity.pwd = pwd;
+    self.userEntity.subscribeId = subscribeId;
     
 #if KSaveDefaultUser
     NSMutableDictionary *newDic = [NSMutableDictionary dictionaryWithDictionary:dict];

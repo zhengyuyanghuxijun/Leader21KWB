@@ -165,7 +165,6 @@
     if (smsCode == nil) {
         smsCode = [self.smsDict objectForKey:@"sms_code"];
     }
-    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     [MBHudUtil showActivityView:nil inView:nil];
     [[HBServiceManager defaultManager] requestUpdatePwd:phone password:password sms_code:smsCode code_id:self.smsDict[@"code_id"] completion:^(id responseObject, NSError *error) {
         [MBHudUtil hideActivityView:nil];

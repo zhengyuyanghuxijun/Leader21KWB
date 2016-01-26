@@ -28,6 +28,8 @@
 @property (nonatomic, strong)NSDictionary *teacher;
 @property (nonatomic, strong)NSDictionary *director;
 
+@property (nonatomic, assign)NSInteger subscribeId;
+
 - (NSString *)getUpAccountName;
 
 @end

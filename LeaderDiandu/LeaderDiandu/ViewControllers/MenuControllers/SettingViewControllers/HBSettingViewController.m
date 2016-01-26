@@ -68,7 +68,7 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
     if ([[HBDataSaveManager defaultManager] userEntity]) {
         [self.logoutButton setTitle:@"退出帐号" forState:UIControlStateNormal];
     } else {
-        [self.logoutButton setTitle:@"立即登录" forState:UIControlStateNormal];
+        [self.logoutButton setTitle:@"马上登录" forState:UIControlStateNormal];
     }
     [self.logoutButton addTarget:self action:@selector(logoutButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:self.logoutButton];

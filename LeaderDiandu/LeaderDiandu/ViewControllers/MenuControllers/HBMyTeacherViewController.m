@@ -122,12 +122,13 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     [array addObject:strValue];
     strValue = [classDic stringForKey:@"name" defautValue:@""];
     [array addObject:strValue];
-    NSNumber *booksetId = [classDic numberForKey:@"bookset_id" defautValue:@(1)];
-    if (booksetId) {
-        strValue = [booksetId stringValue];
+    NSInteger booksetId = 0;
+    if ([classDic isValidDictionary]) {
+        booksetId = [classDic integerForKey:@"bookset_id"];
     } else {
-        strValue = @"";
+        booksetId = userEntity.subscribeId;
     }
+    strValue = [NSString stringWithFormat:@"%ld", (long)booksetId];
     [array addObject:strValue];
     
     self.desArray = array;

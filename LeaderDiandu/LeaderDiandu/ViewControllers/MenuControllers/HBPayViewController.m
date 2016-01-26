@@ -144,7 +144,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 
 - (void)showLoginAlert
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您尚未登录" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"马上登录", nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你尚未登录，无法完成此操作！" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"马上登录", nil];
     [alertView show];
 }
 

@@ -150,6 +150,7 @@
             //获取用户当前订阅的套餐成功
             id tmp = [responseObject objectForKey:@"bookset_id"];
             subscribeId = [tmp integerValue];
+            userEntity.subscribeId = subscribeId;
         }
     }];
 }
@@ -201,6 +202,7 @@
                     //获取用户当前订阅的套餐成功
                     id tmp = [responseObject objectForKey:@"bookset_id"];
                     subscribeId = [tmp integerValue];
+                    userEntity.subscribeId = subscribeId;
                 }
             }];
             //学生获取作业列表
@@ -250,6 +252,7 @@
     subscribeId = -1;
     self.redPointImgView.hidden = YES;
     [AppDelegate delegate].hasNewMsg = NO;
+    [AppDelegate delegate].hasNewExam = NO;
     [_gridView setHeaderViewHidden:YES];
     [self.rightButton setTitle:@"1" forState:UIControlStateNormal];
     [self verifyLogin];

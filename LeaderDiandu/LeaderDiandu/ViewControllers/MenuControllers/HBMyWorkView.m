@@ -230,7 +230,7 @@ typedef enum : NSUInteger {
                 controlX = frame.size.width - controlW;
             } else {
                 controlX = 0;
-                controlY += controlH*(i/2) + 20;
+                controlY += (controlH+20) * (i/2);
             }
             UIButton *button = [self createSelectionButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin+i title:obj];
             [_selectionView addSubview:button];
