@@ -78,7 +78,7 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
 - (void)logoutButtonPressed:(id)sender
 {
     UIButton *button = sender;
-    if ([button.titleLabel.text isEqualToString:@"立即登录"]) {
+    if ([button.titleLabel.text isEqualToString:@"马上登录"]) {
         [Navigator pushLoginControllerNow];
     } else {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"您确定要退出账号？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
@@ -99,13 +99,17 @@ static NSString * const KSettingViewControllerCellAccessoryReuseId = @"KSettingV
         //to do 注销...
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_PauseAllDownload object:nil];
         HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+        [MBHudUtil showActivityView:nil inView:nil];
         [[HBServiceManager defaultManager] requestLogout:userEntity.name completion:^(id responseObject, NSError *error) {
+            [MBHudUtil hideActivityView:nil];
             if (responseObject) {
                 NSDictionary *dic = responseObject;
                 if ([dic[@"result"] isEqualToString:@"OK"]) {
                     //注销成功
                     [[HBDataSaveManager defaultManager] clearUserData];
                     [Navigator pushLoginController];
+                } else {
+                    [MBHudUtil showTextViewAfter:@"退出账号失败，\n请检查网络设置或重试"];
                 }
             }
         }];
