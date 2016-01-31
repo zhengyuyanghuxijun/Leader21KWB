@@ -347,9 +347,6 @@
     } else if ([pwd1 isEqualToString:pwd2] == NO) {
         [MBHudUtil showTextView:@"输入的密码不一致" inView:nil];
         needReturn = YES;
-    } else if (self.smsDict == nil) {
-        [MBHudUtil showTextView:@"请点击获取验证码" inView:nil];
-        needReturn = YES;
     }
 //    if (![self.inputPassword.text isPasswordInput]){
 //        [MBHudUtil showTextView:@"密码长度只能在6-32位字符之间" inView:nil];

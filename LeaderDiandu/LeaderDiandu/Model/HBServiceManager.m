@@ -240,7 +240,11 @@
     [dicInfo setObject:phone     forKey:@"phone"];
     [dicInfo setObject:password    forKey:@"password"];
     [dicInfo setObject:sms_code    forKey:@"sms_code"];
-    [dicInfo setObject:code_id     forKey:@"code_id"];
+    if (code_id == nil) {
+        [dicInfo setObject:@"" forKey:@"code_id"];
+    } else {
+        [dicInfo setObject:code_id     forKey:@"code_id"];
+    }
     
     if (_receivedBlock) {
         return;

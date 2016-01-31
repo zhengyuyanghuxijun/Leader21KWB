@@ -178,7 +178,9 @@
         return;
     }
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    [MBHudUtil showActivityView:@"正在提交" inView:nil];
     [[HBServiceManager defaultManager] requestSubmitScore:userEntity.name book_id:_taskEntity.bookId exam_id:_taskEntity.exam_id score:_scoreNum fromTime:_fromTime toTime:_toTime question_stat:jsonStr completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
         NSString *result = [responseObject stringForKey:@"result"];
         if ([result isEqualToString:@"OK"]) {
             [self showScoreView];

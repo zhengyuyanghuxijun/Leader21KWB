@@ -145,7 +145,9 @@
 {
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     //获取用户当前订阅的套餐
+    [MBHudUtil showActivityView:nil inView:nil];
     [[HBServiceManager defaultManager] requestUserBookset:userEntity.name completion:^(id responseObject, NSError *error) {
+        [MBHudUtil hideActivityView:nil];
         if (responseObject) {
             //获取用户当前订阅的套餐成功
             id tmp = [responseObject objectForKey:@"bookset_id"];

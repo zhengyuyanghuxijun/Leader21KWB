@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "StuGroupCell_Bg.png"
+      "filename" : "StuGroupCell_Bg.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "StuGroupCell_Bg@2x.png",
       "scale" : "2x"
     },
     {

@@ -157,8 +157,10 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
         if (buttonIndex == 1) {
             //解除绑定
             HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+            [MBHudUtil showActivityView:nil inView:nil];
             [[HBServiceManager defaultManager] requestDirectorUnAss:userEntity.name completion:^(id responseObject, NSError *error) {
                 [self getUserInfo];
+                [MBHudUtil hideActivityView:nil];
             }];
         }
     }
@@ -171,7 +173,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
         alertView.tag = 0;
         
         [alertView show];
-    }else{
+    } else {
         NSString *leaderName = nil;
         for (NSString *keyStr in [self.leaderSelectedDic allKeys]) {
             NSString *valueStr = [self.leaderSelectedDic objectForKey:keyStr];
@@ -183,8 +185,10 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
         
         if (leaderName) {
             HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+            [MBHudUtil showActivityView:nil inView:nil];
             [[HBServiceManager defaultManager] requestDirectorAss:userEntity.name director:leaderName completion:^(id responseObject, NSError *error) {
                 [self getUserInfo];
+                [MBHudUtil hideActivityView:nil];
             }];
         }
     }
