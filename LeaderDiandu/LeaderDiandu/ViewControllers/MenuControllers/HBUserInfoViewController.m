@@ -290,13 +290,13 @@ static const CGFloat kImgLength = 1000;
     NSInteger index = indexPath.row;
     if (index == 1) {
         HBEditNameViewController *controller = [[HBEditNameViewController alloc] init];
-        [[AppDelegate delegate].globalNavi pushViewController:controller animated:YES];
+        [myAppDelegate.globalNavi pushViewController:controller animated:YES];
     } else if (index == 2) {
         HBBindPhoneViewController *controller = [[HBBindPhoneViewController alloc] init];
-        [[AppDelegate delegate].globalNavi pushViewController:controller animated:YES];
+        [myAppDelegate.globalNavi pushViewController:controller animated:YES];
     } else if (index == 3) {
         HBModifyPwdViewController *controller = [[HBModifyPwdViewController alloc] init];
-        [[AppDelegate delegate].globalNavi pushViewController:controller animated:YES];
+        [myAppDelegate.globalNavi pushViewController:controller animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

@@ -380,7 +380,7 @@
     
     CGFloat maxImageWidth = 33;
     CGFloat maxItemHeight = 47;
-    if (iPhone5 || iPhone4 || [UIDevice isiPad]) {
+    if (iPhone5 || iPhone4 || myAppDelegate.isPad) {
         maxItemHeight = 30;
     }
     CGFloat maxItemWidth = contentFrame.size.width;

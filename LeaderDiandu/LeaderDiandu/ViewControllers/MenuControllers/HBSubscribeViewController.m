@@ -59,7 +59,7 @@
     //内容
     self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.imgView.frame.origin.x + 30 + 10, 0, rc.size.width - 30 - 30, rc.size.height)];
     self.contentLabel.numberOfLines = 0;
-    if (iPhone4 || [UIDevice isiPad]) {
+    if (iPhone4 || myAppDelegate.isPad) {
         self.contentLabel.font = [UIFont boldSystemFontOfSize:12];
     } else {
         [self.contentLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];

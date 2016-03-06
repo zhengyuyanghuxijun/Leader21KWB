@@ -127,7 +127,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     Class viewCtlClass = NSClassFromString(_headerClassName);
     if (viewCtlClass && [viewCtlClass isSubclassOfClass:[UIViewController class]]) {
         UIViewController *viewController = [[viewCtlClass alloc] init];
-        [[AppDelegate delegate].globalNavi pushViewController:viewController animated:YES];
+        [myAppDelegate.globalNavi pushViewController:viewController animated:YES];
     }
 }
 
@@ -286,7 +286,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
             [cell addSubview:self.msgRedPointView];
         }
         
-        if([AppDelegate delegate].hasNewMsg){
+        if(myAppDelegate.hasNewMsg){
             self.msgRedPointView.hidden = NO;
         }else{
             self.msgRedPointView.hidden = YES;
@@ -300,7 +300,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
             [cell addSubview:self.examRedPointView];
         }
         
-        if([AppDelegate delegate].hasNewExam){
+        if(myAppDelegate.hasNewExam){
             self.examRedPointView.hidden = NO;
         }else{
             self.examRedPointView.hidden = YES;
@@ -333,7 +333,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
         Class viewCtlClass = NSClassFromString(viewCtlName);
         if (viewCtlClass && [viewCtlClass isSubclassOfClass:[UIViewController class]]) {
             UIViewController *viewController = [[viewCtlClass alloc] init];
-            [[AppDelegate delegate].globalNavi pushViewController:viewController animated:YES];
+            [myAppDelegate.globalNavi pushViewController:viewController animated:YES];
         }
     }
     

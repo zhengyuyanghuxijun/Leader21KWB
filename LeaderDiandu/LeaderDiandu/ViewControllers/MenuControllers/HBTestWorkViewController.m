@@ -260,7 +260,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
                         [[HBExamIdDB sharedInstance] updateHBExamId:examArr];
                         
                         //获取到最新数据了，要去掉红点提示
-                        [AppDelegate delegate].hasNewExam = NO;
+                        myAppDelegate.hasNewExam = NO;
                         
                         //学生获取作业列表成功后发送通知
                         [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetExamSuccess object:nil];

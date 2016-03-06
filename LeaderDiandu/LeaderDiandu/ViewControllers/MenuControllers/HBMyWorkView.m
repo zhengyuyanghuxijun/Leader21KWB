@@ -75,7 +75,7 @@ typedef enum : NSUInteger {
     float controlY = 0;
     float controlW = frame.size.width - controlX*2;
     float controlH = 220;
-    if (iPhone4 || [UIDevice isiPad]) {
+    if (iPhone4 || myAppDelegate.isPad) {
         controlH = 180;
     }
     [self initQuestionView:CGRectMake(controlX, controlY, controlW, controlH)];
@@ -122,7 +122,7 @@ typedef enum : NSUInteger {
     
     controlY += controlH + 10;
     controlH = 60;
-    if (iPhone4 || [UIDevice isiPad]) {
+    if (iPhone4 || myAppDelegate.isPad) {
         controlH = 50;
     }
     _descLabel = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
@@ -133,7 +133,7 @@ typedef enum : NSUInteger {
     _descLabel.numberOfLines = 0;
     [_questionView addSubview:_descLabel];
 
-    if (iPhone4 || [UIDevice isiPad]) {
+    if (iPhone4 || myAppDelegate.isPad) {
         controlY += controlH-10;
     } else {
         controlY += controlH + 10;
@@ -159,7 +159,7 @@ typedef enum : NSUInteger {
     } else {
         CGRect rect = _questionView.frame;
         NSInteger margin = 10;
-        if (iPhone4 || [UIDevice isiPad]) {
+        if (iPhone4 || myAppDelegate.isPad) {
             margin = 0;
         }
         float selY = CGRectGetMaxY(rect) + margin;
@@ -182,7 +182,7 @@ typedef enum : NSUInteger {
             if (iPhone5) {
                 controlW = 120;
                 controlH = 60;
-            } else if (iPhone4 || [UIDevice isiPad]) {
+            } else if (iPhone4 || myAppDelegate.isPad) {
                 controlW = 100;
                 controlH = 60;
             }
@@ -313,7 +313,7 @@ typedef enum : NSUInteger {
             _descImg.image = image;
             CGSize imgSize = image.size;
             NSInteger scale = 3;
-            if (iPhone4 || [UIDevice isiPad] || iPhone5) {
+            if (iPhone4 || myAppDelegate.isPad || iPhone5) {
                 scale = 4;
             }
             if ([typeStr isEqualToString:@"judge"]) {

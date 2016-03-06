@@ -90,6 +90,9 @@ AppDelegate *myAppDelegate;
     [self.window makeKeyAndVisible];
     
     myAppDelegate = self;
+    if ([UIDevice isiPad]) {
+        self.isPad = YES;
+    }
     
 //    [self verifyLogin];
     

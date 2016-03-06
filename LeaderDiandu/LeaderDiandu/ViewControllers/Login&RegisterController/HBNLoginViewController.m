@@ -176,7 +176,7 @@
             
             self.loginButton.enabled = YES;
             [Navigator popToRootController];
-            [[AppDelegate delegate] initDHSlideMenu];
+            [myAppDelegate initDHSlideMenu];
             
             NSString *message = [NSString stringWithFormat:@"用户%@登录成功", phone];
             [MBHudUtil showTextViewAfter:message];

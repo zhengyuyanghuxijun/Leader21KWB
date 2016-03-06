@@ -133,7 +133,7 @@
     self.title = @"成绩展示";
     
     CGRect frame = _myWorkView.frame;
-    if (iPhone4 || [UIDevice isiPad]) {
+    if (iPhone4 || myAppDelegate.isPad) {
         frame.origin.y = CGRectGetMinY(_progressView.frame);
         frame.size.height = CGRectGetMaxY(_myWorkView.frame) - frame.origin.y;
     }

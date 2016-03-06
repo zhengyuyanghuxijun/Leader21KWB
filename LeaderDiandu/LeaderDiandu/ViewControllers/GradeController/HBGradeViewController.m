@@ -120,7 +120,7 @@
 -(void)getMsgSuccess
 {
     //有新消息或者新作业，显示红点，都没有则不显示
-    if ([AppDelegate delegate].hasNewMsg || [AppDelegate delegate].hasNewExam) {
+    if (myAppDelegate.hasNewMsg || myAppDelegate.hasNewExam) {
         [self.leftButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         self.redPointImgView.hidden = NO;
     }else{
@@ -132,7 +132,7 @@
 -(void)getExamSuccess
 {
     //有新消息或者新作业，显示红点，都没有则不显示
-    if ([AppDelegate delegate].hasNewMsg || [AppDelegate delegate].hasNewExam) {
+    if (myAppDelegate.hasNewMsg || myAppDelegate.hasNewExam) {
         [self.leftButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         self.redPointImgView.hidden = NO;
     }else{
@@ -253,8 +253,8 @@
     currentID = 1;
     subscribeId = -1;
     self.redPointImgView.hidden = YES;
-    [AppDelegate delegate].hasNewMsg = NO;
-    [AppDelegate delegate].hasNewExam = NO;
+    myAppDelegate.hasNewMsg = NO;
+    myAppDelegate.hasNewExam = NO;
     [_gridView setHeaderViewHidden:YES];
     [self.rightButton setTitle:@"1" forState:UIControlStateNormal];
     [self verifyLogin];
@@ -414,7 +414,7 @@
     
     //未登录体验，先从本地读取一下当前用户数据库中保存的全部阅读进度
     self.readProgressEntityDic = [[HBReadProgressDB sharedInstance] getAllReadprogressDic];
-    [[AppDelegate delegate] initDHSlideMenu];
+    [myAppDelegate initDHSlideMenu];
 }
 
 - (void)requestDemoBookList
@@ -514,7 +514,7 @@
                     [[HBDataSaveManager defaultManager] saveFirstLogin];
                     [[HBDataSaveManager defaultManager] loadSettings];
                     
-                    [[AppDelegate delegate] initDHSlideMenu];
+                    [myAppDelegate initDHSlideMenu];
                     
                     NSString *message = [NSString stringWithFormat:@"用户%@登录成功", phone];
                     [MBHudUtil showTextViewAfter:message];
@@ -998,7 +998,7 @@
         NSDate *date = [NSDate date];
         readBookFromTime = [NSString stringWithFormat:@"%.f",[date timeIntervalSince1970]];
         
-        BOOL isDownloaded = [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
+        BOOL isDownloaded = [LEADERSDK bookPressed:entity useNavigation:myAppDelegate.globalNavi];
         if (isDownloaded == NO) {
             [self handleDownload:entity];
         }
@@ -1324,9 +1324,9 @@
                     
                     //如果新的作业ID值大于数据库中保存的最大作业ID值，则说明有新作业，需要显示红点
                     if ([newMaxExamId integerValue] > [localMaxExamId integerValue]) {
-                        [AppDelegate delegate].hasNewExam = YES;
+                        myAppDelegate.hasNewExam = YES;
                     }else{
-                        [AppDelegate delegate].hasNewExam = NO;
+                        myAppDelegate.hasNewExam = NO;
                     }
                     
                     //学生获取作业列表成功后发送通知
@@ -1364,9 +1364,9 @@
             
             //如果新的消息ID值大于数据库中保存的最大消息ID值，则说明有新消息，需要显示红点
             if ([newMaxMsgId integerValue] > [localMaxMsgId integerValue]) {
-                [AppDelegate delegate].hasNewMsg = YES;
+                myAppDelegate.hasNewMsg = YES;
             }else{
-                [AppDelegate delegate].hasNewMsg = NO;
+                myAppDelegate.hasNewMsg = NO;
             }
             
             //获取新消息列表成功后发送通知

@@ -220,7 +220,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (self.isBinding){
-        if (iPhone4 || [UIDevice isiPad]) {
+        if (iPhone4 || myAppDelegate.isPad) {
             return 150;
         } else {
             return 200;
@@ -236,7 +236,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
     NSInteger screenWidth = [UIScreen mainScreen].bounds.size.width;
     UIView *view = [[UIView alloc] init];
     CGFloat imgY = 0;
-    if (iPhone4 || [UIDevice isiPad]) {
+    if (iPhone4 || myAppDelegate.isPad) {
         imgY = (150-imgWidth) / 2;
     } else {
         imgY = (200-imgWidth) / 2;
