@@ -243,7 +243,11 @@
     dataTask = [self dataTaskWithRequest:request completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
         if (error) {
             if (failure) {
-                failure(responseObject, error);
+                //modify by hxj 添加401返回
+                NSHTTPURLResponse *urlResponse = (NSHTTPURLResponse *)response;
+                NSMutableDictionary *mutDic = [NSMutableDictionary dictionaryWithDictionary:responseObject];
+                [mutDic setObject:@(urlResponse.statusCode) forKey:@"statusCode"];
+                failure(mutDic, error);
             }
         } else {
             if (success) {
