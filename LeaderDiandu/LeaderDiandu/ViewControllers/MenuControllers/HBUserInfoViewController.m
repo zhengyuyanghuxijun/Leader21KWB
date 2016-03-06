@@ -16,8 +16,6 @@
 #import "TimeIntervalUtils.h"
 #import "FileUtil.h"
 
-static CGFloat const KTableViewHeaderHeight = 120;
-static CGFloat const KUserCellHeight = 50;
 static NSString * const KUserInfoViewControllerCellReuseId = @"KUserInfoViewControllerCellReuseId";
 
 static const CGFloat kImgLength = 1000;
@@ -72,7 +70,7 @@ static const CGFloat kImgLength = 1000;
 - (void)createLoginButton
 {
     float controlX = 20;
-    float controlY = KHBNaviBarHeight + KTableViewHeaderHeight + KUserCellHeight*[_titleArr count] + 30;
+    float controlY = KHBNaviBarHeight + 120 + 50*[_titleArr count] + 30;
     float controlW = ScreenWidth - controlX*2;
     float controlH = 45;
     UIButton *loginButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
@@ -139,12 +137,20 @@ static const CGFloat kImgLength = 1000;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return KUserCellHeight;
+    if (myAppDelegate.isPad) {
+        return 100;
+    } else {
+        return 50;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return KTableViewHeaderHeight;
+    if (myAppDelegate.isPad) {
+        return 200;
+    } else {
+        return 120;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -154,11 +160,17 @@ static const CGFloat kImgLength = 1000;
     }
     NSInteger imgWidth = 50;
     NSInteger screenWidth = [UIScreen mainScreen].bounds.size.width;
+    float headerHeight = 120;
+    if (myAppDelegate.isPad) {
+        headerHeight = 200;
+        imgWidth = 100;
+    }
+    
     _headerView = [[UIView alloc] init];
     float controlW = 70;
     float controlH = 25;
     float controlX = (screenWidth-imgWidth-controlW)/2;
-    float controlY = (KTableViewHeaderHeight-imgWidth)/2;
+    float controlY = (headerHeight-imgWidth)/2;
     UIButton *headButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, imgWidth, imgWidth)];
     if (self.headImage) {
         //设置显示圆形头像
@@ -168,9 +180,9 @@ static const CGFloat kImgLength = 1000;
         if (headImg == nil) {
             headImg = [UIImage imageNamed:@"menu_user_pohoto"];
         }
-        [headButton setImage:headImg forState:UIControlStateNormal];
+        [headButton setBackgroundImage:headImg forState:UIControlStateNormal];
     } else {
-        [headButton setImage:[UIImage imageNamed:@"menu_user_pohoto"] forState:UIControlStateNormal];
+        [headButton setBackgroundImage:[UIImage imageNamed:@"menu_user_pohoto"] forState:UIControlStateNormal];
     }
     if ([[HBDataSaveManager defaultManager] userEntity] != nil) {
         [headButton addTarget:self action:@selector(headButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -182,7 +194,7 @@ static const CGFloat kImgLength = 1000;
     UIView *typeView = [self createTypeView:CGRectMake(controlX, controlY, controlW, controlH)];
     [_headerView addSubview:typeView];
     
-    UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, KTableViewHeaderHeight-1, screenWidth, 1)];
+    UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, headerHeight-1, screenWidth, 1)];
     lineLabel.backgroundColor = RGBEQ(239);
     [_headerView addSubview:lineLabel];
     
@@ -244,27 +256,45 @@ static const CGFloat kImgLength = 1000;
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:KUserInfoViewControllerCellReuseId];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.textLabel.textColor = [UIColor blackColor];
+        
         float viewWidth = self.view.frame.size.width;
         float width = 200;
-        UILabel *valueLbl = [[UILabel alloc] initWithFrame:CGRectMake(viewWidth-width-40, 15, width, 20)];
+        float cellHeight = 50;
+        if (myAppDelegate.isPad) {
+            cellHeight = 100;
+        }
+        UILabel *valueLbl = [[UILabel alloc] initWithFrame:CGRectMake(viewWidth-width-40, 0, width, cellHeight)];
         valueLbl.tag = 1001;
         valueLbl.backgroundColor = [UIColor clearColor];
         valueLbl.textColor = [UIColor lightGrayColor];
         valueLbl.textAlignment = NSTextAlignmentRight;
         [cell.contentView addSubview:valueLbl];
         
+        if (myAppDelegate.isPad) {
+            cell.textLabel.font = [UIFont systemFontOfSize:30];
+            valueLbl.font = [UIFont systemFontOfSize:30];
+        }
+        
         if (index == 0 || userEntity == nil) {
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         } else if (index > 0) {
-            UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(viewWidth-40, 15, 20, 20)];
+            float imgSide = 20;
+            if (myAppDelegate.isPad) {
+                imgSide = 30;
+            }
+            UIImageView *arrowImg = [[UIImageView alloc] initWithFrame:CGRectMake(viewWidth-40, (cellHeight-imgSide)/2, imgSide, imgSide)];
             arrowImg.image = [UIImage imageNamed:@"menu_icon_user_open"];
             [cell.contentView addSubview:arrowImg];
         }
+        
+        UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, cellHeight-1, ScreenWidth, 1)];
+        lineLabel.backgroundColor = RGBEQ(239);
+        [cell.contentView addSubview:lineLabel];
     }
     
-    cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.text = [_titleArr objectAtIndex:index];
-    cell.textLabel.textColor = [UIColor blackColor];
     
     if (userEntity != nil) {
         UILabel *valueLbl = (UILabel *)[cell.contentView viewWithTag:1001];
@@ -299,19 +329,6 @@ static const CGFloat kImgLength = 1000;
         [myAppDelegate.globalNavi pushViewController:controller animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
-    }
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
-        [cell setPreservesSuperviewLayoutMargins:NO];
-    }
 }
 
 - (void)headButtonAction:(id)sender

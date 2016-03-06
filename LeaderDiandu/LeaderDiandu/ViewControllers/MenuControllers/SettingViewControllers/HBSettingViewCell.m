@@ -24,13 +24,22 @@
 
 -(void)initUI
 {
+    self.backgroundColor = [UIColor clearColor];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    float controlX = 15;
+    if (myAppDelegate.isPad) {
+        controlX = 50;
+    }
+    
     //标题内容
     self.mainLabel = [[UILabel alloc] init];
-    self.mainLabel.frame = CGRectMake(15, 10, 200, 60/2);
+    self.mainLabel.frame = CGRectMake(controlX, 10, 200, 60/2);
+    self.mainLabel.textColor = [UIColor blackColor];
     [self addSubview:self.mainLabel];
     
     //描述内容
-    self.describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 60/2 + 5, 300, 70/2 - 5)];
+    self.describeLabel = [[UILabel alloc] initWithFrame:CGRectMake(controlX, 60/2 + 5, 300, 70/2 - 5)];
     self.describeLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     self.describeLabel.textColor = [UIColor lightGrayColor];
     [self addSubview:self.describeLabel];

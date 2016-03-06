@@ -37,12 +37,21 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
 
 - (void) initUI
 {
+    self.backgroundColor = [UIColor clearColor];
+    self.textLabel.textColor = [UIColor blackColor];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
+    
     UIFont *fontTime = [UIFont systemFontOfSize:14];
+    float margin = 15;
+    if (myAppDelegate.isPad) {
+        margin = 50;
+    }
     //时间
     self.cellTime = [[UILabel alloc] init];
     _cellTime.font = fontTime;
     self.cellTime.textColor = [UIColor lightGrayColor];
-    self.cellTime.frame = CGRectMake(10, 5, 100, 25);
+    self.cellTime.frame = CGRectMake(margin, 5, 100, 25);
     [self addSubview:self.cellTime];
     
     //老师
@@ -53,11 +62,11 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     
     //书皮
     self.cellImageBookCover = [[UIImageView alloc] init];
-    self.cellImageBookCover.frame = CGRectMake(10, 35, 50, 60);
+    self.cellImageBookCover.frame = CGRectMake(margin, 35, 50, 60);
     [self addSubview:self.cellImageBookCover];
     
     float controlW = 85;
-    float controlX = ScreenWidth-controlW-25;
+    float controlX = ScreenWidth-controlW-margin - 15;
     //分数
     self.cellScore = [[UILabel alloc] init];
     self.cellScore.textColor = KLeaderRGB;
@@ -301,10 +310,6 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     
     HBTaskEntity *taskEntity = [self.taskEntityArr objectAtIndex:indexPath.row];
     [cell updateFormData:taskEntity];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.textLabel.textColor = [UIColor blackColor];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
 
     return cell;
 }

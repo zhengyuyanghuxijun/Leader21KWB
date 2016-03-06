@@ -22,16 +22,17 @@
 
 - (void)initUI:(CGRect)frame
 {
-    float controlX = 80;
-    float controlY = 0;
+    float controlX = 20;
     float controlW = frame.size.width - controlX*2;
-    UIImage *image = [self getScoreImage];
-    float controlH = image.size.height/image.size.width * controlW;
-    UIImageView *scoreImg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-    scoreImg.image = image;
-    [self addSubview:scoreImg];
+    float controlH = 45;
+    float controlY = frame.size.height - controlH - 20;
+    self.finishBtn = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    [_finishBtn setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [_finishBtn setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
+    [_finishBtn setTitle:@"我知道了" forState:UIControlStateNormal];
+    [self addSubview:_finishBtn];
     
-    controlY = CGRectGetMaxY(scoreImg.frame) + 20;
+    controlY = CGRectGetMinY(_finishBtn.frame) - 80;
     controlH = 30;
     UILabel *scoreLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     scoreLbl.backgroundColor = [UIColor clearColor];
@@ -41,15 +42,14 @@
     scoreLbl.text = [self getScoreTip];
     [self addSubview:scoreLbl];
     
-    controlX = 20;
-    controlW = frame.size.width - controlX*2;
-    controlH = 45;
-    controlY = frame.size.height - controlH - 20;
-    self.finishBtn = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-    [_finishBtn setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
-    [_finishBtn setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
-    [_finishBtn setTitle:@"我知道了" forState:UIControlStateNormal];
-    [self addSubview:_finishBtn];
+    UIImage *image = [self getScoreImage];
+    controlY = 0;
+    controlH = CGRectGetMinY(scoreLbl.frame) - 20;
+    controlW = image.size.width/image.size.height * controlH;
+    controlX = (frame.size.width-controlW) / 2;
+    UIImageView *scoreImg = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    scoreImg.image = image;
+    [self addSubview:scoreImg];
 }
 
 - (UIImage *)getScoreImage

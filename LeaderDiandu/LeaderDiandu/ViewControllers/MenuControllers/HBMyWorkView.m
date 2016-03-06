@@ -75,8 +75,10 @@ typedef enum : NSUInteger {
     float controlY = 0;
     float controlW = frame.size.width - controlX*2;
     float controlH = 220;
-    if (iPhone4 || myAppDelegate.isPad) {
+    if (iPhone4) {
         controlH = 180;
+    } else if (myAppDelegate.isPad) {
+        controlH = 400;
     }
     [self initQuestionView:CGRectMake(controlX, controlY, controlW, controlH)];
     
@@ -122,24 +124,33 @@ typedef enum : NSUInteger {
     
     controlY += controlH + 10;
     controlH = 60;
-    if (iPhone4 || myAppDelegate.isPad) {
+    if (iPhone4) {
         controlH = 50;
+    } else if (myAppDelegate.isPad) {
+        controlH = 100;
     }
     _descLabel = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _descLabel.backgroundColor = [UIColor clearColor];
     _descLabel.textColor = [UIColor colorWithHex:0x817b72];
-    _descLabel.font = [UIFont systemFontOfSize:19];
+    if (myAppDelegate.isPad) {
+        _descLabel.font = [UIFont systemFontOfSize:30];
+    } else {
+        _descLabel.font = [UIFont systemFontOfSize:19];
+    }
     _descLabel.textAlignment = NSTextAlignmentCenter;
     _descLabel.numberOfLines = 0;
     [_questionView addSubview:_descLabel];
 
-    if (iPhone4 || myAppDelegate.isPad) {
+    if (iPhone4) {
         controlY += controlH-10;
     } else {
         controlY += controlH + 10;
     }
     controlX += (controlW - 80) / 2;
     controlW = controlH = 80;
+    if (myAppDelegate.isPad) {
+        controlW = controlH = 120;
+    }
     _descButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     [_descButton addTarget:self action:@selector(voiceBtnTouched:) forControlEvents:UIControlEventTouchUpInside];
     [_questionView addSubview:_descButton];
@@ -159,8 +170,10 @@ typedef enum : NSUInteger {
     } else {
         CGRect rect = _questionView.frame;
         NSInteger margin = 10;
-        if (iPhone4 || myAppDelegate.isPad) {
+        if (iPhone4) {
             margin = 0;
+        } else if (myAppDelegate.isPad) {
+            margin = 20;
         }
         float selY = CGRectGetMaxY(rect) + margin;
         float controlH = CGRectGetMinY(_finishButton.frame) - selY-margin*2;
@@ -182,7 +195,7 @@ typedef enum : NSUInteger {
             if (iPhone5) {
                 controlW = 120;
                 controlH = 60;
-            } else if (iPhone4 || myAppDelegate.isPad) {
+            } else if (iPhone4) {
                 controlW = 100;
                 controlH = 60;
             }
@@ -313,7 +326,7 @@ typedef enum : NSUInteger {
             _descImg.image = image;
             CGSize imgSize = image.size;
             NSInteger scale = 3;
-            if (iPhone4 || myAppDelegate.isPad || iPhone5) {
+            if (iPhone4 || iPhone5) {
                 scale = 4;
             }
             if ([typeStr isEqualToString:@"judge"]) {

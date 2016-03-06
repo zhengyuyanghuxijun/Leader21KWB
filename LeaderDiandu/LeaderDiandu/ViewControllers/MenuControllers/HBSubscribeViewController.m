@@ -23,7 +23,7 @@
 #define HHAlertSingleView_SIZE_WIDTH (ScreenWidth - 20 - 20)
 #define HHAlertSingleView_SIZE_HEIGHT (ScreenHeight - 40 - 40)
 
-    static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
+static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
 
 @implementation HBRuleCell
 
@@ -59,8 +59,10 @@
     //内容
     self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.imgView.frame.origin.x + 30 + 10, 0, rc.size.width - 30 - 30, rc.size.height)];
     self.contentLabel.numberOfLines = 0;
-    if (iPhone4 || myAppDelegate.isPad) {
+    if (iPhone4) {
         self.contentLabel.font = [UIFont boldSystemFontOfSize:12];
+    } else if (myAppDelegate.isPad) {
+        self.contentLabel.font = [UIFont boldSystemFontOfSize:30];
     } else {
         [self.contentLabel setFont:[UIFont boldSystemFontOfSize:18.0f]];
     }
@@ -257,7 +259,11 @@
 
 - (CGFloat)gridView:(HBGridView *)gridView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    if (myAppDelegate.isPad) {
+        return 180;
+    } else {
+        return 100;
+    }
 }
 
 // 获取特定位置的单元格视图
