@@ -236,6 +236,234 @@
 		18F367F21BA9541100EBFEC4 /* HBSetStuGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */; };
 		18F367F51BA9542D00EBFEC4 /* HBSetStuOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */; };
 		260085D21C5506E300D5932F /* UIDevice+Addtional.m in Sources */ = {isa = PBXBuildFile; fileRef = 260085D11C5506E300D5932F /* UIDevice+Addtional.m */; };
+		2620BC1F1C8C045C00F5C531 /* HBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214771B9601DA009E3DB9 /* HBMessageViewController.m */; };
+		2620BC201C8C045C00F5C531 /* HBGroupSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C316871BA07F11004F716E /* HBGroupSelectViewController.m */; };
+		2620BC211C8C045C00F5C531 /* HBLeaderUnbindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187AD6461BC6834C00E592F4 /* HBLeaderUnbindingCell.m */; };
+		2620BC221C8C045C00F5C531 /* FTMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5FD301B983930002CCD95 /* FTMenu.m */; };
+		2620BC231C8C045C00F5C531 /* HBScoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C650011B9DF1CA0040E349 /* HBScoreEntity.m */; };
+		2620BC241C8C045C00F5C531 /* HBBillViewControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF0ED51BCB588E00376686 /* HBBillViewControllerCell.m */; };
+		2620BC251C8C045C00F5C531 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7488531B8A2071007BE4CD /* ViewController.m */; };
+		2620BC261C8C045C00F5C531 /* HBHyperlinksButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35D41B8CD91500179237 /* HBHyperlinksButton.m */; };
+		2620BC271C8C045C00F5C531 /* HBScoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C64FFE1B9DE74B0040E349 /* HBScoreListViewController.m */; };
+		2620BC281C8C045C00F5C531 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB5371D1B8F5DEE0023A3F7 /* AFNetworkReachabilityManager.m */; };
+		2620BC291C8C045C00F5C531 /* DoubleCompare.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE351A1B8CB8B500179237 /* DoubleCompare.c */; };
+		2620BC2A1C8C045C00F5C531 /* HBGradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAF40D1B8E01EB00078285 /* HBGradeViewController.m */; };
+		2620BC2B1C8C045C00F5C531 /* HBSKPayService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2677121BF247DD006FB4ED /* HBSKPayService.m */; };
+		2620BC2C1C8C045C00F5C531 /* HBContentBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D018FF01B96F67500A92F59 /* HBContentBaseRequest.m */; };
+		2620BC2D1C8C045C00F5C531 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B5FD2D1B981454002CCD95 /* UIButton+AFNetworking.m */; };
+		2620BC2E1C8C045C00F5C531 /* HBSetStuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367E61BA90C7800EBFEC4 /* HBSetStuController.m */; };
+		2620BC2F1C8C045C00F5C531 /* HBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35C21B8CD46500179237 /* HBBaseViewController.m */; };
+		2620BC301C8C045C00F5C531 /* HBTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D10EA341BF5951600DDE52D /* HBTableView.m */; };
+		2620BC311C8C045C00F5C531 /* DHSlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D086EDB1B949B110061BB1F /* DHSlideMenuViewController.m */; };
+		2620BC321C8C045C00F5C531 /* HBDataSaveManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214641B95568E009E3DB9 /* HBDataSaveManager.m */; };
+		2620BC331C8C045C00F5C531 /* EColumnChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C7151BD9514700899BD0 /* EColumnChartLabel.m */; };
+		2620BC341C8C045C00F5C531 /* HBRegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35CA1B8CD7BE00179237 /* HBRegistViewController.m */; };
+		2620BC351C8C045C00F5C531 /* HBPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214741B96018A009E3DB9 /* HBPayViewController.m */; };
+		2620BC361C8C045C00F5C531 /* HBPayViewControllerModeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A21E701BBAFDFF00EA05C6 /* HBPayViewControllerModeCell.m */; };
+		2620BC371C8C045C00F5C531 /* HBTeacherManCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1826217D1BDCC929006DFF0D /* HBTeacherManCell.m */; };
+		2620BC381C8C045C00F5C531 /* HBMyTeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD2146B1B95FF3B009E3DB9 /* HBMyTeacherViewController.m */; };
+		2620BC391C8C045C00F5C531 /* HBExamAbilityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C7051BD9474A00899BD0 /* HBExamAbilityEntity.m */; };
+		2620BC3A1C8C045C00F5C531 /* FTRotatingCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AB8F521BB9918D00409103 /* FTRotatingCircle.m */; };
+		2620BC3B1C8C045C00F5C531 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7488891B8A2973007BE4CD /* NSData+MD5.m */; };
+		2620BC3C1C8C045C00F5C531 /* HBContentDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */; };
+		2620BC3D1C8C045C00F5C531 /* TextGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFBD3E41BA86839003DB2D1 /* TextGridItemView.m */; };
+		2620BC3E1C8C045C00F5C531 /* HBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9E04FC1BB52B1500055203 /* HBOptionView.m */; };
+		2620BC3F1C8C045C00F5C531 /* HBPayViewControllerMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A21E6D1BBAE63A00EA05C6 /* HBPayViewControllerMoneyCell.m */; };
+		2620BC401C8C045C00F5C531 /* HBMessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186435A01BC54A2F0068E73E /* HBMessageViewCell.m */; };
+		2620BC411C8C045C00F5C531 /* HBContentListDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D621BA52AC400198BE9 /* HBContentListDB.m */; };
+		2620BC421C8C045C00F5C531 /* DataCheckUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35191B8CB8B500179237 /* DataCheckUtil.m */; };
+		2620BC431C8C045C00F5C531 /* HBTeacherManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1834F72F1BDBE32000A5DE65 /* HBTeacherManViewController.m */; };
+		2620BC441C8C045C00F5C531 /* HBRankBookEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ABF5231BD7DEDC006E55A0 /* HBRankBookEntity.m */; };
+		2620BC451C8C045C00F5C531 /* HBReadStatisticalContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C36B8C1BD3EC6400782969 /* HBReadStatisticalContentCell.m */; };
+		2620BC461C8C045C00F5C531 /* HBBillEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF0ED91BCB9FBC00376686 /* HBBillEntity.m */; };
+		2620BC471C8C045C00F5C531 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537131B8F5DEE0023A3F7 /* AFHTTPRequestOperationManager.m */; };
+		2620BC481C8C045C00F5C531 /* HBNTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35D01B8CD87900179237 /* HBNTextField.m */; };
+		2620BC491C8C045C00F5C531 /* HBTestWorkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D0D1BADA391005B4358 /* HBTestWorkManager.m */; };
+		2620BC4A1C8C045C00F5C531 /* HBEditNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0190101B98B19200A92F59 /* HBEditNameViewController.m */; };
+		2620BC4B1C8C045C00F5C531 /* HBTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823061F1B9B300300A8E146 /* HBTaskEntity.m */; };
+		2620BC4C1C8C045C00F5C531 /* HBRankingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC82C51BD2B593004864A7 /* HBRankingListViewController.m */; };
+		2620BC4D1C8C045C00F5C531 /* HBExamKnowledgeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C7021BD946CD00899BD0 /* HBExamKnowledgeEntity.m */; };
+		2620BC4E1C8C045C00F5C531 /* HBStudentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 189719DB1B9F3405006F42A2 /* HBStudentEntity.m */; };
+		2620BC4F1C8C045C00F5C531 /* FileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E307C1BA2B7AD00BBA92F /* FileUtil.m */; };
+		2620BC501C8C045C00F5C531 /* UtilFMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E306F1BA2B14100BBA92F /* UtilFMDatabasePool.m */; };
+		2620BC511C8C045C00F5C531 /* HBWorkManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D018FEA1B96DB5C00A92F59 /* HBWorkManViewController.m */; };
+		2620BC521C8C045C00F5C531 /* HBReadStatisticalStuNumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C36B891BD3E35500782969 /* HBReadStatisticalStuNumCell.m */; };
+		2620BC531C8C045C00F5C531 /* HBSetStuOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */; };
+		2620BC541C8C045C00F5C531 /* EColumnChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C70E1BD950B500899BD0 /* EColumnChart.m */; };
+		2620BC551C8C045C00F5C531 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537111B8F5DEE0023A3F7 /* AFHTTPRequestOperation.m */; };
+		2620BC561C8C045C00F5C531 /* NSDateUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE352E1B8CB8B500179237 /* NSDateUtilities.m */; };
+		2620BC571C8C045C00F5C531 /* HBGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487571B88C2C4007BE4CD /* HBGridView.m */; };
+		2620BC581C8C045C00F5C531 /* HBTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAF4061B8D651500078285 /* HBTitleView.m */; };
+		2620BC591C8C045C00F5C531 /* EColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C70C1BD950B500899BD0 /* EColumn.m */; };
+		2620BC5A1C8C045C00F5C531 /* ButtonGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EC49421B999B2D000900E4 /* ButtonGridItemView.m */; };
+		2620BC5B1C8C045C00F5C531 /* UIViewController+AddBackBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DAAF4031B8D5F8900078285 /* UIViewController+AddBackBtn.m */; };
+		2620BC5C1C8C045C00F5C531 /* HBSubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD2146E1B95FFAC009E3DB9 /* HBSubscribeViewController.m */; };
+		2620BC5D1C8C045C00F5C531 /* HBContentDetailDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */; };
+		2620BC5E1C8C045C00F5C531 /* HBScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8F03411BB9857F00D64D48 /* HBScoreView.m */; };
+		2620BC5F1C8C045C00F5C531 /* EColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C7191BD951E000899BD0 /* EColor.m */; };
+		2620BC601C8C045C00F5C531 /* HBExamEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322FE881BEDE25000775D3A /* HBExamEntity.m */; };
+		2620BC611C8C045C00F5C531 /* GuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EED1681BB12802004E5071 /* GuideView.m */; };
+		2620BC621C8C045C00F5C531 /* HBGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487551B88C2C4007BE4CD /* HBGridItemView.m */; };
+		2620BC631C8C045C00F5C531 /* HBSystemMsgEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864359B1BC546440068E73E /* HBSystemMsgEntity.m */; };
+		2620BC641C8C045C00F5C531 /* NSString+MD5.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D74888B1B8A2973007BE4CD /* NSString+MD5.mm */; };
+		2620BC651C8C045C00F5C531 /* HBVersionCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D2677081BF0E1FD006FB4ED /* HBVersionCheck.m */; };
+		2620BC661C8C045C00F5C531 /* HBCreatGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A244761BA7295A00E1E703 /* HBCreatGroupController.m */; };
+		2620BC671C8C045C00F5C531 /* HBNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBD1AC21BBD940900A3BD72 /* HBNLoginViewController.m */; };
+		2620BC681C8C045C00F5C531 /* HBTaskStatisticalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C7081BD94BC300899BD0 /* HBTaskStatisticalCell.m */; };
+		2620BC691C8C045C00F5C531 /* UIColor+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D181BAE9E68005B4358 /* UIColor+TKCategory.m */; };
+		2620BC6A1C8C045C00F5C531 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537251B8F5DEE0023A3F7 /* AFURLResponseSerialization.m */; };
+		2620BC6B1C8C045C00F5C531 /* HBContentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DC1B96D9DD003CCD6C /* HBContentEntity.m */; };
+		2620BC6C1C8C045C00F5C531 /* HBUserEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A76941B92176C00BC50A0 /* HBUserEntity.m */; };
+		2620BC6D1C8C045C00F5C531 /* HBSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7292C41B9E0650006FA7EA /* HBSettingViewController.m */; };
+		2620BC6E1C8C045C00F5C531 /* HBWeekWorkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322FE8B1BEDE40A00775D3A /* HBWeekWorkCell.m */; };
+		2620BC6F1C8C045C00F5C531 /* HBContentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A768E1B91E33900BC50A0 /* HBContentManager.m */; };
+		2620BC701C8C045C00F5C531 /* HBGradeDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECFA101C0D50A7008B690A /* HBGradeDemoViewController.m */; };
+		2620BC711C8C045C00F5C531 /* HBReadProgressDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D325161BB820EA00904FA6 /* HBReadProgressDB.m */; };
+		2620BC721C8C045C00F5C531 /* HBReadStatisticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC82C71BD2B593004864A7 /* HBReadStatisticalViewController.m */; };
+		2620BC731C8C045C00F5C531 /* HBServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537341B8F78AF0023A3F7 /* HBServiceManager.m */; };
+		2620BC741C8C045C00F5C531 /* HBLeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D018FED1B96DB9200A92F59 /* HBLeaderViewController.m */; };
+		2620BC751C8C045C00F5C531 /* NetUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7488871B8A2973007BE4CD /* NetUtil.m */; };
+		2620BC761C8C045C00F5C531 /* UtilFMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E306B1BA2B14100BBA92F /* UtilFMDatabase.m */; };
+		2620BC771C8C045C00F5C531 /* HBHeaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8C27CB1BCD0A7C008F2F9F /* HBHeaderManager.m */; };
+		2620BC781C8C045C00F5C531 /* NSString+Verify.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCBC29E1B99DE16003DFDD5 /* NSString+Verify.m */; };
+		2620BC791C8C045C00F5C531 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74887E1B8A226E007BE4CD /* AppDelegate.m */; };
+		2620BC7A1C8C045C00F5C531 /* HBGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A13BAF1BA6F5FD004A288F /* HBGroupCell.m */; };
+		2620BC7B1C8C045C00F5C531 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537151B8F5DEE0023A3F7 /* AFURLConnectionOperation.m */; };
+		2620BC7C1C8C045C00F5C531 /* HBGridCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7487531B88C2C4007BE4CD /* HBGridCellView.m */; };
+		2620BC7D1C8C045C00F5C531 /* HHAlertSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 182306121B9B0DEE00A8E146 /* HHAlertSingleView.m */; };
+		2620BC7E1C8C045C00F5C531 /* HBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35C51B8CD60F00179237 /* HBLoginViewController.m */; };
+		2620BC7F1C8C045C00F5C531 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7486F31B88A884007BE4CD /* main.m */; };
+		2620BC801C8C045C00F5C531 /* HBTeacherEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 182621781BDCC2D3006DFF0D /* HBTeacherEntity.m */; };
+		2620BC811C8C045C00F5C531 /* HBRankingListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ABF5271BD7E33B006E55A0 /* HBRankingListCell.m */; };
+		2620BC821C8C045C00F5C531 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537181B8F5DEE0023A3F7 /* AFHTTPSessionManager.m */; };
+		2620BC831C8C045C00F5C531 /* HBManageTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1898BCEB1B9DA7ED00FD9A11 /* HBManageTaskEntity.m */; };
+		2620BC841C8C045C00F5C531 /* HBReadprogressEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 189C0F5D1BB5776300DD39C0 /* HBReadprogressEntity.m */; };
+		2620BC851C8C045C00F5C531 /* UtilFMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E30711BA2B14100BBA92F /* UtilFMDatabaseQueue.m */; };
+		2620BC861C8C045C00F5C531 /* EColumnDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C7101BD950B500899BD0 /* EColumnDataModel.m */; };
+		2620BC871C8C045C00F5C531 /* MBHudUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35271B8CB8B500179237 /* MBHudUtil.m */; };
+		2620BC881C8C045C00F5C531 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D018FFF1B980E8200A92F59 /* UIImageView+AFNetworking.m */; };
+		2620BC891C8C045C00F5C531 /* HBHTTPBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537311B8F70E80023A3F7 /* HBHTTPBaseRequest.m */; };
+		2620BC8A1C8C045C00F5C531 /* HBTestSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D651BA5520900198BE9 /* HBTestSelectViewController.m */; };
+		2620BC8B1C8C045C00F5C531 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537201B8F5DEE0023A3F7 /* AFSecurityPolicy.m */; };
+		2620BC8C1C8C045C00F5C531 /* UtilFMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E30731BA2B14100BBA92F /* UtilFMResultSet.m */; };
+		2620BC8D1C8C045C00F5C531 /* RC4.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D74888D1B8A2973007BE4CD /* RC4.m */; };
+		2620BC8E1C8C045C00F5C531 /* md5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D7488841B8A2973007BE4CD /* md5.cpp */; };
+		2620BC8F1C8C045C00F5C531 /* RefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AB8F4E1BB9911300409103 /* RefreshTableHeaderView.m */; };
+		2620BC901C8C045C00F5C531 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35A91B8CCEFA00179237 /* UIViewAdditions.m */; };
+		2620BC911C8C045C00F5C531 /* MJProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBD1AAF1BBBAB5E00A3BD72 /* MJProgressHUD.m */; };
+		2620BC921C8C045C00F5C531 /* HBRegInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D55734F1C1F153600EB437C /* HBRegInfoViewController.m */; };
+		2620BC931C8C045C00F5C531 /* HBSetStuGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F367F11BA9541100EBFEC4 /* HBSetStuGroupCell.m */; };
+		2620BC941C8C045C00F5C531 /* HBBindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D0190131B98B1B500A92F59 /* HBBindPhoneViewController.m */; };
+		2620BC951C8C045C00F5C531 /* HBTestWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214711B960148009E3DB9 /* HBTestWorkViewController.m */; };
+		2620BC961C8C045C00F5C531 /* HBExamIdDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F381BD00FA800F5D9EE /* HBExamIdDB.m */; };
+		2620BC971C8C045C00F5C531 /* HBUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D018FF31B97513400A92F59 /* HBUserInfoViewController.m */; };
+		2620BC981C8C045C00F5C531 /* UIDevice+Addtional.m in Sources */ = {isa = PBXBuildFile; fileRef = 260085D11C5506E300D5932F /* UIDevice+Addtional.m */; };
+		2620BC991C8C045C00F5C531 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB5371A1B8F5DEE0023A3F7 /* AFURLSessionManager.m */; };
+		2620BC9A1C8C045C00F5C531 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35811B8CBE4300179237 /* MBProgressHUD.m */; };
+		2620BC9B1C8C045C00F5C531 /* TableSecitonDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35A31B8CCEFA00179237 /* TableSecitonDataObject.m */; };
+		2620BC9C1C8C045C00F5C531 /* HBWeekWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322FE851BEDD0BC00775D3A /* HBWeekWorkViewController.m */; };
+		2620BC9D1C8C045C00F5C531 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537231B8F5DEE0023A3F7 /* AFURLRequestSerialization.m */; };
+		2620BC9E1C8C045C00F5C531 /* HBAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EED16E1BB147DA004E5071 /* HBAboutViewController.m */; };
+		2620BC9F1C8C045C00F5C531 /* HBSettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 186435A91BC559DE0068E73E /* HBSettingViewCell.m */; };
+		2620BCA01C8C045C00F5C531 /* HBReadStatisticalDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C36B861BD3D82500782969 /* HBReadStatisticalDateCell.m */; };
+		2620BCA11C8C045C00F5C531 /* HBLeaderBindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187AD6431BC6831B00E592F4 /* HBLeaderBindingCell.m */; };
+		2620BCA21C8C045C00F5C531 /* HBBookManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B712E81BAC5C9F0002AB43 /* HBBookManViewController.m */; };
+		2620BCA31C8C045C00F5C531 /* DHSlideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D086ED91B949B110061BB1F /* DHSlideMenuController.m */; };
+		2620BCA41C8C045C00F5C531 /* HBClassEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C3168F1BA092B1004F716E /* HBClassEntity.m */; };
+		2620BCA51C8C045C00F5C531 /* HBBaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A76911B92064100BC50A0 /* HBBaseEntity.m */; };
+		2620BCA61C8C045C00F5C531 /* HBMyWorkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D1B1BAEA41A005B4358 /* HBMyWorkView.m */; };
+		2620BCA71C8C045C00F5C531 /* HBOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8C27C51BCBABE8008F2F9F /* HBOptionButton.m */; };
+		2620BCA81C8C045C00F5C531 /* HBModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F3C1BD0D6E300F5D9EE /* HBModifyPwdViewController.m */; };
+		2620BCA91C8C045C00F5C531 /* HBPublishWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C316831BA07A9D004F716E /* HBPublishWorkViewController.m */; };
+		2620BCAA1C8C045C00F5C531 /* HBForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35C81B8CD7BE00179237 /* HBForgetPwdViewController.m */; };
+		2620BCAB1C8C045C00F5C531 /* HBTaskStatisticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC82C91BD2B593004864A7 /* HBTaskStatisticalViewController.m */; };
+		2620BCAC1C8C045C00F5C531 /* HBBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF0ED11BCB555100376686 /* HBBillViewController.m */; };
+		2620BCAD1C8C045C00F5C531 /* Navigator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE352C1B8CB8B500179237 /* Navigator.m */; };
+		2620BCAE1C8C045C00F5C531 /* UtilFMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E306D1BA2B14100BBA92F /* UtilFMDatabaseAdditions.m */; };
+		2620BCAF1C8C045C00F5C531 /* HBStuManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D018FE71B96DB3500A92F59 /* HBStuManViewController.m */; };
+		2620BCB01C8C045C00F5C531 /* HBMyWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3F6D151BAE8F64005B4358 /* HBMyWorkViewController.m */; };
+		2620BCB11C8C045C00F5C531 /* TimeIntervalUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35321B8CB8B500179237 /* TimeIntervalUtils.m */; };
+		2620BCB21C8C045C00F5C531 /* HBReadStatisticalLogoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C36B831BD3D40000782969 /* HBReadStatisticalLogoCell.m */; };
+		2620BCB31C8C045C00F5C531 /* HBMsgEntityDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 1880D8611BCE83A1005A2951 /* HBMsgEntityDB.m */; };
+		2620BCB41C8C045C00F5C531 /* HBWeekUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D143F4A1BD417BA00F5D9EE /* HBWeekUtil.m */; };
+		2620BCB51C8C045C00F5C531 /* HBStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D6B1BA5B25C00198BE9 /* HBStudentCell.m */; };
+		2620BCB71C8C045C00F5C531 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 265566F31C1AAB0100150C3C /* libc++.tbd */; };
+		2620BCB81C8C045C00F5C531 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265566F01C1AAAE900150C3C /* Security.framework */; };
+		2620BCB91C8C045C00F5C531 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E99AFE1C059F8C00D92552 /* libz.tbd */; };
+		2620BCBA1C8C045C00F5C531 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D26770F1BF245A9006FB4ED /* StoreKit.framework */; };
+		2620BCBB1C8C045C00F5C531 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D1440131BD8138A00F5D9EE /* libcrypto.a */; };
+		2620BCBC1C8C045C00F5C531 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D143FC51BD7FBD300F5D9EE /* libssl.a */; };
+		2620BCBD1C8C045C00F5C531 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D143F581BD7768100F5D9EE /* CoreGraphics.framework */; };
+		2620BCBE1C8C045C00F5C531 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D143F561BD7765D00F5D9EE /* CoreText.framework */; };
+		2620BCBF1C8C045C00F5C531 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D143F541BD7761A00F5D9EE /* CoreTelephony.framework */; };
+		2620BCC01C8C045C00F5C531 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265566F71C1AABC400150C3C /* Bugly.framework */; };
+		2620BCC11C8C045C00F5C531 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 181E30791BA2B30A00BBA92F /* libsqlite3.dylib */; };
+		2620BCC21C8C045C00F5C531 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D7488791B8A2219007BE4CD /* CoreData.framework */; };
+		2620BCC31C8C045C00F5C531 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC1D3F71B9B348F0043C79B /* AVFoundation.framework */; };
+		2620BCC41C8C045C00F5C531 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC1D3F51B9B33BC0043C79B /* ImageIO.framework */; };
+		2620BCC51C8C045C00F5C531 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC1D3F31B9B33B40043C79B /* MapKit.framework */; };
+		2620BCC61C8C045C00F5C531 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D74887B1B8A2229007BE4CD /* QuartzCore.framework */; };
+		2620BCC71C8C045C00F5C531 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D7488771B8A2213007BE4CD /* CFNetwork.framework */; };
+		2620BCC81C8C045C00F5C531 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D7488751B8A21FA007BE4CD /* SystemConfiguration.framework */; };
+		2620BCC91C8C045C00F5C531 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D7488731B8A21CB007BE4CD /* UIKit.framework */; };
+		2620BCCA1C8C045C00F5C531 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D7488711B8A21C4007BE4CD /* Foundation.framework */; };
+		2620BCCB1C8C045C00F5C531 /* libLeader21SDKOC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DCBC2941B99D4EA003DFDD5 /* libLeader21SDKOC.a */; };
+		2620BCCD1C8C045C00F5C531 /* big_button3_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0D51BAAAA3F00AB7557 /* big_button3_pressed@2x.png */; };
+		2620BCCE1C8C045C00F5C531 /* next_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0E61BAAAA3F00AB7557 /* next_pressed.png */; };
+		2620BCCF1C8C045C00F5C531 /* big_button3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0D21BAAAA3F00AB7557 /* big_button3.png */; };
+		2620BCD01C8C045C00F5C531 /* drawn_oval.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0DA1BAAAA3F00AB7557 /* drawn_oval.png */; };
+		2620BCD11C8C045C00F5C531 /* orientation_port.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0EC1BAAAA3F00AB7557 /* orientation_port.png */; };
+		2620BCD21C8C045C00F5C531 /* menu_bar_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0E01BAAAA3F00AB7557 /* menu_bar_button.png */; };
+		2620BCD31C8C045C00F5C531 /* btn_reader_w_disable@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0D91BAAAA3F00AB7557 /* btn_reader_w_disable@2x.png */; };
+		2620BCD41C8C045C00F5C531 /* titlebar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0F61BAAAA3F00AB7557 /* titlebar.png */; };
+		2620BCD51C8C045C00F5C531 /* back_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0CE1BAAAA3F00AB7557 /* back_button@2x.png */; };
+		2620BCD61C8C045C00F5C531 /* preview_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0F11BAAAA3F00AB7557 /* preview_icon.png */; };
+		2620BCD71C8C045C00F5C531 /* next_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0E71BAAAA3F00AB7557 /* next_pressed@2x.png */; };
+		2620BCD81C8C045C00F5C531 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 0D6BEEF31BBA38090080F342 /* iTunesArtwork */; };
+		2620BCD91C8C045C00F5C531 /* hbcontentdetail.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F2D1BD006BB00F5D9EE /* hbcontentdetail.db */; };
+		2620BCDA1C8C045C00F5C531 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0F51BAAAA3F00AB7557 /* star.png */; };
+		2620BCDB1C8C045C00F5C531 /* drawn_rectangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0DB1BAAAA3F00AB7557 /* drawn_rectangle.png */; };
+		2620BCDC1C8C045C00F5C531 /* btn_reader_w_disable.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0D81BAAAA3F00AB7557 /* btn_reader_w_disable.png */; };
+		2620BCDD1C8C045C00F5C531 /* sprite_20001.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0F41BAAAA3F00AB7557 /* sprite_20001.png */; };
+		2620BCDE1C8C045C00F5C531 /* autoplay_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0CC1BAAAA3F00AB7557 /* autoplay_icon@2x.png */; };
+		2620BCDF1C8C045C00F5C531 /* fnc_exit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0DE1BAAAA3F00AB7557 /* fnc_exit@2x.png */; };
+		2620BCE01C8C045C00F5C531 /* orientation_port@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0ED1BAAAA3F00AB7557 /* orientation_port@2x.png */; };
+		2620BCE11C8C045C00F5C531 /* back_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0CD1BAAAA3F00AB7557 /* back_button.png */; };
+		2620BCE21C8C045C00F5C531 /* orientation_land@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0EB1BAAAA3F00AB7557 /* orientation_land@2x.png */; };
+		2620BCE31C8C045C00F5C531 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0D11BAAAA3F00AB7557 /* bg.png */; };
+		2620BCE41C8C045C00F5C531 /* underline.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0F71BAAAA3F00AB7557 /* underline.png */; };
+		2620BCE51C8C045C00F5C531 /* block_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0D61BAAAA3F00AB7557 /* block_arrow.png */; };
+		2620BCE61C8C045C00F5C531 /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0E41BAAAA3F00AB7557 /* next.png */; };
+		2620BCE71C8C045C00F5C531 /* prev.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0EE1BAAAA3F00AB7557 /* prev.png */; };
+		2620BCE81C8C045C00F5C531 /* big_button3_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0D41BAAAA3F00AB7557 /* big_button3_pressed.png */; };
+		2620BCE91C8C045C00F5C531 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 0D6BEEF41BBA38090080F342 /* iTunesArtwork@2x */; };
+		2620BCEA1C8C045C00F5C531 /* autoplay_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0CB1BAAAA3F00AB7557 /* autoplay_icon.png */; };
+		2620BCEB1C8C045C00F5C531 /* prev_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0F01BAAAA3F00AB7557 /* prev_pressed.png */; };
+		2620BCEC1C8C045C00F5C531 /* prev@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0EF1BAAAA3F00AB7557 /* prev@2x.png */; };
+		2620BCED1C8C045C00F5C531 /* preview_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0F21BAAAA3F00AB7557 /* preview_icon@2x.png */; };
+		2620BCEE1C8C045C00F5C531 /* back_button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0D01BAAAA3F00AB7557 /* back_button_pressed@2x.png */; };
+		2620BCEF1C8C045C00F5C531 /* examid.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F2C1BD006BB00F5D9EE /* examid.db */; };
+		2620BCF01C8C045C00F5C531 /* online_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0E91BAAAA3F00AB7557 /* online_icon@2x.png */; };
+		2620BCF11C8C045C00F5C531 /* back_button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0CF1BAAAA3F00AB7557 /* back_button_pressed.png */; };
+		2620BCF21C8C045C00F5C531 /* menu_bar_button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0E31BAAAA3F00AB7557 /* menu_bar_button_pressed@2x.png */; };
+		2620BCF31C8C045C00F5C531 /* MyStaticModels.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0DC1D4141B9BDF430043C79B /* MyStaticModels.bundle */; };
+		2620BCF41C8C045C00F5C531 /* orientation_land.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0EA1BAAAA3F00AB7557 /* orientation_land.png */; };
+		2620BCF51C8C045C00F5C531 /* flying_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0DC1BAAAA3F00AB7557 /* flying_arrow.png */; };
+		2620BCF61C8C045C00F5C531 /* hbcontentlist.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F2E1BD006BB00F5D9EE /* hbcontentlist.db */; };
+		2620BCF71C8C045C00F5C531 /* block_arrow_series.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0D71BAAAA3F00AB7557 /* block_arrow_series.png */; };
+		2620BCF81C8C045C00F5C531 /* msgentity.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F301BD006BB00F5D9EE /* msgentity.db */; };
+		2620BCF91C8C045C00F5C531 /* question_mark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0F31BAAAA3F00AB7557 /* question_mark.png */; };
+		2620BCFA1C8C045C00F5C531 /* highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0DF1BAAAA3F00AB7557 /* highlight.png */; };
+		2620BCFB1C8C045C00F5C531 /* hbreadprogress.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D143F2F1BD006BB00F5D9EE /* hbreadprogress.db */; };
+		2620BCFC1C8C045C00F5C531 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D7486FE1B88A884007BE4CD /* Images.xcassets */; };
+		2620BCFD1C8C045C00F5C531 /* next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0E51BAAAA3F00AB7557 /* next@2x.png */; };
+		2620BCFE1C8C045C00F5C531 /* menu_bar_button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0E21BAAAA3F00AB7557 /* menu_bar_button_pressed.png */; };
+		2620BCFF1C8C045C00F5C531 /* online_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0E81BAAAA3F00AB7557 /* online_icon.png */; };
+		2620BD001C8C045C00F5C531 /* big_button3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0D31BAAAA3F00AB7557 /* big_button3@2x.png */; };
+		2620BD011C8C045C00F5C531 /* fnc_exit.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0DD1BAAAA3F00AB7557 /* fnc_exit.png */; };
+		2620BD021C8C045C00F5C531 /* menu_bar_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DCAE0E11BAAAA3F00AB7557 /* menu_bar_button@2x.png */; };
+		2620BD0B1C8C078700F5C531 /* LeaderDianduHD-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2620BD0A1C8C078700F5C531 /* LeaderDianduHD-info.plist */; };
+		2620BD0D1C8C5EB500F5C531 /* Images-HD.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2620BD0C1C8C5EB500F5C531 /* Images-HD.xcassets */; };
 		265566F11C1AAAE900150C3C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265566F01C1AAAE900150C3C /* Security.framework */; };
 		265566F41C1AAB0100150C3C /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 265566F31C1AAB0100150C3C /* libc++.tbd */; };
 		265566F81C1AABC400150C3C /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265566F71C1AABC400150C3C /* Bugly.framework */; };
@@ -274,6 +502,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 68A2C1EE1B441DE600A0BB71;
 			remoteInfo = Leader21SDKOCTests;
+		};
+		2620BC1D1C8C045C00F5C531 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0DCBC28E1B99D4EA003DFDD5 /* Leader21SDKOC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 68A2C1E21B441DE600A0BB71;
+			remoteInfo = Leader21SDKOC;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -652,6 +887,9 @@
 		18F367F41BA9542D00EBFEC4 /* HBSetStuOtherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuOtherCell.m; sourceTree = "<group>"; };
 		260085D01C5506E300D5932F /* UIDevice+Addtional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Addtional.h"; sourceTree = "<group>"; };
 		260085D11C5506E300D5932F /* UIDevice+Addtional.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Addtional.m"; sourceTree = "<group>"; };
+		2620BD071C8C045C00F5C531 /* LeaderDiandu-HD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LeaderDiandu-HD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2620BD0A1C8C078700F5C531 /* LeaderDianduHD-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "LeaderDianduHD-info.plist"; sourceTree = "<group>"; };
+		2620BD0C1C8C5EB500F5C531 /* Images-HD.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-HD.xcassets"; path = "Resources-iPad/Images-HD.xcassets"; sourceTree = "<group>"; };
 		265566F01C1AAAE900150C3C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		265566F31C1AAB0100150C3C /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		265566F71C1AABC400150C3C /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
@@ -699,6 +937,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2620BCB61C8C045C00F5C531 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2620BCB71C8C045C00F5C531 /* libc++.tbd in Frameworks */,
+				2620BCB81C8C045C00F5C531 /* Security.framework in Frameworks */,
+				2620BCB91C8C045C00F5C531 /* libz.tbd in Frameworks */,
+				2620BCBA1C8C045C00F5C531 /* StoreKit.framework in Frameworks */,
+				2620BCBB1C8C045C00F5C531 /* libcrypto.a in Frameworks */,
+				2620BCBC1C8C045C00F5C531 /* libssl.a in Frameworks */,
+				2620BCBD1C8C045C00F5C531 /* CoreGraphics.framework in Frameworks */,
+				2620BCBE1C8C045C00F5C531 /* CoreText.framework in Frameworks */,
+				2620BCBF1C8C045C00F5C531 /* CoreTelephony.framework in Frameworks */,
+				2620BCC01C8C045C00F5C531 /* Bugly.framework in Frameworks */,
+				2620BCC11C8C045C00F5C531 /* libsqlite3.dylib in Frameworks */,
+				2620BCC21C8C045C00F5C531 /* CoreData.framework in Frameworks */,
+				2620BCC31C8C045C00F5C531 /* AVFoundation.framework in Frameworks */,
+				2620BCC41C8C045C00F5C531 /* ImageIO.framework in Frameworks */,
+				2620BCC51C8C045C00F5C531 /* MapKit.framework in Frameworks */,
+				2620BCC61C8C045C00F5C531 /* QuartzCore.framework in Frameworks */,
+				2620BCC71C8C045C00F5C531 /* CFNetwork.framework in Frameworks */,
+				2620BCC81C8C045C00F5C531 /* SystemConfiguration.framework in Frameworks */,
+				2620BCC91C8C045C00F5C531 /* UIKit.framework in Frameworks */,
+				2620BCCA1C8C045C00F5C531 /* Foundation.framework in Frameworks */,
+				2620BCCB1C8C045C00F5C531 /* libLeader21SDKOC.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,6 +1058,7 @@
 			children = (
 				0D7486EE1B88A884007BE4CD /* LeaderDiandu.app */,
 				0D7487071B88A884007BE4CD /* LeaderDianduTests.xctest */,
+				2620BD071C8C045C00F5C531 /* LeaderDiandu-HD.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -815,6 +1082,7 @@
 			isa = PBXGroup;
 			children = (
 				0D7486F21B88A884007BE4CD /* Info.plist */,
+				2620BD0A1C8C078700F5C531 /* LeaderDianduHD-info.plist */,
 				0D7486F31B88A884007BE4CD /* main.m */,
 				0D7488811B8A248D007BE4CD /* LeaderDiandu-Prefix.pch */,
 			);
@@ -874,6 +1142,7 @@
 				0DCAE0CA1BAAAA3F00AB7557 /* LeaderSDKResources */,
 				0DC1D4141B9BDF430043C79B /* MyStaticModels.bundle */,
 				0D7486FE1B88A884007BE4CD /* Images.xcassets */,
+				2620BD0C1C8C5EB500F5C531 /* Images-HD.xcassets */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1540,6 +1809,25 @@
 			productReference = 0D7487071B88A884007BE4CD /* LeaderDianduTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		2620BC1B1C8C045C00F5C531 /* LeaderDiandu-HD */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2620BD041C8C045C00F5C531 /* Build configuration list for PBXNativeTarget "LeaderDiandu-HD" */;
+			buildPhases = (
+				2620BC1E1C8C045C00F5C531 /* Sources */,
+				2620BCB61C8C045C00F5C531 /* Frameworks */,
+				2620BCCC1C8C045C00F5C531 /* Resources */,
+				2620BD031C8C045C00F5C531 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2620BC1C1C8C045C00F5C531 /* PBXTargetDependency */,
+			);
+			name = "LeaderDiandu-HD";
+			productName = LeaderDiandu;
+			productReference = 2620BD071C8C045C00F5C531 /* LeaderDiandu-HD.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1579,6 +1867,7 @@
 			projectRoot = "";
 			targets = (
 				0D7486ED1B88A884007BE4CD /* LeaderDiandu */,
+				2620BC1B1C8C045C00F5C531 /* LeaderDiandu-HD */,
 				0D7487061B88A884007BE4CD /* LeaderDianduTests */,
 			);
 		};
@@ -1670,9 +1959,85 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2620BCCC1C8C045C00F5C531 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2620BCCD1C8C045C00F5C531 /* big_button3_pressed@2x.png in Resources */,
+				2620BCCE1C8C045C00F5C531 /* next_pressed.png in Resources */,
+				2620BCCF1C8C045C00F5C531 /* big_button3.png in Resources */,
+				2620BCD01C8C045C00F5C531 /* drawn_oval.png in Resources */,
+				2620BCD11C8C045C00F5C531 /* orientation_port.png in Resources */,
+				2620BCD21C8C045C00F5C531 /* menu_bar_button.png in Resources */,
+				2620BCD31C8C045C00F5C531 /* btn_reader_w_disable@2x.png in Resources */,
+				2620BCD41C8C045C00F5C531 /* titlebar.png in Resources */,
+				2620BCD51C8C045C00F5C531 /* back_button@2x.png in Resources */,
+				2620BCD61C8C045C00F5C531 /* preview_icon.png in Resources */,
+				2620BCD71C8C045C00F5C531 /* next_pressed@2x.png in Resources */,
+				2620BCD81C8C045C00F5C531 /* iTunesArtwork in Resources */,
+				2620BCD91C8C045C00F5C531 /* hbcontentdetail.db in Resources */,
+				2620BCDA1C8C045C00F5C531 /* star.png in Resources */,
+				2620BCDB1C8C045C00F5C531 /* drawn_rectangle.png in Resources */,
+				2620BCDC1C8C045C00F5C531 /* btn_reader_w_disable.png in Resources */,
+				2620BCDD1C8C045C00F5C531 /* sprite_20001.png in Resources */,
+				2620BCDE1C8C045C00F5C531 /* autoplay_icon@2x.png in Resources */,
+				2620BCDF1C8C045C00F5C531 /* fnc_exit@2x.png in Resources */,
+				2620BCE01C8C045C00F5C531 /* orientation_port@2x.png in Resources */,
+				2620BCE11C8C045C00F5C531 /* back_button.png in Resources */,
+				2620BCE21C8C045C00F5C531 /* orientation_land@2x.png in Resources */,
+				2620BCE31C8C045C00F5C531 /* bg.png in Resources */,
+				2620BCE41C8C045C00F5C531 /* underline.png in Resources */,
+				2620BCE51C8C045C00F5C531 /* block_arrow.png in Resources */,
+				2620BCE61C8C045C00F5C531 /* next.png in Resources */,
+				2620BCE71C8C045C00F5C531 /* prev.png in Resources */,
+				2620BCE81C8C045C00F5C531 /* big_button3_pressed.png in Resources */,
+				2620BCE91C8C045C00F5C531 /* iTunesArtwork@2x in Resources */,
+				2620BCEA1C8C045C00F5C531 /* autoplay_icon.png in Resources */,
+				2620BCEB1C8C045C00F5C531 /* prev_pressed.png in Resources */,
+				2620BCEC1C8C045C00F5C531 /* prev@2x.png in Resources */,
+				2620BCED1C8C045C00F5C531 /* preview_icon@2x.png in Resources */,
+				2620BCEE1C8C045C00F5C531 /* back_button_pressed@2x.png in Resources */,
+				2620BCEF1C8C045C00F5C531 /* examid.db in Resources */,
+				2620BCF01C8C045C00F5C531 /* online_icon@2x.png in Resources */,
+				2620BCF11C8C045C00F5C531 /* back_button_pressed.png in Resources */,
+				2620BCF21C8C045C00F5C531 /* menu_bar_button_pressed@2x.png in Resources */,
+				2620BCF31C8C045C00F5C531 /* MyStaticModels.bundle in Resources */,
+				2620BCF41C8C045C00F5C531 /* orientation_land.png in Resources */,
+				2620BCF51C8C045C00F5C531 /* flying_arrow.png in Resources */,
+				2620BCF61C8C045C00F5C531 /* hbcontentlist.db in Resources */,
+				2620BCF71C8C045C00F5C531 /* block_arrow_series.png in Resources */,
+				2620BD0B1C8C078700F5C531 /* LeaderDianduHD-info.plist in Resources */,
+				2620BCF81C8C045C00F5C531 /* msgentity.db in Resources */,
+				2620BD0D1C8C5EB500F5C531 /* Images-HD.xcassets in Resources */,
+				2620BCF91C8C045C00F5C531 /* question_mark.png in Resources */,
+				2620BCFA1C8C045C00F5C531 /* highlight.png in Resources */,
+				2620BCFB1C8C045C00F5C531 /* hbreadprogress.db in Resources */,
+				2620BCFC1C8C045C00F5C531 /* Images.xcassets in Resources */,
+				2620BCFD1C8C045C00F5C531 /* next@2x.png in Resources */,
+				2620BCFE1C8C045C00F5C531 /* menu_bar_button_pressed.png in Resources */,
+				2620BCFF1C8C045C00F5C531 /* online_icon.png in Resources */,
+				2620BD001C8C045C00F5C531 /* big_button3@2x.png in Resources */,
+				2620BD011C8C045C00F5C531 /* fnc_exit.png in Resources */,
+				2620BD021C8C045C00F5C531 /* menu_bar_button@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2620BD031C8C045C00F5C531 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n# Copyright 2014-2015 Bugly @Tencent. All rights reserved.\n#\n# V 1.1\n#\n################################################################################\n# 注意: 请配置下面的信息\n################################################################################\nBUGLY_APP_ID=\"900014908\"\nBUGLY_APP_KEY=\"cvkECcoI2PHfA5Tx\"\nBUNDLE_IDENTIFIER=\"com.leader21.ikwb\"\n################################################################################\n# 自定义配置\n################################################################################\n# Debug模式编译是否上传，1＝上传 0＝不上传，默认不上传\nUPLOAD_DEBUG_SYMBOLS=0\n#\n# 模拟器编译是否上传，1=上传 0=不上传，默认不上传\nUPLOAD_SIMULATOR_SYMBOLS=0\n#\n# # 脚本默认配置的版本格式为CFBundleShortVersionString(CFBundleVersion),  如果你修改默认的版本格式, 请设置此变量, 如果不想修改, 请忽略此设置\n# CUSTOMIZED_APP_VERSION=\"\"\n#\n#\n#\n# This script will extract symbols from the .dSYM and generate .symbol file(Bugly supported) and upload to server.\n# You could visit http://bugly.qq.com to get more details about Bugly.\n#\n# Usage:\n#   * The instructions assume you have copyed this script into your project int Xcode.\n#   * Copy the \"buglySymbolIOS.jar\" file into the \"~/bin\" folder.\n#   * Open the project editor, select your build target.\n#   * Click \"Build Phases\" at the top of the project editor.\n#   * Click \"+\" button in the top left corner and select \"New Run Script Phase\".\n#   * Click \"Run Script\".\n#   * Paste the following script into the dark text box. You will have to uncomment the lines (remove the #) of course.\n#\n# --- SCRIPT BEGINS ON NEXT LINE, COPY AND EDIT FROM THERE ---\n#\n#\n#\n# --- END OF SCRIPT ---\n\n\n################################################################################\n# 注意: 如果你不知道此脚本的执行流程和用法，请不要随便修改！\n################################################################################\n\n# 退出执行并打印提示信息\nexitWithMessage() {\n    echo \"--------------------------------\"\n    echo -e \"${1}\"\n    echo \"--------------------------------\"\n    echo \"No upload and exit.\"\n    echo \"----------------------------------------------------------------\"\n    exit ${2}\n}\n\necho \"----------------------------------------------------------------\"\necho \"Copyright 2014-2015 Bugly @Tencent. All rights reserved.\"\n\necho \"This script will extract symbols from the .dSYM file and generate .symbol file(Bugly supported) and upload to server.\"\necho \"You could visit http://bugly.qq.com to get more details about Bugly.\"\necho \"----------------------------------------------------------------\"\n\necho \"Uploading dSYM to Bugly.\"\necho \"\"\n\n# Bugly服务域名\nDSYM_UPLOAD_DOMAIN=\"bugly.qq.com\"\n\n# 读取Info.plist文件中的版本信息\necho \"Info.Plist : ${INFOPLIST_FILE}\"\n\nBUNDLE_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleVersion' \"${INFOPLIST_FILE}\")\nBUNDLE_SHORT_VERSION=$(/usr/libexec/PlistBuddy -c 'Print CFBundleShortVersionString' \"${INFOPLIST_FILE}\")\n\n# 组装Bugly默认识别的版本信息(格式为CFBundleShortVersionString(CFBundleVersion), 例如: 1.0(1))\nif [ ! \"${CUSTOMIZED_APP_VERSION}\" ]; then\nBUGLY_APP_VERSION=\"${BUNDLE_SHORT_VERSION}(${BUNDLE_VERSION})\"\nelse\nBUGLY_APP_VERSION=\"${CUSTOMIZED_APP_VERSION}\"\nfi\n\n# Bugly符号提取工具路径, 请确保已经把对应的buglySymboliOS.jar拷贝到目录~/bin\nBUGLY_SYMBOL_JAR_PATH=\"$HOME/bin/buglySymboliOS.jar\"\n\necho \"--------------------------------\"\necho \"Step 1: Prepare application information.\"\necho \"--------------------------------\"\n\necho \"Product Name: ${PRODUCT_NAME}\"\necho \"Bundle Identifier: ${BUNDLE_IDENTIFIER}\"\necho \"Version: ${BUNDLE_SHORT_VERSION}\"\necho \"Build: ${BUNDLE_VERSION}\"\n\necho \"Bugly App ID: ${BUGLY_APP_ID}\"\necho \"Bugly App key: ${BUGLY_APP_KEY}\"\necho \"Bugly App Version: ${BUGLY_APP_VERSION}\"\n\necho \"--------------------------------\"\necho \"Step 2: Check the arguments ...\"\n\n# 检查模拟器编译是否允许上传符号\nif [ \"$EFFECTIVE_PLATFORM_NAME\" == \"-iphonesimulator\" ]; then\nif [ $UPLOAD_SIMULATOR_SYMBOLS -eq 0 ]; then\nexitWithMessage \"Warning: Build for simulator and skipping to upload. \\nYou can modify 'UPLOAD_SIMULATOR_SYMBOLS' to 1 in the script.\" 0\nfi\nfi\n\nif [ \"${CONFIGURATION=}\" == \"Debug\" ]; then\nif [ $UPLOAD_DEBUG_SYMBOLS -eq 0 ]; then\nexitWithMessage \"Warning: Build for debug mode and skipping to upload. \\nYou can modify 'UPLOAD_DEBUG_SYMBOLS' to 1 in the script.\" 0\nfi\nfi\n\n# 检查必须参数是否设置\nif [ ! \"${BUGLY_APP_ID}\" ]; then\nexitWithMessage \"Error: Bugly App ID not defined.\" 1\nfi\n\nif [ ! \"${BUGLY_APP_KEY}\" ]; then\nexitWithMessage \"Error: Bugly APP Key not defined.\" 1\nfi\n\nif [ ! \"${BUNDLE_IDENTIFIER}\" ]; then\nexitWithMessage \"Error: Bundle Identifier not defined.\" 1\nfi\n\nfunction uploadDSYM {\n    DSYM_SRC=\"$1\"\n    echo \".dSYM file: ${DSYM_SRC}\"\n    if [ ! -d \"$DSYM_SRC\" ]; then\n    exitWithMessage \"dSYM source not found: ${DSYM_SRC}\" 1\n    fi\n    DSYM_FILE_NAME=${DSYM_SRC##*/}\n        DSYM_SYMBOL_OUT_ZIP_NAME=\"${DSYM_FILE_NAME}.bSymbol.zip\"\n        # 替换空格\n        DSYM_SYMBOL_OUT_ZIP_NAME=\"${DSYM_SYMBOL_OUT_ZIP_NAME// /_}\"\n        DSYM_ZIP_FPATH=\"${BUILT_PRODUCTS_DIR}/${DSYM_SYMBOL_OUT_ZIP_NAME}\"\n        \n        DSYM_SYMBOL_BACKUP_DIR=${BUILD_DIR}/Symbols\n        \n        if [ ! -e \"${DSYM_SYMBOL_BACKUP_DIR}\" ]; then\n        mkdir ${DSYM_SYMBOL_BACKUP_DIR}\n        fi\n        \n        # 备份并清理\n        find ${BUILT_PRODUCTS_DIR} -name \"*.zip\" -print0 | xargs -0 -I {} mv {} ${DSYM_SYMBOL_BACKUP_DIR}\n        /bin/rm -rf \"${BUILT_PRODUCTS_DIR}/*.zip\"\n        \n        echo \"Extract symbols from dSYM to ${DSYM_ZIP_FPATH}.\"\n        \n        echo \"--------------------------------\"\n        (/usr/bin/java -jar \"${BUGLY_SYMBOL_JAR_PATH}\" -i \"${DSYM_SRC}\" -o \"${DSYM_ZIP_FPATH}\" ) || exitWithMessage \"Error: Failed to extract symbols.\" 1\n        echo \"--------------------------------\"\n        \n        if [ ! -e \"${DSYM_ZIP_FPATH}\" ]; then\n        DSYM_SYMBOL_OUT_ZIP_NAME=$(ls ${BUILT_PRODUCTS_DIR} | grep \".zip\")\n        DSYM_ZIP_FPATH=\"${BUILT_PRODUCTS_DIR}/${DSYM_SYMBOL_OUT_ZIP_NAME}\"\n        DSYM_SYMBOL_OUT_ZIP_NAME=${DSYM_SYMBOL_OUT_ZIP_NAME//&/_}\n            fi\n            \n            if [ ! -e \"${DSYM_ZIP_FPATH}\" ] ; then\n            exitWithMessage \"no symbol file zip archive generated: ${DSYM_ZIP_FPATH}\" 1\n            fi\n            \n            # 提取符号信息\n            echo \"--------------------------------\"\n            echo \"Step 3: Extract symbol info from .dSYM file.\"\n            \n            if [ ! -e \"$BUGLY_SYMBOL_JAR_PATH\" ]; then\n            exitWithMessage \"Error: Jar file '${BUGLY_SYMBOL_JAR_PATH}' was not found. \\nPlease copy the jar file into ~/bin folder.\" 1\n            fi\n            \n            echo \"Step 4: Upload the symbols of dSYM.\"\n            echo \"--------------------------------\"\n            echo \"zip : ${DSYM_SYMBOL_OUT_ZIP_NAME}\"\n            echo \"dir : ${DSYM_ZIP_FPATH}\"\n            \n            echo \"dSYM upload domain: ${DSYM_UPLOAD_DOMAIN}\"\n            DSYM_UPLOAD_URL=\"http://${DSYM_UPLOAD_DOMAIN}/upload/dsym?app=${BUGLY_APP_ID}&pid=2&ver=${BUGLY_APP_VERSION}&n=${DSYM_SYMBOL_OUT_ZIP_NAME}&key=${BUGLY_APP_KEY}&bid=${BUNDLE_IDENTIFIER}\"\n            echo \"dSYM upload url: ${DSYM_UPLOAD_URL}\"\n            \n            # Upload dSYM to Bugly\n            echo \"curl --header \"Content-Type:application/zip\" --data-binary \"@${DSYM_ZIP_FPATH}\" \"${DSYM_UPLOAD_URL}\" --verbose\"\n            \n            echo \"--------------------------------\"\n            STATUS=$(/usr/bin/curl --header \"Content-Type:application/zip\" --data-binary \"@${DSYM_ZIP_FPATH}\" \"${DSYM_UPLOAD_URL}\" --verbose)\n            echo \"--------------------------------\"\n            \n            UPLOAD_RESULT=\"FAILTURE\"\n            echo \"Bugly server response: ${STATUS}\"\n            if [ ! \"${STATUS}\" ]; then\n            echo \"Error: Failed to upload the zip archive file.\"\n            elif [[ \"${STATUS}\" == *\":true\"* ]]; then\n            echo \"Success to upload the dSYM for the app [${BUNDLE_IDENTIFIER} ${BUGLY_APP_VERSION}]\"\n            UPLOAD_RESULT=\"SUCCESS\"\n            else\n            echo \"Error: Failed to upload the zip archive file to Bugly.\"\n            fi\n            \n            #Remove temp dSYM archive\n            echo \"Remove temporary zip archive: ${DSYM_ZIP_FPATH}\"\n            #/bin/rm -f \"${DSYM_ZIP_FPATH}\"\n            \n            if [ \"$?\" -ne 0 ]; then\n            exitWithMessage \"Error: Failed to remove temporary zip archive.\" 1\n            fi\n            \n            echo \"--------------------------------\"\n            echo \"${UPLOAD_RESULT} - dSYM upload complete.\"\n            \n            if [[ \"${UPLOAD_RESULT}\" == \"FAILTURE\" ]]; then\n            echo \"--------------------------------\"\n            echo \"Failed to upload the dSYM\"\n            echo \"Please check the script and try it again.\"\n            fi\n            \n            echo \"----------------------------------------------------------------\"\n        }\n        \n        # .dSYM文件信息\n        \n        echo \"DSYM FOLDER ${DWARF_DSYM_FOLDER_PATH}\"\n        \n        DSYM_FOLDER=\"${DWARF_DSYM_FOLDER_PATH}\"\n        \n        IFS=$'\\n'\n        \n        for dsymFile in $(find \"$DSYM_FOLDER\" -name '*.dSYM'); do\n        echo \"Found dSYM file: $dsymFile\"\n        uploadDSYM $dsymFile\n        done\n        \n";
+		};
 		265566F91C1AB92100150C3C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1865,6 +2230,164 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2620BC1E1C8C045C00F5C531 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2620BC1F1C8C045C00F5C531 /* HBMessageViewController.m in Sources */,
+				2620BC201C8C045C00F5C531 /* HBGroupSelectViewController.m in Sources */,
+				2620BC211C8C045C00F5C531 /* HBLeaderUnbindingCell.m in Sources */,
+				2620BC221C8C045C00F5C531 /* FTMenu.m in Sources */,
+				2620BC231C8C045C00F5C531 /* HBScoreEntity.m in Sources */,
+				2620BC241C8C045C00F5C531 /* HBBillViewControllerCell.m in Sources */,
+				2620BC251C8C045C00F5C531 /* ViewController.m in Sources */,
+				2620BC261C8C045C00F5C531 /* HBHyperlinksButton.m in Sources */,
+				2620BC271C8C045C00F5C531 /* HBScoreListViewController.m in Sources */,
+				2620BC281C8C045C00F5C531 /* AFNetworkReachabilityManager.m in Sources */,
+				2620BC291C8C045C00F5C531 /* DoubleCompare.c in Sources */,
+				2620BC2A1C8C045C00F5C531 /* HBGradeViewController.m in Sources */,
+				2620BC2B1C8C045C00F5C531 /* HBSKPayService.m in Sources */,
+				2620BC2C1C8C045C00F5C531 /* HBContentBaseRequest.m in Sources */,
+				2620BC2D1C8C045C00F5C531 /* UIButton+AFNetworking.m in Sources */,
+				2620BC2E1C8C045C00F5C531 /* HBSetStuController.m in Sources */,
+				2620BC2F1C8C045C00F5C531 /* HBBaseViewController.m in Sources */,
+				2620BC301C8C045C00F5C531 /* HBTableView.m in Sources */,
+				2620BC311C8C045C00F5C531 /* DHSlideMenuViewController.m in Sources */,
+				2620BC321C8C045C00F5C531 /* HBDataSaveManager.m in Sources */,
+				2620BC331C8C045C00F5C531 /* EColumnChartLabel.m in Sources */,
+				2620BC341C8C045C00F5C531 /* HBRegistViewController.m in Sources */,
+				2620BC351C8C045C00F5C531 /* HBPayViewController.m in Sources */,
+				2620BC361C8C045C00F5C531 /* HBPayViewControllerModeCell.m in Sources */,
+				2620BC371C8C045C00F5C531 /* HBTeacherManCell.m in Sources */,
+				2620BC381C8C045C00F5C531 /* HBMyTeacherViewController.m in Sources */,
+				2620BC391C8C045C00F5C531 /* HBExamAbilityEntity.m in Sources */,
+				2620BC3A1C8C045C00F5C531 /* FTRotatingCircle.m in Sources */,
+				2620BC3B1C8C045C00F5C531 /* NSData+MD5.m in Sources */,
+				2620BC3C1C8C045C00F5C531 /* HBContentDetailEntity.m in Sources */,
+				2620BC3D1C8C045C00F5C531 /* TextGridItemView.m in Sources */,
+				2620BC3E1C8C045C00F5C531 /* HBOptionView.m in Sources */,
+				2620BC3F1C8C045C00F5C531 /* HBPayViewControllerMoneyCell.m in Sources */,
+				2620BC401C8C045C00F5C531 /* HBMessageViewCell.m in Sources */,
+				2620BC411C8C045C00F5C531 /* HBContentListDB.m in Sources */,
+				2620BC421C8C045C00F5C531 /* DataCheckUtil.m in Sources */,
+				2620BC431C8C045C00F5C531 /* HBTeacherManViewController.m in Sources */,
+				2620BC441C8C045C00F5C531 /* HBRankBookEntity.m in Sources */,
+				2620BC451C8C045C00F5C531 /* HBReadStatisticalContentCell.m in Sources */,
+				2620BC461C8C045C00F5C531 /* HBBillEntity.m in Sources */,
+				2620BC471C8C045C00F5C531 /* AFHTTPRequestOperationManager.m in Sources */,
+				2620BC481C8C045C00F5C531 /* HBNTextField.m in Sources */,
+				2620BC491C8C045C00F5C531 /* HBTestWorkManager.m in Sources */,
+				2620BC4A1C8C045C00F5C531 /* HBEditNameViewController.m in Sources */,
+				2620BC4B1C8C045C00F5C531 /* HBTaskEntity.m in Sources */,
+				2620BC4C1C8C045C00F5C531 /* HBRankingListViewController.m in Sources */,
+				2620BC4D1C8C045C00F5C531 /* HBExamKnowledgeEntity.m in Sources */,
+				2620BC4E1C8C045C00F5C531 /* HBStudentEntity.m in Sources */,
+				2620BC4F1C8C045C00F5C531 /* FileUtil.m in Sources */,
+				2620BC501C8C045C00F5C531 /* UtilFMDatabasePool.m in Sources */,
+				2620BC511C8C045C00F5C531 /* HBWorkManViewController.m in Sources */,
+				2620BC521C8C045C00F5C531 /* HBReadStatisticalStuNumCell.m in Sources */,
+				2620BC531C8C045C00F5C531 /* HBSetStuOtherCell.m in Sources */,
+				2620BC541C8C045C00F5C531 /* EColumnChart.m in Sources */,
+				2620BC551C8C045C00F5C531 /* AFHTTPRequestOperation.m in Sources */,
+				2620BC561C8C045C00F5C531 /* NSDateUtilities.m in Sources */,
+				2620BC571C8C045C00F5C531 /* HBGridView.m in Sources */,
+				2620BC581C8C045C00F5C531 /* HBTitleView.m in Sources */,
+				2620BC591C8C045C00F5C531 /* EColumn.m in Sources */,
+				2620BC5A1C8C045C00F5C531 /* ButtonGridItemView.m in Sources */,
+				2620BC5B1C8C045C00F5C531 /* UIViewController+AddBackBtn.m in Sources */,
+				2620BC5C1C8C045C00F5C531 /* HBSubscribeViewController.m in Sources */,
+				2620BC5D1C8C045C00F5C531 /* HBContentDetailDB.m in Sources */,
+				2620BC5E1C8C045C00F5C531 /* HBScoreView.m in Sources */,
+				2620BC5F1C8C045C00F5C531 /* EColor.m in Sources */,
+				2620BC601C8C045C00F5C531 /* HBExamEntity.m in Sources */,
+				2620BC611C8C045C00F5C531 /* GuideView.m in Sources */,
+				2620BC621C8C045C00F5C531 /* HBGridItemView.m in Sources */,
+				2620BC631C8C045C00F5C531 /* HBSystemMsgEntity.m in Sources */,
+				2620BC641C8C045C00F5C531 /* NSString+MD5.mm in Sources */,
+				2620BC651C8C045C00F5C531 /* HBVersionCheck.m in Sources */,
+				2620BC661C8C045C00F5C531 /* HBCreatGroupController.m in Sources */,
+				2620BC671C8C045C00F5C531 /* HBNLoginViewController.m in Sources */,
+				2620BC681C8C045C00F5C531 /* HBTaskStatisticalCell.m in Sources */,
+				2620BC691C8C045C00F5C531 /* UIColor+TKCategory.m in Sources */,
+				2620BC6A1C8C045C00F5C531 /* AFURLResponseSerialization.m in Sources */,
+				2620BC6B1C8C045C00F5C531 /* HBContentEntity.m in Sources */,
+				2620BC6C1C8C045C00F5C531 /* HBUserEntity.m in Sources */,
+				2620BC6D1C8C045C00F5C531 /* HBSettingViewController.m in Sources */,
+				2620BC6E1C8C045C00F5C531 /* HBWeekWorkCell.m in Sources */,
+				2620BC6F1C8C045C00F5C531 /* HBContentManager.m in Sources */,
+				2620BC701C8C045C00F5C531 /* HBGradeDemoViewController.m in Sources */,
+				2620BC711C8C045C00F5C531 /* HBReadProgressDB.m in Sources */,
+				2620BC721C8C045C00F5C531 /* HBReadStatisticalViewController.m in Sources */,
+				2620BC731C8C045C00F5C531 /* HBServiceManager.m in Sources */,
+				2620BC741C8C045C00F5C531 /* HBLeaderViewController.m in Sources */,
+				2620BC751C8C045C00F5C531 /* NetUtil.m in Sources */,
+				2620BC761C8C045C00F5C531 /* UtilFMDatabase.m in Sources */,
+				2620BC771C8C045C00F5C531 /* HBHeaderManager.m in Sources */,
+				2620BC781C8C045C00F5C531 /* NSString+Verify.m in Sources */,
+				2620BC791C8C045C00F5C531 /* AppDelegate.m in Sources */,
+				2620BC7A1C8C045C00F5C531 /* HBGroupCell.m in Sources */,
+				2620BC7B1C8C045C00F5C531 /* AFURLConnectionOperation.m in Sources */,
+				2620BC7C1C8C045C00F5C531 /* HBGridCellView.m in Sources */,
+				2620BC7D1C8C045C00F5C531 /* HHAlertSingleView.m in Sources */,
+				2620BC7E1C8C045C00F5C531 /* HBLoginViewController.m in Sources */,
+				2620BC7F1C8C045C00F5C531 /* main.m in Sources */,
+				2620BC801C8C045C00F5C531 /* HBTeacherEntity.m in Sources */,
+				2620BC811C8C045C00F5C531 /* HBRankingListCell.m in Sources */,
+				2620BC821C8C045C00F5C531 /* AFHTTPSessionManager.m in Sources */,
+				2620BC831C8C045C00F5C531 /* HBManageTaskEntity.m in Sources */,
+				2620BC841C8C045C00F5C531 /* HBReadprogressEntity.m in Sources */,
+				2620BC851C8C045C00F5C531 /* UtilFMDatabaseQueue.m in Sources */,
+				2620BC861C8C045C00F5C531 /* EColumnDataModel.m in Sources */,
+				2620BC871C8C045C00F5C531 /* MBHudUtil.m in Sources */,
+				2620BC881C8C045C00F5C531 /* UIImageView+AFNetworking.m in Sources */,
+				2620BC891C8C045C00F5C531 /* HBHTTPBaseRequest.m in Sources */,
+				2620BC8A1C8C045C00F5C531 /* HBTestSelectViewController.m in Sources */,
+				2620BC8B1C8C045C00F5C531 /* AFSecurityPolicy.m in Sources */,
+				2620BC8C1C8C045C00F5C531 /* UtilFMResultSet.m in Sources */,
+				2620BC8D1C8C045C00F5C531 /* RC4.m in Sources */,
+				2620BC8E1C8C045C00F5C531 /* md5.cpp in Sources */,
+				2620BC8F1C8C045C00F5C531 /* RefreshTableHeaderView.m in Sources */,
+				2620BC901C8C045C00F5C531 /* UIViewAdditions.m in Sources */,
+				2620BC911C8C045C00F5C531 /* MJProgressHUD.m in Sources */,
+				2620BC921C8C045C00F5C531 /* HBRegInfoViewController.m in Sources */,
+				2620BC931C8C045C00F5C531 /* HBSetStuGroupCell.m in Sources */,
+				2620BC941C8C045C00F5C531 /* HBBindPhoneViewController.m in Sources */,
+				2620BC951C8C045C00F5C531 /* HBTestWorkViewController.m in Sources */,
+				2620BC961C8C045C00F5C531 /* HBExamIdDB.m in Sources */,
+				2620BC971C8C045C00F5C531 /* HBUserInfoViewController.m in Sources */,
+				2620BC981C8C045C00F5C531 /* UIDevice+Addtional.m in Sources */,
+				2620BC991C8C045C00F5C531 /* AFURLSessionManager.m in Sources */,
+				2620BC9A1C8C045C00F5C531 /* MBProgressHUD.m in Sources */,
+				2620BC9B1C8C045C00F5C531 /* TableSecitonDataObject.m in Sources */,
+				2620BC9C1C8C045C00F5C531 /* HBWeekWorkViewController.m in Sources */,
+				2620BC9D1C8C045C00F5C531 /* AFURLRequestSerialization.m in Sources */,
+				2620BC9E1C8C045C00F5C531 /* HBAboutViewController.m in Sources */,
+				2620BC9F1C8C045C00F5C531 /* HBSettingViewCell.m in Sources */,
+				2620BCA01C8C045C00F5C531 /* HBReadStatisticalDateCell.m in Sources */,
+				2620BCA11C8C045C00F5C531 /* HBLeaderBindingCell.m in Sources */,
+				2620BCA21C8C045C00F5C531 /* HBBookManViewController.m in Sources */,
+				2620BCA31C8C045C00F5C531 /* DHSlideMenuController.m in Sources */,
+				2620BCA41C8C045C00F5C531 /* HBClassEntity.m in Sources */,
+				2620BCA51C8C045C00F5C531 /* HBBaseEntity.m in Sources */,
+				2620BCA61C8C045C00F5C531 /* HBMyWorkView.m in Sources */,
+				2620BCA71C8C045C00F5C531 /* HBOptionButton.m in Sources */,
+				2620BCA81C8C045C00F5C531 /* HBModifyPwdViewController.m in Sources */,
+				2620BCA91C8C045C00F5C531 /* HBPublishWorkViewController.m in Sources */,
+				2620BCAA1C8C045C00F5C531 /* HBForgetPwdViewController.m in Sources */,
+				2620BCAB1C8C045C00F5C531 /* HBTaskStatisticalViewController.m in Sources */,
+				2620BCAC1C8C045C00F5C531 /* HBBillViewController.m in Sources */,
+				2620BCAD1C8C045C00F5C531 /* Navigator.m in Sources */,
+				2620BCAE1C8C045C00F5C531 /* UtilFMDatabaseAdditions.m in Sources */,
+				2620BCAF1C8C045C00F5C531 /* HBStuManViewController.m in Sources */,
+				2620BCB01C8C045C00F5C531 /* HBMyWorkViewController.m in Sources */,
+				2620BCB11C8C045C00F5C531 /* TimeIntervalUtils.m in Sources */,
+				2620BCB21C8C045C00F5C531 /* HBReadStatisticalLogoCell.m in Sources */,
+				2620BCB31C8C045C00F5C531 /* HBMsgEntityDB.m in Sources */,
+				2620BCB41C8C045C00F5C531 /* HBWeekUtil.m in Sources */,
+				2620BCB51C8C045C00F5C531 /* HBStudentCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1877,6 +2400,11 @@
 			isa = PBXTargetDependency;
 			name = Leader21SDKOC;
 			targetProxy = 0DC1D4041B9B981B0043C79B /* PBXContainerItemProxy */;
+		};
+		2620BC1C1C8C045C00F5C531 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Leader21SDKOC;
+			targetProxy = 2620BC1D1C8C045C00F5C531 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2003,6 +2531,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				REZ_SEARCH_PATHS = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -2045,6 +2574,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				REZ_SEARCH_PATHS = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
@@ -2083,6 +2613,92 @@
 			};
 			name = Release;
 		};
+		2620BD051C8C045C00F5C531 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jidong Guo (257X5EDALE)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jidong Guo (257X5EDALE)";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LeaderDiandu/Third/Bugly",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../Leader21SDKOC/Additional",
+					"$(SRCROOT)/../Leader21SDKOC/DataEngine/**",
+					"$(SRCROOT)/../Leader21SDKOC/ReadModule/**",
+					"$(SRCROOT)/../Leader21SDKOC/Utils/**",
+					"$(SRCROOT)/../Leader21SDKOC/Third/**",
+					"$(SRCROOT)/../Leader21SDKOC/Http",
+					"$(SRCROOT)/../Leader21SDKOC/Leader21SDKOC",
+				);
+				INFOPLIST_FILE = "LeaderDiandu/LeaderDianduHD-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-all_load";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.ikwb;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				REZ_SEARCH_PATHS = "";
+				TARGETED_DEVICE_FAMILY = 2;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		2620BD061C8C045C00F5C531 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Le Di Network Technology Co., Ltd. (S53AU43PRB)";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LeaderDiandu/Third/Bugly",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LeaderDiandu/App/LeaderDiandu-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../Leader21SDKOC/Additional",
+					"$(SRCROOT)/../Leader21SDKOC/DataEngine/**",
+					"$(SRCROOT)/../Leader21SDKOC/ReadModule/**",
+					"$(SRCROOT)/../Leader21SDKOC/Utils/**",
+					"$(SRCROOT)/../Leader21SDKOC/Third/**",
+					"$(SRCROOT)/../Leader21SDKOC/Http",
+					"$(SRCROOT)/../Leader21SDKOC/Leader21SDKOC",
+				);
+				INFOPLIST_FILE = "LeaderDiandu/LeaderDianduHD-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-all_load";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.leader21.ikwb;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				REZ_SEARCH_PATHS = "";
+				TARGETED_DEVICE_FAMILY = 2;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2109,6 +2725,15 @@
 			buildConfigurations = (
 				0D7487151B88A884007BE4CD /* Debug */,
 				0D7487161B88A884007BE4CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2620BD041C8C045C00F5C531 /* Build configuration list for PBXNativeTarget "LeaderDiandu-HD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2620BD051C8C045C00F5C531 /* Debug */,
+				2620BD061C8C045C00F5C531 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

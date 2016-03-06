@@ -29,3 +29,4 @@
 
 @end
 
+extern AppDelegate *myAppDelegate;

@@ -35,6 +35,8 @@
 
 @end
 
+AppDelegate *myAppDelegate;
+
 @implementation AppDelegate
 
 + (AppDelegate *)delegate
@@ -86,6 +88,8 @@
     
     [self.window setRootViewController:self.globalNavi];
     [self.window makeKeyAndVisible];
+    
+    myAppDelegate = self;
     
 //    [self verifyLogin];
     
