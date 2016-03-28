@@ -128,33 +128,32 @@ static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
 
 -(void)initConfirmButton
 {
-    CGRect rc = CGRectMake(0.0f, ScreenHeight-80, self.view.frame.size.width, 70.0f);
-    rc.origin.x += 20.0f;
-    rc.size.width -= 40.0f;
-    rc.origin.y += 20.0f;
-    rc.size.height -= 30.0f;
-    
+    float buttonH = 40*myAppDelegate.multiple;
+    CGRect rc = CGRectMake(20.0f, ScreenHeight-buttonH-20, ScreenWidth-40, buttonH);
     self.confirmButton = [[UIButton alloc] initWithFrame:rc];
     [self.confirmButton setBackgroundImage:[UIImage imageNamed:@"green-normal"] forState:UIControlStateNormal];
     [self.confirmButton setTitle:@"确认订阅" forState:UIControlStateNormal];
-    [self.confirmButton.titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
+    [self.confirmButton.titleLabel setFont:[UIFont boldSystemFontOfSize:20*myAppDelegate.multiple]];
     [self.confirmButton addTarget:self action:@selector(confirmButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.confirmButton];
 }
 
 -(void)initRuleDescriptionButton
 {
-    CGRect rc = CGRectMake(0.0f, ScreenHeight-80 - 40, ScreenWidth/2 + 20, 70.0f);
+    float controlH = 16*myAppDelegate.multiple;
+    float controlY = CGRectGetMinY(self.confirmButton.frame)-controlH-20;
+    CGRect rc = CGRectMake(0.0f, controlY, ScreenWidth/2 + 20, controlH);
     
     self.ruleDescriptionButton = [[UIButton alloc] initWithFrame:rc];
     [self.ruleDescriptionButton setTitle:@"规则说明" forState:UIControlStateNormal];
-    [self.ruleDescriptionButton.titleLabel setFont:[UIFont boldSystemFontOfSize:LABELFONTSIZE]];
+    [self.ruleDescriptionButton.titleLabel setFont:[UIFont boldSystemFontOfSize:LABELFONTSIZE*myAppDelegate.multiple]];
     [self.ruleDescriptionButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     [self.ruleDescriptionButton addTarget:self action:@selector(ruleDescriptionPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.ruleDescriptionButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     [self.view addSubview:self.ruleDescriptionButton];
     
-    rc = CGRectMake(ScreenWidth/2 + 20 + 10, ScreenHeight-80 - 13, 15, 15);
+    float side = 16*myAppDelegate.multiple;
+    rc = CGRectMake(ScreenWidth/2 + 20 + 10, controlY, side, side);
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:rc];
     imgView.image = [UIImage imageNamed:@"system-msg-icon"];
     [self.view addSubview:imgView];
@@ -273,7 +272,11 @@ static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
     ButtonGridItemView *itemView = (ButtonGridItemView *)[gridView dequeueReusableGridItemAtGridIndex:gridIndex ofGridCellView:gridCell];
     if (!itemView)
     {
-        itemView = [[ButtonGridItemView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, 100)];
+        CGFloat height = 100;
+        if (myAppDelegate.isPad) {
+            height = 180;
+        }
+        itemView = [[ButtonGridItemView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, height)];
     }
     
     NSString *indexStr = [NSString stringWithFormat:@"%ld", (long)(listIndex+1)];
@@ -377,7 +380,8 @@ static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
 {
     UIView *view = [[UIView alloc] init];
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake((HHAlertSingleView_SIZE_WIDTH - (HHAlertSingleView_SIZE_WIDTH - 30 - 30))/2, 10, HHAlertSingleView_SIZE_WIDTH - 30 - 30, 50)];
-    [btn setBackgroundImage:[UIImage imageNamed:@"btn-normal"] forState:UIControlStateNormal];
+    [btn setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [btn setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
     [btn setTitle:@"我知道了" forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(knowBtnPressed) forControlEvents:UIControlEventTouchUpInside];
     [btn.titleLabel setFont:[UIFont boldSystemFontOfSize:26.0f]];

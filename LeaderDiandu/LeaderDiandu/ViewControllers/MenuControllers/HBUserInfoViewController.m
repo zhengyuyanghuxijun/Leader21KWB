@@ -70,7 +70,13 @@ static const CGFloat kImgLength = 1000;
 - (void)createLoginButton
 {
     float controlX = 20;
-    float controlY = KHBNaviBarHeight + 120 + 50*[_titleArr count] + 30;
+    CGFloat headerH = 120;
+    CGFloat cellH = 50;
+    if (myAppDelegate.isPad) {
+        headerH = 200;
+        cellH = 100;
+    }
+    float controlY = KHBNaviBarHeight + headerH + cellH*[_titleArr count] + 30;
     float controlW = ScreenWidth - controlX*2;
     float controlH = 45;
     UIButton *loginButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];

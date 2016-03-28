@@ -104,7 +104,8 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     //底部按钮
     rc = CGRectMake(10.0f, ScreenHeight - 60.0f, ScreenWidth - 10 - 10, 50.0f);
     self.addGroupButton = [[UIButton alloc] initWithFrame:rc];
-    [self.addGroupButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+    [self.addGroupButton setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [self.addGroupButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
     [self.addGroupButton setTitle:@"添加群组" forState:UIControlStateNormal];
     [self.addGroupButton addTarget:self action:@selector(assignWorkButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.addGroupButton];

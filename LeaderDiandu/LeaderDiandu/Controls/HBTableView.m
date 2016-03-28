@@ -51,10 +51,13 @@
     }
     
     controlX = 0;
-    UILabel *emptyLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, viewSize.width, 20)];
+    UILabel *emptyLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, viewSize.width, 30)];
     emptyLbl.backgroundColor = [UIColor clearColor];
     emptyLbl.textColor = [UIColor lightGrayColor];
     emptyLbl.text = tips;
+    if (myAppDelegate.isPad) {
+        emptyLbl.font = [UIFont systemFontOfSize:30];
+    }
     emptyLbl.textAlignment = NSTextAlignmentCenter;
     [_emptyView addSubview:emptyLbl];
 }

@@ -1208,7 +1208,6 @@
 				0D086ED71B949B110061BB1F /* DHSlideMenuController */,
 				0DBE35871B8CCE2200179237 /* Login&RegisterController */,
 				0DD214661B95FC8B009E3DB9 /* MenuControllers */,
-				0DAAF4081B8E014100078285 /* GradeController */,
 				0D7488521B8A2071007BE4CD /* ViewController.h */,
 				0D7488531B8A2071007BE4CD /* ViewController.m */,
 			);
@@ -1251,7 +1250,8 @@
 				26ECFA0F1C0D50A7008B690A /* HBGradeDemoViewController.h */,
 				26ECFA101C0D50A7008B690A /* HBGradeDemoViewController.m */,
 			);
-			path = GradeController;
+			name = GradeController;
+			path = ../GradeController;
 			sourceTree = "<group>";
 		};
 		0DB5370D1B8F5DEE0023A3F7 /* AFNetworking */ = {
@@ -1495,6 +1495,7 @@
 				0DD2146B1B95FF3B009E3DB9 /* HBMyTeacherViewController.m */,
 				0DD2146D1B95FFAC009E3DB9 /* HBSubscribeViewController.h */,
 				0DD2146E1B95FFAC009E3DB9 /* HBSubscribeViewController.m */,
+				0DAAF4081B8E014100078285 /* GradeController */,
 			);
 			path = MenuControllers;
 			sourceTree = "<group>";

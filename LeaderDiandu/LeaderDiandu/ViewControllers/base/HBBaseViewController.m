@@ -50,10 +50,13 @@
 {
     float controlX = 0;
     float controlY = ScreenHeight / 3;
-    UILabel *noLoginLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, ScreenWidth, 20)];
+    UILabel *noLoginLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, ScreenWidth, 30)];
     noLoginLbl.backgroundColor = [UIColor clearColor];
     noLoginLbl.textColor = [UIColor lightGrayColor];
     noLoginLbl.text = text;
+    if (myAppDelegate.isPad) {
+        noLoginLbl.font = [UIFont systemFontOfSize:30];
+    }
     noLoginLbl.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:noLoginLbl];
 }

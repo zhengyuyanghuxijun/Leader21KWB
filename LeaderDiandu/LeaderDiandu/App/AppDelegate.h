@@ -16,7 +16,8 @@
 @property (nonatomic, strong) UINavigationController* globalNavi;
 @property (nonatomic, strong) HBNLoginViewController *loginVC;
 
-@property (nonatomic, assign) BOOL isPad;
+@property (nonatomic, assign) BOOL isPad;       //是否ipad版本
+@property (nonatomic, assign) CGFloat multiple; //ipad版本放大倍数
 
 @property (nonatomic, assign) BOOL hasNewMsg;
 @property (nonatomic, assign) BOOL hasNewExam;

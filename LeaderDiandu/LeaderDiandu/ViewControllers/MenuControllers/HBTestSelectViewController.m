@@ -118,7 +118,7 @@
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, ScreenHeight);
+    CGRect viewFrame = CGRectMake(0, 0, rect.size.width, ScreenHeight);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;

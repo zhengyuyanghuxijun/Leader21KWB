@@ -138,7 +138,8 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
     if (!_bottomBtn) {
         CGRect rc = CGRectMake(10.0f, ScreenHeight - 60.0f, ScreenWidth - 10 - 10, 50.0f);
         _bottomBtn = [[UIButton alloc] initWithFrame:rc];
-        [_bottomBtn setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+        [_bottomBtn setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+        [_bottomBtn setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
         [_bottomBtn addTarget:self action:@selector(bottomBtnPressed) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_bottomBtn];
     }

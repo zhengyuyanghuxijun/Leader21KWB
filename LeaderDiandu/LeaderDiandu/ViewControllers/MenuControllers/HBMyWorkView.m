@@ -82,18 +82,12 @@ typedef enum : NSUInteger {
     }
     [self initQuestionView:CGRectMake(controlX, controlY, controlW, controlH)];
     
-    controlH = 40;
+    controlH = 50*myAppDelegate.multiple;
     NSInteger margin = 20;
-    if (iPhone5) {
-        margin = 20;
-    }
     controlY = frame.size.height-margin-controlH;
     _finishButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
-//    [_finishButton.layer setMasksToBounds:YES];
-//    [_finishButton.layer setCornerRadius:5.0];
-//    _finishButton.backgroundColor = [UIColor greenColor];
-    [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-normal"] forState:UIControlStateNormal];
-    [_finishButton setBackgroundImage:[UIImage imageNamed:@"test-btn-press"] forState:UIControlStateHighlighted];
+    [_finishButton setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [_finishButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
     _finishButton.titleLabel.font = font;
     [_finishButton addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_finishButton];
@@ -160,6 +154,96 @@ typedef enum : NSUInteger {
     [_questionView addSubview:_descImg];
 }
 
+- (void)initSelectionViewN:(NSArray *)optionArray
+{
+    if (_selectionView) {
+        NSArray *subViews = [_selectionView subviews];
+        for (UIView *view in subViews) {
+            [view removeFromSuperview];
+        }
+    } else {
+        NSInteger margin = 10;
+        if (iPhone4) {
+            margin = 0;
+        } else if (myAppDelegate.isPad) {
+            margin = 20;
+        }
+        CGRect rect = _questionView.frame;
+        float selY = CGRectGetMaxY(rect) + margin;
+        float controlH = CGRectGetMinY(_finishButton.frame) - selY-margin;
+        _selectionView = [[UIScrollView alloc] initWithFrame:CGRectMake(CGRectGetMinX(rect), selY, CGRectGetWidth(rect), controlH)];
+        _selectionView.showsHorizontalScrollIndicator = NO;
+        [self addSubview:_selectionView];
+    }
+    _selectionView.contentOffset = CGPointMake(0, 0);
+    _selectionView.scrollEnabled = NO;
+    
+    UIFont *font = [UIFont systemFontOfSize:20];
+    float viewW = CGRectGetWidth(_selectionView.frame);
+    float viewH = CGRectGetHeight(_selectionView.frame);
+    float margin = 0;
+    float marginY = 0;
+    float controlW = 0;
+    float controlH = 0;
+    NSInteger count = optionArray.count;
+    if (count == 2) {
+        margin = viewW/3;
+        controlW = viewW/3;
+        marginY = viewH/4;
+        controlH = viewH/2;
+    } else if (count == 4) {
+        margin = viewW/4;
+        controlW = viewW*3/8;
+        marginY = 10;
+        controlH = (viewH-marginY*3)/2;
+    }
+    
+    for (id obj in optionArray) {
+        if ([obj isKindOfClass:[UIImage class]]) {
+            break;
+        }
+        CGSize objSize = [obj boundingRectWithSize:CGSizeMake(controlW, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font} context:nil].size;
+        if (controlH < objSize.height) {
+            controlH = objSize.height;
+        }
+    }
+    
+    CGRect frame = _selectionView.frame;
+    if (count/2*controlH+30 > frame.size.height) {
+        _selectionView.scrollEnabled = YES;
+        _selectionView.contentSize = CGSizeMake(frame.size.width, count/2*controlH+40);
+    }
+    
+    float controlX, controlY = 0;
+    for (NSInteger i=0; i<count; i++) {
+        
+        controlX = (margin+controlW) * (i%2);
+        controlY = marginY*(i/2+1) + controlH*(i/2);
+        
+        id obj = optionArray[i];
+        if ([obj isKindOfClass:[UIImage class]]) {
+            
+            HBOptionView *view = [[HBOptionView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH) image:obj];
+            view.tag = KTagSelectionBegin+i;
+            view.delegate = self;
+            [_selectionView addSubview:view];
+        } else {
+            UIButton *button = [self createSelectionButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin+i title:obj];
+            [_selectionView addSubview:button];
+        }
+    }
+    
+    if (count == 0) {
+        //判断题
+        controlW = controlH = viewH/2;
+        controlX = (frame.size.width - controlW*2)/4;
+        controlY = viewH/4;
+        [self createJudgeButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin normal:@"test-btn-right-normal" press:@"test-btn-right-press" selected:@"test-btn-right-selected"];
+        controlX += controlX*2 + controlW;
+        [self createJudgeButton:CGRectMake(controlX, controlY, controlW, controlH) tag:KTagSelectionBegin normal:@"test-btn-wrong-normal" press:@"test-btn-wrong-press" selected:@"test-btn-wrong-selected"];
+    }
+}
+
 - (void)initSelectionView:(NSArray *)optionArray
 {
     if (_selectionView) {
@@ -184,8 +268,8 @@ typedef enum : NSUInteger {
     _selectionView.contentOffset = CGPointMake(0, 0);
     _selectionView.scrollEnabled = NO;
     
-    float controlH = 80;
-    float controlW = 110;
+    float controlH = 80*myAppDelegate.multiple;
+    float controlW = 110*myAppDelegate.multiple;
     UIFont *font = [UIFont systemFontOfSize:20];
     //计算选项文字最多时的高度
     NSInteger count = [optionArray count];
@@ -352,7 +436,7 @@ typedef enum : NSUInteger {
     }
     
     NSArray *optionsArr = [_workManager getOptionArray:dict];
-    [self initSelectionView:optionsArr];
+    [self initSelectionViewN:optionsArr];
     
     //若不是最后一题，显示“下一题”，若是最后一题，则未提交过的显示“交作业”。已提交过的显示“完成”
     BOOL isLast = [_workManager isLastObject];

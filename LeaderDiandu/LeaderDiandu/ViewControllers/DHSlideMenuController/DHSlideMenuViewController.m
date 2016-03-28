@@ -146,11 +146,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (myAppDelegate.isPad) {
-        return 100;
-    } else {
-        return 60;
-    }
+    return 60*myAppDelegate.multiple;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -304,7 +300,9 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     if ([viewCtlName isEqualToString:@"HBMessageViewController"]) { //消息中心
         if (!self.msgRedPointView) {
             self.msgRedPointView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"msg_tips_new"]];
-            self.msgRedPointView.frame = CGRectMake(150, (60 - 15)/2, 15, 15);
+            float controlX = 150*myAppDelegate.multiple;
+            float controlY = (60*myAppDelegate.multiple - 15)/2;
+            self.msgRedPointView.frame = CGRectMake(controlX, controlY, 15, 15);
             [cell addSubview:self.msgRedPointView];
         }
         
@@ -318,7 +316,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     if ([viewCtlName isEqualToString:@"HBTestWorkViewController"]) { //我的作业
         if (!self.examRedPointView) {
             self.examRedPointView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"msg_tips_new"]];
-            self.examRedPointView.frame = CGRectMake(150, (60 - 15)/2, 15, 15);
+            self.examRedPointView.frame = CGRectMake(150*myAppDelegate.multiple, (60*myAppDelegate.multiple - 15)/2, 15, 15);
             [cell addSubview:self.examRedPointView];
         }
         

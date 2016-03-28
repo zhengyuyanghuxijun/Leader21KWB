@@ -51,7 +51,8 @@
     
     CGRect rc = CGRectMake(10.0f, ScreenHeight - 80.0f, ScreenWidth - 10 - 10, 50.0f);
     self.publishWorkButton = [[UIButton alloc] initWithFrame:rc];
-    [self.publishWorkButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+    [self.publishWorkButton setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [self.publishWorkButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
     [self.publishWorkButton setTitle:@"发布作业" forState:UIControlStateNormal];
     [self.publishWorkButton addTarget:self action:@selector(publishWorkButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.publishWorkButton];

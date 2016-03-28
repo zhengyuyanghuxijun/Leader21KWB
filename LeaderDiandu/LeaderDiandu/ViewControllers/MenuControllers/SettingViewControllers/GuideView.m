@@ -36,17 +36,6 @@ static NSInteger pageCount = 3;
         UIImage* image2 = nil;
         UIImage* image3 = nil;
 
-//        if (frame.size.height > 480.0f) {
-//            // 4寸手机
-//            image1 = [UIImage imageNamed:@"splash_1h.png"];
-//            image2 = [UIImage imageNamed:@"splash_2h.png"];
-//            image3 = [UIImage imageNamed:@"splash_3h.png"];
-//        }
-//        else {
-//            image1 = [UIImage imageNamed:@"splash_1.png"];
-//            image2 = [UIImage imageNamed:@"splash_2.png"];
-//            image3 = [UIImage imageNamed:@"splash_3.png"];
-//        }
         image1 = [UIImage imageNamed:@"study_guide_1"];
         image2 = [UIImage imageNamed:@"study_guide_2"];
         image3 = [UIImage imageNamed:@"study_guide_3"];
@@ -57,9 +46,6 @@ static NSInteger pageCount = 3;
 //        _imageView1.contentMode = UIViewContentModeCenter;
 //        _imageView2.contentMode = UIViewContentModeCenter;
 //        _imageView3.contentMode = UIViewContentModeCenter;
-        _imageView1.backgroundColor = RGB(28, 158, 201);
-        _imageView2.backgroundColor = RGB(28, 158, 201);
-        _imageView3.backgroundColor = RGB(28, 158, 201);
         [_scrollView addSubview:_imageView1];
         [_scrollView addSubview:_imageView2];
         [_scrollView addSubview:_imageView3];
@@ -72,8 +58,8 @@ static NSInteger pageCount = 3;
         [self addSubview:_pageControl];
         
         _enterButton = [[UIButton alloc] init];
-        [_enterButton setBackgroundImage:[UIImage imageNamed:@"subscription_know"] forState:UIControlStateNormal];
-//        [_enterButton setTitle:@"立即体验" forState:UIControlStateNormal];
+        [_enterButton setBackgroundImage:[UIImage imageNamed:@"btn normal"] forState:UIControlStateNormal];
+        [_enterButton setBackgroundImage:[UIImage imageNamed:@"btn press"] forState:UIControlStateNormal];
         [_enterButton addTarget:self action:@selector(enterButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         self.enterButton.hidden = YES;
         [self addSubview:_enterButton];

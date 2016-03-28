@@ -50,8 +50,8 @@
 
 - (void) initUI
 {
-    CGFloat width = 76;
-    CGFloat height = 108;
+    CGFloat width = 76 * myAppDelegate.multiple;
+    CGFloat height = 108 * myAppDelegate.multiple;
     CGFloat marginY = 20;
     CGFloat controlY = marginY;
 #if KShowDiscount
@@ -83,6 +83,7 @@
     UILabel *paylabel = [[UILabel alloc] init];
     paylabel.frame = CGRectMake(controlX, controlY, 150, controlH);
     paylabel.text = @"应付金额";
+    paylabel.font = [UIFont systemFontOfSize:20*myAppDelegate.multiple];
     [self addSubview:paylabel];
     
 #if KShowDiscount
@@ -94,11 +95,12 @@
 #endif
     
     self.moneyLabel = [[UILabel alloc] init];
-    self.moneyLabel.frame = CGRectMake(ScreenWidth-80-20, controlY, 80, controlH);
+    float controlW = 80*myAppDelegate.multiple;
+    self.moneyLabel.frame = CGRectMake(ScreenWidth-controlW-margin, controlY, controlW, controlH);
     self.moneyLabel.text = @"30.0元";
     self.moneyLabel.textColor = KLeaderRGB;
     self.moneyLabel.textAlignment = NSTextAlignmentRight;
-    self.moneyLabel.font = [UIFont boldSystemFontOfSize:20];
+    self.moneyLabel.font = [UIFont boldSystemFontOfSize:20*myAppDelegate.multiple];
     [self addSubview:self.moneyLabel];
 }
 
@@ -118,6 +120,7 @@
     float controlW = frame.size.width;
     float controlH = frame.size.height/2-10;
     UILabel *timeLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    timeLbl.font = [UIFont systemFontOfSize:20*myAppDelegate.multiple];
     timeLbl.text = self.timeArray[index];
     timeLbl.textColor = [UIColor blackColor];
     timeLbl.textAlignment = NSTextAlignmentCenter;
@@ -125,6 +128,7 @@
     
     controlY += controlH;
     UILabel *moneyLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
+    moneyLbl.font = [UIFont systemFontOfSize:20*myAppDelegate.multiple];
     moneyLbl.text = self.moneyArr[index];
     moneyLbl.textColor = [UIColor blackColor];
     moneyLbl.textAlignment = NSTextAlignmentCenter;

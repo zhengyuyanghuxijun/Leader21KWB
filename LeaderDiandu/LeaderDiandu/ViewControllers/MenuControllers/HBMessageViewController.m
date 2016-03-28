@@ -143,7 +143,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70.0f;
+    return 70*myAppDelegate.multiple;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

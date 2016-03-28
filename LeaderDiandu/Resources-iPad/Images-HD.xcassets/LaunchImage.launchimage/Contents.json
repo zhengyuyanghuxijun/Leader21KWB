@@ -37,7 +37,7 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "Default-756h.png",
+      "filename" : "ipad-launch.png",
       "extent" : "full-screen",
       "scale" : "1x"
     },
@@ -62,7 +62,7 @@
     {
       "orientation" : "portrait",
       "idiom" : "ipad",
-      "filename" : "Default-756h@2x.png",
+      "filename" : "ipad-launch@2x.png",
       "extent" : "full-screen",
       "scale" : "2x"
     },

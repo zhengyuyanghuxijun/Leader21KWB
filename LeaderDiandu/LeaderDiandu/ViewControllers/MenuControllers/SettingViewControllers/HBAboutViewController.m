@@ -20,7 +20,7 @@
     self.title = @"关于课外宝";
     
     UIImageView *logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"APPicon_about"]];
-    logoImgView.frame = CGRectMake((ScreenWidth - 120)/2, (ScreenHeight - 120)/2 - 20, 120, 120);
+    logoImgView.frame = CGRectMake((ScreenWidth - 120)/2, ScreenHeight/4, 120, 120);
     logoImgView.layer.cornerRadius = 30;
     logoImgView.clipsToBounds = YES;
     [self.view addSubview:logoImgView];

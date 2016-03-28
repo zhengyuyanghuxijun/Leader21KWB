@@ -66,6 +66,10 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     self.navigationController.navigationBarHidden = NO;
     self.title = @"支付中心";
     
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"账单" style:UIBarButtonItemStyleDone target:self action:@selector(rightButtonPressed)];
+    [rightButton setTintColor:[UIColor whiteColor]];
+    self.navigationItem.rightBarButtonItem = rightButton;
+    
     self.skPayService = [HBSKPayService defaultService];
     self.skPayService.payDelegate = self;
     _payMonthDic = @{@(1):@(30), @(3):@(88), @(6):@(178), @(12):@(348)};
@@ -83,28 +87,21 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     _tableView.delegate = self;
     [self.view addSubview:_tableView];
     
-    CGRect rc = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, 70.0f);
+    CGRect rc = CGRectMake(0.0f, 0.0f, rect.size.width, 80.0f);
     UIView* view = [[UIView alloc] initWithFrame:rc];
-    rc.origin.x += 20.0f;
-    rc.size.width -= 40.0f;
-    if (iPhone5) {
-        rc.origin.y += 10.0f;
-    } else {
-        rc.origin.y += 20.0f;
-    }
-    rc.size.height -= 30.0f;
     
-    self.payButton = [[UIButton alloc] initWithFrame:rc];
+    float controlX = 20;
+    float controlY = 20;
+    float controlW = rc.size.width-controlX*2;
+    float controlH = 50*myAppDelegate.multiple;
+    self.payButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     [self.payButton setBackgroundImage:[UIImage imageNamed:@"green-normal"] forState:UIControlStateNormal];
+    self.payButton.titleLabel.font = [UIFont systemFontOfSize:20*myAppDelegate.multiple];
     [self.payButton setTitle:@"支付" forState:UIControlStateNormal];
     [self.payButton addTarget:self action:@selector(payButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:self.payButton];
     
     _tableView.tableFooterView = view;
-    
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"账单" style:UIBarButtonItemStyleDone target:self action:@selector(rightButtonPressed)];
-    [rightButton setTintColor:[UIColor whiteColor]];
-    self.navigationItem.rightBarButtonItem = rightButton;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -242,7 +239,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (0 == indexPath.section) {
-        return 320;
+        return 320*myAppDelegate.multiple;
     }else{
         return 50;
     }
@@ -265,7 +262,6 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
         cell.delegate = self;
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.textColor = [UIColor blackColor];
         
         return cell;
     }
