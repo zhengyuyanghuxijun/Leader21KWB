@@ -2,13 +2,13 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "dropmenu_refresh_up@2x-1.png"
+      "filename" : "dropmenu_refresh_up.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "dropmenu_refresh_up@2x.png"
+      "filename" : "dropmenu_refresh_up@2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",

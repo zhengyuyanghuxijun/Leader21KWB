@@ -231,7 +231,7 @@
     } else {
         //记录一下开始阅读时间
         
-        BOOL isDownloaded = [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
+        BOOL isDownloaded = [LEADERSDK bookPressed:entity useNavigation:myAppDelegate.globalNavi];
         if (isDownloaded == NO) {
             [self handleDownload:entity];
         }

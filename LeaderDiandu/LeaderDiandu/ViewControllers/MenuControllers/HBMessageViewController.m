@@ -106,7 +106,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
                     //获取消息成功保存数据库
                     [[HBMsgEntityDB sharedInstance] updateHBMsgEntity:self.msgArr];
                     //获取到最新数据了，要去掉红点提示
-                    [AppDelegate delegate].hasNewMsg = NO;
+                    myAppDelegate.hasNewMsg = NO;
                     //获取新消息列表成功后发送通知
                     [[NSNotificationCenter defaultCenter]postNotificationName:kNotification_GetMsgSuccess object:nil];
                 } else {
@@ -143,7 +143,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 70.0f;
+    return 70*myAppDelegate.multiple;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

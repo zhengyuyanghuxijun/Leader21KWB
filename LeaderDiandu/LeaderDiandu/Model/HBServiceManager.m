@@ -42,10 +42,9 @@
     NSLog(@"发送的数据：%@", dict);
     [[HBHTTPBaseRequest requestWithSubUrl:api] startWithMethod:HBHTTPRequestMethodPOST parameters:dict completion:^(id responseObject, NSError *error) {
         if (error) {
-//            NSDictionary *userDic = error.userInfo;
-//            NSString *descValue = userDic[@"NSLocalizedDescription"];
-            NSString *descValue = error.localizedDescription;
-            if ([descValue containsString:@"401"]) {
+            NSDictionary *dict = responseObject;
+            NSInteger code = [dict[@"statusCode"] integerValue];
+            if (code == 401) {
                 [self startTimer];
             }
         }
@@ -240,7 +239,11 @@
     [dicInfo setObject:phone     forKey:@"phone"];
     [dicInfo setObject:password    forKey:@"password"];
     [dicInfo setObject:sms_code    forKey:@"sms_code"];
-    [dicInfo setObject:code_id     forKey:@"code_id"];
+    if (code_id == nil) {
+        [dicInfo setObject:@"" forKey:@"code_id"];
+    } else {
+        [dicInfo setObject:code_id     forKey:@"code_id"];
+    }
     
     if (_receivedBlock) {
         return;

@@ -288,7 +288,7 @@
     
     CGFloat menuY = 160;
     CGFloat menuH = 50 * 9;
-    if (isIPhone4 || isIPad) {
+    if (isIPhone4) {
         menuH = ScreenHeight-menuY;
     }
     CGRect menuFrame = CGRectMake(ScreenWidth - 75, menuY, 60, menuH);

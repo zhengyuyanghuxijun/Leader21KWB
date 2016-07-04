@@ -64,7 +64,8 @@
     
     CGRect rc = CGRectMake(20.0f, controlY + 180, ScreenWidth - 20 - 20, 50.0f);
     self.okButton = [[UIButton alloc] initWithFrame:rc];
-    [self.okButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+    [self.okButton setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [self.okButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
     [self.okButton setTitle:@"确定" forState:UIControlStateNormal];
     [self.okButton addTarget:self action:@selector(okButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.okButton];

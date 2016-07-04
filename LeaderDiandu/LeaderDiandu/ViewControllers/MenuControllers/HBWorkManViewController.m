@@ -36,8 +36,10 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     //时间
     self.cellTime = [[UILabel alloc] init];
     self.cellTime.frame = CGRectMake(10, 5, 80, 25);
-    if (isIPhone4 || isIPad) {
+    if (isIPhone4) {
         self.cellTime.font = [UIFont boldSystemFontOfSize:12];
+    } else if (myAppDelegate.isPad) {
+        self.cellTime.font = [UIFont boldSystemFontOfSize:22];
     } else {
         self.cellTime.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     }
@@ -152,9 +154,11 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     self.navigationController.navigationBarHidden = NO;
     self.title = @"作业管理";
     
-    CGRect rc = CGRectMake(10.0f, ScreenHeight - 50.0f, ScreenWidth - 10 - 10, 50.0f);
+    float buttonH = 50*myAppDelegate.multiple;
+    CGRect rc = CGRectMake(10.0f, ScreenHeight-buttonH-10, ScreenWidth - 10*2, buttonH);
     self.assignWorkButton = [[UIButton alloc] initWithFrame:rc];
-    [self.assignWorkButton setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+    [self.assignWorkButton setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+    [self.assignWorkButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
     [self.assignWorkButton setTitle:@"布置作业" forState:UIControlStateNormal];
     [self.assignWorkButton addTarget:self action:@selector(assignWorkButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.assignWorkButton];
@@ -191,7 +195,7 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight - 50);
+    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, CGRectGetMinY(self.assignWorkButton.frame)-KHBNaviBarHeight-10);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;

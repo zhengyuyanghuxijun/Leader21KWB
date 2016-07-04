@@ -79,18 +79,21 @@
 
 - (void)initMainView
 {
-    float controlY = KHBNaviBarHeight + 50;
+    float multiple = myAppDelegate.multiple;
     float screenW = self.view.frame.size.width;
-    UIView *accountView = [[UIView alloc] initWithFrame:CGRectMake(0, controlY, screenW, 91)];
+    float controlY = KHBNaviBarHeight + 50;
+    float controlH = 91*multiple;
+    UIView *accountView = [[UIView alloc] initWithFrame:CGRectMake(0, controlY, screenW, controlH)];
     accountView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:accountView];
     
     float controlX = 0;
     controlY = 0;
     float controlW = screenW - controlX*2;
-    float controlH = 45;
+    controlH = 45*multiple;
     self.inputPhoneNumber = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _inputPhoneNumber.placeholder = @"ID/手机号码";
+    _inputPhoneNumber.font = [UIFont systemFontOfSize:12*multiple];
     [_inputPhoneNumber setupTextFieldWithType:HBNTextFieldTypeDefault withIconName:@"phone"];
     [accountView addSubview:_inputPhoneNumber];
     
@@ -103,16 +106,17 @@
     self.inputPassword = [[HBNTextField alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _inputPassword.placeholder = @"输入密码";
     _inputPassword.secureTextEntry = YES;
+    _inputPassword.font = [UIFont systemFontOfSize:12*multiple];
     [_inputPassword setupTextFieldWithType:HBNTextFieldTypePassword withIconName:@"lock"];
     [accountView addSubview:_inputPassword];
     
-    controlW = 100;
+    controlW = 100*multiple;
     controlX = screenW - 20 - controlW;
     controlY = CGRectGetMaxY(accountView.frame) + 20;
-    controlH = 20;
+    controlH = 20*multiple;
     self.forgetPassword = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     [_forgetPassword setTitle:@"忘记密码？" forState:UIControlStateNormal];
-    _forgetPassword.titleLabel.font = [UIFont boldSystemFontOfSize:18];
+    _forgetPassword.titleLabel.font = [UIFont boldSystemFontOfSize:18*multiple];
     [_forgetPassword setTitleColor:RGB(249, 156, 0) forState:UIControlStateNormal];
     [_forgetPassword addTarget:self action:@selector(forgetPassword:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_forgetPassword];
@@ -120,10 +124,10 @@
     controlX = 20;
     controlY = CGRectGetMaxY(_forgetPassword.frame) + 30;
     controlW = screenW - controlX*2;
-    controlH = 45;
+    controlH = 45*multiple;
     self.loginButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     [_loginButton setTitle:@"登录" forState:UIControlStateNormal];
-    _loginButton.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+    _loginButton.titleLabel.font = [UIFont boldSystemFontOfSize:20*multiple];
     [_loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_loginButton setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
     [_loginButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
@@ -137,7 +141,11 @@
     UIButton *linkBtn = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     [linkBtn setTitle:@"跳过" forState:UIControlStateNormal];
     [linkBtn setTitleColor:RGB(249, 156, 0) forState:UIControlStateNormal];
-    linkBtn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
+    if (myAppDelegate.isPad) {
+        linkBtn.titleLabel.font = [UIFont boldSystemFontOfSize:30];
+    } else {
+        linkBtn.titleLabel.font = [UIFont boldSystemFontOfSize:18];
+    }
     [linkBtn addTarget:self action:@selector(linkBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:linkBtn];
 }
@@ -176,7 +184,7 @@
             
             self.loginButton.enabled = YES;
             [Navigator popToRootController];
-            [[AppDelegate delegate] initDHSlideMenu];
+            [myAppDelegate initDHSlideMenu];
             
             NSString *message = [NSString stringWithFormat:@"用户%@登录成功", phone];
             [MBHudUtil showTextViewAfter:message];

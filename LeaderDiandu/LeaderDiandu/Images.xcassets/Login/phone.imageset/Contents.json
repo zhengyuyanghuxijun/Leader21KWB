@@ -6,18 +6,18 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "phone@2x.png"
+      "filename" : "phone@2x.png",
+      "scale" : "2x"
     },
     {
       "resizing" : {
         "mode" : "9-part",
         "center" : {
-          "mode" : "fill",
+          "mode" : "tile",
           "width" : 1,
           "height" : 1
         },
-        "capInsets" : {
+        "cap-insets" : {
           "bottom" : 23,
           "top" : 19,
           "right" : 7,

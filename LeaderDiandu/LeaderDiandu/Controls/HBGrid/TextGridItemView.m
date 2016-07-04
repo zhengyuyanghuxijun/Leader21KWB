@@ -126,6 +126,8 @@
 
 - (void) initUI
 {
+    CGFloat multiple = myAppDelegate.multiple;
+    
     //阅读进度Label
     self.readProgressLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, self.frame.size.width, 25)];
     self.readProgressLabel.textAlignment = NSTextAlignmentCenter;
@@ -139,24 +141,28 @@
     [self addSubview:_progressControl];
     
     //下载按钮
+    CGFloat controlW = 60*multiple;
     self.downloadButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.downloadButton.frame = CGRectMake((self.frame.size.width - 60)/2, 10, 60, 25);
+    self.downloadButton.frame = CGRectMake((self.frame.size.width - controlW)/2, 10, controlW, 25*multiple);
     [self.downloadButton addTarget:self action:@selector(downloadButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.downloadButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.downloadButton.titleLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
+    self.downloadButton.titleLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE*multiple];
     [self addSubview:self.downloadButton];
     
     //书籍名称
     self.bookNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(self.downloadButton.frame) + 5, self.frame.size.width - 30, 20)];
     self.bookNameLabel.textAlignment = NSTextAlignmentCenter;
-    self.bookNameLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];;
+    self.bookNameLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE*multiple];;
     [self addSubview:self.bookNameLabel];
     
     //书籍封皮
     self.bookCoverButton = [UIButton buttonWithType:UIButtonTypeCustom];
     NSInteger height = 120;
     NSInteger controlX = 10;
-    if (isIPhone4 || isIPad) {
+    if (myAppDelegate.isPad) {
+        controlX = 40;
+        height = 230;
+    } else if (isIPhone4) {
         controlX = 20;
         height = 80;
     } else if (isIPhone5) {
@@ -166,7 +172,7 @@
     } else if (isIPhone6P) {
         controlX = 20;
     }
-    self.bookCoverButton.frame = CGRectMake(controlX, CGRectGetMaxY(self.bookNameLabel.frame), self.frame.size.width - controlX*2, height);
+    self.bookCoverButton.frame = CGRectMake(controlX, CGRectGetMaxY(self.bookNameLabel.frame)+10, self.frame.size.width - controlX*2, height);
     [self.bookCoverButton addTarget:self action:@selector(bookCoverButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.bookCoverButton];
     

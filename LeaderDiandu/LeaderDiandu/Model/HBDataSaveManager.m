@@ -168,8 +168,8 @@
     }
     self.showEnBookName = [showEnBookNameStr boolValue];
     
-    [AppDelegate delegate].hasNewMsg = NO;
-    [AppDelegate delegate].hasNewExam = NO;
+    myAppDelegate.hasNewMsg = NO;
+    myAppDelegate.hasNewExam = NO;
 }
 
 - (void)saveFirstLogin

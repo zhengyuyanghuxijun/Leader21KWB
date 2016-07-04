@@ -127,7 +127,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     Class viewCtlClass = NSClassFromString(_headerClassName);
     if (viewCtlClass && [viewCtlClass isSubclassOfClass:[UIViewController class]]) {
         UIViewController *viewController = [[viewCtlClass alloc] init];
-        [[AppDelegate delegate].globalNavi pushViewController:viewController animated:YES];
+        [myAppDelegate.globalNavi pushViewController:viewController animated:YES];
     }
 }
 
@@ -146,12 +146,16 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return 60*myAppDelegate.multiple;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return KTableHeaderHeight;
+    if (myAppDelegate.isPad) {
+        return 200;
+    } else {
+        return 150;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -159,9 +163,14 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     UIView *view = [[UIView alloc] init];
     view.backgroundColor = [UIColor colorWithHex:0xe4e4e4];
     
+    float viewHeight = 150;
     float controlX = 20;
     float controlH = 50;
-    float controlY = KTableHeaderHeight - controlH - 20;
+    if (myAppDelegate.isPad) {
+        viewHeight = 200;
+        controlH = 100;
+    }
+    float controlY = viewHeight - controlH - 20;
     UIImageView *headView = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlH, controlH)];
     if (_avatarFile) {
         headView.layer.cornerRadius = controlH/2;
@@ -185,11 +194,16 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     [view addSubview:buttonInfo];
     
     UIColor *textColor = RGB(93, 85, 95);
-    UIFont *font = [UIFont systemFontOfSize:20];
+    UIFont *font = nil;
+    if (myAppDelegate.isPad) {
+        font = [UIFont systemFontOfSize:30];
+    } else {
+        font = [UIFont systemFontOfSize:20];
+    }
     float typeW = 70;
     controlX = 0;
     controlY = 0;
-    controlH = 25;
+    controlH /= 2;
     controlW = buttonInfo.frame.size.width-controlH-typeW-10;
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if ([userEntity.display_name length] > 0) {
@@ -202,7 +216,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     }
     
     controlY += controlH;
-    controlW = 150;
+//    controlW = 150;
     UILabel *phoneLbl = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     phoneLbl.backgroundColor = [UIColor clearColor];
     phoneLbl.textColor = textColor;
@@ -222,6 +236,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
         controlX = arrowX-typeW-5;
     }
     controlY = 0;
+    controlH = 25;
     UIView *typeView = [self createTypeView:CGRectMake(controlX, controlY, typeW, controlH)];
     [buttonInfo addSubview:typeView];
     
@@ -276,17 +291,22 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     cell.backgroundColor = self.backgroundColor;
     cell.textLabel.text = [self.titles objectAtIndex:indexPath.row];
     cell.textLabel.textColor = [UIColor blackColor];
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
-//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    if (myAppDelegate.isPad) {
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:30];
+    } else {
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
+    }
     
     if ([viewCtlName isEqualToString:@"HBMessageViewController"]) { //消息中心
         if (!self.msgRedPointView) {
             self.msgRedPointView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"msg_tips_new"]];
-            self.msgRedPointView.frame = CGRectMake(150, (60 - 15)/2, 15, 15);
+            float controlX = 150*myAppDelegate.multiple;
+            float controlY = (60*myAppDelegate.multiple - 15)/2;
+            self.msgRedPointView.frame = CGRectMake(controlX, controlY, 15, 15);
             [cell addSubview:self.msgRedPointView];
         }
         
-        if([AppDelegate delegate].hasNewMsg){
+        if(myAppDelegate.hasNewMsg){
             self.msgRedPointView.hidden = NO;
         }else{
             self.msgRedPointView.hidden = YES;
@@ -296,11 +316,11 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     if ([viewCtlName isEqualToString:@"HBTestWorkViewController"]) { //我的作业
         if (!self.examRedPointView) {
             self.examRedPointView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"msg_tips_new"]];
-            self.examRedPointView.frame = CGRectMake(150, (60 - 15)/2, 15, 15);
+            self.examRedPointView.frame = CGRectMake(150*myAppDelegate.multiple, (60*myAppDelegate.multiple - 15)/2, 15, 15);
             [cell addSubview:self.examRedPointView];
         }
         
-        if([AppDelegate delegate].hasNewExam){
+        if(myAppDelegate.hasNewExam){
             self.examRedPointView.hidden = NO;
         }else{
             self.examRedPointView.hidden = YES;
@@ -333,7 +353,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
         Class viewCtlClass = NSClassFromString(viewCtlName);
         if (viewCtlClass && [viewCtlClass isSubclassOfClass:[UIViewController class]]) {
             UIViewController *viewController = [[viewCtlClass alloc] init];
-            [[AppDelegate delegate].globalNavi pushViewController:viewController animated:YES];
+            [myAppDelegate.globalNavi pushViewController:viewController animated:YES];
         }
     }
     

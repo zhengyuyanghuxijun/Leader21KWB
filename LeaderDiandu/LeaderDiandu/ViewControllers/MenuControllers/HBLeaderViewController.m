@@ -138,7 +138,8 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
     if (!_bottomBtn) {
         CGRect rc = CGRectMake(10.0f, ScreenHeight - 60.0f, ScreenWidth - 10 - 10, 50.0f);
         _bottomBtn = [[UIButton alloc] initWithFrame:rc];
-        [_bottomBtn setBackgroundImage:[UIImage imageNamed:@"user_button"] forState:UIControlStateNormal];
+        [_bottomBtn setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
+        [_bottomBtn setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
         [_bottomBtn addTarget:self action:@selector(bottomBtnPressed) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_bottomBtn];
     }
@@ -157,8 +158,10 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
         if (buttonIndex == 1) {
             //解除绑定
             HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+            [MBHudUtil showActivityView:nil inView:nil];
             [[HBServiceManager defaultManager] requestDirectorUnAss:userEntity.name completion:^(id responseObject, NSError *error) {
                 [self getUserInfo];
+                [MBHudUtil hideActivityView:nil];
             }];
         }
     }
@@ -171,7 +174,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
         alertView.tag = 0;
         
         [alertView show];
-    }else{
+    } else {
         NSString *leaderName = nil;
         for (NSString *keyStr in [self.leaderSelectedDic allKeys]) {
             NSString *valueStr = [self.leaderSelectedDic objectForKey:keyStr];
@@ -183,8 +186,10 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
         
         if (leaderName) {
             HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+            [MBHudUtil showActivityView:nil inView:nil];
             [[HBServiceManager defaultManager] requestDirectorAss:userEntity.name director:leaderName completion:^(id responseObject, NSError *error) {
                 [self getUserInfo];
+                [MBHudUtil hideActivityView:nil];
             }];
         }
     }
@@ -216,7 +221,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (self.isBinding){
-        if (isIPhone4 || isIPad) {
+        if (isIPhone4) {
             return 150;
         } else {
             return 200;
@@ -232,7 +237,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
     NSInteger screenWidth = [UIScreen mainScreen].bounds.size.width;
     UIView *view = [[UIView alloc] init];
     CGFloat imgY = 0;
-    if (isIPhone4 || isIPad) {
+    if (isIPhone4) {
         imgY = (150-imgWidth) / 2;
     } else {
         imgY = (200-imgWidth) / 2;

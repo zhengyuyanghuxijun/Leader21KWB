@@ -37,14 +37,15 @@
     self.bodyLabel = [[UILabel alloc] init];
     self.bodyLabel.frame = CGRectMake(10 + 30 + 10, (70 - 25*2)/2, ScreenWidth - 10 - 30 - 10, 25*2);
     self.bodyLabel.textAlignment = NSTextAlignmentLeft;
-    self.bodyLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
+    self.bodyLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE*myAppDelegate.multiple];
     self.bodyLabel.numberOfLines = 0;
     [self addSubview:self.bodyLabel];
     
     //时间
-    self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - 100, 70/2 + 5, 90, 70/2)];
+    float controlW = 90*myAppDelegate.multiple;
+    self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-controlW-10, 70/2 + 5, controlW, 70/2)];
     self.timeLabel.textAlignment = NSTextAlignmentCenter;
-    self.timeLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
+    self.timeLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE*myAppDelegate.multiple];
     self.timeLabel.textColor = [UIColor colorWithHex:0xff8903];
     [self addSubview:self.timeLabel];
     

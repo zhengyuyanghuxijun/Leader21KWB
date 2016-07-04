@@ -306,7 +306,11 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return KTeacherCellHeight;
+    if (myAppDelegate.isPad) {
+        return 100;
+    } else {
+        return 60;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -329,7 +333,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     
     if (headFile) {
         //设置显示圆形头像
-        headView.layer.cornerRadius = 100/2;
+        headView.layer.cornerRadius = imgWidth/2;
         headView.clipsToBounds = YES;
         headView.image = [UIImage imageWithContentsOfFile:headFile];
         if (headView.image == nil) {

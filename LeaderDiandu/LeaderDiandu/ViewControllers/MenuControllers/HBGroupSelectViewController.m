@@ -46,7 +46,9 @@
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
         NSString *user = userEntity.name;
+        [MBHudUtil showActivityView:nil inView:nil];
         [[HBServiceManager defaultManager] requestClassList:user completion:^(id responseObject, NSError *error) {
+            [MBHudUtil hideActivityView:nil];
             NSArray *arr = [responseObject objectForKey:@"classes"];
             for (NSDictionary *dic in arr)
             {

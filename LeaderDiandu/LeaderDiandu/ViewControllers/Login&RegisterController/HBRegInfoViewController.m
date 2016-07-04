@@ -101,7 +101,7 @@
 
 - (void)buttonAction:(id)sender
 {
-    [AppDelegate delegate].loginVC.userID = self.userID;
+    myAppDelegate.loginVC.userID = self.userID;
     [Navigator pushLoginControllerNow];
 }
 

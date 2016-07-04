@@ -60,7 +60,7 @@
     
     //没有iPad的加载图
     if ([device.model hasPrefix:@"iPad"]
-        /*&& screenWidth>=768.0f && screenHeight>=1024.0f*/) {
+        && screenWidth>=768.0f && screenHeight>=1024.0f) {
         return YES;
     }
     else {

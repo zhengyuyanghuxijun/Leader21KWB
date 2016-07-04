@@ -75,9 +75,11 @@ DEF_SINGLETON(ReadBookDecrypt);
             if ([filePath rangeOfString:@".xml"].location != NSNotFound) {
                 NSString *decryptStr = [[NSString alloc] initWithData:decryptData encoding:NSUTF8StringEncoding];
                 NSRange endRange = [decryptStr rangeOfString:@">" options:NSBackwardsSearch];
-                NSString *resStr = [decryptStr substringToIndex:endRange.location + 1];
-                NSData *resData = [resStr dataUsingEncoding:NSUTF8StringEncoding];
-                [resData writeToFile:filePath atomically:YES];
+                if (endRange.length > 0) {
+                    NSString *resStr = [decryptStr substringToIndex:endRange.location + 1];
+                    NSData *resData = [resStr dataUsingEncoding:NSUTF8StringEncoding];
+                    [resData writeToFile:filePath atomically:YES];
+                }
             }
             else if([filePath rangeOfString:@".txt"].location != NSNotFound)
             {
