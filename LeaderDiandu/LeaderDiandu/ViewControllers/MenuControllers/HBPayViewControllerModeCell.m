@@ -50,7 +50,7 @@
         [self addSubview:self.modeLabel];
     } else {
         float controlW = 250;
-        if (iPhone5) {
+        if (isIPhone5) {
             controlW = 230;
         }
         UIImageView *editBg = [[UIImageView alloc] initWithFrame:CGRectMake(10 + 30 + 10, 0, controlW, 50)];

@@ -156,14 +156,14 @@
     self.bookCoverButton = [UIButton buttonWithType:UIButtonTypeCustom];
     NSInteger height = 120;
     NSInteger controlX = 10;
-    if (iPhone4 || [UIDevice isiPad]) {
+    if (isIPhone4 || isIPad) {
         controlX = 20;
         height = 80;
-    } else if (iPhone5) {
+    } else if (isIPhone5) {
         height = 100;
-    } else if (iPhone6) {
+    } else if (isIPhone6) {
         controlX = 15;
-    } else if (iPhone6Plus) {
+    } else if (isIPhone6P) {
         controlX = 20;
     }
     self.bookCoverButton.frame = CGRectMake(controlX, CGRectGetMaxY(self.bookNameLabel.frame), self.frame.size.width - controlX*2, height);

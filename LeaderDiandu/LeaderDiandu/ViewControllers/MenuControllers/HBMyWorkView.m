@@ -75,14 +75,14 @@ typedef enum : NSUInteger {
     float controlY = 0;
     float controlW = frame.size.width - controlX*2;
     float controlH = 220;
-    if (iPhone4 || [UIDevice isiPad]) {
+    if (isIPhone4 || isIPad) {
         controlH = 180;
     }
     [self initQuestionView:CGRectMake(controlX, controlY, controlW, controlH)];
     
     controlH = 40;
     NSInteger margin = 20;
-    if (iPhone5) {
+    if (isIPhone5) {
         margin = 20;
     }
     controlY = frame.size.height-margin-controlH;
@@ -122,7 +122,7 @@ typedef enum : NSUInteger {
     
     controlY += controlH + 10;
     controlH = 60;
-    if (iPhone4 || [UIDevice isiPad]) {
+    if (isIPhone4 || isIPad) {
         controlH = 50;
     }
     _descLabel = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
@@ -133,7 +133,7 @@ typedef enum : NSUInteger {
     _descLabel.numberOfLines = 0;
     [_questionView addSubview:_descLabel];
 
-    if (iPhone4 || [UIDevice isiPad]) {
+    if (isIPhone4 || isIPad) {
         controlY += controlH-10;
     } else {
         controlY += controlH + 10;
@@ -159,7 +159,7 @@ typedef enum : NSUInteger {
     } else {
         CGRect rect = _questionView.frame;
         NSInteger margin = 10;
-        if (iPhone4 || [UIDevice isiPad]) {
+        if (isIPhone4 || isIPad) {
             margin = 0;
         }
         float selY = CGRectGetMaxY(rect) + margin;
@@ -179,10 +179,10 @@ typedef enum : NSUInteger {
     if (count > 0) {
         if ([optionArray[0] isKindOfClass:[UIImage class]] == NO) {
             controlW = 140;
-            if (iPhone5) {
+            if (isIPhone5) {
                 controlW = 120;
                 controlH = 60;
-            } else if (iPhone4 || [UIDevice isiPad]) {
+            } else if (isIPhone4 || isIPad) {
                 controlW = 100;
                 controlH = 60;
             }
@@ -313,7 +313,7 @@ typedef enum : NSUInteger {
             _descImg.image = image;
             CGSize imgSize = image.size;
             NSInteger scale = 3;
-            if (iPhone4 || [UIDevice isiPad] || iPhone5) {
+            if (isIPhone4 || isIPad || isIPhone5) {
                 scale = 4;
             }
             if ([typeStr isEqualToString:@"judge"]) {

@@ -16,7 +16,6 @@
 #import "HBNLoginViewController.h"
 #import "HBGradeViewController.h"
 
-#import "Constants.h"
 #import "HBVersionCheck.h"
 
 #import <Bugly/CrashReporter.h>

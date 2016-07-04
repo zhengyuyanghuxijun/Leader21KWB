@@ -9,6 +9,7 @@
 #import "UIImage+Extra.h"
 
 @implementation UIImage (UIImageExtra)
+
 + (UIImage *)retina4ImageNamed:(NSString *)name;
 {
     if (iPhone5) {

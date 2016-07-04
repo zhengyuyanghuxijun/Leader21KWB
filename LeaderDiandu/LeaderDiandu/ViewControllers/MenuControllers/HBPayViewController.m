@@ -87,7 +87,7 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
     UIView* view = [[UIView alloc] initWithFrame:rc];
     rc.origin.x += 20.0f;
     rc.size.width -= 40.0f;
-    if (iPhone5) {
+    if (isIPhone5) {
         rc.origin.y += 10.0f;
     } else {
         rc.origin.y += 20.0f;
