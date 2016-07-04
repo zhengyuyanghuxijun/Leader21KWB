@@ -57,7 +57,7 @@
     CGRect rect = self.view.frame;
     float controlX = 20;
     NSInteger margin = 30;
-    if ([[UIDevice currentDevice] isIphone5]) {
+    if (isIPhone5) {
         margin = 10;
     }
     float controlY = KHBNaviBarHeight + margin;

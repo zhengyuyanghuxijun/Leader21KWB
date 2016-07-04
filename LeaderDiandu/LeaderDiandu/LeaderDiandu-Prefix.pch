@@ -30,7 +30,6 @@
 #import "AppDelegate.h"
 #import "UIImage+Extra.h"
 #import "MBHudUtil.h"
-#import "UIDevice+Addtional.h"
 #import "UIColor+TKCategory.h"
 #import "NSDictionary+Safe.h"
 #import "NSString+MD5.h"

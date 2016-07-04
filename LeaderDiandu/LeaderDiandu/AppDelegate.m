@@ -90,7 +90,7 @@ AppDelegate *myAppDelegate;
     
     myAppDelegate = self;
     self.multiple = 1.0;
-    if ([UIDevice isiPad]) {
+    if (isIPad) {
         self.isPad = YES;
         self.multiple = 1.5;
     }
