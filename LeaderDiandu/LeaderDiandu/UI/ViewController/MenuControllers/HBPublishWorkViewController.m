@@ -49,7 +49,7 @@
     
     [self addTableView];
     
-    CGRect rc = CGRectMake(10.0f, ScreenHeight - 80.0f, ScreenWidth - 10 - 10, 50.0f);
+    CGRect rc = CGRectMake(10.0f, HBFullScreenHeight - 80.0f, HBFullScreenWidth - 10 - 10, 50.0f);
     self.publishWorkButton = [[UIButton alloc] initWithFrame:rc];
     [self.publishWorkButton setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
     [self.publishWorkButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
@@ -61,7 +61,7 @@
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, 0, rect.size.width, ScreenHeight);
+    CGRect viewFrame = CGRectMake(0, 0, rect.size.width, HBFullScreenHeight);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -107,7 +107,7 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
     
     UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0,70 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
-    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    seperatorLine.backgroundColor = HEXRGBCOLOR(0xff8903);
     [cell addSubview:seperatorLine];
     
     return cell;

@@ -12,7 +12,6 @@
 //#import "HBGradeDemoViewController.h"
 #import "HBNTextField.h"
 
-#import "NSString+Verify.h"
 #import "HBServiceManager.h"
 
 @interface HBNLoginViewController ()<UITextFieldDelegate>
@@ -81,7 +80,7 @@
 {
     float multiple = myAppDelegate.multiple;
     float screenW = self.view.frame.size.width;
-    float controlY = KHBNaviBarHeight + 50;
+    float controlY = HBNavBarHeight + 50;
     float controlH = 91*multiple;
     UIView *accountView = [[UIView alloc] initWithFrame:CGRectMake(0, controlY, screenW, controlH)];
     accountView.backgroundColor = [UIColor whiteColor];
@@ -137,7 +136,7 @@
     controlW = 100;
     controlH = 50;
     controlX = (screenW - controlW) / 2;
-    controlY = ScreenHeight - 20 - 50;
+    controlY = HBFullScreenHeight - 20 - 50;
     UIButton *linkBtn = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     [linkBtn setTitle:@"跳过" forState:UIControlStateNormal];
     [linkBtn setTitleColor:RGB(249, 156, 0) forState:UIControlStateNormal];
@@ -163,7 +162,7 @@
     
     NSString *phone = self.inputPhoneNumber.text;
     NSString *pwd = self.inputPassword.text;
-    if ([NSString checkTextNULL:phone]  || [NSString checkTextNULL:pwd] ) {
+    if ([phone isEmpty]  || [pwd isEmpty] ) {
         [MBHudUtil showTextView:@"请填写完整的用户名和密码" inView:nil];
         return;
     }

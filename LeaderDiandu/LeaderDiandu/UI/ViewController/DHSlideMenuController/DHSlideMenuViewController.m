@@ -14,8 +14,7 @@
 #import "HBHeaderManager.h"
 
 #define KTableHeaderHeight  150
-#define ScreenWidth [UIScreen mainScreen].bounds.size.width
-#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+
 static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewControllerCellReuseId";
 
 @interface DHSlideMenuViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -70,7 +69,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, ScreenWidth, ScreenHeight)];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, HBFullScreenWidth, HBFullScreenHeight)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = NO;
@@ -161,7 +160,7 @@ static NSString * const kSlideMenuViewControllerCellReuseId = @"kSlideMenuViewCo
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor colorWithHex:0xe4e4e4];
+    view.backgroundColor = HEXRGBCOLOR(0xe4e4e4);
     
     float viewHeight = 150;
     float controlX = 20;

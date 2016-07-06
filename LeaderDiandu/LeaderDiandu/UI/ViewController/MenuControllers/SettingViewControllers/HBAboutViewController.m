@@ -20,30 +20,30 @@
     self.title = @"关于课外宝";
     
     UIImageView *logoImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"APPicon_about"]];
-    logoImgView.frame = CGRectMake((ScreenWidth - 120)/2, ScreenHeight/4, 120, 120);
+    logoImgView.frame = CGRectMake((HBFullScreenWidth - 120)/2, HBFullScreenHeight/4, 120, 120);
     logoImgView.layer.cornerRadius = 30;
     logoImgView.clipsToBounds = YES;
     [self.view addSubview:logoImgView];
     
     UILabel *versionLabel = [[UILabel alloc] init];
-    versionLabel.frame = CGRectMake(0, logoImgView.frame.origin.y + 120 + 20, ScreenWidth, 20);
+    versionLabel.frame = CGRectMake(0, logoImgView.frame.origin.y + 120 + 20, HBFullScreenWidth, 20);
     versionLabel.text = [NSString stringWithFormat:@"%@%@", @"课外宝 ", self.versionStr];
     versionLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:versionLabel];
     
     UILabel *companyLabel = [[UILabel alloc] init];
-    companyLabel.frame = CGRectMake(0, versionLabel.frame.origin.y + 20 + 10, ScreenWidth, 20);
+    companyLabel.frame = CGRectMake(0, versionLabel.frame.origin.y + 20 + 10, HBFullScreenWidth, 20);
     companyLabel.text =  @"上海乐迪网络科技有限公司";
     companyLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:companyLabel];
     
     UILabel *phoneLabel = [[UILabel alloc] init];
-    phoneLabel.frame = CGRectMake(0, companyLabel.frame.origin.y + 20 + 10, ScreenWidth/2 - 13, 20);
+    phoneLabel.frame = CGRectMake(0, companyLabel.frame.origin.y + 20 + 10, HBFullScreenWidth/2 - 13, 20);
     phoneLabel.text =  @"客服电话：";
     phoneLabel.textAlignment = NSTextAlignmentRight;
     [self.view addSubview:phoneLabel];
     
-    UIButton *phoneBtn = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth/2 - 13, companyLabel.frame.origin.y + 20 + 10, ScreenWidth/2, 20)];
+    UIButton *phoneBtn = [[UIButton alloc] initWithFrame:CGRectMake(HBFullScreenWidth/2 - 13, companyLabel.frame.origin.y + 20 + 10, HBFullScreenWidth/2, 20)];
     [phoneBtn setTitle:@"400-812-6161" forState:UIControlStateNormal];
     [phoneBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
     phoneBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;

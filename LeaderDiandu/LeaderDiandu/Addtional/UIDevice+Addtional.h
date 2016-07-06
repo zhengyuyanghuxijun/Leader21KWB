@@ -55,7 +55,7 @@
 
 
 // 内存信息
-+ (unsigned int)freeMemory;
-+ (unsigned int)usedMemory;
++ (unsigned long)freeMemory;
++ (unsigned long)usedMemory;
 
 @end

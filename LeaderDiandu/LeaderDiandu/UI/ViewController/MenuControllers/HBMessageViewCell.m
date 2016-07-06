@@ -46,11 +46,11 @@
     self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-controlW-10, 70/2 + 5, controlW, 70/2)];
     self.timeLabel.textAlignment = NSTextAlignmentCenter;
     self.timeLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE*myAppDelegate.multiple];
-    self.timeLabel.textColor = [UIColor colorWithHex:0xff8903];
+    self.timeLabel.textColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:self.timeLabel];
     
     UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 70 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
-    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    seperatorLine.backgroundColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:seperatorLine];
 }
 

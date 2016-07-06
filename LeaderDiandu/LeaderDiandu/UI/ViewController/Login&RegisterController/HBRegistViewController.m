@@ -10,7 +10,6 @@
 #import "HBNLoginViewController.h"
 #import "HBRegInfoViewController.h"
 #import "HBNTextField.h"
-#import "NSString+Verify.h"
 #import "HBServiceManager.h"
 #import "HBHyperlinksButton.h"
 
@@ -92,7 +91,7 @@
     }
     
     float margin = 10;
-    float controlY = KHBNaviBarHeight + 50;
+    float controlY = HBNavBarHeight + 50;
     float controlH = 45;
     float screenW = self.view.frame.size.width;
     UIView *accountView = [[UIView alloc] initWithFrame:CGRectMake(0, controlY, screenW, controlH*editNum+30)];
@@ -331,14 +330,14 @@
     BOOL needReturn = NO;
     NSString *pwd1 = self.inputPassword.text;
     NSString *pwd2 = self.againPassword.text;
-    if ([NSString checkTextNULL:self.inputPhoneNumber.text]){
+    if ([self.inputPhoneNumber.text isEmpty]){
         if (self.viewType == KLeaderViewTypeRegister) {
             [MBHudUtil showTextView:@"请输入昵称" inView:nil];
         } else {
             [MBHudUtil showTextView:@"请输入手机号" inView:nil];
         }
         return YES;
-    } else if ([NSString checkTextNULL:self.inputVerifyCode.text]){
+    } else if ([self.inputVerifyCode.text isEmpty]){
         [MBHudUtil showTextView:@"请输入验证码" inView:nil];
         return YES;
     } else if ([pwd1 length]==0 || [pwd2 length]==0) {

@@ -37,7 +37,7 @@
     self.totalReadCountLabel = [[UILabel alloc] init];
     self.totalReadCountLabel.frame = CGRectMake(0, 50, ScreenWidth/2, 50);
     self.totalReadCountLabel.text = @"          0     次";
-    self.totalReadCountLabel.textColor = [UIColor colorWithHex:0x1E90FF];
+    self.totalReadCountLabel.textColor = HEXRGBCOLOR(0x1E90FF);
     self.totalReadCountLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     self.totalReadCountLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.totalReadCountLabel];
@@ -54,7 +54,7 @@
     self.totalReadTimeLabel = [[UILabel alloc] init];
     self.totalReadTimeLabel.frame = CGRectMake(ScreenWidth/2, 50, ScreenWidth/2, 50);
     self.totalReadTimeLabel.text = @"          0     分钟";
-    self.totalReadTimeLabel.textColor = [UIColor colorWithHex:0x1E90FF];
+    self.totalReadTimeLabel.textColor = HEXRGBCOLOR(0x1E90FF);
     self.totalReadTimeLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     self.totalReadTimeLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.totalReadTimeLabel];
@@ -71,7 +71,7 @@
     self.perReadCountLabel = [[UILabel alloc] init];
     self.perReadCountLabel.frame = CGRectMake(0, 50 + 100, ScreenWidth/2, 50);
     self.perReadCountLabel.text = @"          0     次";
-    self.perReadCountLabel.textColor = [UIColor colorWithHex:0x1E90FF];
+    self.perReadCountLabel.textColor = HEXRGBCOLOR(0x1E90FF);
     self.perReadCountLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     self.perReadCountLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.perReadCountLabel];
@@ -88,7 +88,7 @@
     self.perReadTimeLabel = [[UILabel alloc] init];
     self.perReadTimeLabel.frame = CGRectMake(ScreenWidth/2, 50 + 100, ScreenWidth/2, 50);
     self.perReadTimeLabel.text = @"          0     分钟";
-    self.perReadTimeLabel.textColor = [UIColor colorWithHex:0x1E90FF];
+    self.perReadTimeLabel.textColor = HEXRGBCOLOR(0x1E90FF);
     self.perReadTimeLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     self.perReadTimeLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.perReadTimeLabel];
@@ -105,7 +105,7 @@
     self.perBookReadLabel = [[UILabel alloc] init];
     self.perBookReadLabel.frame = CGRectMake(0, 50 + 200, ScreenWidth/2, 50);
     self.perBookReadLabel.text = @"          0     次";
-    self.perBookReadLabel.textColor = [UIColor colorWithHex:0x1E90FF];
+    self.perBookReadLabel.textColor = HEXRGBCOLOR(0x1E90FF);
     self.perBookReadLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     self.perBookReadLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.perBookReadLabel];

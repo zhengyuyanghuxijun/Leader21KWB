@@ -37,7 +37,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     float controlX = 20;
     float controlH = 25;
     float controlY = (KTeacherCellHeight-controlH*2-5)/2;
-    float controlW = ScreenWidth - controlX*2;
+    float controlW = HBFullScreenWidth - controlX*2;
     
     //时间
     self.cellTitle = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
@@ -86,7 +86,7 @@ static NSString * const KMyTeacherViewControllerCellReuseId = @"KUserInfoViewCon
     }
     
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight);
+    CGRect viewFrame = CGRectMake(0, HBNavBarHeight, rect.size.width, rect.size.height-HBNavBarHeight);
     [self createBindView:viewFrame];
     [self createTableView:viewFrame];
     

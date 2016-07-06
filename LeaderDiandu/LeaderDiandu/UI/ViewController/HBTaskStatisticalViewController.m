@@ -70,7 +70,7 @@
     
     UINavigationBar *naviBar = self.navigationController.navigationBar;
     //设置navigationBar背景颜色
-    [naviBar setBarTintColor:[UIColor colorWithHex:0x1E90FF]];
+    [naviBar setBarTintColor:HEXRGBCOLOR(0x1E90FF)];
     
     self.navigationController.navigationBarHidden = NO;
     self.title = @"作业统计";
@@ -89,7 +89,7 @@
 -(void)addTableView
 {
     if (_tableView == nil) {
-        _tableView = [[HBTableView alloc] initWithFrame:CGRectMake(0.0f, KHBNaviBarHeight + 50 + 50, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50 - 50)];
+        _tableView = [[HBTableView alloc] initWithFrame:CGRectMake(0.0f, HBNavBarHeight + 50 + 50, HBFullScreenWidth, HBFullScreenHeight - HBNavBarHeight - 50 - 50)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = NO;
@@ -105,7 +105,7 @@
 
 - (void)initButton{
     //知识点按钮
-    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight, self.view.frame.size.width/2, 50.0f);
+    CGRect rc = CGRectMake(0.0f, HBNavBarHeight, self.view.frame.size.width/2, 50.0f);
     self.knowledgeButton = [[UIButton alloc] initWithFrame:rc];
     [self.knowledgeButton setBackgroundColor:[UIColor whiteColor]];
     [self.knowledgeButton setTitle:@"知识点" forState:UIControlStateNormal];
@@ -114,11 +114,11 @@
     [self.view addSubview:self.knowledgeButton];
     
     self.knowledgeSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.knowledgeButton.frame.size.height - 2, self.knowledgeButton.frame.size.width, 2)];
-    self.knowledgeSeperator.backgroundColor = [UIColor colorWithHex:0x1E90FF];
+    self.knowledgeSeperator.backgroundColor = HEXRGBCOLOR(0x1E90FF);
     [self.knowledgeButton addSubview:self.knowledgeSeperator];
     
     //能力值按钮
-    rc = CGRectMake(self.view.frame.size.width/2, KHBNaviBarHeight, self.view.frame.size.width/2, 50.0f);
+    rc = CGRectMake(self.view.frame.size.width/2, HBNavBarHeight, self.view.frame.size.width/2, 50.0f);
     self.abilityButton = [[UIButton alloc] initWithFrame:rc];
     [self.abilityButton setBackgroundColor:[UIColor whiteColor]];
     [self.abilityButton setTitle:@"能力值" forState:UIControlStateNormal];
@@ -127,7 +127,7 @@
     [self.view addSubview:self.abilityButton];
     
     self.abilitySeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.abilityButton.frame.size.height - 2, self.abilityButton.frame.size.width, 2)];
-    self.abilitySeperator.backgroundColor = [UIColor colorWithHex:0x1E90FF];
+    self.abilitySeperator.backgroundColor = HEXRGBCOLOR(0x1E90FF);
     [self.abilityButton addSubview:self.abilitySeperator];
     
     [self showKnowledgeView:YES];
@@ -136,7 +136,7 @@
 - (void)initSelectBookSetView
 {
     UIView *bgView = [[UIView alloc] init];
-    bgView.frame = CGRectMake(0, KHBNaviBarHeight + 50, ScreenWidth, 50);
+    bgView.frame = CGRectMake(0, HBNavBarHeight + 50, HBFullScreenWidth, 50);
     bgView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:bgView];
@@ -177,7 +177,7 @@
     [bgView addSubview:self.thisWeekButton];
     
     //套餐按钮
-    self.bookSetButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 8 - 44, (50 - 35)/2, 35, 35)];
+    self.bookSetButton = [[UIButton alloc] initWithFrame:CGRectMake(HBFullScreenWidth - 8 - 44, (50 - 35)/2, 35, 35)];
     [self.bookSetButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-class"] forState:UIControlStateNormal];
     [self.bookSetButton addTarget:self action:@selector(bookSetButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.bookSetButton setTitle:[NSString stringWithFormat:@"%ld", self.bookset_id] forState:UIControlStateNormal];
@@ -289,9 +289,9 @@
     CGFloat menuY = 160;
     CGFloat menuH = 50 * 9;
     if (isIPhone4) {
-        menuH = ScreenHeight-menuY;
+        menuH = HBFullScreenHeight-menuY;
     }
-    CGRect menuFrame = CGRectMake(ScreenWidth - 75, menuY, 60, menuH);
+    CGRect menuFrame = CGRectMake(HBFullScreenWidth - 75, menuY, 60, menuH);
     
     [FTMenu showMenuWithFrame:menuFrame inView:self.navigationController.view menuItems:menuItems currentID:0];
 }

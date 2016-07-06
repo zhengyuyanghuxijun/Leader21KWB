@@ -121,7 +121,7 @@ static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
 
 - (void)initMainGrid
 {
-    _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, ScreenWidth, CGRectGetMinY(self.ruleDescriptionButton.frame)-KHBNaviBarHeight-10)];
+    _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, HBNavBarHeight, ScreenWidth, CGRectGetMinY(self.ruleDescriptionButton.frame)-HBNavBarHeight-10)];
     _gridView.delegate = self;
     [_gridView setScrollEnabled:NO];
     [self.view addSubview:_gridView];

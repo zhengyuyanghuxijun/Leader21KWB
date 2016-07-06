@@ -45,7 +45,7 @@ static NSString * const KOtherStuCellReuseId = @"KOtherStuCellReuseId";
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    //    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, rect.size.height-KHBNaviBarHeight);
+    //    CGRect viewFrame = CGRectMake(0, HBNavBarHeight, rect.size.width, rect.size.height-HBNavBarHeight);
     CGRect viewFrame = CGRectMake(0, 0, rect.size.width, rect.size.height);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;

@@ -7,7 +7,6 @@
 //
 
 #import "HBBindPhoneViewController.h"
-#import "NSString+Verify.h"
 #import "HBServiceManager.h"
 
 @interface HBBindPhoneViewController ()
@@ -35,7 +34,7 @@
     
     float screenW = self.view.frame.size.width;
     float controlX = 0;
-    float controlY = KHBNaviBarHeight + 50;
+    float controlY = HBNavBarHeight + 50;
     float controlW = screenW;
     float controlH = 45;
     UIView *editBg = [[UIView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH*2+1)];
@@ -105,7 +104,7 @@
     [self.view endEditing:YES];
     
     NSString *phoneNum = _phoneEdit.text;
-    if ( [NSString checkTextNULL:phoneNum] || ![phoneNum isPhoneNumInput]) {
+    if ( [phoneNum isEmpty] || ![phoneNum isPhoneNumInput]) {
         [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
         return;
     }
@@ -140,7 +139,7 @@
     
     NSString *phoneNum = _phoneEdit.text;
     NSString *codeNum = _codeEdit.text;
-    if ( [NSString checkTextNULL:phoneNum] || ![phoneNum isPhoneNumInput]) {
+    if ( [phoneNum isEmpty] || ![phoneNum isPhoneNumInput]) {
         [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
         return;
     } else if ([codeNum length] == 0) {
@@ -190,7 +189,7 @@
         [MBHudUtil showTextView:@"请输入手机号码" inView:nil];
         needReturn = YES;
     }
-    else if ([NSString checkTextNULL:_codeEdit.text]) {
+    else if ([_codeEdit.text isEmpty]) {
         [MBHudUtil showTextView:@"请输入验证码" inView:nil];
         needReturn = YES;
     }

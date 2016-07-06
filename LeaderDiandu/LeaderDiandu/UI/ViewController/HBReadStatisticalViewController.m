@@ -55,7 +55,7 @@
     
     UINavigationBar *naviBar = self.navigationController.navigationBar;
     //设置navigationBar背景颜色
-    [naviBar setBarTintColor:[UIColor colorWithHex:0x1E90FF]];
+    [naviBar setBarTintColor:HEXRGBCOLOR(0x1E90FF)];
     
     self.navigationController.navigationBarHidden = NO;
     self.title = @"阅读统计";
@@ -164,7 +164,7 @@
 -(void)addTableView
 {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, ScreenWidth, ScreenHeight)];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, HBFullScreenWidth, HBFullScreenHeight)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = NO;

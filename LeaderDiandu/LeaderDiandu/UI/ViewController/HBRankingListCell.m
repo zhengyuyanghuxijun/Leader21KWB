@@ -53,11 +53,11 @@
     //阅读频度
     self.countLabel = [[UILabel alloc] init];
     self.countLabel.frame = CGRectMake(self.bookNameLabel.frame.origin.x, 100/2, 200, 100/2 - 10);
-    self.countLabel.textColor = [UIColor colorWithHex:0xff8903];
+    self.countLabel.textColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:self.countLabel];
     
     UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 100 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
-    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    seperatorLine.backgroundColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:seperatorLine];
 }
 
@@ -74,7 +74,7 @@
         else if ([rankBookEntity.rank isEqualToString:@"2"] || [rankBookEntity.rank isEqualToString:@"3"]) {
             self.cupImgView.hidden = YES;
             self.rankingLabel.hidden = NO;
-            self.rankingLabel.textColor = [UIColor colorWithHex:0xff8903];
+            self.rankingLabel.textColor = HEXRGBCOLOR(0xff8903);
             self.rankingLabel.text = rankBookEntity.rank;
         }else{
             self.cupImgView.hidden = YES;

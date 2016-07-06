@@ -57,7 +57,7 @@
     self.cellGroup.frame = CGRectMake(self.cellGroupImage.frame.origin.x + self.cellGroupImage.frame.size.width + 7, 70/2 - 3, 150, 70/2 - 10);
     self.cellGroup.textAlignment = NSTextAlignmentLeft;
     self.cellGroup.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
-    self.cellGroup.textColor = [UIColor colorWithHex:0xff8903];
+    self.cellGroup.textColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:self.cellGroup];
     
     //解绑按钮
@@ -71,7 +71,7 @@
     [self addSubview:self.cellUnbundlingBtn];
     
     UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 70 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
-    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    seperatorLine.backgroundColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:seperatorLine];
 }
 

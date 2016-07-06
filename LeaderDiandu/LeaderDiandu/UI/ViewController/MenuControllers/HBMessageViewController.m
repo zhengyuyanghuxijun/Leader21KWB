@@ -120,7 +120,7 @@ static NSString * const KMessageViewControllerAccessoryReuseId = @"KMessageViewC
 -(void)addTableView
 {
     if (_tableView == nil) {
-        _tableView = [[HBTableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, ScreenWidth, ScreenHeight)];
+        _tableView = [[HBTableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, HBFullScreenWidth, HBFullScreenHeight)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = NO;

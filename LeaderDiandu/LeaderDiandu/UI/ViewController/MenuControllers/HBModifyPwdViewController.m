@@ -29,7 +29,7 @@
     
     float screenW = self.view.frame.size.width;
     float controlX = 0;
-    float controlY = KHBNaviBarHeight + 50;
+    float controlY = HBNavBarHeight + 50;
     float controlW = screenW;
     float controlH = 45;
     UIView *editBg = [[UIView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH*3+2)];

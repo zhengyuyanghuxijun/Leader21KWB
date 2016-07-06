@@ -70,7 +70,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     
     [self requestStudentList];
     //学生按钮
-    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight, self.view.frame.size.width/2 - 3, 50.0f);
+    CGRect rc = CGRectMake(0.0f, HBNavBarHeight, self.view.frame.size.width/2 - 3, 50.0f);
     self.studentButton = [[UIButton alloc] initWithFrame:rc];
     [self.studentButton setTitle:@"学生" forState:UIControlStateNormal];
     [self.studentButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -78,11 +78,11 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     [self.view addSubview:self.studentButton];
     
     self.studentSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.studentButton.frame.size.height - 2, self.studentButton.frame.size.width, 2)];
-    self.studentSeperator.backgroundColor = [UIColor colorWithHex:0xff8903];
+    self.studentSeperator.backgroundColor = HEXRGBCOLOR(0xff8903);
     [self.studentButton addSubview:self.studentSeperator];
     
     //分割线
-    UILabel *verticalLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.studentButton.frame.origin.x + self.studentButton.frame.size.width, KHBNaviBarHeight, 6, 50)];
+    UILabel *verticalLineLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.studentButton.frame.origin.x + self.studentButton.frame.size.width, HBNavBarHeight, 6, 50)];
     verticalLineLabel.text = @"|";
     verticalLineLabel.font = [UIFont boldSystemFontOfSize:20.0f];
     verticalLineLabel.textAlignment = NSTextAlignmentCenter;
@@ -90,7 +90,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     [self.view addSubview:verticalLineLabel];
     
     //群组按钮
-    rc = CGRectMake(self.view.frame.size.width/2 + 3, KHBNaviBarHeight, self.view.frame.size.width/2, 50.0f);
+    rc = CGRectMake(self.view.frame.size.width/2 + 3, HBNavBarHeight, self.view.frame.size.width/2, 50.0f);
     self.groupButton = [[UIButton alloc] initWithFrame:rc];
     [self.groupButton setTitle:@"群组" forState:UIControlStateNormal];
     [self.groupButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -98,11 +98,11 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
     [self.view addSubview:self.groupButton];
     
     self.groupSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.groupButton.frame.size.height - 2, self.groupButton.frame.size.width, 2)];
-    self.groupSeperator.backgroundColor = [UIColor colorWithHex:0xff8903];
+    self.groupSeperator.backgroundColor = HEXRGBCOLOR(0xff8903);
     [self.groupButton addSubview:self.groupSeperator];
     
     //底部按钮
-    rc = CGRectMake(10.0f, ScreenHeight - 60.0f, ScreenWidth - 10 - 10, 50.0f);
+    rc = CGRectMake(10.0f, HBFullScreenHeight - 60.0f, HBFullScreenWidth - 10 - 10, 50.0f);
     self.addGroupButton = [[UIButton alloc] initWithFrame:rc];
     [self.addGroupButton setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
     [self.addGroupButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
@@ -148,10 +148,10 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
         [self.view addSubview:_tableView];
         
         if (self.isShowStuView) {
-            CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50.0f);
+            CGRect rc = CGRectMake(0.0f, HBNavBarHeight + 50.0f, HBFullScreenWidth, HBFullScreenHeight - HBNavBarHeight - 50.0f);
             _tableView.frame = rc;
         }else{
-            CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50.0f - 60.0f);
+            CGRect rc = CGRectMake(0.0f, HBNavBarHeight + 50.0f, HBFullScreenWidth, HBFullScreenHeight - HBNavBarHeight - 50.0f - 60.0f);
             _tableView.frame = rc;
         }
     }
@@ -244,7 +244,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
         [self requestStudentList];
     }
     
-    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50.0f);
+    CGRect rc = CGRectMake(0.0f, HBNavBarHeight + 50.0f, HBFullScreenWidth, HBFullScreenHeight - HBNavBarHeight - 50.0f);
     _tableView.frame = rc;
     
     [_tableView reloadData];
@@ -260,7 +260,7 @@ static NSString * const KGroupCellAccessoryReuseId = @"KGroupCellAccessoryReuseI
         [self requestClassList];
     }
     
-    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight + 50.0f, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50.0f - 60.0f);
+    CGRect rc = CGRectMake(0.0f, HBNavBarHeight + 50.0f, HBFullScreenWidth, HBFullScreenHeight - HBNavBarHeight - 50.0f - 60.0f);
     _tableView.frame = rc;
     
     [_tableView reloadData];

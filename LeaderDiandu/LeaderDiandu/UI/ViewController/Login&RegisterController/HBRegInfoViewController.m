@@ -33,8 +33,8 @@
     self.title = @"注册成功";
     
     CGFloat controlW = 88;
-    CGFloat controlX = (ScreenWidth-controlW) / 2;
-    CGFloat controlY = KHBNaviBarHeight + 21;
+    CGFloat controlX = (HBFullScreenWidth-controlW) / 2;
+    CGFloat controlY = HBNavBarHeight + 21;
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlW)];
     iconView.image = [UIImage imageNamed:@"icn-success"];
     [self.view addSubview:iconView];
@@ -59,17 +59,17 @@
         NSString *descStr = [descArr objectAtIndex:i];
         if (i == 0) {
             descLabel = [self createTextLabel:CGRectMake(controlX, controlY, controlW, controlH) text:descStr font:fontMiddle];
-            descLabel.textColor = [UIColor colorWithHex:0x4A4A4A];
+            descLabel.textColor = HEXRGBCOLOR(0x4A4A4A);
             controlY += controlH+21;
         }
         else if (i == 1) {
             descLabel = [self createTextLabel:CGRectMake(controlX, controlY, controlW, controlH) text:descStr font:fontBig];
-            descLabel.textColor = [UIColor colorWithHex:0xFF8903];
+            descLabel.textColor = HEXRGBCOLOR(0xFF8903);
             controlY += controlH+21;
         }
         else {
             descLabel = [self createTextLabel:CGRectMake(controlX, controlY, controlW, controlH) text:descStr font:fontSmall];
-            descLabel.textColor = [UIColor colorWithHex:0x9B9B9B];
+            descLabel.textColor = HEXRGBCOLOR(0x9B9B9B);
             controlY += controlH+7;
         }
         [self.view addSubview:descLabel];

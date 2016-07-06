@@ -55,35 +55,35 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     self.cellClassName = [[UILabel alloc] init];
     self.cellClassName.frame = CGRectMake(self.cellGroupImage.frame.origin.x + self.cellGroupImage.frame.size.width + 5, 5, 80, 25);
     self.cellClassName.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
-    self.cellClassName.textColor = [UIColor colorWithHex:0xff8903];
+    self.cellClassName.textColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:self.cellClassName];
     
     //完成
     UILabel * submittedTitle = [[UILabel alloc] init];
     submittedTitle.text = @"完成";
-    submittedTitle.frame = CGRectMake(ScreenWidth - 110, 5, 50, 25);
+    submittedTitle.frame = CGRectMake(HBFullScreenWidth - 110, 5, 50, 25);
     [submittedTitle setTextAlignment:NSTextAlignmentCenter];
     submittedTitle.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     [self addSubview:submittedTitle];
     self.cellSubmitted = [[UILabel alloc] init];
-    self.cellSubmitted.frame = CGRectMake(ScreenWidth - 110, 25, 50, 25);
+    self.cellSubmitted.frame = CGRectMake(HBFullScreenWidth - 110, 25, 50, 25);
     [self.cellSubmitted setTextAlignment:NSTextAlignmentCenter];
     self.cellSubmitted.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
-    self.cellSubmitted.textColor = [UIColor colorWithHex:0xff8903];
+    self.cellSubmitted.textColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:self.cellSubmitted];
     
     //总数
     UILabel * totleTitle = [[UILabel alloc] init];
     totleTitle.text = @"总数";
-    totleTitle.frame = CGRectMake(ScreenWidth - 70, 5, 50, 25);
+    totleTitle.frame = CGRectMake(HBFullScreenWidth - 70, 5, 50, 25);
     [totleTitle setTextAlignment:NSTextAlignmentCenter];
     totleTitle.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
     [self addSubview:totleTitle];
     self.cellTotal = [[UILabel alloc] init];
-    self.cellTotal.frame = CGRectMake(ScreenWidth - 70, 25, 50, 25);
+    self.cellTotal.frame = CGRectMake(HBFullScreenWidth - 70, 25, 50, 25);
     [self.cellTotal setTextAlignment:NSTextAlignmentCenter];
     self.cellTotal.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
-    self.cellTotal.textColor = [UIColor colorWithHex:0xff8903];
+    self.cellTotal.textColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:self.cellTotal];
     
     //书皮
@@ -98,7 +98,7 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     [self addSubview:self.cellBookName];
     
     UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 100 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
-    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    seperatorLine.backgroundColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:seperatorLine];
 }
 
@@ -155,7 +155,7 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
     self.title = @"作业管理";
     
     float buttonH = 50*myAppDelegate.multiple;
-    CGRect rc = CGRectMake(10.0f, ScreenHeight-buttonH-10, ScreenWidth - 10*2, buttonH);
+    CGRect rc = CGRectMake(10.0f, HBFullScreenHeight-buttonH-10, HBFullScreenWidth - 10*2, buttonH);
     self.assignWorkButton = [[UIButton alloc] initWithFrame:rc];
     [self.assignWorkButton setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
     [self.assignWorkButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];
@@ -195,7 +195,7 @@ static NSString * const KWorkManViewControllerCellReuseId = @"KWorkManViewContro
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, CGRectGetMinY(self.assignWorkButton.frame)-KHBNaviBarHeight-10);
+    CGRect viewFrame = CGRectMake(0, HBNavBarHeight, rect.size.width, CGRectGetMinY(self.assignWorkButton.frame)-HBNavBarHeight-10);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;

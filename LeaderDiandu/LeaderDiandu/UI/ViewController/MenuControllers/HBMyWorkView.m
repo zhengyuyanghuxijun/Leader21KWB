@@ -102,7 +102,7 @@ typedef enum : NSUInteger {
     [_questionView.layer setMasksToBounds:YES];
     [_questionView.layer setCornerRadius:10.0];
     [_questionView.layer setBorderWidth:2.0];
-    [_questionView.layer setBorderColor:[UIColor colorWithHex:0xff8903].CGColor];
+    [_questionView.layer setBorderColor:HEXRGBCOLOR(0xff8903).CGColor];
     [self addSubview:_questionView];
     
     float controlX = 10;
@@ -111,7 +111,7 @@ typedef enum : NSUInteger {
     float controlH = 20;
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _titleLabel.backgroundColor = [UIColor clearColor];
-    _titleLabel.textColor = [UIColor colorWithHex:0xff8903];
+    _titleLabel.textColor = HEXRGBCOLOR(0xff8903);
     _titleLabel.font = [UIFont boldSystemFontOfSize:22];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     [_questionView addSubview:_titleLabel];
@@ -125,7 +125,7 @@ typedef enum : NSUInteger {
     }
     _descLabel = [[UILabel alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     _descLabel.backgroundColor = [UIColor clearColor];
-    _descLabel.textColor = [UIColor colorWithHex:0x817b72];
+    _descLabel.textColor = HEXRGBCOLOR(0x817b72);
     if (myAppDelegate.isPad) {
         _descLabel.font = [UIFont systemFontOfSize:30];
     } else {
@@ -364,7 +364,7 @@ typedef enum : NSUInteger {
     [button setTitle:title forState:UIControlStateNormal];
     button.titleLabel.numberOfLines = 0;
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [button setTitleColor:[UIColor colorWithHex:0xff8903] forState:UIControlStateNormal];
+    [button setTitleColor:HEXRGBCOLOR(0xff8903) forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-normal"] forState:UIControlStateNormal];
     [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-press"] forState:UIControlStateHighlighted];
     [button setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-selected"] forState:UIControlStateSelected];

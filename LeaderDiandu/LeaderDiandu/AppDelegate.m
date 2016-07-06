@@ -58,13 +58,6 @@ AppDelegate *myAppDelegate;
     
 //    NSString *FirstLoginString = [[NSUserDefaults standardUserDefaults] objectForKey:@"FirstLogin"];
     
-    // 启动后的界面
-    
-//    UIStoryboard *mainBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    UITabBarController *tabVC = [mainBoard instantiateInitialViewController];
-//    self.globalNavi = [[UINavigationController alloc] initWithRootViewController:tabVC];
-//    self.globalNavi.navigationBarHidden = YES;
-    
     HBGradeViewController *rootVC = [[HBGradeViewController alloc] init];
     menuVC = [DHSlideMenuController sharedInstance];
     menuVC.mainViewController = rootVC;
@@ -74,7 +67,6 @@ AppDelegate *myAppDelegate;
     
     self.loginVC = [[HBNLoginViewController alloc] init];
     self.globalNavi = [[UINavigationController alloc] initWithRootViewController:menuVC];
-//    self.globalNavi.navigationBarHidden = YES;
     
     //这里读取数据没有意义，
     //需要登录成功后根据userid读取对应用户的数据才准确，
@@ -88,6 +80,9 @@ AppDelegate *myAppDelegate;
     [self.window setRootViewController:self.globalNavi];
     [self.window makeKeyAndVisible];
     
+    //修改NavigationBar样式
+    [self setNavigationBarStyle];
+    
     myAppDelegate = self;
     self.multiple = 1.0;
     if (isIPad) {
@@ -98,6 +93,25 @@ AppDelegate *myAppDelegate;
 //    [self verifyLogin];
     
     return YES;
+}
+
+- (void)setNavigationBarStyle
+{
+    //设置背景颜色
+    [[UINavigationBar appearance] setBarTintColor:KLeaderRGB];
+    
+    //设置标题样式
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:HEXRGBCOLOR(0xffffff), NSForegroundColorAttributeName, [UIFont boldSystemFontOfSize:20], NSFontAttributeName, nil]];
+    
+    //设置返回按钮
+    UIImage *backButtonImage = [[UIImage imageNamed:@"back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 30, 0, 0)];
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    //将返回按钮的文字position设置不在屏幕上显示
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin) forBarMetrics:UIBarMetricsDefault];
+    
+    //设置高斯模糊、半透明
+//    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+//    [[UINavigationBar appearance] setTranslucent:YES];
 }
 
 - (void)verifyLogin
@@ -206,7 +220,7 @@ AppDelegate *myAppDelegate;
     [leftViewController setMenus:titleArr MenuImages:imgArray TabBarControllers:ctlArray];
     leftViewController.headerClassName = @"HBUserInfoViewController";
     menuVC.leftViewController = leftViewController;
-    menuVC.leftViewShowWidth = ScreenWidth - 50;
+    menuVC.leftViewShowWidth = HBFullScreenWidth - 50;
     _currentVC = menuVC;
 }
 

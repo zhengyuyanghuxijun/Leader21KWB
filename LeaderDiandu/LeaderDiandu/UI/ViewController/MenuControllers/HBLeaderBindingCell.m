@@ -29,7 +29,7 @@
     //标题
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.frame = CGRectMake(10, 10, ScreenWidth, 35);
-    self.titleLabel.textColor = [UIColor colorWithHex:0xff8903];
+    self.titleLabel.textColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:self.titleLabel];
     
     //内容
@@ -38,7 +38,7 @@
     [self addSubview:self.contentLabel];
     
     UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 70 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
-    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    seperatorLine.backgroundColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:seperatorLine];
 }
 

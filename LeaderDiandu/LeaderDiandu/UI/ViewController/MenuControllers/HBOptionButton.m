@@ -29,7 +29,7 @@
     [self setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-normal"] forState:UIControlStateNormal];
     [self setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-press"] forState:UIControlStateHighlighted];
     [self setBackgroundImage:[UIImage imageNamed:@"test-btn-choose-selected"] forState:UIControlStateSelected];
-    [self setTitleColor:[UIColor colorWithHex:0xff8903] forState:UIControlStateNormal];
+    [self setTitleColor:HEXRGBCOLOR(0xff8903) forState:UIControlStateNormal];
     
     CGSize size = self.frame.size;
     

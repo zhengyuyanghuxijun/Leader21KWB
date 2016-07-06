@@ -66,7 +66,7 @@
 -(void)initDateView
 {
     UIView *bgView = [[UIView alloc] init];
-    bgView.frame = CGRectMake(0, KHBNaviBarHeight, ScreenWidth, 50);
+    bgView.frame = CGRectMake(0, HBNavBarHeight, HBFullScreenWidth, 50);
     bgView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:bgView];
@@ -160,7 +160,7 @@
 -(void)addTableView
 {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, KHBNaviBarHeight + 50, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50)];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, HBNavBarHeight + 50, HBFullScreenWidth, HBFullScreenHeight - HBNavBarHeight - 50)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = NO;

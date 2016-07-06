@@ -63,7 +63,7 @@ static NSString * const KHBRankingListAllbookCellReuseId = @"KHBRankingListAllbo
     
     UINavigationBar *naviBar = self.navigationController.navigationBar;
     //设置navigationBar背景颜色
-    [naviBar setBarTintColor:[UIColor colorWithHex:0x1E90FF]];
+    [naviBar setBarTintColor:HEXRGBCOLOR(0x1E90FF)];
     
     self.navigationController.navigationBarHidden = NO;
     self.title = @"排行榜";
@@ -80,7 +80,7 @@ static NSString * const KHBRankingListAllbookCellReuseId = @"KHBRankingListAllbo
 -(void)addTableView
 {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, KHBNaviBarHeight + 50 + 50, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 50 - 50)];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, HBNavBarHeight + 50 + 50, HBFullScreenWidth, HBFullScreenHeight - HBNavBarHeight - 50 - 50)];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = NO;
@@ -96,7 +96,7 @@ static NSString * const KHBRankingListAllbookCellReuseId = @"KHBRankingListAllbo
 
 - (void)initButton{
     //我的排行按钮
-    CGRect rc = CGRectMake(0.0f, KHBNaviBarHeight, self.view.frame.size.width/2, 50.0f);
+    CGRect rc = CGRectMake(0.0f, HBNavBarHeight, self.view.frame.size.width/2, 50.0f);
     self.myRankingButton = [[UIButton alloc] initWithFrame:rc];
     [self.myRankingButton setBackgroundColor:[UIColor whiteColor]];
     [self.myRankingButton setTitle:@"我的" forState:UIControlStateNormal];
@@ -105,11 +105,11 @@ static NSString * const KHBRankingListAllbookCellReuseId = @"KHBRankingListAllbo
     [self.view addSubview:self.myRankingButton];
     
     self.myRankingSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.myRankingButton.frame.size.height - 2, self.myRankingButton.frame.size.width, 2)];
-    self.myRankingSeperator.backgroundColor = [UIColor colorWithHex:0x1E90FF];
+    self.myRankingSeperator.backgroundColor = HEXRGBCOLOR(0x1E90FF);
     [self.myRankingButton addSubview:self.myRankingSeperator];
     
     //全国排行按钮
-    rc = CGRectMake(self.view.frame.size.width/2, KHBNaviBarHeight, self.view.frame.size.width/2, 50.0f);
+    rc = CGRectMake(self.view.frame.size.width/2, HBNavBarHeight, self.view.frame.size.width/2, 50.0f);
     self.allRankingButton = [[UIButton alloc] initWithFrame:rc];
     [self.allRankingButton setBackgroundColor:[UIColor whiteColor]];
     [self.allRankingButton setTitle:@"全国" forState:UIControlStateNormal];
@@ -118,7 +118,7 @@ static NSString * const KHBRankingListAllbookCellReuseId = @"KHBRankingListAllbo
     [self.view addSubview:self.allRankingButton];
     
     self.allRankingSeperator = [[UILabel alloc] initWithFrame:CGRectMake(0, self.allRankingButton.frame.size.height - 2, self.allRankingButton.frame.size.width, 2)];
-    self.allRankingSeperator.backgroundColor = [UIColor colorWithHex:0x1E90FF];
+    self.allRankingSeperator.backgroundColor = HEXRGBCOLOR(0x1E90FF);
     [self.allRankingButton addSubview:self.allRankingSeperator];
     
     [self showMyRankingView:YES];
@@ -127,7 +127,7 @@ static NSString * const KHBRankingListAllbookCellReuseId = @"KHBRankingListAllbo
 - (void)initSelectBookSetView
 {
     UIView *bgView = [[UIView alloc] init];
-    bgView.frame = CGRectMake(0, KHBNaviBarHeight + 50, ScreenWidth, 50);
+    bgView.frame = CGRectMake(0, HBNavBarHeight + 50, HBFullScreenWidth, 50);
     bgView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:bgView];
@@ -137,7 +137,7 @@ static NSString * const KHBRankingListAllbookCellReuseId = @"KHBRankingListAllbo
     [bgView addSubview:seperator];
     
     //套餐按钮
-    self.bookSetButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 8 - 44, (50 - 35)/2, 35, 35)];
+    self.bookSetButton = [[UIButton alloc] initWithFrame:CGRectMake(HBFullScreenWidth - 8 - 44, (50 - 35)/2, 35, 35)];
     [self.bookSetButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-class"] forState:UIControlStateNormal];
     [self.bookSetButton addTarget:self action:@selector(bookSetButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.bookSetButton setTitle:[NSString stringWithFormat:@"%ld", self.bookset_id] forState:UIControlStateNormal];
@@ -188,7 +188,7 @@ static NSString * const KHBRankingListAllbookCellReuseId = @"KHBRankingListAllbo
         [menuItems addObject:item];
     }
     
-    CGRect menuFrame = CGRectMake(ScreenWidth - 75, 160, 60, 50 * 9);
+    CGRect menuFrame = CGRectMake(HBFullScreenWidth - 75, 160, 60, 50 * 9);
     
     [FTMenu showMenuWithFrame:menuFrame inView:self.navigationController.view menuItems:menuItems currentID:0];
 }

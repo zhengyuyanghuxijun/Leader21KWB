@@ -7,7 +7,6 @@
 //
 
 #import "HBForgetPwdViewController.h"
-#import "NSString+Verify.h"
 #import "HBServiceManager.h"
 
 @interface HBForgetPwdViewController ()
@@ -58,7 +57,7 @@
         self.title = @"忘记密码";
     }
     
-    float controlY = KHBNaviBarHeight + 50;
+    float controlY = HBNavBarHeight + 50;
     float controlH = 45;
     float screenW = self.view.frame.size.width;
     UIView *accountView = [[UIView alloc] initWithFrame:CGRectMake(0, controlY, screenW, controlH*2+1)];
@@ -125,7 +124,7 @@
 {
     NSString *phone     = self.inputPhoneNumber.text;
     NSString *smsCode   = self.inputVerifyCode.text;
-    if ( [NSString checkTextNULL:phone] || ![phone isPhoneNumInput]) {
+    if ( [phone isEmpty] || ![phone isPhoneNumInput]) {
         [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
         return;
     } else if ([smsCode length] == 0) {
@@ -155,7 +154,7 @@
 {
     NSString *phone     = self.inputPhoneNumber.text;
     NSString *smsCode   = self.inputVerifyCode.text;
-    if ( [NSString checkTextNULL:phone] || ![phone isPhoneNumInput]) {
+    if ( [phone isEmpty] || ![phone isPhoneNumInput]) {
         [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
         return;
     } else if ([smsCode length] == 0) {
@@ -219,7 +218,7 @@
     [self tapToHideKeyboard:nil];
     
     NSString *phoneNum = self.inputPhoneNumber.text;
-    if ( [NSString checkTextNULL:phoneNum] || ![phoneNum isPhoneNumInput]) {
+    if ( [phoneNum isEmpty] || ![phoneNum isPhoneNumInput]) {
         [MBHudUtil showTextView:@"请输入正确的手机号" inView:nil];
         return;
     }
@@ -273,7 +272,7 @@
         [MBHudUtil showTextView:@"请输入手机号码" inView:nil];
         needReturn = YES;
     }
-    else if ([NSString checkTextNULL:self.inputVerifyCode.text]) {
+    else if ([self.inputVerifyCode.text isEmpty]) {
         [MBHudUtil showTextView:@"请输入验证码" inView:nil];
         needReturn = YES;
     }

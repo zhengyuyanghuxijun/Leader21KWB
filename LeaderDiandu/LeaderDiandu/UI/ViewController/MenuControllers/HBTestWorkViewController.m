@@ -65,7 +65,7 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     [self addSubview:self.cellImageBookCover];
     
     float controlW = 85;
-    float controlX = ScreenWidth-controlW-margin - 15;
+    float controlX = HBFullScreenWidth-controlW-margin - 15;
     //分数
     self.cellScore = [[UILabel alloc] init];
     self.cellScore.textColor = KLeaderRGB;
@@ -94,8 +94,8 @@ static NSString * const KTestWorkViewControllerCellReuseId = @"KTestWorkViewCont
     [self addSubview:self.cellBookName];
     
     if (myAppDelegate.isPad) {
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(margin, 100, ScreenWidth-margin, 0.5)];
-        lineView.backgroundColor = [UIColor colorWithHex:0xe7e7e7];
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(margin, 100, HBFullScreenWidth-margin, 0.5)];
+        lineView.backgroundColor = HEXRGBCOLOR(0xe7e7e7);
         [self addSubview:lineView];
     }
 }

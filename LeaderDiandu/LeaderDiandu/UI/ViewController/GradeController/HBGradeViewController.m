@@ -546,7 +546,7 @@
     [self addObserverNet];
     
     CGRect rect = self.view.frame;
-    UIImageView *navView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rect), KHBNaviBarHeight)];
+    UIImageView *navView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rect), HBNavBarHeight)];
     navView.image = [UIImage imageNamed:@"bookshelf-bg-navi"];
     [self.view addSubview:navView];
     
@@ -616,7 +616,7 @@
 - (void)initMainGrid
 {
     if (_gridView == nil) {
-        _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, ScreenWidth, ScreenHeight - KHBNaviBarHeight)];
+        _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, HBNavBarHeight, HBFullScreenWidth, HBFullScreenHeight - HBNavBarHeight)];
         _gridView.delegate = self;
         _gridView.backgroundColor = [UIColor clearColor];
         [_gridView setBackgroundView:@"bookshelf-bg-body"];
@@ -649,7 +649,7 @@
         [menuItems addObject:item];
     }
     
-    CGRect menuFrame = CGRectMake(ScreenWidth - 70, 70, 60, 50 * self.contentEntityArr.count);
+    CGRect menuFrame = CGRectMake(HBFullScreenWidth - 70, 70, 60, 50 * self.contentEntityArr.count);
     
     [FTMenu showMenuWithFrame:menuFrame inView:self.navigationController.view menuItems:menuItems currentID:subscribeId];
 }
@@ -717,7 +717,7 @@
     [self.leftButton addSubview:self.redPointImgView];
     
     //右按钮
-    self.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 8 - 44, 20, 44, 44)];
+    self.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(HBFullScreenWidth - 8 - 44, 20, 44, 44)];
     [self.rightButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-class"] forState:UIControlStateNormal];
     [self.rightButton addTarget:self action:@selector(rightButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.rightButton setTitle:@"1" forState:UIControlStateNormal];
@@ -729,7 +729,7 @@
 {
     //右下角调出统计菜单的按钮
     if (!self.optionButton) {
-        self.optionButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 50, ScreenHeight - 60, 40, 40)];
+        self.optionButton = [[UIButton alloc] initWithFrame:CGRectMake(HBFullScreenWidth - 50, HBFullScreenHeight - 60, 40, 40)];
         [self.optionButton setBackgroundImage:[UIImage imageNamed:@"pop-btn-menu"] forState:UIControlStateNormal];
         [self.optionButton addTarget:self action:@selector(optionButtonPressed) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.optionButton];
@@ -737,7 +737,7 @@
     
     //统计菜单
     if (!self.backgroundView) {
-        self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, ScreenHeight, ScreenWidth, 80)];
+        self.backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, HBFullScreenHeight, HBFullScreenWidth, 80)];
         self.backgroundView.backgroundColor = RGBEQA(0, 0.8);
         [self.view addSubview:self.backgroundView];
         
@@ -745,20 +745,20 @@
         NSArray *optionTextArr = @[@"阅读统计", @"排行榜", @"作业统计"];
         NSArray *imgViewArr = @[@"pop-icn-reading", @"pop-icn-ranking", @"pop-icn-homework"];
         for (NSInteger index = 0; index < 3; index++) {
-            UIButton *statisticalBtn = [[UIButton alloc] initWithFrame:CGRectMake(index * ScreenWidth/3, 0, ScreenWidth/3, 80)];
+            UIButton *statisticalBtn = [[UIButton alloc] initWithFrame:CGRectMake(index * HBFullScreenWidth/3, 0, HBFullScreenWidth/3, 80)];
             
-            UIImageView *readingImgView = [[UIImageView alloc] initWithFrame:CGRectMake((ScreenWidth/3-40)/2, 5, 40, 40)];
+            UIImageView *readingImgView = [[UIImageView alloc] initWithFrame:CGRectMake((HBFullScreenWidth/3-40)/2, 5, 40, 40)];
             readingImgView.image = [UIImage imageNamed:[imgViewArr objectAtIndex:index]];
             [statisticalBtn addSubview:readingImgView];
             
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, ScreenWidth/3, 40)];
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, HBFullScreenWidth/3, 40)];
             label.text = [optionTextArr objectAtIndex:index];
             label.textColor = [UIColor whiteColor];
             label.textAlignment = NSTextAlignmentCenter;
             [statisticalBtn addSubview:label];
             
-            UILabel *verticalLine = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth/3 + 2, 15, 2, 80 - 15 - 15)];
-            verticalLine.backgroundColor = [UIColor colorWithHex:0x484848];
+            UILabel *verticalLine = [[UILabel alloc] initWithFrame:CGRectMake(HBFullScreenWidth/3 + 2, 15, 2, 80 - 15 - 15)];
+            verticalLine.backgroundColor = HEXRGBCOLOR(0x484848);
             [statisticalBtn addSubview:verticalLine];
             
             statisticalBtn.tag = index;
@@ -767,8 +767,8 @@
         }
     }
     
-    self.optionButton.frame = CGRectMake(ScreenWidth - 50, ScreenHeight - 60, 40, 40);
-    self.backgroundView.frame = CGRectMake(0, ScreenHeight, ScreenWidth, 80);
+    self.optionButton.frame = CGRectMake(HBFullScreenWidth - 50, HBFullScreenHeight - 60, 40, 40);
+    self.backgroundView.frame = CGRectMake(0, HBFullScreenHeight, HBFullScreenWidth, 80);
     
     HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
     if (userEntity) {
@@ -785,12 +785,12 @@
 
 -(void)optionButtonPressed
 {
-    if (self.backgroundView.frame.origin.y == ScreenHeight) {
-        self.optionButton.frame = CGRectMake(ScreenWidth - 50, ScreenHeight - 80 - 50, 40, 40);
-        self.backgroundView.frame = CGRectMake(0, ScreenHeight - 80, ScreenWidth, 80);
+    if (self.backgroundView.frame.origin.y == HBFullScreenHeight) {
+        self.optionButton.frame = CGRectMake(HBFullScreenWidth - 50, HBFullScreenHeight - 80 - 50, 40, 40);
+        self.backgroundView.frame = CGRectMake(0, HBFullScreenHeight - 80, HBFullScreenWidth, 80);
     }else{
-        self.optionButton.frame = CGRectMake(ScreenWidth - 50, ScreenHeight - 60, 40, 40);
-        self.backgroundView.frame = CGRectMake(0, ScreenHeight, ScreenWidth, 80);
+        self.optionButton.frame = CGRectMake(HBFullScreenWidth - 50, HBFullScreenHeight - 60, 40, 40);
+        self.backgroundView.frame = CGRectMake(0, HBFullScreenHeight, HBFullScreenWidth, 80);
     }
 }
 
@@ -878,7 +878,7 @@
 
 - (CGFloat)gridView:(HBGridView *)gridView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (ScreenHeight - KHBNaviBarHeight) / 3.0f;
+    return (HBFullScreenHeight - HBNavBarHeight) / 3.0f;
 }
 
 // 获取特定位置的单元格视图
@@ -888,7 +888,7 @@
     TextGridItemView *itemView = (TextGridItemView *)[gridView dequeueReusableGridItemAtGridIndex:gridIndex ofGridCellView:gridCell];
     if (!itemView)
     {
-        itemView = [[TextGridItemView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, (ScreenHeight - KHBNaviBarHeight)/3)];
+        itemView = [[TextGridItemView alloc] initWithFrame:CGRectMake(0, 0, HBFullScreenWidth/3, (HBFullScreenHeight - HBNavBarHeight)/3)];
     }
     
     itemView.delegate = self;

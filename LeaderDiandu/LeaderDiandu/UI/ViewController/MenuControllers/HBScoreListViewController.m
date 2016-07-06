@@ -52,14 +52,14 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
     
     //分数
     self.cellScore = [[UILabel alloc] init];
-    self.cellScore.frame = CGRectMake(ScreenWidth - 100, 0, 90, 70);
+    self.cellScore.frame = CGRectMake(HBFullScreenWidth - 100, 0, 90, 70);
     self.cellScore.textAlignment = NSTextAlignmentRight;
     self.cellScore.font = [UIFont boldSystemFontOfSize:SCORELABELFONTSIZE];
-    self.cellScore.textColor = [UIColor colorWithHex:0xff8903];
+    self.cellScore.textColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:self.cellScore];
     
     UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0,70 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
-    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    seperatorLine.backgroundColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:seperatorLine];
 }
 
@@ -84,7 +84,7 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
         self.cellTime.text = scoreEntity.taskTime;
         if (scoreEntity.score) {
             self.cellScore.font = [UIFont boldSystemFontOfSize:SCORELABELFONTSIZE];
-            self.cellScore.textColor = [UIColor colorWithHex:0xff8903];
+            self.cellScore.textColor = HEXRGBCOLOR(0xff8903);
             self.cellScore.text = scoreEntity.score;
         }else{
             self.cellScore.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
@@ -145,7 +145,7 @@ static NSString * const KScoreListViewControllerCellReuseId = @"KScoreListViewCo
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, ScreenHeight);
+    CGRect viewFrame = CGRectMake(0, HBNavBarHeight, rect.size.width, HBFullScreenHeight);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;

@@ -188,7 +188,7 @@
     
     self.progressView = [[MBProgressHUD alloc] initWithView:self];
     self.progressView.mode = MBProgressHUDModeDeterminate;
-    self.progressView.backgroundBg = [self imageWithColor:[UIColor clearColor] size:CGSizeMake(1.0f, 1.0f)];
+//    self.progressView.backgroundBg = [self imageWithColor:[UIColor clearColor] size:CGSizeMake(1.0f, 1.0f)];
     self.progressView.userInteractionEnabled = NO;
     [self addSubview:self.progressView];
     

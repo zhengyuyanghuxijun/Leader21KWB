@@ -121,7 +121,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
 -(void)addTableView
 {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight - 60) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, HBFullScreenWidth, HBFullScreenHeight - 60) style:UITableViewStyleGrouped];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -136,7 +136,7 @@ static NSString * const KLeaderUnBindingCellReuseId = @"KLeaderUnBindingCellReus
 {
     //底部按钮
     if (!_bottomBtn) {
-        CGRect rc = CGRectMake(10.0f, ScreenHeight - 60.0f, ScreenWidth - 10 - 10, 50.0f);
+        CGRect rc = CGRectMake(10.0f, HBFullScreenHeight - 60.0f, HBFullScreenWidth - 10 - 10, 50.0f);
         _bottomBtn = [[UIButton alloc] initWithFrame:rc];
         [_bottomBtn setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
         [_bottomBtn setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];

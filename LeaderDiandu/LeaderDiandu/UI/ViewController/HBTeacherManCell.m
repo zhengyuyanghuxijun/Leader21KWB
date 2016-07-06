@@ -44,21 +44,21 @@
     self.associate_timeLabel.frame = CGRectMake(self.display_nameLabel.frame.origin.x + self.display_nameLabel.frame.size.width + 10, 10, 100, 70/2 - 10);
     self.associate_timeLabel.textAlignment = NSTextAlignmentLeft;
     self.associate_timeLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
-    [self.associate_timeLabel setTextColor:[UIColor colorWithHex:0xff8903]];
+    [self.associate_timeLabel setTextColor:HEXRGBCOLOR(0xff8903)];
     [self addSubview:self.associate_timeLabel];
     
     //学生总数
     self.totalLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + 50 + 10, 70/2, 70, 70/2 - 10)];
     self.totalLabel.textAlignment = NSTextAlignmentCenter;
     self.totalLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
-    [self.totalLabel setTextColor:[UIColor colorWithHex:0xff8903]];
+    [self.totalLabel setTextColor:HEXRGBCOLOR(0xff8903)];
     [self addSubview:self.totalLabel];
     
     //VIP用户
     self.vipLabel = [[UILabel alloc] init];
     self.vipLabel.frame = CGRectMake(self.associate_timeLabel.frame.origin.x, 70/2, 100, 70/2 - 10);
     self.vipLabel.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
-    [self.vipLabel setTextColor:[UIColor colorWithHex:0xff8903]];
+    [self.vipLabel setTextColor:HEXRGBCOLOR(0xff8903)];
     [self addSubview:self.vipLabel];
     
     //解绑按钮
@@ -72,7 +72,7 @@
     [self addSubview:self.cellUnbundlingBtn];
     
     UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 70 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
-    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    seperatorLine.backgroundColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:seperatorLine];
 }
 

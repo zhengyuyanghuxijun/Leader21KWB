@@ -28,7 +28,7 @@
     
     CGRect frame = self.view.frame;
     float controlX = 0;
-    float controlY = KHBNaviBarHeight + 50;
+    float controlY = HBNavBarHeight + 50;
     float width = frame.size.width - controlX*2;
     UIView *editBg = [[UIView alloc] initWithFrame:CGRectMake(controlX, controlY, width, 50)];
     editBg.backgroundColor = [UIColor whiteColor];

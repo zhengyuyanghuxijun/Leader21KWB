@@ -9,12 +9,10 @@
 #import "HBLoginViewController.h"
 #import "HBRegistViewController.h"
 //#import "HBForgetPwdViewController.h"
-#import "UIViewController+AddBackBtn.h"
 //#import "MJThirdLoginView.h"
 //#import "MJMainViewController.h"
 
 #import "HBTitleView.h"
-#import "NSString+Verify.h"
 #import "HBNTextField.h"
 
 #import "HBServiceManager.h"
@@ -76,11 +74,11 @@
     
     NSString *phone = self.inputPhoneNumber.text;
     NSString *pwd = self.inputPassword.text;
-    if ([NSString checkTextNULL:phone]  || [NSString checkTextNULL:pwd] ) {
-        if ([NSString checkTextNULL:phone]) {
+    if ([phone isEmpty]  || [pwd isEmpty] ) {
+        if ([phone isEmpty]) {
             [self.inputPhoneNumber showErrorMessage:@"请输入手机号"];
         }
-        if ([NSString checkTextNULL:pwd]) {
+        if ([pwd isEmpty]) {
             [self.inputPassword showErrorMessage:@"请输入密码"];
         }
         if (![pwd isValidPassword]) {

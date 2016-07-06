@@ -60,12 +60,12 @@
     if (isIPhone5) {
         margin = 10;
     }
-    float controlY = KHBNaviBarHeight + margin;
+    float controlY = HBNavBarHeight + margin;
     float controlW = rect.size.width - controlX*2;
     CGRect viewFrame = CGRectMake(controlX, controlY, controlW, 10);
     _progressView = [[UIProgressView alloc] initWithFrame:viewFrame];
     _progressView.trackTintColor = RGB(216, 212, 202);
-    _progressView.progressTintColor = [UIColor colorWithHex:0xff8903];
+    _progressView.progressTintColor = HEXRGBCOLOR(0xff8903);
     CGAffineTransform transform = CGAffineTransformMakeScale(1.0f, 5.0f);
     _progressView.transform = transform;
     [self.view addSubview:_progressView];

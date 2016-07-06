@@ -68,7 +68,7 @@
 -(void)addTableView
 {
     CGRect rect = self.view.frame;
-    CGRect viewFrame = CGRectMake(0, KHBNaviBarHeight, rect.size.width, ScreenHeight);
+    CGRect viewFrame = CGRectMake(0, HBNavBarHeight, rect.size.width, HBFullScreenHeight);
     _tableView = [[UITableView alloc] initWithFrame:viewFrame];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -112,7 +112,7 @@
     cell.textLabel.textColor = [UIColor blackColor];
     
     UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 50 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
-    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    seperatorLine.backgroundColor = HEXRGBCOLOR(0xff8903);
     [cell addSubview:seperatorLine];
     
     return cell;

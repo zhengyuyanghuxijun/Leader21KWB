@@ -35,7 +35,7 @@
     self.cellGroupName = [[UILabel alloc] init];
     self.cellGroupName.frame = CGRectMake(10 + 17 + 10, 10, 200, 70/2 - 10);
     self.cellGroupName.font = [UIFont boldSystemFontOfSize:BUTTONFONTSIZE];
-    self.cellGroupName.textColor = [UIColor colorWithHex:0xff8903];
+    self.cellGroupName.textColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:self.cellGroupName];
     
     //等级
@@ -47,7 +47,7 @@
     self.cellLevelNum = [[UILabel alloc] init];
     self.cellLevelNum.frame = CGRectMake(self.cellLevel.frame.origin.x + self.cellLevel.frame.size.width + 5, 70/2, 10, 70/2 - 10);
     self.cellLevelNum.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
-    self.cellLevelNum.textColor = [UIColor colorWithHex:0xff8903];
+    self.cellLevelNum.textColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:self.cellLevelNum];
     
     //人数
@@ -59,7 +59,7 @@
     self.cellCountNum = [[UILabel alloc] init];
     self.cellCountNum.frame = CGRectMake(self.cellCount.frame.origin.x + self.cellCount.frame.size.width + 5, 70/2, 10, 70/2 - 10);
     self.cellCountNum.font = [UIFont boldSystemFontOfSize:LABELFONTSIZE];
-    self.cellCountNum.textColor = [UIColor colorWithHex:0xff8903];
+    self.cellCountNum.textColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:self.cellCountNum];
     
     //时间
@@ -87,7 +87,7 @@
     [self addSubview:self.cellDissolveBtn];
     
     UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, 70 - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
-    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    seperatorLine.backgroundColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:seperatorLine];
 }
 

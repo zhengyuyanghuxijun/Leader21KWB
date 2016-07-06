@@ -76,8 +76,8 @@ static const CGFloat kImgLength = 1000;
         headerH = 200;
         cellH = 100;
     }
-    float controlY = KHBNaviBarHeight + headerH + cellH*[_titleArr count] + 30;
-    float controlW = ScreenWidth - controlX*2;
+    float controlY = HBNavBarHeight + headerH + cellH*[_titleArr count] + 30;
+    float controlW = HBFullScreenWidth - controlX*2;
     float controlH = 45;
     UIButton *loginButton = [[UIButton alloc] initWithFrame:CGRectMake(controlX, controlY, controlW, controlH)];
     [loginButton setTitle:@"马上登录" forState:UIControlStateNormal];
@@ -295,7 +295,7 @@ static const CGFloat kImgLength = 1000;
             [cell.contentView addSubview:arrowImg];
         }
         
-        UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, cellHeight-1, ScreenWidth, 1)];
+        UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, cellHeight-1, HBFullScreenWidth, 1)];
         lineLabel.backgroundColor = RGBEQ(239);
         [cell.contentView addSubview:lineLabel];
     }

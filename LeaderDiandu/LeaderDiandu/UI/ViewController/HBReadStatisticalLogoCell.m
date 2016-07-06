@@ -26,7 +26,7 @@
 {
     UIView *bgView = [[UIView alloc] init];
     bgView.frame = CGRectMake(0, 0, ScreenWidth, 120);
-    bgView.backgroundColor = [UIColor colorWithHex:0x1E90FF];
+    bgView.backgroundColor = HEXRGBCOLOR(0x1E90FF);
     [self addSubview:bgView];
     
     //图标

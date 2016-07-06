@@ -34,7 +34,7 @@
 @implementation UIColor (TKCategory)
 
 + (instancetype) colorWithHex:(unsigned int)hex{
-	return [UIColor colorWithHex:hex alpha:1];
+    return [UIColor colorWithHex:hex alpha:1];
 }
 
 + (instancetype) colorWithHex:(unsigned int)hex alpha:(CGFloat)alpha{

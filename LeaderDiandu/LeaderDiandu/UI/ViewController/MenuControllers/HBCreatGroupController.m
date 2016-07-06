@@ -36,7 +36,7 @@
     self.navigationController.navigationBarHidden = NO;
     self.title = @"创建群组";
     
-    float controlY = KHBNaviBarHeight + 50;
+    float controlY = HBNavBarHeight + 50;
     float screenW = self.view.frame.size.width;
     UIView *accountView = [[UIView alloc] initWithFrame:CGRectMake(0, controlY, screenW, 91)];
     accountView.backgroundColor = [UIColor whiteColor];
@@ -62,7 +62,7 @@
     self.levelTextField.delegate = self;
     [accountView addSubview:self.levelTextField];
     
-    CGRect rc = CGRectMake(20.0f, controlY + 180, ScreenWidth - 20 - 20, 50.0f);
+    CGRect rc = CGRectMake(20.0f, controlY + 180, HBFullScreenWidth - 20 - 20, 50.0f);
     self.okButton = [[UIButton alloc] initWithFrame:rc];
     [self.okButton setBackgroundImage:[UIImage imageNamed:@"yellow-normal"] forState:UIControlStateNormal];
     [self.okButton setBackgroundImage:[UIImage imageNamed:@"yellow-press"] forState:UIControlStateHighlighted];

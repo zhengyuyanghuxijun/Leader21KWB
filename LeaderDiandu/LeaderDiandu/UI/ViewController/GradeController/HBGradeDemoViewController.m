@@ -8,7 +8,6 @@
 
 #import "HBGradeDemoViewController.h"
 #import "HBTitleView.h"
-#import "UIViewController+AddBackBtn.h"
 #import "DHSlideMenuController.h"
 #import "DHSlideMenuViewController.h"
 #import "HBGridView.h"
@@ -64,7 +63,7 @@
     [self addObserverNet];
     
     CGRect rect = self.view.frame;
-    UIImageView *navView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rect), KHBNaviBarHeight)];
+    UIImageView *navView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(rect), HBNavBarHeight)];
     navView.image = [UIImage imageNamed:@"bookshelf-bg-navi"];
     [self.view addSubview:navView];
     
@@ -97,7 +96,7 @@
 - (void)initMainGrid
 {
     if (_gridView == nil) {
-        _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, ScreenWidth, ScreenHeight - KHBNaviBarHeight)];
+        _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, HBNavBarHeight, HBFullScreenWidth, HBFullScreenHeight - HBNavBarHeight)];
         _gridView.delegate = self;
         _gridView.backgroundColor = [UIColor clearColor];
         [_gridView setBackgroundView:@"bookshelf-bg-body"];
@@ -116,7 +115,7 @@
     [self.view addSubview:self.leftButton];
     
     //右按钮
-    self.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 8 - 44, 20, 44, 44)];
+    self.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(HBFullScreenWidth - 8 - 44, 20, 44, 44)];
     [self.rightButton setBackgroundImage:[UIImage imageNamed:@"bookshelf-btn-class"] forState:UIControlStateNormal];
     [self.rightButton addTarget:self action:@selector(rightButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.rightButton setTitle:@"1" forState:UIControlStateNormal];
@@ -167,7 +166,7 @@
 
 - (CGFloat)gridView:(HBGridView *)gridView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (ScreenHeight - KHBNaviBarHeight) / 3.0f;
+    return (HBFullScreenHeight - HBNavBarHeight) / 3.0f;
 }
 
 // 获取特定位置的单元格视图
@@ -177,7 +176,7 @@
     TextGridItemView *itemView = (TextGridItemView *)[gridView dequeueReusableGridItemAtGridIndex:gridIndex ofGridCellView:gridCell];
     if (!itemView)
     {
-        itemView = [[TextGridItemView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, (ScreenHeight - KHBNaviBarHeight)/3)];
+        itemView = [[TextGridItemView alloc] initWithFrame:CGRectMake(0, 0, HBFullScreenWidth/3, (HBFullScreenHeight - HBNavBarHeight)/3)];
     }
     
     itemView.delegate = self;

@@ -18,7 +18,6 @@
 #include <sys/mount.h>
 #import <mach/mach.h>
 #import <MessageUI/MFMailComposeViewController.h>
-#import "NSString+MD5.h"
 
 @implementation UIDevice (Addtional)
 
@@ -55,12 +54,10 @@
 + (BOOL)isiPad
 {
     UIDevice* device = [UIDevice currentDevice];
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     
     //没有iPad的加载图
     if ([device.model hasPrefix:@"iPad"]
-        && screenWidth>=768.0f && screenHeight>=1024.0f) {
+        /*&& screenWidth>=768.0f && screenHeight>=1024.0f*/) {
         return YES;
     }
     else {
@@ -239,8 +236,7 @@
     ifm = (struct if_msghdr *)buf;
     sdl = (struct sockaddr_dl *)(ifm + 1);
     ptr = (unsigned char *)LLADDR(sdl);
-    NSString *outstring = [NSString stringWithFormat:@"%02X:%02X:%02X:%02X:%02X:%02X", 
-                           *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4), *(ptr+5)];
+    NSString *outstring = [NSString stringWithFormat:@"%02X:%02X:%02X:%02X:%02X:%02X", *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4), *(ptr+5)];
     free(buf);
     
     return outstring;
@@ -257,7 +253,7 @@
         NSString *im20SecretCode = @"im20interactive.com+ajvGGILjwtZ30feLFmLn";
         
         NSString *stringToHash = [NSString stringWithFormat:@"%@%@",macaddress,im20SecretCode];
-        NSString *identifier = [stringToHash md5];
+        NSString *identifier = [stringToHash MD5];
         
         return identifier;
     }
@@ -265,7 +261,7 @@
 
 
 // 内存信息
-+ (unsigned int)freeMemory{
++ (unsigned long)freeMemory{
     mach_port_t host_port = mach_host_self();
     mach_msg_type_number_t host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
     vm_size_t pagesize;
@@ -276,7 +272,7 @@
     return vm_stat.free_count * pagesize;
 }
 
-+ (unsigned int)usedMemory{
++ (unsigned long)usedMemory{
     struct task_basic_info info;
     mach_msg_type_number_t size = sizeof(info);
     kern_return_t kerr = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)&info, &size);

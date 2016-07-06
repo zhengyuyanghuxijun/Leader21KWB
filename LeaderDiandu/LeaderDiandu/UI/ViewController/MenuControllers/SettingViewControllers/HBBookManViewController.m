@@ -157,19 +157,19 @@
 -(void)creatDescribeLabel
 {
     UIView *bgView = [[UIView alloc] init];
-    bgView.frame = CGRectMake(0, KHBNaviBarHeight, ScreenWidth, 44);
+    bgView.frame = CGRectMake(0, HBNavBarHeight, HBFullScreenWidth, 44);
     bgView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:bgView];
     
     self.describeLabel = [[UILabel alloc] init];
-    self.describeLabel.frame = CGRectMake(10, KHBNaviBarHeight, ScreenWidth, 44);
+    self.describeLabel.frame = CGRectMake(10, HBNavBarHeight, HBFullScreenWidth, 44);
     self.describeLabel.text = [NSString stringWithFormat:@"本地图书共%ldM,存储空间剩余%@", self.localBookSize, [self freeSpace]];
     [self.view addSubview:self.describeLabel];
 }
 
 -(void)addTableView
 {
-    CGRect rect = CGRectMake(0, KHBNaviBarHeight + 44, ScreenWidth, ScreenHeight - KHBNaviBarHeight - 44 - 60);
+    CGRect rect = CGRectMake(0, HBNavBarHeight + 44, HBFullScreenWidth, HBFullScreenHeight - HBNavBarHeight - 44 - 60);
     _tableView = [[UITableView alloc] initWithFrame:rect];
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -180,7 +180,7 @@
 -(void)creatFooterView
 {
     UIView *bgView = [[UIView alloc] init];
-    bgView.frame = CGRectMake(0, ScreenHeight - 60, ScreenWidth, 60);
+    bgView.frame = CGRectMake(0, HBFullScreenHeight - 60, HBFullScreenWidth, 60);
     bgView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:bgView];
 
@@ -197,7 +197,7 @@
     [bgView addSubview:self.isSelectedAllLabel];
     
     //删除按钮
-    self.deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(ScreenWidth - 80, 0, 80, 60)];
+    self.deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(HBFullScreenWidth - 80, 0, 80, 60)];
     self.deleteBtn.backgroundColor = [UIColor redColor];
     [self.deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
     [self.deleteBtn addTarget:self action:@selector(deleteBtnPressed) forControlEvents:UIControlEventTouchUpInside];

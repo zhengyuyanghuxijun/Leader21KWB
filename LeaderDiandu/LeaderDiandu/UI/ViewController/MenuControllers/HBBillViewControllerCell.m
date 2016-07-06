@@ -40,7 +40,7 @@
     //支付状态
     self.statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth - 100, 5, 100 - 10, KCellHeight/2)];
     self.statusLabel.textAlignment = NSTextAlignmentRight;
-    self.statusLabel.textColor = [UIColor colorWithHex:0xff8903];
+    self.statusLabel.textColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:self.statusLabel];
     
     //内容
@@ -56,7 +56,7 @@
     [self addSubview:self.timeLabel];
     
     UILabel *seperatorLine = [[UILabel alloc] initWithFrame:CGRectMake(0, KCellHeight - 0.5, [UIScreen mainScreen].bounds.size.width, 0.5)];
-    seperatorLine.backgroundColor = [UIColor colorWithHex:0xff8903];
+    seperatorLine.backgroundColor = HEXRGBCOLOR(0xff8903);
     [self addSubview:seperatorLine];
 }
 
