@@ -66,53 +66,13 @@
 		0D8ABA101D2A66DB00C8034B /* DHSlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB96E1D2A66DB00C8034B /* DHSlideMenuViewController.m */; };
 		0D8ABA161D2A66DB00C8034B /* HBGradeDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB97B1D2A66DB00C8034B /* HBGradeDemoViewController.m */; };
 		0D8ABA171D2A66DB00C8034B /* HBGradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB97D1D2A66DB00C8034B /* HBGradeViewController.m */; };
-		0D8ABA221D2A66DB00C8034B /* HBTeacherManCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9931D2A66DB00C8034B /* HBTeacherManCell.m */; };
-		0D8ABA231D2A66DB00C8034B /* HBWeekWorkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9951D2A66DB00C8034B /* HBWeekWorkCell.m */; };
-		0D8ABA241D2A66DB00C8034B /* HBWeekWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9971D2A66DB00C8034B /* HBWeekWorkViewController.m */; };
 		0D8ABA251D2A66DB00C8034B /* HBForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB99A1D2A66DB00C8034B /* HBForgetPwdViewController.m */; };
 		0D8ABA261D2A66DB00C8034B /* HBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB99C1D2A66DB00C8034B /* HBLoginViewController.m */; };
 		0D8ABA271D2A66DB00C8034B /* HBNLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB99E1D2A66DB00C8034B /* HBNLoginViewController.m */; };
 		0D8ABA281D2A66DB00C8034B /* HBRegInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9A01D2A66DB00C8034B /* HBRegInfoViewController.m */; };
 		0D8ABA291D2A66DB00C8034B /* HBRegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9A21D2A66DB00C8034B /* HBRegistViewController.m */; };
-		0D8ABA2B1D2A66DB00C8034B /* HBBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9A71D2A66DB00C8034B /* HBBillViewController.m */; };
-		0D8ABA2C1D2A66DB00C8034B /* HBBillViewControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9A91D2A66DB00C8034B /* HBBillViewControllerCell.m */; };
-		0D8ABA2D1D2A66DB00C8034B /* HBBindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9AB1D2A66DB00C8034B /* HBBindPhoneViewController.m */; };
-		0D8ABA2E1D2A66DB00C8034B /* HBCreatGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9AD1D2A66DB00C8034B /* HBCreatGroupController.m */; };
-		0D8ABA2F1D2A66DB00C8034B /* HBEditNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9AF1D2A66DB00C8034B /* HBEditNameViewController.m */; };
-		0D8ABA301D2A66DB00C8034B /* HBGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9B11D2A66DB00C8034B /* HBGroupCell.m */; };
-		0D8ABA311D2A66DB00C8034B /* HBGroupSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9B31D2A66DB00C8034B /* HBGroupSelectViewController.m */; };
-		0D8ABA321D2A66DB00C8034B /* HBLeaderBindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9B51D2A66DB00C8034B /* HBLeaderBindingCell.m */; };
-		0D8ABA331D2A66DB00C8034B /* HBLeaderUnbindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9B71D2A66DB00C8034B /* HBLeaderUnbindingCell.m */; };
-		0D8ABA341D2A66DB00C8034B /* HBLeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9B91D2A66DB00C8034B /* HBLeaderViewController.m */; };
-		0D8ABA351D2A66DB00C8034B /* HBMessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9BB1D2A66DB00C8034B /* HBMessageViewCell.m */; };
-		0D8ABA361D2A66DB00C8034B /* HBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9BD1D2A66DB00C8034B /* HBMessageViewController.m */; };
-		0D8ABA371D2A66DB00C8034B /* HBModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9BF1D2A66DB00C8034B /* HBModifyPwdViewController.m */; };
-		0D8ABA381D2A66DB00C8034B /* HBMyTeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9C11D2A66DB00C8034B /* HBMyTeacherViewController.m */; };
-		0D8ABA391D2A66DB00C8034B /* HBMyWorkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9C31D2A66DB00C8034B /* HBMyWorkView.m */; };
-		0D8ABA3A1D2A66DB00C8034B /* HBMyWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9C51D2A66DB00C8034B /* HBMyWorkViewController.m */; };
-		0D8ABA3B1D2A66DB00C8034B /* HBOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9C71D2A66DB00C8034B /* HBOptionButton.m */; };
-		0D8ABA3C1D2A66DB00C8034B /* HBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9C91D2A66DB00C8034B /* HBOptionView.m */; };
-		0D8ABA3D1D2A66DB00C8034B /* HBPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9CB1D2A66DB00C8034B /* HBPayViewController.m */; };
-		0D8ABA3E1D2A66DB00C8034B /* HBPayViewControllerModeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9CD1D2A66DB00C8034B /* HBPayViewControllerModeCell.m */; };
-		0D8ABA3F1D2A66DB00C8034B /* HBPayViewControllerMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9CF1D2A66DB00C8034B /* HBPayViewControllerMoneyCell.m */; };
-		0D8ABA401D2A66DB00C8034B /* HBPublishWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9D11D2A66DB00C8034B /* HBPublishWorkViewController.m */; };
-		0D8ABA411D2A66DB00C8034B /* HBScoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9D31D2A66DB00C8034B /* HBScoreListViewController.m */; };
-		0D8ABA421D2A66DB00C8034B /* HBScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9D51D2A66DB00C8034B /* HBScoreView.m */; };
-		0D8ABA431D2A66DB00C8034B /* HBSetStuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9D71D2A66DB00C8034B /* HBSetStuController.m */; };
-		0D8ABA441D2A66DB00C8034B /* HBSetStuGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9D91D2A66DB00C8034B /* HBSetStuGroupCell.m */; };
-		0D8ABA451D2A66DB00C8034B /* HBSetStuOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9DB1D2A66DB00C8034B /* HBSetStuOtherCell.m */; };
-		0D8ABA461D2A66DB00C8034B /* HBStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9DD1D2A66DB00C8034B /* HBStudentCell.m */; };
-		0D8ABA471D2A66DB00C8034B /* HBStuManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9DF1D2A66DB00C8034B /* HBStuManViewController.m */; };
-		0D8ABA481D2A66DB00C8034B /* HBSubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9E11D2A66DB00C8034B /* HBSubscribeViewController.m */; };
-		0D8ABA491D2A66DB00C8034B /* HBTeacherManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9E31D2A66DB00C8034B /* HBTeacherManViewController.m */; };
-		0D8ABA4A1D2A66DB00C8034B /* HBTestSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9E51D2A66DB00C8034B /* HBTestSelectViewController.m */; };
-		0D8ABA4B1D2A66DB00C8034B /* HBTestWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9E71D2A66DB00C8034B /* HBTestWorkViewController.m */; };
-		0D8ABA4C1D2A66DB00C8034B /* HBUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9E91D2A66DB00C8034B /* HBUserInfoViewController.m */; };
-		0D8ABA4D1D2A66DB00C8034B /* HBWorkManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9EB1D2A66DB00C8034B /* HBWorkManViewController.m */; };
-		0D8ABA4E1D2A66DB00C8034B /* GuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9EE1D2A66DB00C8034B /* GuideView.m */; };
 		0D8ABA4F1D2A66DB00C8034B /* HBAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9F01D2A66DB00C8034B /* HBAboutViewController.m */; };
 		0D8ABA501D2A66DB00C8034B /* HBBookManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9F21D2A66DB00C8034B /* HBBookManViewController.m */; };
-		0D8ABA511D2A66DB00C8034B /* HBSettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9F41D2A66DB00C8034B /* HBSettingViewCell.m */; };
 		0D8ABA521D2A66DB00C8034B /* HBSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9F61D2A66DB00C8034B /* HBSettingViewController.m */; };
 		0D8ABA531D2A66DB00C8034B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9F81D2A66DB00C8034B /* ViewController.m */; };
 		0D8ABA8C1D2A6A7700C8034B /* examid.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D8ABA561D2A6A7700C8034B /* examid.db */; };
@@ -197,6 +157,46 @@
 		0D8ABB1B1D2E0C9C00C8034B /* HBRankingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB101D2E0C9C00C8034B /* HBRankingListViewController.m */; };
 		0D8ABB1C1D2E0C9C00C8034B /* HBReadStatisticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB121D2E0C9C00C8034B /* HBReadStatisticalViewController.m */; };
 		0D8ABB1D1D2E0C9C00C8034B /* HBTaskStatisticalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB141D2E0C9C00C8034B /* HBTaskStatisticalViewController.m */; };
+		0D8ABB231D2E12AF00C8034B /* GuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB201D2E12AF00C8034B /* GuideView.m */; };
+		0D8ABB241D2E12AF00C8034B /* HBSettingViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB221D2E12AF00C8034B /* HBSettingViewCell.m */; };
+		0D8ABB4E1D2E12D500C8034B /* HBMessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB271D2E12D500C8034B /* HBMessageViewCell.m */; };
+		0D8ABB4F1D2E12D500C8034B /* HBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB291D2E12D500C8034B /* HBMessageViewController.m */; };
+		0D8ABB501D2E12D500C8034B /* HBLeaderBindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB2D1D2E12D500C8034B /* HBLeaderBindingCell.m */; };
+		0D8ABB511D2E12D500C8034B /* HBLeaderUnbindingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB2F1D2E12D500C8034B /* HBLeaderUnbindingCell.m */; };
+		0D8ABB521D2E12D500C8034B /* HBLeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB311D2E12D500C8034B /* HBLeaderViewController.m */; };
+		0D8ABB531D2E12D500C8034B /* HBMyTeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB341D2E12D500C8034B /* HBMyTeacherViewController.m */; };
+		0D8ABB541D2E12D500C8034B /* HBMyWorkView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB381D2E12D500C8034B /* HBMyWorkView.m */; };
+		0D8ABB551D2E12D500C8034B /* HBOptionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB3A1D2E12D500C8034B /* HBOptionButton.m */; };
+		0D8ABB561D2E12D500C8034B /* HBOptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB3C1D2E12D500C8034B /* HBOptionView.m */; };
+		0D8ABB571D2E12D500C8034B /* HBScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB3E1D2E12D500C8034B /* HBScoreView.m */; };
+		0D8ABB581D2E12D500C8034B /* HBMyWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB401D2E12D500C8034B /* HBMyWorkViewController.m */; };
+		0D8ABB591D2E12D500C8034B /* HBTestWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB421D2E12D500C8034B /* HBTestWorkViewController.m */; };
+		0D8ABB5A1D2E12D500C8034B /* HBBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB451D2E12D500C8034B /* HBBillViewController.m */; };
+		0D8ABB5B1D2E12D500C8034B /* HBBillViewControllerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB471D2E12D500C8034B /* HBBillViewControllerCell.m */; };
+		0D8ABB5C1D2E12D500C8034B /* HBPayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB491D2E12D500C8034B /* HBPayViewController.m */; };
+		0D8ABB5D1D2E12D500C8034B /* HBPayViewControllerModeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB4B1D2E12D500C8034B /* HBPayViewControllerModeCell.m */; };
+		0D8ABB5E1D2E12D500C8034B /* HBPayViewControllerMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB4D1D2E12D500C8034B /* HBPayViewControllerMoneyCell.m */; };
+		0D8ABB921D2E12E400C8034B /* HBGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB621D2E12E300C8034B /* HBGroupCell.m */; };
+		0D8ABB931D2E12E400C8034B /* HBSetStuGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB641D2E12E300C8034B /* HBSetStuGroupCell.m */; };
+		0D8ABB941D2E12E400C8034B /* HBSetStuOtherCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB661D2E12E300C8034B /* HBSetStuOtherCell.m */; };
+		0D8ABB951D2E12E400C8034B /* HBStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB681D2E12E300C8034B /* HBStudentCell.m */; };
+		0D8ABB961D2E12E400C8034B /* HBCreatGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB6A1D2E12E300C8034B /* HBCreatGroupController.m */; };
+		0D8ABB971D2E12E400C8034B /* HBSetStuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB6C1D2E12E400C8034B /* HBSetStuController.m */; };
+		0D8ABB981D2E12E400C8034B /* HBStuManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB6E1D2E12E400C8034B /* HBStuManViewController.m */; };
+		0D8ABB991D2E12E400C8034B /* HBSubscribeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB711D2E12E400C8034B /* HBSubscribeViewController.m */; };
+		0D8ABB9A1D2E12E400C8034B /* HBTeacherManCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB751D2E12E400C8034B /* HBTeacherManCell.m */; };
+		0D8ABB9B1D2E12E400C8034B /* HBTeacherManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB771D2E12E400C8034B /* HBTeacherManViewController.m */; };
+		0D8ABB9C1D2E12E400C8034B /* HBBindPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB7A1D2E12E400C8034B /* HBBindPhoneViewController.m */; };
+		0D8ABB9D1D2E12E400C8034B /* HBEditNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB7C1D2E12E400C8034B /* HBEditNameViewController.m */; };
+		0D8ABB9E1D2E12E400C8034B /* HBModifyPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB7E1D2E12E400C8034B /* HBModifyPwdViewController.m */; };
+		0D8ABB9F1D2E12E400C8034B /* HBUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB801D2E12E400C8034B /* HBUserInfoViewController.m */; };
+		0D8ABBA01D2E12E400C8034B /* HBWeekWorkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB841D2E12E400C8034B /* HBWeekWorkCell.m */; };
+		0D8ABBA11D2E12E400C8034B /* HBWeekWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB861D2E12E400C8034B /* HBWeekWorkViewController.m */; };
+		0D8ABBA21D2E12E400C8034B /* HBGroupSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB891D2E12E400C8034B /* HBGroupSelectViewController.m */; };
+		0D8ABBA31D2E12E400C8034B /* HBPublishWorkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB8B1D2E12E400C8034B /* HBPublishWorkViewController.m */; };
+		0D8ABBA41D2E12E400C8034B /* HBScoreListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB8D1D2E12E400C8034B /* HBScoreListViewController.m */; };
+		0D8ABBA51D2E12E400C8034B /* HBTestSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB8F1D2E12E400C8034B /* HBTestSelectViewController.m */; };
+		0D8ABBA61D2E12E400C8034B /* HBWorkManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8ABB911D2E12E400C8034B /* HBWorkManViewController.m */; };
 		0D8C27CC1BCD0A7C008F2F9F /* HBHeaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8C27CB1BCD0A7C008F2F9F /* HBHeaderManager.m */; };
 		0DB537261B8F5DEE0023A3F7 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537111B8F5DEE0023A3F7 /* AFHTTPRequestOperation.m */; };
 		0DB537271B8F5DEE0023A3F7 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537131B8F5DEE0023A3F7 /* AFHTTPRequestOperationManager.m */; };
@@ -474,12 +474,6 @@
 		0D8AB97B1D2A66DB00C8034B /* HBGradeDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGradeDemoViewController.m; sourceTree = "<group>"; };
 		0D8AB97C1D2A66DB00C8034B /* HBGradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGradeViewController.h; sourceTree = "<group>"; };
 		0D8AB97D1D2A66DB00C8034B /* HBGradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGradeViewController.m; sourceTree = "<group>"; };
-		0D8AB9921D2A66DB00C8034B /* HBTeacherManCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTeacherManCell.h; sourceTree = "<group>"; };
-		0D8AB9931D2A66DB00C8034B /* HBTeacherManCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTeacherManCell.m; sourceTree = "<group>"; };
-		0D8AB9941D2A66DB00C8034B /* HBWeekWorkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBWeekWorkCell.h; sourceTree = "<group>"; };
-		0D8AB9951D2A66DB00C8034B /* HBWeekWorkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBWeekWorkCell.m; sourceTree = "<group>"; };
-		0D8AB9961D2A66DB00C8034B /* HBWeekWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBWeekWorkViewController.h; sourceTree = "<group>"; };
-		0D8AB9971D2A66DB00C8034B /* HBWeekWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBWeekWorkViewController.m; sourceTree = "<group>"; };
 		0D8AB9991D2A66DB00C8034B /* HBForgetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBForgetPwdViewController.h; sourceTree = "<group>"; };
 		0D8AB99A1D2A66DB00C8034B /* HBForgetPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBForgetPwdViewController.m; sourceTree = "<group>"; };
 		0D8AB99B1D2A66DB00C8034B /* HBLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBLoginViewController.h; sourceTree = "<group>"; };
@@ -490,84 +484,10 @@
 		0D8AB9A01D2A66DB00C8034B /* HBRegInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBRegInfoViewController.m; sourceTree = "<group>"; };
 		0D8AB9A11D2A66DB00C8034B /* HBRegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBRegistViewController.h; sourceTree = "<group>"; };
 		0D8AB9A21D2A66DB00C8034B /* HBRegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBRegistViewController.m; sourceTree = "<group>"; };
-		0D8AB9A61D2A66DB00C8034B /* HBBillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBBillViewController.h; sourceTree = "<group>"; };
-		0D8AB9A71D2A66DB00C8034B /* HBBillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBillViewController.m; sourceTree = "<group>"; };
-		0D8AB9A81D2A66DB00C8034B /* HBBillViewControllerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBBillViewControllerCell.h; sourceTree = "<group>"; };
-		0D8AB9A91D2A66DB00C8034B /* HBBillViewControllerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBillViewControllerCell.m; sourceTree = "<group>"; };
-		0D8AB9AA1D2A66DB00C8034B /* HBBindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBBindPhoneViewController.h; sourceTree = "<group>"; };
-		0D8AB9AB1D2A66DB00C8034B /* HBBindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBindPhoneViewController.m; sourceTree = "<group>"; };
-		0D8AB9AC1D2A66DB00C8034B /* HBCreatGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBCreatGroupController.h; sourceTree = "<group>"; };
-		0D8AB9AD1D2A66DB00C8034B /* HBCreatGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBCreatGroupController.m; sourceTree = "<group>"; };
-		0D8AB9AE1D2A66DB00C8034B /* HBEditNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBEditNameViewController.h; sourceTree = "<group>"; };
-		0D8AB9AF1D2A66DB00C8034B /* HBEditNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBEditNameViewController.m; sourceTree = "<group>"; };
-		0D8AB9B01D2A66DB00C8034B /* HBGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGroupCell.h; sourceTree = "<group>"; };
-		0D8AB9B11D2A66DB00C8034B /* HBGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGroupCell.m; sourceTree = "<group>"; };
-		0D8AB9B21D2A66DB00C8034B /* HBGroupSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGroupSelectViewController.h; sourceTree = "<group>"; };
-		0D8AB9B31D2A66DB00C8034B /* HBGroupSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGroupSelectViewController.m; sourceTree = "<group>"; };
-		0D8AB9B41D2A66DB00C8034B /* HBLeaderBindingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBLeaderBindingCell.h; sourceTree = "<group>"; };
-		0D8AB9B51D2A66DB00C8034B /* HBLeaderBindingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBLeaderBindingCell.m; sourceTree = "<group>"; };
-		0D8AB9B61D2A66DB00C8034B /* HBLeaderUnbindingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBLeaderUnbindingCell.h; sourceTree = "<group>"; };
-		0D8AB9B71D2A66DB00C8034B /* HBLeaderUnbindingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBLeaderUnbindingCell.m; sourceTree = "<group>"; };
-		0D8AB9B81D2A66DB00C8034B /* HBLeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBLeaderViewController.h; sourceTree = "<group>"; };
-		0D8AB9B91D2A66DB00C8034B /* HBLeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBLeaderViewController.m; sourceTree = "<group>"; };
-		0D8AB9BA1D2A66DB00C8034B /* HBMessageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMessageViewCell.h; sourceTree = "<group>"; };
-		0D8AB9BB1D2A66DB00C8034B /* HBMessageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMessageViewCell.m; sourceTree = "<group>"; };
-		0D8AB9BC1D2A66DB00C8034B /* HBMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMessageViewController.h; sourceTree = "<group>"; };
-		0D8AB9BD1D2A66DB00C8034B /* HBMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMessageViewController.m; sourceTree = "<group>"; };
-		0D8AB9BE1D2A66DB00C8034B /* HBModifyPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBModifyPwdViewController.h; sourceTree = "<group>"; };
-		0D8AB9BF1D2A66DB00C8034B /* HBModifyPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBModifyPwdViewController.m; sourceTree = "<group>"; };
-		0D8AB9C01D2A66DB00C8034B /* HBMyTeacherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyTeacherViewController.h; sourceTree = "<group>"; };
-		0D8AB9C11D2A66DB00C8034B /* HBMyTeacherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMyTeacherViewController.m; sourceTree = "<group>"; };
-		0D8AB9C21D2A66DB00C8034B /* HBMyWorkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkView.h; sourceTree = "<group>"; };
-		0D8AB9C31D2A66DB00C8034B /* HBMyWorkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMyWorkView.m; sourceTree = "<group>"; };
-		0D8AB9C41D2A66DB00C8034B /* HBMyWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkViewController.h; sourceTree = "<group>"; };
-		0D8AB9C51D2A66DB00C8034B /* HBMyWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMyWorkViewController.m; sourceTree = "<group>"; };
-		0D8AB9C61D2A66DB00C8034B /* HBOptionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBOptionButton.h; sourceTree = "<group>"; };
-		0D8AB9C71D2A66DB00C8034B /* HBOptionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBOptionButton.m; sourceTree = "<group>"; };
-		0D8AB9C81D2A66DB00C8034B /* HBOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBOptionView.h; sourceTree = "<group>"; };
-		0D8AB9C91D2A66DB00C8034B /* HBOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBOptionView.m; sourceTree = "<group>"; };
-		0D8AB9CA1D2A66DB00C8034B /* HBPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBPayViewController.h; sourceTree = "<group>"; };
-		0D8AB9CB1D2A66DB00C8034B /* HBPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBPayViewController.m; sourceTree = "<group>"; };
-		0D8AB9CC1D2A66DB00C8034B /* HBPayViewControllerModeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBPayViewControllerModeCell.h; sourceTree = "<group>"; };
-		0D8AB9CD1D2A66DB00C8034B /* HBPayViewControllerModeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBPayViewControllerModeCell.m; sourceTree = "<group>"; };
-		0D8AB9CE1D2A66DB00C8034B /* HBPayViewControllerMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBPayViewControllerMoneyCell.h; sourceTree = "<group>"; };
-		0D8AB9CF1D2A66DB00C8034B /* HBPayViewControllerMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBPayViewControllerMoneyCell.m; sourceTree = "<group>"; };
-		0D8AB9D01D2A66DB00C8034B /* HBPublishWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBPublishWorkViewController.h; sourceTree = "<group>"; };
-		0D8AB9D11D2A66DB00C8034B /* HBPublishWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBPublishWorkViewController.m; sourceTree = "<group>"; };
-		0D8AB9D21D2A66DB00C8034B /* HBScoreListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBScoreListViewController.h; sourceTree = "<group>"; };
-		0D8AB9D31D2A66DB00C8034B /* HBScoreListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreListViewController.m; sourceTree = "<group>"; };
-		0D8AB9D41D2A66DB00C8034B /* HBScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBScoreView.h; sourceTree = "<group>"; };
-		0D8AB9D51D2A66DB00C8034B /* HBScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreView.m; sourceTree = "<group>"; };
-		0D8AB9D61D2A66DB00C8034B /* HBSetStuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuController.h; sourceTree = "<group>"; };
-		0D8AB9D71D2A66DB00C8034B /* HBSetStuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuController.m; sourceTree = "<group>"; };
-		0D8AB9D81D2A66DB00C8034B /* HBSetStuGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuGroupCell.h; sourceTree = "<group>"; };
-		0D8AB9D91D2A66DB00C8034B /* HBSetStuGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuGroupCell.m; sourceTree = "<group>"; };
-		0D8AB9DA1D2A66DB00C8034B /* HBSetStuOtherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuOtherCell.h; sourceTree = "<group>"; };
-		0D8AB9DB1D2A66DB00C8034B /* HBSetStuOtherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuOtherCell.m; sourceTree = "<group>"; };
-		0D8AB9DC1D2A66DB00C8034B /* HBStudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBStudentCell.h; sourceTree = "<group>"; };
-		0D8AB9DD1D2A66DB00C8034B /* HBStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBStudentCell.m; sourceTree = "<group>"; };
-		0D8AB9DE1D2A66DB00C8034B /* HBStuManViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBStuManViewController.h; sourceTree = "<group>"; };
-		0D8AB9DF1D2A66DB00C8034B /* HBStuManViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBStuManViewController.m; sourceTree = "<group>"; };
-		0D8AB9E01D2A66DB00C8034B /* HBSubscribeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSubscribeViewController.h; sourceTree = "<group>"; };
-		0D8AB9E11D2A66DB00C8034B /* HBSubscribeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSubscribeViewController.m; sourceTree = "<group>"; };
-		0D8AB9E21D2A66DB00C8034B /* HBTeacherManViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTeacherManViewController.h; sourceTree = "<group>"; };
-		0D8AB9E31D2A66DB00C8034B /* HBTeacherManViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTeacherManViewController.m; sourceTree = "<group>"; };
-		0D8AB9E41D2A66DB00C8034B /* HBTestSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestSelectViewController.h; sourceTree = "<group>"; };
-		0D8AB9E51D2A66DB00C8034B /* HBTestSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestSelectViewController.m; sourceTree = "<group>"; };
-		0D8AB9E61D2A66DB00C8034B /* HBTestWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestWorkViewController.h; sourceTree = "<group>"; };
-		0D8AB9E71D2A66DB00C8034B /* HBTestWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestWorkViewController.m; sourceTree = "<group>"; };
-		0D8AB9E81D2A66DB00C8034B /* HBUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBUserInfoViewController.h; sourceTree = "<group>"; };
-		0D8AB9E91D2A66DB00C8034B /* HBUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBUserInfoViewController.m; sourceTree = "<group>"; };
-		0D8AB9EA1D2A66DB00C8034B /* HBWorkManViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBWorkManViewController.h; sourceTree = "<group>"; };
-		0D8AB9EB1D2A66DB00C8034B /* HBWorkManViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBWorkManViewController.m; sourceTree = "<group>"; };
-		0D8AB9ED1D2A66DB00C8034B /* GuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideView.h; sourceTree = "<group>"; };
-		0D8AB9EE1D2A66DB00C8034B /* GuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideView.m; sourceTree = "<group>"; };
 		0D8AB9EF1D2A66DB00C8034B /* HBAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBAboutViewController.h; sourceTree = "<group>"; };
 		0D8AB9F01D2A66DB00C8034B /* HBAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBAboutViewController.m; sourceTree = "<group>"; };
 		0D8AB9F11D2A66DB00C8034B /* HBBookManViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBBookManViewController.h; sourceTree = "<group>"; };
 		0D8AB9F21D2A66DB00C8034B /* HBBookManViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBookManViewController.m; sourceTree = "<group>"; };
-		0D8AB9F31D2A66DB00C8034B /* HBSettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSettingViewCell.h; sourceTree = "<group>"; };
-		0D8AB9F41D2A66DB00C8034B /* HBSettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSettingViewCell.m; sourceTree = "<group>"; };
 		0D8AB9F51D2A66DB00C8034B /* HBSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSettingViewController.h; sourceTree = "<group>"; };
 		0D8AB9F61D2A66DB00C8034B /* HBSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSettingViewController.m; sourceTree = "<group>"; };
 		0D8AB9F71D2A66DB00C8034B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -681,6 +601,86 @@
 		0D8ABB121D2E0C9C00C8034B /* HBReadStatisticalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBReadStatisticalViewController.m; sourceTree = "<group>"; };
 		0D8ABB131D2E0C9C00C8034B /* HBTaskStatisticalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTaskStatisticalViewController.h; sourceTree = "<group>"; };
 		0D8ABB141D2E0C9C00C8034B /* HBTaskStatisticalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTaskStatisticalViewController.m; sourceTree = "<group>"; };
+		0D8ABB1F1D2E12AF00C8034B /* GuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideView.h; sourceTree = "<group>"; };
+		0D8ABB201D2E12AF00C8034B /* GuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideView.m; sourceTree = "<group>"; };
+		0D8ABB211D2E12AF00C8034B /* HBSettingViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSettingViewCell.h; sourceTree = "<group>"; };
+		0D8ABB221D2E12AF00C8034B /* HBSettingViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSettingViewCell.m; sourceTree = "<group>"; };
+		0D8ABB261D2E12D500C8034B /* HBMessageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMessageViewCell.h; sourceTree = "<group>"; };
+		0D8ABB271D2E12D500C8034B /* HBMessageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMessageViewCell.m; sourceTree = "<group>"; };
+		0D8ABB281D2E12D500C8034B /* HBMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMessageViewController.h; sourceTree = "<group>"; };
+		0D8ABB291D2E12D500C8034B /* HBMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMessageViewController.m; sourceTree = "<group>"; };
+		0D8ABB2C1D2E12D500C8034B /* HBLeaderBindingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBLeaderBindingCell.h; sourceTree = "<group>"; };
+		0D8ABB2D1D2E12D500C8034B /* HBLeaderBindingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBLeaderBindingCell.m; sourceTree = "<group>"; };
+		0D8ABB2E1D2E12D500C8034B /* HBLeaderUnbindingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBLeaderUnbindingCell.h; sourceTree = "<group>"; };
+		0D8ABB2F1D2E12D500C8034B /* HBLeaderUnbindingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBLeaderUnbindingCell.m; sourceTree = "<group>"; };
+		0D8ABB301D2E12D500C8034B /* HBLeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBLeaderViewController.h; sourceTree = "<group>"; };
+		0D8ABB311D2E12D500C8034B /* HBLeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBLeaderViewController.m; sourceTree = "<group>"; };
+		0D8ABB331D2E12D500C8034B /* HBMyTeacherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyTeacherViewController.h; sourceTree = "<group>"; };
+		0D8ABB341D2E12D500C8034B /* HBMyTeacherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMyTeacherViewController.m; sourceTree = "<group>"; };
+		0D8ABB371D2E12D500C8034B /* HBMyWorkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkView.h; sourceTree = "<group>"; };
+		0D8ABB381D2E12D500C8034B /* HBMyWorkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMyWorkView.m; sourceTree = "<group>"; };
+		0D8ABB391D2E12D500C8034B /* HBOptionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBOptionButton.h; sourceTree = "<group>"; };
+		0D8ABB3A1D2E12D500C8034B /* HBOptionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBOptionButton.m; sourceTree = "<group>"; };
+		0D8ABB3B1D2E12D500C8034B /* HBOptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBOptionView.h; sourceTree = "<group>"; };
+		0D8ABB3C1D2E12D500C8034B /* HBOptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBOptionView.m; sourceTree = "<group>"; };
+		0D8ABB3D1D2E12D500C8034B /* HBScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBScoreView.h; sourceTree = "<group>"; };
+		0D8ABB3E1D2E12D500C8034B /* HBScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreView.m; sourceTree = "<group>"; };
+		0D8ABB3F1D2E12D500C8034B /* HBMyWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBMyWorkViewController.h; sourceTree = "<group>"; };
+		0D8ABB401D2E12D500C8034B /* HBMyWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBMyWorkViewController.m; sourceTree = "<group>"; };
+		0D8ABB411D2E12D500C8034B /* HBTestWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestWorkViewController.h; sourceTree = "<group>"; };
+		0D8ABB421D2E12D500C8034B /* HBTestWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestWorkViewController.m; sourceTree = "<group>"; };
+		0D8ABB441D2E12D500C8034B /* HBBillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBBillViewController.h; sourceTree = "<group>"; };
+		0D8ABB451D2E12D500C8034B /* HBBillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBillViewController.m; sourceTree = "<group>"; };
+		0D8ABB461D2E12D500C8034B /* HBBillViewControllerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBBillViewControllerCell.h; sourceTree = "<group>"; };
+		0D8ABB471D2E12D500C8034B /* HBBillViewControllerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBillViewControllerCell.m; sourceTree = "<group>"; };
+		0D8ABB481D2E12D500C8034B /* HBPayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBPayViewController.h; sourceTree = "<group>"; };
+		0D8ABB491D2E12D500C8034B /* HBPayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBPayViewController.m; sourceTree = "<group>"; };
+		0D8ABB4A1D2E12D500C8034B /* HBPayViewControllerModeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBPayViewControllerModeCell.h; sourceTree = "<group>"; };
+		0D8ABB4B1D2E12D500C8034B /* HBPayViewControllerModeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBPayViewControllerModeCell.m; sourceTree = "<group>"; };
+		0D8ABB4C1D2E12D500C8034B /* HBPayViewControllerMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBPayViewControllerMoneyCell.h; sourceTree = "<group>"; };
+		0D8ABB4D1D2E12D500C8034B /* HBPayViewControllerMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBPayViewControllerMoneyCell.m; sourceTree = "<group>"; };
+		0D8ABB611D2E12E300C8034B /* HBGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGroupCell.h; sourceTree = "<group>"; };
+		0D8ABB621D2E12E300C8034B /* HBGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGroupCell.m; sourceTree = "<group>"; };
+		0D8ABB631D2E12E300C8034B /* HBSetStuGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuGroupCell.h; sourceTree = "<group>"; };
+		0D8ABB641D2E12E300C8034B /* HBSetStuGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuGroupCell.m; sourceTree = "<group>"; };
+		0D8ABB651D2E12E300C8034B /* HBSetStuOtherCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuOtherCell.h; sourceTree = "<group>"; };
+		0D8ABB661D2E12E300C8034B /* HBSetStuOtherCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuOtherCell.m; sourceTree = "<group>"; };
+		0D8ABB671D2E12E300C8034B /* HBStudentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBStudentCell.h; sourceTree = "<group>"; };
+		0D8ABB681D2E12E300C8034B /* HBStudentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBStudentCell.m; sourceTree = "<group>"; };
+		0D8ABB691D2E12E300C8034B /* HBCreatGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBCreatGroupController.h; sourceTree = "<group>"; };
+		0D8ABB6A1D2E12E300C8034B /* HBCreatGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBCreatGroupController.m; sourceTree = "<group>"; };
+		0D8ABB6B1D2E12E300C8034B /* HBSetStuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSetStuController.h; sourceTree = "<group>"; };
+		0D8ABB6C1D2E12E400C8034B /* HBSetStuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSetStuController.m; sourceTree = "<group>"; };
+		0D8ABB6D1D2E12E400C8034B /* HBStuManViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBStuManViewController.h; sourceTree = "<group>"; };
+		0D8ABB6E1D2E12E400C8034B /* HBStuManViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBStuManViewController.m; sourceTree = "<group>"; };
+		0D8ABB701D2E12E400C8034B /* HBSubscribeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSubscribeViewController.h; sourceTree = "<group>"; };
+		0D8ABB711D2E12E400C8034B /* HBSubscribeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSubscribeViewController.m; sourceTree = "<group>"; };
+		0D8ABB741D2E12E400C8034B /* HBTeacherManCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTeacherManCell.h; sourceTree = "<group>"; };
+		0D8ABB751D2E12E400C8034B /* HBTeacherManCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTeacherManCell.m; sourceTree = "<group>"; };
+		0D8ABB761D2E12E400C8034B /* HBTeacherManViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTeacherManViewController.h; sourceTree = "<group>"; };
+		0D8ABB771D2E12E400C8034B /* HBTeacherManViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTeacherManViewController.m; sourceTree = "<group>"; };
+		0D8ABB791D2E12E400C8034B /* HBBindPhoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBBindPhoneViewController.h; sourceTree = "<group>"; };
+		0D8ABB7A1D2E12E400C8034B /* HBBindPhoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBindPhoneViewController.m; sourceTree = "<group>"; };
+		0D8ABB7B1D2E12E400C8034B /* HBEditNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBEditNameViewController.h; sourceTree = "<group>"; };
+		0D8ABB7C1D2E12E400C8034B /* HBEditNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBEditNameViewController.m; sourceTree = "<group>"; };
+		0D8ABB7D1D2E12E400C8034B /* HBModifyPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBModifyPwdViewController.h; sourceTree = "<group>"; };
+		0D8ABB7E1D2E12E400C8034B /* HBModifyPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBModifyPwdViewController.m; sourceTree = "<group>"; };
+		0D8ABB7F1D2E12E400C8034B /* HBUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBUserInfoViewController.h; sourceTree = "<group>"; };
+		0D8ABB801D2E12E400C8034B /* HBUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBUserInfoViewController.m; sourceTree = "<group>"; };
+		0D8ABB831D2E12E400C8034B /* HBWeekWorkCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBWeekWorkCell.h; sourceTree = "<group>"; };
+		0D8ABB841D2E12E400C8034B /* HBWeekWorkCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBWeekWorkCell.m; sourceTree = "<group>"; };
+		0D8ABB851D2E12E400C8034B /* HBWeekWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBWeekWorkViewController.h; sourceTree = "<group>"; };
+		0D8ABB861D2E12E400C8034B /* HBWeekWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBWeekWorkViewController.m; sourceTree = "<group>"; };
+		0D8ABB881D2E12E400C8034B /* HBGroupSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGroupSelectViewController.h; sourceTree = "<group>"; };
+		0D8ABB891D2E12E400C8034B /* HBGroupSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGroupSelectViewController.m; sourceTree = "<group>"; };
+		0D8ABB8A1D2E12E400C8034B /* HBPublishWorkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBPublishWorkViewController.h; sourceTree = "<group>"; };
+		0D8ABB8B1D2E12E400C8034B /* HBPublishWorkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBPublishWorkViewController.m; sourceTree = "<group>"; };
+		0D8ABB8C1D2E12E400C8034B /* HBScoreListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBScoreListViewController.h; sourceTree = "<group>"; };
+		0D8ABB8D1D2E12E400C8034B /* HBScoreListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBScoreListViewController.m; sourceTree = "<group>"; };
+		0D8ABB8E1D2E12E400C8034B /* HBTestSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestSelectViewController.h; sourceTree = "<group>"; };
+		0D8ABB8F1D2E12E400C8034B /* HBTestSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestSelectViewController.m; sourceTree = "<group>"; };
+		0D8ABB901D2E12E400C8034B /* HBWorkManViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBWorkManViewController.h; sourceTree = "<group>"; };
+		0D8ABB911D2E12E400C8034B /* HBWorkManViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBWorkManViewController.m; sourceTree = "<group>"; };
 		0D8C27CA1BCD0A7C008F2F9F /* HBHeaderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBHeaderManager.h; sourceTree = "<group>"; };
 		0D8C27CB1BCD0A7C008F2F9F /* HBHeaderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBHeaderManager.m; sourceTree = "<group>"; };
 		0DB5370E1B8F5DEE0023A3F7 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -1066,15 +1066,8 @@
 			children = (
 				0D8AB96A1D2A66DB00C8034B /* DHSlideMenuController */,
 				0D8AB9791D2A66DB00C8034B /* GradeController */,
-				0D8AB9921D2A66DB00C8034B /* HBTeacherManCell.h */,
-				0D8AB9931D2A66DB00C8034B /* HBTeacherManCell.m */,
-				0D8AB9941D2A66DB00C8034B /* HBWeekWorkCell.h */,
-				0D8AB9951D2A66DB00C8034B /* HBWeekWorkCell.m */,
-				0D8AB9961D2A66DB00C8034B /* HBWeekWorkViewController.h */,
-				0D8AB9971D2A66DB00C8034B /* HBWeekWorkViewController.m */,
 				0D8AB9981D2A66DB00C8034B /* Login&RegisterController */,
 				0D8AB9A51D2A66DB00C8034B /* MenuControllers */,
-				0D8ABB011D2E0C9C00C8034B /* StatisticalController */,
 				0D8AB9F71D2A66DB00C8034B /* ViewController.h */,
 				0D8AB9F81D2A66DB00C8034B /* ViewController.m */,
 			);
@@ -1123,77 +1116,19 @@
 		0D8AB9A51D2A66DB00C8034B /* MenuControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0D8AB9A61D2A66DB00C8034B /* HBBillViewController.h */,
-				0D8AB9A71D2A66DB00C8034B /* HBBillViewController.m */,
-				0D8AB9A81D2A66DB00C8034B /* HBBillViewControllerCell.h */,
-				0D8AB9A91D2A66DB00C8034B /* HBBillViewControllerCell.m */,
-				0D8AB9AA1D2A66DB00C8034B /* HBBindPhoneViewController.h */,
-				0D8AB9AB1D2A66DB00C8034B /* HBBindPhoneViewController.m */,
-				0D8AB9AC1D2A66DB00C8034B /* HBCreatGroupController.h */,
-				0D8AB9AD1D2A66DB00C8034B /* HBCreatGroupController.m */,
-				0D8AB9AE1D2A66DB00C8034B /* HBEditNameViewController.h */,
-				0D8AB9AF1D2A66DB00C8034B /* HBEditNameViewController.m */,
-				0D8AB9B01D2A66DB00C8034B /* HBGroupCell.h */,
-				0D8AB9B11D2A66DB00C8034B /* HBGroupCell.m */,
-				0D8AB9B21D2A66DB00C8034B /* HBGroupSelectViewController.h */,
-				0D8AB9B31D2A66DB00C8034B /* HBGroupSelectViewController.m */,
-				0D8AB9B41D2A66DB00C8034B /* HBLeaderBindingCell.h */,
-				0D8AB9B51D2A66DB00C8034B /* HBLeaderBindingCell.m */,
-				0D8AB9B61D2A66DB00C8034B /* HBLeaderUnbindingCell.h */,
-				0D8AB9B71D2A66DB00C8034B /* HBLeaderUnbindingCell.m */,
-				0D8AB9B81D2A66DB00C8034B /* HBLeaderViewController.h */,
-				0D8AB9B91D2A66DB00C8034B /* HBLeaderViewController.m */,
-				0D8AB9BA1D2A66DB00C8034B /* HBMessageViewCell.h */,
-				0D8AB9BB1D2A66DB00C8034B /* HBMessageViewCell.m */,
-				0D8AB9BC1D2A66DB00C8034B /* HBMessageViewController.h */,
-				0D8AB9BD1D2A66DB00C8034B /* HBMessageViewController.m */,
-				0D8AB9BE1D2A66DB00C8034B /* HBModifyPwdViewController.h */,
-				0D8AB9BF1D2A66DB00C8034B /* HBModifyPwdViewController.m */,
-				0D8AB9C01D2A66DB00C8034B /* HBMyTeacherViewController.h */,
-				0D8AB9C11D2A66DB00C8034B /* HBMyTeacherViewController.m */,
-				0D8AB9C21D2A66DB00C8034B /* HBMyWorkView.h */,
-				0D8AB9C31D2A66DB00C8034B /* HBMyWorkView.m */,
-				0D8AB9C41D2A66DB00C8034B /* HBMyWorkViewController.h */,
-				0D8AB9C51D2A66DB00C8034B /* HBMyWorkViewController.m */,
-				0D8AB9C61D2A66DB00C8034B /* HBOptionButton.h */,
-				0D8AB9C71D2A66DB00C8034B /* HBOptionButton.m */,
-				0D8AB9C81D2A66DB00C8034B /* HBOptionView.h */,
-				0D8AB9C91D2A66DB00C8034B /* HBOptionView.m */,
-				0D8AB9CA1D2A66DB00C8034B /* HBPayViewController.h */,
-				0D8AB9CB1D2A66DB00C8034B /* HBPayViewController.m */,
-				0D8AB9CC1D2A66DB00C8034B /* HBPayViewControllerModeCell.h */,
-				0D8AB9CD1D2A66DB00C8034B /* HBPayViewControllerModeCell.m */,
-				0D8AB9CE1D2A66DB00C8034B /* HBPayViewControllerMoneyCell.h */,
-				0D8AB9CF1D2A66DB00C8034B /* HBPayViewControllerMoneyCell.m */,
-				0D8AB9D01D2A66DB00C8034B /* HBPublishWorkViewController.h */,
-				0D8AB9D11D2A66DB00C8034B /* HBPublishWorkViewController.m */,
-				0D8AB9D21D2A66DB00C8034B /* HBScoreListViewController.h */,
-				0D8AB9D31D2A66DB00C8034B /* HBScoreListViewController.m */,
-				0D8AB9D41D2A66DB00C8034B /* HBScoreView.h */,
-				0D8AB9D51D2A66DB00C8034B /* HBScoreView.m */,
-				0D8AB9D61D2A66DB00C8034B /* HBSetStuController.h */,
-				0D8AB9D71D2A66DB00C8034B /* HBSetStuController.m */,
-				0D8AB9D81D2A66DB00C8034B /* HBSetStuGroupCell.h */,
-				0D8AB9D91D2A66DB00C8034B /* HBSetStuGroupCell.m */,
-				0D8AB9DA1D2A66DB00C8034B /* HBSetStuOtherCell.h */,
-				0D8AB9DB1D2A66DB00C8034B /* HBSetStuOtherCell.m */,
-				0D8AB9DC1D2A66DB00C8034B /* HBStudentCell.h */,
-				0D8AB9DD1D2A66DB00C8034B /* HBStudentCell.m */,
-				0D8AB9DE1D2A66DB00C8034B /* HBStuManViewController.h */,
-				0D8AB9DF1D2A66DB00C8034B /* HBStuManViewController.m */,
-				0D8AB9E01D2A66DB00C8034B /* HBSubscribeViewController.h */,
-				0D8AB9E11D2A66DB00C8034B /* HBSubscribeViewController.m */,
-				0D8AB9E21D2A66DB00C8034B /* HBTeacherManViewController.h */,
-				0D8AB9E31D2A66DB00C8034B /* HBTeacherManViewController.m */,
-				0D8AB9E41D2A66DB00C8034B /* HBTestSelectViewController.h */,
-				0D8AB9E51D2A66DB00C8034B /* HBTestSelectViewController.m */,
-				0D8AB9E61D2A66DB00C8034B /* HBTestWorkViewController.h */,
-				0D8AB9E71D2A66DB00C8034B /* HBTestWorkViewController.m */,
-				0D8AB9E81D2A66DB00C8034B /* HBUserInfoViewController.h */,
-				0D8AB9E91D2A66DB00C8034B /* HBUserInfoViewController.m */,
-				0D8AB9EA1D2A66DB00C8034B /* HBWorkManViewController.h */,
-				0D8AB9EB1D2A66DB00C8034B /* HBWorkManViewController.m */,
+				0D8ABB251D2E12D500C8034B /* MessageCenter */,
+				0D8ABB2A1D2E12D500C8034B /* MyLeader */,
+				0D8ABB321D2E12D500C8034B /* MyTeacher */,
+				0D8ABB351D2E12D500C8034B /* MyWork */,
+				0D8ABB431D2E12D500C8034B /* PayCenter */,
 				0D8AB9EC1D2A66DB00C8034B /* SettingViewControllers */,
+				0D8ABB5F1D2E12E300C8034B /* StudentManager */,
+				0D8ABB6F1D2E12E400C8034B /* SubscribeLevel */,
+				0D8ABB721D2E12E400C8034B /* TeacherManager */,
+				0D8ABB781D2E12E400C8034B /* UserInfo */,
+				0D8ABB811D2E12E400C8034B /* WeekWork */,
+				0D8ABB871D2E12E400C8034B /* WorkManager */,
+				0D8ABB011D2E0C9C00C8034B /* StatisticalController */,
 			);
 			path = MenuControllers;
 			sourceTree = "<group>";
@@ -1201,14 +1136,11 @@
 		0D8AB9EC1D2A66DB00C8034B /* SettingViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0D8AB9ED1D2A66DB00C8034B /* GuideView.h */,
-				0D8AB9EE1D2A66DB00C8034B /* GuideView.m */,
+				0D8ABB1E1D2E12AF00C8034B /* Cell */,
 				0D8AB9EF1D2A66DB00C8034B /* HBAboutViewController.h */,
 				0D8AB9F01D2A66DB00C8034B /* HBAboutViewController.m */,
 				0D8AB9F11D2A66DB00C8034B /* HBBookManViewController.h */,
 				0D8AB9F21D2A66DB00C8034B /* HBBookManViewController.m */,
-				0D8AB9F31D2A66DB00C8034B /* HBSettingViewCell.h */,
-				0D8AB9F41D2A66DB00C8034B /* HBSettingViewCell.m */,
 				0D8AB9F51D2A66DB00C8034B /* HBSettingViewController.h */,
 				0D8AB9F61D2A66DB00C8034B /* HBSettingViewController.m */,
 			);
@@ -1356,7 +1288,8 @@
 				0D8ABB131D2E0C9C00C8034B /* HBTaskStatisticalViewController.h */,
 				0D8ABB141D2E0C9C00C8034B /* HBTaskStatisticalViewController.m */,
 			);
-			path = StatisticalController;
+			name = StatisticalController;
+			path = ../StatisticalController;
 			sourceTree = "<group>";
 		};
 		0D8ABB021D2E0C9C00C8034B /* Cell */ = {
@@ -1376,6 +1309,210 @@
 				0D8ABB0E1D2E0C9C00C8034B /* HBTaskStatisticalCell.m */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		0D8ABB1E1D2E12AF00C8034B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB1F1D2E12AF00C8034B /* GuideView.h */,
+				0D8ABB201D2E12AF00C8034B /* GuideView.m */,
+				0D8ABB211D2E12AF00C8034B /* HBSettingViewCell.h */,
+				0D8ABB221D2E12AF00C8034B /* HBSettingViewCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0D8ABB251D2E12D500C8034B /* MessageCenter */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB261D2E12D500C8034B /* HBMessageViewCell.h */,
+				0D8ABB271D2E12D500C8034B /* HBMessageViewCell.m */,
+				0D8ABB281D2E12D500C8034B /* HBMessageViewController.h */,
+				0D8ABB291D2E12D500C8034B /* HBMessageViewController.m */,
+			);
+			path = MessageCenter;
+			sourceTree = "<group>";
+		};
+		0D8ABB2A1D2E12D500C8034B /* MyLeader */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB2B1D2E12D500C8034B /* Cell */,
+				0D8ABB301D2E12D500C8034B /* HBLeaderViewController.h */,
+				0D8ABB311D2E12D500C8034B /* HBLeaderViewController.m */,
+			);
+			path = MyLeader;
+			sourceTree = "<group>";
+		};
+		0D8ABB2B1D2E12D500C8034B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB2C1D2E12D500C8034B /* HBLeaderBindingCell.h */,
+				0D8ABB2D1D2E12D500C8034B /* HBLeaderBindingCell.m */,
+				0D8ABB2E1D2E12D500C8034B /* HBLeaderUnbindingCell.h */,
+				0D8ABB2F1D2E12D500C8034B /* HBLeaderUnbindingCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0D8ABB321D2E12D500C8034B /* MyTeacher */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB331D2E12D500C8034B /* HBMyTeacherViewController.h */,
+				0D8ABB341D2E12D500C8034B /* HBMyTeacherViewController.m */,
+			);
+			path = MyTeacher;
+			sourceTree = "<group>";
+		};
+		0D8ABB351D2E12D500C8034B /* MyWork */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB361D2E12D500C8034B /* Cell */,
+				0D8ABB3F1D2E12D500C8034B /* HBMyWorkViewController.h */,
+				0D8ABB401D2E12D500C8034B /* HBMyWorkViewController.m */,
+				0D8ABB411D2E12D500C8034B /* HBTestWorkViewController.h */,
+				0D8ABB421D2E12D500C8034B /* HBTestWorkViewController.m */,
+			);
+			path = MyWork;
+			sourceTree = "<group>";
+		};
+		0D8ABB361D2E12D500C8034B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB371D2E12D500C8034B /* HBMyWorkView.h */,
+				0D8ABB381D2E12D500C8034B /* HBMyWorkView.m */,
+				0D8ABB391D2E12D500C8034B /* HBOptionButton.h */,
+				0D8ABB3A1D2E12D500C8034B /* HBOptionButton.m */,
+				0D8ABB3B1D2E12D500C8034B /* HBOptionView.h */,
+				0D8ABB3C1D2E12D500C8034B /* HBOptionView.m */,
+				0D8ABB3D1D2E12D500C8034B /* HBScoreView.h */,
+				0D8ABB3E1D2E12D500C8034B /* HBScoreView.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0D8ABB431D2E12D500C8034B /* PayCenter */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB441D2E12D500C8034B /* HBBillViewController.h */,
+				0D8ABB451D2E12D500C8034B /* HBBillViewController.m */,
+				0D8ABB461D2E12D500C8034B /* HBBillViewControllerCell.h */,
+				0D8ABB471D2E12D500C8034B /* HBBillViewControllerCell.m */,
+				0D8ABB481D2E12D500C8034B /* HBPayViewController.h */,
+				0D8ABB491D2E12D500C8034B /* HBPayViewController.m */,
+				0D8ABB4A1D2E12D500C8034B /* HBPayViewControllerModeCell.h */,
+				0D8ABB4B1D2E12D500C8034B /* HBPayViewControllerModeCell.m */,
+				0D8ABB4C1D2E12D500C8034B /* HBPayViewControllerMoneyCell.h */,
+				0D8ABB4D1D2E12D500C8034B /* HBPayViewControllerMoneyCell.m */,
+			);
+			path = PayCenter;
+			sourceTree = "<group>";
+		};
+		0D8ABB5F1D2E12E300C8034B /* StudentManager */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB601D2E12E300C8034B /* Cell */,
+				0D8ABB691D2E12E300C8034B /* HBCreatGroupController.h */,
+				0D8ABB6A1D2E12E300C8034B /* HBCreatGroupController.m */,
+				0D8ABB6B1D2E12E300C8034B /* HBSetStuController.h */,
+				0D8ABB6C1D2E12E400C8034B /* HBSetStuController.m */,
+				0D8ABB6D1D2E12E400C8034B /* HBStuManViewController.h */,
+				0D8ABB6E1D2E12E400C8034B /* HBStuManViewController.m */,
+			);
+			path = StudentManager;
+			sourceTree = "<group>";
+		};
+		0D8ABB601D2E12E300C8034B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB611D2E12E300C8034B /* HBGroupCell.h */,
+				0D8ABB621D2E12E300C8034B /* HBGroupCell.m */,
+				0D8ABB631D2E12E300C8034B /* HBSetStuGroupCell.h */,
+				0D8ABB641D2E12E300C8034B /* HBSetStuGroupCell.m */,
+				0D8ABB651D2E12E300C8034B /* HBSetStuOtherCell.h */,
+				0D8ABB661D2E12E300C8034B /* HBSetStuOtherCell.m */,
+				0D8ABB671D2E12E300C8034B /* HBStudentCell.h */,
+				0D8ABB681D2E12E300C8034B /* HBStudentCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0D8ABB6F1D2E12E400C8034B /* SubscribeLevel */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB701D2E12E400C8034B /* HBSubscribeViewController.h */,
+				0D8ABB711D2E12E400C8034B /* HBSubscribeViewController.m */,
+			);
+			path = SubscribeLevel;
+			sourceTree = "<group>";
+		};
+		0D8ABB721D2E12E400C8034B /* TeacherManager */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB731D2E12E400C8034B /* Cell */,
+				0D8ABB761D2E12E400C8034B /* HBTeacherManViewController.h */,
+				0D8ABB771D2E12E400C8034B /* HBTeacherManViewController.m */,
+			);
+			path = TeacherManager;
+			sourceTree = "<group>";
+		};
+		0D8ABB731D2E12E400C8034B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB741D2E12E400C8034B /* HBTeacherManCell.h */,
+				0D8ABB751D2E12E400C8034B /* HBTeacherManCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0D8ABB781D2E12E400C8034B /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB791D2E12E400C8034B /* HBBindPhoneViewController.h */,
+				0D8ABB7A1D2E12E400C8034B /* HBBindPhoneViewController.m */,
+				0D8ABB7B1D2E12E400C8034B /* HBEditNameViewController.h */,
+				0D8ABB7C1D2E12E400C8034B /* HBEditNameViewController.m */,
+				0D8ABB7D1D2E12E400C8034B /* HBModifyPwdViewController.h */,
+				0D8ABB7E1D2E12E400C8034B /* HBModifyPwdViewController.m */,
+				0D8ABB7F1D2E12E400C8034B /* HBUserInfoViewController.h */,
+				0D8ABB801D2E12E400C8034B /* HBUserInfoViewController.m */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		0D8ABB811D2E12E400C8034B /* WeekWork */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB821D2E12E400C8034B /* Cell */,
+				0D8ABB851D2E12E400C8034B /* HBWeekWorkViewController.h */,
+				0D8ABB861D2E12E400C8034B /* HBWeekWorkViewController.m */,
+			);
+			path = WeekWork;
+			sourceTree = "<group>";
+		};
+		0D8ABB821D2E12E400C8034B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB831D2E12E400C8034B /* HBWeekWorkCell.h */,
+				0D8ABB841D2E12E400C8034B /* HBWeekWorkCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		0D8ABB871D2E12E400C8034B /* WorkManager */ = {
+			isa = PBXGroup;
+			children = (
+				0D8ABB881D2E12E400C8034B /* HBGroupSelectViewController.h */,
+				0D8ABB891D2E12E400C8034B /* HBGroupSelectViewController.m */,
+				0D8ABB8A1D2E12E400C8034B /* HBPublishWorkViewController.h */,
+				0D8ABB8B1D2E12E400C8034B /* HBPublishWorkViewController.m */,
+				0D8ABB8C1D2E12E400C8034B /* HBScoreListViewController.h */,
+				0D8ABB8D1D2E12E400C8034B /* HBScoreListViewController.m */,
+				0D8ABB8E1D2E12E400C8034B /* HBTestSelectViewController.h */,
+				0D8ABB8F1D2E12E400C8034B /* HBTestSelectViewController.m */,
+				0D8ABB901D2E12E400C8034B /* HBWorkManViewController.h */,
+				0D8ABB911D2E12E400C8034B /* HBWorkManViewController.m */,
+			);
+			path = WorkManager;
 			sourceTree = "<group>";
 		};
 		0DB5370D1B8F5DEE0023A3F7 /* AFNetworking */ = {
@@ -1860,42 +1997,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D8AB9FF1D2A66DB00C8034B /* UIViewAdditions.m in Sources */,
-				0D8ABA381D2A66DB00C8034B /* HBMyTeacherViewController.m in Sources */,
 				0D8ABA521D2A66DB00C8034B /* HBSettingViewController.m in Sources */,
 				0D8ABAFE1D2E0ACE00C8034B /* EColumnChart.m in Sources */,
 				18C650021B9DF1CA0040E349 /* HBScoreEntity.m in Sources */,
 				0D8ABB171D2E0C9C00C8034B /* HBReadStatisticalDateCell.m in Sources */,
 				0DB5372B1B8F5DEE0023A3F7 /* AFNetworkReachabilityManager.m in Sources */,
 				0D8ABACA1D2A727E00C8034B /* MBHudUtil.m in Sources */,
-				0D8ABA2B1D2A66DB00C8034B /* HBBillViewController.m in Sources */,
 				0D8ABA0C1D2A66DB00C8034B /* MJProgressHUD.m in Sources */,
 				0DBE35361B8CB8B500179237 /* DoubleCompare.c in Sources */,
 				0D2677131BF247DD006FB4ED /* HBSKPayService.m in Sources */,
 				0D018FF11B96F67500A92F59 /* HBContentBaseRequest.m in Sources */,
 				18B5FD2E1B981454002CCD95 /* UIButton+AFNetworking.m in Sources */,
+				0D8ABBA61D2E12E400C8034B /* HBWorkManViewController.m in Sources */,
 				0D8ABA281D2A66DB00C8034B /* HBRegInfoViewController.m in Sources */,
 				0DD214651B95568E009E3DB9 /* HBDataSaveManager.m in Sources */,
 				0D8ABAE21D2AC7CF00C8034B /* NSDictionary+HBExt.m in Sources */,
+				0D8ABB921D2E12E400C8034B /* HBGroupCell.m in Sources */,
 				0D8ABAE31D2AC7CF00C8034B /* NSString+HBExt.m in Sources */,
 				1810C7061BD9474A00899BD0 /* HBExamAbilityEntity.m in Sources */,
 				0D7488921B8A2973007BE4CD /* NSData+MD5.m in Sources */,
 				181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */,
+				0D8ABB981D2E12E400C8034B /* HBStuManViewController.m in Sources */,
+				0D8ABB4F1D2E12D500C8034B /* HBMessageViewController.m in Sources */,
+				0D8ABB531D2E12D500C8034B /* HBMyTeacherViewController.m in Sources */,
 				18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */,
 				0D8ABAC91D2A727E00C8034B /* HBToastHud.m in Sources */,
 				0DBE35351B8CB8B500179237 /* DataCheckUtil.m in Sources */,
+				0D8ABB5E1D2E12D500C8034B /* HBPayViewControllerMoneyCell.m in Sources */,
 				18ABF5241BD7DEDC006E55A0 /* HBRankBookEntity.m in Sources */,
-				0D8ABA3F1D2A66DB00C8034B /* HBPayViewControllerMoneyCell.m in Sources */,
 				18DF0EDA1BCB9FBC00376686 /* HBBillEntity.m in Sources */,
-				0D8ABA341D2A66DB00C8034B /* HBLeaderViewController.m in Sources */,
 				0DB537271B8F5DEE0023A3F7 /* AFHTTPRequestOperationManager.m in Sources */,
+				0D8ABB5B1D2E12D500C8034B /* HBBillViewControllerCell.m in Sources */,
 				0D8ABA011D2A66DB00C8034B /* FTRotatingCircle.m in Sources */,
-				0D8ABA3E1D2A66DB00C8034B /* HBPayViewControllerModeCell.m in Sources */,
-				0D8ABA301D2A66DB00C8034B /* HBGroupCell.m in Sources */,
-				0D8ABA221D2A66DB00C8034B /* HBTeacherManCell.m in Sources */,
-				0D8ABA241D2A66DB00C8034B /* HBWeekWorkViewController.m in Sources */,
+				0D8ABBA51D2E12E400C8034B /* HBTestSelectViewController.m in Sources */,
+				0D8ABB5D1D2E12D500C8034B /* HBPayViewControllerModeCell.m in Sources */,
 				0D8ABA4F1D2A66DB00C8034B /* HBAboutViewController.m in Sources */,
 				0D8ABAE51D2AC7CF00C8034B /* UISlider+HBExt.m in Sources */,
-				0D8ABA481D2A66DB00C8034B /* HBSubscribeViewController.m in Sources */,
 				0D3F6D0E1BADA391005B4358 /* HBTestWorkManager.m in Sources */,
 				0D8ABA0F1D2A66DB00C8034B /* DHSlideMenuController.m in Sources */,
 				0D8ABAE71D2AC7CF00C8034B /* UITextField+HBExt.m in Sources */,
@@ -1903,123 +2040,123 @@
 				182306201B9B300300A8E146 /* HBTaskEntity.m in Sources */,
 				0D8ABA101D2A66DB00C8034B /* DHSlideMenuViewController.m in Sources */,
 				1810C7031BD946CD00899BD0 /* HBExamKnowledgeEntity.m in Sources */,
-				0D8ABA331D2A66DB00C8034B /* HBLeaderUnbindingCell.m in Sources */,
 				0D8ABAE41D2AC7CF00C8034B /* UIImage+HBExt.m in Sources */,
 				189719DC1B9F3405006F42A2 /* HBStudentEntity.m in Sources */,
-				0D8ABA391D2A66DB00C8034B /* HBMyWorkView.m in Sources */,
+				0D8ABB951D2E12E400C8034B /* HBStudentCell.m in Sources */,
 				0D8ABAFF1D2E0ACE00C8034B /* EColumnChartLabel.m in Sources */,
 				0D8ABA291D2A66DB00C8034B /* HBRegistViewController.m in Sources */,
+				0D8ABB571D2E12D500C8034B /* HBScoreView.m in Sources */,
 				181E307D1BA2B7AD00BBA92F /* FileUtil.m in Sources */,
 				181E30761BA2B14100BBA92F /* UtilFMDatabasePool.m in Sources */,
 				0DB537261B8F5DEE0023A3F7 /* AFHTTPRequestOperation.m in Sources */,
-				0D8ABA351D2A66DB00C8034B /* HBMessageViewCell.m in Sources */,
+				0D8ABB5A1D2E12D500C8034B /* HBBillViewController.m in Sources */,
 				0DBE353E1B8CB8B500179237 /* NSDateUtilities.m in Sources */,
 				0D8ABAE61D2AC7CF00C8034B /* UITabBar+HBExt.m in Sources */,
-				0D8ABA431D2A66DB00C8034B /* HBSetStuController.m in Sources */,
-				0D8ABA361D2A66DB00C8034B /* HBMessageViewController.m in Sources */,
-				0D8ABA4B1D2A66DB00C8034B /* HBTestWorkViewController.m in Sources */,
+				0D8ABB511D2E12D500C8034B /* HBLeaderUnbindingCell.m in Sources */,
 				0D8ABA061D2A66DB00C8034B /* TextGridItemView.m in Sources */,
-				0D8ABA3C1D2A66DB00C8034B /* HBOptionView.m in Sources */,
+				0D8ABB9E1D2E12E400C8034B /* HBModifyPwdViewController.m in Sources */,
 				0D8ABB001D2E0ACE00C8034B /* EColumnDataModel.m in Sources */,
-				0D8ABA461D2A66DB00C8034B /* HBStudentCell.m in Sources */,
 				181E30801BA2C28600BBA92F /* HBContentDetailDB.m in Sources */,
+				0D8ABB591D2E12D500C8034B /* HBTestWorkViewController.m in Sources */,
+				0D8ABB231D2E12AF00C8034B /* GuideView.m in Sources */,
 				0D8AB9321D2A58BA00C8034B /* AppDelegate.m in Sources */,
 				4322FE891BEDE25000775D3A /* HBExamEntity.m in Sources */,
 				0D8ABAFC1D2E0ACE00C8034B /* EColor.m in Sources */,
 				1864359C1BC546440068E73E /* HBSystemMsgEntity.m in Sources */,
-				0D8ABA441D2A66DB00C8034B /* HBSetStuGroupCell.m in Sources */,
+				0D8ABB4E1D2E12D500C8034B /* HBMessageViewCell.m in Sources */,
 				0D8ABA081D2A66DB00C8034B /* HBNTextField.m in Sources */,
 				0D8ABA0A1D2A66DB00C8034B /* HBTitleView.m in Sources */,
-				0D8ABA511D2A66DB00C8034B /* HBSettingViewCell.m in Sources */,
 				0D8ABA171D2A66DB00C8034B /* HBGradeViewController.m in Sources */,
 				0D7488941B8A2973007BE4CD /* NSString+MD5.mm in Sources */,
 				0D8ABAFD1D2E0ACE00C8034B /* EColumn.m in Sources */,
-				0D8ABA2C1D2A66DB00C8034B /* HBBillViewControllerCell.m in Sources */,
 				0D8ABA531D2A66DB00C8034B /* ViewController.m in Sources */,
 				0D8ABA051D2A66DB00C8034B /* HBGridView.m in Sources */,
 				0D8ABA261D2A66DB00C8034B /* HBLoginViewController.m in Sources */,
-				0D8ABA231D2A66DB00C8034B /* HBWeekWorkCell.m in Sources */,
 				0D2677091BF0E1FD006FB4ED /* HBVersionCheck.m in Sources */,
 				0D8ABA251D2A66DB00C8034B /* HBForgetPwdViewController.m in Sources */,
 				0D8AB9FA1D2A66DB00C8034B /* HBBaseViewController.m in Sources */,
-				0D8ABA471D2A66DB00C8034B /* HBStuManViewController.m in Sources */,
+				0D8ABB551D2E12D500C8034B /* HBOptionButton.m in Sources */,
+				0D8ABB9D1D2E12E400C8034B /* HBEditNameViewController.m in Sources */,
 				0D8AB92D1D2A57D000C8034B /* HBDeviceInfo.m in Sources */,
 				0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */,
-				0D8ABA4C1D2A66DB00C8034B /* HBUserInfoViewController.m in Sources */,
-				0D8ABA2E1D2A66DB00C8034B /* HBCreatGroupController.m in Sources */,
 				0DB5372E1B8F5DEE0023A3F7 /* AFURLResponseSerialization.m in Sources */,
 				0D8ABA161D2A66DB00C8034B /* HBGradeDemoViewController.m in Sources */,
 				181456DD1B96D9DD003CCD6C /* HBContentEntity.m in Sources */,
 				0D8ABB151D2E0C9C00C8034B /* HBRankingListCell.m in Sources */,
-				0D8ABA2D1D2A66DB00C8034B /* HBBindPhoneViewController.m in Sources */,
-				0D8ABA421D2A66DB00C8034B /* HBScoreView.m in Sources */,
 				0D7A76951B92176C00BC50A0 /* HBUserEntity.m in Sources */,
+				0D8ABB521D2E12D500C8034B /* HBLeaderViewController.m in Sources */,
 				0D7A768F1B91E33900BC50A0 /* HBContentManager.m in Sources */,
 				0D8ABB1D1D2E0C9C00C8034B /* HBTaskStatisticalViewController.m in Sources */,
 				0D8ABB191D2E0C9C00C8034B /* HBReadStatisticalStuNumCell.m in Sources */,
+				0D8ABB561D2E12D500C8034B /* HBOptionView.m in Sources */,
 				0D8ABB161D2E0C9C00C8034B /* HBReadStatisticalContentCell.m in Sources */,
 				18D325171BB820EA00904FA6 /* HBReadProgressDB.m in Sources */,
 				0DB537351B8F78AF0023A3F7 /* HBServiceManager.m in Sources */,
 				0D8ABB1A1D2E0C9C00C8034B /* HBTaskStatisticalCell.m in Sources */,
+				0D8ABB9C1D2E12E400C8034B /* HBBindPhoneViewController.m in Sources */,
 				0D7488901B8A2973007BE4CD /* NetUtil.m in Sources */,
+				0D8ABB5C1D2E12D500C8034B /* HBPayViewController.m in Sources */,
+				0D8ABB541D2E12D500C8034B /* HBMyWorkView.m in Sources */,
 				181E30741BA2B14100BBA92F /* UtilFMDatabase.m in Sources */,
 				0D8C27CC1BCD0A7C008F2F9F /* HBHeaderManager.m in Sources */,
-				0D8ABA3D1D2A66DB00C8034B /* HBPayViewController.m in Sources */,
 				0D8ABA271D2A66DB00C8034B /* HBNLoginViewController.m in Sources */,
+				0D8ABB9A1D2E12E400C8034B /* HBTeacherManCell.m in Sources */,
 				0D8ABAE91D2AC7CF00C8034B /* UIViewController+HBExt.m in Sources */,
 				0D8ABA0D1D2A66DB00C8034B /* RefreshTableHeaderView.m in Sources */,
 				0D8ABB1B1D2E0C9C00C8034B /* HBRankingListViewController.m in Sources */,
-				0D8ABA3A1D2A66DB00C8034B /* HBMyWorkViewController.m in Sources */,
 				0DB537281B8F5DEE0023A3F7 /* AFURLConnectionOperation.m in Sources */,
-				0D8ABA411D2A66DB00C8034B /* HBScoreListViewController.m in Sources */,
 				0D7486F41B88A884007BE4CD /* main.m in Sources */,
 				182621791BDCC2D3006DFF0D /* HBTeacherEntity.m in Sources */,
 				0D8ABB1C1D2E0C9C00C8034B /* HBReadStatisticalViewController.m in Sources */,
-				0D8ABA4D1D2A66DB00C8034B /* HBWorkManViewController.m in Sources */,
+				0D8ABBA41D2E12E400C8034B /* HBScoreListViewController.m in Sources */,
 				0DB537291B8F5DEE0023A3F7 /* AFHTTPSessionManager.m in Sources */,
-				0D8ABA451D2A66DB00C8034B /* HBSetStuOtherCell.m in Sources */,
-				0D8ABA3B1D2A66DB00C8034B /* HBOptionButton.m in Sources */,
 				1898BCEC1B9DA7ED00FD9A11 /* HBManageTaskEntity.m in Sources */,
 				0D8ABA091D2A66DB00C8034B /* HBTableView.m in Sources */,
+				0D8ABBA31D2E12E400C8034B /* HBPublishWorkViewController.m in Sources */,
 				189C0F5E1BB5776300DD39C0 /* HBReadprogressEntity.m in Sources */,
 				181E30771BA2B14100BBA92F /* UtilFMDatabaseQueue.m in Sources */,
 				0D8ABA041D2A66DB00C8034B /* HBGridItemView.m in Sources */,
-				0D8ABA4E1D2A66DB00C8034B /* GuideView.m in Sources */,
 				0D01900B1B980E8200A92F59 /* UIImageView+AFNetworking.m in Sources */,
+				0D8ABB941D2E12E400C8034B /* HBSetStuOtherCell.m in Sources */,
 				0D8ABAE11D2AC7CF00C8034B /* NSData+HBExt.m in Sources */,
-				0D8ABA491D2A66DB00C8034B /* HBTeacherManViewController.m in Sources */,
+				0D8ABBA21D2E12E400C8034B /* HBGroupSelectViewController.m in Sources */,
+				0D8ABB501D2E12D500C8034B /* HBLeaderBindingCell.m in Sources */,
 				0D8ABA001D2A66DB00C8034B /* FTMenu.m in Sources */,
+				0D8ABB9B1D2E12E400C8034B /* HBTeacherManViewController.m in Sources */,
+				0D8ABB991D2E12E400C8034B /* HBSubscribeViewController.m in Sources */,
 				0DB537321B8F70E80023A3F7 /* HBHTTPBaseRequest.m in Sources */,
-				0D8ABA4A1D2A66DB00C8034B /* HBTestSelectViewController.m in Sources */,
 				0D8ABACB1D2A727E00C8034B /* MBProgressHUD.m in Sources */,
+				0D8ABBA11D2E12E400C8034B /* HBWeekWorkViewController.m in Sources */,
 				0DB5372C1B8F5DEE0023A3F7 /* AFSecurityPolicy.m in Sources */,
 				181E30781BA2B14100BBA92F /* UtilFMResultSet.m in Sources */,
 				0D8ABA501D2A66DB00C8034B /* HBBookManViewController.m in Sources */,
+				0D8ABB971D2E12E400C8034B /* HBSetStuController.m in Sources */,
 				0D8ABA071D2A66DB00C8034B /* HBHyperlinksButton.m in Sources */,
 				0D7488961B8A2973007BE4CD /* RC4.m in Sources */,
-				0D8ABA371D2A66DB00C8034B /* HBModifyPwdViewController.m in Sources */,
+				0D8ABB9F1D2E12E400C8034B /* HBUserInfoViewController.m in Sources */,
 				0D8ABB181D2E0C9C00C8034B /* HBReadStatisticalLogoCell.m in Sources */,
-				0D8ABA321D2A66DB00C8034B /* HBLeaderBindingCell.m in Sources */,
 				0D8AB92E1D2A57D000C8034B /* HBFileManager.m in Sources */,
 				0D74888E1B8A2973007BE4CD /* md5.cpp in Sources */,
 				0D8ABA021D2A66DB00C8034B /* ButtonGridItemView.m in Sources */,
 				0D143F391BD00FA800F5D9EE /* HBExamIdDB.m in Sources */,
+				0D8ABB241D2E12AF00C8034B /* HBSettingViewCell.m in Sources */,
+				0D8ABB961D2E12E400C8034B /* HBCreatGroupController.m in Sources */,
 				260085D21C5506E300D5932F /* UIDevice+Addtional.m in Sources */,
 				0DB5372A1B8F5DEE0023A3F7 /* AFURLSessionManager.m in Sources */,
-				0D8ABA2F1D2A66DB00C8034B /* HBEditNameViewController.m in Sources */,
+				0D8ABB931D2E12E400C8034B /* HBSetStuGroupCell.m in Sources */,
+				0D8ABBA01D2E12E400C8034B /* HBWeekWorkCell.m in Sources */,
 				0D8ABAE01D2AC7CF00C8034B /* NSArray+HBExt.m in Sources */,
 				0D8ABA031D2A66DB00C8034B /* HBGridCellView.m in Sources */,
 				0DB5372D1B8F5DEE0023A3F7 /* AFURLRequestSerialization.m in Sources */,
-				0D8ABA311D2A66DB00C8034B /* HBGroupSelectViewController.m in Sources */,
 				18C316901BA092B1004F716E /* HBClassEntity.m in Sources */,
 				0D7A76921B92064100BC50A0 /* HBBaseEntity.m in Sources */,
 				0DBE353D1B8CB8B500179237 /* Navigator.m in Sources */,
 				181E30751BA2B14100BBA92F /* UtilFMDatabaseAdditions.m in Sources */,
 				0D8ABAE81D2AC7CF00C8034B /* UITextView+HBExt.m in Sources */,
 				0DBE35401B8CB8B500179237 /* TimeIntervalUtils.m in Sources */,
-				0D8ABA401D2A66DB00C8034B /* HBPublishWorkViewController.m in Sources */,
 				1880D8621BCE83A1005A2951 /* HBMsgEntityDB.m in Sources */,
 				0D143F4B1BD417BA00F5D9EE /* HBWeekUtil.m in Sources */,
+				0D8ABB581D2E12D500C8034B /* HBMyWorkViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
