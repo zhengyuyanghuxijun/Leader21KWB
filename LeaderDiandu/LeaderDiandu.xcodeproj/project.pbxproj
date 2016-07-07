@@ -335,6 +335,7 @@
 		26E99AFF1C059F8C00D92552 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E99AFE1C059F8C00D92552 /* libz.tbd */; };
 		4322FE891BEDE25000775D3A /* HBExamEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322FE881BEDE25000775D3A /* HBExamEntity.m */; };
 		E53F27291D2E41E3006F982B /* TextGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E53F27281D2E41E3006F982B /* TextGridCell.m */; };
+		E53F272D1D2E59A5006F982B /* SubscribeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E53F272C1D2E59A5006F982B /* SubscribeGridCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -785,6 +786,8 @@
 		4322FE881BEDE25000775D3A /* HBExamEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBExamEntity.m; sourceTree = "<group>"; };
 		E53F27271D2E41E3006F982B /* TextGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextGridCell.h; sourceTree = "<group>"; };
 		E53F27281D2E41E3006F982B /* TextGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextGridCell.m; sourceTree = "<group>"; };
+		E53F272B1D2E59A5006F982B /* SubscribeGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubscribeGridCell.h; sourceTree = "<group>"; };
+		E53F272C1D2E59A5006F982B /* SubscribeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubscribeGridCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1443,6 +1446,7 @@
 		0D8ABB6F1D2E12E400C8034B /* SubscribeLevel */ = {
 			isa = PBXGroup;
 			children = (
+				E53F272A1D2E5981006F982B /* Cell */,
 				0D8ABB701D2E12E400C8034B /* HBSubscribeViewController.h */,
 				0D8ABB711D2E12E400C8034B /* HBSubscribeViewController.m */,
 			);
@@ -1771,6 +1775,15 @@
 			children = (
 				E53F27271D2E41E3006F982B /* TextGridCell.h */,
 				E53F27281D2E41E3006F982B /* TextGridCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		E53F272A1D2E5981006F982B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E53F272B1D2E59A5006F982B /* SubscribeGridCell.h */,
+				E53F272C1D2E59A5006F982B /* SubscribeGridCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2151,6 +2164,7 @@
 				0D8ABB181D2E0C9C00C8034B /* HBReadStatisticalLogoCell.m in Sources */,
 				0D8AB92E1D2A57D000C8034B /* HBFileManager.m in Sources */,
 				0D74888E1B8A2973007BE4CD /* md5.cpp in Sources */,
+				E53F272D1D2E59A5006F982B /* SubscribeGridCell.m in Sources */,
 				0D8ABA021D2A66DB00C8034B /* ButtonGridItemView.m in Sources */,
 				0D143F391BD00FA800F5D9EE /* HBExamIdDB.m in Sources */,
 				0D8ABB241D2E12AF00C8034B /* HBSettingViewCell.m in Sources */,

@@ -8,8 +8,8 @@
 
 #import "HBSubscribeViewController.h"
 #import "HBGridView.h"
-#import "HBGridItemView.h"
-#import "ButtonGridItemView.h"
+#import "TextGridCell.h"
+#import "SubscribeGridCell.h"
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 #import "HHAlertSingleView.h"
@@ -23,6 +23,7 @@
 #define HHAlertSingleView_SIZE_WIDTH (ScreenWidth - 20 - 20)
 #define HHAlertSingleView_SIZE_HEIGHT (ScreenHeight - 40 - 40)
 
+static NSString *const kSubscribeGridCell = @"kSubscribeGridCell";
 static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
 
 @implementation HBRuleCell
@@ -73,9 +74,10 @@ static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
 
 @end
 
-@interface HBSubscribeViewController ()<HBGridViewDelegate, UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface HBSubscribeViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
-    HBGridView *_gridView;
+    UICollectionView        *_collectionView;
+    
     NSArray *_ruleArr;
 }
 
@@ -121,10 +123,30 @@ static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
 
 - (void)initMainGrid
 {
-    _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, HBNavBarHeight, ScreenWidth, CGRectGetMinY(self.ruleDescriptionButton.frame)-HBNavBarHeight-10)];
-    _gridView.delegate = self;
-    [_gridView setScrollEnabled:NO];
-    [self.view addSubview:_gridView];
+    if (_collectionView == nil) {
+        
+        CGFloat screenWidth = ScreenWidth;
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+        //设置headerView
+        flowLayout.headerReferenceSize = CGSizeMake(screenWidth, 5);
+        //设置footerView
+        flowLayout.footerReferenceSize = CGSizeMake(screenWidth, 0);
+        flowLayout.minimumInteritemSpacing = 0.0;
+        flowLayout.minimumLineSpacing = 1.0;
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, HBNavBarHeight, ScreenWidth, CGRectGetMinY(self.ruleDescriptionButton.frame)-HBNavBarHeight-10) collectionViewLayout:flowLayout];
+        _collectionView.backgroundColor = [UIColor clearColor];
+        _collectionView.dataSource = self;
+        _collectionView.delegate = self;
+        _collectionView.alwaysBounceVertical = YES;
+        [_collectionView setScrollEnabled:NO];
+        [self.view addSubview:_collectionView];
+        
+        [_collectionView registerClass:[SubscribeGridCell class] forCellWithReuseIdentifier:kSubscribeGridCell];
+        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ReusableView"];
+        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusableView"];
+    }
 }
 
 -(void)initConfirmButton
@@ -162,7 +184,7 @@ static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
 
 - (void)confirmButtonPressed:(id)sender
 {
-    if (self.currentSelectIndex + 1 == self.subscribeId) {
+    if (self.currentSelectIndex == self.subscribeId) {
         [MBHudUtil showTextView:@"请选择想订阅的群组" inView:nil];
         return;
     }
@@ -220,7 +242,7 @@ static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
             NSString *user = userEntity.name;
             //获取用户当前订阅的套餐
             [MBHudUtil showActivityView:nil inView:nil];
-            [[HBServiceManager defaultManager] requestBooksetSub:user bookset_id:[NSString stringWithFormat:@"%ld",(long)(self.currentSelectIndex+1)] months:@"1" completion:^(id responseObject, NSError *error) {
+            [[HBServiceManager defaultManager] requestBooksetSub:user bookset_id:[NSString stringWithFormat:@"%ld",(long)self.currentSelectIndex] months:@"1" completion:^(id responseObject, NSError *error) {
                 if (responseObject) {
                     NSString *result = [responseObject objectForKey:@"result"];
                     if ([result isEqualToString:@"OK"]) {
@@ -236,69 +258,73 @@ static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
     }
 }
 
-#pragma mark -
-#pragma mark HBGridViewDelegate
+//add by zyy
+#pragma mark - UICollectionViewDataSource
 
-// 获取单元格的总数
-- (NSInteger)gridNumberOfGridView:(HBGridView *)gridView
+//定义展示的UICollectionViewCell的个数
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return 9;
 }
 
-// 获取gridview每行显示的grid数
-- (NSInteger)columnNumberOfGridView:(HBGridView *)gridView
+//定义展示的Section的个数
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 3;
+    return 1;
 }
 
-// 获取单元格的行数
-- (NSInteger)rowNumberOfGridView:(HBGridView *)gridView
+//每个UICollectionView展示的内容
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 3;
-}
-
-- (CGFloat)gridView:(HBGridView *)gridView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (myAppDelegate.isPad) {
-        return 180;
-    } else {
-        return 100;
-    }
-}
-
-// 获取特定位置的单元格视图
-- (HBGridItemView *)gridView:(HBGridView *)gridView inGridCell:(HBGridCellView *)gridCell gridItemViewAtGridIndex:(GridIndex *)gridIndex listIndex:(NSInteger)listIndex
-{
-    NSLog(@"list index:%ld", (long)listIndex);
-    ButtonGridItemView *itemView = (ButtonGridItemView *)[gridView dequeueReusableGridItemAtGridIndex:gridIndex ofGridCellView:gridCell];
-    if (!itemView)
+    NSInteger row = indexPath.item;
+    
+    SubscribeGridCell *cell = (SubscribeGridCell *)[collectionView dequeueReusableCellWithReuseIdentifier:kSubscribeGridCell forIndexPath:indexPath];
+    if (!cell)
     {
         CGFloat height = 100;
         if (myAppDelegate.isPad) {
             height = 180;
         }
-        itemView = [[ButtonGridItemView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, height)];
+        cell = [[SubscribeGridCell alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth/3, height)];
     }
     
-    NSString *indexStr = [NSString stringWithFormat:@"%ld", (long)(listIndex+1)];
+    NSLog(@"list index:%ld", (long)row);
+    NSString *indexStr = [NSString stringWithFormat:@"%ld", (long)row];
     
     //说明这个等级是被订阅的，需要特殊标记一下
-    if (self.subscribeId == (listIndex + 1)) {
-        [itemView updateSubscribeImgView:YES levelButton:YES index:indexStr];
-    }else if(self.currentSelectIndex == listIndex){
-        [itemView updateSubscribeImgView:NO levelButton:YES index:indexStr];
+    if (self.subscribeId == row) {
+        [cell updateSubscribeImgView:YES levelButton:YES index:indexStr];
+    }else if(self.currentSelectIndex == row){
+        [cell updateSubscribeImgView:NO levelButton:YES index:indexStr];
     }else{
-        [itemView updateSubscribeImgView:NO levelButton:NO index:indexStr];
+        [cell updateSubscribeImgView:NO levelButton:NO index:indexStr];
     }
-
-    return itemView;
+    
+    return cell;
 }
 
-- (void)gridView:(HBGridView *)gridView didSelectGridItemAtIndex:(NSInteger)index
-{
-    self.currentSelectIndex = index;
-    [_gridView reloadData];
+#pragma mark - UICollectionViewDelegateFlowLayout
 
+//定义每个cell大小
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(ScreenWidth/3, ScreenWidth/3);
+}
+
+//返回每个UICollectionView的间距
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsZero;
+}
+
+#pragma mark --UICollectionViewDelegate
+
+//UICollectionView被选中时调用的方法
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger row = indexPath.item;
+    self.currentSelectIndex = row;
+    [_collectionView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -329,7 +355,7 @@ static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
                 //获取用户当前订阅的套餐成功
                 id tmp = [responseObject objectForKey:@"bookset_id"];
                 self.subscribeId = [tmp integerValue];
-                [_gridView reloadData];
+                [_collectionView reloadData];
                 [MBHudUtil hideActivityView:nil];
             }
         }];
