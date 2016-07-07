@@ -334,6 +334,7 @@
 		265566F81C1AABC400150C3C /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 265566F71C1AABC400150C3C /* Bugly.framework */; };
 		26E99AFF1C059F8C00D92552 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 26E99AFE1C059F8C00D92552 /* libz.tbd */; };
 		4322FE891BEDE25000775D3A /* HBExamEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322FE881BEDE25000775D3A /* HBExamEntity.m */; };
+		E53F27291D2E41E3006F982B /* TextGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E53F27281D2E41E3006F982B /* TextGridCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -782,6 +783,8 @@
 		26E99AFE1C059F8C00D92552 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		4322FE871BEDE25000775D3A /* HBExamEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBExamEntity.h; sourceTree = "<group>"; };
 		4322FE881BEDE25000775D3A /* HBExamEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBExamEntity.m; sourceTree = "<group>"; };
+		E53F27271D2E41E3006F982B /* TextGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextGridCell.h; sourceTree = "<group>"; };
+		E53F27281D2E41E3006F982B /* TextGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextGridCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1088,6 +1091,7 @@
 		0D8AB9791D2A66DB00C8034B /* GradeController */ = {
 			isa = PBXGroup;
 			children = (
+				E53F27261D2E4165006F982B /* Cell */,
 				0D8AB97A1D2A66DB00C8034B /* HBGradeDemoViewController.h */,
 				0D8AB97B1D2A66DB00C8034B /* HBGradeDemoViewController.m */,
 				0D8AB97C1D2A66DB00C8034B /* HBGradeViewController.h */,
@@ -1762,6 +1766,15 @@
 			path = Bugly;
 			sourceTree = "<group>";
 		};
+		E53F27261D2E4165006F982B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				E53F27271D2E41E3006F982B /* TextGridCell.h */,
+				E53F27281D2E41E3006F982B /* TextGridCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2018,6 +2031,7 @@
 				0D7488921B8A2973007BE4CD /* NSData+MD5.m in Sources */,
 				181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */,
 				0D8ABB981D2E12E400C8034B /* HBStuManViewController.m in Sources */,
+				E53F27291D2E41E3006F982B /* TextGridCell.m in Sources */,
 				0D8ABB4F1D2E12D500C8034B /* HBMessageViewController.m in Sources */,
 				0D8ABB531D2E12D500C8034B /* HBMyTeacherViewController.m in Sources */,
 				18E57D631BA52AC400198BE9 /* HBContentListDB.m in Sources */,

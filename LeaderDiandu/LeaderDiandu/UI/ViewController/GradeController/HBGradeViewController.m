@@ -10,7 +10,7 @@
 #import "HBTitleView.h"
 #import "DHSlideMenuController.h"
 #import "HBGridView.h"
-#import "TextGridItemView.h"
+#import "TextGridCell.h"
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 #import "HBContentManager.h"
@@ -41,12 +41,16 @@
 
 #define LEADERSDK [Leader21SDKOC sharedInstance]
 
-#define DataSourceCount 10
+#define DataSourceCount  10
 #define saveReadProgress 0
+#define KHBNaviBarHeight 64
 
-@interface HBGradeViewController ()<HBGridViewDelegate, reloadGridDelegate>
+static NSString *const kTextGridCell = @"kTextGridCell";
+
+@interface HBGradeViewController()<UICollectionViewDataSource, UICollectionViewDelegate, NewReloadGridDelegate, SelectTextGridCellDelegate>
 {
-    HBGridView *_gridView;
+    UICollectionView        *_collectionView;
+    
     NSInteger currentID;
     NSInteger subscribeId;
     NSString *readBookFromTime;
@@ -197,7 +201,7 @@
     if (userEntity) {
         /** type: 1 - 学生； 10 - 老师*/
         if (userEntity.type == 1) {
-            [_gridView setHeaderViewHidden:NO];
+//            [_gridView setHeaderViewHidden:NO];
             //获取用户当前订阅的套餐
             [[HBServiceManager defaultManager] requestUserBookset:userEntity.name completion:^(id responseObject, NSError *error) {
                 if (responseObject) {
@@ -220,7 +224,7 @@
                 }
             }];
         } else {
-            [_gridView setHeaderViewHidden:YES];
+//            [_gridView setHeaderViewHidden:YES];
             //老师登录，将学生作业Id数组清空
             [self.taskEntityArr removeAllObjects];
             //登录成功先load套餐信息，如果套餐信息为空则去服务器拉取数据
@@ -255,7 +259,7 @@
     self.redPointImgView.hidden = YES;
     myAppDelegate.hasNewMsg = NO;
     myAppDelegate.hasNewExam = NO;
-    [_gridView setHeaderViewHidden:YES];
+//    [_gridView setHeaderViewHidden:YES];
     [self.rightButton setTitle:@"1" forState:UIControlStateNormal];
     [self verifyLogin];
 }
@@ -494,7 +498,7 @@
     [self.contentDetailEntityDic removeAllObjects];
     [self.contentDetailEntityDic setObject:booklist forKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
     
-    [_gridView hideRefreshView];
+//    [_gridView hideRefreshView];
     [self reloadGrid];
 }
 
@@ -602,7 +606,7 @@
         }
     }
     
-    [_gridView hideRefreshView];
+//    [_gridView hideRefreshView];
     [self reloadGrid];
 }
 
@@ -615,23 +619,40 @@
 
 - (void)initMainGrid
 {
-    if (_gridView == nil) {
-        _gridView = [[HBGridView alloc] initWithFrame:CGRectMake(0, HBNavBarHeight, HBFullScreenWidth, HBFullScreenHeight - HBNavBarHeight)];
-        _gridView.delegate = self;
-        _gridView.backgroundColor = [UIColor clearColor];
-        [_gridView setBackgroundView:@"bookshelf-bg-body"];
+    if (_collectionView == nil) {
+        
+        CGFloat screenWidth = HBFullScreenWidth;
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+        //设置headerView
+        flowLayout.headerReferenceSize = CGSizeMake(screenWidth, 5);
+        //设置footerView
+        flowLayout.footerReferenceSize = CGSizeMake(screenWidth, 0);
+        flowLayout.minimumInteritemSpacing = 0.0;
+        flowLayout.minimumLineSpacing = 1.0;
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, KHBNaviBarHeight, HBFullScreenWidth, HBFullScreenHeight - KHBNaviBarHeight) collectionViewLayout:flowLayout];
+        _collectionView.backgroundColor = [UIColor clearColor];
+        UIImageView *imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bookshelf-bg-body"]];
+        [_collectionView setBackgroundView:imageView];
+        _collectionView.dataSource = self;
+        _collectionView.delegate = self;
+        _collectionView.alwaysBounceVertical = YES;
+        [self.view addSubview:_collectionView];
+        
+        [_collectionView registerClass:[TextGridCell class] forCellWithReuseIdentifier:kTextGridCell];
+        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"ReusableView"];
+        [_collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"ReusableView"];
         
         HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
         if (userEntity) {
             /** type: 1 - 学生； 10 - 老师*/
             if (userEntity.type == 1) {
-                [_gridView setHeaderViewHidden:NO];
+                //                [_collectionView setHeaderViewHidden:NO];
             }else{
-                [_gridView setHeaderViewHidden:YES];
+                //                [_collectionView setHeaderViewHidden:YES];
             }
         }
-        
-        [self.view addSubview:_gridView];
     }
 }
 
@@ -834,11 +855,11 @@
  }
  */
 
-#pragma mark -
-#pragma mark HBGridViewDelegate
+//add by zyy
+#pragma mark - UICollectionViewDataSource
 
-// 获取单元格的总数
-- (NSInteger)gridNumberOfGridView:(HBGridView *)gridView
+//定义展示的UICollectionViewCell的个数
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
     if (arr) {
@@ -851,57 +872,31 @@
     return 0;
 }
 
-// 获取gridview每行显示的grid数
-- (NSInteger)columnNumberOfGridView:(HBGridView *)gridView
+//定义展示的Section的个数
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 3;
+    return 1;
 }
 
-// 获取单元格的行数
-- (NSInteger)rowNumberOfGridView:(HBGridView *)gridView
+//每个UICollectionView展示的内容
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
-    NSInteger count = arr.count;
-    if ([[HBDataSaveManager defaultManager] userEntity] == nil) {
-        count += 1;
-    }
+    NSInteger row = indexPath.item;
     
-    if (count % [self columnNumberOfGridView:gridView])
-    {
-        return count / [self columnNumberOfGridView:gridView] + 1;
-    }
-    else
-    {
-        return count / [self columnNumberOfGridView:gridView];
-    }
-}
-
-- (CGFloat)gridView:(HBGridView *)gridView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return (HBFullScreenHeight - HBNavBarHeight) / 3.0f;
-}
-
-// 获取特定位置的单元格视图
-- (HBGridItemView *)gridView:(HBGridView *)gridView inGridCell:(HBGridCellView *)gridCell gridItemViewAtGridIndex:(GridIndex *)gridIndex listIndex:(NSInteger)listIndex
-{
-    NSLog(@"list index:%ld", (long)listIndex);
-    TextGridItemView *itemView = (TextGridItemView *)[gridView dequeueReusableGridItemAtGridIndex:gridIndex ofGridCellView:gridCell];
-    if (!itemView)
-    {
-        itemView = [[TextGridItemView alloc] initWithFrame:CGRectMake(0, 0, HBFullScreenWidth/3, (HBFullScreenHeight - HBNavBarHeight)/3)];
-    }
+    TextGridCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kTextGridCell forIndexPath:indexPath];
+    cell.delegate = self;
+    cell.selectDelegate = self;
     
-    itemView.delegate = self;
-    itemView.touchEnable = NO;
-
+    NSLog(@"list index:%ld", (long)row);
+    
     NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
-    if (listIndex==[arr count]) {
+    if (row==[arr count]) {
         //默认封皮
-        [itemView setDemoImage:@"cover_get_more"];
-        return itemView;
+        [cell setDemoImage:@"cover_get_more"];
+        return cell;
     }
     
-    BookEntity *entity = arr[listIndex];
+    BookEntity *entity = arr[row];
     NSString *bookTitle = entity.bookTitleCN;
     if ([[HBDataSaveManager defaultManager] showEnBookName]) {
         bookTitle = entity.bookTitle;
@@ -911,9 +906,9 @@
     NSDictionary * targetData = [[NSDictionary alloc]initWithObjectsAndKeys:
                                  bookTitle, TextGridItemView_BookName,entity.fileId, TextGridItemView_BookCover, @"mainGrid_download", TextGridItemView_downloadState, [vipBookDic objectForKey:entity.bookId], TextGridItemView_isVip, nil];
     
-    [itemView updateFormData:targetData];
+    [cell updateFormData:targetData forIndex:row];
     
-    itemView.bookDownloadUrl = entity.bookUrl;
+    cell.bookDownloadUrl = entity.bookUrl;
     
     NSString *book_id = [NSString stringWithFormat:@"%@", entity.bookId];
     HBReadprogressEntity *readprogressEntity = [self.readProgressEntityDic objectForKey:book_id];
@@ -928,82 +923,53 @@
                 BOOL flag = YES;
                 for (HBTaskEntity *taskentity in self.taskEntityArr) {
                     if (taskentity.bookId == [entity.bookId integerValue]) {
-                        [itemView bookDownloaded:entity progress:progress isTask:YES];
+                        [cell bookDownloaded:entity progress:progress isTask:YES];
                         flag = NO;
                         break;
                     }
                 }
                 if (flag) {
-                    [itemView bookDownloaded:entity progress:progress isTask:NO];
+                    [cell bookDownloaded:entity progress:progress isTask:NO];
                 }
             }else{
-                [itemView teacherBookDownloaded:entity];
+                [cell teacherBookDownloaded:entity];
             }
         } else {
-            [itemView bookDownloaded:entity progress:progress isTask:NO];
+            [cell bookDownloaded:entity progress:progress isTask:NO];
         }
     }else if([LEADERSDK isBookDownloading:entity]){
-        [itemView bookDownloading:entity];  //正在下载
+        [cell bookDownloading:entity];  //正在下载
     }else{
-        [itemView bookUnDownload:entity];   //未下载
+        [cell bookUnDownload:entity];   //未下载
     }
     
-    return itemView;
+    return cell;
 }
 
-- (void)gridView:(HBGridView *)gridView didSelectGridItemAtIndex:(NSInteger)index
+#pragma mark - UICollectionViewDelegateFlowLayout
+
+//定义每个cell大小
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    TextGridItemView *itemView = (TextGridItemView *)[gridView gridItemViewAtIndex:index];
-    //    itemView.backgroundColor = [UIColor grayColor];
+    return CGSizeMake(HBFullScreenWidth/3, (HBFullScreenHeight - KHBNaviBarHeight)/3);
+}
+
+//返回每个UICollectionView的间距
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsZero;
+}
+
+#pragma mark --UICollectionViewDelegate
+
+//UICollectionView被选中时调用的方法
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSInteger row = indexPath.item;
     
-    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
-    if (index == arr.count) {
-        [self showLoginAlert:@"获取更多内容，请登录。"];
-        return;
-    }
+    TextGridCell * cell = (TextGridCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
-    BookEntity *entity = arr[index];
-    
-    //VIP书籍，需要提示用户
-    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
-    if (userEntity) {
-        /** type: 1 - 学生； 10 - 老师*/
-        if (userEntity.type == 1) {
-            NSMutableDictionary *vipBookDic = [[HBDataSaveManager defaultManager] vipBookDic];
-            if ([[vipBookDic objectForKey:entity.bookId] isEqualToString:@"1"]) {
-                if (userEntity.account_status == 1) {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你尚未开通VIP，无权下载阅读此书，请开通VIP后再试。" delegate:self cancelButtonTitle:@"再等等" otherButtonTitles:@"现在激活", nil];
-                    alertView.tag = 0;
-                    
-                    [alertView show];
-                    
-                    return;
-                } else if (userEntity.account_status == 3){
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你的VIP已过期，无权下载阅读此书，请重新激活后再试。" delegate:self cancelButtonTitle:@"再等等" otherButtonTitles:@"现在激活", nil];
-                    alertView.tag = 0;
-                    
-                    [alertView show];
-                    
-                    return;
-                }
-            }
-        }
-    }
-    
-    if (itemView.isTest && [LEADERSDK isBookDownloading:entity]==NO) {
-        //跳转作业逻辑
-        [self jumpToTestWork:[entity.bookId integerValue]];
-    } else {
-        //记录一下开始阅读时间
-        NSDate *date = [NSDate date];
-        readBookFromTime = [NSString stringWithFormat:@"%.f",[date timeIntervalSince1970]];
-        
-        BOOL isDownloaded = [LEADERSDK bookPressed:entity useNavigation:myAppDelegate.globalNavi];
-        if (isDownloaded == NO) {
-            [self handleDownload:entity];
-        }
-        itemView.bookDownloadUrl = entity.bookUrl;
-    }
+    [self didSelectTextGridCell:row forCell:cell];
 }
 
 - (void)handleDownload:(BookEntity *)entity
@@ -1234,7 +1200,7 @@
                     }
                 }
                 
-                [_gridView hideRefreshView];
+//                [_gridView hideRefreshView];
                 [self reloadGrid];
             }];
             
@@ -1255,9 +1221,66 @@
     [self reloadGrid];
 }
 
+#pragma mark - SelectTextGridCellDelegate
+
+- (void)didSelectTextGridCell:(NSInteger)index forCell:(TextGridCell *)cell
+{
+    NSInteger row = index;
+    
+    NSMutableArray *arr = [self.contentDetailEntityDic objectForKey:[NSString stringWithFormat:@"%ld", (long)currentID]];
+    if (row == arr.count) {
+        [self showLoginAlert:@"获取更多内容，请登录。"];
+        return;
+    }
+    
+    BookEntity *entity = arr[row];
+    
+    //VIP书籍，需要提示用户
+    HBUserEntity *userEntity = [[HBDataSaveManager defaultManager] userEntity];
+    if (userEntity) {
+        /** type: 1 - 学生； 10 - 老师*/
+        if (userEntity.type == 1) {
+            NSMutableDictionary *vipBookDic = [[HBDataSaveManager defaultManager] vipBookDic];
+            if ([[vipBookDic objectForKey:entity.bookId] isEqualToString:@"1"]) {
+                if (userEntity.account_status == 1) {
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你尚未开通VIP，无权下载阅读此书，请开通VIP后再试。" delegate:self cancelButtonTitle:@"再等等" otherButtonTitles:@"现在激活", nil];
+                    alertView.tag = 0;
+                    
+                    [alertView show];
+                    
+                    return;
+                } else if (userEntity.account_status == 3){
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你的VIP已过期，无权下载阅读此书，请重新激活后再试。" delegate:self cancelButtonTitle:@"再等等" otherButtonTitles:@"现在激活", nil];
+                    alertView.tag = 0;
+                    
+                    [alertView show];
+                    
+                    return;
+                }
+            }
+        }
+    }
+    
+    if (cell.isTest && [LEADERSDK isBookDownloading:entity]==NO) {
+        //跳转作业逻辑
+        [self jumpToTestWork:[entity.bookId integerValue]];
+    } else {
+        //记录一下开始阅读时间
+        NSDate *date = [NSDate date];
+        readBookFromTime = [NSString stringWithFormat:@"%.f",[date timeIntervalSince1970]];
+        
+        BOOL isDownloaded = [LEADERSDK bookPressed:entity useNavigation:[AppDelegate delegate].globalNavi];
+        if (isDownloaded == NO) {
+            [self handleDownload:entity];
+        }
+        cell.bookDownloadUrl = entity.bookUrl;
+    }
+}
+
 -(void)reloadGrid
 {
-    [_gridView reloadData];
+    [_collectionView reloadData];
+//    [_gridView reloadData];
 }
 
 -(void)requestTaskListOfStudent

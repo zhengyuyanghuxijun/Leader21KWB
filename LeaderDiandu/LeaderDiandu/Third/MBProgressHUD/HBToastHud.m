@@ -47,7 +47,7 @@ static CGFloat const TipViewHeight = 32.0;
     _HUD.customView = _loadingView;
     _HUD.opacity = 0.7;
     _HUD.margin = 33.0;
-    _HUD.cornerRadius = 15.0;
+    _HUD.layer.cornerRadius = 15.0;
     
     CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotationAnimation.duration = 1.2;
@@ -82,7 +82,7 @@ static CGFloat const TipViewHeight = 32.0;
     HUD.delegate = self;
     HUD.opacity = 0.7;
     HUD.margin = 33.0;
-    HUD.cornerRadius = 15.0;
+    HUD.layer.cornerRadius = 15.0;
     [inView addSubview:HUD];
     
     [HUD show:YES];
