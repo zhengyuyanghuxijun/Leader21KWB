@@ -288,12 +288,12 @@ static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
     }
     
     NSLog(@"list index:%ld", (long)row);
-    NSString *indexStr = [NSString stringWithFormat:@"%ld", (long)row];
+    NSString *indexStr = [NSString stringWithFormat:@"%ld", (long)(row + 1)];
     
     //说明这个等级是被订阅的，需要特殊标记一下
-    if (self.subscribeId == row) {
+    if (self.subscribeId == (row + 1)) {
         [cell updateSubscribeImgView:YES levelButton:YES index:indexStr];
-    }else if(self.currentSelectIndex == row){
+    }else if(self.currentSelectIndex == (row + 1)){
         [cell updateSubscribeImgView:NO levelButton:YES index:indexStr];
     }else{
         [cell updateSubscribeImgView:NO levelButton:NO index:indexStr];
@@ -322,7 +322,7 @@ static NSString * const kHBRuleCellReuseId = @"kHBRuleCellReuseId";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger row = indexPath.item;
-    self.currentSelectIndex = row;
+    self.currentSelectIndex = (row + 1);
     [_collectionView reloadData];
 }
 
