@@ -50,11 +50,6 @@
 		0D8AB9FF1D2A66DB00C8034B /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9471D2A66DB00C8034B /* UIViewAdditions.m */; };
 		0D8ABA001D2A66DB00C8034B /* FTMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB94A1D2A66DB00C8034B /* FTMenu.m */; };
 		0D8ABA011D2A66DB00C8034B /* FTRotatingCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB94C1D2A66DB00C8034B /* FTRotatingCircle.m */; };
-		0D8ABA021D2A66DB00C8034B /* ButtonGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB94F1D2A66DB00C8034B /* ButtonGridItemView.m */; };
-		0D8ABA031D2A66DB00C8034B /* HBGridCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9511D2A66DB00C8034B /* HBGridCellView.m */; };
-		0D8ABA041D2A66DB00C8034B /* HBGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9531D2A66DB00C8034B /* HBGridItemView.m */; };
-		0D8ABA051D2A66DB00C8034B /* HBGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9551D2A66DB00C8034B /* HBGridView.m */; };
-		0D8ABA061D2A66DB00C8034B /* TextGridItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9571D2A66DB00C8034B /* TextGridItemView.m */; };
 		0D8ABA071D2A66DB00C8034B /* HBHyperlinksButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9591D2A66DB00C8034B /* HBHyperlinksButton.m */; };
 		0D8ABA081D2A66DB00C8034B /* HBNTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB95B1D2A66DB00C8034B /* HBNTextField.m */; };
 		0D8ABA091D2A66DB00C8034B /* HBTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB95D1D2A66DB00C8034B /* HBTableView.m */; };
@@ -64,7 +59,6 @@
 		0D8ABA0D1D2A66DB00C8034B /* RefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9651D2A66DB00C8034B /* RefreshTableHeaderView.m */; };
 		0D8ABA0F1D2A66DB00C8034B /* DHSlideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB96C1D2A66DB00C8034B /* DHSlideMenuController.m */; };
 		0D8ABA101D2A66DB00C8034B /* DHSlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB96E1D2A66DB00C8034B /* DHSlideMenuViewController.m */; };
-		0D8ABA161D2A66DB00C8034B /* HBGradeDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB97B1D2A66DB00C8034B /* HBGradeDemoViewController.m */; };
 		0D8ABA171D2A66DB00C8034B /* HBGradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB97D1D2A66DB00C8034B /* HBGradeViewController.m */; };
 		0D8ABA251D2A66DB00C8034B /* HBForgetPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB99A1D2A66DB00C8034B /* HBForgetPwdViewController.m */; };
 		0D8ABA261D2A66DB00C8034B /* HBLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB99C1D2A66DB00C8034B /* HBLoginViewController.m */; };
@@ -74,7 +68,6 @@
 		0D8ABA4F1D2A66DB00C8034B /* HBAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9F01D2A66DB00C8034B /* HBAboutViewController.m */; };
 		0D8ABA501D2A66DB00C8034B /* HBBookManViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9F21D2A66DB00C8034B /* HBBookManViewController.m */; };
 		0D8ABA521D2A66DB00C8034B /* HBSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9F61D2A66DB00C8034B /* HBSettingViewController.m */; };
-		0D8ABA531D2A66DB00C8034B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9F81D2A66DB00C8034B /* ViewController.m */; };
 		0D8ABA8C1D2A6A7700C8034B /* examid.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D8ABA561D2A6A7700C8034B /* examid.db */; };
 		0D8ABA8D1D2A6A7700C8034B /* hbcontentdetail.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D8ABA571D2A6A7700C8034B /* hbcontentdetail.db */; };
 		0D8ABA8E1D2A6A7700C8034B /* hbcontentlist.db in Resources */ = {isa = PBXBuildFile; fileRef = 0D8ABA581D2A6A7700C8034B /* hbcontentlist.db */; };
@@ -444,16 +437,6 @@
 		0D8AB94A1D2A66DB00C8034B /* FTMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMenu.m; sourceTree = "<group>"; };
 		0D8AB94B1D2A66DB00C8034B /* FTRotatingCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTRotatingCircle.h; sourceTree = "<group>"; };
 		0D8AB94C1D2A66DB00C8034B /* FTRotatingCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTRotatingCircle.m; sourceTree = "<group>"; };
-		0D8AB94E1D2A66DB00C8034B /* ButtonGridItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonGridItemView.h; sourceTree = "<group>"; };
-		0D8AB94F1D2A66DB00C8034B /* ButtonGridItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonGridItemView.m; sourceTree = "<group>"; };
-		0D8AB9501D2A66DB00C8034B /* HBGridCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGridCellView.h; sourceTree = "<group>"; };
-		0D8AB9511D2A66DB00C8034B /* HBGridCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGridCellView.m; sourceTree = "<group>"; };
-		0D8AB9521D2A66DB00C8034B /* HBGridItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGridItemView.h; sourceTree = "<group>"; };
-		0D8AB9531D2A66DB00C8034B /* HBGridItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGridItemView.m; sourceTree = "<group>"; };
-		0D8AB9541D2A66DB00C8034B /* HBGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGridView.h; sourceTree = "<group>"; };
-		0D8AB9551D2A66DB00C8034B /* HBGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGridView.m; sourceTree = "<group>"; };
-		0D8AB9561D2A66DB00C8034B /* TextGridItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextGridItemView.h; sourceTree = "<group>"; };
-		0D8AB9571D2A66DB00C8034B /* TextGridItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextGridItemView.m; sourceTree = "<group>"; };
 		0D8AB9581D2A66DB00C8034B /* HBHyperlinksButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBHyperlinksButton.h; sourceTree = "<group>"; };
 		0D8AB9591D2A66DB00C8034B /* HBHyperlinksButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBHyperlinksButton.m; sourceTree = "<group>"; };
 		0D8AB95A1D2A66DB00C8034B /* HBNTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBNTextField.h; sourceTree = "<group>"; };
@@ -472,8 +455,6 @@
 		0D8AB96C1D2A66DB00C8034B /* DHSlideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHSlideMenuController.m; sourceTree = "<group>"; };
 		0D8AB96D1D2A66DB00C8034B /* DHSlideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHSlideMenuViewController.h; sourceTree = "<group>"; };
 		0D8AB96E1D2A66DB00C8034B /* DHSlideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHSlideMenuViewController.m; sourceTree = "<group>"; };
-		0D8AB97A1D2A66DB00C8034B /* HBGradeDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGradeDemoViewController.h; sourceTree = "<group>"; };
-		0D8AB97B1D2A66DB00C8034B /* HBGradeDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGradeDemoViewController.m; sourceTree = "<group>"; };
 		0D8AB97C1D2A66DB00C8034B /* HBGradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBGradeViewController.h; sourceTree = "<group>"; };
 		0D8AB97D1D2A66DB00C8034B /* HBGradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBGradeViewController.m; sourceTree = "<group>"; };
 		0D8AB9991D2A66DB00C8034B /* HBForgetPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBForgetPwdViewController.h; sourceTree = "<group>"; };
@@ -492,8 +473,6 @@
 		0D8AB9F21D2A66DB00C8034B /* HBBookManViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBBookManViewController.m; sourceTree = "<group>"; };
 		0D8AB9F51D2A66DB00C8034B /* HBSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBSettingViewController.h; sourceTree = "<group>"; };
 		0D8AB9F61D2A66DB00C8034B /* HBSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBSettingViewController.m; sourceTree = "<group>"; };
-		0D8AB9F71D2A66DB00C8034B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0D8AB9F81D2A66DB00C8034B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0D8ABA561D2A6A7700C8034B /* examid.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = examid.db; sourceTree = "<group>"; };
 		0D8ABA571D2A6A7700C8034B /* hbcontentdetail.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbcontentdetail.db; sourceTree = "<group>"; };
 		0D8ABA581D2A6A7700C8034B /* hbcontentlist.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = hbcontentlist.db; sourceTree = "<group>"; };
@@ -1031,7 +1010,6 @@
 				0D8AB94A1D2A66DB00C8034B /* FTMenu.m */,
 				0D8AB94B1D2A66DB00C8034B /* FTRotatingCircle.h */,
 				0D8AB94C1D2A66DB00C8034B /* FTRotatingCircle.m */,
-				0D8AB94D1D2A66DB00C8034B /* HBGrid */,
 				0D8AB9581D2A66DB00C8034B /* HBHyperlinksButton.h */,
 				0D8AB9591D2A66DB00C8034B /* HBHyperlinksButton.m */,
 				0D8AB95A1D2A66DB00C8034B /* HBNTextField.h */,
@@ -1050,23 +1028,6 @@
 			path = CustomView;
 			sourceTree = "<group>";
 		};
-		0D8AB94D1D2A66DB00C8034B /* HBGrid */ = {
-			isa = PBXGroup;
-			children = (
-				0D8AB94E1D2A66DB00C8034B /* ButtonGridItemView.h */,
-				0D8AB94F1D2A66DB00C8034B /* ButtonGridItemView.m */,
-				0D8AB9501D2A66DB00C8034B /* HBGridCellView.h */,
-				0D8AB9511D2A66DB00C8034B /* HBGridCellView.m */,
-				0D8AB9521D2A66DB00C8034B /* HBGridItemView.h */,
-				0D8AB9531D2A66DB00C8034B /* HBGridItemView.m */,
-				0D8AB9541D2A66DB00C8034B /* HBGridView.h */,
-				0D8AB9551D2A66DB00C8034B /* HBGridView.m */,
-				0D8AB9561D2A66DB00C8034B /* TextGridItemView.h */,
-				0D8AB9571D2A66DB00C8034B /* TextGridItemView.m */,
-			);
-			path = HBGrid;
-			sourceTree = "<group>";
-		};
 		0D8AB9691D2A66DB00C8034B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1074,8 +1035,6 @@
 				0D8AB9791D2A66DB00C8034B /* GradeController */,
 				0D8AB9981D2A66DB00C8034B /* Login&RegisterController */,
 				0D8AB9A51D2A66DB00C8034B /* MenuControllers */,
-				0D8AB9F71D2A66DB00C8034B /* ViewController.h */,
-				0D8AB9F81D2A66DB00C8034B /* ViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1095,8 +1054,6 @@
 			isa = PBXGroup;
 			children = (
 				E53F27261D2E4165006F982B /* Cell */,
-				0D8AB97A1D2A66DB00C8034B /* HBGradeDemoViewController.h */,
-				0D8AB97B1D2A66DB00C8034B /* HBGradeDemoViewController.m */,
 				0D8AB97C1D2A66DB00C8034B /* HBGradeViewController.h */,
 				0D8AB97D1D2A66DB00C8034B /* HBGradeViewController.m */,
 			);
@@ -2080,7 +2037,6 @@
 				0DBE353E1B8CB8B500179237 /* NSDateUtilities.m in Sources */,
 				0D8ABAE61D2AC7CF00C8034B /* UITabBar+HBExt.m in Sources */,
 				0D8ABB511D2E12D500C8034B /* HBLeaderUnbindingCell.m in Sources */,
-				0D8ABA061D2A66DB00C8034B /* TextGridItemView.m in Sources */,
 				0D8ABB9E1D2E12E400C8034B /* HBModifyPwdViewController.m in Sources */,
 				0D8ABB001D2E0ACE00C8034B /* EColumnDataModel.m in Sources */,
 				181E30801BA2C28600BBA92F /* HBContentDetailDB.m in Sources */,
@@ -2096,8 +2052,6 @@
 				0D8ABA171D2A66DB00C8034B /* HBGradeViewController.m in Sources */,
 				0D7488941B8A2973007BE4CD /* NSString+MD5.mm in Sources */,
 				0D8ABAFD1D2E0ACE00C8034B /* EColumn.m in Sources */,
-				0D8ABA531D2A66DB00C8034B /* ViewController.m in Sources */,
-				0D8ABA051D2A66DB00C8034B /* HBGridView.m in Sources */,
 				0D8ABA261D2A66DB00C8034B /* HBLoginViewController.m in Sources */,
 				0D2677091BF0E1FD006FB4ED /* HBVersionCheck.m in Sources */,
 				0D8ABA251D2A66DB00C8034B /* HBForgetPwdViewController.m in Sources */,
@@ -2107,7 +2061,6 @@
 				0D8AB92D1D2A57D000C8034B /* HBDeviceInfo.m in Sources */,
 				0D3F6D191BAE9E68005B4358 /* UIColor+TKCategory.m in Sources */,
 				0DB5372E1B8F5DEE0023A3F7 /* AFURLResponseSerialization.m in Sources */,
-				0D8ABA161D2A66DB00C8034B /* HBGradeDemoViewController.m in Sources */,
 				181456DD1B96D9DD003CCD6C /* HBContentEntity.m in Sources */,
 				0D8ABB151D2E0C9C00C8034B /* HBRankingListCell.m in Sources */,
 				0D7A76951B92176C00BC50A0 /* HBUserEntity.m in Sources */,
@@ -2142,7 +2095,6 @@
 				0D8ABBA31D2E12E400C8034B /* HBPublishWorkViewController.m in Sources */,
 				189C0F5E1BB5776300DD39C0 /* HBReadprogressEntity.m in Sources */,
 				181E30771BA2B14100BBA92F /* UtilFMDatabaseQueue.m in Sources */,
-				0D8ABA041D2A66DB00C8034B /* HBGridItemView.m in Sources */,
 				0D01900B1B980E8200A92F59 /* UIImageView+AFNetworking.m in Sources */,
 				0D8ABB941D2E12E400C8034B /* HBSetStuOtherCell.m in Sources */,
 				0D8ABAE11D2AC7CF00C8034B /* NSData+HBExt.m in Sources */,
@@ -2165,7 +2117,6 @@
 				0D8AB92E1D2A57D000C8034B /* HBFileManager.m in Sources */,
 				0D74888E1B8A2973007BE4CD /* md5.cpp in Sources */,
 				E53F272D1D2E59A5006F982B /* SubscribeGridCell.m in Sources */,
-				0D8ABA021D2A66DB00C8034B /* ButtonGridItemView.m in Sources */,
 				0D143F391BD00FA800F5D9EE /* HBExamIdDB.m in Sources */,
 				0D8ABB241D2E12AF00C8034B /* HBSettingViewCell.m in Sources */,
 				0D8ABB961D2E12E400C8034B /* HBCreatGroupController.m in Sources */,
@@ -2174,7 +2125,6 @@
 				0D8ABB931D2E12E400C8034B /* HBSetStuGroupCell.m in Sources */,
 				0D8ABBA01D2E12E400C8034B /* HBWeekWorkCell.m in Sources */,
 				0D8ABAE01D2AC7CF00C8034B /* NSArray+HBExt.m in Sources */,
-				0D8ABA031D2A66DB00C8034B /* HBGridCellView.m in Sources */,
 				0DB5372D1B8F5DEE0023A3F7 /* AFURLRequestSerialization.m in Sources */,
 				18C316901BA092B1004F716E /* HBClassEntity.m in Sources */,
 				0D7A76921B92064100BC50A0 /* HBBaseEntity.m in Sources */,

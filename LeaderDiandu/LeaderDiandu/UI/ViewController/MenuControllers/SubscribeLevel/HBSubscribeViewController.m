@@ -7,7 +7,6 @@
 //
 
 #import "HBSubscribeViewController.h"
-#import "HBGridView.h"
 #import "TextGridCell.h"
 #import "SubscribeGridCell.h"
 #import "HBDataSaveManager.h"
