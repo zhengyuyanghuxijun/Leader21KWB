@@ -9,7 +9,6 @@
 #import "HBNLoginViewController.h"
 #import "HBRegistViewController.h"
 //#import "HBForgetPwdViewController.h"
-//#import "HBGradeDemoViewController.h"
 #import "HBNTextField.h"
 
 #import "HBServiceManager.h"
@@ -224,8 +223,6 @@
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotification_PauseAllDownload object:nil];
     [self.navigationController popViewControllerAnimated:YES];
-//    HBGradeDemoViewController *controller = [[HBGradeDemoViewController alloc] init];
-//    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - Notification

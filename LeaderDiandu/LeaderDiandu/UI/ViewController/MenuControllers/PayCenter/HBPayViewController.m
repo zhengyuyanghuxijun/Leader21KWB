@@ -570,7 +570,6 @@ static NSString * const KHBPayViewControllerCellModeReuseId = @"KHBPayViewContro
 //    [HHAlertSingleView showAlertWithStyle:HHAlertStyleError inView:[UIApplication sharedApplication].keyWindow Title:@"充值失败" detail:errorMsg cancelButton:nil Okbutton:@"确定" block:^(HHAlertButton buttonindex) {
 //        
 //    }];
-//    [self hideMJProgressHUD];
 }
 
 @end

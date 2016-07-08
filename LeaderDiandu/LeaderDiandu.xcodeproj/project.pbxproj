@@ -55,7 +55,6 @@
 		0D8ABA091D2A66DB00C8034B /* HBTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB95D1D2A66DB00C8034B /* HBTableView.m */; };
 		0D8ABA0A1D2A66DB00C8034B /* HBTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB95F1D2A66DB00C8034B /* HBTitleView.m */; };
 		0D8ABA0B1D2A66DB00C8034B /* HHAlertSingleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9611D2A66DB00C8034B /* HHAlertSingleView.m */; };
-		0D8ABA0C1D2A66DB00C8034B /* MJProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9631D2A66DB00C8034B /* MJProgressHUD.m */; };
 		0D8ABA0D1D2A66DB00C8034B /* RefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB9651D2A66DB00C8034B /* RefreshTableHeaderView.m */; };
 		0D8ABA0F1D2A66DB00C8034B /* DHSlideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB96C1D2A66DB00C8034B /* DHSlideMenuController.m */; };
 		0D8ABA101D2A66DB00C8034B /* DHSlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AB96E1D2A66DB00C8034B /* DHSlideMenuViewController.m */; };
@@ -447,8 +446,6 @@
 		0D8AB95F1D2A66DB00C8034B /* HBTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTitleView.m; sourceTree = "<group>"; };
 		0D8AB9601D2A66DB00C8034B /* HHAlertSingleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHAlertSingleView.h; sourceTree = "<group>"; };
 		0D8AB9611D2A66DB00C8034B /* HHAlertSingleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHAlertSingleView.m; sourceTree = "<group>"; };
-		0D8AB9621D2A66DB00C8034B /* MJProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJProgressHUD.h; sourceTree = "<group>"; };
-		0D8AB9631D2A66DB00C8034B /* MJProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJProgressHUD.m; sourceTree = "<group>"; };
 		0D8AB9641D2A66DB00C8034B /* RefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshTableHeaderView.h; sourceTree = "<group>"; };
 		0D8AB9651D2A66DB00C8034B /* RefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshTableHeaderView.m; sourceTree = "<group>"; };
 		0D8AB96B1D2A66DB00C8034B /* DHSlideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHSlideMenuController.h; sourceTree = "<group>"; };
@@ -1020,8 +1017,6 @@
 				0D8AB95F1D2A66DB00C8034B /* HBTitleView.m */,
 				0D8AB9601D2A66DB00C8034B /* HHAlertSingleView.h */,
 				0D8AB9611D2A66DB00C8034B /* HHAlertSingleView.m */,
-				0D8AB9621D2A66DB00C8034B /* MJProgressHUD.h */,
-				0D8AB9631D2A66DB00C8034B /* MJProgressHUD.m */,
 				0D8AB9641D2A66DB00C8034B /* RefreshTableHeaderView.h */,
 				0D8AB9651D2A66DB00C8034B /* RefreshTableHeaderView.m */,
 			);
@@ -1986,7 +1981,6 @@
 				0D8ABB171D2E0C9C00C8034B /* HBReadStatisticalDateCell.m in Sources */,
 				0DB5372B1B8F5DEE0023A3F7 /* AFNetworkReachabilityManager.m in Sources */,
 				0D8ABACA1D2A727E00C8034B /* MBHudUtil.m in Sources */,
-				0D8ABA0C1D2A66DB00C8034B /* MJProgressHUD.m in Sources */,
 				0DBE35361B8CB8B500179237 /* DoubleCompare.c in Sources */,
 				0D2677131BF247DD006FB4ED /* HBSKPayService.m in Sources */,
 				0D018FF11B96F67500A92F59 /* HBContentBaseRequest.m in Sources */,
