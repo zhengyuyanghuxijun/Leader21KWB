@@ -11,8 +11,10 @@
 #import "HBServiceManager.h"
 #import "HBContentManager.h"
 #import "HBContentListDB.h"
-#import "HBContentDetailDB.h"
 #import "UIImageView+AFNetworking.h"
+#import "CoreDataHelper.h"
+
+#define LEADERSDK [Leader21SDKOC sharedInstance]
 
 @implementation HBTestSelectViewCell
 
@@ -45,18 +47,18 @@
 
 -(void)updateFormData:(id)sender
 {
-    HBContentDetailEntity *contentDetailEntity = (HBContentDetailEntity*)sender;
+    BookEntity *bookEntity = (BookEntity*)sender;
     
-    if (contentDetailEntity) {
-        NSString *fileIdStr = contentDetailEntity.FILE_ID;
+    if (bookEntity) {
+        NSString *fileIdStr = bookEntity.fileId;
         fileIdStr = [fileIdStr lowercaseString];
         NSString *urlStr = [NSString stringWithFormat:KHBBookImgFormatUrl, fileIdStr, fileIdStr];
         [self.cellImgView setImageWithURL:[NSURL URLWithString:urlStr] placeholderImage:[UIImage imageNamed:@"mainGrid_defaultBookCover"]];
         
         if ([[HBDataSaveManager defaultManager] showEnBookName]) {
-            self.cellContentLabel.text = contentDetailEntity.BOOK_TITLE;
+            self.cellContentLabel.text = bookEntity.bookTitle;
         }else{
-            self.cellContentLabel.text = contentDetailEntity.BOOK_TITLE_CN;
+            self.cellContentLabel.text = bookEntity.bookTitleCN;
         }
     }
 }
@@ -93,26 +95,45 @@
     
     NSString *booksIDStr = [[HBContentListDB sharedInstance] booksidWithID:self.bookset_id];
     if (booksIDStr != nil && booksIDStr.length > 0) {
-        NSArray *booksIDArr = [booksIDStr componentsSeparatedByString:@","];
-        self.testArray = [[HBContentDetailDB sharedInstance] booksWithBooksIDArr:booksIDArr];
-        if (self.testArray == nil || 0 == self.testArray.count) {
-            [[HBContentManager defaultManager] requestBookList:booksIDStr completion:^(id responseObject, NSError *error) {
-                if (responseObject){
-                    //获取书本列表成功
-                    NSArray *arr = [responseObject objectForKey:@"books"];
-                    [[HBContentDetailDB sharedInstance] updateHBContentDetail:arr];
-                    self.testArray = [[HBContentDetailDB sharedInstance] booksWithBooksIDArr:booksIDArr];
-                    if (self.testArray != nil && self.testArray.count > 0) {
-                        [self addTableView];
-                    }else{
-                        //无数据
-                    }
-                }
-            }];
+        NSArray *booksIDsArr = [booksIDStr componentsSeparatedByString:@","];
+        [self getContentDetailEntitys:booksIDsArr];
+    }
+}
+
+-(void)getContentDetailEntitys:(NSArray *)booksIDsArr
+{
+    for (NSString *bookId in booksIDsArr) {
+        NSPredicate* predicate = [NSPredicate predicateWithFormat:@"bookId == %@", bookId];
+        BookEntity *bookEntity = (BookEntity*)[CoreDataHelper getFirstObjectWithEntryName:@"BookEntity" withPredicate:predicate];
+        if (bookEntity != nil) {
+            [self.testArray addObject:bookEntity];
         }else{
-            [self addTableView];
+            //获取书本列表
+            [self requestContentDetailEntity];
+            return ;
         }
     }
+
+    [self addTableView];
+}
+
+-(void)requestContentDetailEntity
+{
+    //获取书本列表
+    NSString *booksIDStr = [[HBContentListDB sharedInstance] booksidWithID:self.bookset_id];
+    [LEADERSDK requestBookInfo:booksIDStr onComplete:^(NSArray *booklist, NSInteger errorCode, NSString *errorMsg) {
+        NSMutableArray *booklistTmp = [[NSMutableArray alloc] initWithCapacity:1];
+        for (BookEntity *entityTmp in booklist) {
+            [booklistTmp addObject:entityTmp];
+        }
+        self.testArray = booklistTmp;
+        
+        if (self.testArray != nil && self.testArray.count > 0) {
+            [self addTableView];
+        }else{
+            //无数据
+        }
+    }];
 }
 
 -(void)addTableView
@@ -151,9 +172,9 @@
         cell = [[HBTestSelectViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"KHBTestSelectViewControllerCellReuseId"];
     }
     
-    HBContentDetailEntity *contentDetailEntity = [self.testArray objectAtIndex:indexPath.row];
+    BookEntity *bookEntity = [self.testArray objectAtIndex:indexPath.row];;
 
-    [cell updateFormData:contentDetailEntity];
+    [cell updateFormData:bookEntity];
     cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     

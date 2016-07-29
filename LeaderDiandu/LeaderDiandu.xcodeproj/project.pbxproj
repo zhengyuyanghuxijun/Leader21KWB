@@ -214,14 +214,12 @@
 		1810C7031BD946CD00899BD0 /* HBExamKnowledgeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C7021BD946CD00899BD0 /* HBExamKnowledgeEntity.m */; };
 		1810C7061BD9474A00899BD0 /* HBExamAbilityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C7051BD9474A00899BD0 /* HBExamAbilityEntity.m */; };
 		181456DD1B96D9DD003CCD6C /* HBContentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DC1B96D9DD003CCD6C /* HBContentEntity.m */; };
-		181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */; };
 		181E30741BA2B14100BBA92F /* UtilFMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E306B1BA2B14100BBA92F /* UtilFMDatabase.m */; };
 		181E30751BA2B14100BBA92F /* UtilFMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E306D1BA2B14100BBA92F /* UtilFMDatabaseAdditions.m */; };
 		181E30761BA2B14100BBA92F /* UtilFMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E306F1BA2B14100BBA92F /* UtilFMDatabasePool.m */; };
 		181E30771BA2B14100BBA92F /* UtilFMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E30711BA2B14100BBA92F /* UtilFMDatabaseQueue.m */; };
 		181E30781BA2B14100BBA92F /* UtilFMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E30731BA2B14100BBA92F /* UtilFMResultSet.m */; };
 		181E307D1BA2B7AD00BBA92F /* FileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E307C1BA2B7AD00BBA92F /* FileUtil.m */; };
-		181E30801BA2C28600BBA92F /* HBContentDetailDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */; };
 		182306201B9B300300A8E146 /* HBTaskEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1823061F1B9B300300A8E146 /* HBTaskEntity.m */; };
 		182621791BDCC2D3006DFF0D /* HBTeacherEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 182621781BDCC2D3006DFF0D /* HBTeacherEntity.m */; };
 		1864359C1BC546440068E73E /* HBSystemMsgEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864359B1BC546440068E73E /* HBSystemMsgEntity.m */; };
@@ -246,7 +244,6 @@
 		2620BC321C8C045C00F5C531 /* HBDataSaveManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DD214641B95568E009E3DB9 /* HBDataSaveManager.m */; };
 		2620BC391C8C045C00F5C531 /* HBExamAbilityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1810C7051BD9474A00899BD0 /* HBExamAbilityEntity.m */; };
 		2620BC3B1C8C045C00F5C531 /* NSData+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7488891B8A2973007BE4CD /* NSData+MD5.m */; };
-		2620BC3C1C8C045C00F5C531 /* HBContentDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */; };
 		2620BC411C8C045C00F5C531 /* HBContentListDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E57D621BA52AC400198BE9 /* HBContentListDB.m */; };
 		2620BC421C8C045C00F5C531 /* DataCheckUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE35191B8CB8B500179237 /* DataCheckUtil.m */; };
 		2620BC441C8C045C00F5C531 /* HBRankBookEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 18ABF5231BD7DEDC006E55A0 /* HBRankBookEntity.m */; };
@@ -260,7 +257,6 @@
 		2620BC501C8C045C00F5C531 /* UtilFMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E306F1BA2B14100BBA92F /* UtilFMDatabasePool.m */; };
 		2620BC551C8C045C00F5C531 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB537111B8F5DEE0023A3F7 /* AFHTTPRequestOperation.m */; };
 		2620BC561C8C045C00F5C531 /* NSDateUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DBE352E1B8CB8B500179237 /* NSDateUtilities.m */; };
-		2620BC5D1C8C045C00F5C531 /* HBContentDetailDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */; };
 		2620BC601C8C045C00F5C531 /* HBExamEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4322FE881BEDE25000775D3A /* HBExamEntity.m */; };
 		2620BC631C8C045C00F5C531 /* HBSystemMsgEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864359B1BC546440068E73E /* HBSystemMsgEntity.m */; };
 		2620BC641C8C045C00F5C531 /* NSString+MD5.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0D74888B1B8A2973007BE4CD /* NSString+MD5.mm */; };
@@ -707,8 +703,6 @@
 		1810C7051BD9474A00899BD0 /* HBExamAbilityEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBExamAbilityEntity.m; sourceTree = "<group>"; };
 		181456DB1B96D9DD003CCD6C /* HBContentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentEntity.h; sourceTree = "<group>"; };
 		181456DC1B96D9DD003CCD6C /* HBContentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentEntity.m; sourceTree = "<group>"; };
-		181456DE1B96E483003CCD6C /* HBContentDetailEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentDetailEntity.h; sourceTree = "<group>"; };
-		181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentDetailEntity.m; sourceTree = "<group>"; };
 		181E306A1BA2B14100BBA92F /* UtilFMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilFMDatabase.h; sourceTree = "<group>"; };
 		181E306B1BA2B14100BBA92F /* UtilFMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilFMDatabase.m; sourceTree = "<group>"; };
 		181E306C1BA2B14100BBA92F /* UtilFMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UtilFMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -721,8 +715,6 @@
 		181E30731BA2B14100BBA92F /* UtilFMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UtilFMResultSet.m; sourceTree = "<group>"; };
 		181E307B1BA2B7AD00BBA92F /* FileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUtil.h; sourceTree = "<group>"; };
 		181E307C1BA2B7AD00BBA92F /* FileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUtil.m; sourceTree = "<group>"; };
-		181E307E1BA2C28600BBA92F /* HBContentDetailDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBContentDetailDB.h; sourceTree = "<group>"; };
-		181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBContentDetailDB.m; sourceTree = "<group>"; };
 		1823061E1B9B300300A8E146 /* HBTaskEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTaskEntity.h; sourceTree = "<group>"; };
 		1823061F1B9B300300A8E146 /* HBTaskEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTaskEntity.m; sourceTree = "<group>"; };
 		182621771BDCC2D3006DFF0D /* HBTeacherEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTeacherEntity.h; sourceTree = "<group>"; };
@@ -1642,8 +1634,6 @@
 				0D7A76941B92176C00BC50A0 /* HBUserEntity.m */,
 				181456DB1B96D9DD003CCD6C /* HBContentEntity.h */,
 				181456DC1B96D9DD003CCD6C /* HBContentEntity.m */,
-				181456DE1B96E483003CCD6C /* HBContentDetailEntity.h */,
-				181456DF1B96E483003CCD6C /* HBContentDetailEntity.m */,
 				189C0F5C1BB5776300DD39C0 /* HBReadprogressEntity.h */,
 				189C0F5D1BB5776300DD39C0 /* HBReadprogressEntity.m */,
 				1823061E1B9B300300A8E146 /* HBTaskEntity.h */,
@@ -1679,8 +1669,6 @@
 			children = (
 				0D143F371BD00FA800F5D9EE /* HBExamIdDB.h */,
 				0D143F381BD00FA800F5D9EE /* HBExamIdDB.m */,
-				181E307E1BA2C28600BBA92F /* HBContentDetailDB.h */,
-				181E307F1BA2C28600BBA92F /* HBContentDetailDB.m */,
 				18E57D611BA52AC400198BE9 /* HBContentListDB.h */,
 				18E57D621BA52AC400198BE9 /* HBContentListDB.m */,
 				18D325151BB820EA00904FA6 /* HBReadProgressDB.h */,
@@ -1993,7 +1981,6 @@
 				0D8ABAE31D2AC7CF00C8034B /* NSString+HBExt.m in Sources */,
 				1810C7061BD9474A00899BD0 /* HBExamAbilityEntity.m in Sources */,
 				0D7488921B8A2973007BE4CD /* NSData+MD5.m in Sources */,
-				181456E01B96E483003CCD6C /* HBContentDetailEntity.m in Sources */,
 				0D8ABB981D2E12E400C8034B /* HBStuManViewController.m in Sources */,
 				E53F27291D2E41E3006F982B /* TextGridCell.m in Sources */,
 				0D8ABB4F1D2E12D500C8034B /* HBMessageViewController.m in Sources */,
@@ -2033,7 +2020,6 @@
 				0D8ABB511D2E12D500C8034B /* HBLeaderUnbindingCell.m in Sources */,
 				0D8ABB9E1D2E12E400C8034B /* HBModifyPwdViewController.m in Sources */,
 				0D8ABB001D2E0ACE00C8034B /* EColumnDataModel.m in Sources */,
-				181E30801BA2C28600BBA92F /* HBContentDetailDB.m in Sources */,
 				0D8ABB591D2E12D500C8034B /* HBTestWorkViewController.m in Sources */,
 				0D8ABB231D2E12AF00C8034B /* GuideView.m in Sources */,
 				0D8AB9321D2A58BA00C8034B /* AppDelegate.m in Sources */,
@@ -2158,7 +2144,6 @@
 				2620BC321C8C045C00F5C531 /* HBDataSaveManager.m in Sources */,
 				2620BC391C8C045C00F5C531 /* HBExamAbilityEntity.m in Sources */,
 				2620BC3B1C8C045C00F5C531 /* NSData+MD5.m in Sources */,
-				2620BC3C1C8C045C00F5C531 /* HBContentDetailEntity.m in Sources */,
 				2620BC411C8C045C00F5C531 /* HBContentListDB.m in Sources */,
 				2620BC421C8C045C00F5C531 /* DataCheckUtil.m in Sources */,
 				2620BC441C8C045C00F5C531 /* HBRankBookEntity.m in Sources */,
@@ -2172,7 +2157,6 @@
 				2620BC501C8C045C00F5C531 /* UtilFMDatabasePool.m in Sources */,
 				2620BC551C8C045C00F5C531 /* AFHTTPRequestOperation.m in Sources */,
 				2620BC561C8C045C00F5C531 /* NSDateUtilities.m in Sources */,
-				2620BC5D1C8C045C00F5C531 /* HBContentDetailDB.m in Sources */,
 				2620BC601C8C045C00F5C531 /* HBExamEntity.m in Sources */,
 				2620BC631C8C045C00F5C531 /* HBSystemMsgEntity.m in Sources */,
 				2620BC641C8C045C00F5C531 /* NSString+MD5.mm in Sources */,

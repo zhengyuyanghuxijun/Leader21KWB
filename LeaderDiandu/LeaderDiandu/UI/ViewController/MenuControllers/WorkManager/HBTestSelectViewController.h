@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "HBBaseViewController.h"
-#import "HBContentDetailEntity.h"
+#import "Leader21SDKOC.h"
 
 @protocol HBTestSelectViewDelegate <NSObject>
 
-- (void)selectedTest:(HBContentDetailEntity *)contentDetailEntity;
+- (void)selectedTest:(BookEntity *)bookEntity;
 
 @end
 

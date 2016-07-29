@@ -13,6 +13,8 @@
 #import "HBDataSaveManager.h"
 #import "HBServiceManager.h"
 
+#import "Leader21SDKOC.h"
+
 @interface HBPublishWorkViewController ()<UITableViewDataSource, UITableViewDelegate, HBGroupSelectViewDelegate, HBTestSelectViewDelegate>
 {
     UITableView *_tableView;
@@ -23,7 +25,7 @@
 @property (nonatomic, copy) NSString* testStr;
 
 @property (nonatomic, strong) HBClassEntity* classEntity;
-@property (nonatomic, strong) HBContentDetailEntity* contentDetailEntity;
+@property (nonatomic, strong) BookEntity* bookEntity;
 
 @end
 
@@ -137,7 +139,7 @@
     if (self.classEntity == nil) {
         [MBHudUtil showTextView:@"请选择群租" inView:nil];
         return;
-    } else if (self.contentDetailEntity == nil) {
+    } else if (self.bookEntity == nil) {
         [MBHudUtil showTextView:@"请选择作业" inView:nil];
         return;
     }
@@ -150,7 +152,7 @@
         [[HBServiceManager defaultManager] requestClassMember:user class_id:self.classEntity.classId completion:^(id responseObject, NSError *error) {
             NSArray *arr = [responseObject objectForKey:@"members"];
             if (arr.count > 0) {
-                [[HBServiceManager defaultManager] requestTaskAssign:user book_id:self.contentDetailEntity.ID class_id:self.classEntity.classId bookset_id:self.classEntity.booksetId completion:^(id responseObject, NSError *error) {
+                [[HBServiceManager defaultManager] requestTaskAssign:user book_id:[self.bookEntity.bookId integerValue] class_id:self.classEntity.classId bookset_id:self.classEntity.booksetId completion:^(id responseObject, NSError *error) {
                     //布置作业成功!!!
                     if (responseObject) {
                         NSDictionary *dict = responseObject;
@@ -171,7 +173,7 @@
 - (void)selectedGroup:(HBClassEntity *)classEntity
 {
     if (self.classEntity.classId != classEntity.classId) {
-        self.contentDetailEntity = nil;
+        self.bookEntity = nil;
         self.testStr = @"作业选择";
     }
     
@@ -183,13 +185,13 @@
 
 #pragma mark - HBTestSelectViewDelegate
 
-- (void)selectedTest:(HBContentDetailEntity *)contentDetailEntity
+- (void)selectedTest:(BookEntity *)bookEntity
 {
-    self.contentDetailEntity = contentDetailEntity;
+    self.bookEntity = bookEntity;
     if ([[HBDataSaveManager defaultManager] showEnBookName]) {
-        self.testStr = contentDetailEntity.BOOK_TITLE;
+        self.testStr = bookEntity.bookTitle;
     }else{
-        self.testStr = contentDetailEntity.BOOK_TITLE_CN;
+        self.testStr = bookEntity.bookTitleCN;
     }
     
     [_tableView reloadData];
